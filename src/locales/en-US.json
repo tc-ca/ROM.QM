@@ -1,0 +1,12 @@
+{
+  "app": {
+    "bottom-navigation": {
+      "save": "Save"
+    },
+    "settings": {
+      "darkMode": "Dark mode",
+      "language": "Language",
+      "settings": "Settings"
+    }
+  }
+}
