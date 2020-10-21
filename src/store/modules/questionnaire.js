@@ -61,7 +61,6 @@ export const actions = {
 
 export const mutations = {
   setQuestionnaire (state, payload) {
-    const { questionnaire } = payload
-    state.questionnaire = questionnaire
+    state.questionnaire = payload
   }
 }

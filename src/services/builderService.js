@@ -24,6 +24,10 @@ function createGroup (questionnaire) {
 function createQuestionnaire () {
   return {
     name: 'Questionnaire 1',
+    title: {
+      [LANGUAGE.ENGLISH]: 'Questionnaire Title EN',
+      [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
+    },
     groups: []
   }
 }

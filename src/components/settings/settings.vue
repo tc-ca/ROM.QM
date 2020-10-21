@@ -3,7 +3,7 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">
-          {{ $t("app.settings.questionnaire.title") }}
+          {{ $t('app.settings.settings') }}
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -13,9 +13,11 @@
           <v-list-item-icon>
             <v-icon>mdi-palette</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>{{
-            $t("app.settings.darkMode")
-          }}</v-list-item-content>
+          <v-list-item-content>
+            {{
+              $t('app.settings.darkMode')
+            }}
+          </v-list-item-content>
           <v-list-item-action>
             <v-switch
               v-model="darkMode"
@@ -61,7 +63,7 @@
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displayNav" link @click="navigateTo('builder', 'Default Questionnaire')">
+      <v-list-item v-if="displayNav" link @click="navigateTo('builder')">
         <v-list-item-content>
           <v-list-item-title>
             Builder
@@ -90,22 +92,12 @@ export default {
       type: Boolean,
       default: false
     },
-    questionnaire: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    },
     appsettings: {
       type: Object,
       default: function () {
         return {
-          settings: {
-            lang: 'en-US',
-            questionnaire: {
-              groups: { questions: {} }
-            }
-          }
+          lang: 'en-US',
+          darkmode: true
         }
       }
     }
@@ -121,10 +113,10 @@ export default {
   computed: {
     ...mapGetters({ settings: 'settings' }),
     lang: state => {
-      if (!state || !state.app) {
+      if (!state || !state.settings) {
         return 'en-US'
       }
-      return state.app.settings.lang
+      return state.settings.lang
     },
     showDrawer: {
       get () {
@@ -139,11 +131,10 @@ export default {
   },
   created () {
     this.showDrawer = this.show
-    if (this.app && this.app.settings) {
-      this.darkMode = this.app.settings.darkMode
-      this.$vuetify.theme.dark = this.app.settings.darkMode
-      this.language = this.app.settings.lang
-      this.questionnaire = this.app.settings.questionnaire
+    if (this.appsettings) {
+      this.darkMode = this.appsettings.darkMode
+      this.$vuetify.theme.dark = this.appsettings.darkMode
+      this.language = this.appsettings.lang
     }
 
     const env = process.env.NODE_ENV || 'development'
@@ -153,7 +144,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['saveDarkMode', 'setAppLanguage', 'setStateSettings', 'setStateQuestionnaire']),
+    ...mapActions(['saveDarkMode', 'setAppLanguage', 'setQuestionnaire']),
     setDarkMode (val) {
       console.log('setDarkMode')
       this.$vuetify.theme.dark = val
@@ -163,13 +154,6 @@ export default {
       console.log('setLanguage')
       this.$i18n.locale = val
       this.setAppLanguage(val)
-    },
-    setSettings (val) {
-      console.log('setSettings')
-      // let questionnaire = questionnaireApi.GetQuestionnaireGroups()
-      this.app.settings = val
-      this.setStateSettings(val)
-      this.$emit('appsettings', this.app.settings)
     },
     navigateTo (name, schema) {
       console.log(name)
@@ -186,11 +170,9 @@ export default {
     },
     loadDocumentationSafetyMarks () {
       console.log('loadDocumentationSafetyMarks')
-      this.navigateTo('questionnaire')
       let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
-      // this.setSettings(questionnaire)
-      this.app.settings.questionnaire = docSafetyMark
-      this.$emit('appsettings', docSafetyMark)
+      this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
+      this.navigateTo('questionnaire')
     }
   }
 }

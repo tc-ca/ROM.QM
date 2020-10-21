@@ -1,9 +1,8 @@
 
 export const state = {
-  app: {
-    settings: {
-
-    }
+  settings: {
+    lang: 'en-US',
+    darkMode: false
   }
 }
 
@@ -30,21 +29,21 @@ export const actions = {
 export const mutations = {
 
   SET_DARKMODE (state, val) {
-    state.app.settings.darkMode = val
+    state.settings.darkMode = val
   },
 
   SET_LANGUAGE (state, val) {
-    state.app.settings.lang = val
+    state.settings.lang = val
   },
   SET_SETTINGS (state, val) {
-    state.app.settings = val
+    state.settings = val
   }
 }
 
 export const getters = {
-  getSettings (state) {
+  getAppSettings (state) {
     // TODO: pull settings form server
-    return state.app.settings
+    return state.settings
   }
 }
 

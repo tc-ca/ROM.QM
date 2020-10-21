@@ -643,10 +643,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 import { LANGUAGE } from '../constants.js'
 import Question from '../components/builder/question'
 import BuilderService from '../services/builderService'
+import { mapState } from 'vuex'
 // import utils from '../utils'
 
 export default {
@@ -655,17 +656,23 @@ export default {
     Question
   },
   props: {
-    // schema:
-    // {
-    //   type: String,
-    //   required: false,
-    //   default: ''
-    // },
-    // settings:
-    // {
-    //   type: Object,
-    //   required: false
-    // }
+    schema:
+    {
+      type: String,
+      required: false,
+      default: ''
+    },
+    settings:
+    {
+      type: Object,
+      required: false,
+      default: function () {
+        return {
+          lang: LANGUAGE.ENGLISH,
+          darkMode: false
+        }
+      }
+    }
   },
   data () {
     return {
@@ -699,15 +706,10 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      lang: state => {
-        if (!state || !state.app) {
-          return 'en-US'
-        }
-        return state.app.settings.lang
-      }
-      // selectedQuestion: state => state.builder.selectedQuestion
-    }),
+    lang () {
+      console.log('App.vue: language computed ' + this.settings.lang + ')')
+      return this.settings.lang
+    },
     eng () {
       return LANGUAGE.ENGLISH
     },
@@ -716,7 +718,15 @@ export default {
     },
     filterProvisions () {
       return (item, search, textKey) => item[textKey].indexOf(search) > -1
-    }
+    },
+    ...mapState({
+      group: state => {
+        if (!state || !state.group) {
+          return []
+        }
+        return state.group
+      }
+    })
   },
   watch: {
     schema (value, oldValue) {
@@ -736,12 +746,13 @@ export default {
     )
 
     this.provisions[0].Text = 'All'
+
+    this.questionnaire = BuilderService.createQuestionnaire()
   },
   mounted () {
 
   },
   methods: {
-
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
     },

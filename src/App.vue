@@ -10,7 +10,7 @@
         @click="showSettings = !showSettings"
       />
       <v-toolbar-title>
-        {{ app.settings.questionnaire.title[lang] }}
+        {{ questionnaire.title[lang] }}
       </v-toolbar-title>
       <v-spacer />
       <v-btn
@@ -34,7 +34,7 @@
     </v-app-bar>
     <settings
       :show="showSettings"
-      @appsettings="app"
+      @appsettings="settings"
       @close="showSettings = false"
     />
     <v-content>
@@ -57,6 +57,7 @@ import NotificationContainer from './components/notification-container/notificat
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
 import { mapActions, mapState } from 'vuex'
+import builderService from './services/builderService.js'
 
 export default {
   name: 'App',
@@ -70,70 +71,44 @@ export default {
       type: String,
       required: true
     },
-    metadata: {
-      type: Object,
-      default: function () {
-        return {
-          title: {
-            [LANGUAGE.ENGLISH]: 'General Questionnaire',
-            [LANGUAGE.FRENCH]: 'FR General Questionnaire'
-          }
-        }
-      }
-    },
     lang: {
       type: String,
-      default: 'en-US'
+      default: LANGUAGE.ENGLISH
     }
   },
   data: function () {
     return {
       showLegislationSearchModal: false,
-      showSettings: false,
-      meta: {
-        title: ''
-      },
-      app: {
-        settings: {
-          questionnaire: {
-            title: {
-              [LANGUAGE.ENGLISH]: 'General Questionnaire',
-              [LANGUAGE.FRENCH]: 'FR General Questionnaire'
-            },
-            groups: {},
-            lang: 'en-US'
-          }
-        }
-      }
+      showSettings: false
     }
   },
   computed: {
     title () {
-      return `${this.meta.title[this.language]}`
+      return `${this.questionnaire.title[this.language]}`
     },
     ...mapState({
       language: state => {
         console.log('App.vue: language computed ' + state + ')')
-        if (state == null || !state.app) {
-          return ''
+        if (state == null || !state.settings) {
+          return LANGUAGE.ENGLISH
         }
-        return state.app.settings.lang
+        return state.settings.settings.lang
       },
       questionnaire: state => {
         console.log('App.vue: questionnaire computed ' + state + ')')
-        if (state == null) {
-          return {}
+        if (!state || !state.app) {
+          return builderService.createQuestionnaire()
         }
-        if (!state.app) {
-          return {}
-        }
-        return state.app.settings.questionnaire
+        return state.settings.questionnaire
       },
       settings: state => {
-        if (state == null || !state.app) {
-          return { lang: 'en-US', questionnaire: { title: 'default title', groups: {}, lang: 'en-US' } }
+        if (state == null || !state.settings) {
+          return {
+            lang: LANGUAGE.ENGLISH,
+            darkMode: false
+          }
         }
-        return state.app.settings
+        return state.settings.settings
       }
     })
   },
@@ -143,33 +118,25 @@ export default {
       console.log('App.vue: lang watch ' + value + ')')
       this.setLanguage()
     },
-    // settings (value, oldValue) {
-    //   console.log('App.vue: settings watch ' + value)
-    //   this.settings = JSON.parse(value)
-    // },
-    metadata (value, oldValue) {
-      this.meta = JSON.parse(this.metadata)
+    settings (value, oldValue) {
+      console.log('App.vue: settings watch ' + value)
+      this.settings = JSON.parse(value)
     }
   },
   created: function () {
-    this.$router.push({ name: this.page }).catch(e => { })
-    this.meta = this.metadata
-    this.getSettings()
+    this.$router.push({ name: this.page }).catch(e => {
+      console.log(e)
+    })
   },
   methods: {
-    ...mapActions(['getSettings', 'setAppLanguage', 'setSettings']),
+    ...mapActions([ 'setAppLanguage', 'setSettings' ]),
     setLanguage () {
       console.log('App.vue: setLanguage (' + this.lang + ')')
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
     save () {
-      this.setSettings(this.app.settings)
-    },
-    getSettings () {
-      console.log('App.vue: setLanguage (' + this.lang + ')')
-      this.$i18n.locale = this.lang
-      this.setAppLanguage(this.lang)
+      this.setSettings(this.settings)
     }
   }
 
