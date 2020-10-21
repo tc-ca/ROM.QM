@@ -669,7 +669,14 @@ export default {
   },
   data () {
     return {
-      questionnaire: {},
+      questionnaire: {
+        title: {
+          [LANGUAGE.ENGLISH]: 'General Questionnaire',
+          [LANGUAGE.FRENCH]: 'FR General Questionnaire'
+        },
+        groups: [],
+        lang: 'en-US'
+      },
       selectedGroup: null,
       selectedQuestion: null,
       questionTypes: [{ value: 'text', text: 'Text' }, { value: 'radio', text: 'Radio' }, { value: 'select', text: 'Select' }, { value: 'number', text: 'Number' }, { value: 'image', text: 'Image' }],
@@ -691,15 +698,6 @@ export default {
       questionPanels: []
     }
   },
-
-  watch: {
-    schema (value, oldValue) {
-      this.$store.dispatch('getQuestionnaireGroups', value)
-    },
-    settings (value, oldValue) {
-      this.$store.dispatch('getSettings', value)
-    }
-  },
   computed: {
     ...mapState({
       lang: state => {
@@ -718,6 +716,14 @@ export default {
     },
     filterProvisions () {
       return (item, search, textKey) => item[textKey].indexOf(search) > -1
+    }
+  },
+  watch: {
+    schema (value, oldValue) {
+      this.$store.dispatch('getQuestionnaireGroups', value)
+    },
+    settings (value, oldValue) {
+      this.$store.dispatch('getSettings', value)
     }
   },
   created () {
