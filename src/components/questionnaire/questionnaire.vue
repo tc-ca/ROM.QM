@@ -64,7 +64,7 @@ export default {
       })
 
       if (this.$refs.questionaire_form.validate()) {
-        console.log('saving...')
+        // console.log('saving...')
       } else {
         this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorect`, color: 'error' })
       }

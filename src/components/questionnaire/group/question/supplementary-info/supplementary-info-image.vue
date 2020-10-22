@@ -239,7 +239,7 @@ export default {
       '$refs.validationInput.validations',
       (newValue) => {
         let error = this.picture.display && this.picture.required && !this.images.length > 0
-        console.log('$refs.validationInput.validations ' + error)
+        // console.log('$refs.validationInput.validations ' + error)
         this.onError(error)
       }
     )

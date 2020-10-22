@@ -49,28 +49,28 @@
           </v-list-item-content>
         </template>
       </v-list-item>
-      <v-list-item v-if="displayNav" link @click="navigateTo('home')">
+      <v-list-item v-if="displaynav" link @click="navigateTo('home')">
         <v-list-item-content>
           <v-list-item-title>
             Home
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displayNav" link @click="navigateTo('questionnaire')">
+      <v-list-item v-if="displaynav" link @click="navigateTo('questionnaire')">
         <v-list-item-content>
           <v-list-item-title>
             Questionnaire
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displayNav" link @click="navigateTo('builder')">
+      <v-list-item v-if="displaynav" link @click="navigateTo('builder')">
         <v-list-item-content>
           <v-list-item-title>
             Builder
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displayNav" link @click="loadDocumentationSafetyMarks()">
+      <v-list-item v-if="displaynav" link @click="loadDocumentationSafetyMarks()">
         <v-list-item-content>
           <v-list-item-title>
             Documentation and Safety Marks Example
@@ -100,14 +100,17 @@ export default {
           darkmode: true
         }
       }
+    },
+    displaynav: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
       language: null, // gets set in the created method
       darkMode: false,
-      languages: LANGUAGES,
-      displayNav: false
+      languages: LANGUAGES
     }
   },
   computed: {
@@ -140,36 +143,36 @@ export default {
     const env = process.env.NODE_ENV || 'development'
 
     if (env === 'development') {
-      this.displayNav = true
+      this.displaynav = true
     }
   },
   methods: {
     ...mapActions(['saveDarkMode', 'setAppLanguage', 'setQuestionnaire']),
     setDarkMode (val) {
-      console.log('setDarkMode')
+      // console.log('setDarkMode')
       this.$vuetify.theme.dark = val
       this.saveDarkMode(val)
     },
     setLanguage (val) {
-      console.log('setLanguage')
+      // console.log('setLanguage')
       this.$i18n.locale = val
       this.setAppLanguage(val)
     },
     navigateTo (name, schema) {
-      console.log(name)
+      // console.log(name)
 
       if (schema) {
         this.$router.push({ name: name, params: { schema: schema } }).catch(e => {
-          console.log(e)
+          // console.log(e)
         })
       }
 
       this.$router.push({ name: name }).catch(e => {
-        console.log(e)
+        // console.log(e)
       })
     },
     loadDocumentationSafetyMarks () {
-      console.log('loadDocumentationSafetyMarks')
+      // console.log('loadDocumentationSafetyMarks')
       let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
       this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
       this.navigateTo('questionnaire')

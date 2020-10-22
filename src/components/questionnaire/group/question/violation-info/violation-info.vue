@@ -135,7 +135,7 @@ export default {
 
         entry.text = Description
         let test = this.findObjectByLabel(entry, 'Text')
-        console.log(test)
+        // console.log(test)
         return Object.assign({}, test, { Description })
       })
     },

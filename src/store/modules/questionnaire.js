@@ -55,7 +55,7 @@ export const actions = {
       })
     })
 
-    console.log(JSON.stringify(questionnaire, null, 2))
+    // console.log(JSON.stringify(questionnaire, null, 2))
   }
 }
 

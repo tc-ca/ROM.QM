@@ -33,6 +33,7 @@
       </v-btn>
     </v-app-bar>
     <settings
+      :displaynav="displayAppNav"
       :show="showSettings"
       @appsettings="settings"
       @close="showSettings = false"
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+
 import { LANGUAGE } from './constants.js'
 
 import NotificationContainer from './components/notification-container/notification-container.vue'
@@ -74,6 +76,14 @@ export default {
     lang: {
       type: String,
       default: LANGUAGE.ENGLISH
+    },
+    schema: {
+      type: String,
+      default: 'Documentation and Safety Marks'
+    },
+    displayAppNav: {
+      type: Boolean,
+      default: true
     }
   },
   data: function () {
@@ -88,14 +98,14 @@ export default {
     },
     ...mapState({
       language: state => {
-        console.log('App.vue: language computed ' + state + ')')
+        // console.log('App.vue: language computed ' + state + ')')
         if (state == null || !state.settings) {
           return LANGUAGE.ENGLISH
         }
         return state.settings.settings.lang
       },
       questionnaire: state => {
-        console.log('App.vue: questionnaire computed ' + state + ')')
+        // console.log('App.vue: questionnaire computed ' + state + ')')
         if (!state || !state.app) {
           return builderService.createQuestionnaire()
         }
@@ -115,23 +125,23 @@ export default {
   watch: {
     // required for Field Service, as this.lang not available from the created hook method ONLY when app is reading code from tdgwoodservice.js, has to do with how the page is loaded in.
     lang (value, oldValue) {
-      console.log('App.vue: lang watch ' + value + ')')
+      // console.log('App.vue: lang watch ' + value + ')')
       this.setLanguage()
     },
     settings (value, oldValue) {
-      console.log('App.vue: settings watch ' + value)
+      // console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
     }
   },
   created: function () {
     this.$router.push({ name: this.page }).catch(e => {
-      console.log(e)
+      // console.log(e)
     })
   },
   methods: {
     ...mapActions([ 'setAppLanguage', 'setSettings' ]),
     setLanguage () {
-      console.log('App.vue: setLanguage (' + this.lang + ')')
+      // console.log('App.vue: setLanguage (' + this.lang + ')')
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },

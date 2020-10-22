@@ -707,7 +707,7 @@ export default {
   },
   computed: {
     lang () {
-      console.log('App.vue: language computed ' + this.settings.lang + ')')
+      // console.log('App.vue: language computed ' + this.settings.lang + ')')
       return this.settings.lang
     },
     eng () {
