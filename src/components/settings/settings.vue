@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer v-model="showDrawer" temporary app>
+  <v-navigation-drawer
+    v-model="showDrawer"
+    temporary
+    app
+  >
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">
@@ -7,7 +11,10 @@
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list dense nav>
+    <v-list
+      dense
+      nav
+    >
       <v-list-item>
         <template>
           <v-list-item-icon>
@@ -49,28 +56,44 @@
           </v-list-item-content>
         </template>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="navigateTo('home')">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('home')"
+      >
         <v-list-item-content>
           <v-list-item-title>
             Home
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="navigateTo('questionnaire')">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('questionnaire')"
+      >
         <v-list-item-content>
           <v-list-item-title>
             Questionnaire
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="navigateTo('builder')">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('builder')"
+      >
         <v-list-item-content>
           <v-list-item-title>
             Builder
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="loadDocumentationSafetyMarks()">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="loadDocumentationSafetyMarks()"
+      >
         <v-list-item-content>
           <v-list-item-title>
             Documentation and Safety Marks Example

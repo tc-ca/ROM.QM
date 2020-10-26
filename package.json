@@ -5,10 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production --dest dist --target app",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "build-storybook": "build-storybook",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
     "@resconet/jsbridge": "^12.3.2",
@@ -34,9 +35,11 @@
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-plugin-router": "^4.4.4",
+    "@vue/cli-plugin-unit-jest": "^4.5.8",
     "@vue/cli-plugin-vuex": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.1.0",
     "eslint": "^5.16.0",
