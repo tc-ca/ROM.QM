@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "build-storybook": "build-storybook",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006 -s public"
   },
   "dependencies": {
     "@resconet/jsbridge": "^12.3.2",
