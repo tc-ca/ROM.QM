@@ -12,6 +12,7 @@
     "storybook": "start-storybook -p 6006 -s public"
   },
   "dependencies": {
+    "@mdi/font": "^5.8.55",
     "@resconet/jsbridge": "^12.3.2",
     "core-js": "^3.4.4",
     "document-register-element": "^1.14.3",
