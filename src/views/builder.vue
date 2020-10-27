@@ -738,14 +738,12 @@ export default {
   },
   created () {
     this.provisions = require('../api/legislation-hierarchy-list.js').default.data[0].children.filter(
-      function (x) {
+      (x) => {
         if (x.Label.trim() === '1.16') {
           return x.children
         }
       }
-    )
-
-    this.provisions[0].Text = 'All'
+    )[0].children
 
     this.questionnaire = BuilderService.createQuestionnaire()
   },
