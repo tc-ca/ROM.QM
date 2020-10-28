@@ -13,7 +13,6 @@ steps:
 - script: |
     npm install
     npm run build
-    npm run build --mode production --dest dist --target app
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
