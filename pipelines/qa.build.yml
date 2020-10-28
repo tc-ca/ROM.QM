@@ -1,5 +1,5 @@
 trigger:
-- main
+- qa
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -13,15 +13,14 @@ steps:
 - script: |
     npm install
     npm run build
-    npm run build --mode production --dest dist --target app
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
   inputs:
-    Contents: 'build/**' # Pull the build directory (React)
+    Contents: 'dist/**' # Pull the build directory (Vue)
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs: 
     pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
-    ArtifactName: 'www' # output artifact named www
+    ArtifactName: 'qm.qa.managed' # output artifact named www
