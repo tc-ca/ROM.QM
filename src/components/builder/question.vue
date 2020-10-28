@@ -3,13 +3,12 @@
     :class="{selected: question === selectedQuestion}"
   >
     <v-expansion-panel-header
-      @click="editQuestion($event)"
       ripple
+      @click="editQuestion($event)"
     >
       <template
         #actions
-      >
-      </template>
+      />
 
       <div
         :style="{fontSize:'16px !important'}"
@@ -23,108 +22,106 @@
     <v-expansion-panel-content eager>
       <v-row @click="editQuestion($event)">
         <v-col cols="12">
-
-        <div class="mt-5">
-          <response
-            :question="question"
-            :group="group"
-          />
-        </div>
-
-        <div>
-          <v-expansion-panels
-            v-model="childQuestionPanels"
-            hover
-            focusable
-            multiple
-          >
-            <question
-              v-for="(childQuestion, questionIndex) in question.childQuestions"
-              ref="groupQuestion"
-              :key="questionIndex"
-              :question="childQuestion"
-              :selected-question="selectedQuestion"
+          <div class="mt-5">
+            <response
+              :question="question"
               :group="group"
-              :questionnaire="questionnaire"
-              :index="questionIndex"
-              :title-style="{fontSize:'16px !important'}"
-              @editQuestion="editChildQuestion"
-              @childQuestionAdded="onChildQuestionAdded"
-              @childQuestionRemoved="onChildQuestionRemoved"
-              @removeQuestion="removeChildQuestion(childQuestion)"
             />
-          </v-expansion-panels>
-        </div>
-        <v-row
-          justify="center"
-          align="center"
-          class="ma-2"
-        >
-          <v-col
-            class="col-auto"
-          >
-            <v-btn @click="addQuestion($event)">
-              Add Child question
-            </v-btn>
-          </v-col>
-          <v-col
-            class="col-auto"
-          >
-            <v-tooltip
-              top
-              open-delay="300"
+          </div>
+
+          <div>
+            <v-expansion-panels
+              v-model="childQuestionPanels"
+              hover
+              focusable
+              multiple
             >
-              <template #activator="{ on, attrs }">
-                <v-btn
-                  small
-                  icon
-                  @click="confirmRemoveQuestion()"
-                >
-                  <v-icon
+              <question
+                v-for="(childQuestion, questionIndex) in question.childQuestions"
+                ref="groupQuestion"
+                :key="questionIndex"
+                :question="childQuestion"
+                :selected-question="selectedQuestion"
+                :group="group"
+                :questionnaire="questionnaire"
+                :index="questionIndex"
+                :title-style="{fontSize:'16px !important'}"
+                @editQuestion="editChildQuestion"
+                @childQuestionAdded="onChildQuestionAdded"
+                @childQuestionRemoved="onChildQuestionRemoved"
+                @removeQuestion="removeChildQuestion(childQuestion)"
+              />
+            </v-expansion-panels>
+          </div>
+          <v-row
+            justify="center"
+            align="center"
+            class="ma-2"
+          >
+            <v-col
+              class="col-auto"
+            >
+              <v-btn @click="addQuestion($event)">
+                Add Child question
+              </v-btn>
+            </v-col>
+            <v-col
+              class="col-auto"
+            >
+              <v-tooltip
+                top
+                open-delay="300"
+              >
+                <template #activator="{ on, attrs }">
+                  <v-btn
                     small
-                    v-bind="attrs"
-                    v-on="on"
+                    icon
+                    @click="confirmRemoveQuestion()"
                   >
-                    mdi-delete
-                  </v-icon>
+                    <v-icon
+                      small
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      mdi-delete
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span>Remove question</span>
+              </v-tooltip>
+            </v-col>
+          </v-row>
+
+          <v-dialog
+            v-model="confirmDialogOpen"
+            max-width="290"
+          >
+            <v-card>
+              <v-card-title class="headline">
+                Delete?
+              </v-card-title>
+
+              <v-card-actions>
+                <v-spacer />
+
+                <v-btn
+                  color="error"
+                  text
+                  @click="confirmDialogOpen = false; removeQuestion()"
+                >
+                  Yes
                 </v-btn>
-              </template>
-              <span>Remove question</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
 
-        <v-dialog
-          v-model="confirmDialogOpen"
-          max-width="290"
-        >
-          <v-card>
-            <v-card-title class="headline">
-              Delete?
-            </v-card-title>
-
-            <v-card-actions>
-              <v-spacer />
-
-              <v-btn
-                color="error"
-                text
-                @click="confirmDialogOpen = false; removeQuestion()"
-              >
-                Yes
-              </v-btn>
-
-              <v-btn
-                text
-                @click="confirmDialogOpen = false"
-              >
-                No
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+                <v-btn
+                  text
+                  @click="confirmDialogOpen = false"
+                >
+                  No
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-col>
-
       </v-row>
     </v-expansion-panel-content>
   </v-expansion-panel>
