@@ -18,6 +18,10 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
+- task: MSCRMToolInstaller@12
+  inputs:
+    nugetFeed: 'official'
+    psFeed: 'official'
 - task: MSCRMCreatePatch@12
   inputs:
     crmConnectionString: '$(ConnectionDev)'
