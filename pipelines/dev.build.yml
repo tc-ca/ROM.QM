@@ -82,5 +82,5 @@ steps:
     useAsyncMode: true
 - task: PublishBuildArtifacts@1
   inputs: 
-    pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' # dist or build files
     ArtifactName: 'www' # output artifact named www
