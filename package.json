@@ -5,10 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production --dest dist --target app",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
+    "build-storybook": "build-storybook",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "storybook": "start-storybook -p 6006 -s public"
   },
   "dependencies": {
+    "@mdi/font": "^5.8.55",
     "@resconet/jsbridge": "^12.3.2",
     "core-js": "^3.4.4",
     "document-register-element": "^1.14.3",
@@ -23,16 +27,27 @@
     "vuex": "^3.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
     "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@storybook/addon-actions": "^6.0.27",
+    "@storybook/addon-docs": "^6.0.27",
+    "@storybook/addon-essentials": "^6.0.27",
+    "@storybook/addon-knobs": "^6.0.27",
+    "@storybook/addon-links": "^6.0.27",
+    "@storybook/vue": "^6.0.27",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-plugin-router": "^4.4.4",
+    "@vue/cli-plugin-unit-jest": "^4.5.8",
     "@vue/cli-plugin-vuex": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.1.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "react-is": "^17.0.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-i18n": "^0.6.1",
