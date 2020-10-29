@@ -1,8 +1,15 @@
 trigger:
 - development
 
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-latest'
+    windows:
+      imageName: 'vs2017-win2016'
+
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: $(imageName)
 
 steps:
 - task: NodeTool@0
@@ -49,25 +56,25 @@ steps:
     solutionName: '$(LatestPatchName)'
     exportManaged: false
     exportUnmanaged: true
-    outputPath: '$(Build.ArtifactStagingDirectory)\$(QM.Core)'
+    outputPath: '$(Build.ArtifactStagingDirectory)'
 
 - task: CopyFiles@2
   inputs:
     Contents: 'dist/**' # Pull the build directory (Vue)
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\$(QM.Core)\WebResources'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\WebResources'
 
 - task: MSCRMPackSolution@12
   inputs:
-    unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)\$(QM.Core)'
-    packageType: 'Managed'
-    outputPath: '$(Build.ArtifactStagingDirectory)\Solutions'
-    sourceLoc: '(Build.ArtifactStagingDirectory)\Solutions'
+    unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)'
+    packageType: 'both'
+    outputPath: '$(Build.ArtifactStagingDirectory)'
+    sourceLoc: '(Build.ArtifactStagingDirectory)'
     localize: true
 
 - task: MSCRMImportSolution@12
   inputs:
     crmConnectionString: '$(ConnectionDev)'
-    solutionFile: '$(Build.ArtifactStagingDirectory)\Solutions\$(PatchName)'
+    solutionFile: '$(Build.ArtifactStagingDirectory)\$(PatchName)'
     publishWorkflows: true
     holdingSolution: true
     override: true
@@ -79,5 +86,5 @@ steps:
     useAsyncMode: true
 - task: PublishBuildArtifacts@1
   inputs: 
-    pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' # dist or build files
     ArtifactName: 'www' # output artifact named www
