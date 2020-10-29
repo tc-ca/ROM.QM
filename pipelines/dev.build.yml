@@ -36,14 +36,6 @@ steps:
     solutionName: '$(QM.Core)'
     existsVariableName: '$(PatchExists)'
     patchVariableName: '$(PatchName)'
-
-- task: MSCRMGetLatestPatch@12
-  name: GetLatestPatchTask
-  inputs:
-    crmConnectionString: '$(ConnectionDev)'
-    solutionName: '$(QM.Core)'
-    existsVariableName: '$(PatchExists)'
-    patchVariableName: '$(PatchName)'
 - powershell: |
     Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
     Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
