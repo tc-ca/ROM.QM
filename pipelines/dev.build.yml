@@ -1,10 +1,8 @@
 trigger:
 - development
-
 stages:
 - stage: A
   jobs:
-
   - job: Build
     pool:
       vmImage: 'ubuntu-latest'
@@ -13,13 +11,15 @@ stages:
       inputs:
         versionSpec: '10.x'
       displayName: 'Install Node.js'
-
     - script: |
         npm install
         npm run build
       displayName: 'npm install and build'
-    - publish: 
-
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        artifact: 'www'
+        publishLocation: 'pipeline'
   - deployment: Deploy
     condition: succeeded()
     dependsOn: Build
@@ -39,8 +39,8 @@ stages:
             inputs:
               crmConnectionString: '$(ConnectionDev)'
               solutionName: '$(CoreSolutionName)'
-              existsVariableName: '$(PatchExists)'
-              patchVariableName: '$(PatchName)'
+              existsVariableName: 'PatchExists'
+              patchVariableName: 'LatestPatchName'
           - powershell: |
               Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
               Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
@@ -59,11 +59,6 @@ stages:
               publish: true
               solutionName: '$(LatestPatchName)'
               crmConnectionTimeout: 360
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: '$(Build.ArtifactStagingDirectory)'
-              artifact: 'www'
-              publishLocation: 'pipeline'
           # - powershell: |
           #     If(!(test-path '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)'))
           #     {
