@@ -39,6 +39,7 @@ function createQuestion (questionnaire) {
     id: id,
     sortOrder: id,
     isVisible: true,
+    isMultiple: true,
     text: {
       [LANGUAGE.ENGLISH]: 'Question text',
       [LANGUAGE.FRENCH]: 'FR: Question text'
