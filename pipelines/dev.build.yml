@@ -18,6 +18,7 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
+    - publish: 
 
   - deployment: Deploy
     condition: succeeded()
@@ -33,12 +34,6 @@ stages:
             inputs:
               nugetFeed: 'official'
               psFeed: 'official'
-          # - task: MSCRMCreatePatch@12
-          #   inputs:
-          #     crmConnectionString: '$(ConnectionDev)'
-          #     uniqueName: '$(QMCore)'
-          #     displayName: '$(QMCore)_patch_$(ProductVersion)'
-          #     versionNumber: '$(ProductVersion)'
           - task: MSCRMGetLatestPatch@12
             name: GetLatestPatchTask
             inputs:
@@ -64,6 +59,11 @@ stages:
               publish: true
               solutionName: '$(LatestPatchName)'
               crmConnectionTimeout: 360
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(Build.ArtifactStagingDirectory)'
+              artifact: 'www'
+              publishLocation: 'pipeline'
           # - powershell: |
           #     If(!(test-path '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)'))
           #     {
