@@ -127,10 +127,14 @@ export default {
       this.$emit('responseChanged')
     },
     updateViolationInfo (args) {
+      var res = args.value
+      if (Array.isArray(args.value)) {
+        res = args.value.sort().join()
+      }
       if (this.question.violationInfo.matchingType === 'equal') {
-        this.displayViolationInfo = this.question.violationInfo.responseToMatch === args.value
+        this.displayViolationInfo = this.question.violationInfo.responseToMatch === res
       } else if (this.question.violationInfo.matchingType === 'notEqual') {
-        this.displayViolationInfo = this.question.violationInfo.responseToMatch !== args.value
+        this.displayViolationInfo = this.question.violationInfo.responseToMatch !== res
       }
     },
     updateDependants (args) {
