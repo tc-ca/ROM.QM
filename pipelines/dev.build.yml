@@ -42,12 +42,8 @@ stages:
     - powershell: |
         Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
         Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
-        Write-Host "Patch Version =  $(PatchVersion)"
-        Write-Host "Product Version =  $(ProductVersion)"
         Write-Host "Patch Exists =  $(PatchExists)"
         Write-Host "Latest Patch Name =  $(LatestPatchName)"
-        Write-Host "${{ eq('$(PatchExists)', 'False') }}"
-        Write-Host variables['task.GetLatestPatchTask.PatchExists']
     - task: MSCRMUpdateWebResource@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
