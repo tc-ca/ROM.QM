@@ -24,6 +24,7 @@ stages:
     dependsOn: Build
     pool:
       vmImage: vs2017-win2016'
+    environment: DEV
     strategy:
       runOnce:
         deploy:
