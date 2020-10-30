@@ -38,7 +38,7 @@ stages:
         crmConnectionString: '$(ConnectionDev)'
         solutionName: '$(CoreSolutionName)'
         existsVariableName: '$(PatchExists)'
-        patchVariableName: '$(PatchName)'
+        patchVariableName: '$(LatestPatchName)'
     - powershell: |
         Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
         Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
