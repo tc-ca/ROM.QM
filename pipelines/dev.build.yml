@@ -52,7 +52,7 @@ stages:
             inputs:
               crmConnectionString: '$(ConnectionDev)'
               webResourceDeploymentType: 'folderPath'
-              webResourceFolderPath: 'dist/**'
+              webResourceFolderPath: 'dist'
               searchPattern: '*.html,*.htm,*.js,*.css,*.png,*.jpeg, *.ico'
               publish: true
               solutionName: '$(LatestPatchName)'
