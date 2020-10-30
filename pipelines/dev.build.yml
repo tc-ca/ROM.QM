@@ -16,6 +16,11 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
+    - task: PublishBuildArtifacts@1
+      inputs: 
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)\dist\**' # dist or build files
+        ArtifactName: 'www' # output artifact named www
+
   - job: Deploy
     condition: succeeded()
     dependsOn: Build
