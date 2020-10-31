@@ -85,14 +85,13 @@ stages:
       inputs:
         unpackedFilesFolder: '$(Pipeline.Workspace)'
         solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
-    - task: CopyFiles@2
-      inputs:
-        Contents: '$(Pipeline.Workspace)\**' 
-        TargetFolder: '$(Agent.SourcesDirectory)'
+    # - task: CopyFiles@2
+    #   inputs:
+    #     Contents: '$(Pipeline.Workspace)\**' 
+    #     TargetFolder: '$(Pipeline.SourcesDirectory)'
     - task: MSCRMPackSolution@12
       inputs:
         unpackedFilesFolder: '$(Pipeline.Workspace)'
-        packageType: 'Managed'
         outputPath: '$(Pipeline.Workspace)'
         localize: false
     - task: MSCRMImportSolution@12
