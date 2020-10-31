@@ -25,88 +25,94 @@ stages:
         Write-Host "$(Build.ArtifactStagingDirectory)"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: 'dist'
+        targetPath: 'dist\**'
         artifact: 'QMWebResources' #should be named after web resource prefix 
         publishLocation: 'pipeline'
-  - deployment: Deploy
+    # - task: PublishBuildArtifacts@1
+    #   inputs:
+    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    #     ArtifactName: 'QMWebResources'
+    #     publishLocation: 'Container'
+  # - deployment: Deploy
+  #   condition: succeeded()
+  #   dependsOn: Build
+  #   pool:
+  #     vmImage: 'vs2017-win2016'
+  #   environment: DEV
+  #   strategy:
+  #     runOnce:
+  #       deploy:
+  - job: Deploy
     condition: succeeded()
     dependsOn: Build
     pool:
       vmImage: 'vs2017-win2016'
-    environment: DEV
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: DownloadBuildArtifacts@0
-            continueOnError: true
-            inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              itemPattern: '**' # Set patterns accordingly
-              downloadPath: '$(System.ArtifactsDirectory)'
-          - task: DownloadBuildArtifacts@0
-            continueOnError: true
-            inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              itemPattern: '**' # Set patterns accordingly
-              downloadPath: '$(Agent.BuildDirectory)'
-          - task: MSCRMToolInstaller@12
-            inputs:
-              nugetFeed: 'official'
-              psFeed: 'official'
-          - task: MSCRMGetLatestPatch@12
-            name: GetLatestPatchTask
-            inputs:
-              crmConnectionString: '$(ConnectionDev)'
-              solutionName: '$(CoreSolutionName)'
-              existsVariableName: 'PatchExists'
-              patchVariableName: 'LatestPatchName'
-          - powershell: |
-              Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
-              Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
-              Write-Host "Patch Exists =  $(PatchExists)"
-              Write-Host "Latest Patch Name =  $(LatestPatchName)"
-          - task: MSCRMExportSolution@12
-            inputs:
-              crmConnectionString: '$(ConnectionDev)'
-              solutionName: '$(LatestPatchName)'
-              exportManaged: false
-              exportUnmanaged: true
-              outputPath: ''
-          - task: CopyFiles@2
-            inputs:
-              Contents: 'dist/**' # Pull the build directory (Vue)
-              TargetFolder: '$(Agent.BuildDirectory)\$(LatestPatchName)\WebResources'
-          - powershell: |
-              If(!(test-path '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions'))
-              {
-                Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder does not exists."
-                New-Item -ItemType Directory -Force -Path '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions'
-                Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder created."
-              }
-              Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)"
-              Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions"
-          - task: MSCRMPackSolution@12
-            inputs:
-              unpackedFilesFolder: '$(Agent.BuildDirectory)\$(LatestPatchName)'
-              packageType: 'Managed'
-              outputPath: 'Solutions'
-              localize: false
-          - task: MSCRMImportSolution@12
-            inputs:
-              crmConnectionString: '$(ConnectionDev)'
-              solutionFile: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions\$(LatestPatchName).zip'
-              publishWorkflows: true
-              holdingSolution: false
-          #     override: true
-          # - task: MSCRMApplySolution@12
-          #   inputs:
-          #     crmConnectionString: '$(ConnectionDev)'
-          #     solutionName: '$(LatestPatchName)'
-          #     useAsyncMode: true
-          - task: CopyFiles@2
-            inputs:
-              Contents: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions\**'
-              TargetFolder: '$(Agent.SourcesDirectory)\$(LatestPatchName)\WebResources'
+    steps:
+    - powershell: |
+        Write-Host "Agent.BuildDirectory"
+        Write-Host "Pipeline.Workspace"
+        Get-ChildItem -Path "$(Agent.BuildDirectory)"
+        Get-ChildItem -Path "$(Pipeline.Workspace)"
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'QMWebResources'
+        targetPath: '$(Pipeline.Workspace)'
+    - task: MSCRMToolInstaller@12
+      inputs:
+        nugetFeed: 'official'
+        psFeed: 'official'
+    - task: MSCRMGetLatestPatch@12
+      name: GetLatestPatchTask
+      inputs:
+        crmConnectionString: '$(ConnectionDev)'
+        solutionName: '$(CoreSolutionName)'
+        existsVariableName: 'PatchExists'
+        patchVariableName: 'LatestPatchName'
+    - powershell: |
+        Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
+        Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
+        Write-Host "Patch Exists =  $(PatchExists)"
+        Write-Host "Latest Patch Name =  $(LatestPatchName)"
+    - task: MSCRMExportSolution@12
+      inputs:
+        crmConnectionString: '$(ConnectionDev)'
+        solutionName: '$(LatestPatchName)'
+        exportManaged: false
+        exportUnmanaged: true
+        outputPath: ''
+    - task: CopyFiles@2
+      inputs:
+        Contents: 'dist/**' # Pull the build directory (Vue)
+        TargetFolder: '$(Pipeline.Workspace)\$(LatestPatchName)\WebResources'
+    - powershell: |
+        If(!(test-path '$(Pipeline.Workspace)\$(LatestPatchName)\Solutions'))
+        {
+          Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder does not exists."
+          New-Item -ItemType Directory -Force -Path '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions'
+          Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder created."
+        }
+        Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)"
+        Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions"
+    - task: MSCRMPackSolution@12
+      inputs:
+        unpackedFilesFolder: '$(Agent.BuildDirectory)\$(LatestPatchName)'
+        packageType: 'Managed'
+        outputPath: 'Solutions'
+        localize: false
+    - task: MSCRMImportSolution@12
+      inputs:
+        crmConnectionString: '$(ConnectionDev)'
+        solutionFile: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions\$(LatestPatchName).zip'
+        publishWorkflows: true
+        holdingSolution: false
+    #     override: true
+    # - task: MSCRMApplySolution@12
+    #   inputs:
+    #     crmConnectionString: '$(ConnectionDev)'
+    #     solutionName: '$(LatestPatchName)'
+    #     useAsyncMode: true
+    - task: CopyFiles@2
+      inputs:
+        Contents: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions\**'
+        TargetFolder: '$(Agent.SourcesDirectory)\$(LatestPatchName)\WebResources'
