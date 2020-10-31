@@ -17,10 +17,10 @@ stages:
       displayName: 'npm install and build'
     - powershell: |
         Write-Host "Outputting Current Directory File List"
-        Write-Host "dir"
+        dir
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)\dist'
+        targetPath: '$(Build.ArtifactStagingDirectory)/dist'
         artifact: 'www'
         publishLocation: 'pipeline'
   - deployment: Deploy
