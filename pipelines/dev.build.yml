@@ -11,13 +11,18 @@ stages:
       inputs:
         versionSpec: '10.x'
       displayName: 'Install Node.js'
+    - powershell: |
+        Write-Host "Current directory file list pre build"
+        dir
     - script: |
         npm install
         npm run build
       displayName: 'npm install and build'
     - powershell: |
-        Write-Host "Outputting Current Directory File List"
+        Write-Host "Current directory file list post build"
         dir
+        Write-Host "Build Artifacts staging directory"
+        Write-Host "$(Build.ArtifactStagingDirectory)"
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)/dist'
