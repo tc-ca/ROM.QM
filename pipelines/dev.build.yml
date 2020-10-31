@@ -15,9 +15,12 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
+    - powershell: |
+        Write-Host "Outputting Current Directory File List"
+        Write-Host "dir"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)'
+        targetPath: '$(Build.ArtifactStagingDirectory)\dist'
         artifact: 'www'
         publishLocation: 'pipeline'
   - deployment: Deploy
@@ -48,11 +51,17 @@ stages:
               Write-Host "Latest Patch Name =  $(LatestPatchName)"
               Write-Host "${{ eq('$(PatchExists)', 'False') }}"
               Write-Host variables['task.GetLatestPatchTask.PatchExists']
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'www'
+              downloadPath: '$(System.ArtifactStagingDirectory)'
           - task: MSCRMUpdateWebResource@12
             inputs:
               crmConnectionString: '$(ConnectionDev)'
               webResourceDeploymentType: 'folderPath'
-              webResourceFolderPath: 'dist'
+              webResourceFolderPath: '$(System.ArtifactStagingDirectory)'
               searchPattern: '*.html,*.htm,*.js,*.css,*.png,*.jpeg, *.ico'
               publish: true
               solutionName: '$(LatestPatchName)'
