@@ -71,7 +71,7 @@ stages:
               solutionName: '$(LatestPatchName)'
               exportManaged: false
               exportUnmanaged: true
-              outputPath: '$(Agent.BuildDirectory)\$(LatestPatchName)'
+              outputPath: '/'
           - task: CopyFiles@2
             inputs:
               Contents: 'dist/**' # Pull the build directory (Vue)
