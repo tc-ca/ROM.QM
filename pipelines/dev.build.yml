@@ -48,17 +48,23 @@ stages:
     pool:
       vmImage: 'vs2017-win2016'
     steps:
-    - powershell: |
-        Write-Host "Agent.BuildDirectory"
-        Write-Host "Pipeline.Workspace"
-        Get-ChildItem -Path "$(Agent.BuildDirectory)"
-        Get-ChildItem -Path "$(Pipeline.Workspace)"
+    - task: PowerShell@2
+      continueOnError: true
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Agent.BuildDirectory"
+          Write-Host "Pipeline.Workspace"
+          Get-ChildItem -Path "$(Agent.BuildDirectory)"
+          Get-ChildItem -Path "$(Pipeline.Workspace)"
+        errorActionPreference: 'continue'
     - task: MSCRMToolInstaller@12
       inputs:
         nugetFeed: 'official'
         psFeed: 'official'
     - task: MSCRMGetLatestPatch@12
       name: GetLatestPatchTask
+      continueOnError: true
       inputs:
         crmConnectionString: '$(ConnectionDev)'
         solutionName: '$(CoreSolutionName)'
@@ -88,9 +94,16 @@ stages:
         buildType: 'current'
         artifactName: 'QMWebResources'
         targetPath: '$(Pipeline.Workspace)\dist'
-    - powershell: |
-        Get-ChildItem -Path "$(Pipeline.Workspace)"
-        Get-ChildItem -Path "$(Pipeline.Workspace)\dist"
+    - task: PowerShell@2
+      continueOnError: true
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Pipeline.SourcesDirectory"
+          Write-Host "Pipeline.Workspace"
+          Get-ChildItem -Path "$(Pipeline.SourcesDirectory)"
+          Get-ChildItem -Path "$(Pipeline.Workspace)"
+        errorActionPreference: 'continue'
     - task: CopyFiles@2
       inputs:
         Contents: '$(Pipeline.Workspace)\dist\**' 
@@ -100,9 +113,10 @@ stages:
         unpackedFilesFolder: '$(Pipeline.Workspace)'
         outputPath: '$(Pipeline.Workspace)'
         localize: false
-    - powershell: |
+    - powershell: 
         Get-ChildItem -Path "$(Pipeline.Workspace)"
-        Get-ChildItem -Path "$(Pipeline.Workspace)"        
+        Get-ChildItem -Path "$(Pipeline.Workspace)"    
+
     - task: MSCRMImportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
