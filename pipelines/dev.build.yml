@@ -22,7 +22,7 @@ stages:
         Write-Host "Current directory file list post build"
         dir
         Write-Host "Build Artifacts staging directory"
-        Write-Host "$(Build.ArtifactStagingDirectory)"
+        Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: 'dist'
@@ -53,11 +53,6 @@ stages:
         Write-Host "Pipeline.Workspace"
         Get-ChildItem -Path "$(Agent.BuildDirectory)"
         Get-ChildItem -Path "$(Pipeline.Workspace)"
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'QMWebResources'
-        targetPath: '$(Pipeline.Workspace)'
     - task: MSCRMToolInstaller@12
       inputs:
         nugetFeed: 'official'
@@ -85,15 +80,29 @@ stages:
       inputs:
         unpackedFilesFolder: '$(Pipeline.Workspace)'
         solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
-    # - task: CopyFiles@2
-    #   inputs:
-    #     Contents: '$(Pipeline.Workspace)\**' 
-    #     TargetFolder: '$(Pipeline.SourcesDirectory)'
+    - powershell: |
+        Get-ChildItem -Path "$(Pipeline.Workspace)"
+        Get-ChildItem -Path "$(Pipeline.Workspace)\dist"
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'QMWebResources'
+        targetPath: '$(Pipeline.Workspace)\dist'
+    - powershell: |
+        Get-ChildItem -Path "$(Pipeline.Workspace)"
+        Get-ChildItem -Path "$(Pipeline.Workspace)\dist"
+    - task: CopyFiles@2
+      inputs:
+        Contents: '$(Pipeline.Workspace)\dist\**' 
+        TargetFolder: '$(Pipeline.SourcesDirectory)\WebResources'
     - task: MSCRMPackSolution@12
       inputs:
         unpackedFilesFolder: '$(Pipeline.Workspace)'
         outputPath: '$(Pipeline.Workspace)'
         localize: false
+    - powershell: |
+        Get-ChildItem -Path "$(Pipeline.Workspace)"
+        Get-ChildItem -Path "$(Pipeline.Workspace)"        
     - task: MSCRMImportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
