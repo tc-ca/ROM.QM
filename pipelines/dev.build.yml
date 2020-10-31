@@ -80,25 +80,25 @@ stages:
         solutionName: '$(LatestPatchName)'
         exportManaged: false
         exportUnmanaged: true
-        outputPath: '\s'
+        outputPath: '$(Pipeline.Workspace)'
     - task: MSCRMExtractSolution@12
       inputs:
-        unpackedFilesFolder: '\s'
-        solutionFile: '\s'
+        unpackedFilesFolder: '$(Pipeline.Workspace)'
+        solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
     - task: CopyFiles@2
       inputs:
-        Contents: '\s\**' 
-        TargetFolder: '$(Agent.SourcesDirectory)\$(LatestPatchName)'
+        Contents: '$(Pipeline.Workspace)\**' 
+        TargetFolder: '$(Agent.SourcesDirectory)'
     - task: MSCRMPackSolution@12
       inputs:
-        unpackedFilesFolder: '\s'
+        unpackedFilesFolder: '$(Pipeline.Workspace)'
         packageType: 'Managed'
-        outputPath: '\s'
+        outputPath: '$(Pipeline.Workspace)'
         localize: false
     - task: MSCRMImportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
-        solutionFile: '\s\$(LatestPatchName).zip'
+        solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
         publishWorkflows: true
         holdingSolution: false
     #     override: true
