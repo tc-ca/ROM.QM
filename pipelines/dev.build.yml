@@ -26,7 +26,7 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: 'dist'
-        artifact: 'www'
+        artifact: 'QM_' #should be named after web resource prefix 
         publishLocation: 'pipeline'
   - deployment: Deploy
     condition: succeeded()
@@ -53,63 +53,55 @@ stages:
               Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
               Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
               Write-Host "Patch Exists =  $(PatchExists)"
-              Write-Host "Latest Patch Name =  $(LatestPatchName)"
-              Write-Host "${{ eq('$(PatchExists)', 'False') }}"
-          - powershell: 
-            displayName: Debug Information
-              |
+          - powershell: |
               Write-Host "Current Directory"
               dir
               Write-Host "Build Agent Directory $(Agent.BuildDirectory)"
-          # - task: DownloadBuildArtifacts@0
-          #   inputs:
-          #     buildType: 'current'
-          #     downloadType: 'single'
-          #     artifactName: 'www'
-          #     downloadPath: '$(Agent.BuildDirectory)'
-          - task: MSCRMUpdateWebResource@12
+          - powershell: |
+              If(!(test-path '$(Build.BuildDirectory)\$(LatestPatchName)'))
+              {
+                Write-Host "$(Build.BuildDirectory)\$(LatestPatchName) folder does not exists."
+                New-Item -ItemType Directory -Force -Path '$(Build.BuildDirectory)\$(LatestPatchName)'
+                Write-Host "$(Build.BuildDirectory)\$(LatestPatchName) folder created."
+              }
+          - task: MSCRMExportSolution@12
             inputs:
               crmConnectionString: '$(ConnectionDev)'
-              webResourceDeploymentType: 'folderPath'
-              webResourceFolderPath: '$(Agent.BuildDirectory)'
-              searchPattern: '*.html,*.htm,*.js,*.css,*.png,*.jpeg, *.ico'
-              publish: true
               solutionName: '$(LatestPatchName)'
-              crmConnectionTimeout: 360
-          # - powershell: |
-          #     If(!(test-path '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)'))
-          #     {
-          #       Write-Host "$(Build.ArtifactStagingDirectory)\$(CoreSolutionName) folder does not exists."
-          #       New-Item -ItemType Directory -Force -Path '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)'
-          #       Write-Host "$(Build.ArtifactStagingDirectory)\$(CoreSolutionName) folder created."
-          #     }
-          # - task: MSCRMExportSolution@12
-          #   inputs:
-          #     crmConnectionString: '$(ConnectionDev)'
-          #     solutionName: '$(LatestPatchName)'
-          #     exportManaged: false
-          #     exportUnmanaged: true
-          #     outputPath: '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)'
-          # - task: CopyFiles@2
-          #   inputs:
-          #     Contents: 'dist/**' # Pull the build directory (Vue)
-          #     TargetFolder: '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)\WebResources'
-          # - task: MSCRMPackSolution@12
-          #   inputs:
-          #     unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)\$(CoreSolutionName)'
-          #     packageType: 'both'
-          #     outputPath: '$(Build.SourcesDirectory)\$(CoreSolutionName)'
-          #     sourceLoc: 'auto'
-          #     localize: true
-          # - task: MSCRMImportSolution@12
-          #   inputs:
-          #     crmConnectionString: '$(ConnectionDev)'
-          #     solutionFile: '$(Build.ArtifactStagingDirectory)\$(PatchName)'
-          #     publishWorkflows: true
-          #     holdingSolution: true
+              exportManaged: false
+              exportUnmanaged: true
+              outputPath: '$(Build.BuildDirectory)\$(LatestPatchName)'
+          - task: CopyFiles@2
+            inputs:
+              Contents: 'dist/**' # Pull the build directory (Vue)
+              TargetFolder: '$(Build.BuildDirectory)\$(LatestPatchName)\WebResources'
+          - powershell: |
+              If(!(test-path '$(Build.BuildDirectory)\$(LatestPatchName)\Solutions'))
+              {
+                Write-Host "$(Build.BuildDirectory)\$(LatestPatchName)\Solutions folder does not exists."
+                New-Item -ItemType Directory -Force -Path '$(Build.BuildDirectory)\$(LatestPatchName)\Solutions'
+                Write-Host "$(Build.BuildDirectory)\$(LatestPatchName)\Solutions folder created."
+              }
+          - task: MSCRMPackSolution@12
+            inputs:
+              unpackedFilesFolder: '$(Build.BuildDirectory)\$(LatestPatchName)'
+              packageType: 'Managed'
+              outputPath: '$(Build.BuildDirectory)\$(LatestPatchName)\Solutions'
+              sourceLoc: 'auto'
+              localize: true
+          - task: MSCRMImportSolution@12
+            inputs:
+              crmConnectionString: '$(ConnectionDev)'
+              solutionFile: '$(Build.BuildDirectory)\$(LatestPatchName)\Solutions\$(LatestPatchName).zip'
+              publishWorkflows: true
+              holdingSolution: false
           #     override: true
           # - task: MSCRMApplySolution@12
           #   inputs:
           #     crmConnectionString: '$(ConnectionDev)'
-          #     solutionName: '$(QMCore)'
+          #     solutionName: '$(LatestPatchName)'
           #     useAsyncMode: true
+          - task: CopyFiles@2
+            inputs:
+              Contents: '$(Build.BuildDirectory)\$(LatestPatchName)\Solutions\**'
+              TargetFolder: '$(Build.SourcesDirectory)\$(LatestPatchName)\WebResources'
