@@ -65,6 +65,7 @@ stages:
                 New-Item -ItemType Directory -Force -Path '$(Agent.BuildDirectory)\$(LatestPatchName)'
                 Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName) folder created."
               }
+              Get-ChildItem -Path "/"
           - task: MSCRMExportSolution@12
             inputs:
               crmConnectionString: '$(ConnectionDev)'
@@ -83,13 +84,14 @@ stages:
                 New-Item -ItemType Directory -Force -Path '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions'
                 Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder created."
               }
+              Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)"
+              Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions"
           - task: MSCRMPackSolution@12
             inputs:
               unpackedFilesFolder: '$(Agent.BuildDirectory)\$(LatestPatchName)'
               packageType: 'Managed'
-              outputPath: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions'
-              sourceLoc: 'auto'
-              localize: true
+              outputPath: 'Solutions'
+              localize: false
           - task: MSCRMImportSolution@12
             inputs:
               crmConnectionString: '$(ConnectionDev)'
