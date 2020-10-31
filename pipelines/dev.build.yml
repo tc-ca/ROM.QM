@@ -26,7 +26,7 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: 'dist'
-        artifact: 'QM_' #should be named after web resource prefix 
+        artifact: 'QMWebResources' #should be named after web resource prefix 
         publishLocation: 'pipeline'
   - deployment: Deploy
     condition: succeeded()
@@ -38,6 +38,20 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: DownloadBuildArtifacts@0
+            continueOnError: true
+            inputs:
+              buildType: 'current'
+              downloadType: 'specific'
+              itemPattern: '**' # Set patterns accordingly
+              downloadPath: '$(System.ArtifactsDirectory)'
+          - task: DownloadBuildArtifacts@0
+            continueOnError: true
+            inputs:
+              buildType: 'current'
+              downloadType: 'specific'
+              itemPattern: '**' # Set patterns accordingly
+              downloadPath: '$(Agent.BuildDirectory)'
           - task: MSCRMToolInstaller@12
             inputs:
               nugetFeed: 'official'
@@ -54,25 +68,13 @@ stages:
               Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
               Write-Host "Patch Exists =  $(PatchExists)"
               Write-Host "Latest Patch Name =  $(LatestPatchName)"
-          - powershell: |
-              Write-Host "Current Directory"
-              dir
-              Write-Host "Build Agent Directory $(Agent.BuildDirectory)"
-          - powershell: |
-              If(!(test-path '$(Agent.BuildDirectory)\$(LatestPatchName)'))
-              {
-                Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName) folder does not exists."
-                New-Item -ItemType Directory -Force -Path '$(Agent.BuildDirectory)\$(LatestPatchName)'
-                Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName) folder created."
-              }
-              Get-ChildItem -Path "/"
           - task: MSCRMExportSolution@12
             inputs:
               crmConnectionString: '$(ConnectionDev)'
               solutionName: '$(LatestPatchName)'
               exportManaged: false
               exportUnmanaged: true
-              outputPath: '/'
+              outputPath: ''
           - task: CopyFiles@2
             inputs:
               Contents: 'dist/**' # Pull the build directory (Vue)
