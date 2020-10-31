@@ -25,7 +25,7 @@ stages:
         Write-Host "$(Build.ArtifactStagingDirectory)"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '/dist'
+        targetPath: 'dist'
         artifact: 'www'
         publishLocation: 'pipeline'
   - deployment: Deploy
