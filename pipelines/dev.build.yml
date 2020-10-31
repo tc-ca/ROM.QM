@@ -55,18 +55,23 @@ stages:
               Write-Host "Patch Exists =  $(PatchExists)"
               Write-Host "Latest Patch Name =  $(LatestPatchName)"
               Write-Host "${{ eq('$(PatchExists)', 'False') }}"
-              Write-Host variables['task.GetLatestPatchTask.PatchExists']
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              buildType: 'current'
-              downloadType: 'single'
-              artifactName: 'www'
-              downloadPath: '$(System.ArtifactStagingDirectory)'
+          - powershell: 
+            displayName: Debug Information
+              |
+              Write-Host "Current Directory"
+              dir
+              Write-Host "Build Agent Directory $(Agent.BuildDirectory)"
+          # - task: DownloadBuildArtifacts@0
+          #   inputs:
+          #     buildType: 'current'
+          #     downloadType: 'single'
+          #     artifactName: 'www'
+          #     downloadPath: '$(Agent.BuildDirectory)'
           - task: MSCRMUpdateWebResource@12
             inputs:
               crmConnectionString: '$(ConnectionDev)'
               webResourceDeploymentType: 'folderPath'
-              webResourceFolderPath: '$(System.ArtifactStagingDirectory)'
+              webResourceFolderPath: '$(Agent.BuildDirectory)'
               searchPattern: '*.html,*.htm,*.js,*.css,*.png,*.jpeg, *.ico'
               publish: true
               solutionName: '$(LatestPatchName)'
