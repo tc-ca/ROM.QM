@@ -80,30 +80,25 @@ stages:
         solutionName: '$(LatestPatchName)'
         exportManaged: false
         exportUnmanaged: true
-        outputPath: ''
+        outputPath: '\s'
+    - task: MSCRMExtractSolution@12
+      inputs:
+        unpackedFilesFolder: '\s'
+        solutionFile: '\s'
     - task: CopyFiles@2
       inputs:
-        Contents: 'dist/**' # Pull the build directory (Vue)
-        TargetFolder: '$(Pipeline.Workspace)\$(LatestPatchName)\WebResources'
-    - powershell: |
-        If(!(test-path '$(Pipeline.Workspace)\$(LatestPatchName)\Solutions'))
-        {
-          Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder does not exists."
-          New-Item -ItemType Directory -Force -Path '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions'
-          Write-Host "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions folder created."
-        }
-        Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)"
-        Get-ChildItem -Path "$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions"
+        Contents: '\s\**' 
+        TargetFolder: '$(Agent.SourcesDirectory)\$(LatestPatchName)'
     - task: MSCRMPackSolution@12
       inputs:
-        unpackedFilesFolder: '$(Agent.BuildDirectory)\$(LatestPatchName)'
+        unpackedFilesFolder: '\s'
         packageType: 'Managed'
-        outputPath: 'Solutions'
+        outputPath: '\s'
         localize: false
     - task: MSCRMImportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
-        solutionFile: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions\$(LatestPatchName).zip'
+        solutionFile: '\s\$(LatestPatchName).zip'
         publishWorkflows: true
         holdingSolution: false
     #     override: true
@@ -112,7 +107,3 @@ stages:
     #     crmConnectionString: '$(ConnectionDev)'
     #     solutionName: '$(LatestPatchName)'
     #     useAsyncMode: true
-    - task: CopyFiles@2
-      inputs:
-        Contents: '$(Agent.BuildDirectory)\$(LatestPatchName)\Solutions\**'
-        TargetFolder: '$(Agent.SourcesDirectory)\$(LatestPatchName)\WebResources'
