@@ -11,12 +11,10 @@ stages:
       inputs:
         versionSpec: '10.x'
       displayName: 'Install Node.js'
-    - powershell: |
-        Write-Host "Current directory file list pre build"
-        dir
     - script: |
         npm install
         npm run build
+        npm run test:unit
       displayName: 'npm install and build'
     - powershell: |
         Write-Host "Current directory file list post build"
@@ -94,6 +92,16 @@ stages:
         buildType: 'current'
         artifactName: 'QMWebResources'
         targetPath: '$(Pipeline.Workspace)'
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'specific'
+        project: '0e26be07-8156-4953-b64e-80a4ed8a33f3'
+        pipeline: '409'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
+        downloadType: 'single'
+        artifactName: 'QMWebResources'
+        downloadPath: '$(System.ArtifactsDirectory)'
     - task: PowerShell@2
       continueOnError: true
       inputs:
@@ -102,11 +110,11 @@ stages:
           Write-Host "Pipeline.SourcesDirectory"
           Write-Host "Pipeline.Workspace"
           Get-ChildItem -Path "$(Pipeline.SourcesDirectory)"
-          Get-ChildItem -Path "$(Pipeline.Workspace)"
+          Get-ChildItem -Path "$(System.ArtifactsDirectory)"
         errorActionPreference: 'continue'
     - task: CopyFiles@2
       inputs:
-        Contents: '$(Pipeline.Workspace)' 
+        Contents: '**'
         TargetFolder: '$(Pipeline.SourcesDirectory)\WebResources'
     - task: MSCRMPackSolution@12
       inputs:
