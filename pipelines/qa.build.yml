@@ -1,6 +1,12 @@
-trigger:
-- development
 
+trigger:
+  branches:
+    include:
+    - development
+  paths:
+    exclude:
+    - Pipelines/*
+    
 pool:
   vmImage: 'ubuntu-latest'
 
