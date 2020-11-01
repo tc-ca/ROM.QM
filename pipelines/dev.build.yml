@@ -25,7 +25,7 @@ stages:
         Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: 'dist'
+        targetPath: '$(Pipeline.Workspace)'
         artifact: 'QMWebResources' #should be named after web resource prefix 
         publishLocation: 'pipeline'
     # - task: PublishBuildArtifacts@1
@@ -44,6 +44,7 @@ stages:
   #       deploy:
   - job: Deploy
     condition: succeeded()
+    continueOnError: true
     dependsOn: Build
     pool:
       vmImage: 'vs2017-win2016'
@@ -88,12 +89,11 @@ stages:
         solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
     - powershell: |
         Get-ChildItem -Path "$(Pipeline.Workspace)"
-        Get-ChildItem -Path "$(Pipeline.Workspace)\dist"
     - task: DownloadPipelineArtifact@2
       inputs:
         buildType: 'current'
         artifactName: 'QMWebResources'
-        targetPath: '$(Pipeline.Workspace)\dist'
+        targetPath: '$(Pipeline.Workspace)'
     - task: PowerShell@2
       continueOnError: true
       inputs:
@@ -106,7 +106,7 @@ stages:
         errorActionPreference: 'continue'
     - task: CopyFiles@2
       inputs:
-        Contents: '$(Pipeline.Workspace)\dist\**' 
+        Contents: '$(Pipeline.Workspace)' 
         TargetFolder: '$(Pipeline.SourcesDirectory)\WebResources'
     - task: MSCRMPackSolution@12
       inputs:
