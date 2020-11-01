@@ -107,10 +107,8 @@ stages:
         unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)'
         outputPath: '$(Build.ArtifactStagingDirectory)'
         localize: false
-    - powershell: 
+    - powershell: |
         Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
-        Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"    
-
     - task: MSCRMImportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
