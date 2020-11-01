@@ -24,7 +24,7 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Build.ArtifactStagingDirectory)'
-        artifact: 'QMWebResources' #should be named after web resource prefix 
+        artifact: 'WebResources' #should be named after web resource folder 
         publishLocation: 'pipeline'
     # - task: PublishBuildArtifacts@1
     #   inputs:
@@ -95,7 +95,7 @@ stages:
         specificBuildWithTriggering: true
         buildVersionToDownload: 'latest'
         downloadType: 'single'
-        artifactName: 'QMWebResources'
+        artifactName: 'WebResources'
         downloadPath: '$(Build.ArtifactStagingDirectory)'
     - task: PowerShell@2
       continueOnError: true
@@ -107,10 +107,6 @@ stages:
           Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
           Get-ChildItem -Path "$(System.ArtifactsDirectory)"
         errorActionPreference: 'continue'
-    - task: CopyFiles@2
-      inputs:
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)\WebResources'
     - task: MSCRMPackSolution@12
       inputs:
         unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)'
