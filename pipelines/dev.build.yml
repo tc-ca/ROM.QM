@@ -23,7 +23,7 @@ stages:
         Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
         artifact: 'QMWebResources' #should be named after web resource prefix 
         publishLocation: 'pipeline'
     # - task: PublishBuildArtifacts@1
@@ -53,9 +53,9 @@ stages:
         targetType: 'inline'
         script: |
           Write-Host "Agent.BuildDirectory"
-          Write-Host "Pipeline.Workspace"
+          Write-Host "$(Build.ArtifactStagingDirectory)"
           Get-ChildItem -Path "$(Agent.BuildDirectory)"
-          Get-ChildItem -Path "$(Pipeline.Workspace)"
+          Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
         errorActionPreference: 'continue'
     - task: MSCRMToolInstaller@12
       inputs:
@@ -80,18 +80,13 @@ stages:
         solutionName: '$(LatestPatchName)'
         exportManaged: false
         exportUnmanaged: true
-        outputPath: '$(Pipeline.Workspace)'
+        outputPath: '$(Build.ArtifactStagingDirectory)'
     - task: MSCRMExtractSolution@12
       inputs:
-        unpackedFilesFolder: '$(Pipeline.Workspace)'
-        solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
+        unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)'
+        solutionFile: '$(Build.ArtifactStagingDirectory)\$(LatestPatchName).zip'
     - powershell: |
-        Get-ChildItem -Path "$(Pipeline.Workspace)"
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'QMWebResources'
-        targetPath: '$(Pipeline.Workspace)'
+        Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
     - task: DownloadBuildArtifacts@0
       inputs:
         buildType: 'specific'
@@ -101,34 +96,34 @@ stages:
         buildVersionToDownload: 'latest'
         downloadType: 'single'
         artifactName: 'QMWebResources'
-        downloadPath: '$(System.ArtifactsDirectory)'
+        downloadPath: '$(Build.ArtifactStagingDirectory)'
     - task: PowerShell@2
       continueOnError: true
       inputs:
         targetType: 'inline'
         script: |
-          Write-Host "Pipeline.SourcesDirectory"
+          Write-Host "Build.ArtifactStagingDirectory"
           Write-Host "Pipeline.Workspace"
-          Get-ChildItem -Path "$(Pipeline.SourcesDirectory)"
+          Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
           Get-ChildItem -Path "$(System.ArtifactsDirectory)"
         errorActionPreference: 'continue'
     - task: CopyFiles@2
       inputs:
         Contents: '**'
-        TargetFolder: '$(Pipeline.SourcesDirectory)\WebResources'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\WebResources'
     - task: MSCRMPackSolution@12
       inputs:
-        unpackedFilesFolder: '$(Pipeline.Workspace)'
-        outputPath: '$(Pipeline.Workspace)'
+        unpackedFilesFolder: '$(Build.ArtifactStagingDirectory)'
+        outputPath: '$(Build.ArtifactStagingDirectory)'
         localize: false
     - powershell: 
-        Get-ChildItem -Path "$(Pipeline.Workspace)"
-        Get-ChildItem -Path "$(Pipeline.Workspace)"    
+        Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
+        Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"    
 
     - task: MSCRMImportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
-        solutionFile: '$(Pipeline.Workspace)\$(LatestPatchName).zip'
+        solutionFile: '$(Build.ArtifactStagingDirectory)\$(LatestPatchName).zip'
         publishWorkflows: true
         holdingSolution: false
     #     override: true
