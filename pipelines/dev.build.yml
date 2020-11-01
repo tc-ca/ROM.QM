@@ -21,16 +21,11 @@ stages:
         dir
         Write-Host "Build Artifacts staging directory"
         Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
-    - task: PublishPipelineArtifact@1
+    - task: PublishBuildArtifacts@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)'
-        artifact: 'WebResources' #should be named after web resource folder 
-        publishLocation: 'pipeline'
-    # - task: PublishBuildArtifacts@1
-    #   inputs:
-    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    #     ArtifactName: 'QMWebResources'
-    #     publishLocation: 'Container'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'WebResources'
+        publishLocation: 'Container'
   # - deployment: Deploy
   #   condition: succeeded()
   #   dependsOn: Build
