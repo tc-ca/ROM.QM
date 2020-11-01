@@ -1,5 +1,5 @@
 trigger:
-- qa
+- development
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -13,6 +13,7 @@ steps:
 - script: |
     npm install
     npm run build
+    npm run test
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
@@ -23,4 +24,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs: 
     pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
-    ArtifactName: 'qm.qa.managed' # output artifact named www
+    ArtifactName: 'QMWebResources' # output artifact named www
