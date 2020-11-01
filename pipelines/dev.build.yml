@@ -69,6 +69,26 @@ stages:
         Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
         Write-Host "Patch Exists =  $(PatchExists)"
         Write-Host "Latest Patch Name =  $(LatestPatchName)"
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'specific'
+        project: '0e26be07-8156-4953-b64e-80a4ed8a33f3'
+        pipeline: '409'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
+        downloadType: 'single'
+        artifactName: 'WebResources'
+        downloadPath: '$(Build.ArtifactStagingDirectory)'
+    - task: MSCRMUpdateWebResource@12
+      inputs:
+        crmConnectionString: '$(ConnectionDev)'
+        webResourceDeploymentType: 'folderPath'
+        webResourceFolderPath: '$(Build.ArtifactStagingDirectory)\WebResources'
+        searchPattern: '*.*,**'
+        failIfWebResourceNotFound: false
+        publish: true
+        solutionName: '$(LatestPatchName)'
+        crmConnectionTimeout: 360
     - task: MSCRMExportSolution@12
       inputs:
         crmConnectionString: '$(ConnectionDev)'
@@ -82,16 +102,6 @@ stages:
         solutionFile: '$(Build.ArtifactStagingDirectory)\$(LatestPatchName).zip'
     - powershell: |
         Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        buildType: 'specific'
-        project: '0e26be07-8156-4953-b64e-80a4ed8a33f3'
-        pipeline: '409'
-        specificBuildWithTriggering: true
-        buildVersionToDownload: 'latest'
-        downloadType: 'single'
-        artifactName: 'WebResources'
-        downloadPath: '$(Build.ArtifactStagingDirectory)'
     - task: PowerShell@2
       continueOnError: true
       inputs:
@@ -100,7 +110,6 @@ stages:
           Write-Host "Build.ArtifactStagingDirectory"
           Write-Host "Pipeline.Workspace"
           Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
-          Get-ChildItem -Path "$(System.ArtifactsDirectory)"
         errorActionPreference: 'continue'
     - task: MSCRMPackSolution@12
       inputs:
