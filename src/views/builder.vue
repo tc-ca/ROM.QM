@@ -201,6 +201,27 @@
               label="Sort Order"
               @change="sortQuestions(selectedQuestion)"
             />
+             <v-select
+              v-model="selectedQuestion.type"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              label="Internal Comments"
+            />
+             <v-select
+              v-model="selectedQuestion.type"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              label="External Comments"
+            />
+             <v-select
+              v-model="selectedQuestion.type"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              label="Picture(s)"
+            />
             <v-checkbox
               v-model="selectedQuestion.isVisible"
               dense
@@ -687,6 +708,7 @@ export default {
       selectedGroup: null,
       selectedQuestion: null,
       questionTypes: [{ value: 'text', text: 'Text' }, { value: 'radio', text: 'Radio' }, { value: 'select', text: 'Select' }, { value: 'number', text: 'Number' }, { value: 'image', text: 'Image' }],
+      optionTypes: [{ value: '1', text: 'Required' }, { value: '2', text: 'Optional' }, { value: '3', text: 'N/A' }],
       optionsCollapsed: true,
       validatorTypes: [{ value: 'require', text: 'Require' }, { value: 'min', text: 'Min' }, { value: 'max', text: 'Max' }, { value: 'minLength', text: 'Min Length' }, { value: 'maxLength', text: 'Max Length' }],
       validatorsCollapsed: true,
