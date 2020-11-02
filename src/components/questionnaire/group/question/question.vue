@@ -42,6 +42,35 @@
 
       <violation-info v-if="displayViolationInfo" />
 
+      <section>
+        <v-expansion-panel v-show="displayInternalComment">
+          <v-expansion-panel-header class="subtitle-2">
+            <span>
+              Internal Comment
+              <span
+                v-if="isInternalCommentRequired"
+                style="color: red"
+              >(required)</span>
+              <span v-else>(optional)</span>
+            </span>
+            <!-- <v-icon
+              v-if="!comment.validationState"
+              color="red"
+            >
+              mdi-exclamation
+            </v-icon>  -->
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-textarea
+              v-model="question.internalComment.value"
+              auto-grow
+              outlined
+              dense
+              rows="1"
+            />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </section>
       <div>
         <v-expansion-panels
           hover
@@ -106,6 +135,24 @@ export default {
   computed: {
     questionText () {
       return `${this.index + 1}. ${this.question.text[this.lang]}`
+    },
+    displayInternalComment () {
+      return this.question.internalComment.option !== '3'
+    },
+    displayExternalComment () {
+      return this.question.externalComment.option !== '3'
+    },
+    displayPicture () {
+      return this.question.picture.option !== '3'
+    },
+    isInternalCommentRequired () {
+      return this.question.internalComment.option === '1'
+    },
+    isExternalCommentRequired () {
+      return this.question.externalComment.option === '1'
+    },
+    isPictureRequired () {
+      return this.question.picture.option === '1'
     },
     ...mapState({
       lang: state => {

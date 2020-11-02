@@ -201,22 +201,22 @@
               label="Sort Order"
               @change="sortQuestions(selectedQuestion)"
             />
-             <v-select
-              v-model="selectedQuestion.type"
+            <v-select
+              v-model="selectedQuestion.internalComment.option"
               item-text="text"
               item-value="value"
               :items="optionTypes"
               label="Internal Comments"
             />
-             <v-select
-              v-model="selectedQuestion.type"
+            <v-select
+              v-model="selectedQuestion.externalComment.option"
               item-text="text"
               item-value="value"
               :items="optionTypes"
               label="External Comments"
             />
-             <v-select
-              v-model="selectedQuestion.type"
+            <v-select
+              v-model="selectedQuestion.picture.option"
               item-text="text"
               item-value="value"
               :items="optionTypes"

@@ -82,6 +82,15 @@ function createQuestion (questionnaire) {
       responseToMatch: 'false', // value to compare to question.response. If matches then supplementaryInfo rule is applied
       matchingType: 'equal' // notEqual, greaterThen, lessThen...
     },
+    internalComment: {
+      option: '2', value: ''
+    },
+    externalComment: {
+      option: '2', value: ''
+    },
+    picture: {
+      option: '2', value: ''
+    },
     childQuestions: [
 
     ],
