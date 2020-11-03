@@ -40,7 +40,6 @@
         >
           mdi-exclamation
         </v-icon>
-        <!-- <v-icon v-else slot="append" large color="green">mdi-check</v-icon> -->
       </v-textarea>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -48,7 +47,6 @@
 
 <script>
 export default {
-  // props: ['display', 'required', 'label', 'hint', 'question', 'group', 'saveToProp'],
   props: {
     comment: {
       type: Object,
