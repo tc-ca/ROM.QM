@@ -42,22 +42,9 @@
 
       <violation-info v-if="displayViolationInfo" />
 
-      <question-comment
-        v-if="displayInternalComment"
-        title="Internal Comment"
-        :comment="question.internalComment"
-      />
-
-      <question-comment
-        v-if="displayExternalComment"
-        title="External Comment"
-        :comment="question.externalComment"
-      />
-
-      <picture-slot
-        v-if="displayPicture"
-        title="Picture"
-        :picture-req="question.picture"
+      <supplementary-info
+        :question="question"
+        :group="group"
       />
 
       <div>
@@ -87,14 +74,12 @@
 
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
-// import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import ViolationInfo from './violation-info/violation-info.vue'
-import QuestionComment from './comments/question-comment.vue'
-import PictureSlot from './picture/picture-slot.vue'
+import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 
 export default {
   name: 'Question',
-  components: { Response, ViolationInfo, QuestionComment, PictureSlot },
+  components: { Response, ViolationInfo, SupplementaryInfo },
 
   props: {
     question: {
@@ -126,21 +111,6 @@ export default {
   computed: {
     questionText () {
       return `${this.index + 1}. ${this.question.text[this.lang]}`
-    },
-    displayInternalComment () {
-      return this.question.internalComment.option !== '3'
-    },
-    displayExternalComment () {
-      return this.question.externalComment.option !== '3'
-    },
-    displayPicture () {
-      return this.question.picture.option !== '3'
-    },
-    isExternalCommentRequired () {
-      return this.question.externalComment.option === '1'
-    },
-    isPictureRequired () {
-      return this.question.picture.option === '1'
     },
     ...mapState({
       lang: state => {

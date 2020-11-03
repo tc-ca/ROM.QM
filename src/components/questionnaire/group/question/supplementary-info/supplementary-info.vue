@@ -5,7 +5,8 @@
     :value="[]"
   >
     <supplementary-info-comment
-      :comment="supplementaryInfo.externalComment"
+      v-if="displayExternalComment"
+      :comment="question.externalComment"
       label="External Comment"
       hint="External comments will be available to the public"
       :group="group"
@@ -14,7 +15,8 @@
       @error="error"
     />
     <supplementary-info-comment
-      :comment="supplementaryInfo.internalComment"
+      v-if="displayInternalComment"
+      :comment="question.internalComment"
       label="Internal Comment"
       hint="Internal comments will only be made available to internal stakeholders"
       :group="group"
@@ -23,7 +25,8 @@
       @error="error"
     />
     <supplementary-info-image
-      :picture="supplementaryInfo.picture"
+      v-if="displayPicture"
+      :picture="question.picture"
       label="Photos"
       :group="group"
       :question="question"
@@ -34,17 +37,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
 
 export default {
+  name: 'SupplementaryInfo',
   components: { SupplementaryInfoComment, SupplementaryInfoImage },
 
   props: {
-    supplementaryInfoRule: {
-      type: Object,
-      required: true
-    },
     question: {
       type: Object,
       required: true
@@ -53,6 +54,25 @@ export default {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    displayInternalComment () {
+      return this.question.internalComment.option !== '3'
+    },
+    displayExternalComment () {
+      return this.question.externalComment.option !== '3'
+    },
+    displayPicture () {
+      return this.question.picture.option !== '3'
+    },
+    ...mapState({
+      lang: state => {
+        if (!state || !state.app) {
+          return 'en-US'
+        }
+        return state.app.settings.lang
+      }
+    })
   },
   methods: {
     error (error) {
