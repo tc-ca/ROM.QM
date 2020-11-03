@@ -74,7 +74,7 @@
                     focusable
                     multiple
                   >
-                    <question
+                    <b-question
                       v-for="(question, questionIndex) in group.questions"
                       :key="questionIndex"
                       :question="question"
@@ -666,7 +666,7 @@
 <script>
 // import { mapState } from 'vuex'
 import { LANGUAGE } from '../constants.js'
-import Question from '../components/builder/question'
+import BQuestion from '../components/builder/b-question'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
 // import utils from '../utils'
@@ -674,7 +674,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'Builder',
   components: {
-    Question
+    BQuestion
   },
   props: {
     schema:
