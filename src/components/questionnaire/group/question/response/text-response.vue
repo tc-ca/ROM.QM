@@ -2,7 +2,10 @@
   <div>
     test: {{ question.validationRules[0] }}
 
-    <pure-text-response :question="question" :lang="en-US" />
+    <pure-text-response
+      :question="question"
+      :lang="en-US"
+    />
   </div>
 </template>
 

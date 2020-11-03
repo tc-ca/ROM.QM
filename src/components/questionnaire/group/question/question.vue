@@ -42,35 +42,24 @@
 
       <violation-info v-if="displayViolationInfo" />
 
-      <section>
-        <v-expansion-panel v-show="displayInternalComment">
-          <v-expansion-panel-header class="subtitle-2">
-            <span>
-              Internal Comment
-              <span
-                v-if="isInternalCommentRequired"
-                style="color: red"
-              >(required)</span>
-              <span v-else>(optional)</span>
-            </span>
-            <!-- <v-icon
-              v-if="!comment.validationState"
-              color="red"
-            >
-              mdi-exclamation
-            </v-icon>  -->
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-textarea
-              v-model="question.internalComment.value"
-              auto-grow
-              outlined
-              dense
-              rows="1"
-            />
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </section>
+      <question-comment
+        v-if="displayInternalComment"
+        title="Internal Comment"
+        :comment="question.internalComment"
+      />
+
+      <question-comment
+        v-if="displayExternalComment"
+        title="External Comment"
+        :comment="question.externalComment"
+      />
+
+      <picture-slot
+        v-if="displayPicture"
+        title="Picture"
+        :picture-req="question.picture"
+      />
+
       <div>
         <v-expansion-panels
           hover
@@ -100,10 +89,12 @@ import { mapState } from 'vuex'
 import Response from './response/response.vue'
 // import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import ViolationInfo from './violation-info/violation-info.vue'
+import QuestionComment from './comments/question-comment.vue'
+import PictureSlot from './picture/picture-slot.vue'
 
 export default {
   name: 'Question',
-  components: { Response, ViolationInfo },
+  components: { Response, ViolationInfo, QuestionComment, PictureSlot },
 
   props: {
     question: {
@@ -144,9 +135,6 @@ export default {
     },
     displayPicture () {
       return this.question.picture.option !== '3'
-    },
-    isInternalCommentRequired () {
-      return this.question.internalComment.option === '1'
     },
     isExternalCommentRequired () {
       return this.question.externalComment.option === '1'
