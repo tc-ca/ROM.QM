@@ -10,7 +10,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 let group = {
-  primaryKey: '',
+  primaryKey: 'Group 1',
   title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
   isRepeatable: false,
   isVisible: false,
@@ -208,18 +208,152 @@ describe('Group.vue', () => {
   //   expect(wrapper.findAll('[data-testid="removeGroup"]').length).toEqual(0)
   // })
 
-  it('"adds a copy group to state', () => {
+  // TESTING MUTATIONS
+
+  it('setGroups', () => {
+    const state = {
+      groups: [],
+      groupsCopy: []
+    }
+    const groups = [{}, {}]
+    mutations.setGroups(state, { groups: groups })
+    expect(state.groups.length).toEqual(groups.length)
+  })
+
+  it('copyGroups', () => {
+    const state = {
+      groups: [],
+      groupsCopy: []
+    }
+    const groupsCopy = [{}, {}]
+    mutations.copyGroups(state, { groupsCopy })
+    expect(state.groupsCopy.length).toEqual(groupsCopy.length)
+  })
+
+  it('UpdateGroupOrder', () => {
+    const state = {
+      groups: [],
+      groupsCopy: []
+    }
+    const order = 5
+    mutations.UpdateGroupOrder(state, { group, order: order })
+    expect(group.order).toEqual(order)
+  })
+
+  test('updateGroupHtmlElementId', () => {
+    const state = {
+      groups: [],
+      groupsCopy: []
+    }
+    const group = {
+      primaryKey: 'Group1',
+      title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+      domSuffix: '',
+      htmlElementId: '',
+      questions: []
+    }
+    const domSuffix = '#001'
+
+    mutations.updateGroupHtmlElementId(state, { group, domSuffix })
+
+    expect(group.htmlElementId).toEqual(`${group.primaryKey}${domSuffix}`)
+  })
+
+  test('repeatGroup', () => {
     const state = { groups: [], groupsCopy: [] }
     mutations.repeatGroup(state, { copiedGroup: group, insertAt: 0 })
-    console.log(state.groups.length)
     expect(state.groups.length).toEqual(1)
   })
 
-  it('"copy group should be in correct position inserted at', () => {
-    const state = { groups: [], groupsCopy: [] }
-    mutations.repeatGroup(state, { copiedGroup: group, insertAt: 0 })
-    state.groups.find(x => x.primaryKey === group.primaryKey)
-    console.log(state.groups.length)
-    expect(state.groups.length).toEqual(1)
+  it('copy group should be in correct position inserted at', () => {
+    const state = {
+      groups: [
+        {
+          primaryKey: 'Group1',
+          title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+          isRepeatable: false,
+          isVisible: false,
+          showKey: '',
+          hideKey: '',
+          order: 0,
+          domSuffix: '#000',
+          htmlElementId: 'Group1#000',
+          questions: []
+        }
+      ],
+      groupsCopy: []
+    }
+
+    // simulate copying of group 1
+    const copyOfGroup1 = {
+      primaryKey: 'Group1',
+      title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+      isRepeatable: false,
+      isVisible: false,
+      showKey: '',
+      hideKey: '',
+      order: 0,
+      domSuffix: '#001',
+      htmlElementId: 'Group1#001',
+      questions: []
+    }
+    mutations.repeatGroup(state, { copiedGroup: copyOfGroup1, insertAt: 1 })
+    const index = state.groups.findIndex(
+      x => x.htmlElementId === copyOfGroup1.htmlElementId
+    )
+    expect(index).toEqual(1)
+  })
+
+  it('removeGroup', () => {
+    const state = {
+      groups: [
+        {
+          primaryKey: 'Group1',
+          title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+          isRepeatable: false,
+          isVisible: false,
+          showKey: '',
+          hideKey: '',
+          order: 0,
+          domSuffix: '#000',
+          htmlElementId: 'Group1#000',
+          questions: []
+        },
+        {
+          primaryKey: 'Group2',
+          title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+          isRepeatable: false,
+          isVisible: false,
+          showKey: '',
+          hideKey: '',
+          order: 1,
+          domSuffix: '#000',
+          htmlElementId: 'Group2#000',
+          questions: []
+        }
+      ],
+      groupsCopy: []
+    }
+
+    const groupToBeRemoved = {
+      primaryKey: 'Group2',
+      title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+      isRepeatable: false,
+      isVisible: false,
+      showKey: '',
+      hideKey: '',
+      order: 1,
+      domSuffix: '#000',
+      htmlElementId: 'Group2#000',
+      questions: []
+    }
+
+    // simulate copying of group 1
+    mutations.removeGroup(state, { group: groupToBeRemoved })
+    const index = state.groups.findIndex(
+      x => x.htmlElementId === groupToBeRemoved.htmlElementId
+    )
+    console.log(JSON.stringify(groupToBeRemoved, null, 2))
+    expect(index).toEqual(-1)
   })
 })
