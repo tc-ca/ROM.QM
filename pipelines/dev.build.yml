@@ -1,5 +1,5 @@
 trigger:
-- development
+- main
 
 stages:
 - stage: A
@@ -17,7 +17,19 @@ stages:
     - script: |
         npm install
         npm run build
+        npm run test:unit 
       displayName: 'npm install and build'
+
+    - task: CopyFiles@2
+      inputs:
+        Contents: 'dist/**' # Pull the build directory (Vue)
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      inputs: 
+        pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+        ArtifactName: 'WebResources' # output artifact named www
+
 
   - deployment: Deploy
     condition: succeeded()
