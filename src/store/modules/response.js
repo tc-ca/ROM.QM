@@ -82,6 +82,10 @@ export const actions = {
     // question index should always exist in this case as a response must be answered before supplementary info provided,
     // therefore question obj should always be found in the response store
     // TODO add error/log handling when returning -1 from findIndex.
+
+    // This is an error
+    if (!responseGroup) return
+
     const questionIndex = responseGroup.questions.findIndex(x => x.htmlElementId === question.htmlElementId)
 
     context.commit('updateSupplementaryInfo', { responseGroup, questionIndex, response, saveToProp })
