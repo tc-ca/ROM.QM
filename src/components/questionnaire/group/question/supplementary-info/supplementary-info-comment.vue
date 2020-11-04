@@ -29,16 +29,17 @@
       <v-textarea
         ref="textArea"
         v-model="comment.value"
+        prepend-icon="mdi-message-text-outline"
         auto-grow
         dense
         outlined
-        filled
+        clearable
+        clear-icon="mdi-close-circle"
         :placeholder="placeholderText"
         rows="1"
         :hint="hint"
         :rules="rules"
         @update:error="onError"
-        @change="handler($event)"
       >
         <v-icon
           v-if="comment.required"
@@ -146,3 +147,7 @@ export default {
   padding-left: 4px !important;
 }
 </style>
+
+/*
+  @change="handler($event)" on v-textarea
+*/
