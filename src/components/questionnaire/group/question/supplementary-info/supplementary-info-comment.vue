@@ -3,17 +3,25 @@
     <v-expansion-panel-header class="subtitle-2">
       <span>
         {{ label }}
-        <span
+        <v-icon
           v-if="isCommentRequired"
-          style="color: red"
-        >(required)</span>
-        <span v-else>(optional)</span>
+          color="red"
+        >
+          mdi-alpha-r-box-outline
+        </v-icon>
+        <v-icon
+          v-else
+          color="primary"
+        >
+          mdi-alpha-o-box-outline
+        </v-icon>
       </span>
+      <v-spacer />
       <v-icon
         v-if="errorInComment"
         color="red"
       >
-        mdi-exclamation
+        mdi-message-alert
       </v-icon>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
