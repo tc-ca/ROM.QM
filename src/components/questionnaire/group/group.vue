@@ -28,6 +28,7 @@
           <!-- Repeat button -->
           <v-icon
             v-if="group.isRepeatable=== true"
+            data-testid="repeatGroup"
             large
             color="primary"
             @click.native.stop="repeatGroup(group)"
@@ -43,6 +44,8 @@
           <!-- Remove button -->
           <v-icon
             v-if="group.isRepeatable=== true && repeatedGroup"
+
+            data-testid="removeGroup"
             large
             color="primary"
             @click.native.stop="removeGroup(group, index)"
