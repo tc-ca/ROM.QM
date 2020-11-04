@@ -3,8 +3,10 @@ trigger:
     include:
     - development
   paths:
+    include:
+    - '*' # same as '/' for the repository root
     exclude:
-    - Pipelines/*
+    - 'pipelines/*' # same as 'docs/'
 jobs:
 - job: Build
   pool:
