@@ -3,17 +3,24 @@
     <v-expansion-panel-header class="subtitle-2">
       <span>
         {{ label }}
-        <span
+        <v-icon
           v-if="isPictureRequired"
-          style="color: red"
-        >(required)</span>
-        <span v-else>(optional)</span>
+          color="red"
+        >
+          mdi-alpha-r-box-outline
+        </v-icon>
+        <v-icon
+          v-else
+          color="primary"
+        >
+          mdi-alpha-o-box-outline
+        </v-icon>
       </span>
       <v-icon
-        v-if="!validationStatus"
+        v-if="validationStatus"
         color="red"
       >
-        mdi-exclamation
+        mdi-message-alert
       </v-icon>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
@@ -210,14 +217,15 @@ export default {
       return this.picture.option === '1'
     },
     validationStatus () {
-      return !this.error
+      debugger
+      return this.displayPicture && this.isPictureRequired && !this.images.length > 0
     }
   },
   mounted () {
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
-        let error = this.picture.display && this.picture.required && !this.images.length > 0
+        let error = this.displayPicture && this.isPictureRequired && !this.images.length > 0
         // console.log('$refs.validationInput.validations ' + error)
         this.onError(error)
       }
@@ -225,11 +233,10 @@ export default {
   },
   methods: {
     onFileChange (e) {
-      if (e.length === 0) {
+      if (!e) {
         return
       }
       this.createImage(e)
-      e = null
     },
     createImage (file) {
       var reader = new FileReader()
