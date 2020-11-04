@@ -16,6 +16,7 @@
           mdi-alpha-o-box-outline
         </v-icon>
       </span>
+      <v-spacer />
       <v-icon
         v-if="validationStatus"
         color="red"
@@ -217,7 +218,6 @@ export default {
       return this.picture.option === '1'
     },
     validationStatus () {
-      debugger
       return this.displayPicture && this.isPictureRequired && !this.images.length > 0
     }
   },
