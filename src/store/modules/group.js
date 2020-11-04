@@ -83,7 +83,7 @@ export const mutations = {
     const { groupsCopy } = payload
     state.groupsCopy = groupsCopy
   },
-
+// TODO: lowercase function name 
   UpdateGroupOrder (state, payload) {
     const { group, order } = payload
     group.order = order
@@ -103,7 +103,7 @@ export const mutations = {
 
   removeGroup (state, payload) {
     const { group } = payload
-    for (let index = state.groups.length - 1; index--;) {
+    for (let index = state.groups.length; index--;) {
       if (state.groups[index].order === group.order) {
         state.groups.splice(index, 1)
       }
