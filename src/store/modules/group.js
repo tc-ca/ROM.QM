@@ -2,7 +2,6 @@
 import _ from 'lodash'
 import { pad } from '../../utils.js'
 import questionnaireService from '../../services/questionnaireService.js'
-
 export const state = {
   groups: [],
   groupsCopy: []
@@ -10,7 +9,7 @@ export const state = {
 }
 
 export const getters = {
-  getTargetedRepeatedGroups (state, getters) {
+  getTargetedRepeatedGroups (state) {
     return (primaryKey) => {
       return state.groups.filter(x => x.primaryKey === primaryKey)
     }
@@ -84,7 +83,7 @@ export const mutations = {
     const { groupsCopy } = payload
     state.groupsCopy = groupsCopy
   },
-
+// TODO: lowercase function name 
   UpdateGroupOrder (state, payload) {
     const { group, order } = payload
     group.order = order
@@ -104,7 +103,7 @@ export const mutations = {
 
   removeGroup (state, payload) {
     const { group } = payload
-    for (let index = state.groups.length - 1; index--;) {
+    for (let index = state.groups.length; index--;) {
       if (state.groups[index].order === group.order) {
         state.groups.splice(index, 1)
       }

@@ -4,34 +4,57 @@ module.exports = {
   env: {
     node: true
   },
-
-  'extends': [
-    'plugin:vue/recommended',
-    '@vue/standard'
-  ],
+  extends: ["eslint:recommended"],
 
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'vue/component-name-in-template-casing': ['error', 'kebab-case', {
-      'registeredComponentsOnly': false,
-      'ignores': []
-    }]
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
   },
 
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
-
+  parser: "babel-eslint",
+  extends: ["eslint:recommended"],
   overrides: [
     {
       files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)"
       ],
+      extends: ["@vue/standard"],
+
       env: {
         jest: true
       }
+    },
+    {
+      files: ["*.vue"],
+      extends: ["plugin:vue/recommended", "@vue/standard"],
+      rules: {
+        "vue/component-name-in-template-casing": [
+          "error",
+          "kebab-case",
+          {
+            registeredComponentsOnly: false,
+            ignores: []
+          }
+        ]
+      }
+    },
+
+    {
+      files: ["*.mdx"],
+      extends: ["plugin:mdx/recommended", "plugin:react/recommended"],
+      parserOptions: {
+        ecmaVersion: 12,
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      settings: {
+        react: {
+          version: "detect"
+        }
+      }
     }
   ]
-}
+};

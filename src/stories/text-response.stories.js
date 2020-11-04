@@ -2,7 +2,6 @@ import PureTextResponse from '../components/questionnaire/group/question/respons
 import { action } from '@storybook/addon-actions'
 import { withKnobs, object } from '@storybook/addon-knobs'
 
-
 export default {
   title: 'text-response',
   excludeStories: /.*Data$/,
@@ -29,19 +28,18 @@ export const Default = () => ({
   },
   methods: { onError: action('error') }
 })
- 
-{
-components: { PureTextResponse },
-  template: taskTemplate,
-  props: {
-    question: {
-      default: () => questionData
-    },
-    lang: {
-      default: object('lang', 'en-US')
-    }
-  },
-}
+// {
+// components: { PureTextResponse },
+//   template: taskTemplate,
+//   props: {
+//     question: {
+//       default: () => questionData
+//     },
+//     lang: {
+//       default: object('lang', 'en-US')
+//     }
+//   },
+// }
 
 // export const Default = () => ({
 //   components: { PureTextResponse },

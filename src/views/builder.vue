@@ -160,8 +160,16 @@
         <v-row v-if="selectedGroup">
           <v-col>
             <v-text-field
+              v-model="selectedGroup.primaryKey"
+              label="Group name"
+            />
+            <v-text-field
               v-model="selectedGroup.title[eng]"
-              label="Group name En"
+              label="Group text En"
+            />
+            <v-text-field
+              v-model="selectedGroup.title[fr]"
+              label="Group text Fr"
             />
             <v-checkbox
               v-model="selectedGroup.isVisible"

@@ -2,8 +2,9 @@ import { LANGUAGE } from '../constants.js'
 
 function createGroup (questionnaire) {
   let group = {}
+  const id = getNextGroupId(questionnaire);
 
-  group.primaryKey = ''
+  group.primaryKey = `Group ${id + 1}`;
   group.title = {
     [LANGUAGE.ENGLISH]: 'New Group',
     [LANGUAGE.FRENCH]: 'Fr: New Group'
@@ -12,7 +13,7 @@ function createGroup (questionnaire) {
   group.isVisible = true
   group.showKey = ''
   group.hideKey = ''
-  group.order = getNextGoupId(questionnaire)
+  group.order = id
   group.domSuffix = 'prop value created virtually'
   group.htmlElementId = 'prop value created virtually'
 
@@ -101,7 +102,7 @@ function createChildQuestion (questionnaire, queistion) {
   return q
 }
 
-function getNextGoupId (questionnaire) {
+function getNextGroupId (questionnaire) {
   return questionnaire.groups.length
 }
 
