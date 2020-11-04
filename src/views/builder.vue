@@ -157,7 +157,6 @@
             />
           </v-col>
         </v-row>
-        {{ selectedGroup }}
         <v-row v-if="selectedGroup">
           <v-col>
             <v-text-field
