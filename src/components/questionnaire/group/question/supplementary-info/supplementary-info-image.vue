@@ -19,11 +19,11 @@
     <v-expansion-panel-content eager>
       <v-row>
         <v-col>
-            <v-file-input
-                prepend-icon="mdi-camera-plus-outline"
-                @change="onFileChange"
-                hide-input
-              ></v-file-input>
+          <v-file-input
+            prepend-icon="mdi-camera-plus-outline"
+            hide-input
+            @change="onFileChange"
+          />
         </v-col>
         <v-col>
           <v-btn-toggle rounded>
