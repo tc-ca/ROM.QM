@@ -21,21 +21,25 @@ jobs:
     displayName: 'npm install and build'
   - powershell: |
       Write-Host "============================================"
-      Write-Host "Current directory file list post build"
-      dir
-      Write-Host "============================================"
-      Write-Host ""
-      Write-Host "============================================"
-      Write-Host "Build Artifacts staging directory"
-      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
-      Write-Host "============================================"
-      Write-Host "============================================"
       Write-Host "Agent.BuildDirectory"
       Get-ChildItem -Path "$(Agent.BuildDirectory)"
       Write-Host "============================================"
+      Write-Host ""
+      Write-Host "============================================"
+      Write-Host "Build.ArtifactStagingDirectory"
+      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
+      Write-Host "============================================"
+      Write-Host "============================================"
+      Write-Host "Build.BinariesDirectory"
+      Get-ChildItem -Path "$(Build.BinariesDirectory)"
+      Write-Host "============================================"
+      Write-Host "============================================"
+      Write-Host "Build.SourcesDirectory"
+      Get-ChildItem -Path "$(Build.SourcesDirectory)"
+      Write-Host "============================================"
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist/**'
+      PathtoPublish: $(Build.SourcesDirectory)/dist/**'
       ArtifactName: 'WebResources'
       publishLocation: 'Container'
 
@@ -69,6 +73,14 @@ jobs:
         Write-Host "============================================"
         Write-Host "Build.ArtifactStagingDirectory"
         Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
+        Write-Host "============================================"
+        Write-Host "============================================"
+        Write-Host "Build.BinariesDirectory"
+        Get-ChildItem -Path "$(Build.BinariesDirectory)"
+        Write-Host "============================================"
+        Write-Host "============================================"
+        Write-Host "Build.SourcesDirectory"
+        Get-ChildItem -Path "$(Build.SourcesDirectory)"
         Write-Host "============================================"
       errorActionPreference: 'continue'
   - task: MSCRMToolInstaller@12
