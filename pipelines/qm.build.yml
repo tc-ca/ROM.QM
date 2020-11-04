@@ -19,7 +19,7 @@ steps:
 - script: |
     npm install
     npm run build
-    npm run test
+    npm run test:unit 
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
