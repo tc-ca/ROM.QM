@@ -29,9 +29,13 @@ jobs:
       Write-Host "Build Artifacts staging directory"
       Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
       Write-Host "============================================"
+      Write-Host "============================================"
+      Write-Host "Agent.BuildDirectory"
+      Get-ChildItem -Path "$(Agent.BuildDirectory)"
+      Write-Host "============================================"
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: 'dist/**'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist/**'
       ArtifactName: 'WebResources'
       publishLocation: 'Container'
 
