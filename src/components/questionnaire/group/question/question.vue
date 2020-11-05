@@ -42,6 +42,11 @@
 
       <violation-info v-if="displayViolationInfo" />
 
+      <supplementary-info
+        :question="question"
+        :group="group"
+      />
+
       <div>
         <v-expansion-panels
           hover
@@ -69,12 +74,12 @@
 
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
-// import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import ViolationInfo from './violation-info/violation-info.vue'
+import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 
 export default {
   name: 'Question',
-  components: { Response, ViolationInfo },
+  components: { Response, ViolationInfo, SupplementaryInfo },
 
   props: {
     question: {
