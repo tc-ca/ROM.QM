@@ -2,9 +2,10 @@ module.exports = {
   root: true,
 
   env: {
-    node: true
+    node: true,
+    "browser": true,
+    "localStorage": true
   },
-  extends: ["eslint:recommended"],
 
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
@@ -19,7 +20,7 @@ module.exports = {
         "**/__tests__/*.{j,t}s?(x)",
         "**/tests/unit/**/*.spec.{j,t}s?(x)"
       ],
-      extends: ["@vue/standard"],
+      extends: ["eslint:recommended", "plugin:vue/recommended"],
 
       env: {
         jest: true
