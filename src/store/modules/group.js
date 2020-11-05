@@ -5,7 +5,6 @@ import questionnaireService from '../../services/questionnaireService.js'
 export const state = {
   groups: [],
   groupsCopy: []
-
 }
 
 export const getters = {

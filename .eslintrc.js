@@ -3,8 +3,7 @@ module.exports = {
 
   env: {
     node: true,
-    "browser": true,
-    "localStorage": true
+    "browser": true
   },
 
   rules: {
@@ -20,7 +19,7 @@ module.exports = {
         "**/__tests__/*.{j,t}s?(x)",
         "**/tests/unit/**/*.spec.{j,t}s?(x)"
       ],
-      extends: ["eslint:recommended", "plugin:vue/recommended"],
+      extends: ["@vue/standard"],
 
       env: {
         jest: true

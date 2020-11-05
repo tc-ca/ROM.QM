@@ -10,7 +10,7 @@ export const state = {
 * gets the questions out of groups into a flat structure
 */
 export const getters = {
-  questionnaireQuestions (state, getters, rootState, rootGetters) {
+  questionnaireQuestions (state, getters, rootState) { //, rootGetters) {
     let questions = []
     const groups = rootState.group.groups
     for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
