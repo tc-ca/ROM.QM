@@ -29,6 +29,7 @@
           <v-file-input
             prepend-icon="mdi-camera-plus-outline"
             hide-input
+            accept="image/*"
             @change="onFileChange"
           />
         </v-col>
