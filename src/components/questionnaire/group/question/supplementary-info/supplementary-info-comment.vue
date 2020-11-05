@@ -1,36 +1,45 @@
 <template>
-  <v-expansion-panel v-show="comment.display">
+  <v-expansion-panel v-show="displayComment">
     <v-expansion-panel-header class="subtitle-2">
       <span>
         {{ label }}
-        <span
-          v-if="comment.required"
-          style="color: red"
-        >(required)</span>
-        <span v-else>(optional)</span>
+        <v-icon
+          v-if="isCommentRequired"
+          color="red"
+        >
+          mdi-alpha-r-box-outline
+        </v-icon>
+        <v-icon
+          v-else
+          color="primary"
+        >
+          mdi-alpha-o-box-outline
+        </v-icon>
       </span>
+      <v-spacer />
       <v-icon
-        v-if="!comment.validationState"
+        v-if="errorInComment"
         color="red"
       >
-        mdi-exclamation
+        mdi-message-alert
       </v-icon>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
       <br>
       <v-textarea
         ref="textArea"
-        v-model="response"
+        v-model="comment.value"
+        prepend-icon="mdi-message-text-outline"
         auto-grow
         dense
         outlined
-        filled
+        clearable
+        clear-icon="mdi-close-circle"
         :placeholder="placeholderText"
         rows="1"
         :hint="hint"
         :rules="rules"
         @update:error="onError"
-        @change="handler($event)"
       >
         <v-icon
           v-if="comment.required"
@@ -40,7 +49,6 @@
         >
           mdi-exclamation
         </v-icon>
-        <!-- <v-icon v-else slot="append" large color="green">mdi-check</v-icon> -->
       </v-textarea>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -48,7 +56,6 @@
 
 <script>
 export default {
-  // props: ['display', 'required', 'label', 'hint', 'question', 'group', 'saveToProp'],
   props: {
     comment: {
       type: Object,
@@ -79,15 +86,24 @@ export default {
   data () {
     return {
       rules: [
-        value => !this.comment.display || !this.comment.required ? true : !!this.response || 'Required.'
+        value => !this.displayComment || !this.isCommentRequired ? true : !!this.comment.value || 'Required.'
       ],
-      response: ''
+      response: '',
+      validationStatus: false
     }
   },
   computed: {
     placeholderText () {
-      const required = this.comment.required
-      return required ? 'comment required' : ''
+      return this.isCommentRequired ? 'comment required' : ''
+    },
+    isCommentRequired () {
+      return this.comment.option === '1'
+    },
+    displayComment () {
+      return this.comment.option !== '3'
+    },
+    errorInComment () {
+      return this.displayComment && this.isCommentRequired && !this.comment.value
     }
   },
   watch: {
@@ -101,8 +117,7 @@ export default {
     this.$watch(
       '$refs.textArea.validations',
       (newValue) => {
-        let error = this.comment.display && this.comment.required && !this.response
-        this.onError(error)
+        this.onError(this.errorInComment)
       }
     )
   },
@@ -132,3 +147,7 @@ export default {
   padding-left: 4px !important;
 }
 </style>
+
+/*
+  @change="handler($event)" on v-textarea
+*/

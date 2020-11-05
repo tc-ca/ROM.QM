@@ -133,7 +133,7 @@ import Response from './response/response'
 import BuilderService from '../../services/builderService'
 
 export default {
-  name: 'Question',
+  name: 'BQuestion',
   components: {
     Response
   },

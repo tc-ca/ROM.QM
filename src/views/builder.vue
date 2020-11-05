@@ -74,7 +74,7 @@
                     focusable
                     multiple
                   >
-                    <question
+                    <b-question
                       v-for="(question, questionIndex) in group.questions"
                       :key="questionIndex"
                       :question="question"
@@ -208,6 +208,27 @@
               type="number"
               label="Sort Order"
               @change="sortQuestions(selectedQuestion)"
+            />
+            <v-select
+              v-model="selectedQuestion.internalComment.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              label="Internal Comments"
+            />
+            <v-select
+              v-model="selectedQuestion.externalComment.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              label="External Comments"
+            />
+            <v-select
+              v-model="selectedQuestion.picture.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              label="Picture(s)"
             />
             <v-checkbox
               v-model="selectedQuestion.isVisible"
@@ -653,7 +674,7 @@
 <script>
 // import { mapState } from 'vuex'
 import { LANGUAGE } from '../constants.js'
-import Question from '../components/builder/question'
+import BQuestion from '../components/builder/b-question'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
 // import utils from '../utils'
@@ -661,7 +682,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'Builder',
   components: {
-    Question
+    BQuestion
   },
   props: {
     schema:
@@ -695,6 +716,7 @@ export default {
       selectedGroup: null,
       selectedQuestion: null,
       questionTypes: [{ value: 'text', text: 'Text' }, { value: 'radio', text: 'Radio' }, { value: 'select', text: 'Select' }, { value: 'number', text: 'Number' }, { value: 'image', text: 'Image' }],
+      optionTypes: [{ value: '1', text: 'Required' }, { value: '2', text: 'Optional' }, { value: '3', text: 'N/A' }],
       optionsCollapsed: true,
       validatorTypes: [{ value: 'require', text: 'Require' }, { value: 'min', text: 'Min' }, { value: 'max', text: 'Max' }, { value: 'minLength', text: 'Min Length' }, { value: 'maxLength', text: 'Max Length' }],
       validatorsCollapsed: true,
