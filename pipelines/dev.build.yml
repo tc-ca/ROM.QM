@@ -58,7 +58,6 @@ jobs:
       ArtifactName: 'WebResources'
       publishLocation: 'Container'
 
-
   # - deployment: Deploy
   #   condition: succeeded()
   #   dependsOn: Build
