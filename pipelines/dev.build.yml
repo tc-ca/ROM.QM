@@ -51,7 +51,7 @@ jobs:
       Write-Host "============================================"
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: $(Build.SourcesDirectory)/dist'
+      PathtoPublish: $(Build.SourcesDirectory)/dist/**'
       ArtifactName: 'WebResources'
       publishLocation: 'Container'
 
