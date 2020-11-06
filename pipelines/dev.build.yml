@@ -1,16 +1,13 @@
-trigger:
-  branches:
-    include:
-    - development
-  paths:
-    include:
-    - '*'
-    exclude:
-    - 'pipelines/*'
-    - 'dist/*'
-    - 'node_modules/*'
-    - 'README.md'
-    - '.gitignore'
+# trigger: none
+#   paths:
+#     include:
+#     - '*'
+#     exclude:
+#     - 'pipelines/*'
+#     - 'dist/*'
+#     - 'node_modules/*'
+#     - 'README.md'
+#     - '.gitignore'
 jobs:
 - job: Build
   pool:
