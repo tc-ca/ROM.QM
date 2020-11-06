@@ -40,6 +40,7 @@
         :hint="hint"
         :rules="rules"
         @update:error="onError"
+        @change="handler($event)"
       >
         <v-icon
           v-if="comment.required"
