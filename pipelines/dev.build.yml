@@ -33,6 +33,9 @@ jobs:
       customCommand: 'run test:unit'
   - powershell: |
       Write-Host "============================================"
+      Write-Host "System.DefaultWorkingDirectory"
+      Get-ChildItem -Path "$(System.DefaultWorkingDirectory)"
+      Write-Host "============================================"
       Write-Host "Agent.BuildDirectory"
       Get-ChildItem -Path "$(Agent.BuildDirectory)"
       Write-Host "============================================"
@@ -51,7 +54,7 @@ jobs:
       Write-Host "============================================"
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: $(Build.SourcesDirectory)/dist/**'
+      PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
       ArtifactName: 'WebResources'
       publishLocation: 'Container'
 
