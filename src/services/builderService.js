@@ -85,13 +85,13 @@ function createQuestion (questionnaire) {
       matchingType: 'equal' // notEqual, greaterThen, lessThen...
     },
     internalComment: {
-      option: '2', value: ''
+      option: 'optional', value: ''
     },
     externalComment: {
-      option: '2', value: ''
+      option: 'optional', value: ''
     },
     picture: {
-      option: '2', value: ''
+      option: 'optional', value: ''
     },
     childQuestions: [
 

@@ -97,10 +97,10 @@ export default {
       return this.isCommentRequired ? 'comment required' : ''
     },
     isCommentRequired () {
-      return this.comment.option === '1'
+      return this.comment.option === 'required'
     },
     displayComment () {
-      return this.comment.option !== '3'
+      return this.comment.option !== 'n/a'
     },
     errorInComment () {
       return this.displayComment && this.isCommentRequired && !this.comment.value

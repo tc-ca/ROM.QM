@@ -57,13 +57,13 @@ export default {
   },
   computed: {
     displayInternalComment () {
-      return this.question.internalComment.option !== '3'
+      return this.question.internalComment.option !== 'n/a'
     },
     displayExternalComment () {
-      return this.question.externalComment.option !== '3'
+      return this.question.externalComment.option !== 'n/a'
     },
     displayPicture () {
-      return this.question.picture.option !== '3'
+      return this.question.picture.option !== 'n/a'
     },
     ...mapState({
       lang: state => {

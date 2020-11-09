@@ -43,6 +43,7 @@
       <violation-info v-if="displayViolationInfo" />
 
       <supplementary-info
+        v-if="displaySupplementaryInfo"
         :question="question"
         :group="group"
       />
@@ -105,6 +106,7 @@ export default {
   data () {
     return {
       displayViolationInfo: false,
+      displaySupplementaryInfo: false,
       isValid: null
     }
   },
@@ -127,9 +129,13 @@ export default {
   methods: {
     onUserResponseChanged (args) {
       this.updateViolationInfo(args)
+      this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
       this.$emit('responseChanged')
+    },
+    updateSupplementaryInfoVisibility (args) {
+      this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
       var res = args.value
