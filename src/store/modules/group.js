@@ -16,11 +16,13 @@ export const getters = {
 }
 
 export const actions = {
+  // this action is similar to the the below 'getQuestionnaireGroups' but assumes you already have groups collection from somewhere non external
   setQuestionnaireGroups ({ commit }, groups) {
     const groupsCopy = _.cloneDeep(groups)
     commit('setGroups', { groups })
     commit('copyGroups', { groupsCopy })
   },
+  // use this action when wanting to retrieve from questionnaire schema from api. mocking call for now
   getQuestionnaireGroups ({ commit }, schema) {
     if (state.groups.length === 0) {
       // todo do a real fetch using woodfordIntegration.js
@@ -34,7 +36,6 @@ export const actions = {
     // get all similar groups
     // const targetedRepeatedGroups = state.questionnaire.groups.filter(x => x.primaryKey === group.primaryKey) // TODO: remove
     const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
-
     // get starting reference for group in the collection of group array i.e. starting point/index 4
     const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.order)
     const startReference = Math.min(...repeatedGroupsOrders)

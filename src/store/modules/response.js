@@ -39,6 +39,7 @@ export const getters = {
 }
 
 function addResponsesToWindowObject (responses) {
+  // eslint-disable-next-line no-undef
   window.TCQuestionnaireBuilder = { responses: responses }
 }
 
