@@ -708,7 +708,7 @@ export default {
       selectedGroup: null,
       selectedQuestion: null,
       questionTypes: [{ value: 'text', text: 'Text' }, { value: 'radio', text: 'Radio' }, { value: 'select', text: 'Select' }, { value: 'number', text: 'Number' }, { value: 'image', text: 'Image' }],
-      optionTypes: [{ value: '1', text: 'Required' }, { value: '2', text: 'Optional' }, { value: '3', text: 'N/A' }],
+      optionTypes: [{ value: 'required', text: 'Required' }, { value: 'optional', text: 'Optional' }, { value: 'n/a', text: 'N/A' }],
       optionsCollapsed: true,
       validatorTypes: [{ value: 'require', text: 'Require' }, { value: 'min', text: 'Min' }, { value: 'max', text: 'Max' }, { value: 'minLength', text: 'Min Length' }, { value: 'maxLength', text: 'Max Length' }],
       validatorsCollapsed: true,

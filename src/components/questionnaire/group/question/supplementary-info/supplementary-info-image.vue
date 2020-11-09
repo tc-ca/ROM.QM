@@ -216,7 +216,7 @@ export default {
       return !this.picture.display
     },
     isPictureRequired () {
-      return this.picture.option === '1'
+      return this.picture.option === 'required'
     },
     validationStatus () {
       return this.displayPicture && this.isPictureRequired && !this.images.length > 0
