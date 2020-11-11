@@ -122,17 +122,8 @@ export default {
     )
   },
   methods: {
-
-    // TODO: think of a better name
-    updateResponseStore: function (response) {
-      const question = this.question
-      const group = this.group
-      const saveToProp = this.saveToProp
-      this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
-    },
     handler: function (value) {
       // TODO: better name of argument.
-      this.updateResponseStore(value)
     },
     onError (error) {
       this.comment.validationStatus = !error
