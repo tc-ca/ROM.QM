@@ -56,6 +56,7 @@
 
 <script>
 export default {
+  emits: ['error'],
   props: {
     comment: {
       type: Object,
