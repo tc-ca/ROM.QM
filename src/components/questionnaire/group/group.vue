@@ -112,7 +112,9 @@ export default {
       return `${this.index + 1}. ${this.group.title[this.lang]}`
     },
     repeatGroupTextDifferentiator () {
-      return this.$store.getters.getResponsesToShowInGroupHeader(this.group.htmlElementId).join(', ')
+      // This need to be changed because the response store was eliminated. It was used to generate a private title to the group that is repeatable
+      // return this.$store.getters.getResponsesToShowInGroupHeader(this.group.htmlElementId).join(', ')
+      return ''
     },
     // ...mapState(['groups']),
     ...mapState({
