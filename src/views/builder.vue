@@ -722,7 +722,6 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
 import BQuestion from '../components/builder/b-question'
@@ -734,35 +733,9 @@ export default {
   components: {
     BQuestion
   },
-  props: {
-    schema:
-    {
-      type: String,
-      required: false,
-      default: ''
-    },
-    settings:
-    {
-      type: Object,
-      required: false,
-      default: function () {
-        return {
-          lang: LANGUAGE.ENGLISH,
-          darkMode: false
-        }
-      }
-    }
-  },
   data () {
     return {
-      questionnaire: {
-        title: {
-          [LANGUAGE.ENGLISH]: 'General Questionnaire',
-          [LANGUAGE.FRENCH]: 'FR General Questionnaire'
-        },
-        groups: [],
-        lang: 'en-US'
-      },
+      questionnaire: null,
       selectedGroup: null,
       selectedQuestion: null,
       questionTypes: BUILDER.QUESTION_TYPES,
@@ -786,10 +759,6 @@ export default {
     }
   },
   computed: {
-    lang () {
-      // console.log('App.vue: language computed ' + this.settings.lang + ')')
-      return this.settings.lang
-    },
     eng () {
       return LANGUAGE.ENGLISH
     },
@@ -805,16 +774,14 @@ export default {
           return []
         }
         return state.group
+      },
+      lang: state => {
+        if (!state || !state.settings) {
+          return LANGUAGE.ENGLISH
+        }
+        return state.settings.settings.lang
       }
     })
-  },
-  watch: {
-    schema (value, oldValue) {
-      this.$store.dispatch('getQuestionnaireGroups', value)
-    },
-    settings (value, oldValue) {
-      this.$store.dispatch('getSettings', value)
-    }
   },
   created () {
     this.provisions = require('../api/legislation-hierarchy-list.js').default.data[0].children.filter(
@@ -863,8 +830,6 @@ export default {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
       group.questions.push(question)
-
-      // const qInstance = utils.getQuestionReference(this.questionnaire.groups, question)
 
       this.addQuestionToIndex(question)
 
