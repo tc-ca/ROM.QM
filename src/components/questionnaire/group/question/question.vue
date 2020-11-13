@@ -46,6 +46,7 @@
         v-if="displaySupplementaryInfo"
         :question="question"
         :group="group"
+        @error="onError"
       />
 
       <div>
@@ -79,6 +80,7 @@ import ViolationInfo from './violation-info/violation-info.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 
 export default {
+  emits: ['error', 'responseChanged'],
   name: 'Question',
   components: { Response, ViolationInfo, SupplementaryInfo },
 

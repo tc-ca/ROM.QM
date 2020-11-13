@@ -12,7 +12,7 @@
       :group="group"
       :question="question"
       save-to-prop="externalComment"
-      @error="error"
+      @error="onError"
     />
     <supplementary-info-comment
       v-if="displayInternalComment"
@@ -22,7 +22,7 @@
       :group="group"
       :question="question"
       save-to-prop="internalComment"
-      @error="error"
+      @error="onError"
     />
     <supplementary-info-image
       v-if="displayPicture"
@@ -31,7 +31,7 @@
       :group="group"
       :question="question"
       save-to-prop="images"
-      @error="error"
+      @error="onError"
     />
   </v-expansion-panels>
 </template>
@@ -42,6 +42,7 @@ import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
 
 export default {
+  emits: ['error'],
   name: 'SupplementaryInfo',
   components: { SupplementaryInfoComment, SupplementaryInfoImage },
 
@@ -75,7 +76,7 @@ export default {
     })
   },
   methods: {
-    error (error) {
+    onError (error) {
       this.$emit('error', error)
     }
   }
