@@ -5,6 +5,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-actions",
     "@storybook/addon-knobs",
+    "@storybook/addon-a11y",
+
     {
       name: "@storybook/addon-docs",
       options: {

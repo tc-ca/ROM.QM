@@ -192,14 +192,14 @@ export default {
     },
     findObjectByLabel (obj, label) {
       for (var i in obj) {
-        if (obj.hasOwnProperty(i) && i === label) {
+        if (Object.prototype.hasOwnProperty.call(obj, i) && i === label) {
           const newText =
             obj[i].length > this.descriptionLimit
               ? obj[i].slice(0, this.descriptionLimit) + '...'
               : obj[i]
           obj[i] = newText
         }
-        if (obj.hasOwnProperty(i) && i === 'children') {
+        if (Object.prototype.hasOwnProperty.call(obj, i) && i === 'children') {
           for (let index = 0; index < obj[i].length; index++) {
             this.findObjectByLabel(obj[i][index], label)
           }
