@@ -723,7 +723,8 @@
 
 <script>
 // import { mapState } from 'vuex'
-import { LANGUAGE, BUILDER } from '../constants.js'
+import { LANGUAGE } from '../constants.js'
+import BUILDER from '../data/builderLookupTypes'
 import BQuestion from '../components/builder/b-question'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
