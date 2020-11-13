@@ -289,11 +289,12 @@ export default {
     },
 
     updateResponseStore: function () {
-      const question = this.question
-      const group = this.group
-      const saveToProp = this.saveToProp
-      const response = this.images
-      this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
+      // Need to be changed because the updateSupplementaryInfo on the response store was deleted
+      // const question = this.question
+      // const group = this.group
+      // const saveToProp = this.saveToProp
+      // const response = this.images
+      // this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
     },
     onError (error) {
       this.$emit('error', error)

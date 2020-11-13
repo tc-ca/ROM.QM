@@ -36,7 +36,7 @@
               focusable
               multiple
             >
-              <question
+              <builder-question
                 v-for="(childQuestion, questionIndex) in question.childQuestions"
                 ref="groupQuestion"
                 :key="questionIndex"
@@ -133,7 +133,7 @@ import Response from './response/response'
 import BuilderService from '../../services/builderService'
 
 export default {
-  name: 'BQuestion',
+  name: 'BuilderQuestion',
   components: {
     Response
   },
