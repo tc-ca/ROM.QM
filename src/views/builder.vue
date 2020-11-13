@@ -201,7 +201,14 @@
               item-value="value"
               :items="questionTypes"
               label="Question Type"
-            />
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
             <v-text-field
               v-model="selectedQuestion.sortOrder"
               dense
@@ -215,21 +222,42 @@
               item-value="value"
               :items="optionTypes"
               label="Internal Comments"
-            />
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
             <v-select
               v-model="selectedQuestion.externalComment.option"
               item-text="text"
               item-value="value"
               :items="optionTypes"
               label="External Comments"
-            />
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
             <v-select
               v-model="selectedQuestion.picture.option"
               item-text="text"
               item-value="value"
               :items="optionTypes"
               label="Picture(s)"
-            />
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
             <v-checkbox
               v-model="selectedQuestion.isVisible"
               dense
@@ -264,7 +292,15 @@
                   :items="dependencyValidationActions"
                   label="Rules are violated when response is"
                   @change="onViolationInfoChanged"
-                />
+                >
+                  <template v-slot:selection="{ item }">
+                    <span>{{ item.text[lang] }}</span>
+                  </template>
+                  <template v-slot:item="{ item }">
+                    <span>{{ item.text[lang] }}</span>
+                  </template>
+                </v-select>
+
                 <v-text-field
                   v-model="selectedQuestion.violationInfo.responseToMatch"
                   dense
@@ -392,7 +428,14 @@
                     item-value="value"
                     :items="validatorTypes"
                     label="Type"
-                  />
+                  >
+                    <template v-slot:selection="{ item }">
+                      <span>{{ item.text[lang] }}</span>
+                    </template>
+                    <template v-slot:item="{ item }">
+                      <span>{{ item.text[lang] }}</span>
+                    </template>
+                  </v-select>
                   <v-text-field
                     v-show="validationRule.type !== 'require'"
                     v-model="validationRule.value"
@@ -472,7 +515,14 @@
                         item-text="text"
                         item-value="value"
                         label="Type"
-                      />
+                      >
+                        <template v-slot:selection="{ item }">
+                          <span>{{ item.text[lang] }}</span>
+                        </template>
+                        <template v-slot:item="{ item }">
+                          <span>{{ item.text[lang] }}</span>
+                        </template>
+                      </v-select>
                       <v-select
                         v-show="dependencyGroup.ruleType === 'validation' || dependencyGroup.ruleType === 'validationValue'"
                         v-model="dependencyGroup.childValidatorName"
@@ -673,11 +723,10 @@
 
 <script>
 // import { mapState } from 'vuex'
-import { LANGUAGE } from '../constants.js'
+import { LANGUAGE, BUILDER } from '../constants.js'
 import BQuestion from '../components/builder/b-question'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
-// import utils from '../utils'
 
 export default {
   name: 'Builder',
@@ -715,14 +764,14 @@ export default {
       },
       selectedGroup: null,
       selectedQuestion: null,
-      questionTypes: [{ value: 'text', text: 'Text' }, { value: 'radio', text: 'Radio' }, { value: 'select', text: 'Select' }, { value: 'number', text: 'Number' }, { value: 'image', text: 'Image' }],
-      optionTypes: [{ value: 'required', text: 'Required' }, { value: 'optional', text: 'Optional' }, { value: 'n/a', text: 'N/A' }],
+      questionTypes: BUILDER.QUESTION_TYPES,
+      optionTypes: BUILDER.OPTION_TYPES,
       optionsCollapsed: true,
-      validatorTypes: [{ value: 'require', text: 'Require' }, { value: 'min', text: 'Min' }, { value: 'max', text: 'Max' }, { value: 'minLength', text: 'Min Length' }, { value: 'maxLength', text: 'Max Length' }],
+      validatorTypes: BUILDER.VALIDATOR_TYPES,
       validatorsCollapsed: true,
       dependenciesCollapsed: true,
-      dependencyGroupTypes: [{ value: 'visibility', text: 'Visibility' }, { value: 'validation', text: 'Enable validator' }, { value: 'validationValue', text: 'Set validator value' }],
-      dependencyValidationActions: [{ value: null, text: '--' }, { value: 'equal', text: 'Equal' }, { value: 'notEqual', text: 'Not equal' }, { value: 'greaterThen', text: 'Greater then' }, { value: 'lessThen', text: 'Less then' }, { value: 'lengthLessThen', text: 'Length less then' }, { value: 'lengthGreaterThen', text: 'Length greater then' }],
+      dependencyGroupTypes: BUILDER.DEPENDENCY_GROUP_TYPES,
+      dependencyValidationActions: BUILDER.DEPENDENCY_VALIDATION_ACTIONS,
       questions: [],
       confirmDialogOpen: false,
       confirmCallback: null,
