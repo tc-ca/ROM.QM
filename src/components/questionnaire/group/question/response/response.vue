@@ -51,6 +51,7 @@ import NumberResponse from './number-response'
 import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {
+  emits: ['change', 'error'],
   components: { TextResponse, RadioResponse, SelectResponse, ImageResponse, NumberResponse },
   props: {
     question: {

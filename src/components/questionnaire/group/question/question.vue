@@ -40,7 +40,10 @@
         />
       </div>
 
-      <violation-info v-if="displayViolationInfo" />
+      <violation-info
+        v-if="displayViolationInfo"
+        @violations-change="onViolationsChange"
+      />
 
       <supplementary-info
         v-if="displaySupplementaryInfo"
@@ -80,7 +83,7 @@ import ViolationInfo from './violation-info/violation-info.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 
 export default {
-  emits: ['error', 'responseChanged'],
+  emits: ['error', 'responseChanged', 'group-subtitle-change'],
   name: 'Question',
   components: { Response, ViolationInfo, SupplementaryInfo },
 
@@ -129,6 +132,11 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
+    onViolationsChange (args) {
+      console.log(JSON.stringify(args))
+      this.question.violationResponse = args
+      this.$emit('group-subtitle-change')
+    },
     onUserResponseChanged (args) {
       this.updateViolationInfo(args)
       this.updateSupplementaryInfoVisibility(args)

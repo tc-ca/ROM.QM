@@ -97,6 +97,7 @@
 
 <script>
 export default {
+  emits: ['violations-change'],
   data () {
     return {
       violations: null,
@@ -174,7 +175,17 @@ export default {
     //       textTwo.indexOf(searchText) > -1
     // }
   },
-
+  watch: {
+    violations: {
+      immediate: true,
+      handler (newValue, oldValue) {
+        // console.log(`Watcher evaluated. old=${oldValue}, new=${newValue}`)
+        if (newValue) {
+          this.$emit('violations-change', newValue)
+        }
+      }
+    }
+  },
   created: function () {
     this.legislations = require('../../../../../api/legislation-flat-list.js').default.data
     this.legislations2 = require('../../../../../api/legislation-hierarchy-list.js').default.data[0].children.filter(
