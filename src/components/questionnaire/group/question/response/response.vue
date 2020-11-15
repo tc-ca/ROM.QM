@@ -50,6 +50,7 @@ import ImageResponse from './image-response'
 import NumberResponse from './number-response'
 
 export default {
+  emits: ['change', 'error'],
   components: { TextResponse, RadioResponse, SelectResponse, ImageResponse, NumberResponse },
   props: {
     question: {
