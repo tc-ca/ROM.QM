@@ -169,8 +169,6 @@ export default {
       this.$emit('responseChanged')
     },
     updateSupplementaryInfoVisibility (args) {
-      /* eslint-disable no-debugger */
-      debugger
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {

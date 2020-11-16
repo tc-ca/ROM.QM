@@ -109,8 +109,6 @@ export default {
         }
       }
     )
-    /* eslint-disable no-debugger */
-    debugger
     this.findObjectByLabel(l[0], '1.16 (1) (d)')
     this.legislations2 = this.myobj
   },
@@ -121,11 +119,9 @@ export default {
     },
 
     findObjectByLabel (obj, label) {
-      /* eslint-disable no-debugger */
       for (var i in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, i) && i === 'Label') {
           if (obj[i].trim() === label) {
-            debugger
             let a = []
             this.found = true
             a.push(obj)
