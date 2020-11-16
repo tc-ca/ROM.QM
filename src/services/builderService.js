@@ -2,9 +2,9 @@ import { LANGUAGE } from '../constants.js'
 
 function createGroup (questionnaire) {
   let group = {}
-  const id = getNextGroupId(questionnaire);
+  const id = getNextGroupId(questionnaire)
 
-  group.primaryKey = `Group ${id + 1}`;
+  group.primaryKey = `Group ${id + 1}`
   group.title = {
     [LANGUAGE.ENGLISH]: 'New Group',
     [LANGUAGE.FRENCH]: 'Fr: New Group'
@@ -55,7 +55,11 @@ function createQuestion (questionnaire) {
           [LANGUAGE.ENGLISH]: 'Yes',
           [LANGUAGE.FRENCH]: 'FR: Yes'
         },
-        value: 'true'
+        value: 'true',
+        provisions: createProvisions(),
+        selectedProvisions: [],
+        searchProvisions: null,
+        isProvisionCollapsed: false,
       // ...
       },
       {
@@ -65,7 +69,11 @@ function createQuestion (questionnaire) {
           [LANGUAGE.ENGLISH]: 'No',
           [LANGUAGE.FRENCH]: 'FR: No'
         },
-        value: 'false'
+        value: 'false',
+        provisions: createProvisions(),
+        selectedProvisions: [],
+        searchProvisions: null,
+        isProvisionCollapsed: false,
       }
     ],
     validationRules: [
@@ -134,6 +142,16 @@ function getTotalQuestionsNumber (questions) {
   return length
 }
 
+function createProvisions() {
+  return require('../api/legislation-hierarchy-list.js').default.data[0].children.filter(
+    (x) => {
+      if (x.Label.trim() === '1.16') {
+        return x.children
+      }
+    }
+  )[0].children
+}
+
 function createResponseOption (question) {
   let id = question.responseOptions.length + 1
   return {
@@ -143,7 +161,11 @@ function createResponseOption (question) {
       [LANGUAGE.ENGLISH]: `Option ${id}`,
       [LANGUAGE.FRENCH]: `FR: Option ${id}`
     },
-    value: id
+    value: id,
+    provisions: createProvisions(),
+    selectedProvisions: [],
+    searchProvisions: null,
+    isProvisionCollapsed: false,
   }
 }
 
