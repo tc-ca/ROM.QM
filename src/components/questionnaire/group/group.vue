@@ -19,9 +19,9 @@
             {{ groupTitle }}
 
             <span
-              v-if="group.isRepeatable=== true"
+              v-if="group.isRepeatable=== true && repeatGroupTextDifferentiator !== ''"
               class="subtitle-1 text-truncate"
-            >{{ ` ${repeatGroupTextDifferentiator}` }}</span>
+            >{{ repeatGroupTextDifferentiator }}</span>
           </h2>
         </v-col>
         <v-col cols="1">
@@ -74,6 +74,7 @@
               :in-repeated-group="repeatedGroup"
               @responseChanged="onResponseChanged"
               @error="onError"
+              @group-subtitle-change="onSubtitleChange"
             />
           </v-expansion-panels>
         </v-col>
@@ -88,7 +89,7 @@ import { mapState } from 'vuex'
 import Question from './question/question.vue'
 
 export default {
-
+  emits: ['responseChanged'],
   components: { Question },
 
   props: {
@@ -106,7 +107,8 @@ export default {
     return {
       // indicates if the group was created by using the repeat function i.e. not original
       repeatedGroup: false,
-      valid: true
+      valid: true,
+      repeatGroupTextDifferentiator: ''
     }
   },
 
@@ -114,10 +116,6 @@ export default {
     groupTitle () {
       return `${this.index + 1}. ${this.group.title[this.lang]}`
     },
-    repeatGroupTextDifferentiator () {
-      return this.$store.getters.getResponsesToShowInGroupHeader(this.group.htmlElementId).join(', ')
-    },
-    // ...mapState(['groups']),
     ...mapState({
       lang: state => {
         if (!state || !state.app) {
@@ -164,6 +162,29 @@ export default {
   },
 
   methods: {
+    onSubtitleChange () {
+      this.repeatGroupTextDifferentiator = ''
+      this.group.questions.forEach(q => {
+        if (q.violationResponse && q.violationResponse.length > 0) {
+          const args = q.violationResponse
+          let subtitle = ''
+          args.forEach(arg => {
+            if (!this.repeatGroupTextDifferentiator.includes(arg)) {
+              if (subtitle.length > 0) {
+                subtitle += ', '
+              }
+              subtitle += arg.trim()
+            }
+          })
+          if (subtitle.length > 0) {
+            if (this.repeatGroupTextDifferentiator.length > 0) {
+              this.repeatGroupTextDifferentiator += ', '
+            }
+            this.repeatGroupTextDifferentiator += subtitle.trim()
+          }
+        }
+      })
+    },
     repeatGroup (group) {
       this.$store.dispatch('repeatGroup', group)
     },
