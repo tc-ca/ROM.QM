@@ -114,7 +114,7 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change'],
   name: 'Question',
-  components: { Response, ViolationInfo, SupplementaryInfo },
+  components: { Response, SupplementaryInfo },
 
   props: {
     question: {
