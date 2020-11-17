@@ -144,6 +144,9 @@
       <v-col cols="5">
         <v-row justify="end">
           <v-col class="col-auto">
+            <v-btn @click="load()">
+              Load
+            </v-btn>
             <v-btn @click="save()">
               Save
             </v-btn>
@@ -835,6 +838,9 @@ export default {
     editQuestion (group, question) {
       this.selectedGroup = null
       this.selectedQuestion = question
+    },
+    load () {
+      alert('Loading...')
     },
     save () {
       this.$store.dispatch('save', this.questionnaire)
