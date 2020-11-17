@@ -839,8 +839,8 @@ export default {
       this.selectedGroup = null
       this.selectedQuestion = question
     },
-    load () {
-      alert('Loading...')
+    async load () {
+      await this.$store.dispatch('load')
     },
     save () {
       this.$store.dispatch('save', this.questionnaire)
@@ -930,7 +930,7 @@ export default {
       this.violationsCollapsed = !this.violationsCollapsed
     },
     toggleProvisions (option) {
-      console.log(option)
+      // console.log(option)
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }

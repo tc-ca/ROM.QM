@@ -31,7 +31,8 @@ export const actions = {
   },
   // use this action when wanting to retrieve from questionnaire schema from api. mocking call for now
   getQuestionnaireGroups ({ commit }, schema) {
-      questionnaireService.GetQuestionnaireGroupsFromCRM(schema, this.getQuestionnaireGroupsRequestComplete, commit)
+    console.log('ains')
+      questionnaireService.Loadtemplate(schema, this.getQuestionnaireGroupsRequestComplete, commit)
       //const groupsCopy = _.cloneDeep(groups)
       //commit('setGroups', { groups })
       //commit('copyGroups', { groupsCopy })

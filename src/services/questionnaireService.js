@@ -44,43 +44,46 @@ export default {
     }
   }
   ,
-  // GetQuestionnaireGroups () {
-  //   let questionnaire = require('../api/safety-marks-and-documentation.js').default
+  async GetQuestionnaireGroups () {
+    
+    // let questionnaire = require('../api/safety-marks-and-documentation.js').default
+    let questionnaire = await Loadtemplate()
+    alert(questionnaire)
 
-  //   let questionDict = {}
+    let questionDict = {}
 
-  //   let populateQuestons = (queston) => {
-  //     questionDict[queston.id] = queston
+    let populateQuestons = (queston) => {
+      questionDict[queston.id] = queston
 
-  //     queston.childQuestions.forEach(child => {
-  //       populateQuestons(child)
-  //     })
-  //   }
+      queston.childQuestions.forEach(child => {
+        populateQuestons(child)
+      })
+    }
 
-  //   questionnaire.groups.forEach(qroup => {
-  //     if (qroup.question) {
-  //       qroup.qustions.forEach(q => populateQuestons(q))
-  //     }
-  //   })
+    questionnaire.groups.forEach(qroup => {
+      if (qroup.question) {
+        qroup.qustions.forEach(q => populateQuestons(q))
+      }
+    })
 
-  //   let populateDependantsOnQuestions = (question) => {
-  //     question.dependencyGroups.forEach(dg => {
-  //       dg.questionDependencies.forEach(qd => {
-  //         qd.dependsOnQuestion = questionDict[qd.dependsOnQuestion]
-  //       })
-  //     })
+    let populateDependantsOnQuestions = (question) => {
+      question.dependencyGroups.forEach(dg => {
+        dg.questionDependencies.forEach(qd => {
+          qd.dependsOnQuestion = questionDict[qd.dependsOnQuestion]
+        })
+      })
 
-  //     question.childQuestions.forEach(cq => this.populateDependantsOnDependency(cq))
-  //   }
+      question.childQuestions.forEach(cq => this.populateDependantsOnDependency(cq))
+    }
 
-  //   questionnaire.groups.forEach(qroup => {
-  //     if (qroup.question) {
-  //       qroup.qustions.forEach(q => populateDependantsOnQuestions(q))
-  //     }
-  //   })
+    questionnaire.groups.forEach(qroup => {
+      if (qroup.question) {
+        qroup.qustions.forEach(q => populateDependantsOnQuestions(q))
+      }
+    })
 
-  //   return questionnaire
-  // },
+    return questionnaire
+  },
 
   async GetTemplateJson(){
     alert('start GetTemplateJson')
@@ -127,8 +130,25 @@ export default {
     }
   },
 
-  async GetQuestionnaireGroupsFromCRM() {//schema, callback, commit) {
-    await this.TestConnection()
-    await this.GetTemplateJson()
+  async Loadtemplate() {//schema, callback, commit) {
+    //await this.TestConnection()
+    //await this.GetTemplateJson()
+   await Xrm.WebApi.online
+      .retrieveRecord(
+        "qm_sytemplate",
+        "893bcfb7-49f1-4c2f-8cf5-a412893fb229",
+        "?$select=qm_templatejsontxt"
+      )
+      .then(
+        function success(result) {
+          var qm_templatejsontxt = result["qm_templatejsontxt"];
+          alert('inside load template');
+          alert(qm_templatejsontxt);
+          return qm_templatejsontxt
+        },
+        function(error) {
+          Xrm.Utility.alertDialog(error.message);
+        }
+      );
   }
 }
