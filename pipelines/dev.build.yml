@@ -1,5 +1,8 @@
 trigger:
-- main
+  none
+
+pr:
+  none 
 
 stages:
 - stage: A
