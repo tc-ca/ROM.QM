@@ -83,7 +83,7 @@ export const mutations = {
     const { groupsCopy } = payload
     state.groupsCopy = groupsCopy
   },
-// TODO: lowercase function name 
+  // TODO: lowercase function name
   UpdateGroupOrder (state, payload) {
     const { group, order } = payload
     group.order = order

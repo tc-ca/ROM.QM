@@ -264,51 +264,6 @@
               label="Visible by default"
             />
 
-            <div>
-              <div>
-                <v-btn
-                  small
-                  icon
-                  @click="tougleViolations()"
-                >
-                  <v-icon v-if="violationsCollapsed">
-                    mdi-menu-right
-                  </v-icon>
-                  <v-icon v-if="!violationsCollapsed">
-                    mdi-menu-down
-                  </v-icon>
-                </v-btn>
-                Violation
-              </div>
-              <div
-                v-show="!violationsCollapsed"
-                class="bordered pa-2 ml-2 my-2"
-              >
-                <v-select
-                  v-model="selectedQuestion.violationInfo.matchingType"
-                  dense
-                  item-text="text"
-                  item-value="value"
-                  :items="dependencyValidationActions"
-                  label="Rules are violated when response is"
-                  @change="onViolationInfoChanged"
-                >
-                  <template v-slot:selection="{ item }">
-                    <span>{{ item.text[lang] }}</span>
-                  </template>
-                  <template v-slot:item="{ item }">
-                    <span>{{ item.text[lang] }}</span>
-                  </template>
-                </v-select>
-
-                <v-text-field
-                  v-model="selectedQuestion.violationInfo.responseToMatch"
-                  dense
-                  label="to"
-                />
-              </div>
-            </div>
-
             <div
               v-if="selectedQuestion.type === 'select' || selectedQuestion.type === 'radio' "
             >
@@ -316,7 +271,7 @@
                 <v-btn
                   small
                   icon
-                  @click="tougleOptions()"
+                  @click="toggleOptions()"
                 >
                   <v-icon v-if="optionsCollapsed">
                     mdi-menu-right
@@ -376,6 +331,54 @@
                       <span>Remove response option</span>
                     </v-tooltip>
                   </div>
+                  <div>
+                    <div>
+                      <v-btn
+                        small
+                        icon
+                        @click="toggleProvisions(option)"
+                      >
+                        <v-icon v-if="!option.isProvisionCollapsed">
+                          mdi-menu-right
+                        </v-icon>
+                        <v-icon v-if="option.isProvisionCollapsed">
+                          mdi-menu-down
+                        </v-icon>
+                      </v-btn>
+                      Provisions
+                    </div>
+                    <div v-show="option.isProvisionCollapsed">
+                      <div>
+                        <v-card
+                          class="mx-auto"
+                        >
+                          <v-sheet class="pa-4">
+                            <v-text-field
+                              v-model="option.searchProvisions"
+                              label="Search"
+                              outlined
+                              hide-details
+                              clearable
+                              clear-icon="mdi-close-circle-outline"
+                            />
+                          </v-sheet>
+                          <v-card-text>
+                            <v-treeview
+                              v-model="option.selectedProvisions"
+                              selectable
+                              item-text="Text"
+                              item-key="Text"
+                              selection-type="leaf"
+                              return-object
+                              :search="option.searchProvisions"
+                              :filter="option.filterProvisions"
+                              :items="option.provisions"
+                            />
+                          </v-card-text>
+                        </v-card>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="right">
                   <v-btn
@@ -392,7 +395,7 @@
                 <v-btn
                   small
                   icon
-                  @click="tougleValidators()"
+                  @click="toggleValidators()"
                 >
                   <v-icon v-if="validatorsCollapsed">
                     mdi-menu-right
@@ -490,7 +493,7 @@
                   <v-btn
                     small
                     icon
-                    @click="tougleDependencies()"
+                    @click="toggleDependencies()"
                   >
                     <v-icon v-if="dependenciesCollapsed">
                       mdi-menu-right
@@ -636,54 +639,6 @@
                   </div>
                 </div>
               </div>
-
-              <div>
-                <div>
-                  <v-btn
-                    small
-                    icon
-                    @click="tougleProvisions()"
-                  >
-                    <v-icon v-if="provisionsCollapsed">
-                      mdi-menu-right
-                    </v-icon>
-                    <v-icon v-if="!provisionsCollapsed">
-                      mdi-menu-down
-                    </v-icon>
-                  </v-btn>
-                  Provisions
-                </div>
-                <div v-show="!provisionsCollapsed">
-                  <div>
-                    <v-card
-                      class="mx-auto"
-                    >
-                      <v-sheet class="pa-4">
-                        <v-text-field
-                          v-model="searchProvisions"
-                          label="Search"
-                          outlined
-                          hide-details
-                          clearable
-                          clear-icon="mdi-close-circle-outline"
-                        />
-                      </v-sheet>
-                      <v-card-text>
-                        <v-treeview
-                          selectable
-                          item-text="Text"
-                          item-key="Text"
-                          selection-type="leaf"
-                          return-object
-                          :search="searchProvisions"
-                          :filter="filterProvisions"
-                          :items="provisions"
-                        />
-                      </v-card-text>
-                    </v-card>
-                  </div>
-                </div>
-              </div>
             </div>
           </v-col>
         </v-row>
@@ -755,7 +710,9 @@ export default {
       provisions: null,
       searchProvisions: null,
       groupPanels: [],
-      questionPanels: []
+      questionPanels: [],
+      selectedProvisions: [],
+      questionProvisions: []
     }
   },
   computed: {
@@ -885,7 +842,7 @@ export default {
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
     },
-    tougleOptions () {
+    toggleOptions () {
       this.optionsCollapsed = !this.optionsCollapsed
     },
     removeResponseOption (option) {
@@ -907,10 +864,10 @@ export default {
         }
       }
     },
-    tougleValidators () {
+    toggleValidators () {
       this.validatorsCollapsed = !this.validatorsCollapsed
     },
-    tougleDependencies () {
+    toggleDependencies () {
       this.dependenciesCollapsed = !this.dependenciesCollapsed
     },
     addDependencyGroup () {
@@ -963,11 +920,12 @@ export default {
         this.selectedQuestion.violationInfo.responseToMatch = null
       }
     },
-    tougleViolations () {
+    toggleViolations () {
       this.violationsCollapsed = !this.violationsCollapsed
     },
-    tougleProvisions () {
-      this.provisionsCollapsed = !this.provisionsCollapsed
+    toggleProvisions (option) {
+      console.log(option)
+      option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }
 }
