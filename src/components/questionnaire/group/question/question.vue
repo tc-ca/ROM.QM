@@ -40,10 +40,39 @@
         />
       </div>
 
-      <violation-info
-        v-if="displayViolationInfo"
-        @violations-change="onViolationsChange"
-      />
+      <!-- <violation-info v-if="displayViolationInfo" /> -->
+
+      <div>
+        <div>
+          <v-card
+            class="mx-auto"
+          >
+            <v-sheet class="pa-4">
+              <v-text-field
+                v-model="selResponseOptions.searchProvisions"
+                label="Search"
+                outlined
+                hide-details
+                clearable
+                clear-icon="mdi-close-circle-outline"
+              />
+            </v-sheet>
+            <v-card-text>
+              <v-treeview
+                v-model="pros"
+                selectable
+                item-text="Text"
+                item-key="Text"
+                selection-type="leaf"
+                return-object
+                :search="selResponseOptions.searchProvisions"
+                :filter="selResponseOptions.filterProvisions"
+                :items="selResponseOptions.provisions"
+              />
+            </v-card-text>
+          </v-card>
+        </div>
+      </div>
 
       <supplementary-info
         v-if="displaySupplementaryInfo"
@@ -79,13 +108,13 @@
 
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
-import ViolationInfo from './violation-info/violation-info.vue'
+// import ViolationInfo from './violation-info/violation-info1.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change'],
   name: 'Question',
-  components: { Response, ViolationInfo, SupplementaryInfo },
+  components: { Response, SupplementaryInfo },
 
   props: {
     question: {
@@ -112,7 +141,9 @@ export default {
     return {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
-      isValid: null
+      isValid: null,
+      selResponseOptions: [],
+      pros: []
     }
   },
   computed: {
@@ -148,14 +179,10 @@ export default {
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
-      var res = args.value
-      if (Array.isArray(args.value)) {
-        res = args.value.sort().join()
-      }
-      if (this.question.violationInfo.matchingType === 'equal') {
-        this.displayViolationInfo = this.question.violationInfo.responseToMatch === res
-      } else if (this.question.violationInfo.matchingType === 'notEqual') {
-        this.displayViolationInfo = this.question.violationInfo.responseToMatch !== res
+      if (this.question.responseOptions.length > 0) {
+        let index = this.question.responseOptions.findIndex(q => q.value === args.value)
+        this.displayViolationInfo = index !== -1
+        this.selResponseOptions = this.question.responseOptions[index]
       }
     },
     updateDependants (args) {
