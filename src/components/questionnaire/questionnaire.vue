@@ -26,6 +26,7 @@
 <script>
 import { mapState } from 'vuex'
 import QuestionnaireGroup from './group/group.vue'
+// import questionnaireApi from '../../services/questionnaireService'
 
 // let env = process.env.NODE_ENV || 'development'
 
@@ -55,6 +56,9 @@ export default {
   },
 
   created: function () {
+    // let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
+    // this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
+    // this.navigateTo('questionnaire')
     this.$store.dispatch('getQuestionnaireGroups', null)
   },
   methods: {

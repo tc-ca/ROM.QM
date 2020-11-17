@@ -5,17 +5,19 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production --dest dist --target app",
+    "builddev": "vue-cli-service build --mode development --dest devdist --target app",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build-storybook": "build-storybook",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "storybook": "start-storybook -p 6006 -s public"
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
     "@resconet/jsbridge": "^12.3.2",
     "@storybook/addon-a11y": "^6.0.27",
+    "copyfiles": "^2.4.0",
     "core-js": "^3.4.4",
+    "cross-env": "^7.0.2",
     "document-register-element": "^1.14.3",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.15",
