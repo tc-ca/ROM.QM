@@ -77,6 +77,7 @@ export default {
     var entity = {};
     entity.qm_templatejsontxt = JSON.stringify(jsonObject);
 
+    alert("trying to save" + JSON.stringify(entity.qm_templatejsontxt));
     await Xrm.WebApi.online
       .updateRecord(
         "qm_sytemplate",

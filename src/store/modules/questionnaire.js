@@ -69,11 +69,12 @@ export const actions = {
     //TODO: check if this processing step is needed.
     // const test = questionnaireService.GetQuestionnaireGroups(JSON.parse(questionnaire));
 
-    commit("setQuestionnaire", questionnaire);
+    commit("setQuestionnaire",  questionnaire );
     dispatch("setQuestionnaireGroups", questionnaire.groups);
   },
   async SaveQuestionnaireStateToDynamics({state}) {
 
+    alert('action: ' + state.questionnaire)
     const questionnaire = state.questionnaire;
     const result = await questionnaireService.SaveTemplate(
       questionnaire
@@ -84,8 +85,7 @@ export const actions = {
 
 export const mutations = {
   setQuestionnaire(state, payload) {
-    const { questionnaire } = payload;
-    state.questionnaire = questionnaire
+    state.questionnaire = payload
   },
 
   setTemplate(state, payload) {

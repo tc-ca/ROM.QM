@@ -144,14 +144,8 @@
       <v-col cols="5">
         <v-row justify="end">
           <v-col class="col-auto">
-            <v-btn @click="load()">
-              Load
-            </v-btn>
             <v-btn @click="save()">
               Save
-            </v-btn>
-            <v-btn @click="saveTemplate">
-              Save Template
             </v-btn>
           </v-col>
         </v-row>
@@ -841,12 +835,6 @@ export default {
     editQuestion (group, question) {
       this.selectedGroup = null
       this.selectedQuestion = question
-    },
-    async load () {
-      await this.$store.dispatch('GetQuestionnaireJSONFromDynamics')
-      alert('After dispatching the load action. End of the cicle')
-      let templ = this.$store.getters['getTemplate']
-      alert('Templ = ' + templ)
     },
     async save () {
       this.$store.dispatch('save', this.questionnaire)
