@@ -107,7 +107,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-import questionnaireApi from '../../services/questionnaireService'
+// import questionnaireApi from '../../services/questionnaireService'
 
 export default {
   props: {
@@ -194,11 +194,19 @@ export default {
         // console.log(e)
       })
     },
-    loadDocumentationSafetyMarks () {
-      // console.log('loadDocumentationSafetyMarks')
-      let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
-      this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
+    async loadDocumentationSafetyMarks () {
+      // todo: get guid for specific questionnaire wanted to retrieve
+      // get questionnaire from dynamics by calling action
+      const questionnaire = await this.$store.dispatch('GetQuestionnaireJSONFromDynamics')
+      // set the state by calling action
+      this.$store.dispatch('setQuestionnaireGroups', questionnaire.groups)
       this.navigateTo('questionnaire')
+      // console.log('loadDocumentationSafetyMarks')
+
+      // let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
+      // console.log(docSafetyMark)
+      // this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
+      // this.navigateTo('questionnaire')
     }
   }
 }
