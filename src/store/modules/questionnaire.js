@@ -1,12 +1,11 @@
 import _ from "lodash";
-import questionnaireService from "../../services/questionnaireService";
+import questionnaireService from "../../services/questionnaireService.js";
 
 export const state = {
   groups: [],
   groupsCopy: [],
   questionnaire: {}
 };
-
 export const actions = {
   save({ dispatch }, questionnaire) {
     // first save to state for use in questionnaire
@@ -67,11 +66,19 @@ export const actions = {
 
     // console.log(JSON.stringify(questionnaire, null, 2))
   },
-  // this action is similar to the the below 'getQuestionnaireGroups' but assumes you already have groups collection from somewhere non external
-  async load({ commit }) {
-    const r1 = await questionnaireService.Loadtemplate();
+    async load({ commit }) {
+    const r1 = await questionnaireService.GetQuestionnaireById();
     alert('R1 value = ' + r1);
     commit('setTemplate', r1);
+  },
+  // this action is similar to the the below 'getQuestionnaireGroups' but assumes you already have groups collection from somewhere non external
+  async GetQuestionnaireJSONFromDynamics() {
+    // get inital json from dynamics
+    // then process it
+    const questionnaire = await questionnaireService.GetQuestionnaireById();
+    const test = questionnaireService.GetQuestionnaireGroups(questionnaire);
+
+    return test;
   }
 };
 
@@ -79,6 +86,7 @@ export const mutations = {
   setQuestionnaire(state, payload) {
     state.questionnaire = payload;
   },
+  
   setTemplate(state, payload) {
     alert('Entering mutation setTemplate with payload = ' + payload);
     state.template = payload;
@@ -89,4 +97,4 @@ export const getters = {
   getTemplate (state) {
     return state.template;
   }
-};
+}
