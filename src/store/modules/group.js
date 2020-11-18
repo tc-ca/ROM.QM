@@ -22,13 +22,6 @@ export const actions = {
     commit('setGroups', { groups })
     commit('copyGroups', { groupsCopy })
   },
-  getQuestionnaireGroupsRequestComplete(response, commit){
-    var jsonResponse = JSON.parse(response)
-    const groupsCopy = _.cloneDeep(jsonResponse)
-
-    commit('setGroups', { jsonResponse })
-    commit('copyGroups', { groupsCopy })
-  },
   // use this action when wanting to retrieve from questionnaire schema from api. mocking call for now
   getQuestionnaireGroups ({ commit }, schema) {
       if (state.groups.length === 0) {

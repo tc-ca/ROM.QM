@@ -2,12 +2,11 @@ import _ from "lodash";
 import questionnaireService from "../../services/questionnaireService.js";
 
 export const state = {
-  groups: [],
-  groupsCopy: [],
-  questionnaire: {}
+  questionnaire: {},
+  template: {}
 };
 export const actions = {
-  save({ dispatch }, questionnaire) {
+  save({ commit, dispatch }, questionnaire) {
     // first save to state for use in questionnaire
     let groups = _.cloneDeep(questionnaire.groups);
 
@@ -25,11 +24,9 @@ export const actions = {
         populateDependantsOnDependency(q);
       });
     });
-    dispatch("setQuestionnaireGroups", groups);
-    state.questionnaire = questionnaire;
 
-    // then serialize for saving
-    questionnaire = _.cloneDeep(questionnaire);
+    //processing is done for groups, can safely set the state.
+    dispatch("setQuestionnaireGroups", groups);
 
     let populateDependantsOnDependencyIds = q => {
       q.dependencyGroups.forEach(dg => {
@@ -63,38 +60,41 @@ export const actions = {
         removeCircularRefFromDependency(q);
       });
     });
+        
+    commit("setQuestionnaire", questionnaire);
 
-    // console.log(JSON.stringify(questionnaire, null, 2))
   },
-    async load({ commit }) {
-    const r1 = await questionnaireService.GetQuestionnaireById();
-    alert('R1 value = ' + r1);
-    commit('setTemplate', r1);
-  },
-  // this action is similar to the the below 'getQuestionnaireGroups' but assumes you already have groups collection from somewhere non external
-  async GetQuestionnaireJSONFromDynamics() {
-    // get inital json from dynamics
-    // then process it
-    const questionnaire = await questionnaireService.GetQuestionnaireById();
-    const test = questionnaireService.GetQuestionnaireGroups(questionnaire);
 
-    return test;
+  async SetQuestionnaireState({ commit, dispatch }, questionnaire) {
+    //TODO: check if this processing step is needed.
+    // const test = questionnaireService.GetQuestionnaireGroups(JSON.parse(questionnaire));
+
+    commit("setQuestionnaire", questionnaire);
+    dispatch("setQuestionnaireGroups", questionnaire.groups);
+  },
+  async SaveQuestionnaireStateToDynamics({state}) {
+
+    const questionnaire = state.questionnaire;
+    const result = await questionnaireService.SaveTemplate(
+      questionnaire
+    );
+    return result;
   }
 };
 
 export const mutations = {
   setQuestionnaire(state, payload) {
-    state.questionnaire = payload;
+    const { questionnaire } = payload;
+    state.questionnaire = questionnaire
   },
-  
+
   setTemplate(state, payload) {
-    alert('Entering mutation setTemplate with payload = ' + payload);
     state.template = payload;
   }
 };
 
 export const getters = {
-  getTemplate (state) {
+  getTemplate(state) {
     return state.template;
   }
-}
+};
