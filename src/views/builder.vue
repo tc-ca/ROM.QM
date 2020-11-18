@@ -841,6 +841,9 @@ export default {
     },
     async load () {
       await this.$store.dispatch('load')
+      alert('After dispatching the load action. End of the cicle')
+      let templ = this.$store.getters['getTemplate']
+      alert('Templ = ' + templ)
     },
     save () {
       this.$store.dispatch('save', this.questionnaire)

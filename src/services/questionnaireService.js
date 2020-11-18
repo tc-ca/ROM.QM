@@ -130,25 +130,23 @@ export default {
     }
   },
 
-  async Loadtemplate() {//schema, callback, commit) {
-    //await this.TestConnection()
-    //await this.GetTemplateJson()
-   await Xrm.WebApi.online
+  async Loadtemplate() {
+    let resTemplate = '';
+    await Xrm.WebApi.online
       .retrieveRecord(
         "qm_sytemplate",
         "893bcfb7-49f1-4c2f-8cf5-a412893fb229",
         "?$select=qm_templatejsontxt"
       )
-      .then(
-        function success(result) {
-          var qm_templatejsontxt = result["qm_templatejsontxt"];
-          alert('inside load template');
-          alert(qm_templatejsontxt);
-          return qm_templatejsontxt
-        },
-        function(error) {
-          Xrm.Utility.alertDialog(error.message);
-        }
-      );
+      .then(function success(result) {
+        var qm_templatejsontxt = result["qm_templatejsontxt"];
+        alert('inside load template');
+        alert(qm_templatejsontxt);
+        resTemplate = qm_templatejsontxt;
+      },
+      function(error) {
+        Xrm.Utility.alertDialog(error.message);
+      });
+    return resTemplate;
   }
 }

@@ -1,11 +1,12 @@
 import _ from "lodash";
-import questionnaireService from "../../services/questionnaireService.js";
+import questionnaireService from "../../services/questionnaireService";
 
 export const state = {
   groups: [],
   groupsCopy: [],
   questionnaire: {}
 };
+
 export const actions = {
   save({ dispatch }, questionnaire) {
     // first save to state for use in questionnaire
@@ -67,25 +68,25 @@ export const actions = {
     // console.log(JSON.stringify(questionnaire, null, 2))
   },
   // this action is similar to the the below 'getQuestionnaireGroups' but assumes you already have groups collection from somewhere non external
-  async load() {
-    alert("banana");
-
-    const test = await questionnaireService.Loadtemplate().then(result => {
-          alert("banana3");
-
-      alert(result);
-    });
-    alert(test);
-    alert("banana2");
-
-    //const groupsCopy = _.cloneDeep(groups)
-    //commit('setGroups', { groups })
-    //commit('copyGroups', { groupsCopy })
+  async load({ commit }) {
+    const r1 = await questionnaireService.Loadtemplate();
+    alert('R1 value = ' + r1);
+    commit('setTemplate', r1);
   }
 };
 
 export const mutations = {
   setQuestionnaire(state, payload) {
     state.questionnaire = payload;
+  },
+  setTemplate(state, payload) {
+    alert('Entering mutation setTemplate with payload = ' + payload);
+    state.template = payload;
+  }
+};
+
+export const getters = {
+  getTemplate (state) {
+    return state.template;
   }
 };
