@@ -118,7 +118,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-import questionnaireService from '../../services/questionnaireService'
+import { XrmWebApi } from '../../services/questionnaireService.js'
 
 export default {
   props: {
@@ -207,7 +207,7 @@ export default {
     },
     async getQuestionnaireFromDynamics () {
       // call api to get questionnaire to display
-      const questionnaire = await questionnaireService.GetQuestionnaireById()
+      const questionnaire = await XrmWebApi.GetQuestionnaireById()
       // set questionnaire state to retrieved api data, questionnaire will render whats in state.
       await this.$store.dispatch('SetQuestionnaireState', questionnaire)
 
