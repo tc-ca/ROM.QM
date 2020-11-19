@@ -144,9 +144,6 @@
       <v-col cols="5">
         <v-row justify="end">
           <v-col class="col-auto">
-            <v-btn @click="load()">
-              Load
-            </v-btn>
             <v-btn @click="save()">
               Save
             </v-btn>
@@ -839,14 +836,9 @@ export default {
       this.selectedGroup = null
       this.selectedQuestion = question
     },
-    async load () {
-      await this.$store.dispatch('load')
-      alert('After dispatching the load action. End of the cicle')
-      let templ = this.$store.getters['getTemplate']
-      alert('Templ = ' + templ)
-    },
-    save () {
+    async save () {
       this.$store.dispatch('save', this.questionnaire)
+      await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
     },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))

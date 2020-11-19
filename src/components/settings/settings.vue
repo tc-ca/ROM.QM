@@ -92,11 +92,22 @@
       <v-list-item
         v-if="displaynav"
         link
-        @click="loadDocumentationSafetyMarks()"
+        @click="getQuestionnaireFromDynamics()"
       >
         <v-list-item-content>
           <v-list-item-title>
-            Documentation and Safety Marks Example
+            Questionnaire pulling from dynamics
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('questionnaire')"
+      >
+        <v-list-item-content>
+          <v-list-item-title>
+            Questionnaire pulling from state
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -107,7 +118,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-// import questionnaireApi from '../../services/questionnaireService'
+import questionnaireService from '../../services/questionnaireService'
 
 export default {
   props: {
@@ -194,19 +205,13 @@ export default {
         // console.log(e)
       })
     },
-    async loadDocumentationSafetyMarks () {
-      // todo: get guid for specific questionnaire wanted to retrieve
-      // get questionnaire from dynamics by calling action
-      const questionnaire = await this.$store.dispatch('GetQuestionnaireJSONFromDynamics')
-      // set the state by calling action
-      this.$store.dispatch('setQuestionnaireGroups', questionnaire.groups)
-      this.navigateTo('questionnaire')
-      // console.log('loadDocumentationSafetyMarks')
+    async getQuestionnaireFromDynamics () {
+      // call api to get questionnaire to display
+      const questionnaire = await questionnaireService.GetQuestionnaireById()
+      // set questionnaire state to retrieved api data, questionnaire will render whats in state.
+      await this.$store.dispatch('SetQuestionnaireState', questionnaire)
 
-      // let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
-      // console.log(docSafetyMark)
-      // this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
-      // this.navigateTo('questionnaire')
+      this.navigateTo('questionnaire')
     }
   }
 }
