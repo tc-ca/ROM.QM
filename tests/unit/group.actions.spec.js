@@ -18,11 +18,6 @@ describe('Test Group component Vuex Actions', () => {
     })
   })
 
-  // TODO: add test
-  test('getQuestionnaireGroups', async () => {
-
-  })
-
   test('repeated group should be placed into the correct position', async () => {
     const theOriginalListOfGroups = [
       {

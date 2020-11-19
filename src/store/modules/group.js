@@ -1,7 +1,6 @@
 // TODO: optimize later, pull down only method required.
 import _ from 'lodash'
 import { pad } from '../../utils.js'
-import questionnaireService from '../../services/questionnaireService.js'
 export const state = {
   groups: [],
   groupsCopy: []
@@ -16,22 +15,12 @@ export const getters = {
 }
 
 export const actions = {
-  // this action is similar to the the below 'getQuestionnaireGroups' but assumes you already have groups collection from somewhere non external
   setQuestionnaireGroups ({ commit }, groups) {
     const groupsCopy = _.cloneDeep(groups)
     commit('setGroups', { groups })
     commit('copyGroups', { groupsCopy })
   },
-  // use this action when wanting to retrieve from questionnaire schema from api. mocking call for now
-  getQuestionnaireGroups ({ commit }, schema) {
-      if (state.groups.length === 0) {
-        // todo do a real fetch using woodfordIntegration.js
-        const groups = questionnaireService.GetQuestionnaireGroups(schema);
-        const groupsCopy = _.cloneDeep(groups);
-        commit("setGroups", { groups });
-        commit("copyGroups", { groupsCopy });
-      }
-  },
+
   repeatGroup ({ commit, state, getters }, group) {
     // get all similar groups
     // const targetedRepeatedGroups = state.questionnaire.groups.filter(x => x.primaryKey === group.primaryKey) // TODO: remove

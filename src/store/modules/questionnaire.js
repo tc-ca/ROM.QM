@@ -1,5 +1,5 @@
 import _ from "lodash";
-import questionnaireService from "../../services/questionnaireService.js";
+import { XrmWebApi } from "../../services/questionnaireService";
 
 export const state = {
   questionnaire: {},
@@ -66,9 +66,6 @@ export const actions = {
   },
 
   async SetQuestionnaireState({ commit, dispatch }, questionnaire) {
-    //TODO: check if this processing step is needed.
-    // const test = questionnaireService.GetQuestionnaireGroups(JSON.parse(questionnaire));
-
     commit("setQuestionnaire",  questionnaire );
     dispatch("setQuestionnaireGroups", questionnaire.groups);
   },
@@ -76,7 +73,7 @@ export const actions = {
 
     alert('action: ' + state.questionnaire)
     const questionnaire = state.questionnaire;
-    const result = await questionnaireService.SaveTemplate(
+    const result = await XrmWebApi.SaveTemplate(
       questionnaire
     );
     return result;
