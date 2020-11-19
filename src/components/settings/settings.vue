@@ -206,6 +206,13 @@ export default {
       })
     },
     async getQuestionnaireFromDynamics () {
+      var QM = window.QMSDK
+
+      alert(QM.recordGuid)
+      alert(QM.formContext)
+
+      await XrmWebApi.GetGlobalContext()
+
       // call api to get questionnaire to display
       const questionnaire = await XrmWebApi.GetQuestionnaireById()
       // set questionnaire state to retrieved api data, questionnaire will render whats in state.

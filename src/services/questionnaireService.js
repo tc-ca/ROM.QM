@@ -47,10 +47,44 @@
         }
       );
     return data;
-  }
-  }
- 
+  },
 
+  GetGlobalContext: async function () {  
+
+    //alert(JSON.stringify(QMSDK.formExecutionContext,null))
+
+    var context = Xrm.Utility.getGlobalContext()
+
+    alert(JSON.stringify(context, null))
+
+		var client = Xrm.Internal.isUci() ? 'UCI' : 'Web';
+		var clientName = Xrm.Utility.getGlobalContext().client.getClient();
+    var userId = Xrm.Utility.getGlobalContext().userSettings.userId;
+    
+    alert(JSON.stringify(client, null))
+    alert(JSON.stringify(clientName, null))
+    alert(JSON.stringify(userId, null))
+
+
+
+    // var formContext = executionContext.getFormContext();  
+
+    // var templateIdAttribute = formContext.getAttribute("qm_templateId");
+
+    // alert(formContext);
+    // alert(templateIdAttribute);
+
+    // //check for customer  
+    // if (templateIdAttribute != null &&  
+    //   templateIdAttribute.getValue() != null) {  
+
+    //     var templateId = templateIdAttribute.getValue()[0].id;  
+
+    //     alert(templateId);
+    // }  
+  }  
+
+}
   
 export {
   XrmWebApi

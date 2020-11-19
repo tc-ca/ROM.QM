@@ -16,6 +16,7 @@
   <link href=css/chunk-vendors.css rel=stylesheet>
   <link href=css/app.css rel=stylesheet>
   <script src="../ClientGlobalContext.js.aspx" type="text/javascript" ></script>
+  <script src="./sdk.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -25,11 +26,14 @@
 
   <!-- <questionnaire-builder page="questionnaire" questionnaire-id="" lang="en-US" ></questionnaire-builder> -->
 
-  <questionnaire-builder schema="generalCompliance" page="builder" lang="en-US" >
+  <questionnaire-builder onload="builderLoad" schema="generalCompliance" page="builder" lang="en-US" >
      
   </questionnaire-builder>
   <script>
-
+    function builderLoad(){
+      window.QMSDK = QMSDK;
+      alert("builderLoad" + window.QMSDK.recordGuid)
+    }
   </script>
   <script src=js/chunk-vendors.js></script>
   <script src=js/app.js></script>
