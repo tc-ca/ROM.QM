@@ -20,20 +20,27 @@ function InitializeQuestionnaireBuilder (dynParams) {
   let userLang            = dynParams.userLang;
   let templateId          = dynParams.templateId;
 
-  // we're not showing the builder form if this is a new template
-  // if (templateJson == null) {
-  //   return;
-  // }
+  // if the template has some json we will render it by passing value to prop of Vue app
+  //by setting attribute on the element which has a watch event to detect changes.
+ if (templateJson !== null) {
+      let questionnaire = document.getElementsByTagName(
+        "questionnaire-builder"
+      )[0];
+      // set the attribute
+      questionnaire.setAttribute("schema", templateJson);
+  }
 
-  //I guess we need to pass this to the view prop, then view can deal with loading it 
-  var questionnaireDefinition = JSON.parse(templateJson);
+  // Xrm.Utility.alertDialog("formType: " + formType);
+  // Xrm.Utility.alertDialog("templateJSON: " + templateJson);
+  // Xrm.Utility.alertDialog("templateId: " + templateId);
+  // Xrm.Utility.alertDialog("userGuid: " + userGuid);
+  // Xrm.Utility.alertDialog("userName: " + userName);
+  // Xrm.Utility.alertDialog("userLang: " + userLang);
 
-  Xrm.Utility.alertDialog("banana");
-  Xrm.Utility.alertDialog("formType: " + formType);
-  Xrm.Utility.alertDialog("templateId: " + templateId);
-  Xrm.Utility.alertDialog("userGuid: " + userGuid);
-  Xrm.Utility.alertDialog("userName: " + userName);
-  Xrm.Utility.alertDialog("userLang: " + userLang);
+  //TODO: on save stick json into the attribute of the form
+
+
+
 
   // if (surveyResponse != null) {
   //   survey.data = JSON.parse(surveyResponse);

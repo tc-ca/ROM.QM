@@ -216,7 +216,7 @@ export default {
       // call api to get questionnaire to display
       const questionnaire = await XrmWebApi.GetQuestionnaireById()
       // set questionnaire state to retrieved api data, questionnaire will render whats in state.
-      await this.$store.dispatch('SetQuestionnaireState', questionnaire)
+      this.$store.dispatch('SetQuestionnaireState', questionnaire)
 
       this.navigateTo('questionnaire')
     }
