@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production --dest dist --target app",
-    "builddev": "vue-cli-service build --mode development --dest devdist --target app",
+    "postbuild": "@powershell -Command ./publishingScripts/publishQmResources.ps1 -ExecutionPolicy Unrestricted -NoProfile",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build-storybook": "build-storybook",
@@ -53,6 +53,7 @@
     "eslint-plugin-mdx": "^1.8.2",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-vue": "^6.2.2",
+    "pwsh": "^0.3.0",
     "react-is": "^17.0.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",

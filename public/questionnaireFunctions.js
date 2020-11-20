@@ -28,6 +28,7 @@ function InitializeQuestionnaireBuilder (dynParams) {
   //I guess we need to pass this to the view prop, then view can deal with loading it 
   var questionnaireDefinition = JSON.parse(templateJson);
 
+  Xrm.Utility.alertDialog("banana");
   Xrm.Utility.alertDialog("formType: " + formType);
   Xrm.Utility.alertDialog("templateId: " + templateId);
   Xrm.Utility.alertDialog("userGuid: " + userGuid);
