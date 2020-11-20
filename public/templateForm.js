@@ -87,18 +87,20 @@ var ROM;
         ///////////////////////////////////////////////
         /////FORM SAVE
         ///////////////////////////////////////////////
-        function onSave(eContext) {
+        function OnDynamicsFormSave(eContext) {
             // Get formContext
             var Form = eContext.getFormContext();
             // Get the web resource control on the form
-            var wrCtrl = Form.getControl('WebResource_QuestionnaireRender');
-            if (wrCtrl.getVisible() === false) {
+            var webResourceControl = Form.getControl('WebResource_BuilderTemplateForm');
+
+            if (webResourceControl.getVisible() === false) {
                 return;
             }
+            
             // Get the web resource inner content window
-            CompleteQuestionnaire(wrCtrl);
+            CompleteQuestionnaire(webResourceControl);
         }
-        TemplateForm.onSave = onSave;
+        TemplateForm.OnDynamicsFormSave = OnDynamicsFormSave;
 
 
 
