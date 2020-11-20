@@ -58,6 +58,63 @@ function InitializeQuestionnaireBuilder (dynParams) {
   // $('.sv-btn.sv-footer__complete-btn').hide();
 }
 
+function InitializeQuestionnaireRender (webResourceControl, executionContext, id) {
+
+  var Form = executionContext.getFormContext();
+
+  // let executionContext    = dynParams.executionContext;
+  // let webResourceControl  = dynParams.webResourceControl;
+  // let templateJson        = dynParams.templateJson;
+  // let formType            = dynParams.formType;
+  // let userGuid            = dynParams.userGuid;
+  // let userName            = dynParams.userName;
+  // let userLang            = dynParams.userLang;
+  // let templateId          = dynParams.templateId;
+
+  // we're not showing the builder form if this is a new template
+  // if (templateJson == null) {
+  //   return;
+  // }
+
+  //I guess we need to pass this to the view prop, then view can deal with loading it 
+  //var questionnaireDefinition = JSON.parse(templateJson);
+
+  Xrm.Utility.alertDialog("InitializeQuestionnaireRender");
+  Xrm.Utility.alertDialog(id);
+  // Xrm.Utility.alertDialog("formType: " + formType);
+  // Xrm.Utility.alertDialog("templateId: " + templateId);
+  // Xrm.Utility.alertDialog("userGuid: " + userGuid);
+  // Xrm.Utility.alertDialog("userName: " + userName);
+  // Xrm.Utility.alertDialog("userLang: " + userLang);
+
+  
+  //value > 1 means that the record exists and is not new
+  //var globalContext = Xrm.Utility.getGlobalContext();
+
+  
+  if (Form.ui.getFormType() > 1) {
+    Xrm.Utility.alertDialog("EXISTING QUESTIONNAIRE");
+  }
+  else {
+    Xrm.Utility.alertDialog("NEW QUESTIONNAIRE");
+  }
+
+  // if (surveyResponse != null) {
+  //   survey.data = JSON.parse(surveyResponse);
+  // }
+
+  // survey.onComplete.add(function (result) {
+  //   SaveAnswers(result);
+  // });
+
+  // $('#surveyElement').Survey({
+  //   model: survey,
+  //   onValueChanged: surveyValueChanged,
+  // });
+
+  // $('.sv-btn.sv-footer__complete-btn').hide();
+}
+
 function SaveAnswers(userInput) {
   var data = JSON.stringify(userInput.data, null, 3);
   window.parentFormContext.getAttribute('qm_templatejsontxt').setValue(data);
