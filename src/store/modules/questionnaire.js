@@ -2,8 +2,7 @@ import _ from "lodash";
 import { XrmWebApi } from "../../services/questionnaireService";
 
 export const state = {
-  questionnaire: {},
-  template: {}
+  questionnaire: null,
 };
 export const actions = {
   save({ commit, dispatch }, questionnaire) {
@@ -60,18 +59,17 @@ export const actions = {
         removeCircularRefFromDependency(q);
       });
     });
-        
+
     commit("setQuestionnaire", questionnaire);
 
   },
 
-  async SetQuestionnaireState({ commit, dispatch }, questionnaire) {
+   SetQuestionnaireState({ commit, dispatch }, questionnaire) {
     commit("setQuestionnaire",  questionnaire );
     dispatch("setQuestionnaireGroups", questionnaire.groups);
   },
   async SaveQuestionnaireStateToDynamics({state}) {
 
-    alert('action: ' + state.questionnaire)
     const questionnaire = state.questionnaire;
     const result = await XrmWebApi.SaveTemplate(
       questionnaire

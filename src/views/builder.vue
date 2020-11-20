@@ -748,11 +748,19 @@ export default {
         }
       }
     )[0].children
-
-    this.questionnaire = BuilderService.createQuestionnaire()
+    // on create event, build the basic definition of questionnaire builder
+    const questionnaire = BuilderService.createQuestionnaire()
+    // put the definition in the store
+    this.$store.dispatch('SetQuestionnaireState', questionnaire)
+    this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
-
+    // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'setQuestionnaire') {
+        this.questionnaire = state.questionnaire.questionnaire
+      }
+    })
   },
   methods: {
     addGroup () {
