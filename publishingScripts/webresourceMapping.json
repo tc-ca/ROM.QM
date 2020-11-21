@@ -55,6 +55,12 @@
         "file": "../dist/templateForm.js",
         "description": null,
         "ts": null
+    },
+    {
+        "uniquename": "qm_serviceTaskForm.js",
+        "file": "../dist/ServiceTaskMainForm.js",
+        "description": null,
+        "ts": null
     }
     ]
 }

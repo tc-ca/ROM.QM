@@ -1,37 +1,11 @@
 ﻿/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-
-
 var ServiceTaskForm = (function (window, document) {
 
-    //variables
-    var globalContext;
-
 //********************private methods*******************
-    function fetchQuestionnaire(formContext, executionContext) {
-        var req = new XMLHttpRequest();
-        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/qm_sytemplates?fetchXml=%3Cfetch%3E%3Centity%20name%3D%22qm_sytemplate%22%3E%3Cattribute%20name%3D%22qm_sytemplateid%22%20alias%3D%22templateId%22%2F%3E%3Cattribute%20name%3D%22qm_name%22%20alias%3D%22templatePrimaryKey%22%2F%3E%3Cattribute%20name%3D%22qm_templatee%22%20alias%3D%22templateTitleEn%22%2F%3E%3Cattribute%20name%3D%22qm_templatef%22%20alias%3D%22templateTitleFr%22%2F%3E%3Clink-entity%20name%3D%22qm_sytemplate_sygroup%22%20from%3D%22qm_sytemplateid%22%20to%3D%22qm_sytemplateid%22%20link-type%3D%22inner%22%20alias%3D%22template_groups%22%20intersect%3D%22true%22%20%3E%3Clink-entity%20name%3D%22qm_sygroup%22%20from%3D%22qm_sygroupid%22%20to%3D%22qm_sygroupid%22%20link-type%3D%22outer%22%20alias%3D%22groups%22%20visible%3D%22true%22%20%3E%3Cattribute%20name%3D%22qm_groupf%22%20%2F%3E%3Cattribute%20name%3D%22qm_groupe%22%20%2F%3E%3Cattribute%20name%3D%22qm_name%22%20%2F%3E%3Cattribute%20name%3D%22qm_ordernbr%22%20%2F%3E%3Cattribute%20name%3D%22qm_isvisibleind%22%20%2F%3E%3Cattribute%20name%3D%22qm_sygroupid%22%20%2F%3E%3Corder%20attribute%3D%22qm_ordernbr%22%20%2F%3E%3Clink-entity%20name%3D%22qm_syquestion%22%20from%3D%22qm_sygroupid%22%20to%3D%22qm_sygroupid%22%20link-type%3D%22inner%22%20alias%3D%22questions%22%20visible%3D%22true%22%20%3E%3Cattribute%20name%3D%22qm_name%22%20%2F%3E%3Cattribute%20name%3D%22qm_questione%22%20%2F%3E%3Cattribute%20name%3D%22qm_questionf%22%20%2F%3E%3Cattribute%20name%3D%22qm_ordernbr%22%20%2F%3E%3Cattribute%20name%3D%22qm_isvisibleind%22%20%2F%3E%3Cattribute%20name%3D%22qm_questiontypecd%22%20%2F%3E%3Cattribute%20name%3D%22qm_syquestionid%22%20%2F%3E%3Cattribute%20name%3D%22qm_syquestionid_self%22%20%2F%3E%3Corder%20attribute%3D%22qm_ordernbr%22%20%2F%3E%3Clink-entity%20name%3D%22qm_syresponse%22%20from%3D%22qm_syquestionid%22%20to%3D%22qm_syquestionid%22%20link-type%3D%22outer%22%20alias%3D%22responses%22%20visible%3D%22true%22%20%3E%3Cattribute%20name%3D%22qm_name%22%20%2F%3E%3Cattribute%20name%3D%22qm_syresponseid%22%20%2F%3E%3Corder%20attribute%3D%22qm_name%22%20%2F%3E%3C%2Flink-entity%3E%3C%2Flink-entity%3E%3C%2Flink-entity%3E%3C%2Flink-entity%3E%3C%2Fentity%3E%3C%2Ffetch%3E", true);
-        req.setRequestHeader("OData-MaxVersion", "4.0");
-        req.setRequestHeader("OData-Version", "4.0");
-        req.setRequestHeader("Accept", "application/json");
-        req.onreadystatechange = function () {
-            if (this.readyState === 4) {
-                req.onreadystatechange = null;
-                if (this.status === 200) {
-                    var results = JSON.parse(this.response);
-                } else {
-                    Xrm.Utility.alertDialog(this.statusText);
-                }
-            }
-        };
-        req.send();
-    }
 
 
 //********************private methods end***************
-
-
-
 
 
 
@@ -42,7 +16,7 @@ var ServiceTaskForm = (function (window, document) {
         OnLoad: function (executionContext) {
 
             Xrm.Utility.alertDialog("ONLOAD");
-            
+
             var Form = executionContext.getFormContext();
 
             var recordGuid = Form.data.entity.getId();
