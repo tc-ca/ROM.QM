@@ -92,11 +92,22 @@
       <v-list-item
         v-if="displaynav"
         link
-        @click="loadDocumentationSafetyMarks()"
+        @click="getQuestionnaireFromDynamics()"
       >
         <v-list-item-content>
           <v-list-item-title>
-            Documentation and Safety Marks Example
+            Questionnaire pulling from dynamics
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('questionnaire')"
+      >
+        <v-list-item-content>
+          <v-list-item-title>
+            Questionnaire pulling from state
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -107,7 +118,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-import questionnaireApi from '../../services/questionnaireService'
+import { XrmWebApi } from '../../services/questionnaireService.js'
 
 export default {
   props: {
@@ -194,10 +205,19 @@ export default {
         // console.log(e)
       })
     },
-    loadDocumentationSafetyMarks () {
-      // console.log('loadDocumentationSafetyMarks')
-      let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
-      this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
+    async getQuestionnaireFromDynamics () {
+      var QM = window.QMSDK
+
+      alert(QM.recordGuid)
+      alert(QM.formContext)
+
+      await XrmWebApi.GetGlobalContext()
+
+      // call api to get questionnaire to display
+      const questionnaire = await XrmWebApi.GetQuestionnaireById()
+      // set questionnaire state to retrieved api data, questionnaire will render whats in state.
+      this.$store.dispatch('SetQuestionnaireState', questionnaire)
+
       this.navigateTo('questionnaire')
     }
   }
