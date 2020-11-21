@@ -15,7 +15,6 @@
       >
         <span
           class="text-break"
-          v-html="questionText"
         />
       </div>
     </v-expansion-panel-header>
@@ -228,3 +227,7 @@ export default {
     box-shadow: 0 0px 5px 0 rgba(255, 0, 0, 1);
   }
 </style>
+
+/*
+          v-html="questionText"
+*/

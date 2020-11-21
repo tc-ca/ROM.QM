@@ -132,9 +132,18 @@ export default {
     settings (value, oldValue) {
       // console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
+    },
+    schema (value, oldValue) {
+      alert(`value: ${value} oldValue: ${oldValue}`)
+
+      let questionnaire = JSON.parse(value)
+      this.$store.dispatch('SetQuestionnaireState', questionnaire)
+      alert('stuff that got put into store: ' + JSON.stringify(this.$store.state.questionnaire.questionnaire))
     }
   },
   created: function () {
+    alert(`created, this.page: ${this.page}`)
+
     this.$router.push({ name: this.page }).catch(e => {
       // console.log(e)
     })
