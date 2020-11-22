@@ -33,8 +33,13 @@ export default {
   components: { QuestionnaireGroup },
 
   props: {
-    schema:
+    templatejson:
     { type: String,
+      required: true
+    },
+    templateid:
+    {
+      type: String,
       required: true
     }
   },

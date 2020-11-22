@@ -1,12 +1,13 @@
 <template>
   <questionnaire
     ref="questionnaire"
-    :schema="'test'"
+    :templatejson="'test'"
+    :templateid="'893bcfb7-49f1-4c2f-8cf5-a412893fb229'"
   />
 </template>
 
 <script>
-// TODO: figure out this usage for :schema
+// TODO: figure out this usage for :templatejson
 
 import Questionnaire from '../components/questionnaire/questionnaire.vue'
 
@@ -15,9 +16,13 @@ export default {
     Questionnaire
   },
   props: {
-    schema: {
+    templatejson: {
       type: String,
       default: ''
+    },
+    templateid: {
+      type: String,
+      default: '893bcfb7-49f1-4c2f-8cf5-a412893fb229'
     }
   }
 }
