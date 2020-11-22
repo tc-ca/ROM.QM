@@ -2,7 +2,7 @@ import _ from "lodash";
 import { XrmWebApi } from "../../services/questionnaireService";
 
 export const state = {
-  questionnaire: null,
+  questionnaire: null
 };
 export const actions = {
   save({ commit, dispatch }, questionnaire) {
@@ -63,8 +63,10 @@ export const actions = {
     commit("setQuestionnaire", questionnaire);
 
   },
-
-   SetQuestionnaireState({ commit, dispatch }, questionnaire) {
+  SetTemplateIdState({ commit }, id) {
+    commit("setTemplateId",  id );
+  },
+  SetQuestionnaireState({ commit, dispatch }, questionnaire) {
     commit("setQuestionnaire",  questionnaire );
     dispatch("setQuestionnaireGroups", questionnaire.groups);
   },
@@ -85,6 +87,15 @@ export const mutations = {
 
   setTemplate(state, payload) {
     state.template = payload;
+  }, 
+
+  setTemplateId(state, payload) {
+    if (!state || !state.questionnaire)
+    {
+      console.log('state is null in the store when setting templateid')
+      return
+    }
+    state.questionnaire.templateid = payload
   }
 };
 

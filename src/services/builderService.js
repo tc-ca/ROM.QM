@@ -29,7 +29,8 @@ function createQuestionnaire () {
       [LANGUAGE.ENGLISH]: 'Questionnaire Title EN',
       [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
     },
-    groups: []
+    groups: [],
+    templateid: '893bcfb7-49f1-4c2f-8cf5-a412893fb229'
   }
 }
 

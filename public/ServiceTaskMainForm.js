@@ -15,7 +15,7 @@ var ServiceTaskForm = (function (window, document) {
 
         OnLoad: function (executionContext) {
 
-            Xrm.Utility.alertDialog("ONLOAD");
+            console.log("ONLOAD");
 
             var Form = executionContext.getFormContext();
 
@@ -41,7 +41,7 @@ var ServiceTaskForm = (function (window, document) {
         },
 
         OnSave: function (executionContext) {
-            Xrm.Utility.alertDialog("ONSAVE");  
+            console.log("ONSAVE");  
         }
 
     };
@@ -70,7 +70,7 @@ var ServiceTaskForm = (function (window, document) {
 
     function changeControlsBaseOnTaskType(formContext, executionContext) {
 
-        Xrm.Utility.alertDialog("changeControlsBaseOnTaskType");
+        console.log("changeControlsBaseOnTaskType");
       
         //control msdyn_surveyboundedoutput
         if (GetLookupName(formContext, "msdyn_tasktype").indexOf("General Compliance") > -1) {
@@ -82,7 +82,7 @@ var ServiceTaskForm = (function (window, document) {
       
       function OnTaskTypeChange(executionContext) {
       
-        Xrm.Utility.alertDialog("ONTASKTYPECHANGE");
+        console.log("ONTASKTYPECHANGE");
       
         var formContext = executionContext.getFormContext();
         

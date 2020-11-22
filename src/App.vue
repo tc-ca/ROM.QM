@@ -77,13 +77,17 @@ export default {
       type: String,
       default: LANGUAGE.ENGLISH
     },
-    schema: {
+    templatejson: {
       type: String,
       default: 'Documentation and Safety Marks'
     },
     displayAppNav: {
       type: Boolean,
       default: true
+    },
+    templateid: {
+      type: String,
+      default: '893bcfb7-49f1-4c2f-8cf5-a412893fb229'
     }
   },
   data: function () {
@@ -99,14 +103,14 @@ export default {
     },
     ...mapState({
       language: state => {
-        // console.log('App.vue: language computed ' + state + ')')
+        console.log('App.vue: language computed ' + state + ')')
         if (state == null || !state.settings) {
           return LANGUAGE.ENGLISH
         }
         return state.settings.settings.lang
       },
       questionnaire: state => {
-        // console.log('App.vue: questionnaire computed ' + state + ')')
+        console.log('App.vue: questionnaire computed ' + state + ')')
         if (!state || !state.app) {
           return builderService.createQuestionnaire()
         }
@@ -133,17 +137,20 @@ export default {
       // console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
     },
-    schema (value, oldValue) {
+    templatejson (value, oldValue) {
       alert(`value: ${value} oldValue: ${oldValue}`)
 
       let questionnaire = JSON.parse(value)
       this.$store.dispatch('SetQuestionnaireState', questionnaire)
-      alert('stuff that got put into store: ' + JSON.stringify(this.$store.state.questionnaire.questionnaire))
+      console.log('stuff that got put into store: ' + JSON.stringify(this.$store.state.questionnaire.questionnaire))
+    },
+    templateid (value, oldValue) {
+      alert(`templateid value: ${value} oldValue: ${oldValue}`)
+
+      this.$store.dispatch('SetTemplateIdState', value)
     }
   },
   created: function () {
-    alert(`created, this.page: ${this.page}`)
-
     this.$router.push({ name: this.page }).catch(e => {
       // console.log(e)
     })
