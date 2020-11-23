@@ -52,7 +52,6 @@
 </template>
 
 <script>
-
 import { LANGUAGE } from './constants.js'
 
 import NotificationContainer from './components/notification-container/notification-container.vue'
@@ -87,7 +86,7 @@ export default {
     },
     templateid: {
       type: String,
-      default: '893bcfb7-49f1-4c2f-8cf5-a412893fb229'
+      default: ''
     }
   },
   data: function () {
@@ -102,21 +101,21 @@ export default {
       return `${this.questionnaire.title[this.language]}`
     },
     ...mapState({
-      language: state => {
+      language: (state) => {
         console.log('App.vue: language computed ' + state + ')')
         if (state == null || !state.settings) {
           return LANGUAGE.ENGLISH
         }
         return state.settings.settings.lang
       },
-      questionnaire: state => {
+      questionnaire: (state) => {
         console.log('App.vue: questionnaire computed ' + state + ')')
         if (!state || !state.app) {
           return builderService.createQuestionnaire()
         }
         return state.settings.questionnaire
       },
-      settings: state => {
+      settings: (state) => {
         if (state == null || !state.settings) {
           return {
             lang: LANGUAGE.ENGLISH,
@@ -142,21 +141,24 @@ export default {
 
       let questionnaire = JSON.parse(value)
       this.$store.dispatch('SetQuestionnaireState', questionnaire)
-      console.log('stuff that got put into store: ' + JSON.stringify(this.$store.state.questionnaire.questionnaire))
+      console.log(
+        'stuff that got put into store: ' +
+          JSON.stringify(this.$store.state.questionnaire.questionnaire)
+      )
     },
     templateid (value, oldValue) {
-      alert(`templateid value: ${value} oldValue: ${oldValue}`)
+      console.log(`templateid value: ${value} oldValue: ${oldValue}`)
 
       this.$store.dispatch('SetTemplateIdState', value)
     }
   },
   created: function () {
-    this.$router.push({ name: this.page }).catch(e => {
+    this.$router.push({ name: this.page }).catch((e) => {
       // console.log(e)
     })
   },
   methods: {
-    ...mapActions([ 'setAppLanguage', 'setSettings' ]),
+    ...mapActions(['setAppLanguage', 'setSettings']),
     setLanguage () {
       // console.log('App.vue: setLanguage (' + this.lang + ')')
       this.$i18n.locale = this.lang
@@ -166,7 +168,6 @@ export default {
       this.setSettings(this.settings)
     }
   }
-
 }
 </script>
 
@@ -179,5 +180,4 @@ export default {
   /* color: #2c3e50; */
   /* margin-top: 60px; */
 }
-
 </style>
