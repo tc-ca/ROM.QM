@@ -1,13 +1,8 @@
 <template>
-  <questionnaire
-    ref="questionnaire"
-    :templatejson="'test'"
-    :templateid="''"
-  />
+  <questionnaire />
 </template>
 
 <script>
-// TODO: figure out this usage for :templatejson
 
 import Questionnaire from '../components/questionnaire/questionnaire.vue'
 
@@ -15,15 +10,13 @@ export default {
   components: {
     Questionnaire
   },
-  props: {
-    templatejson: {
-      type: String,
-      default: ''
-    },
-    templateid: {
-      type: String,
-      default: ''
-    }
+  mounted () {
+    // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'setQuestionnaire') {
+        this.questionnaire = state.questionnaire.questionnaire
+      }
+    })
   }
 }
 </script>
