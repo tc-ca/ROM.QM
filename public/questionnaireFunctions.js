@@ -20,14 +20,14 @@ function InitializeQuestionnaireBuilder (dynParams) {
   let userLang            = dynParams.userLang;
   let templateId          = dynParams.templateId;
 
-  // if the template has some json we will render it by passing value to prop of Vue app
-  //by setting attribute on the element which has a watch event to detect changes.
-  let questionnaire = document.getElementsByTagName(
-    "questionnaire-builder"
-  )[0];
-  // set the attribute
-  questionnaire.setAttribute("templatejson", templatejson);
-  questionnaire.setAttribute("templateid", templateId);
+
+
+        var questionnaire = document
+          .querySelector("questionnaire-builder")
+          .getVueInstance();
+
+        questionnaire.load(templateId);
+  
 
   // Xrm.Utility.alertDialog("formType: " + formType);
   // Xrm.Utility.alertDialog("templatejson: " + templatejson);
@@ -124,8 +124,12 @@ const surveyValueChanged = function (sender, options) {
   }
 };
 
-function DoComplete(eContext) {
-
+function DoComplete(eContext, recordGuid) {
+  alert("do complete");
+  var questionnaire = document
+    .querySelector("questionnaire-builder")
+    .getVueInstance();
+  questionnaire.save(recordGuid);
 }
 
 
