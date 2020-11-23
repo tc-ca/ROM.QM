@@ -23,27 +23,42 @@ import { LANGUAGE } from '../constants.js'
 
 
 
-function GetLegislations() {
+async function GetLegislations() {
   
-  var req = new XMLHttpRequest();
-  req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/ovs_LegislationsGet", true);
-  req.setRequestHeader("OData-MaxVersion", "4.0");
-  req.setRequestHeader("OData-Version", "4.0");
-  req.setRequestHeader("Accept", "application/json");
-  req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-  req.onreadystatechange = function() {
-      if (this.readyState === 4) {
-          req.onreadystatechange = null;
-          if (this.status === 200) {
-              var results = JSON.parse(this.response);
-              localStorage.setItem('legislations-data', results.jsonResult)
-          } else {
-              Xrm.Utility.alertDialog(this.statusText);
-          }
-      }
+  var Sdk = window.Sdk || {};
+  /**
+  * Request to execute WhoAmI function
+  */
+  Sdk.ovs_LegislationsGet = function () { };
+  // NOTE: The getMetadata property should be attached to the function prototype instead of the
+  // function object itself.
+  Sdk.ovs_LegislationsGet.prototype.getMetadata = function () {
+  return {
+  boundParameter: null,
+  parameterTypes: {},
+  operationType: 0,
+  operationName: "ovs_LegislationsGet"
   };
-  req.send(); 
+  };
   
+  // Construct a request object from the metadata
+  var templateGetRequest = new Sdk.ovs_LegislationsGet();
+
+  await Xrm.WebApi.online.execute(templateGetRequest).then(
+      function success(result) {
+        //Xrm.Utility.alertDialog(result)
+        //localStorage.setItem('my-result', result)
+        alert('bananna!')
+        alert(JSON.stringify(result))
+          if (result.ok) {
+              Xrm.Utility.alertDialog(JSON.stringify(result.responseText))
+              //localStorage.setItem('legislations-data', result.responseText)
+          }
+      },
+      function(error) {
+          Xrm.Utility.alertDialog(error.message)
+      }
+  );
 }
 
 function createGroup (questionnaire) {
@@ -190,7 +205,7 @@ function getTotalQuestionsNumber (questions) {
 
 function createProvisions() {
   //console.log(JSON.parse(localStorage.getItem('legislations-data')))
-  return JSON.parse((localStorage.getItem('legislations-data')))
+  return localStorage.getItem('legislations-data')
 }
 
 function createResponseOption (question) {
