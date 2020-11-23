@@ -130,7 +130,7 @@ TDG.QuestionnaireEntityForm = {
     // Request entity form (currently edited Account form).
     TDG.GetInspectionQuestionnaire(
       props.inspection,
-      function (res, ins) {
+      function (res) {//, ins) {
         // update questionnaire
         if (res.length === 1) {
           MobileCRM.DynamicEntity.loadById(

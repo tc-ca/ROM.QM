@@ -22,14 +22,12 @@ function InitializeQuestionnaireBuilder (dynParams) {
 
   // if the template has some json we will render it by passing value to prop of Vue app
   //by setting attribute on the element which has a watch event to detect changes.
- if (templatejson !== null) {
-      let questionnaire = document.getElementsByTagName(
-        "questionnaire-builder"
-      )[0];
-      // set the attribute
-      questionnaire.setAttribute("templatejson", templatejson);
-      questionnaire.setAttribute("templateid", templateId);
-  }
+  let questionnaire = document.getElementsByTagName(
+    "questionnaire-builder"
+  )[0];
+  // set the attribute
+  questionnaire.setAttribute("templatejson", templatejson);
+  questionnaire.setAttribute("templateid", templateId);
 
   // Xrm.Utility.alertDialog("formType: " + formType);
   // Xrm.Utility.alertDialog("templatejson: " + templatejson);

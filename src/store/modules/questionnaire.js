@@ -60,18 +60,21 @@ export const actions = {
       });
     });
 
-    commit("setQuestionnaire", questionnaire);
+    console.log("save questionnaire - templateId: " + questionnaire.templateid);
 
+    commit("setQuestionnaire", questionnaire);
   },
   SetTemplateIdState({ commit }, id) {
+    console.log("set template state: " + id);
     commit("setTemplateId",  id );
   },
   SetQuestionnaireState({ commit, dispatch }, questionnaire) {
+    console.log("set questionnaire state - templateid:" + questionnaire.templateid);
     commit("setQuestionnaire",  questionnaire );
     dispatch("setQuestionnaireGroups", questionnaire.groups);
   },
   async SaveQuestionnaireStateToDynamics({state}) {
-
+    console.log("SaveQuestionnaireStateToDynamics: " + state.questionnaire.templateid);
     const questionnaire = state.questionnaire;
     const result = await XrmWebApi.SaveTemplate(
       questionnaire
@@ -86,6 +89,7 @@ export const mutations = {
   },
 
   setTemplate(state, payload) {
+    alert("setTemplate");
     state.template = payload;
   }, 
 
