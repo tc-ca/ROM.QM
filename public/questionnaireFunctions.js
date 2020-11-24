@@ -72,6 +72,7 @@ async function InitializeQuestionnaireRender(dynParams) {
   //no result, so we have to load the base template from the templateId
   if (!resultJSON) {
 
+    //get json to render
     const { template } = await getTemplateDataByServiceTaskId( xrm,serviceTaskId);
     //set the questionnaire state for the app to display json questionnaire
     questionnaireVueInstance.Render(template);
@@ -79,6 +80,7 @@ async function InitializeQuestionnaireRender(dynParams) {
   }
   else{
         alert("in the else");
+        // get json to render
         const questionnaire = JSON.parse(resultJSON);
         //set the questionnaire state for the app to display json questionnaire
         questionnaireVueInstance.Render(questionnaire);
