@@ -15,6 +15,9 @@ var ROM;
         /////FORM LOAD
         ///////////////////////////////////////////////
         function OnDynamicsFormLoad(eContext) {
+
+            alert('localtemplateform');
+
             var Form = eContext.getFormContext();
 
             //hide the builder tab if this is a new template
@@ -72,7 +75,7 @@ var ROM;
                 win.InitialContext(dynParams.executionContext);
                 win.InitializeQuestionnaireBuilder(dynParams);
             });
-        }
+        }                       
 
 
         ///////////////////////////////////////////////

@@ -89,7 +89,6 @@ export const mutations = {
   },
 
   setTemplate(state, payload) {
-    alert("setTemplate");
     state.template = payload;
   }, 
 
