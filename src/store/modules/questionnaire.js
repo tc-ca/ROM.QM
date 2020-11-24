@@ -4,6 +4,13 @@ import builderService from "../../services/builderService";
 export const state = {
   questionnaire: null
 };
+
+export const getters = {
+  getQuestionnaire (state) {
+    return state.questionnaire;
+  }
+};
+
 export const actions = {
   SetQuestionnaireState({ commit, dispatch }, payload) {
     const { questionnaire, page, id } = payload;
