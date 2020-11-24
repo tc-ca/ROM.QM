@@ -9,9 +9,7 @@
         color="white"
         @click="showSettings = !showSettings"
       />
-      <v-toolbar-title>
-        {{ questionnaire.title[lang] }}
-      </v-toolbar-title>
+      <v-toolbar-title />
       <v-spacer />
       <v-btn
         id="save"
@@ -52,14 +50,13 @@
 </template>
 
 <script>
-
 import { LANGUAGE } from './constants.js'
 
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
 import { mapActions, mapState } from 'vuex'
-import builderService from './services/builderService.js'
+import { XrmWebApi } from './services/questionnaireService.js'
 
 export default {
   name: 'App',
@@ -77,13 +74,17 @@ export default {
       type: String,
       default: LANGUAGE.ENGLISH
     },
-    schema: {
+    templatejson: {
       type: String,
       default: 'Documentation and Safety Marks'
     },
     displayAppNav: {
       type: Boolean,
       default: true
+    },
+    templateid: {
+      type: String,
+      default: ''
     }
   },
   data: function () {
@@ -98,21 +99,14 @@ export default {
       return `${this.questionnaire.title[this.language]}`
     },
     ...mapState({
-      language: state => {
-        // console.log('App.vue: language computed ' + state + ')')
+      language: (state) => {
+        console.log('App.vue: language computed ' + state + ')')
         if (state == null || !state.settings) {
           return LANGUAGE.ENGLISH
         }
         return state.settings.settings.lang
       },
-      questionnaire: state => {
-        // console.log('App.vue: questionnaire computed ' + state + ')')
-        if (!state || !state.app) {
-          return builderService.createQuestionnaire()
-        }
-        return state.settings.questionnaire
-      },
-      settings: state => {
+      settings: (state) => {
         if (state == null || !state.settings) {
           return {
             lang: LANGUAGE.ENGLISH,
@@ -126,40 +120,49 @@ export default {
   watch: {
     // required for Field Service, as this.lang not available from the created hook method ONLY when app is reading code from tdgwoodservice.js, has to do with how the page is loaded in.
     lang (value, oldValue) {
-      // console.log('App.vue: lang watch ' + value + ')')
+      console.log('App.vue: lang watch ' + value + ')')
       this.setLanguage()
     },
     settings (value, oldValue) {
-      // console.log('App.vue: settings watch ' + value)
+      console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
-    },
-    schema (value, oldValue) {
-      alert(`value: ${value} oldValue: ${oldValue}`)
-
-      let questionnaire = JSON.parse(value)
-      this.$store.dispatch('SetQuestionnaireState', questionnaire)
-      alert('stuff that got put into store: ' + JSON.stringify(this.$store.state.questionnaire.questionnaire))
     }
+    // templatejson (value, oldValue) {
+    //   const questionnaire = JSON.parse(value)
+    //   const page = this.page
+    //   this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+    // }
+    // templateid (value, oldValue) {
+    //   this.$store.dispatch('SetQuestionnaireIdState', value)
+    // }
   },
   created: function () {
-    alert(`created, this.page: ${this.page}`)
-
-    this.$router.push({ name: this.page }).catch(e => {
+    this.$router.push({ name: this.page }).catch((e) => {
       // console.log(e)
     })
   },
   methods: {
-    ...mapActions([ 'setAppLanguage', 'setSettings' ]),
+    ...mapActions(['setAppLanguage', 'setSettings']),
     setLanguage () {
       // console.log('App.vue: setLanguage (' + this.lang + ')')
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    save () {
-      this.setSettings(this.settings)
+    async save (id) {
+      const questionnaire = this.$store.state.questionnaire.questionnaire
+      const page = this.page
+
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
+      await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
+    },
+    async load (id) {
+      const page = this.page
+      // call api to get questionnaire to display
+      let questionnaire = await XrmWebApi.GetQuestionnaireById(id)
+      // set questionnaire state to retrieved api data, questionnaire will render whats in state.
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
     }
   }
-
 }
 </script>
 
@@ -172,5 +175,4 @@ export default {
   /* color: #2c3e50; */
   /* margin-top: 60px; */
 }
-
 </style>

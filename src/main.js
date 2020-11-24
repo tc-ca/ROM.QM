@@ -20,7 +20,7 @@ App.store = store
 App.vuetify = vuetify
 App.i18n = i18n
 App.router = router
-App.displayNav = true
+App.displayNav = false
 
 Vue.customElement('questionnaire-builder', App)
 

@@ -118,7 +118,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-import { XrmWebApi } from '../../services/questionnaireService.js'
+// import { XrmWebApi } from '../../services/questionnaireService.js'
 
 export default {
   props: {
@@ -183,43 +183,43 @@ export default {
   methods: {
     ...mapActions(['saveDarkMode', 'setAppLanguage', 'setQuestionnaire']),
     setDarkMode (val) {
-      // console.log('setDarkMode')
+      console.log('setDarkMode')
       this.$vuetify.theme.dark = val
       this.saveDarkMode(val)
     },
     setLanguage (val) {
-      // console.log('setLanguage')
+      console.log('setLanguage')
       this.$i18n.locale = val
       this.setAppLanguage(val)
     },
-    navigateTo (name, schema) {
-      // console.log(name)
-
-      if (schema) {
-        this.$router.push({ name: name, params: { schema: schema } }).catch(e => {
-          // console.log(e)
+    navigateTo (name, templatejson) {
+      console.log(name)
+      if (templatejson) {
+        this.$router.push({ name: name, params: { templatejson: templatejson } }).catch(e => {
+          console.log(e)
         })
       }
 
       this.$router.push({ name: name }).catch(e => {
-        // console.log(e)
+        console.log(e)
       })
-    },
-    async getQuestionnaireFromDynamics () {
-      var QM = window.QMSDK
-
-      alert(QM.recordGuid)
-      alert(QM.formContext)
-
-      await XrmWebApi.GetGlobalContext()
-
-      // call api to get questionnaire to display
-      const questionnaire = await XrmWebApi.GetQuestionnaireById()
-      // set questionnaire state to retrieved api data, questionnaire will render whats in state.
-      this.$store.dispatch('SetQuestionnaireState', questionnaire)
-
-      this.navigateTo('questionnaire')
     }
+    // ,
+    // async getQuestionnaireFromDynamics () {
+    //   var QM = window.QMSDK
+
+    //   alert(QM.recordGuid)
+    //   alert(QM.formContext)
+
+    //   await XrmWebApi.GetGlobalContext()
+
+    //   // call api to get questionnaire to display
+    //   const questionnaire = await XrmWebApi.GetQuestionnaireById()
+    //   // set questionnaire state to retrieved api data, questionnaire will render whats in state.
+    //   this.$store.dispatch('SetQuestionnaireState', questionnaire)
+
+    //   this.navigateTo('questionnaire')
+    // }
   }
 }
 </script>

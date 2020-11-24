@@ -23,10 +23,7 @@
         :style="{fontSize:'16px !important'}"
       >
         <!-- eslint-disable vue/no-v-html -->
-        <span
-          class="text-break"
-          v-html="questionText"
-        />
+        <span class="text-break">{{ questionText }}</span>
       </div>
       <!--eslint-enable-->
     </v-expansion-panel-header>
@@ -170,6 +167,7 @@ export default {
     },
     onUserResponseChanged (args) {
       this.updateViolationInfo(args)
+      this.updateViolationInfoVisibility(args)
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
@@ -178,10 +176,21 @@ export default {
     updateSupplementaryInfoVisibility (args) {
       this.displaySupplementaryInfo = (args && args.value)
     },
+    updateViolationInfoVisibility (args) {
+      var res = args.value
+      if (Array.isArray(args.value)) {
+        res = args.value.sort().join()
+      }
+      if (this.question.violationInfo.matchingType === 'equal') {
+        this.displayViolationInfo = this.question.violationInfo.responseToMatch === res
+      } else if (this.question.violationInfo.matchingType === 'notEqual') {
+        this.displayViolationInfo = this.question.violationInfo.responseToMatch !== res
+      }
+    },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
         let index = this.question.responseOptions.findIndex(q => q.value === args.value)
-        this.displayViolationInfo = index !== -1
+        // this.displayViolationInfo = index !== -1
         this.selResponseOptions = this.question.responseOptions[index]
       }
     },

@@ -15,6 +15,9 @@ var ROM;
         /////FORM LOAD
         ///////////////////////////////////////////////
         function OnDynamicsFormLoad(eContext) {
+
+            alert('localtemplateform');
+
             var Form = eContext.getFormContext();
 
             //hide the builder tab if this is a new template
@@ -32,7 +35,7 @@ var ROM;
             var webResourceControl = Form.getControl('WebResource_BuilderTemplateForm');
 
             //grab the JSON from the hidden field on the form
-            var templateJson = Form.getAttribute('qm_templatejsontxt').getValue();
+            var templatejson = Form.getAttribute('qm_templatejsontxt').getValue();
             
             // 0 = Undefined, 1 = Create, 2 = Update, 3 = Read Only, 4 = Disabled, 6 = Bulk Edit
             var formType = Form.ui.getFormType(); 
@@ -50,7 +53,7 @@ var ROM;
             var dynParams = {
                 executionContext: eContext,
                 webResourceControl: webResourceControl, 
-                templateJson: templateJson, 
+                templatejson: templatejson, 
                 formType: formType,
                 userGuid: userGuid, 
                 userName: userName, 
@@ -72,18 +75,9 @@ var ROM;
                 win.InitialContext(dynParams.executionContext);
                 win.InitializeQuestionnaireBuilder(dynParams);
             });
-        }
+        }                       
 
-        // Get dynamics language
-        function getUserLang() {
-            var languageCode = Xrm.Utility.getGlobalContext().userSettings.languageId;
-            var surveyLocale = 'en';
-            if (languageCode == 1036) {
-                //French
-                surveyLocale = 'fr';
-            }
-            return surveyLocale;
-        }
+
         ///////////////////////////////////////////////
         /////FORM SAVE
         ///////////////////////////////////////////////
@@ -98,23 +92,23 @@ var ROM;
             }
             
             // Get the web resource inner content window
-            CompleteQuestionnaire(webResourceControl);
+            CompleteQuestionnaire(eContext, webResourceControl);
         }
         TemplateForm.OnDynamicsFormSave = OnDynamicsFormSave;
-
-
-
-
-
 
 
     })(TemplateForm = ROM.TemplateForm || (ROM.TemplateForm = {}));
 })(ROM || (ROM = {}));
 
-function CompleteQuestionnaire(wrCtrl) {
+function CompleteQuestionnaire(eContext, wrCtrl) {
     // Get the web resource inner content window
     wrCtrl.getContentWindow().then(function (win) {
-        var userInput = win.DoComplete();
+            var Form = eContext.getFormContext();
+
+            //hide the builder tab if this is a new template
+            var recordGuid = Form.data.entity.getId();
+            alert('from template form '+recordGuid)
+        var userInput = win.DoComplete(eContext, recordGuid);
     });
 }
 
@@ -122,4 +116,15 @@ function hideTab(eContext, tabname, hideorshow) {
     var formContext = eContext.getFormContext();
     var tabObj = formContext.ui.tabs.get(tabname);
     tabObj.setVisible(hideorshow);
+}
+
+// Get dynamics language
+function getUserLang() {
+    var languageCode = Xrm.Utility.getGlobalContext().userSettings.languageId;
+    var surveyLocale = 'en';
+    if (languageCode == 1036) {
+        //French
+        surveyLocale = 'fr';
+    }
+    return surveyLocale;
 }

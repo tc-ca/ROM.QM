@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col>
+    <v-col cols="7">
       <v-form
         ref="questionaire_form"
         v-model="valid"
@@ -20,6 +20,15 @@
         </v-expansion-panels>
       </v-form>
     </v-col>
+    <v-col cols="5">
+      <v-row justify="end">
+        <v-col class="col-auto">
+          <v-btn @click="saveTmp()">
+            Save Temp
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-col>
   </v-row>
 </template>
 
@@ -33,8 +42,13 @@ export default {
   components: { QuestionnaireGroup },
 
   props: {
-    schema:
+    templatejson:
     { type: String,
+      required: true
+    },
+    templateid:
+    {
+      type: String,
       required: true
     }
   },
@@ -48,13 +62,13 @@ export default {
     ...mapState(['group'])
   },
   methods: {
-    save () {
+    saveTmp () {
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
       })
 
       if (this.$refs.questionaire_form.validate()) {
-        // console.log('saving...')
+        console.log('Attempting to save...')
       } else {
         this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorect`, color: 'error' })
       }
