@@ -56,7 +56,6 @@ import NotificationContainer from './components/notification-container/notificat
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
 import { mapActions, mapState } from 'vuex'
-import { XrmWebApi } from './services/questionnaireService.js'
 
 export default {
   name: 'App',
@@ -127,14 +126,6 @@ export default {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
     }
-    // templatejson (value, oldValue) {
-    //   const questionnaire = JSON.parse(value)
-    //   const page = this.page
-    //   this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-    // }
-    // templateid (value, oldValue) {
-    //   this.$store.dispatch('SetQuestionnaireIdState', value)
-    // }
   },
   created: function () {
     this.$router.push({ name: this.page }).catch((e) => {
@@ -148,19 +139,21 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    async save (id) {
-      const questionnaire = this.$store.state.questionnaire.questionnaire
+    GetAndSetQuestionnaireState (questionnaire, id) {
       const page = this.page
+      // passing arguments set
+      alert(questionnaire)
+      alert(id)
 
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
-      await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
-    },
-    async load (id) {
-      const page = this.page
-      // call api to get questionnaire to display
-      let questionnaire = await XrmWebApi.GetQuestionnaireById(id)
-      // set questionnaire state to retrieved api data, questionnaire will render whats in state.
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
+      if (questionnaire && id) {
+        alert('set')
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
+        return this.$store.state.questionnaire.questionnaire
+      } else {
+        alert('get')
+        // return what you have in state
+        return this.$store.state.questionnaire.questionnaire
+      }
     }
   }
 }

@@ -9,7 +9,7 @@ function InitialContext(executionContext) {
   window.parentFormContext = executionContext.getFormContext();
 }
 
-function InitializeQuestionnaireBuilder (dynParams) {
+async function InitializeQuestionnaireBuilder (dynParams) {
 
   let executionContext    = dynParams.executionContext;
   let webResourceControl  = dynParams.webResourceControl;
@@ -21,12 +21,18 @@ function InitializeQuestionnaireBuilder (dynParams) {
   let templateId          = dynParams.templateId;
 
 
-
-        var questionnaire = document
+        var questionnaireVueInstance = document
           .querySelector("questionnaire-builder")
           .getVueInstance();
 
-        questionnaire.load(templateId);
+        const questionnaireJson =  await GetQuestionnaireById(templateId);
+        alert('from dynamics: '+ JSON.stringify(questionnaireJson));
+
+        //need to pass id and template separate because on new, json questionnaire wont have an id on it. 
+        questionnaireVueInstance.GetAndSetQuestionnaireState(
+          questionnaireJson,
+          templateId
+        );
   
 
   // Xrm.Utility.alertDialog("formType: " + formType);
@@ -119,11 +125,21 @@ const surveyValueChanged = function (sender, options) {
   }
 };
 
-function DoComplete(eContext, recordGuid) {
-  var questionnaire = document
+async function DoComplete(eContext, recordGuid) {
+  alert('do complete')
+  var questionnaireVueInstance = document
     .querySelector("questionnaire-builder")
     .getVueInstance();
-  questionnaire.save(recordGuid);
+  
+
+  //save what we have in state
+  //get questionnaire from state
+  //pass to dynamics
+  const questionnaire = questionnaireVueInstance.GetAndSetQuestionnaireState();
+  alert(JSON.stringify(questionnaire))
+  const result = await SaveQuestionnaire(questionnaire, recordGuid);
+ 
+
 }
 
 
@@ -181,6 +197,45 @@ function getTemplateIdByServiceTask(xrm, serviceTaskId) {
     }
 
 )}
+
+   async function GetQuestionnaireById (id) {
+    let data = '';
+    await Xrm.WebApi.online
+      .retrieveRecord(
+        "qm_sytemplate",
+        id,
+        "?$select=qm_templatejsontxt"
+      )
+      .then(
+        function success(result) {
+          var qm_templatejsontxt = result["qm_templatejsontxt"];
+           data = JSON.parse(qm_templatejsontxt);
+        },
+        function(error) {
+          Xrm.Utility.alertDialog(error.message);
+        }
+      );
+    return data;
+  }
+
+  async function SaveQuestionnaire(questionnaire, id) {
+    let data = null;
+    var entity = {};
+    entity.qm_templatejsontxt = JSON.stringify(questionnaire);
+    alert("saving id: " + id);
+    alert("saving json: " + JSON.stringify(questionnaire));
+    await Xrm.WebApi.online.updateRecord("qm_sytemplate", id, entity).then(
+      function success(result) {
+        data = result.id;
+        alert("success: " + data);
+      },
+      function(error) {
+        alert("error" + error);
+        Xrm.Utility.alertDialog(error.message);
+      }
+    );
+    return data;
+  }
 
 // const createAnnotation = function (regarding, fileInfo, documentBody) {
 //   /// <param name='regrding' type='MobileCRM.Refernce'/>
