@@ -4,19 +4,18 @@
   let XrmWebApi = {
  //todo remove hardcoded guid
   //should by named template or questionnaire??
-  GetQuestionnaireById: async function () {
+  GetQuestionnaireById: async function (id) {
     let data = '';
     await Xrm.WebApi.online
       .retrieveRecord(
         "qm_sytemplate",
-        "893bcfb7-49f1-4c2f-8cf5-a412893fb229",
+        id,
         "?$select=qm_templatejsontxt"
       )
       .then(
         function success(result) {
           var qm_templatejsontxt = result["qm_templatejsontxt"];
            data = JSON.parse(qm_templatejsontxt);
-           console.log(JSON.stringify(data))
         },
         function(error) {
           Xrm.Utility.alertDialog(error.message);
@@ -25,17 +24,17 @@
     return data;
   },
 
-  SaveTemplate: async function (template) {
+  SaveQuestionnaire: async function (questionnaire, id) {
     let data = null;
     var entity = {};
-    var templateid = template.templateid;
-    entity.qm_templatejsontxt = JSON.stringify(template);
-
-    console.log("trying to save" + JSON.stringify(entity.qm_templatejsontxt));
+    entity.qm_templatejsontxt = JSON.stringify(questionnaire);
+    alert('saving id: '+id)
+    alert('saving json: ' + JSON.stringify(questionnaire))
+    alert(JSON.stringify(entity))
     await Xrm.WebApi.online
       .updateRecord(
         "qm_sytemplate",
-        templateid,
+        id,
         entity
       )
       .then(
@@ -44,6 +43,7 @@
           console.log('success: ' + data)
         },
         function(error) {
+          alert('error' + error)
           Xrm.Utility.alertDialog(error.message);
         }
       );

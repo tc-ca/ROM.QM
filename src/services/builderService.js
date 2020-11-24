@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { LANGUAGE } from '../constants.js'
 
 function createGroup (questionnaire) {
@@ -191,6 +192,61 @@ function createDependencyGroup () {
   }
 }
 
+
+function processBuilderForSave(questionnaire){
+  let groups = _.cloneDeep(questionnaire.groups);
+
+  let populateDependantsOnDependency = q => {
+    q.dependencyGroups.forEach(dg => {
+      dg.questionDependencies.forEach(qd =>
+        qd.dependsOnQuestion.dependants.push(q)
+      );
+    });
+    q.childQuestions.forEach(cq => populateDependantsOnDependency(cq));
+  };
+
+  groups.forEach(g => {
+    g.questions.forEach(q => {
+      populateDependantsOnDependency(q);
+    });
+  });
+
+
+  let populateDependantsOnDependencyIds = q => {
+    q.dependencyGroups.forEach(dg => {
+      dg.questionDependencies.forEach(qd =>
+        qd.dependsOnQuestion.dependants.push(q.id)
+      );
+    });
+    q.childQuestions.forEach(cq => populateDependantsOnDependencyIds(cq));
+  };
+
+  questionnaire.groups.forEach(g => {
+    g.questions.forEach(q => {
+      populateDependantsOnDependencyIds(q);
+    });
+  });
+
+  let removeCircularRefFromDependency = question => {
+    question.dependencyGroups.forEach(dg => {
+      dg.questionDependencies.forEach(qd => {
+        qd.dependsOnQuestion = qd.dependsOnQuestion.id;
+      });
+    });
+
+    question.childQuestions.forEach(cq => removeCircularRefFromDependency(cq));
+  };
+
+  questionnaire.groups.forEach(g => {
+    g.questions.forEach(q => {
+      removeCircularRefFromDependency(q);
+    });
+  });
+
+  return {groupsData:groups, questionnaireData:questionnaire}
+
+}
+
 export default {
   createGroup,
   createQuestionnaire,
@@ -198,5 +254,6 @@ export default {
   createChildQuestion,
   createResponseOption,
   createValidator,
-  createDependencyGroup
-}
+  createDependencyGroup,
+  processBuilderForSave
+};
