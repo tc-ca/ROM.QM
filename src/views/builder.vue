@@ -366,8 +366,8 @@
                             <v-treeview
                               v-model="option.selectedProvisions"
                               selectable
-                              item-text="Text"
-                              item-key="Text"
+                              item-text="DisplayEnglishText"
+                              item-key="id"
                               selection-type="leaf"
                               return-object
                               :search="option.searchProvisions"
@@ -741,13 +741,7 @@ export default {
     })
   },
   created () {
-    this.provisions = require('../api/legislation-hierarchy-list.js').default.data[0].children.filter(
-      (x) => {
-        if (x.Label.trim() === '1.16') {
-          return x.children
-        }
-      }
-    )[0].children
+    this.provisions = BuilderService.createProvisions()
     // on create event, build the basic definition of questionnaire builder
     const questionnaire = BuilderService.createQuestionnaire()
     const page = 'builder'
@@ -756,6 +750,7 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
+    BuilderService.GetLegislations()
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'setQuestionnaire') {
@@ -938,7 +933,7 @@ export default {
       this.violationsCollapsed = !this.violationsCollapsed
     },
     toggleProvisions (option) {
-      // console.log(option)
+      console.log(option.selectedProvisions)
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }

@@ -56,10 +56,10 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="pros"
+                v-model="selResponseOptions.selectedProvisions"
                 selectable
-                item-text="Text"
-                item-key="Text"
+                item-text="DisplayEnglishText"
+                item-key="id"
                 selection-type="leaf"
                 return-object
                 :search="selResponseOptions.searchProvisions"
