@@ -30,7 +30,6 @@
     entity.qm_templatejsontxt = JSON.stringify(questionnaire);
     alert('saving id: '+id)
     alert('saving json: ' + JSON.stringify(questionnaire))
-    alert(JSON.stringify(entity))
     await Xrm.WebApi.online
       .updateRecord(
         "qm_sytemplate",
@@ -40,7 +39,7 @@
       .then(
         function success(result) {
           data = result.id;
-          console.log('success: ' + data)
+          alert('success: ' + data)
         },
         function(error) {
           alert('error' + error)

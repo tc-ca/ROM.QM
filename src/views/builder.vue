@@ -755,7 +755,6 @@ export default {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'setQuestionnaire') {
         this.questionnaire = state.questionnaire.questionnaire
-        alert('new state' + JSON.stringify(state.questionnaire.questionnaire))
       }
     })
   },
