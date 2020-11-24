@@ -28,7 +28,7 @@ export const actions = {
         break;
       case "questionnaire":
         {
-          alert("questionnaire");
+          // alert("questionnaire");
           commit("setQuestionnaire", questionnaire);
           dispatch("setQuestionnaireGroups", questionnaire.groups);
         }
