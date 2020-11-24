@@ -9,9 +9,7 @@
         color="white"
         @click="showSettings = !showSettings"
       />
-      <v-toolbar-title>
-        {{ questionnaire.title[lang] }}
-      </v-toolbar-title>
+      <v-toolbar-title />
       <v-spacer />
       <v-btn
         id="save"
@@ -58,7 +56,7 @@ import NotificationContainer from './components/notification-container/notificat
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
 import { mapActions, mapState } from 'vuex'
-import builderService from './services/builderService.js'
+import { XrmWebApi } from './services/questionnaireService.js'
 
 export default {
   name: 'App',
@@ -108,13 +106,6 @@ export default {
         }
         return state.settings.settings.lang
       },
-      questionnaire: (state) => {
-        console.log('App.vue: questionnaire computed ' + state + ')')
-        if (!state || !state.app) {
-          return builderService.createQuestionnaire()
-        }
-        return state.settings.questionnaire
-      },
       settings: (state) => {
         if (state == null || !state.settings) {
           return {
@@ -135,22 +126,15 @@ export default {
     settings (value, oldValue) {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
-    },
-    templatejson (value, oldValue) {
-      console.log(`value: ${value} oldValue: ${oldValue}`)
-
-      let questionnaire = JSON.parse(value)
-      this.$store.dispatch('SetQuestionnaireState', questionnaire)
-      console.log(
-        'stuff that got put into store: ' +
-          JSON.stringify(this.$store.state.questionnaire.questionnaire)
-      )
-    },
-    templateid (value, oldValue) {
-      console.log(`templateid value: ${value} oldValue: ${oldValue}`)
-
-      this.$store.dispatch('SetTemplateIdState', value)
     }
+    // templatejson (value, oldValue) {
+    //   const questionnaire = JSON.parse(value)
+    //   const page = this.page
+    //   this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+    // }
+    // templateid (value, oldValue) {
+    //   this.$store.dispatch('SetQuestionnaireIdState', value)
+    // }
   },
   created: function () {
     this.$router.push({ name: this.page }).catch((e) => {
@@ -164,8 +148,19 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    save () {
-      this.setSettings(this.settings)
+    async save (id) {
+      const questionnaire = this.$store.state.questionnaire.questionnaire
+      const page = this.page
+
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
+      await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
+    },
+    async load (id) {
+      const page = this.page
+      // call api to get questionnaire to display
+      let questionnaire = await XrmWebApi.GetQuestionnaireById(id)
+      // set questionnaire state to retrieved api data, questionnaire will render whats in state.
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
     }
   }
 }
