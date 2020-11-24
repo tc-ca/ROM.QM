@@ -140,6 +140,9 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
+    /**
+     * Sets the questionnaire state, which is used to render the on screen elements, a valid json must be passed.
+     */
     Render (questionnaire) {
       const page = this.page
 
@@ -147,10 +150,13 @@ export default {
         alert('set')
         this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       }
+    },
+    /**
+    * Returns current state of questionnaire
+    */
+    GetState (questionnaire) {
+      return this.$store.state.questionnaire.questionnaire
     }
-  },
-  GetState (questionnaire) {
-    return this.$store.state.questionnaire.questionnaire
   }
 
 }
