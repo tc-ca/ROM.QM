@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production --dest dist --target app",
+    "buildDevelopment": "vue-cli-service build --mode development --dest dist --target app",
     "deploy": "@powershell -Command ./publishingScripts/publishQmResources.ps1 -ExecutionPolicy Unrestricted -NoProfile",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

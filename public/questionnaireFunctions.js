@@ -54,40 +54,27 @@ function InitializeQuestionnaireBuilder (dynParams) {
   // $('.sv-btn.sv-footer__complete-btn').hide();
 }
 
-function InitializeQuestionnaireRender (webResourceControl, executionContext, id) {
+function InitializeQuestionnaireRender (dynParams) {
+  let executionContext    = dynParams.executionContext;
+  let webResourceControl  = dynParams.webResourceControl;
+  let resultjson          = dynParams.resultjson;
+  let formType            = dynParams.formType;
+  let userGuid            = dynParams.userGuid;
+  let userName            = dynParams.userName;
+  let userLang            = dynParams.userLang;
+  let templateId          = dynParams.templateId;
+  let serviceTaskId       = dynParams.serviceTaskId;
+  let xrm                 = dynParams.xrm;
+  let msdyn_TaskType      = dynParams.msdyn_TaskType;
 
-  var Form = executionContext.getFormContext();
+  console.log("formType: " + formType);
+  console.log("templateId: " + templateId);
+  console.log("userGuid: " + userGuid);
+  console.log("userName: " + userName);
+  console.log("userLang: " + userLang);
+  console.log("serviceTaskId: " + serviceTaskId);
 
-  // let executionContext    = dynParams.executionContext;
-  // let webResourceControl  = dynParams.webResourceControl;
-  // let templatejson        = dynParams.templatejson;
-  // let formType            = dynParams.formType;
-  // let userGuid            = dynParams.userGuid;
-  // let userName            = dynParams.userName;
-  // let userLang            = dynParams.userLang;
-  // let templateId          = dynParams.templateId;
-
-  // we're not showing the builder form if this is a new template
-  // if (templatejson == null) {
-  //   return;
-  // }
-
-  //I guess we need to pass this to the view prop, then view can deal with loading it 
-  //var questionnaireDefinition = JSON.parse(templatejson);
-
-  console.log(id);
-  //console.log("formType: " + formType);
-  //console.log("templateId: " + templateId);
-  //console.log("userGuid: " + userGuid);
-  //console.log("userName: " + userName);
-  //console.log("userLang: " + userLang);
-//
-  
-  //value > 1 means that the record exists and is not new
-  //var globalContext = Xrm.Utility.getGlobalContext();
-
-  
-  if (Form.ui.getFormType() > 1) {
+  if (formType > 1) {
     //Xrm.Utility.alertDialog("EXISTING QUESTIONNAIRE");
     console.log("EXISTING QUESTIONNAIRE")
   }
@@ -96,20 +83,28 @@ function InitializeQuestionnaireRender (webResourceControl, executionContext, id
     console.log("NEW QUESTIONNAIRE");
   }
 
-  // if (surveyResponse != null) {
-  //   survey.data = JSON.parse(surveyResponse);
-  // }
+  // we're not showing the render form if this is a new service task
+  // user must select the service task type first
+  if (!serviceTaskId) {
+    return;
+  }
 
-  // survey.onComplete.add(function (result) {
-  //   SaveAnswers(result);
-  // });
+  //pass this to the view prop, then view can deal with loading it 
+  if (!resultjson)
+  {
+    //no result, so we have to load the base template from the templateId
+    getTemplateIdByServiceTask(xrm, serviceTaskId);
+    return;
+  }
 
-  // $('#surveyElement').Survey({
-  //   model: survey,
-  //   onValueChanged: surveyValueChanged,
-  // });
-
-  // $('.sv-btn.sv-footer__complete-btn').hide();
+  let render = document.getElementsByTagName(
+    "questionnaire-builder"
+  )[0];
+  // set the prop values on our vue control
+  render.setAttribute("templatejson", resultjson);
+  render.setAttribute("templateid", templateId);
+  render.setAttribute("page", "questionnaire");
+  
 }
 
 function SaveAnswers(userInput) {
@@ -164,6 +159,25 @@ function SetOptionsetByValue(formContext, attr, intValue) {
       }
   }
 }
+
+function getTemplateIdByServiceTask(xrm, serviceTaskId) {
+
+  Xrm.WebApi.online.retrieveRecord("msdyn_workorderservicetask", serviceTaskId, "?$select=msdyn_name&$expand=msdyn_tasktype($select=msdyn_servicetasktypeid),ovs_questionnairetemplateid($select=qm_sytemplateid,qm_templatejsontxt)").then(
+    function success(result) {
+        if (result.hasOwnProperty("ovs_questionnairetemplateid")) {
+            var templateId = result["ovs_questionnairetemplateid"]["qm_sytemplateid"];
+            var templatejson = result["ovs_questionnairetemplateid"]["qm_templatejsontxt"];
+
+            let render = document.getElementsByTagName("questionnaire-builder")[0];
+            render.setAttribute("templatejson", templatejson);
+            render.setAttribute("templateid", templateId);
+        }
+    },
+    function(error) {
+        Xrm.Utility.alertDialog(error.message);
+    }
+
+)}
 
 // const createAnnotation = function (regarding, fileInfo, documentBody) {
 //   /// <param name='regrding' type='MobileCRM.Refernce'/>

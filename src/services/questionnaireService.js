@@ -52,8 +52,6 @@
 
   GetGlobalContext: async function () {  
 
-    //alert(JSON.stringify(QMSDK.formExecutionContext,null))
-
     var context = Xrm.Utility.getGlobalContext()
 
     console.log(JSON.stringify(context, null))
