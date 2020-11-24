@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+
 'use strict';
 window.parentExecutionContext = null;
 window.parentFormContext = null;
@@ -23,13 +24,10 @@ async function InitializeQuestionnaireBuilder(dynParams) {
     .querySelector("questionnaire-builder")
     .getVueInstance();
 
-  const questionnaireJson = await GetQuestionnaireById(templateId);
-  alert("from dynamics: " + JSON.stringify(questionnaireJson));
+  const template = await GetTemplateById(templateId);
 
-  //need to pass id and template separate because on new, json questionnaire wont have an id on it.
-  questionnaireVueInstance.GetAndSetQuestionnaireState(
-    questionnaireJson,
-    templateId
+  questionnaireVueInstance.Render(
+    template,
   );
 }
 
@@ -74,28 +72,17 @@ async function InitializeQuestionnaireRender(dynParams) {
   //no result, so we have to load the base template from the templateId
   if (!resultJSON) {
 
-    const {questionnaire, questionnaireId} = await getTemplateDataByServiceTaskId( xrm,serviceTaskId);
-    //need to pass id and template separate because on new, json questionnaire wont have an id on it.
-    questionnaireVueInstance.GetAndSetQuestionnaireState(
-      questionnaire,
-      questionnaireId
-    );
+    const { template } = await getTemplateDataByServiceTaskId( xrm,serviceTaskId);
+    //set the questionnaire state for the app to display json questionnaire
+    questionnaireVueInstance.Render(template);
     return;
   }
   else{
-    alert('in the else')
-    const questionnaire = JSON.parse(resultJSON);
-        questionnaireVueInstance.GetAndSetQuestionnaireState(
-          questionnaire,
-          questionnaireId
-        );
-  }
-
-  let render = document.getElementsByTagName("questionnaire-builder")[0];
-  // set the prop values on our vue control
-  render.setAttribute("templatejson", resultJSON);
-  render.setAttribute("templateid", questionnaireId);
-  render.setAttribute("page", "questionnaire");
+        alert("in the else");
+        const questionnaire = JSON.parse(resultJSON);
+        //set the questionnaire state for the app to display json questionnaire
+        questionnaireVueInstance.Render(questionnaire);
+      }
 }
 
 function SaveAnswers(userInput) {
@@ -120,12 +107,12 @@ async function DoComplete(eContext, recordGuid, isBuilderPage) {
   //get questionnaire from state
   //pass to dynamics
   if (isBuilderPage) {
-    const questionnaire = questionnaireVueInstance.GetAndSetQuestionnaireState();
+    const questionnaire = questionnaireVueInstance.GetState();
     alert(JSON.stringify(questionnaire))
     const result = await SaveQuestionnaire(questionnaire, recordGuid);
   }
   else {
-    const questionnaire = questionnaireVueInstance.GetAndSetQuestionnaireState();
+    const questionnaire = questionnaireVueInstance.GetState();
     alert(JSON.stringify(questionnaire))
     const result = await SaveQuestionnaire(questionnaire, recordGuid);
   }
@@ -184,7 +171,7 @@ async function getTemplateDataByServiceTaskId(xrm, serviceTaskId) {
           var template = JSON.parse(
             result["ovs_questionnairetemplateid"]["qm_templatejsontxt"]
           );
-          data = { questionnaireId: templateId, questionnaire: template };
+          data = { template: template };
         }
       },
       function(error) {
@@ -194,7 +181,7 @@ async function getTemplateDataByServiceTaskId(xrm, serviceTaskId) {
   return data;
 }
 
-async function GetQuestionnaireById(id) {
+async function GetTemplateById(id) {
   let data = null;
   await Xrm.WebApi.online
     .retrieveRecord("qm_sytemplate", id, "?$select=qm_templatejsontxt")
