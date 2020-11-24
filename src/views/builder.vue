@@ -750,8 +750,9 @@ export default {
     )[0].children
     // on create event, build the basic definition of questionnaire builder
     const questionnaire = BuilderService.createQuestionnaire()
+    const page = 'builder'
     // put the definition in the store
-    this.$store.dispatch('SetQuestionnaireState', questionnaire)
+    this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
@@ -759,6 +760,7 @@ export default {
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'setQuestionnaire') {
         this.questionnaire = state.questionnaire.questionnaire
+        alert('new state' + JSON.stringify(state.questionnaire.questionnaire))
       }
     })
   },
@@ -844,8 +846,11 @@ export default {
       this.selectedGroup = null
       this.selectedQuestion = question
     },
-    async save () {
-      this.$store.dispatch('save', this.questionnaire)
+    async save (id) {
+      alert('save')
+      const page = 'builder'
+      const questionnaire = this.questionnaire
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
       await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
     },
     addOption () {

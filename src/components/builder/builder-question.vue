@@ -13,9 +13,7 @@
       <div
         :style="{fontSize:'16px !important'}"
       >
-        <span
-          class="text-break"
-        />
+        <span class="text-break">{{ questionText }}</span>
       </div>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
@@ -227,7 +225,3 @@ export default {
     box-shadow: 0 0px 5px 0 rgba(255, 0, 0, 1);
   }
 </style>
-
-/*
-          v-html="questionText"
-*/
