@@ -24,8 +24,7 @@
           :search="search"
           :filter="filter"
           :open.sync="open"
-        >
-        </v-treeview>
+        />
       </v-card-text>
     </v-card>
   </div>

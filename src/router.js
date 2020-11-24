@@ -28,7 +28,7 @@ export default new Router({
     // props: {
     //   default: true,
     //   settings: {},
-    //   schema: 'Default Questionnaire'
+    //   templatejson: 'Default Questionnaire'
     // }
   },
   {

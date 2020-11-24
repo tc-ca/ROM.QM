@@ -130,7 +130,7 @@ TDG.QuestionnaireEntityForm = {
     // Request entity form (currently edited Account form).
     TDG.GetInspectionQuestionnaire(
       props.inspection,
-      function (res, ins) {
+      function (res) {//, ins) {
         // update questionnaire
         if (res.length === 1) {
           MobileCRM.DynamicEntity.loadById(
@@ -192,7 +192,7 @@ TDG.QuestionnaireEntityForm = {
 
     const questionnaire = document.querySelector('questionnaire-builder')
 
-    questionnaire.setAttribute('schema', JSON.stringify(props.configurationData))
+    questionnaire.setAttribute('templatejson', JSON.stringify(props.configurationData))
     questionnaire.setAttribute('lang', props.lang)
     // questionnaire.setAttribute('metadata', JSON.stringify({ title: { 'en-US': props.template.properties.tc_englishtitle, 'fr-FR': props.template.properties.tc_frenchtitle } }))
     // TODO: ains, come back and clean things up
