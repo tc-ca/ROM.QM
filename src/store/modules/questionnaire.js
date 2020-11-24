@@ -1,110 +1,58 @@
-import _ from "lodash";
 import { XrmWebApi } from "../../services/questionnaireService";
+import builderService from "../../services/builderService";
 
 export const state = {
-  questionnaire: null
+  questionnaire: null,
+  questionnaireId: null
 };
 export const actions = {
-  save({ commit, dispatch }, questionnaire) {
-    // first save to state for use in questionnaire
-    let groups = _.cloneDeep(questionnaire.groups);
-
-    let populateDependantsOnDependency = q => {
-      q.dependencyGroups.forEach(dg => {
-        dg.questionDependencies.forEach(qd =>
-          qd.dependsOnQuestion.dependants.push(q)
-        );
-      });
-      q.childQuestions.forEach(cq => populateDependantsOnDependency(cq));
-    };
-
-    groups.forEach(g => {
-      g.questions.forEach(q => {
-        populateDependantsOnDependency(q);
-      });
-    });
-
-    //processing is done for groups, can safely set the state.
-    dispatch("setQuestionnaireGroups", groups);
-
-    let populateDependantsOnDependencyIds = q => {
-      q.dependencyGroups.forEach(dg => {
-        dg.questionDependencies.forEach(qd =>
-          qd.dependsOnQuestion.dependants.push(q.id)
-        );
-      });
-      q.childQuestions.forEach(cq => populateDependantsOnDependencyIds(cq));
-    };
-
-    questionnaire.groups.forEach(g => {
-      g.questions.forEach(q => {
-        populateDependantsOnDependencyIds(q);
-      });
-    });
-
-    let removeCircularRefFromDependency = question => {
-      question.dependencyGroups.forEach(dg => {
-        dg.questionDependencies.forEach(qd => {
-          qd.dependsOnQuestion = qd.dependsOnQuestion.id;
-        });
-      });
-
-      question.childQuestions.forEach(cq =>
-        removeCircularRefFromDependency(cq)
-      );
-    };
-
-    questionnaire.groups.forEach(g => {
-      g.questions.forEach(q => {
-        removeCircularRefFromDependency(q);
-      });
-    });
-
-    console.log("save questionnaire - templateId: " + questionnaire.templateid);
-
-    commit("setQuestionnaire", questionnaire);
+  SetQuestionnaireIdState({ commit }, id) {
+    alert('inside set id state')
+    commit("setQuestionnaireId", id);
   },
-  SetTemplateIdState({ commit }, id) {
-    console.log("set template state: " + id);
-    commit("setTemplateId",  id );
+
+  SetQuestionnaireState({ commit, dispatch }, payload) {
+    const { questionnaire, page, id } = payload;
+    switch (page) {
+      case "builder":
+        {
+          alert('builder')
+          // does some processing before setting state
+          const {questionnaireData, groupsData} = builderService.processBuilderForSave(questionnaire);
+          commit("setQuestionnaire", questionnaireData);
+          dispatch("setQuestionnaireGroups", groupsData);
+        }
+        break;
+      case "questionnaire":
+        alert('questionnaire')
+        commit("setQuestionnaire", questionnaire);
+        dispatch("setQuestionnaireGroups", questionnaire.groups);
+        break;
+      default:
+        break;
+    }
+              commit("setQuestionnaireId", id);
   },
-  SetQuestionnaireState({ commit, dispatch }, questionnaire) {
-    console.log("set questionnaire state - templateid:" + questionnaire.templateid);
-    commit("setQuestionnaire",  questionnaire );
-    dispatch("setQuestionnaireGroups", questionnaire.groups);
-  },
-  async SaveQuestionnaireStateToDynamics({state}) {
-    console.log("SaveQuestionnaireStateToDynamics: " + state.questionnaire.templateid);
+
+  async SaveQuestionnaireStateToDynamics({ state }) {
     const questionnaire = state.questionnaire;
-    const result = await XrmWebApi.SaveTemplate(
-      questionnaire
-    );
+    const questionnaireId = state.questionnaire.questionnaireId
+    const result = await XrmWebApi.SaveQuestionnaire(questionnaire, questionnaireId);
     return result;
   }
 };
 
 export const mutations = {
   setQuestionnaire(state, payload) {
-    state.questionnaire = payload
+    state.questionnaire = payload;
+    alert('state looks like: '+JSON.stringify(state.questionnaire))
   },
 
-  setTemplate(state, payload) {
-    alert("setTemplate");
-    state.template = payload;
-  }, 
+  setQuestionnaireId(state, payload) {
+    //state.questionnaireId = payload;
+    alert("state looks like for id: " + state.questionnaireId);
 
-  setTemplateId(state, payload) {
-    if (!state || !state.questionnaire)
-    {
-      console.log('state is null in the store when setting templateid')
-      return
-    }
-    state.questionnaire.templateid = payload
-  }
-};
+    state.questionnaire.questionnaireId = payload;
 
-export const getters = {
-  getTemplate(state) {
-    return state.template;
   }
 };
