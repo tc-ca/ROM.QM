@@ -844,7 +844,7 @@ export default {
       alert('save')
       const page = 'builder'
       const questionnaire = this.questionnaire
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
     },
     addOption () {

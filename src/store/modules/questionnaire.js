@@ -13,7 +13,7 @@ export const getters = {
 
 export const actions = {
   SetQuestionnaireState({ commit, dispatch }, payload) {
-    const { questionnaire, page, id } = payload;
+    const { questionnaire, page } = payload;
     switch (page) {
       case "builder":
         {
@@ -37,7 +37,6 @@ export const actions = {
       default:
         break;
     }
-    commit("setQuestionnaireId", id);
   },
 
   async SaveQuestionnaireStateToDynamics({ state }) {
@@ -54,9 +53,5 @@ export const actions = {
 export const mutations = {
   setQuestionnaire(state, payload) {
     state.questionnaire = payload;
-  },
-
-  setQuestionnaireId(state, payload) {
-    state.questionnaire.questionnaireId = payload;
   }
 };

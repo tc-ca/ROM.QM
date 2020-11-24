@@ -128,6 +128,8 @@ export default {
     }
   },
   created: function () {
+    const test = this.page
+    alert(test)
     this.$router.push({ name: this.page }).catch((e) => {
       // console.log(e)
     })
@@ -135,27 +137,22 @@ export default {
   methods: {
     ...mapActions(['setAppLanguage', 'setSettings']),
     setLanguage () {
-      // console.log('App.vue: setLanguage (' + this.lang + ')')
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    GetAndSetQuestionnaireState (questionnaire, id) {
+    Render (questionnaire) {
       const page = this.page
-      // passing arguments set
-      alert(questionnaire)
-      alert(id)
 
-      if (questionnaire && id) {
+      if (questionnaire) {
         alert('set')
-        this.$store.dispatch('SetQuestionnaireState', { questionnaire, page, id })
-        return this.$store.state.questionnaire.questionnaire
-      } else {
-        alert('get')
-        // return what you have in state
-        return this.$store.state.questionnaire.questionnaire
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       }
     }
+  },
+  GetState (questionnaire) {
+    return this.$store.state.questionnaire.questionnaire
   }
+
 }
 </script>
 
