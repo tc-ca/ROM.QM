@@ -120,7 +120,6 @@ const surveyValueChanged = function (sender, options) {
 };
 
 function DoComplete(eContext, recordGuid) {
-  alert("do complete");
   var questionnaire = document
     .querySelector("questionnaire-builder")
     .getVueInstance();
