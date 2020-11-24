@@ -5,6 +5,13 @@ export const state = {
   questionnaire: null,
   questionnaireId: null
 };
+
+export const getters = {
+  getQuestionnaire (state) {
+    return state.questionnaire;
+  }
+};
+
 export const actions = {
   SetQuestionnaireIdState({ commit }, id) {
     alert('inside set id state')

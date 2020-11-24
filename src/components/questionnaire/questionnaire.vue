@@ -23,8 +23,8 @@
     <v-col cols="5">
       <v-row justify="end">
         <v-col class="col-auto">
-          <v-btn @click="saveTmp()">
-            Save Temp
+          <v-btn @click="validateQ()">
+            Validate
           </v-btn>
         </v-col>
       </v-row>
@@ -62,14 +62,16 @@ export default {
     ...mapState(['group'])
   },
   methods: {
-    saveTmp () {
+    validateQ () {
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
       })
-
+      alert('LM-Test')
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       } else {
+        let q = this.$store.getters['getQuestionnaire']
+        console.log(JSON.stringify(q))
         this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorect`, color: 'error' })
       }
     }
