@@ -125,7 +125,7 @@ const surveyValueChanged = function (sender, options) {
   }
 };
 
-async function DoComplete(eContext, recordGuid) {
+async function DoComplete(eContext, recordGuid, isBuilderPage) {
   alert('do complete')
   var questionnaireVueInstance = document
     .querySelector("questionnaire-builder")
@@ -135,11 +135,16 @@ async function DoComplete(eContext, recordGuid) {
   //save what we have in state
   //get questionnaire from state
   //pass to dynamics
-  const questionnaire = questionnaireVueInstance.GetAndSetQuestionnaireState();
-  alert(JSON.stringify(questionnaire))
-  const result = await SaveQuestionnaire(questionnaire, recordGuid);
- 
-
+  if (isBuilderPage) {
+    const questionnaire = questionnaireVueInstance.GetAndSetQuestionnaireState();
+    alert(JSON.stringify(questionnaire))
+    const result = await SaveQuestionnaire(questionnaire, recordGuid);
+  }
+  else {
+    const questionnaire = questionnaireVueInstance.GetAndSetQuestionnaireState();
+    alert(JSON.stringify(questionnaire))
+    const result = await SaveQuestionnaire(questionnaire, recordGuid);
+  }
 }
 
 
