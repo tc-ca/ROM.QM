@@ -1,14 +1,26 @@
+export const namespaced = true
 
 export const state = {
   legislations: null
 };
 
+export const getters = {
+  GetLegislationFromLocalData(state) {
+    return state.legislations;
+  },
+  NeedToLoadLegislations(state) {
+    return state.legislations === null;
+  }
+};
+
 export const actions = {
   // SetLegislationsState({ commit }, payload) {
   // }
-    async SetLegislationsStateToLocalData({ commit }) {
+  async SetLegislationsStateToLocalData({ commit }) {
+    if(!state.legislations) {
       const data = await GetLegislationFromLocalImportModule();
       commit("SetLegislations", data);
+    }
   }
 };
 
