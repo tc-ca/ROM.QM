@@ -845,7 +845,6 @@ export default {
       const page = 'builder'
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-      await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
     },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
