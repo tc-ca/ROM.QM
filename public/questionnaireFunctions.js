@@ -29,6 +29,11 @@ async function InitializeQuestionnaireBuilder(dynParams) {
   questionnaireVueInstance.Render(
     template,
   );
+
+  const legs = await GetLegislations();
+  questionnaireVueInstance.SetLegislations(
+    legs,
+  )
 }
 
 async function InitializeQuestionnaireRender(dynParams) {
@@ -77,6 +82,29 @@ async function InitializeQuestionnaireRender(dynParams) {
     questionnaireVueInstance.Render(template);
     return;
   }
+  else{
+        alert("in the else");
+        // get json to render
+        const questionnaire = JSON.parse(resultJSON);
+        //set the questionnaire state for the app to display json questionnaire
+        questionnaireVueInstance.Render(questionnaire);
+
+        const legs = await GetLegislations();
+        questionnaireVueInstance.SetLegislations(
+          legs,
+        );
+      }
+}
+
+function SaveAnswers(userInput) {
+  var data = JSON.stringify(userInput.data, null, 3);
+  window.parentFormContext.getAttribute("qm_templatejsontxt").setValue(data);
+}
+
+const surveyValueChanged = function(sender, options) {
+  const el = document.getElementById(options.name);
+  if (el) {
+    el.value = options.value;
   else {
     // get json to render
     const questionnaire = JSON.parse(resultJSON);
@@ -140,6 +168,27 @@ function SetOptionsetByValue(formContext, attr, intValue) {
       oSet.setSubmitMode("always");
     }
   }
+}
+
+function GetLegislations() {  
+  var req = new XMLHttpRequest();
+  req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/ovs_LegislationsGet", true);
+  req.setRequestHeader("OData-MaxVersion", "4.0");
+  req.setRequestHeader("OData-Version", "4.0");
+  req.setRequestHeader("Accept", "application/json");
+  req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+  req.onreadystatechange = function() {
+      if (this.readyState === 4) {
+          req.onreadystatechange = null;
+          if (this.status === 200) {
+              return JSON.parse(this.response);
+              // localStorage.setItem('legislations-data', results.jsonResult)
+          } else {
+              Xrm.Utility.alertDialog(this.statusText);
+          }
+      }
+  };
+  req.send();  
 }
 
 async function getTemplateDataByServiceTaskId(serviceTaskId) {

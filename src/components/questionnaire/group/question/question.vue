@@ -102,7 +102,7 @@
 </template>
 
 <script>
-
+import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
@@ -160,9 +160,11 @@ export default {
   },
   methods: {
     loadSelectedItems (selectedProvisions) {
-      var provisions = JSON.parse((localStorage.getItem('legislations-data')))
-      var obj = provisions
-      var cloneObj = provisions
+      /* eslint-disable no-debugger */
+      debugger
+      var provisions = this.$store.state.legislations.legislations // JSON.parse((localStorage.getItem('legislations-data')))
+      var obj = _.cloneDeep(provisions)
+      var cloneObj = _.cloneDeep(provisions)
       let str = []
 
       let first = 0

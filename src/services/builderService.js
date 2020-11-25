@@ -15,8 +15,8 @@ function GetLegislations() {
       if (this.readyState === 4) {
           req.onreadystatechange = null;
           if (this.status === 200) {
-              var results = JSON.parse(this.response);
-              localStorage.setItem('legislations-data', results.jsonResult)
+              return JSON.parse(this.response);
+              // localStorage.setItem('legislations-data', results.jsonResult)
           } else {
               Xrm.Utility.alertDialog(this.statusText);
           }
@@ -83,7 +83,7 @@ function createQuestion (questionnaire) {
           [LANGUAGE.FRENCH]: 'FR: Yes'
         },
         value: 'true',
-        provisions: [], //createProvisions(),
+        provisions: [],
         selectedProvisions: [],
         searchProvisions: null,
         isProvisionCollapsed: false,
@@ -97,7 +97,7 @@ function createQuestion (questionnaire) {
           [LANGUAGE.FRENCH]: 'FR: No'
         },
         value: 'false',
-        provisions: [],//createProvisions(),
+        provisions: [],
         selectedProvisions: [],
         searchProvisions: null,
         isProvisionCollapsed: false,
@@ -170,8 +170,9 @@ function getTotalQuestionsNumber (questions) {
 }
 
 function createProvisions() {
-  //console.log(JSON.parse(localStorage.getItem('s-data')))
-  return JSON.parse((localStorage.getItem('legislations-data')))
+  //console.log(JSON.parse(localStorage.getItem('legislations-data')))
+  //return JSON.parse((localStorage.getItem('legislations-data')))
+  return this.$store.state.legislations
 }
 
 function createResponseOption (question) {
