@@ -56,7 +56,7 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="selResponseOptions.selectedProvisions"
+                v-model="selResponses"
                 selectable
                 item-text="DisplayEnglishText"
                 item-key="id"
@@ -105,7 +105,6 @@
 
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
-// import ViolationInfo from './violation-info/violation-info1.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 
 export default {
@@ -140,7 +139,7 @@ export default {
       displaySupplementaryInfo: false,
       isValid: null,
       selResponseOptions: [],
-      pros: []
+      selResponses: []
     }
   },
   computed: {
@@ -160,8 +159,76 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
+    loadSelectedItems (provisions, selectedProvisions) {
+      var obj = provisions
+      var cloneObj = provisions
+      let str = []
+
+      let first = 0
+      let second = 0
+      let third = 0
+
+      selectedProvisions.forEach(getIds)
+
+      function getIds (item) {
+        str.push(item.id)
+      }
+
+      obj.forEach(iterate)
+
+      function iterate (item, index, array) {
+        first = index
+        if (item.children.length > 0) {
+          item.children.forEach(iterate2)
+          if (cloneObj[first].children.length > 0) {
+            var x = true
+            for (let i = 0; i < cloneObj[first].children.length; i++) {
+              if (cloneObj[first].children[i] !== undefined) {
+                x = false
+              }
+            }
+            if (x && !str.includes(cloneObj[first].id)) {
+              delete cloneObj[first]
+            }
+          }
+        } else {
+          if (!str.includes(item.id)) {
+            delete cloneObj[first]
+          }
+        }
+      }
+
+      function iterate2 (item, index, array) {
+        second = index
+        if (item.children.length > 0) {
+          item.children.forEach(iterate3)
+          if (cloneObj[first].children[second].children.length > 0) {
+            var x = true
+            for (let i = 0; i < cloneObj[first].children[second].children.length; i++) {
+              if (cloneObj[first].children[second].children[i] !== undefined) {
+                x = false
+              }
+            }
+            if (x && !str.includes(cloneObj[first].children[second].id)) {
+              delete cloneObj[first].children[second]
+            }
+          }
+        } else {
+          if (!str.includes(item.id)) {
+            delete cloneObj[first].children[second]
+          }
+        }
+      }
+
+      function iterate3 (item, index, array) {
+        third = index
+        if (!str.includes(item.id)) {
+          delete cloneObj[first].children[second].children[third]
+        }
+      }
+      return cloneObj
+    },
     onViolationsChange (args) {
-      console.log(JSON.stringify(args))
       this.question.violationResponse = args
       this.$emit('group-subtitle-change')
     },
@@ -181,6 +248,7 @@ export default {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
           this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
+          responseOption.provisions = this.loadSelectedItems(responseOption.provisions, responseOption.selectedProvisions)
         } else this.displayViolationInfo = false
         this.selResponseOptions = this.question.responseOptions[index]
       }
