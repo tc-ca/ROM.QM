@@ -13,9 +13,9 @@ export const actions = {
     commit('SET_NOTIFICATIONS', notification)
   },
   addNotification ({ commit }, notification) {
-    notification.show = false
+    notification.showing = false
     notification.color = notification.color || 'success'
-    notification.timeout = notification.timeout || 3000
+    notification.timeout = notification.timeout || 6000
 
     commit('SET_NOTIFICATIONS', notification)
   },
@@ -34,7 +34,7 @@ export const mutations = {
   },
   setNotificationsVisible (state) {
     if (state.notifications.length > 0) {
-      state.notifications.forEach( n => n.show = true )
+      state.notifications.forEach( n => n.showing = true )
     }
   },
   clearNotifications (state) {
