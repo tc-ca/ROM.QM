@@ -102,7 +102,7 @@
 </template>
 
 <script>
-
+import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
@@ -159,22 +159,12 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-    async loadSelectedItems (selectedProvisions) {
-      var provisions = JSON.parse((localStorage.getItem('legislations-data')))
-
-      // This is a temporary solution to allow me to work since the legislations are not been loaded from Dynamic
-      if (!provisions) {
-        // Loading for local store
-        if (this.$store.getters['legislations/NeedToLoadLegislations']) {
-          await this.$store.dispatch('legislations/SetLegislationsStateToLocalData')
-        }
-        provisions = this.$store.getters['legislations/GetLegislationFromLocalData']
-        console.log(JSON.stringify(provisions))
-      }
-      // End of temporary solution
-
-      var obj = provisions
-      var cloneObj = provisions
+    loadSelectedItems (selectedProvisions) {
+      /* eslint-disable no-debugger */
+      debugger
+      var provisions = this.$store.state.legislations.legislations // JSON.parse((localStorage.getItem('legislations-data')))
+      var obj = _.cloneDeep(provisions)
+      var cloneObj = _.cloneDeep(provisions)
       let str = []
 
       let first = 0

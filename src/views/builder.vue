@@ -741,7 +741,7 @@ export default {
     })
   },
   created () {
-    this.provisions = BuilderService.createProvisions()
+    this.provisions = this.$store.state.legislations.legislations
     // on create event, build the basic definition of questionnaire builder
     const questionnaire = BuilderService.createQuestionnaire()
     const page = 'builder'
@@ -750,7 +750,9 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
-    BuilderService.GetLegislations()
+    const provs = BuilderService.GetLegislations()
+    this.$store.dispatch('SetLegislations', { provs })
+
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'setQuestionnaire') {
@@ -939,7 +941,8 @@ export default {
       this.violationsCollapsed = !this.violationsCollapsed
     },
     toggleProvisions (option) {
-      console.log(option.selectedProvisions)
+      console.log(this.$store.state.legislations)
+      option.provisions = this.provisions
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }
