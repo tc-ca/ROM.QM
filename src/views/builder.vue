@@ -558,7 +558,14 @@
                               item-value="value"
                               :items="dependencyValidationActions"
                               label="to be"
-                            />
+                            >
+                              <template v-slot:selection="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                              <template v-slot:item="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                            </v-select>
                             <v-text-field
                               v-model="questionDependency.validationValue"
                               dense
@@ -741,7 +748,6 @@ export default {
     })
   },
   created () {
-    this.provisions = this.$store.state.legislations.legislations
     // on create event, build the basic definition of questionnaire builder
     const questionnaire = BuilderService.createQuestionnaire()
     const page = 'builder'
@@ -750,13 +756,22 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
-    const provs = BuilderService.GetLegislations()
-    this.$store.dispatch('SetLegislations', { provs })
+    // const provs = BuilderService.GetLegislations()
+    // this.$store.dispatch('SetLegislations', { provs })
 
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
-      if (mutation.type === 'setQuestionnaire') {
-        this.questionnaire = state.questionnaire.questionnaire
+      switch (mutation.type) {
+        case 'setQuestionnaire':
+          this.questionnaire = state.questionnaire.questionnaire
+
+          break
+        case 'setLegislations':
+          this.provisions = this.$store.state.legislations.legislations
+
+          break
+        default:
+          break
       }
     })
   },
@@ -848,7 +863,8 @@ export default {
       this.questionnaire.groups.forEach(x => {
         x.questions.forEach(q => {
           q.responseOptions.forEach(r => {
-            r.provisions = null
+            r.provisions = r.selectedProvisions
+            r.selectedProvisions = null
           })
         })
       })
@@ -942,7 +958,7 @@ export default {
     },
     toggleProvisions (option) {
       console.log(this.$store.state.legislations)
-      option.provisions = this.provisions
+      option.provisions = this.$store.state.legislations.legislations
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }

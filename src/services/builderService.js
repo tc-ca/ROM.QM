@@ -3,29 +3,6 @@ import { LANGUAGE } from '../constants.js'
 
 /* eslint-disable no-undef */
 
-function GetLegislations() {
-  
-  var req = new XMLHttpRequest();
-  req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/ovs_LegislationsGet", true);
-  req.setRequestHeader("OData-MaxVersion", "4.0");
-  req.setRequestHeader("OData-Version", "4.0");
-  req.setRequestHeader("Accept", "application/json");
-  req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-  req.onreadystatechange = function() {
-      if (this.readyState === 4) {
-          req.onreadystatechange = null;
-          if (this.status === 200) {
-              return JSON.parse(this.response);
-              // localStorage.setItem('legislations-data', results.jsonResult)
-          } else {
-              Xrm.Utility.alertDialog(this.statusText);
-          }
-      }
-  };
-  req.send(); 
-  
-}
-
 function createGroup (questionnaire) {
   let group = {}
   const id = getNextGroupId(questionnaire)
@@ -269,7 +246,6 @@ function processBuilderForSave(questionnaire){
 }
 
 export default {
-  GetLegislations,
   createGroup,
   createQuestionnaire,
   createQuestion,
