@@ -843,7 +843,6 @@ export default {
       this.selectedQuestion = question
     },
     async save (id) {
-      alert('save')
       const page = 'builder'
       console.log(this.questionnaire)
       this.questionnaire.groups.forEach(x => {

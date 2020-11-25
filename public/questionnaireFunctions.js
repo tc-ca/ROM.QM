@@ -75,10 +75,9 @@ async function InitializeQuestionnaireRender(dynParams) {
   }
 
   //no result, so we have to load the base template from the templateId
-  if (!resultJSON) {
-
+  if (!resultJSON || resultJSON === 'null') {
     //get json to render
-    const { template } = await getTemplateDataByServiceTaskId( xrm,serviceTaskId);
+    let template = await getTemplateDataByServiceTaskId(serviceTaskId);
     //set the questionnaire state for the app to display json questionnaire
     questionnaireVueInstance.Render(template);
     return;
@@ -106,11 +105,15 @@ const surveyValueChanged = function(sender, options) {
   const el = document.getElementById(options.name);
   if (el) {
     el.value = options.value;
+  else {
+    // get json to render
+    const questionnaire = JSON.parse(resultJSON);
+    //set the questionnaire state for the app to display json questionnaire
+    questionnaireVueInstance.Render(questionnaire);
   }
-};
+}
 
-async function DoComplete(eContext, recordGuid, isBuilderPage) {
-  alert('do complete')
+async function DoComplete(eContext, recordGuid, isBuilderPage = false) {
   var questionnaireVueInstance = document
     .querySelector("questionnaire-builder")
     .getVueInstance();
@@ -120,12 +123,13 @@ async function DoComplete(eContext, recordGuid, isBuilderPage) {
   //pass to dynamics
   if (isBuilderPage) {
     const questionnaire = questionnaireVueInstance.GetState();
-    alert(JSON.stringify(questionnaire))
-    const result = await SaveQuestionnaire(questionnaire, recordGuid);
+    const result = await SaveQuestionnaireTemplate(questionnaire, recordGuid);
   }
   else {
+    //////////////////////////////////
+    ////RECORDGUID = SERVICE TASK ID
+    //////////////////////////////////
     const questionnaire = questionnaireVueInstance.GetState();
-    alert(JSON.stringify(questionnaire))
     const result = await SaveQuestionnaire(questionnaire, recordGuid);
   }
 }
@@ -166,8 +170,7 @@ function SetOptionsetByValue(formContext, attr, intValue) {
   }
 }
 
-function GetLegislations() {
-  
+function GetLegislations() {  
   var req = new XMLHttpRequest();
   req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/ovs_LegislationsGet", true);
   req.setRequestHeader("OData-MaxVersion", "4.0");
@@ -185,34 +188,48 @@ function GetLegislations() {
           }
       }
   };
-  req.send(); 
-  
+  req.send();  
 }
 
-async function getTemplateDataByServiceTaskId(xrm, serviceTaskId) {
+async function getTemplateDataByServiceTaskId(serviceTaskId) {
   let data = null;
+  var serviceTaskTypeId = null;
+  var templateJson = null;
+  await Xrm.WebApi.online.retrieveRecord("msdyn_workorderservicetask", serviceTaskId, "?$select=msdyn_name,ovs_questionnaireresultjson&$expand=msdyn_tasktype($select=msdyn_name,msdyn_servicetasktypeid)").then(
+    function success(result) {
+        data = result["ovs_questionnaireresultjson"];
 
-  await Xrm.WebApi.online
-    .retrieveRecord(
-      "msdyn_workorderservicetask",
-      serviceTaskId,
-      "?$select=msdyn_name&$expand=msdyn_tasktype($select=msdyn_servicetasktypeid),ovs_questionnairetemplateid($select=qm_sytemplateid,qm_templatejsontxt)"
-    )
-    .then(
-      function success(result) {
-        if (result.hasOwnProperty("ovs_questionnairetemplateid")) {
-          var templateId =
-            result["ovs_questionnairetemplateid"]["qm_sytemplateid"];
-          var template = JSON.parse(
-            result["ovs_questionnairetemplateid"]["qm_templatejsontxt"]
-          );
-          data = { template: template };
+        if (result.hasOwnProperty("msdyn_tasktype")) {
+          serviceTaskTypeId = result["msdyn_tasktype"]["msdyn_servicetasktypeid"];
         }
-      },
-      function(error) {
+    },
+    function(error) {
         Xrm.Utility.alertDialog(error.message);
-      }
-    );
+    }
+  ).then(function(){
+    if (data == null || data === "null"){
+      data = GetTemplateByServiceTaskType(serviceTaskTypeId);
+    }
+  });
+
+  return data;
+}
+
+async function GetTemplateByServiceTaskType(serviceTaskTypeId){
+  let data = null;
+  await Xrm.WebApi.online.retrieveRecord("msdyn_servicetasktype", serviceTaskTypeId, "?$select=msdyn_name&$expand=ovs_QuestionnaireTemplate($select=qm_sytemplateid,qm_templatejsontxt)").then(
+    function success(result) {
+        var msdyn_name = result["msdyn_name"];
+        if (result.hasOwnProperty("ovs_QuestionnaireTemplate")) {
+            var ovs_QuestionnaireTemplate_qm_sytemplateid = result["ovs_QuestionnaireTemplate"]["qm_sytemplateid"];
+            var templateJson  = result["ovs_QuestionnaireTemplate"]["qm_templatejsontxt"];
+            data = JSON.parse(templateJson) ;
+        }
+    },
+    function(error) {
+        Xrm.Utility.alertDialog(error.message);
+    }
+  );
   return data;
 }
 
@@ -232,24 +249,140 @@ async function GetTemplateById(id) {
   return data;
 }
 
-async function SaveQuestionnaire(questionnaire, id) {
+async function SaveQuestionnaireTemplate(questionnaire, id) {
   let data = null;
   var entity = {};
   entity.qm_templatejsontxt = JSON.stringify(questionnaire);
-  alert("saving id: " + id);
-  alert("saving json: " + JSON.stringify(questionnaire));
+  console.log("saving id: " + id);
+  console.log("saving json: " + JSON.stringify(questionnaire));
   await Xrm.WebApi.online.updateRecord("qm_sytemplate", id, entity).then(
     function success(result) {
       data = result.id;
-      alert("success: " + data);
+      DisplayGlobalNotification('Questionnaire Template Saved Successfully', 1);
     },
     function(error) {
-      alert("error" + error);
       Xrm.Utility.alertDialog(error.message);
     }
   );
   return data;
 }
+
+async function SaveQuestionnaire(questionnaireResult, serviceTaskId){
+  let updatedServiceTaskId = null;
+  var serviceTask = {};
+
+  /////////////////////////////////////////////////////
+  ////MUST BE SIMPLE STRING, CANT BE COMPLEX OBJECT
+  /////////////////////////////////////////////////////
+  serviceTask.ovs_questionnaireresultjson = JSON.stringify(questionnaireResult);
+  
+  await Xrm.WebApi.online.updateRecord("msdyn_workorderservicetask", serviceTaskId, serviceTask).then(
+      function success(result) {
+          updatedServiceTaskId = result.id;
+          DisplayFormNotification('Questionnaire Saved Successfully', "INFO");
+      },
+      function(error) {
+          Xrm.Utility.alertDialog(error.message);
+      }
+  );
+
+  return updatedServiceTaskId;
+}
+
+
+
+/**
+ * 
+ * @param {MESSAGE TO THE USER} message 
+ * @param {TYPE OF NOTIFICATION ["INFO", "WARNING", "ERROR"]} type 
+ * @param {TIME IN MS TO CLEAR NOTIFICATION [DEFAULT 5 SECONDS]} timeout 
+ */
+function DisplayFormNotification(message, type, timeout=3000) {
+  //UNIQUE ID FOR THIS NOTIFICATION. 
+  //ID IS USED TO LATER CLOSE THIS SPECIFIC NOTIFICATION
+  var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  var id = randLetter + Date.now();
+
+  //DISPLAY THE NOTIFICATION
+  Xrm.Page.ui.setFormNotification(message, type, id);
+
+  //WAIT, AND CLEAR
+  setTimeout(
+      function () {
+          Xrm.Page.ui.clearFormNotification(id);
+      },
+      timeout
+  );
+}
+
+
+
+/**
+ * 
+ * @param {MESSAGE TO THE USER} message 
+ * @param {TYPE OF NOTIFICATION [1: SUCCESS, 2: ERROR, 3: WARNING, 4: INFORMATION ]} type 
+ * @param {TIME IN MS TO CLEAR NOTIFICATION [DEFAULT 5 SECONDS]} timeout 
+ * @param {ACTION FUNCTION TO PERFORM WHEN NOTIFICATION CLICKED 
+ * var myAction = 
+ * {
+ *    actionLabel: "Click here to Submit", 
+ *    eventHandler: function () {
+ *      Xrm.Navigation.openUrl("https://soundharyasubhash.wordpress.com");
+ *      // perform other operations as required on clicking
+ *    }
+ * }
+ *} action
+ */
+function DisplayGlobalNotification(message, type, timeout=3000, action=null){
+    // DEFINE NOTIFICATION OBJECT
+    var notification = 
+    {
+      type: 2,
+      level: type, // Information
+      message: message
+    }
+
+    //ADD ACTION IF DEFINED
+    if (!action) notification.action = action;
+
+    //SHOW GLOBAL NOTIFICATION
+    Xrm.App.addGlobalNotification(notification).then(
+
+      function success(result) {
+        console.log("Notification created with ID: " + result);
+
+        // Wait for 5 seconds and then clear the notification
+        window.setTimeout(function () { 
+          Xrm.App.clearGlobalNotification(result); 
+        }, timeout);
+
+      },
+
+      function (error) {
+        console.log(error.message);
+        // handle error conditions
+      }
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const createAnnotation = function (regarding, fileInfo, documentBody) {
 //   /// <param name='regrding' type='MobileCRM.Refernce'/>
