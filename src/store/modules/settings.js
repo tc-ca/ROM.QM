@@ -1,4 +1,3 @@
-
 export const state = {
   settings: {
     lang: 'en-US',
