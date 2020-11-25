@@ -1,7 +1,10 @@
+import legislationLocalCopy from '../../api/legislation.json'
+
+const env = process.env.NODE_ENV || "development";
 
 export const state = {
-  legislations: null
-};
+         legislations: env === "development" ? legislationLocalCopy: null 
+       };
 
 
 export const actions = {
