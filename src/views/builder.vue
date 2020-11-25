@@ -558,7 +558,14 @@
                               item-value="value"
                               :items="dependencyValidationActions"
                               label="to be"
-                            />
+                            >
+                              <template v-slot:selection="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                              <template v-slot:item="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                            </v-select>
                             <v-text-field
                               v-model="questionDependency.validationValue"
                               dense
@@ -754,8 +761,17 @@ export default {
 
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
-      if (mutation.type === 'setQuestionnaire') {
-        this.questionnaire = state.questionnaire.questionnaire
+      switch (mutation.type) {
+        case 'setQuestionnaire':
+          this.questionnaire = state.questionnaire.questionnaire
+
+          break
+        case 'setLegislations':
+          this.provisions = this.$store.state.legislations.legislations
+
+          break
+        default:
+          break
       }
     })
   },
