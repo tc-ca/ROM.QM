@@ -56,7 +56,7 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="selResponses"
+                v-model="selResponseOptions.selectedProvisions"
                 selectable
                 item-text="DisplayEnglishText"
                 item-key="id"
@@ -159,7 +159,8 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-    loadSelectedItems (provisions, selectedProvisions) {
+    loadSelectedItems (selectedProvisions) {
+      var provisions = JSON.parse((localStorage.getItem('legislations-data')))
       var obj = provisions
       var cloneObj = provisions
       let str = []
@@ -246,10 +247,14 @@ export default {
       if (this.question.responseOptions.length > 0) {
         let index = this.question.responseOptions.findIndex(q => q.value === args.value)
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
+
         if (responseOption) {
           this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
-          responseOption.provisions = this.loadSelectedItems(responseOption.provisions, responseOption.selectedProvisions)
-        } else this.displayViolationInfo = false
+          responseOption.provisions = this.loadSelectedItems(responseOption.selectedProvisions || responseOption.provisions)
+          // responseOption.selectedProvisions = null
+        } else {
+          this.displayViolationInfo = false
+        }
         this.selResponseOptions = this.question.responseOptions[index]
       }
     },
