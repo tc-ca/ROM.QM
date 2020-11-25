@@ -4,11 +4,12 @@ export const state = {
 };
 
 export const actions = {
-  // SetLegislationsState({ commit }, payload) {
-  // }
     async SetLegislationsStateToLocalData({ commit }) {
       const data = await GetLegislationFromLocalImportModule();
       commit("SetLegislations", data);
+  },
+  async SetLegislationsState({ commit }, payload) {
+    commit("setLegislations", payload);
   }
 };
 
