@@ -750,8 +750,8 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
-    const provs = BuilderService.GetLegislations()
-    this.$store.dispatch('SetLegislations', { provs })
+    // const provs = BuilderService.GetLegislations()
+    // this.$store.dispatch('SetLegislations', { provs })
 
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
