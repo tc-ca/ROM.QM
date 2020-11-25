@@ -18,7 +18,7 @@
       </span>
       <v-spacer />
       <v-icon
-        v-if="validationStatus"
+        v-if="errorInPicture"
         color="red"
       >
         mdi-message-alert
@@ -204,7 +204,9 @@ export default {
       speedDialOpen: false,
       rules: [
         value => !this.picture.display || !this.picture.required ? true : this.images.length > 0 || 'Required.'
-      ]
+      ],
+      validationStatus: false,
+      notification: null
     }
   },
 
@@ -218,7 +220,7 @@ export default {
     isPictureRequired () {
       return this.picture.option === 'required'
     },
-    validationStatus () {
+    errorInPicture () {
       return this.displayPicture && this.isPictureRequired && !this.images.length > 0
     }
   },
@@ -297,6 +299,12 @@ export default {
       // this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
     },
     onError (error) {
+      this.picture.validationStatus = !error
+      if (!this.picture.validationStatus) {
+        this.picture.notification = { text: `Picture is required on question ${this.question.text[this.lang]}, please upload at least one.`, color: 'error' }
+      } else {
+        this.picture.notification = null
+      }
       this.$emit('error', error)
     }
   }

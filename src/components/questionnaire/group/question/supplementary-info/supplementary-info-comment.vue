@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   emits: ['error'],
   props: {
@@ -90,7 +92,8 @@ export default {
         value => !this.displayComment || !this.isCommentRequired ? true : !!this.comment.value || 'Required.'
       ],
       response: '',
-      validationStatus: false
+      validationStatus: false,
+      notification: null
     }
   },
   computed: {
@@ -105,7 +108,15 @@ export default {
     },
     errorInComment () {
       return this.displayComment && this.isCommentRequired && !this.comment.value
-    }
+    },
+    ...mapState({
+      lang: state => {
+        if (!state || !state.app) {
+          return 'en-US'
+        }
+        return state.app.settings.lang
+      }
+    })
   },
   watch: {
     'comment.display' (newValue) {
@@ -128,6 +139,11 @@ export default {
     },
     onError (error) {
       this.comment.validationStatus = !error
+      if (!this.comment.validationStatus) {
+        this.comment.notification = { text: `${this.comment.label} for question ${this.question.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' }
+      } else {
+        this.comment.notification = null
+      }
       this.$emit('error', error)
     }
   }
