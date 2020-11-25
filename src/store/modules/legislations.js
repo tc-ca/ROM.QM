@@ -14,13 +14,13 @@ export const getters = {
 };
 
 export const actions = {
-  // SetLegislationsState({ commit }, payload) {
-  // }
-  async SetLegislationsStateToLocalData({ commit }) {
+    async SetLegislationsStateToLocalData({ commit }) {
     if(!state.legislations) {
       const data = await GetLegislationFromLocalImportModule();
       commit("SetLegislations", data);
-    }
+    },
+  async SetLegislationsState({ commit }, payload) {
+    commit("setLegislations", payload);
   }
 };
 
