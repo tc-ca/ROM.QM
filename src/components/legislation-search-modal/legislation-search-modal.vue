@@ -95,7 +95,7 @@ export default {
   },
 
   created: function () {
-    mockData = require('../../api/legislation-flat-list.js')
+    mockData = JSON.parse(require('../../api/legislation.json'))
     this.legislations = mockData.default.data
   },
 
