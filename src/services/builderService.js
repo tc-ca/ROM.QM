@@ -3,27 +3,6 @@ import { LANGUAGE } from '../constants.js'
 
 /* eslint-disable no-undef */
 
-// async function GetLegislations() {
-//   var req = new XMLHttpRequest();
-//   req.open("GET", "http://localhost:3000/children", true);
-//   req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-//   req.onreadystatechange = function() {
-//       if (this.readyState === 4) {
-//           req.onreadystatechange = null;
-//           if (this.status === 200) {
-//             localStorage.setItem('legislations-data', this.response)
-//           } else {
-//               console.log(this.statusText);
-//           }
-//       }
-//   };
-//   req.send();
-// }
-
-
-
-
-
 function GetLegislations() {
   
   var req = new XMLHttpRequest();
@@ -206,7 +185,7 @@ function createResponseOption (question) {
       [LANGUAGE.FRENCH]: `FR: Option ${id}`
     },
     value: id,
-    provisions: createProvisions(),
+    provisions: [],//createProvisions(),
     selectedProvisions: [],
     searchProvisions: null,
     isProvisionCollapsed: false,

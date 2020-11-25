@@ -44,12 +44,14 @@ export default {
   props: {
     templatejson:
     { type: String,
-      required: true
+      required: false,
+      default: ''
     },
     templateid:
     {
       type: String,
-      required: true
+      required: false,
+      default: ''
     }
   },
   data () {
