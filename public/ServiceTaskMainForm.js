@@ -12,8 +12,6 @@ var ServiceTaskForm = (function (window, document) {
         ///////////////////////////////////////////////
         OnDynamicsFormLoad: function (executionContext) {
 
-            console.log("AARON");
-
             var Form = executionContext.getFormContext();
 
             var recordGuid = Form.data.entity.getId();
@@ -23,11 +21,11 @@ var ServiceTaskForm = (function (window, document) {
 
             //hide the questionnaire control if this is a new service task
             if (!recordGuid) {
-                SetSectionVisibility(Form, "{1932b377-2e7e-4880-9b0e-477cc529b5fe}", "questionnare_section", false);
+                SetSectionVisibility(Form, "ServiceTaskGeneralTab", "questionnare_section", false);
                 return;
             }
             else {
-                SetSectionVisibility(Form, "{1932b377-2e7e-4880-9b0e-477cc529b5fe}", "questionnare_section", true);
+                SetSectionVisibility(Form, "ServiceTaskGeneralTab", "questionnare_section", true);
             }
 
             // Get the web resource control on the form
@@ -72,6 +70,11 @@ var ServiceTaskForm = (function (window, document) {
         OnDynamicsFormSave: function (eContext) {
             // Get formContext
             var Form = eContext.getFormContext();
+            
+            var recordGuid = Form.data.entity.getId();
+
+            if (!recordGuid) return; //don't try to save if we havent saved task yet
+
             // Get the web resource control on the form
             var webResourceControl = Form.getControl('WebResource_Questionnaire');
 
@@ -139,29 +142,24 @@ var ServiceTaskForm = (function (window, document) {
     }
 
     function changeControlsBaseOnTaskType(formContext, executionContext) {
-        console.log("changeControlsBaseOnTaskType");
-
         var recordGuid = formContext.data.entity.getId();
 
         //hide the questionnaire control if this is a new service task
         if (!recordGuid || !GetLookupName(formContext, "msdyn_tasktype")) {
-            SetSectionVisibility(formContext, "{1932b377-2e7e-4880-9b0e-477cc529b5fe}", "questionnare_section", false);
+            SetSectionVisibility(formContext, "ServiceTaskGeneralTab", "questionnare_section", false);
             return;
         }
         else {
-            SetSectionVisibility(formContext, "{1932b377-2e7e-4880-9b0e-477cc529b5fe}", "questionnare_section", true);
+            SetSectionVisibility(formContext, "ServiceTaskGeneralTab", "questionnare_section", true);
         }
     }
 
     function OnTaskTypeChange(executionContext) {
-
         console.log("ONTASKTYPECHANGE");
 
         var formContext = executionContext.getFormContext();
 
         changeControlsBaseOnTaskType(formContext, executionContext);
-
-        //fetchQuestionnaire(formContext, executionContext);
     }
 
     // Get dynamics language

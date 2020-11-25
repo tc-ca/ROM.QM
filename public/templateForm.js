@@ -16,8 +16,6 @@ var ROM;
         ///////////////////////////////////////////////
         function OnDynamicsFormLoad(eContext) {
 
-            alert('localtemplateform');
-
             var Form = eContext.getFormContext();
 
             //hide the builder tab if this is a new template
@@ -107,8 +105,8 @@ function CompleteQuestionnaire(eContext, wrCtrl) {
 
             //hide the builder tab if this is a new template
             var recordGuid = Form.data.entity.getId();
-            alert('from template form '+recordGuid)
-        var userInput = win.DoComplete(eContext, recordGuid);
+            console.log('from template form '+recordGuid)
+        var userInput = win.DoComplete(eContext, recordGuid, true);
     });
 }
 

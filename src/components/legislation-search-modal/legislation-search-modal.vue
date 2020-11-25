@@ -95,8 +95,8 @@ export default {
   },
 
   created: function () {
-    mockData = JSON.parse(require('../../api/legislation.json'))
-    this.legislations = mockData.default.data
+    mockData = require('../../api/legislation.json')
+    this.legislations = mockData
   },
 
   methods: {
