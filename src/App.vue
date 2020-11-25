@@ -145,7 +145,7 @@ export default {
      */
     Render (questionnaire) {
       const page = this.page
-
+      alert('render')
       if (questionnaire) {
         alert('set')
         this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
@@ -155,7 +155,15 @@ export default {
     * Returns current state of questionnaire
     */
     GetState (questionnaire) {
+      alert('get state')
+
       return this.$store.state.questionnaire.questionnaire
+    },
+    /**
+    * Sets legislations state
+    */
+    SetLegislations (legislations) {
+      this.$store.dispatch('SetLegislationsState', { legislations })
     }
   }
 
