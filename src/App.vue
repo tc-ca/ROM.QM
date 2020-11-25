@@ -57,6 +57,8 @@ import LegislationSearchModal from './components/legislation-search-modal/legisl
 import Settings from './components/settings/settings.vue'
 import { mapActions, mapState } from 'vuex'
 
+const env = process.env.NODE_ENV || 'development'
+
 export default {
   name: 'App',
   components: {
@@ -129,7 +131,11 @@ export default {
       this.settings = JSON.parse(value)
     }
   },
-  created: function () {
+  created: async function () {
+    if (env) {
+      await this.$store.dispatch('SetLegislationsStateToLocalData')
+    }
+
     this.$router.push({ name: this.page }).catch((e) => {
       // console.log(e)
     })
