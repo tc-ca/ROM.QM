@@ -14,11 +14,12 @@ export const getters = {
 };
 
 export const actions = {
-    async SetLegislationsStateToLocalData({ commit }) {
-    if(!state.legislations) {
+  async SetLegislationsStateToLocalData({ commit }) {
+    if (!state.legislations) {
       const data = await GetLegislationFromLocalImportModule();
       commit("SetLegislations", data);
-    },
+    }
+  },
   async SetLegislationsState({ commit }, payload) {
     commit("setLegislations", payload);
   }
