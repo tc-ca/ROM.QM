@@ -741,7 +741,6 @@ export default {
     })
   },
   created () {
-    this.provisions = this.$store.state.legislations.legislations
     // on create event, build the basic definition of questionnaire builder
     const questionnaire = BuilderService.createQuestionnaire()
     const page = 'builder'
@@ -848,7 +847,8 @@ export default {
       this.questionnaire.groups.forEach(x => {
         x.questions.forEach(q => {
           q.responseOptions.forEach(r => {
-            r.provisions = null
+            r.provisions = r.selectedProvisions
+            r.selectedProvisions = null
           })
         })
       })
@@ -942,7 +942,7 @@ export default {
     },
     toggleProvisions (option) {
       console.log(this.$store.state.legislations)
-      option.provisions = this.provisions
+      option.provisions = this.$store.state.legislations.legislations
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }
