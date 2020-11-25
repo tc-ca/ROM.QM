@@ -843,6 +843,15 @@ export default {
     async save (id) {
       alert('save')
       const page = 'builder'
+      console.log(this.questionnaire)
+      this.questionnaire.groups.forEach(x => {
+        x.questions.forEach(q => {
+          q.responseOptions.forEach(r => {
+            r.provisions = null
+          })
+        })
+      })
+      console.log(this.questionnaire)
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       await this.$store.dispatch('SaveQuestionnaireStateToDynamics')
