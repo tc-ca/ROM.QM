@@ -5,8 +5,8 @@ export const state = {
 
 
 export const actions = {
-  SetLegislationsState({ commit }, payload) {
-  }
+  // SetLegislationsState({ commit }, payload) {
+  // }
 };
 
 export const mutations = {
