@@ -1,4 +1,3 @@
-import { XrmWebApi } from "../../services/questionnaireService";
 import builderService from "../../services/builderService";
 
 export const state = {
@@ -37,16 +36,6 @@ export const actions = {
       default:
         break;
     }
-  },
-
-  async SaveQuestionnaireStateToDynamics({ state }) {
-    const questionnaire = state.questionnaire;
-    const questionnaireId = state.questionnaire.questionnaireId;
-    const result = await XrmWebApi.SaveQuestionnaire(
-      questionnaire,
-      questionnaireId
-    );
-    return result;
   }
 };
 
