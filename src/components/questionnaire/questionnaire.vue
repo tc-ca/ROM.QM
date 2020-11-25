@@ -70,23 +70,30 @@ export default {
   },
   methods: {
     addQuestionNotificationsToList (q) {
+      if (q.notification) {
+        this.$store.dispatch('notification/addNotification', q.notification)
+      }
       if (!q.validationState || !q.response) {
-        this.$store.dispatch('notification/addNotification', { text: `A valid response for question ${q.text[this.lang]} is required.`, color: 'error' })
+        q.notification = { text: `A valid response for question ${q.text[this.lang]} is required.`, color: 'error' }
+        this.$store.dispatch('notification/addNotification', q.notification)
       }
       if (q.internalComment.notification) {
         this.$store.dispatch('notification/addNotification', q.internalComment.notification)
       } else if (q.internalComment.option === 'required' && q.internalComment.value.trim().length === 0) {
-        this.$store.dispatch('notification/addNotification', { text: `Internal Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' })
+        q.internalComment.notification = { text: `Internal Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' }
+        this.$store.dispatch('notification/addNotification', q.internalComment.notification)
       }
       if (q.externalComment.notification) {
         this.$store.dispatch('notification/addNotification', q.externalComment.notification)
       } else if (q.externalComment.option === 'required' && q.externalComment.value.trim().length === 0) {
-        this.$store.dispatch('notification/addNotification', { text: `External Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' })
+        q.externalComment.notification = { text: `External Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' }
+        this.$store.dispatch('notification/addNotification', q.externalComment.notification)
       }
       if (q.picture.notification) {
         this.$store.dispatch('notification/addNotification', q.picture.notification)
       } else if (q.picture.option === 'required' && q.picture.value.trim().length === 0) {
-        this.$store.dispatch('notification/addNotification', { text: `Picture is required on question ${q.text[this.lang]}, please upload at least one.`, color: 'error' })
+        q.picture.notification = { text: `Picture is required on question ${q.text[this.lang]}, please upload at least one.`, color: 'error' }
+        this.$store.dispatch('notification/addNotification', q.picture.notification)
       }
       q.childQuestions.forEach(child => {
         this.addQuestionNotificationsToList(child)
