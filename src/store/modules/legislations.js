@@ -19,8 +19,8 @@ export const mutations = {
 };
 
 async function GetLegislationFromLocalImportModule() {
-  const data = await import("../../api/legislation").then(something => {
-    return something.default;
+  const data = await import("../../api/legislation").then(module => {
+    return module.default;
   });
   return data;
 }
