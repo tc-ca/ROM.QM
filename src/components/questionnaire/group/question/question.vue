@@ -159,8 +159,20 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-    loadSelectedItems (selectedProvisions) {
+    async loadSelectedItems (selectedProvisions) {
       var provisions = JSON.parse((localStorage.getItem('legislations-data')))
+
+      // This is a temporary solution to allow me to work since the legislations are not been loaded from Dynamic
+      if (!provisions) {
+        // Loading for local store
+        if (this.$store.getters['legislations/NeedToLoadLegislations']) {
+          await this.$store.dispatch('legislations/SetLegislationsStateToLocalData')
+        }
+        provisions = this.$store.getters['legislations/GetLegislationFromLocalData']
+        console.log(JSON.stringify(provisions))
+      }
+      // End of temporary solution
+
       var obj = provisions
       var cloneObj = provisions
       let str = []
