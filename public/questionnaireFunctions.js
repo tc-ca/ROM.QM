@@ -105,6 +105,7 @@ const surveyValueChanged = function(sender, options) {
   const el = document.getElementById(options.name);
   if (el) {
     el.value = options.value;
+  }
   else {
     // get json to render
     const questionnaire = JSON.parse(resultJSON);
