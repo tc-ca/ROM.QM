@@ -75,15 +75,17 @@ export default {
     },
     templatejson: {
       type: String,
-      default: 'Documentation and Safety Marks'
+      default: 'Documentation and Safety Marks',
+      required: false
     },
     displayAppNav: {
       type: Boolean,
-      default: true
+      default: !process.env.VUE_APP_DISPLAY_NAV
     },
     templateid: {
       type: String,
-      default: ''
+      default: '',
+      required: false
     }
   },
   data: function () {
@@ -128,8 +130,6 @@ export default {
     }
   },
   created: function () {
-    const test = this.page
-    alert(test)
     this.$router.push({ name: this.page }).catch((e) => {
       // console.log(e)
     })
@@ -147,7 +147,6 @@ export default {
       const page = this.page
       alert('render')
       if (questionnaire) {
-        alert('set')
         this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       }
     },

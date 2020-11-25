@@ -3,27 +3,6 @@ import { LANGUAGE } from '../constants.js'
 
 /* eslint-disable no-undef */
 
-// async function GetLegislations() {
-//   var req = new XMLHttpRequest();
-//   req.open("GET", "http://localhost:3000/children", true);
-//   req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-//   req.onreadystatechange = function() {
-//       if (this.readyState === 4) {
-//           req.onreadystatechange = null;
-//           if (this.status === 200) {
-//             localStorage.setItem('legislations-data', this.response)
-//           } else {
-//               console.log(this.statusText);
-//           }
-//       }
-//   };
-//   req.send();
-// }
-
-
-
-
-
 function GetLegislations() {
   
   var req = new XMLHttpRequest();
@@ -104,7 +83,7 @@ function createQuestion (questionnaire) {
           [LANGUAGE.FRENCH]: 'FR: Yes'
         },
         value: 'true',
-        provisions: createProvisions(),
+        provisions: [], //createProvisions(),
         selectedProvisions: [],
         searchProvisions: null,
         isProvisionCollapsed: false,
@@ -118,7 +97,7 @@ function createQuestion (questionnaire) {
           [LANGUAGE.FRENCH]: 'FR: No'
         },
         value: 'false',
-        provisions: createProvisions(),
+        provisions: [],//createProvisions(),
         selectedProvisions: [],
         searchProvisions: null,
         isProvisionCollapsed: false,
@@ -191,7 +170,7 @@ function getTotalQuestionsNumber (questions) {
 }
 
 function createProvisions() {
-  //console.log(JSON.parse(localStorage.getItem('legislations-data')))
+  //console.log(JSON.parse(localStorage.getItem('s-data')))
   return JSON.parse((localStorage.getItem('legislations-data')))
 }
 
@@ -205,7 +184,7 @@ function createResponseOption (question) {
       [LANGUAGE.FRENCH]: `FR: Option ${id}`
     },
     value: id,
-    provisions: createProvisions(),
+    provisions: [],//createProvisions(),
     selectedProvisions: [],
     searchProvisions: null,
     isProvisionCollapsed: false,
