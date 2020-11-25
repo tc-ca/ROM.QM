@@ -29,6 +29,11 @@ async function InitializeQuestionnaireBuilder(dynParams) {
   questionnaireVueInstance.Render(
     template,
   );
+
+  const legs = await GetLegislations();
+  questionnaireVueInstance.SetLegislations(
+    legs,
+  )
 }
 
 async function InitializeQuestionnaireRender(dynParams) {
@@ -84,6 +89,11 @@ async function InitializeQuestionnaireRender(dynParams) {
         const questionnaire = JSON.parse(resultJSON);
         //set the questionnaire state for the app to display json questionnaire
         questionnaireVueInstance.Render(questionnaire);
+
+        const legs = await GetLegislations();
+        questionnaireVueInstance.SetLegislations(
+          legs,
+        );
       }
 }
 
@@ -154,6 +164,29 @@ function SetOptionsetByValue(formContext, attr, intValue) {
       oSet.setSubmitMode("always");
     }
   }
+}
+
+function GetLegislations() {
+  
+  var req = new XMLHttpRequest();
+  req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/ovs_LegislationsGet", true);
+  req.setRequestHeader("OData-MaxVersion", "4.0");
+  req.setRequestHeader("OData-Version", "4.0");
+  req.setRequestHeader("Accept", "application/json");
+  req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+  req.onreadystatechange = function() {
+      if (this.readyState === 4) {
+          req.onreadystatechange = null;
+          if (this.status === 200) {
+              return JSON.parse(this.response);
+              // localStorage.setItem('legislations-data', results.jsonResult)
+          } else {
+              Xrm.Utility.alertDialog(this.statusText);
+          }
+      }
+  };
+  req.send(); 
+  
 }
 
 async function getTemplateDataByServiceTaskId(xrm, serviceTaskId) {
