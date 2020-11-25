@@ -558,7 +558,14 @@
                               item-value="value"
                               :items="dependencyValidationActions"
                               label="to be"
-                            />
+                            >
+                              <template v-slot:selection="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                              <template v-slot:item="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                            </v-select>
                             <v-text-field
                               v-model="questionDependency.validationValue"
                               dense
@@ -764,6 +771,7 @@ export default {
           break
         case 'setLegislations':
           this.provisions = this.$store.state.legislations.legislations
+
           break
         default:
           break
