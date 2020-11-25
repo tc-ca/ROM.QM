@@ -57,22 +57,57 @@ export default {
       valid: false
     }
   },
-  computed:
-  {
-    ...mapState(['group'])
+  computed: {
+    ...mapState(['group']),
+    ...mapState({
+      lang: state => {
+        if (!state || !state.app) {
+          return 'en-US'
+        }
+        return state.app.settings.lang
+      }
+    })
   },
   methods: {
+    addQuestionNotificationsToList (q) {
+      if (!q.validationState || !q.response) {
+        this.$store.dispatch('notification/addNotification', { text: `A valid response for question ${q.text[this.lang]} is required.`, color: 'error' })
+      }
+      if (q.internalComment.notification) {
+        this.$store.dispatch('notification/addNotification', q.internalComment.notification)
+      } else if (q.internalComment.option === 'required' && q.internalComment.value.trim().length === 0) {
+        this.$store.dispatch('notification/addNotification', { text: `Internal Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' })
+      }
+      if (q.externalComment.notification) {
+        this.$store.dispatch('notification/addNotification', q.externalComment.notification)
+      } else if (q.externalComment.option === 'required' && q.externalComment.value.trim().length === 0) {
+        this.$store.dispatch('notification/addNotification', { text: `External Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' })
+      }
+      if (q.picture.notification) {
+        this.$store.dispatch('notification/addNotification', q.picture.notification)
+      } else if (q.picture.option === 'required' && q.picture.value.trim().length === 0) {
+        this.$store.dispatch('notification/addNotification', { text: `Picture is required on question ${q.text[this.lang]}, please upload at least one.`, color: 'error' })
+      }
+      q.childQuestions.forEach(child => {
+        this.addQuestionNotificationsToList(child)
+      })
+    },
     validateQ () {
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
       })
-      alert('LM-Test')
+      this.$store.dispatch('notification/clearNotifications')
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       } else {
-        let q = this.$store.getters['getQuestionnaire']
-        console.log(JSON.stringify(q))
-        this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorect`, color: 'error' })
+        console.log(JSON.stringify(this.group.groups))
+        this.group.groups.forEach(group => {
+          group.questions.forEach(question => {
+            this.addQuestionNotificationsToList(question)
+          })
+        })
+        this.$store.dispatch('notification/showNotifications')
+        // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
     }
   }
