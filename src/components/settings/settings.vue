@@ -208,9 +208,6 @@ export default {
     // async getQuestionnaireFromDynamics () {
     //   var QM = window.QMSDK
 
-    //   alert(QM.recordGuid)
-    //   alert(QM.formContext)
-
     //   await XrmWebApi.GetGlobalContext()
 
     //   // call api to get questionnaire to display
