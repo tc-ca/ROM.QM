@@ -369,11 +369,11 @@
                               item-text="DisplayEnglishText"
                               item-key="id"
                               selection-type="leaf"
-                              return-object
                               :search="option.searchProvisions"
                               :filter="option.filterProvisions"
-                              :items="option.provisions"
+                              :items="provisions"
                             />
+                            {{ option.filterProvisions }}
                           </v-card-text>
                         </v-card>
                       </div>
@@ -766,7 +766,7 @@ export default {
           this.questionnaire = state.questionnaire.questionnaire
 
           break
-        case 'setLegislations':
+        case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
 
           break
@@ -957,8 +957,6 @@ export default {
       this.violationsCollapsed = !this.violationsCollapsed
     },
     toggleProvisions (option) {
-      console.log(this.$store.state.legislations)
-      option.provisions = this.$store.state.legislations.legislations
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }
