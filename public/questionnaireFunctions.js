@@ -84,7 +84,6 @@ async function InitializeQuestionnaireRender(dynParams) {
     return;
   }
   else {
-        alert("in the else");
         // get json to render
         const questionnaire = JSON.parse(resultJSON);
         //set the questionnaire state for the app to display json questionnaire
