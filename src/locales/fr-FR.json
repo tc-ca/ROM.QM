@@ -8,6 +8,13 @@
       "language": "FR Language",
       "settings": "FR Settings"
     },
+    "navigations": {
+      "home": "FR Home",
+      "questionnaire": "FR Questionnaire",
+      "builder": "FR Builder",
+      "qFromDynamics": "FR Questionnaire pulling from dynamics",
+      "qFromState": "FR Questionnaire pulling from state"
+    },
     "builder": {
       "save": "FR Save",
       "questionnaireName": "FR Questionnaire Name",
@@ -49,9 +56,13 @@
         "addGroup": "FR Add Group",
         "removeGroup": "FR Remove Group",
         "groupName": "FR Group Name",
+        "delete": "FR Delete ?",
+        "yes": "FR Yes",
+        "no": "FR No",
         "question": {
           "addQuestion": "FR Add Question",
           "removeQuestion": "FR Remove Question",
+          "addChildQuestion": "FR Add Child Question",
           "delete": "FR Delete ?",
           "yes": "FR Yes",
           "no": "FR No"
