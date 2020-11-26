@@ -14,12 +14,7 @@ function createGroup (questionnaire) {
   }
   group.isRepeatable = false
   group.isVisible = true
-  group.showKey = ''
-  group.hideKey = ''
   group.order = id
-  group.domSuffix = 'prop value created virtually'
-  group.htmlElementId = 'prop value created virtually'
-
   group.questions = []
 
   return group
@@ -147,8 +142,6 @@ function getTotalQuestionsNumber (questions) {
 }
 
 function createProvisions() {
-  //console.log(JSON.parse(localStorage.getItem('legislations-data')))
-  //return JSON.parse((localStorage.getItem('legislations-data')))
   return this.$store.state.legislations
 }
 
