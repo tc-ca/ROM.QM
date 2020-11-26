@@ -4,8 +4,18 @@ export const state = {
   notifications: []
 }
 
+export const getters = {
+  hasNotifications(state) {
+    return (state.notifications && state.notifications.length > 0);
+  },
+  getNotifications(state) {
+    return state.notifications;
+  }
+}
+
 export const actions = {
   show ({ commit }, notification) {
+    notification.id = new Date().toISOString()
     notification.showing = true
     notification.color = notification.color || 'success'
     notification.timeout = notification.timeout || 3000
@@ -13,6 +23,7 @@ export const actions = {
     commit('SET_NOTIFICATIONS', notification)
   },
   addNotification ({ commit }, notification) {
+    notification.id = new Date().toISOString()
     notification.showing = false
     notification.color = notification.color || 'success'
     notification.timeout = notification.timeout || 6000
