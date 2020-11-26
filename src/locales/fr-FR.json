@@ -7,6 +7,56 @@
       "darkMode": "FR Dark mode ",
       "language": "FR Language",
       "settings": "FR Settings"
+    },
+    "builder": {
+      "save": "FR Save",
+      "questionnaireName": "FR Questionnaire Name",
+      "questionName": "FR Question Name",
+      "questionType": "FR Question Type",
+      "sortOrder": "FR Sort Order",
+      "internalComments": "FR Internal Comments",
+      "externalComments": "FR External Comments",
+      "picture": "FR Picture(s)",
+      "visibleByDefault": "FR Visible by default",
+      "responseOptions": {
+        "responseOptions": "FR Response Options",
+        "sortOrder": "FR Sort Order",
+        "value": "FR Value",
+        "removResponseoption": "FR Remove response option",
+        "provisions": {
+          "provisions": "FR Provisions",
+          "search": "FR Search"
+        },
+        "addOption": "FR Add Option"
+      },
+      "validators": {
+        "validators": "FR Validators",
+        "name": "FR Name",
+        "enabled": "FR Enabled",
+        "type": "FR Type",
+        "removeValidator": "FR Remove Validator",
+        "addValidator": "FR Add Validator"
+      },
+      "dependsOn": {
+        "dependsOn": "FR Depends On",
+        "type": "FR Type",
+        "addQuestion": "FR Add Question",
+        "removDependencyGroup": "FR Remove dependency group",
+        "addDependencyGroup": "FR Add Dependency Group"
+      },
+
+      "group": {
+        "addGroup": "FR Add Group",
+        "removeGroup": "FR Remove Group",
+        "groupName": "FR Group Name",
+        "question": {
+          "addQuestion": "FR Add Question",
+          "removeQuestion": "FR Remove Question",
+          "delete": "FR Delete ?",
+          "yes": "FR Yes",
+          "no": "FR No"
+        }
+      }
     }
   }
 }

@@ -7,6 +7,59 @@
       "darkMode": "Dark mode",
       "language": "Language",
       "settings": "Settings"
+    },
+    "builder": {
+      "save": "Save",
+      "questionnaireName": "Questionnaire Name",
+      "questionName": "Question Name",
+      "questionType": "Question Type",
+      "sortOrder": "Sort Order",
+      "internalComments": "Internal Comments",
+      "externalComments": "External Comments",
+      "picture": "Picture(s)",
+      "visibleByDefault": "Visible by default",
+      "responseOptions": {
+        "responseOptions": "Response Options",
+        "sortOrder": "Sort Order",
+        "value": "Value",
+        "removResponseoption": "Remove response option",
+        "provisions": {
+          "provisions": "Provisions",
+          "search": "Search"
+        },
+        "addOption": "Add Option"
+      },
+      "validators": {
+        "validators": "Validators",
+        "name": "Name",
+        "enabled": "Enabled",
+        "type": "Type",
+        "removeValidator": "Remove Validator",
+        "addValidator": "Add Validator"
+      },
+      "dependsOn": {
+        "dependsOn": "Depends On",
+        "type": "Type",
+        "addQuestion": "Add Question",
+        "removDependencyGroup": "Remove dependency group",
+        "addDependencyGroup": "Add Dependency Group"
+      },
+
+      "group": {
+        "addGroup": "Add Group",
+        "removeGroup": "Remove Group",
+        "groupName": "Group Name",
+        "delete": "Delete ?",
+        "yes": "Yes",
+        "no": "No",
+        "question": {
+          "addQuestion": "Add Question",
+          "removeQuestion": "Remove Question",
+          "delete": "Delete ?",
+          "yes": "Yes",
+          "no": "No"
+        }
+      }
     }
   }
 }
