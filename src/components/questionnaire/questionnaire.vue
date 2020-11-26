@@ -20,7 +20,7 @@
         </v-expansion-panels>
       </v-form>
     </v-col>
-    <v-spacer></v-spacer>
+    <v-spacer />
     <v-col cols="5">
       <v-row justify="end">
         <v-col class="col-auto">
