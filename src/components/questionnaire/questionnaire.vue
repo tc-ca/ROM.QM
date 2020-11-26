@@ -24,7 +24,7 @@
       <v-row justify="end">
         <v-col class="col-auto">
           <v-btn @click="validateQ()">
-            Validate
+            {{ $t('app.questionnaire.validate ') }}
           </v-btn>
         </v-col>
       </v-row>
