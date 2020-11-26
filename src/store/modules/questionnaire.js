@@ -5,7 +5,7 @@ export const state = {
 };
 
 export const getters = {
-  getQuestionnaire (state) {
+  getQuestionnaire(state) {
     return state.questionnaire;
   }
 };
@@ -36,12 +36,22 @@ export const actions = {
           dispatch("setQuestionnaireGroups", questionnaire.groups);
         }
 
-        break;
-      default:
-        break;
-    }
-  }
-};
+               break;
+             default:
+               break;
+           }
+         },
+         RemoveBuilderCircularDependencies({ commit, state, dispatch,}) {
+         const questionnaire = state.questionnaire
+         
+           const {
+             questionnaireData,
+             groupsData
+           } = builderService.processBuilderForSave(questionnaire);
+           commit("setQuestionnaire", questionnaireData);
+           dispatch("setQuestionnaireGroups", groupsData);
+         }
+       };
 
 export const mutations = {
   setQuestionnaire(state, payload) {
