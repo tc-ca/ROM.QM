@@ -5,38 +5,48 @@ export const state = {
 };
 
 export const getters = {
-  getQuestionnaire (state) {
+  getQuestionnaire(state) {
     return state.questionnaire;
   }
 };
 
 export const actions = {
-  SetQuestionnaireState({ commit, dispatch }, payload) {
-    const { questionnaire, page } = payload;
-    switch (page) {
-      case "builder":
-        {
-          // builder does some processing before setting state
-          const {
-            questionnaireData,
-            groupsData
-          } = builderService.processBuilderForSave(questionnaire);
-          commit("setQuestionnaire", questionnaireData);
-          dispatch("setQuestionnaireGroups", groupsData);
-        }
-        break;
-      case "questionnaire":
-        {
-          commit("setQuestionnaire", questionnaire);
-          dispatch("setQuestionnaireGroups", questionnaire.groups);
-        }
+         SetQuestionnaireState({ commit, dispatch }, payload) {
+           const { questionnaire, page } = payload;
+           switch (page) {
+             case "builder":
+               {
+                 // builder does some processing before setting state
+                 const {
+                   questionnaireData,
+                   groupsData
+                 } = builderService.processBuilderForSave(questionnaire);
+                 commit("setQuestionnaire", questionnaireData);
+                 dispatch("setQuestionnaireGroups", groupsData);
+               }
+               break;
+             case "questionnaire":
+               {
+                 commit("setQuestionnaire", questionnaire);
+                 dispatch("setQuestionnaireGroups", questionnaire.groups);
+               }
 
-        break;
-      default:
-        break;
-    }
-  }
-};
+               break;
+             default:
+               break;
+           }
+         },
+         RemoveBuilderCircularDependencies({ commit, state, dispatch,}) {
+         const questionnaire = state.questionnaire
+         
+           const {
+             questionnaireData,
+             groupsData
+           } = builderService.processBuilderForSave(questionnaire);
+           commit("setQuestionnaire", questionnaireData);
+           dispatch("setQuestionnaireGroups", groupsData);
+         }
+       };
 
 export const mutations = {
   setQuestionnaire(state, payload) {

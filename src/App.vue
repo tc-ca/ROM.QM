@@ -158,7 +158,8 @@ export default {
     /**
     * Returns current state of questionnaire
     */
-    GetState (questionnaire) {
+    GetState () {
+      this.$store.dispatch('RemoveBuilderCircularDependencies')
       return this.$store.state.questionnaire.questionnaire
     },
     /**
