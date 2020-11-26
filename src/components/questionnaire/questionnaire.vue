@@ -43,7 +43,8 @@ export default {
 
   props: {
     templatejson:
-    { type: String,
+    {
+      type: String,
       required: false,
       default: ''
     },

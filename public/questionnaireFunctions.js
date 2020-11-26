@@ -31,6 +31,7 @@ async function InitializeQuestionnaireBuilder(dynParams) {
   );
 
   const legs = await GetLegislations();
+
   questionnaireVueInstance.SetLegislations(
     legs,
   )
@@ -82,18 +83,18 @@ async function InitializeQuestionnaireRender(dynParams) {
     questionnaireVueInstance.Render(template);
     return;
   }
-  else{
-        alert("in the else");
+  else {
         // get json to render
         const questionnaire = JSON.parse(resultJSON);
         //set the questionnaire state for the app to display json questionnaire
         questionnaireVueInstance.Render(questionnaire);
+  }
 
-        const legs = await GetLegislations();
-        questionnaireVueInstance.SetLegislations(
-          legs,
-        );
-      }
+  const legs = await GetLegislations();
+
+  questionnaireVueInstance.SetLegislations(
+    legs,
+  );
 }
 
 function SaveAnswers(userInput) {
@@ -119,20 +120,25 @@ async function DoComplete(eContext, recordGuid, isBuilderPage = false) {
     .querySelector("questionnaire-builder")
     .getVueInstance();
 
+  var questionnaire = {};
   //save what we have in state
   //get questionnaire from state
   //pass to dynamics
   if (isBuilderPage) {
-    const questionnaire = questionnaireVueInstance.GetState();
+    questionnaire = questionnaireVueInstance.GetState();
     const result = await SaveQuestionnaireTemplate(questionnaire, recordGuid);
   }
   else {
     //////////////////////////////////
     ////RECORDGUID = SERVICE TASK ID
     //////////////////////////////////
-    const questionnaire = questionnaireVueInstance.GetState();
+    questionnaire = questionnaireVueInstance.GetState();
     const result = await SaveQuestionnaire(questionnaire, recordGuid);
   }
+
+  //re-render the questionnaire after save
+  //dynamics saves at wierd times, like refresh, and the questionnaire doesnt always reload
+  questionnaireVueInstance.Render(questionnaire);
 }
 
 function SetValue(formContext, attr, val) {
@@ -171,26 +177,38 @@ function SetOptionsetByValue(formContext, attr, intValue) {
   }
 }
 
-function GetLegislations() {  
-  var req = new XMLHttpRequest();
-  req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/ovs_LegislationsGet", true);
-  req.setRequestHeader("OData-MaxVersion", "4.0");
-  req.setRequestHeader("OData-Version", "4.0");
-  req.setRequestHeader("Accept", "application/json");
-  req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-  req.onreadystatechange = function() {
-      if (this.readyState === 4) {
-          req.onreadystatechange = null;
-          if (this.status === 200) {
-              return JSON.parse(this.response);
-              // localStorage.setItem('legislations-data', results.jsonResult)
-          } else {
-              Xrm.Utility.alertDialog(this.statusText);
-          }
-      }
+async function GetLegislations() {  
+
+  let data = null;
+
+  var ovs_LegislationsGetRequest = {
+    getMetadata: function() {
+        return {
+            boundParameter: null,
+            parameterTypes: {},
+            operationType: 0,
+            operationName: "ovs_LegislationsGet"
+        };
+    }
   };
-  req.send();  
+
+  await Xrm.WebApi.online.execute(ovs_LegislationsGetRequest).then(
+      async function success(result) {
+          if (result.ok) {
+              let resultJson = await result.json();
+              let jsonObject = resultJson.jsonResult;
+              data = JSON.parse(jsonObject);
+          }
+      },
+      async function(error) {
+          Xrm.Utility.alertDialog(error.message);
+      }
+  );
+
+  return data;
 }
+
+
 
 async function getTemplateDataByServiceTaskId(serviceTaskId) {
   let data = null;
@@ -272,9 +290,7 @@ async function SaveQuestionnaire(questionnaireResult, serviceTaskId){
   let updatedServiceTaskId = null;
   var serviceTask = {};
 
-  /////////////////////////////////////////////////////
   ////MUST BE SIMPLE STRING, CANT BE COMPLEX OBJECT
-  /////////////////////////////////////////////////////
   serviceTask.ovs_questionnaireresultjson = JSON.stringify(questionnaireResult);
   
   await Xrm.WebApi.online.updateRecord("msdyn_workorderservicetask", serviceTaskId, serviceTask).then(

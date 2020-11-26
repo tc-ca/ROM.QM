@@ -19,7 +19,10 @@ export const actions = {
     }
   },
   async SetLegislationsState({ commit }, payload) {
-    commit("setLegislations", payload);
+    //////////////////////
+    /////legislations is the name of the property on payload
+    const { legislations } = payload
+    commit("SetLegislations", legislations);
   }
 };
 
