@@ -24,6 +24,9 @@ export default {
       if (mutation.type === 'SetLegislation') {
         this.provisions = this.$store.state.legislations.legislations
       }
+      if (mutation.type === 'setQuestionnaireGroups') {
+        this.questionnaire.groups = state.questionnaire.groups
+      }
     })
   }
 }

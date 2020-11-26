@@ -131,8 +131,10 @@ export default {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
       isValid: null,
-      selResponseOptions: []
-      // selResponses: []
+      selResponseOptions: [],
+      selResponses: [],
+      expansion: true,
+      provisions: []
     }
   },
   computed: {
