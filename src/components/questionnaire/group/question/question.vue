@@ -61,7 +61,7 @@
                 selection-type="leaf"
                 :search="selResponseOptions.searchProvisions"
                 :filter="selResponseOptions.filterProvisions"
-                :items="provisions"
+                :items="selResponseOptions.provisions"
               />
             </v-card-text>
           </v-card>
@@ -242,6 +242,8 @@ export default {
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
+      /* eslint-disable no-debugger */
+      debugger
       if (this.question.responseOptions.length > 0) {
         let index = this.question.responseOptions.findIndex(q => q.value === args.value)
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
