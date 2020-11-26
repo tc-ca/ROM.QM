@@ -15,7 +15,6 @@ export const getters = {
 
 export const actions = {
   show ({ commit }, notification) {
-    notification.id = new Date().toISOString()
     notification.showing = true
     notification.color = notification.color || 'success'
     notification.timeout = notification.timeout || 3000
@@ -23,7 +22,6 @@ export const actions = {
     commit('SET_NOTIFICATIONS', notification)
   },
   addNotification ({ commit }, notification) {
-    notification.id = new Date().toISOString()
     notification.showing = false
     notification.color = notification.color || 'success'
     notification.timeout = notification.timeout || 6000
@@ -52,3 +50,4 @@ export const mutations = {
     state.notifications = []
   }
 }
+

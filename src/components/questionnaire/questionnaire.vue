@@ -20,6 +20,7 @@
         </v-expansion-panels>
       </v-form>
     </v-col>
+    <v-spacer></v-spacer>
     <v-col cols="5">
       <v-row justify="end">
         <v-col class="col-auto">
@@ -30,10 +31,7 @@
       </v-row>
       <div v-if="hasNotifications">
         <v-row>
-          <p>There are notifications</p>
-        </v-row>
-        <v-row>
-          <questionnaire-error q-notifications="" />
+          <questionnaire-error :notifications="notifications" />
         </v-row>
       </div>
     </v-col>
@@ -43,7 +41,8 @@
 <script>
 import { mapState } from 'vuex'
 import QuestionnaireGroup from './group/group.vue'
-import QuestionnaireError from './QuestionnaireError'
+import QuestionnaireError from './questionnaire-error'
+import { buildNotificationObject } from '../../utils'
 
 // let env = process.env.NODE_ENV || 'development'
 
@@ -81,37 +80,36 @@ export default {
     }),
     hasNotifications () {
       return this.$store.getters['notification/hasNotifications']
+    },
+    notifications () {
+      const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
+      return notices
     }
   },
   methods: {
-    getNotifications () {
-      const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
-      return notices
-    },
     addQuestionNotificationsToList (q) {
       if (q.notification) {
         this.$store.dispatch('notification/addNotification', q.notification)
-      }
-      if (!q.validationState || !q.response) {
-        q.notification = { text: `A valid response for question ${q.text[this.lang]} is required.`, color: 'error' }
+      } else if (!q.validationState || !q.response) {
+        q.notification = buildNotificationObject(q, 'A valid response for the question is required.', 'mdi-message-draw', this.lang)
         this.$store.dispatch('notification/addNotification', q.notification)
       }
       if (q.internalComment.notification) {
         this.$store.dispatch('notification/addNotification', q.internalComment.notification)
       } else if (q.internalComment.option === 'required' && q.internalComment.value.trim().length === 0) {
-        q.internalComment.notification = { text: `Internal Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' }
+        q.internalComment.notification = buildNotificationObject(q, 'Internal Comment for the question is required. Please enter a value on the comment field.', 'mdi-message-alert', this.lang)
         this.$store.dispatch('notification/addNotification', q.internalComment.notification)
       }
       if (q.externalComment.notification) {
         this.$store.dispatch('notification/addNotification', q.externalComment.notification)
       } else if (q.externalComment.option === 'required' && q.externalComment.value.trim().length === 0) {
-        q.externalComment.notification = { text: `External Comment for question ${q.text[this.lang]} is required. Please enter a value on the comment field.`, color: 'error' }
+        q.externalComment.notification = buildNotificationObject(q, 'External Comment for the question is required. Please enter a value on the comment field.', 'mdi-message-alert', this.lang)
         this.$store.dispatch('notification/addNotification', q.externalComment.notification)
       }
       if (q.picture.notification) {
         this.$store.dispatch('notification/addNotification', q.picture.notification)
       } else if (q.picture.option === 'required' && q.picture.value.trim().length === 0) {
-        q.picture.notification = { text: `Picture is required on question ${q.text[this.lang]}, please upload at least one.`, color: 'error' }
+        q.picture.notification = buildNotificationObject(q, 'A picture is required for this question. Please upload at least one.', 'mdi-image-plus', this.lang)
         this.$store.dispatch('notification/addNotification', q.picture.notification)
       }
       q.childQuestions.forEach(child => {
@@ -132,6 +130,7 @@ export default {
             this.addQuestionNotificationsToList(question)
           })
         })
+        console.log(JSON.stringify(this.group.groups))
         // this.$store.dispatch('notification/showNotifications')
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
