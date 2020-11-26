@@ -11,7 +11,9 @@
       />
       <v-toolbar-title />
       <v-spacer />
+
       <v-btn
+        v-if="env === 'development'"
         id="save"
         icon
         color="white"
@@ -93,7 +95,8 @@ export default {
   data: function () {
     return {
       showLegislationSearchModal: false,
-      showSettings: false
+      showSettings: false,
+      env: process.env.NODE_ENV || 'development'
     }
   },
   computed: {
@@ -134,6 +137,7 @@ export default {
   created: async function () {
     if (env === 'development') {
       await this.$store.dispatch('SetLegislationsStateToLocalData')
+      await this.$store.dispatch('SetMockQuestionnaireResponse')
     }
 
     this.$router.push({ name: this.page }).catch((e) => {

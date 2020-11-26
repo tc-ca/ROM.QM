@@ -132,8 +132,10 @@ export default {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
       isValid: null,
-      selResponseOptions: []
-      // selResponses: []
+      selResponseOptions: [],
+      selResponses: [],
+      expansion: true,
+      provisions: []
     }
   },
   computed: {
@@ -245,6 +247,7 @@ export default {
         if (responseOption) {
           this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
           responseOption.provisions = this.loadSelectedItems(responseOption.provisions)
+          responseOption.selectedProvisions = []
         } else {
           this.displayViolationInfo = false
         }
