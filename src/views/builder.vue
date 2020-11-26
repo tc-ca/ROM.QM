@@ -142,7 +142,10 @@
         </div>
       </v-col>
       <v-col cols="5">
-        <v-row justify="end">
+        <v-row
+          v-if="env==='development'"
+          justify="end"
+        >
           <v-col class="col-auto">
             <v-btn @click="save()">
               Save
@@ -369,11 +372,11 @@
                               item-text="DisplayEnglishText"
                               item-key="id"
                               selection-type="leaf"
-                              return-object
                               :search="option.searchProvisions"
                               :filter="option.filterProvisions"
-                              :items="option.provisions"
+                              :items="provisions"
                             />
+                            {{ option.filterProvisions }}
                           </v-card-text>
                         </v-card>
                       </div>
@@ -719,7 +722,8 @@ export default {
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],
-      questionProvisions: []
+      questionProvisions: [],
+      env: process.env.NODE_ENV
     }
   },
   computed: {
@@ -766,7 +770,7 @@ export default {
           this.questionnaire = state.questionnaire.questionnaire
 
           break
-        case 'setLegislations':
+        case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
 
           break
@@ -860,15 +864,6 @@ export default {
     async save (id) {
       const page = 'builder'
       console.log(this.questionnaire)
-      this.questionnaire.groups.forEach(x => {
-        x.questions.forEach(q => {
-          q.responseOptions.forEach(r => {
-            r.provisions = r.selectedProvisions
-            r.selectedProvisions = null
-          })
-        })
-      })
-      console.log(this.questionnaire)
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },
@@ -957,8 +952,6 @@ export default {
       this.violationsCollapsed = !this.violationsCollapsed
     },
     toggleProvisions (option) {
-      console.log(this.$store.state.legislations)
-      option.provisions = this.$store.state.legislations.legislations
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }

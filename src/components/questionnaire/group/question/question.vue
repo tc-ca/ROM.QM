@@ -28,7 +28,7 @@
       <!--eslint-enable-->
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
-      <div :class="{'mt-5': expansion}">
+      <div :class="{'mt-6': expansion}">
         <response
           :question="question"
           :group="group"
@@ -36,8 +36,6 @@
           @error="onError"
         />
       </div>
-
-      <!-- <violation-info v-if="displayViolationInfo" /> -->
 
       <div v-if="displayViolationInfo">
         <div>
@@ -61,7 +59,6 @@
                 item-text="DisplayEnglishText"
                 item-key="id"
                 selection-type="leaf"
-                return-object
                 :search="selResponseOptions.searchProvisions"
                 :filter="selResponseOptions.filterProvisions"
                 :items="selResponseOptions.provisions"
@@ -127,10 +124,6 @@ export default {
     },
     inRepeatedGroup: {
       type: Boolean, required: true
-    },
-    expansion: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
@@ -138,8 +131,8 @@ export default {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
       isValid: null,
-      selResponseOptions: [],
-      selResponses: []
+      selResponseOptions: []
+      // selResponses: []
     }
   },
   computed: {
@@ -160,22 +153,14 @@ export default {
   },
   methods: {
     loadSelectedItems (selectedProvisions) {
-      /* eslint-disable no-debugger */
-      debugger
-      var provisions = this.$store.state.legislations.legislations // JSON.parse((localStorage.getItem('legislations-data')))
+      var provisions = this.$store.state.legislations.legislations
       var obj = _.cloneDeep(provisions)
       var cloneObj = _.cloneDeep(provisions)
-      let str = []
+      let str = selectedProvisions
 
       let first = 0
       let second = 0
       let third = 0
-
-      selectedProvisions.forEach(getIds)
-
-      function getIds (item) {
-        str.push(item.id)
-      }
 
       obj.forEach(iterate)
 
@@ -229,6 +214,17 @@ export default {
           delete cloneObj[first].children[second].children[third]
         }
       }
+
+      cloneObj = cloneObj.filter(function (e) { return e != null })
+      cloneObj.forEach(q => {
+        if (q.children.length > 0) {
+          q.forEach(q1 => {
+            q1 = q1.filter(function (e) { return e != null })
+          })
+          q = q.filter(function (e) { return e != null })
+        }
+      })
+
       return cloneObj
     },
     onViolationsChange (args) {
@@ -246,19 +242,20 @@ export default {
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
+      /* eslint-disable no-debugger */
+      debugger
       if (this.question.responseOptions.length > 0) {
         let index = this.question.responseOptions.findIndex(q => q.value === args.value)
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
 
         if (responseOption) {
-          debugger
-          this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
-          responseOption.provisions = this.loadSelectedItems(responseOption.provisions)
+          this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
+          responseOption.provisions = this.loadSelectedItems(responseOption.selectedProvisions)
           // responseOption.selectedProvisions = null
         } else {
           this.displayViolationInfo = false
         }
-        this.selResponseOptions = this.question.responseOptions[index]
+        this.selResponseOptions = _.cloneDeep(this.question.responseOptions[index])
       }
     },
     updateDependants (args) {

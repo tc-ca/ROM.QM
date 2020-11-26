@@ -132,7 +132,7 @@ export default {
     }
   },
   created: async function () {
-    if (env) {
+    if (env === 'development') {
       await this.$store.dispatch('SetLegislationsStateToLocalData')
     }
 
@@ -151,7 +151,6 @@ export default {
      */
     Render (questionnaire) {
       const page = this.page
-      alert('render')
       if (questionnaire) {
         this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       }
@@ -160,8 +159,6 @@ export default {
     * Returns current state of questionnaire
     */
     GetState (questionnaire) {
-      alert('get state')
-
       return this.$store.state.questionnaire.questionnaire
     },
     /**
