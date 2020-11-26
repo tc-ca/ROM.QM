@@ -61,7 +61,6 @@
                 item-text="DisplayEnglishText"
                 item-key="id"
                 selection-type="leaf"
-                return-object
                 :search="selResponseOptions.searchProvisions"
                 :filter="selResponseOptions.filterProvisions"
                 :items="selResponseOptions.provisions"
@@ -165,17 +164,11 @@ export default {
       var provisions = this.$store.state.legislations.legislations // JSON.parse((localStorage.getItem('legislations-data')))
       var obj = _.cloneDeep(provisions)
       var cloneObj = _.cloneDeep(provisions)
-      let str = []
+      let str = selectedProvisions
 
       let first = 0
       let second = 0
       let third = 0
-
-      selectedProvisions.forEach(getIds)
-
-      function getIds (item) {
-        str.push(item.id)
-      }
 
       obj.forEach(iterate)
 
@@ -229,6 +222,17 @@ export default {
           delete cloneObj[first].children[second].children[third]
         }
       }
+
+      cloneObj = cloneObj.filter(function (e) { return e != null })
+      cloneObj.forEach(q => {
+        if (q.children.length > 0) {
+          q.forEach(q1 => {
+            q1 = q1.filter(function (e) { return e != null })
+          })
+          q = q.filter(function (e) { return e != null })
+        }
+      })
+
       return cloneObj
     },
     onViolationsChange (args) {
@@ -252,13 +256,13 @@ export default {
 
         if (responseOption) {
           debugger
-          this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
-          responseOption.provisions = this.loadSelectedItems(responseOption.provisions)
+          this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
+          responseOption.provisions = this.loadSelectedItems(responseOption.selectedProvisions)
           // responseOption.selectedProvisions = null
         } else {
           this.displayViolationInfo = false
         }
-        this.selResponseOptions = this.question.responseOptions[index]
+        this.selResponseOptions = _.cloneDeep(this.question.responseOptions[index])
       }
     },
     updateDependants (args) {
