@@ -864,15 +864,6 @@ export default {
     async save (id) {
       const page = 'builder'
       console.log(this.questionnaire)
-      this.questionnaire.groups.forEach(x => {
-        x.questions.forEach(q => {
-          q.responseOptions.forEach(r => {
-            r.provisions = r.selectedProvisions
-            r.selectedProvisions = null
-          })
-        })
-      })
-      console.log(this.questionnaire)
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },
