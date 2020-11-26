@@ -28,6 +28,14 @@
           </v-btn>
         </v-col>
       </v-row>
+      <div v-if="hasNotifications">
+        <v-row>
+          <p>There are notifications</p>
+        </v-row>
+        <v-row>
+          <questionnaire-error q-notifications="" />
+        </v-row>
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -35,11 +43,12 @@
 <script>
 import { mapState } from 'vuex'
 import QuestionnaireGroup from './group/group.vue'
+import QuestionnaireError from './QuestionnaireError'
 
 // let env = process.env.NODE_ENV || 'development'
 
 export default {
-  components: { QuestionnaireGroup },
+  components: { QuestionnaireGroup, QuestionnaireError },
 
   props: {
     templatejson:
@@ -69,9 +78,16 @@ export default {
         }
         return state.app.settings.lang
       }
-    })
+    }),
+    hasNotifications () {
+      return this.$store.getters['notification/hasNotifications']
+    }
   },
   methods: {
+    getNotifications () {
+      const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
+      return notices
+    },
     addQuestionNotificationsToList (q) {
       if (q.notification) {
         this.$store.dispatch('notification/addNotification', q.notification)
@@ -110,13 +126,13 @@ export default {
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       } else {
-        console.log(JSON.stringify(this.group.groups))
+        // console.log(JSON.stringify(this.group.groups))
         this.group.groups.forEach(group => {
           group.questions.forEach(question => {
             this.addQuestionNotificationsToList(question)
           })
         })
-        this.$store.dispatch('notification/showNotifications')
+        // this.$store.dispatch('notification/showNotifications')
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
     }
