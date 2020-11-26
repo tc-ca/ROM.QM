@@ -44,7 +44,7 @@
           >
             <v-sheet class="pa-4">
               <v-text-field
-                v-model="selResponseOptions.searchProvisions"
+                v-model="selectedResponseOption.searchProvisions"
                 label="Search"
                 outlined
                 hide-details
@@ -54,14 +54,14 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="selResponseOptions.selectedProvisions"
+                v-model="selectedResponseOption.selectedProvisions"
                 selectable
-                item-text="DisplayEnglishText"
+                :item-text="'title.' + lang"
                 item-key="id"
                 selection-type="leaf"
-                :search="selResponseOptions.searchProvisions"
-                :filter="selResponseOptions.filterProvisions"
-                :items="selResponseOptions.provisions"
+                :search="selectedResponseOption.searchProvisions"
+                :filter="selectedResponseOption.filterProvisions"
+                :items="provisions"
               />
             </v-card-text>
           </v-card>
@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+// import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
@@ -124,6 +124,11 @@ export default {
     },
     inRepeatedGroup: {
       type: Boolean, required: true
+    },
+    expansion: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
@@ -131,22 +136,19 @@ export default {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
       isValid: null,
-      selResponseOptions: [],
+      selectedResponseOption: [],
       selResponses: [],
-      expansion: true,
       provisions: []
     }
   },
   computed: {
     questionText () {
-      return `${this.index + 1}. ${this.question.text[this.lang]}`
+      // return `${this.index + 1}. ${this.question.text[this.lang]}`
+      return `${this.question.text[this.lang]}`
     },
     ...mapState({
       lang: state => {
-        if (!state || !state.app) {
-          return 'en-US'
-        }
-        return state.app.settings.lang
+        return 'en'
       }
     })
   },
@@ -154,80 +156,39 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-    loadSelectedItems (selectedProvisions) {
-      var provisions = this.$store.state.legislations.legislations
-      var obj = _.cloneDeep(provisions)
-      var cloneObj = _.cloneDeep(provisions)
-      let str = selectedProvisions
+    loadSelectedItems (responseOption) {
+      let dictionnairyOfProvisions = this.$store.state.legislations.legislations
+      // let provisionsToSelect = responseOption.responseOption
+      let provisionsToDisplay = responseOption.provisions
 
-      let first = 0
-      let second = 0
-      let third = 0
+      for (let index = 0; index < provisionsToDisplay.length; index++) {
+        // get the key from array
+        let provisionId = provisionsToDisplay[index]
 
-      obj.forEach(iterate)
+        // map to the value i want to extract
+        console.log('rehydratedProvision', dictionnairyOfProvisions[provisionId])
 
-      function iterate (item, index, array) {
-        first = index
-        if (item.children.length > 0) {
-          item.children.forEach(iterate2)
-          if (cloneObj[first].children.length > 0) {
-            var x = true
-            for (let i = 0; i < cloneObj[first].children.length; i++) {
-              if (cloneObj[first].children[i] !== undefined) {
-                x = false
-              }
-            }
-            if (x && !str.includes(cloneObj[first].id)) {
-              delete cloneObj[first]
-            }
-          }
-        } else {
-          if (!str.includes(item.id)) {
-            delete cloneObj[first]
-          }
-        }
+        var rehydratedProvision = dictionnairyOfProvisions[provisionId]
+        this.provisions.push(rehydratedProvision)
       }
 
-      function iterate2 (item, index, array) {
-        second = index
-        if (item.children.length > 0) {
-          item.children.forEach(iterate3)
-          if (cloneObj[first].children[second].children.length > 0) {
-            var x = true
-            for (let i = 0; i < cloneObj[first].children[second].children.length; i++) {
-              if (cloneObj[first].children[second].children[i] !== undefined) {
-                x = false
-              }
-            }
-            if (x && !str.includes(cloneObj[first].children[second].id)) {
-              delete cloneObj[first].children[second]
-            }
-          }
-        } else {
-          if (!str.includes(item.id)) {
-            delete cloneObj[first].children[second]
-          }
-        }
-      }
+      // acc is "accumulator", google it
+      const idMapping = this.provisions.reduce((acc, el, i) => {
+        acc[el.id] = i
+        return acc
+      }, {})
 
-      function iterate3 (item, index, array) {
-        third = index
-        if (!str.includes(item.id)) {
-          delete cloneObj[first].children[second].children[third]
-        }
-      }
+      this.provisions.forEach(el => {
+        // Use our mapping to locate the parent element in our data array
+        const parentEl = this.provisions[idMapping[el.parentLegislationId]]
 
-      cloneObj = cloneObj.filter(function (e) { return e != null })
-      cloneObj.forEach(q => {
-        if (q.children.length > 0) {
-          q.forEach(q1 => {
-            q1 = q1.filter(function (e) { return e != null })
-          })
-          q = q.filter(function (e) { return e != null })
+        if (parentEl) {
+          // Add our current el to its parent's `children` array
+          parentEl.children = [...(parentEl.children || []), el]
         }
       })
 
-      return cloneObj
+      console.log(JSON.stringify(this.provisions))
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
@@ -244,24 +205,20 @@ export default {
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
-      this.selResponseOptions = null
-      /* eslint-disable no-debugger */
-      // debugger
       if (this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
-
         if (responseOption) {
           if (responseOption.provisions == null) {
-            this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
-            this.loadSelectedItems(responseOption.selectedProvisions)
+            this.displayViolationInfo = false
           } else {
-            this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
+            this.loadSelectedItems(responseOption)
+            this.displayViolationInfo = true
           }
         } else {
           this.displayViolationInfo = false
         }
-        this.selResponseOptions = responseOption // _.cloneDeep(this.question.responseOptions[index])
-        this.selResponseOptions.selectedProvisions = responseOption.selectedProvisions
+        this.selectedResponseOption = responseOption
+        this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
       }
     },
     updateDependants (args) {

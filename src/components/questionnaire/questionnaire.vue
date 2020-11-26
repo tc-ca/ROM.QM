@@ -1,35 +1,59 @@
 <template>
-  <v-row>
-    <v-col cols="7">
-      <v-form
-        ref="questionaire_form"
-        v-model="valid"
-      >
-        <v-expansion-panels
-          focusable
-          multiple
-          class="v-expansion-panel"
+  <div>
+    <v-row>
+      <v-col cols="6">
+        <v-btn
+          color="teal"
+          fab
+          @click="expandAll()"
         >
-          <questionnaire-group
-            v-for="(group, groupIndex) in group.groups"
-            ref="questionGroup"
-            :key="groupIndex"
-            :group="group"
-            :index="groupIndex"
-          />
-        </v-expansion-panels>
-      </v-form>
-    </v-col>
-    <v-col cols="5">
-      <v-row justify="end">
-        <v-col class="col-auto">
-          <v-btn @click="validateQ()">
-            Validate
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-col>
-  </v-row>
+          <v-icon>mdi-camera-plus-outline</v-icon>
+          <span>Expand All</span>
+        </v-btn>
+      </v-col>
+      <v-col cols="6">
+        <v-btn
+          color="teal"
+          fab
+          @click="collapseAll()"
+        >
+          <v-icon>mdi-camera-plus-outline</v-icon>
+          <span>Collapse All</span>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="7">
+        <v-form
+          ref="questionaire_form"
+          v-model="valid"
+        >
+          <v-expansion-panels
+            focusable
+            multiple
+            class="v-expansion-panel"
+          >
+            <questionnaire-group
+              v-for="(group, groupIndex) in group.groups"
+              ref="questionGroup"
+              :key="groupIndex"
+              :group="group"
+              :index="groupIndex"
+            />
+          </v-expansion-panels>
+        </v-form>
+      </v-col>
+      <v-col cols="5">
+        <v-row justify="end">
+          <v-col class="col-auto">
+            <v-btn @click="validateQ()">
+              Validate
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -40,21 +64,6 @@ import QuestionnaireGroup from './group/group.vue'
 
 export default {
   components: { QuestionnaireGroup },
-
-  props: {
-    templatejson:
-    {
-      type: String,
-      required: false,
-      default: ''
-    },
-    templateid:
-    {
-      type: String,
-      required: false,
-      default: ''
-    }
-  },
   data () {
     return {
       valid: false
@@ -65,7 +74,7 @@ export default {
     ...mapState({
       lang: state => {
         if (!state || !state.app) {
-          return 'en-US'
+          return 'en'
         }
         return state.app.settings.lang
       }
@@ -119,6 +128,14 @@ export default {
         this.$store.dispatch('notification/showNotifications')
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
+    },
+    collapseAll () {
+      alert('collapse')
+      // to loop
+    },
+    expandAll () {
+      alert('expand')
+      // to loop
     }
   }
 }

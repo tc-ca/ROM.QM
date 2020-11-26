@@ -1,6 +1,6 @@
 module.exports = Object.freeze({
   LANGUAGE: {
-    ENGLISH: 'en-US',
-    FRENCH: 'fr-FR'
+    ENGLISH: 'en',
+    FRENCH: 'fr'
   }
 });

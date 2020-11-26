@@ -194,7 +194,7 @@ TDG.QuestionnaireEntityForm = {
 
     questionnaire.setAttribute('templatejson', JSON.stringify(props.configurationData))
     questionnaire.setAttribute('lang', props.lang)
-    // questionnaire.setAttribute('metadata', JSON.stringify({ title: { 'en-US': props.template.properties.tc_englishtitle, 'fr-FR': props.template.properties.tc_frenchtitle } }))
+    // questionnaire.setAttribute('metadata', JSON.stringify({ title: { 'en': props.template.properties.tc_englishtitle, 'fr': props.template.properties.tc_frenchtitle } }))
     // TODO: ains, come back and clean things up
 
     document.addEventListener('click', function (event) {
