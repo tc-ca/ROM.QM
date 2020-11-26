@@ -242,20 +242,24 @@ export default {
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
+      this.selResponseOptions = null
       /* eslint-disable no-debugger */
-      debugger
+      // debugger
       if (this.question.responseOptions.length > 0) {
-        let index = this.question.responseOptions.findIndex(q => q.value === args.value)
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
 
         if (responseOption) {
-          this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
-          responseOption.provisions = this.loadSelectedItems(responseOption.selectedProvisions)
-          // responseOption.selectedProvisions = null
+          if (responseOption.provisions == null) {
+            this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
+            this.loadSelectedItems(responseOption.selectedProvisions)
+          } else {
+            this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
+          }
         } else {
           this.displayViolationInfo = false
         }
-        this.selResponseOptions = _.cloneDeep(this.question.responseOptions[index])
+        this.selResponseOptions = responseOption // _.cloneDeep(this.question.responseOptions[index])
+        this.selResponseOptions.selectedProvisions = responseOption.selectedProvisions
       }
     },
     updateDependants (args) {
