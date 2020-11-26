@@ -11,6 +11,11 @@ export const getters = {
 };
 
 export const actions = {
+  async SetMockQuestionnaireResponse({ commit , dispatch }) {
+    const data = await SetMockQuestionnaireResponseImportModule();
+    commit("setQuestionnaire", data);
+    dispatch("setQuestionnaireGroups", data.groups);
+  },
   SetQuestionnaireState({ commit, dispatch }, payload) {
     const { questionnaire, page } = payload;
     switch (page) {
@@ -43,3 +48,10 @@ export const mutations = {
     state.questionnaire = payload;
   }
 };
+
+async function SetMockQuestionnaireResponseImportModule() {
+  const data = await import("../../api/betaAnswers").then(module => {
+    return module.default;
+  });
+  return data;
+}
