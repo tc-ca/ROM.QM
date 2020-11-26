@@ -68,6 +68,18 @@
           "no": "FR No"
         }
       }
+    },
+    "questionnaire": {
+      "validate": "FR Validate",
+      "group": {
+        "question": {
+          "externalComment": "FR External Comment",
+          "externalCommentInfo": "FR External comments will be available to the public",
+          "internalComment": "FR Internal Comment",
+          "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
+          "photos": "FR Photos"
+        }
+      }
     }
   }
 }
