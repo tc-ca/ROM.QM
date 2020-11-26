@@ -204,19 +204,6 @@ export default {
         console.log(e)
       })
     }
-    // ,
-    // async getQuestionnaireFromDynamics () {
-    //   var QM = window.QMSDK
-
-    //   await XrmWebApi.GetGlobalContext()
-
-    //   // call api to get questionnaire to display
-    //   const questionnaire = await XrmWebApi.GetQuestionnaireById()
-    //   // set questionnaire state to retrieved api data, questionnaire will render whats in state.
-    //   this.$store.dispatch('SetQuestionnaireState', questionnaire)
-
-    //   this.navigateTo('questionnaire')
-    // }
   }
 }
 </script>

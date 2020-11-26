@@ -120,20 +120,25 @@ async function DoComplete(eContext, recordGuid, isBuilderPage = false) {
     .querySelector("questionnaire-builder")
     .getVueInstance();
 
+  var questionnaire = {};
   //save what we have in state
   //get questionnaire from state
   //pass to dynamics
   if (isBuilderPage) {
-    const questionnaire = questionnaireVueInstance.GetState();
+    questionnaire = questionnaireVueInstance.GetState();
     const result = await SaveQuestionnaireTemplate(questionnaire, recordGuid);
   }
   else {
     //////////////////////////////////
     ////RECORDGUID = SERVICE TASK ID
     //////////////////////////////////
-    const questionnaire = questionnaireVueInstance.GetState();
+    questionnaire = questionnaireVueInstance.GetState();
     const result = await SaveQuestionnaire(questionnaire, recordGuid);
   }
+
+  //re-render the questionnaire after save
+  //dynamics saves at wierd times, like refresh, and the questionnaire doesnt always reload
+  questionnaireVueInstance.Render(questionnaire);
 }
 
 function SetValue(formContext, attr, val) {
@@ -285,9 +290,7 @@ async function SaveQuestionnaire(questionnaireResult, serviceTaskId){
   let updatedServiceTaskId = null;
   var serviceTask = {};
 
-  /////////////////////////////////////////////////////
   ////MUST BE SIMPLE STRING, CANT BE COMPLEX OBJECT
-  /////////////////////////////////////////////////////
   serviceTask.ovs_questionnaireresultjson = JSON.stringify(questionnaireResult);
   
   await Xrm.WebApi.online.updateRecord("msdyn_workorderservicetask", serviceTaskId, serviceTask).then(

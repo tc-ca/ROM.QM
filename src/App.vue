@@ -132,7 +132,7 @@ export default {
     }
   },
   created: async function () {
-    if (env) {
+    if (env === 'development') {
       await this.$store.dispatch('SetLegislationsStateToLocalData')
     }
 
