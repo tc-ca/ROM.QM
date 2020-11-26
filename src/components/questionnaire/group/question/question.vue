@@ -28,7 +28,7 @@
       <!--eslint-enable-->
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
-      <div :class="{'mt-5': expansion}">
+      <div :class="{'mt-6': expansion}">
         <response
           :question="question"
           :group="group"
@@ -36,8 +36,6 @@
           @error="onError"
         />
       </div>
-
-      <!-- <violation-info v-if="displayViolationInfo" /> -->
 
       <div v-if="displayViolationInfo">
         <div>
@@ -64,7 +62,7 @@
                 return-object
                 :search="selResponseOptions.searchProvisions"
                 :filter="selResponseOptions.filterProvisions"
-                :items="selResponseOptions.provisions"
+                :items="provisions"
               />
             </v-card-text>
           </v-card>
@@ -127,10 +125,6 @@ export default {
     },
     inRepeatedGroup: {
       type: Boolean, required: true
-    },
-    expansion: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
@@ -138,8 +132,8 @@ export default {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
       isValid: null,
-      selResponseOptions: [],
-      selResponses: []
+      selResponseOptions: []
+      // selResponses: []
     }
   },
   computed: {
@@ -160,9 +154,7 @@ export default {
   },
   methods: {
     loadSelectedItems (selectedProvisions) {
-      /* eslint-disable no-debugger */
-      debugger
-      var provisions = this.$store.state.legislations.legislations // JSON.parse((localStorage.getItem('legislations-data')))
+      var provisions = this.$store.state.legislations.legislations
       var obj = _.cloneDeep(provisions)
       var cloneObj = _.cloneDeep(provisions)
       let str = []
@@ -251,10 +243,8 @@ export default {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
 
         if (responseOption) {
-          debugger
           this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
           responseOption.provisions = this.loadSelectedItems(responseOption.provisions)
-          // responseOption.selectedProvisions = null
         } else {
           this.displayViolationInfo = false
         }

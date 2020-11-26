@@ -142,7 +142,10 @@
         </div>
       </v-col>
       <v-col cols="5">
-        <v-row justify="end">
+        <v-row
+          v-if="env==='development'"
+          justify="end"
+        >
           <v-col class="col-auto">
             <v-btn @click="save()">
               Save
@@ -719,7 +722,8 @@ export default {
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],
-      questionProvisions: []
+      questionProvisions: [],
+      env: process.env.NODE_ENV
     }
   },
   computed: {
