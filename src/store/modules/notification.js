@@ -4,6 +4,15 @@ export const state = {
   notifications: []
 }
 
+export const getters = {
+  hasNotifications(state) {
+    return (state.notifications && state.notifications.length > 0);
+  },
+  getNotifications(state) {
+    return state.notifications;
+  }
+}
+
 export const actions = {
   show ({ commit }, notification) {
     notification.showing = true
@@ -41,3 +50,4 @@ export const mutations = {
     state.notifications = []
   }
 }
+
