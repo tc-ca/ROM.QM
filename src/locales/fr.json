@@ -79,7 +79,9 @@
           "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
           "photos": "FR Photos"
         }
-      }
+      },
+      "expandAll": "FR Expand All",
+      "collapseAll": "FR Collapse All"
     }
   }
 }

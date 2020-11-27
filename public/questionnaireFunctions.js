@@ -90,7 +90,7 @@ async function InitializeQuestionnaireRender(dynParams) {
         questionnaireVueInstance.Render(questionnaire);
   }
 
-  const legs = await GetLegislations();
+  const legs = await getLegislationDictionnary();
 
   questionnaireVueInstance.SetLegislations(
     legs,
@@ -203,6 +203,37 @@ async function GetLegislations() {
       async function(error) {
           Xrm.Utility.alertDialog(error.message);
       }
+  );
+
+  return data;
+}
+
+
+async function getLegislationDictionnary () {
+  let data = [];
+
+  var ovs_LegislationGetFlatRequest = {
+    getMetadata: function() {
+        return {
+            boundParameter: null,
+            parameterTypes: {},
+            operationType: 0,
+            operationName: "ovs_LegislationGetFlat"
+        };
+    }
+  };
+
+  await Xrm.WebApi.online.execute(ovs_LegislationGetFlatRequest).then(
+    async function success(result) {
+      if (result.ok) {
+        let resultJson = await result.json();
+        let jsonObject = resultJson.jsonResult;
+        data = JSON.parse(jsonObject);
+      }
+    },
+    function(error) {
+        Xrm.Utility.alertDialog(error.message);
+    }
   );
 
   return data;

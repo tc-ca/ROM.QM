@@ -1,40 +1,54 @@
 <template>
-  <v-row>
-    <v-col cols="7">
-      <v-form
-        ref="questionaire_form"
-        v-model="valid"
-        justify="start"
-      >
-        <v-expansion-panels
-          focusable
-          multiple
-          class="v-expansion-panel"
+  <div>
+    <v-row>
+      <v-col>
+        <v-btn
+          @click="expandAll()"
         >
-          <questionnaire-group
-            v-for="(group, groupIndex) in group.groups"
-            ref="questionGroup"
-            :key="groupIndex"
-            :group="group"
-            :index="groupIndex"
-          />
-        </v-expansion-panels>
-      </v-form>
-    </v-col>
-    <v-col cols="5">
-      <v-row justify="space-around">
+          <span>{{ $t('app.questionnaire.expandAll') }}</span>
+        </v-btn>
+        <v-btn
+          @click="collapseAll()"
+        >
+          <span>{{ $t('app.questionnaire.collapseAll') }}</span>
+        </v-btn>
         <v-btn @click="validateQ()">
           {{ $t('app.questionnaire.validate') }}
         </v-btn>
-      </v-row>
-      <v-row
-        v-if="hasNotifications"
-        justify="space-around"
-      >
-        <questionnaire-error :notifications="notifications" />
-      </v-row>
-    </v-col>
-  </v-row>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-form
+          ref="questionaire_form"
+          v-model="valid"
+          justify="start"
+        >
+          <v-expansion-panels
+            v-model="expansionPanels"
+            focusable
+            multiple
+            class="v-expansion-panel"
+          >
+            <questionnaire-group
+              v-for="(group, groupIndex) in group.groups"
+              ref="questionGroup"
+              :key="groupIndex"
+              :group="group"
+              :index="groupIndex"
+              :expand="expand"
+            />
+          </v-expansion-panels>
+        </v-form>
+      </v-col>
+    </v-row>
+    <v-row
+      v-if="hasNotifications"
+      justify="space-around"
+    >
+      <questionnaire-error :notifications="notifications" />
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -64,7 +78,8 @@ export default {
   },
   data () {
     return {
-      valid: false
+      valid: false,
+      expand: true
     }
   },
   computed: {
@@ -72,9 +87,20 @@ export default {
     ...mapState({
       lang: state => {
         if (!state || !state.app) {
-          return 'en-US'
+          return 'en'
         }
         return state.app.settings.lang
+      },
+      expansionPanels () {
+        if (this.expand) {
+          let indexes = []
+          for (let i = 0; i < this.group.groups.length; i++) {
+            indexes.push(i)
+          }
+          return indexes
+        } else {
+          return []
+        }
       }
     }),
     hasNotifications () {
@@ -133,6 +159,12 @@ export default {
         // this.$store.dispatch('notification/showNotifications')
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
+    },
+    collapseAll () {
+      this.expand = false
+    },
+    expandAll () {
+      this.expand = true
     }
   }
 }

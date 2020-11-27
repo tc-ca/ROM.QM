@@ -114,7 +114,7 @@
                   "$id": "/properties/PluginTypes/items/properties/Steps/items/properties/MessageName",
                   "type": "string",
                   "title": "The Message name of Plugin step to register",
-                  "description": "Please refer message names from https://msdn.microsoft.com/en-us/library/gg328576.aspx",
+                  "description": "Please refer message names from https://msdn.microsoft.com/en/library/gg328576.aspx",
                   "default": "",
                   "examples": [
                     "Update"

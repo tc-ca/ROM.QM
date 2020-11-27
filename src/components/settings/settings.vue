@@ -130,7 +130,7 @@ export default {
       type: Object,
       default: function () {
         return {
-          lang: 'en-US',
+          lang: 'en',
           darkmode: true
         }
       }
@@ -151,7 +151,7 @@ export default {
     ...mapGetters({ settings: 'settings' }),
     lang: state => {
       if (!state || !state.settings) {
-        return 'en-US'
+        return 'en'
       }
       return state.settings.lang
     },

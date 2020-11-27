@@ -59,10 +59,10 @@
       <v-row>
         <v-col cols="12">
           <v-expansion-panels
+            v-model="expansionPanelsValue"
             multiple
             focusable
             hover
-            :value="expantionPanelsValue"
           >
             <question
               v-for="(question, questionIndex) in group.questions"
@@ -72,6 +72,7 @@
               :group="group"
               :index="questionIndex"
               :in-repeated-group="repeatedGroup"
+              :expand="expand"
               @responseChanged="onResponseChanged"
               @error="onError"
               @group-subtitle-change="onSubtitleChange"
@@ -100,6 +101,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    expand: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -114,28 +119,29 @@ export default {
 
   computed: {
     groupTitle () {
-      return `${this.index + 1}. ${this.group.title[this.lang]}`
+      // return `${this.index + 1}. ${this.group.title[this.lang]}`
+      return `${this.group.title[this.lang]}`
     },
     ...mapState({
       lang: state => {
         if (!state || !state.app) {
-          return 'en-US'
+          return 'en'
         }
         return state.app.settings.lang
       }
     }),
-    expanded () {
-      return [0, 1]
-    },
-    expantionPanelsValue () {
-      const arr = []
-      for (let i = 0; i < this.group.questions.length; i++) {
-        arr.push(i)
+    expansionPanelsValue () {
+      if (this.expand) {
+        let indexes = []
+        for (let i = 0; i < this.group.questions.length; i++) {
+          indexes.push(i)
+        }
+        return indexes
+      } else {
+        return []
       }
-      return arr
     }
   },
-
   created () {
     // on repeat the last item in the array gets created hence the need for this method to update the group.order
     // uncomment console.log to obersve behavior

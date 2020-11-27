@@ -1,15 +1,15 @@
 {
     "name": "Questionnaire 1",
     "title": {
-        "en-US": "Questionnaire Title EN",
-        "fr-FR": "Questionnaire Title EN"
+        "en": "Questionnaire Title EN",
+        "fr": "Questionnaire Title EN"
     },
     "groups": [
         {
             "primaryKey": "Group 1",
             "title": {
-                "en-US": "New Group",
-                "fr-FR": "Fr: New Group"
+                "en": "New Group",
+                "fr": "Fr: New Group"
             },
             "isRepeatable": false,
             "isVisible": true,
@@ -22,8 +22,8 @@
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en-US": "Question text",
-                        "fr-FR": "FR: Question text"
+                        "en": "Question text",
+                        "fr": "FR: Question text"
                     },
                     "type": "radio",
                     "response": "false",
@@ -32,8 +32,8 @@
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
-                                "en-US": "Yes",
-                                "fr-FR": "FR: Yes"
+                                "en": "Yes",
+                                "fr": "FR: Yes"
                             },
                             "value": "true",
                             "provisions": [],
@@ -45,15 +45,16 @@
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
-                                "en-US": "No",
-                                "fr-FR": "FR: No"
+                                "en": "No",
+                                "fr": "FR: No"
                             },
                             "value": "false",
                             "provisions": [
-                                "08561d55-bffa-418a-b2c2-fa77613f60e4",
-                                "54909a23-e7c2-40f5-be97-e8c13be66ea7",
-                                "3fb1b184-fd9d-4549-b809-d1237e209a0a",
-                                "ff47dd56-db92-4023-98cd-6a768f253886"
+                                "090cb692-ea13-4753-9789-eba8d7503b5b",
+                                "b80fa1c1-71f6-4ceb-a99c-6257942a96b9",
+                                "e311574a-8bac-4b5b-b092-a31182accab5",
+                                "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1"
+
                             ],
                             "selectedProvisions": [
                                 "08561d55-bffa-418a-b2c2-fa77613f60e4"
@@ -69,8 +70,8 @@
                             "type": "require",
                             "value": null,
                             "errorMessage": {
-                                "en-US": "Required",
-                                "fr-FR": "FR: Required"
+                                "en": "Required",
+                                "fr": "FR: Required"
                             }
                         }
                     ],
@@ -79,7 +80,7 @@
                         "matchingType": "equal"
                     },
                     "internalComment": {
-                        "option": "optional",
+                        "option": "required",
                         "value": ""
                     },
                     "externalComment": {
@@ -104,8 +105,8 @@
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en-US": "Question text",
-                        "fr-FR": "FR: Question text"
+                        "en": "Question text",
+                        "fr": "FR: Question text"
                     },
                     "type": "radio",
                     "response": "false",
@@ -114,8 +115,8 @@
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
-                                "en-US": "Yes",
-                                "fr-FR": "FR: Yes"
+                                "en": "Yes",
+                                "fr": "FR: Yes"
                             },
                             "value": "true",
                             "provisions": [],
@@ -127,8 +128,8 @@
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
-                                "en-US": "No",
-                                "fr-FR": "FR: No"
+                                "en": "No",
+                                "fr": "FR: No"
                             },
                             "value": "false",
                             "provisions": [
@@ -159,8 +160,8 @@
                             "type": "require",
                             "value": null,
                             "errorMessage": {
-                                "en-US": "Required",
-                                "fr-FR": "FR: Required"
+                                "en": "Required",
+                                "fr": "FR: Required"
                             }
                         }
                     ],
@@ -192,8 +193,8 @@
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en-US": "Question text",
-                        "fr-FR": "FR: Question text"
+                        "en": "Question text",
+                        "fr": "FR: Question text"
                     },
                     "type": "radio",
                     "response": "false",
@@ -202,8 +203,8 @@
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
-                                "en-US": "Yes",
-                                "fr-FR": "FR: Yes"
+                                "en": "Yes",
+                                "fr": "FR: Yes"
                             },
                             "value": "true",
                             "provisions": [],
@@ -215,8 +216,8 @@
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
-                                "en-US": "No",
-                                "fr-FR": "FR: No"
+                                "en": "No",
+                                "fr": "FR: No"
                             },
                             "value": "false",
                             "provisions": [
@@ -235,8 +236,8 @@
                             "type": "require",
                             "value": null,
                             "errorMessage": {
-                                "en-US": "Required",
-                                "fr-FR": "FR: Required"
+                                "en": "Required",
+                                "fr": "FR: Required"
                             }
                         }
                     ],
