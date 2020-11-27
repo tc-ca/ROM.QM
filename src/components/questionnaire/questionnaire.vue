@@ -4,6 +4,7 @@
       <v-form
         ref="questionaire_form"
         v-model="valid"
+        justify="start"
       >
         <v-expansion-panels
           focusable
@@ -20,20 +21,18 @@
         </v-expansion-panels>
       </v-form>
     </v-col>
-    <v-spacer />
     <v-col cols="5">
-      <v-row justify="end">
-        <v-col class="col-auto">
-          <v-btn @click="validateQ()">
-            Validate
-          </v-btn>
-        </v-col>
+      <v-row justify="space-around">
+        <v-btn @click="validateQ()">
+          Validate
+        </v-btn>
       </v-row>
-      <div v-if="hasNotifications">
-        <v-row>
-          <questionnaire-error :notifications="notifications" />
-        </v-row>
-      </div>
+      <v-row
+        v-if="hasNotifications"
+        justify="space-around"
+      >
+        <questionnaire-error :notifications="notifications" />
+      </v-row>
     </v-col>
   </v-row>
 </template>
