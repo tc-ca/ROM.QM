@@ -9,12 +9,12 @@
         #actions
       >
         <v-icon
-          v-if="expansion && isValid === false"
+          v-if="expand && isValid === false"
           color="red"
         >
           mdi-exclamation
         </v-icon>
-        <v-icon v-if="expansion">
+        <v-icon v-if="expand">
           mdi-menu-down
         </v-icon>
       </template>
@@ -28,7 +28,7 @@
       <!--eslint-enable-->
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
-      <div :class="{'mt-6': expansion}">
+      <div :class="{'mt-6': expand}">
         <response
           :question="question"
           :group="group"
@@ -68,6 +68,8 @@
         </div>
       </div>
 
+      <br>
+
       <supplementary-info
         v-if="displaySupplementaryInfo"
         :question="question"
@@ -77,6 +79,7 @@
 
       <div>
         <v-expansion-panels
+          v-model="expansionPanelsValue"
           hover
           focusable
           multiple
@@ -89,7 +92,7 @@
             :group="group"
             :index="questionIndex"
             :in-repeated-group="inRepeatedGroup"
-            :expansion="true"
+            :expand="expand"
             @error="onChildError"
           />
         </v-expansion-panels>
@@ -125,7 +128,7 @@ export default {
     inRepeatedGroup: {
       type: Boolean, required: true
     },
-    expansion: {
+    expand: {
       type: Boolean,
       required: false,
       default: false
@@ -145,6 +148,17 @@ export default {
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
+    },
+    expansionPanelsValue () {
+      if (this.expand) {
+        let indexes = []
+        for (let i = 0; i < this.question.childQuestions.length; i++) {
+          indexes.push(i)
+        }
+        return indexes
+      } else {
+        return []
+      }
     },
     ...mapState({
       lang: state => {
@@ -172,23 +186,45 @@ export default {
         this.provisions.push(rehydratedProvision)
       }
 
-      // acc is "accumulator", google it
-      const idMapping = this.provisions.reduce((acc, el, i) => {
-        acc[el.id] = i
-        return acc
-      }, {})
+      // deep merge function
+      function merge (current, update) {
+        Object.keys(update).forEach(function (key) {
+          // if update[key] exist, and it's not a string or array,
+          // we go in one level deeper
 
-      this.provisions.forEach(el => {
-        // Use our mapping to locate the parent element in our data array
-        const parentEl = this.provisions[idMapping[el.parentLegislationId]]
+          if (Object.prototype.hasOwnProperty.call(current, key) &&
+            typeof current[key] === 'object' &&
+            !(current[key] instanceof Array)) {
+            merge(current[key], update[key])
 
-        if (parentEl) {
-          // Add our current el to its parent's `children` array
-          parentEl.children = [...(parentEl.children || []), el]
-        }
-      })
+            // if update[key] doesn't exist in current, or it's a string
+            // or array, then assign/overwrite current[key] to update[key]
+          } else {
+            current[key] = update[key]
+          }
+        })
+        return current
+      }
 
-      console.log(JSON.stringify(this.provisions))
+      const tree = (rowsArray, keysArray) => {
+        return rowsArray.reduce((acc, row) => {
+          const groupBy = (row, keys) => {
+            const [first, ...rest] = keys
+
+            if (!first) return [row]
+
+            return {
+              [row[first]]: groupBy(row, rest)
+            }
+          }
+          acc = merge(groupBy(row, keysArray), acc)
+          return acc
+        }, {})
+      }
+
+      var answer = tree(this.provisions, responseOption.provisions)
+
+      console.log(JSON.stringify(answer))
     },
     onViolationsChange (args) {
       this.question.violationResponse = args

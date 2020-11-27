@@ -1,24 +1,18 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="6">
+      <v-col cols="1">
         <v-btn
-          color="teal"
-          fab
           @click="expandAll()"
         >
-          <v-icon>mdi-camera-plus-outline</v-icon>
-          <span>Expand All</span>
+          <span>{{ $t('app.questionnaire.expandAll') }}</span>
         </v-btn>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="1">
         <v-btn
-          color="teal"
-          fab
           @click="collapseAll()"
         >
-          <v-icon>mdi-camera-plus-outline</v-icon>
-          <span>Collapse All</span>
+          <span>{{ $t('app.questionnaire.collapseAll') }}</span>
         </v-btn>
       </v-col>
     </v-row>
@@ -29,6 +23,7 @@
           v-model="valid"
         >
           <v-expansion-panels
+            v-model="expansionPanels"
             focusable
             multiple
             class="v-expansion-panel"
@@ -39,6 +34,7 @@
               :key="groupIndex"
               :group="group"
               :index="groupIndex"
+              :expand="expand"
             />
           </v-expansion-panels>
         </v-form>
@@ -66,7 +62,8 @@ export default {
   components: { QuestionnaireGroup },
   data () {
     return {
-      valid: false
+      valid: false,
+      expand: true
     }
   },
   computed: {
@@ -77,6 +74,17 @@ export default {
           return 'en'
         }
         return state.app.settings.lang
+      },
+      expansionPanels () {
+        if (this.expand) {
+          let indexes = []
+          for (let i = 0; i < this.group.groups.length; i++) {
+            indexes.push(i)
+          }
+          return indexes
+        } else {
+          return []
+        }
       }
     })
   },
@@ -130,12 +138,10 @@ export default {
       }
     },
     collapseAll () {
-      alert('collapse')
-      // to loop
+      this.expand = false
     },
     expandAll () {
-      alert('expand')
-      // to loop
+      this.expand = true
     }
   }
 }
