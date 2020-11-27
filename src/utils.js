@@ -59,7 +59,7 @@ export function getQuestionReferenceRecurse (questions, question) {
   return null
 }
 
-export function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang = 'en-US', color = 'error') {
+export function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang = 'en', color = 'error') {
   const notice = { header: `Question: ${q.text[lang]}`, text: text, icon: icon, color: color };
   return notice;
 }
