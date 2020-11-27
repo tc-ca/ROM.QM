@@ -267,7 +267,7 @@ export default {
       if (this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
-          if (responseOption.provisions == null) {
+          if (responseOption.provisions == null || responseOption.provisions.length === 0) {
             this.displayViolationInfo = false
           } else {
             this.loadSelectedItems(responseOption)
