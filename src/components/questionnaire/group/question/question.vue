@@ -174,19 +174,22 @@ export default {
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
       // let provisionsToSelect = responseOption.responseOption
       let provisionsToDisplay = responseOption.provisions
-
+      let test = []
       for (let index = 0; index < provisionsToDisplay.length; index++) {
         // get the key from array
         let provisionId = provisionsToDisplay[index]
+        // alert('provisionId' + provisionsToDisplay[index])
 
         // map to the value i want to extract
         console.log('rehydratedProvision', dictionnairyOfProvisions[provisionId])
+        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
 
         var rehydratedProvision = dictionnairyOfProvisions[provisionId]
-        this.provisions.push(rehydratedProvision)
+        test.push(rehydratedProvision)
       }
+      console.log('my suff', test)
 
-      let data = _.cloneDeep(this.provisions)
+      let data = _.cloneDeep(test)
       // const data = [
       //   { id: 2, parentId: 1 }, // no parent
       //   { id: 3, parentId: 2 },
@@ -199,6 +202,8 @@ export default {
 
       const ids = data.map(x => x.id)
       const parentids = data.map(x => x.parentLegislationId)
+      console.log('i', ids)
+      console.log('p', parentids)
 
       const uniq = [...new Set(ids)]
       // const uniqP = [...new Set(parentids)];
@@ -207,16 +212,16 @@ export default {
       // console.log(uniqP)
       for (var i = 0; i < ids.length; i++) {
         if (uniq.includes(parentids[i])) {
-          console.log('yes, parent is found', data[i].parentId)
+          console.log('yes, parent is found', data[i].parentLegislationId)
         } else {
-          console.log('no, parent is not found', data[i].parentId)
+          console.log('no, parent is not found', data[i].parentLegislationId)
           // if you dont have a parent will will just set it to the root node
-          data[i].parentId = -1
+          data[i].parentLegislationId = -1
         }
       }
 
       // create a root node, set to some number and null for the below algorith to know its the root
-      data.push({ id: -1, parentId: null })
+      data.push({ id: '-1', parentLegislationId: null })
 
       console.log('new data', data)
 
@@ -226,14 +231,16 @@ export default {
       }, {})
 
       let root
+      console.log(data.length)
       data.forEach(el => {
+        console.log('el', el)
         // Handle the root element
-        if (el.parentId === null) {
+        if (el.parentLegislationId === null) {
           root = el
           return
         }
         // Use our mapping to locate the parent element in our data array
-        const parentEl = data[idMapping[el.parentId]]
+        const parentEl = data[idMapping[el.parentLegislationId]]
         // Add our current el to its parent's `children` array
         parentEl.children = [...(parentEl.children || []), el]
       })
