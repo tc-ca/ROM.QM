@@ -102,7 +102,7 @@
 </template>
 
 <script>
-// import _ from 'lodash'
+import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
@@ -174,57 +174,80 @@ export default {
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
       // let provisionsToSelect = responseOption.responseOption
       let provisionsToDisplay = responseOption.provisions
-
+      let test = []
       for (let index = 0; index < provisionsToDisplay.length; index++) {
         // get the key from array
         let provisionId = provisionsToDisplay[index]
+        // alert('provisionId' + provisionsToDisplay[index])
 
         // map to the value i want to extract
         console.log('rehydratedProvision', dictionnairyOfProvisions[provisionId])
+        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
 
         var rehydratedProvision = dictionnairyOfProvisions[provisionId]
-        this.provisions.push(rehydratedProvision)
+        test.push(rehydratedProvision)
+      }
+      console.log('my suff', test)
+
+      let data = _.cloneDeep(test)
+      // const data = [
+      //   { id: 2, parentId: 1 }, // no parent
+      //   { id: 3, parentId: 2 },
+      //   { id: 4, parentId: 2 },
+      //   { id: 5, parentId: 1 }, // no parent
+      //   { id: 6, parentId: 5 },
+      //   { id: 7, parentId: 5 },
+      //   { id: 8, parentId: 19 } // no parent
+      // ]
+
+      const ids = data.map(x => x.id)
+      const parentids = data.map(x => x.parentLegislationId)
+      console.log('i', ids)
+      console.log('p', parentids)
+
+      const uniq = [...new Set(ids)]
+      // const uniqP = [...new Set(parentids)];
+
+      // [null, 1, 2, 5, 19]
+      // console.log(uniqP)
+      for (var i = 0; i < ids.length; i++) {
+        if (uniq.includes(parentids[i])) {
+          console.log('yes, parent is found', data[i].parentLegislationId)
+        } else {
+          console.log('no, parent is not found', data[i].parentLegislationId)
+          // if you dont have a parent will will just set it to the root node
+          data[i].parentLegislationId = -1
+        }
       }
 
-      // deep merge function
-      function merge (current, update) {
-        Object.keys(update).forEach(function (key) {
-          // if update[key] exist, and it's not a string or array,
-          // we go in one level deeper
+      // create a root node, set to some number and null for the below algorith to know its the root
+      data.push({ id: '-1', parentLegislationId: null })
 
-          if (Object.prototype.hasOwnProperty.call(current, key) &&
-            typeof current[key] === 'object' &&
-            !(current[key] instanceof Array)) {
-            merge(current[key], update[key])
+      console.log('new data', data)
 
-            // if update[key] doesn't exist in current, or it's a string
-            // or array, then assign/overwrite current[key] to update[key]
-          } else {
-            current[key] = update[key]
-          }
-        })
-        return current
-      }
+      const idMapping = data.reduce((acc, el, i) => {
+        acc[el.id] = i
+        return acc
+      }, {})
 
-      const tree = (rowsArray, keysArray) => {
-        return rowsArray.reduce((acc, row) => {
-          const groupBy = (row, keys) => {
-            const [first, ...rest] = keys
-
-            if (!first) return [row]
-
-            return {
-              [row[first]]: groupBy(row, rest)
-            }
-          }
-          acc = merge(groupBy(row, keysArray), acc)
-          return acc
-        }, {})
-      }
-
-      var answer = tree(this.provisions, responseOption.provisions)
-
-      console.log(JSON.stringify(answer))
+      let root
+      console.log(data.length)
+      data.forEach(el => {
+        console.log('el', el)
+        // Handle the root element
+        if (el.parentLegislationId === null) {
+          root = el
+          return
+        }
+        // Use our mapping to locate the parent element in our data array
+        const parentEl = data[idMapping[el.parentLegislationId]]
+        // Add our current el to its parent's `children` array
+        parentEl.children = [...(parentEl.children || []), el]
+      })
+      console.log('new tree', JSON.stringify(root.children))
+      console.log('provisions', JSON.stringify(this.provisions))
+      this.provisions = root.children
+      // console.log(JSON.stringify(answer))
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
