@@ -29,7 +29,12 @@ export default {
   },
   computed: {
     ...mapState({
-      lang: state => state.app.settings.lang
+      lang: state => {
+        if (!state || !state.settings) {
+          return 'en'
+        }
+        return state.settings.settings.lang
+      }
     })
   }
 }
