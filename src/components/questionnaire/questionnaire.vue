@@ -24,7 +24,7 @@
     <v-col cols="5">
       <v-row justify="space-around">
         <v-btn @click="validateQ()">
-          {{ $t('app.questionnaire.validate ') }}
+          {{ $t('app.questionnaire.validate') }}
         </v-btn>
       </v-row>
       <v-row
