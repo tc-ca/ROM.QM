@@ -7,8 +7,8 @@
     <supplementary-info-comment
       v-if="displayExternalComment"
       :comment="question.externalComment"
-      label="External Comment"
-      hint="External comments will be available to the public"
+      :label="$t('app.questionnaire.group.question.externalComment')"
+      :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
       :question="question"
       save-to-prop="externalComment"
@@ -17,8 +17,8 @@
     <supplementary-info-comment
       v-if="displayInternalComment"
       :comment="question.internalComment"
-      label="Internal Comment"
-      hint="Internal comments will only be made available to internal stakeholders"
+      :label="$t('app.questionnaire.group.question.internalComment')"
+      :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"
       :question="question"
       save-to-prop="internalComment"
@@ -27,7 +27,7 @@
     <supplementary-info-image
       v-if="displayPicture"
       :picture="question.picture"
-      label="Photos"
+      :label="$t('app.questionnaire.group.question.photos')"
       :group="group"
       :question="question"
       save-to-prop="images"
