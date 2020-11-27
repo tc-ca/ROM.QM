@@ -111,10 +111,10 @@ export default {
     },
     ...mapState({
       lang: state => {
-        if (!state || !state.app) {
+        if (!state || !state.settings) {
           return 'en'
         }
-        return state.app.settings.lang
+        return state.settings.settings.lang
       }
     })
   },
