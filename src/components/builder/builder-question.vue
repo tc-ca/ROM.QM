@@ -59,7 +59,7 @@
               class="col-auto"
             >
               <v-btn @click="addQuestion($event)">
-                Add Child question
+                {{ $t('app.builder.group.question.addChildQuestion') }}
               </v-btn>
             </v-col>
             <v-col
@@ -84,7 +84,7 @@
                     </v-icon>
                   </v-btn>
                 </template>
-                <span>Remove question</span>
+                <span>{{ $t('app.builder.group.question.removeQuestion') }}</span>
               </v-tooltip>
             </v-col>
           </v-row>
@@ -95,7 +95,7 @@
           >
             <v-card>
               <v-card-title class="headline">
-                Delete?
+                {{ $t('app.builder.group.question.delete') }}
               </v-card-title>
 
               <v-card-actions>
@@ -106,14 +106,14 @@
                   text
                   @click="confirmDialogOpen = false; removeQuestion()"
                 >
-                  Yes
+                  {{ $t('app.builder.group.question.yes') }}
                 </v-btn>
 
                 <v-btn
                   text
                   @click="confirmDialogOpen = false"
                 >
-                  No
+                  {{ $t('app.builder.group.question.no') }}
                 </v-btn>
               </v-card-actions>
             </v-card>

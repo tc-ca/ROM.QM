@@ -97,7 +97,7 @@
                           class="col-auto"
                         >
                           <v-btn @click="addQuestion($event, group)">
-                            Add question
+                            {{ $t('app.builder.group.question.addQuestion') }}
                           </v-btn>
                         </v-col>
                         <v-col
@@ -122,7 +122,7 @@
                                 </v-icon>
                               </v-btn>
                             </template>
-                            <span>Remove group</span>
+                            <span>{{ $t('app.builder.group.removeGroup') }}</span>
                           </v-tooltip>
                         </v-col>
                       </v-row>
@@ -137,7 +137,7 @@
           class="mt-2 center"
         >
           <v-btn @click="addGroup()">
-            Add group
+            {{ $t('app.builder.group.addGroup') }}
           </v-btn>
         </div>
       </v-col>
@@ -148,7 +148,7 @@
         >
           <v-col class="col-auto">
             <v-btn @click="save()">
-              Save
+              {{ $t('app.builder.save') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -156,7 +156,7 @@
           <v-col>
             <v-text-field
               v-model="questionnaire.name"
-              label="Questionnaire name"
+              :label="$t('app.builder.questionnaireName')"
             />
           </v-col>
         </v-row>
@@ -164,7 +164,7 @@
           <v-col>
             <v-text-field
               v-model="selectedGroup.primaryKey"
-              label="Group name"
+              :label="$t('app.builder.group.groupName')"
             />
             <v-text-field
               v-model="selectedGroup.title[eng]"
@@ -188,7 +188,7 @@
           <v-col>
             <v-text-field
               v-model="selectedQuestion.name"
-              label="Question name"
+              :label="$t('app.builder.questionName')"
             />
             <v-text-field
               v-model="selectedQuestion.text[eng]"
@@ -203,7 +203,7 @@
               item-text="text"
               item-value="value"
               :items="questionTypes"
-              label="Question Type"
+              :label="$t('app.builder.questionType')"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -216,7 +216,7 @@
               v-model="selectedQuestion.sortOrder"
               dense
               type="number"
-              label="Sort Order"
+              :label="$t('app.builder.sortOrder')"
               @change="sortQuestions(selectedQuestion)"
             />
             <v-select
@@ -224,7 +224,7 @@
               item-text="text"
               item-value="value"
               :items="optionTypes"
-              label="Internal Comments"
+              :label="$t('app.builder.internalComments')"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -238,7 +238,7 @@
               item-text="text"
               item-value="value"
               :items="optionTypes"
-              label="External Comments"
+              :label="$t('app.builder.externalComments')"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -252,7 +252,7 @@
               item-text="text"
               item-value="value"
               :items="optionTypes"
-              label="Picture(s)"
+              :label="$t('app.builder.picture')"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -264,7 +264,7 @@
             <v-checkbox
               v-model="selectedQuestion.isVisible"
               dense
-              label="Visible by default"
+              :label="$t('app.builder.visibleByDefault')"
             />
 
             <div
@@ -283,7 +283,7 @@
                     mdi-menu-down
                   </v-icon>
                 </v-btn>
-                Response Options
+                {{ $t('app.builder.responseOptions.responseOptions') }}
               </div>
               <div v-show="!optionsCollapsed">
                 <div
@@ -299,17 +299,17 @@
                   <v-text-field
                     v-model="option.text[fr]"
                     dense
-                    label="Oprion text Fr"
+                    label="Option text Fr"
                   />
                   <v-text-field
                     v-model.number="option.sortOrder"
                     dense
-                    label="Sort Order"
+                    :label="$t('app.builder.responseOptions.sortOrder')"
                   />
                   <v-text-field
                     v-model="option.value"
                     dense
-                    label="value"
+                    :label="$t('app.builder.responseOptions.value')"
                   />
                   <div class="right">
                     <v-tooltip
@@ -331,7 +331,7 @@
                           </v-icon>
                         </v-btn>
                       </template>
-                      <span>Remove response option</span>
+                      <span>{{ $t('app.builder.responseOptions.removResponseoption') }}</span>
                     </v-tooltip>
                   </div>
                   <div>
@@ -348,7 +348,7 @@
                           mdi-menu-down
                         </v-icon>
                       </v-btn>
-                      Provisions
+                      {{ $t('app.builder.responseOptions.provisions.provisions') }}
                     </div>
                     <div v-show="option.isProvisionCollapsed">
                       <div>
@@ -358,7 +358,7 @@
                           <v-sheet class="pa-4">
                             <v-text-field
                               v-model="option.searchProvisions"
-                              label="Search"
+                              :label="$t('app.builder.responseOptions.provisions.search')"
                               outlined
                               hide-details
                               clearable
@@ -388,7 +388,7 @@
                     small
                     @click="addOption()"
                   >
-                    Add option
+                    $t('app.builder.responseOptions.addOption')
                   </v-btn>
                 </div>
               </div>
@@ -407,7 +407,7 @@
                     mdi-menu-down
                   </v-icon>
                 </v-btn>
-                Validators
+                {{ $t('app.builder.validators.validators') }}
               </div>
               <div
                 v-show="!validatorsCollapsed"
@@ -420,12 +420,12 @@
                   <v-text-field
                     v-model="validationRule.name"
                     dense
-                    label="Name"
+                    :label="$t('app.builder.validators.name')"
                   />
                   <v-checkbox
                     v-model="validationRule.enabled"
                     dense
-                    label="Enabled"
+                    :label="$t('app.builder.validators.enabled')"
                   />
                   <v-select
                     v-model="validationRule.type"
@@ -433,7 +433,7 @@
                     item-text="text"
                     item-value="value"
                     :items="validatorTypes"
-                    label="Type"
+                    :label="$t('app.builder.validators.type')"
                   >
                     <template v-slot:selection="{ item }">
                       <span>{{ item.text[lang] }}</span>
@@ -451,7 +451,7 @@
                   <v-text-field
                     v-model="validationRule.errorMessage[eng]"
                     dense
-                    label="Error message"
+                    label="En: Error message"
                   />
                   <v-text-field
                     v-model="validationRule.errorMessage[fr]"
@@ -478,7 +478,7 @@
                           </v-icon>
                         </v-btn>
                       </template>
-                      <span>Remove validatior</span>
+                      <span>{{ $t('app.builder.validators.removeValidator') }}</span>
                     </v-tooltip>
                   </div>
                 </div>
@@ -487,7 +487,7 @@
                     small
                     @click="addValidator()"
                   >
-                    Add validator
+                    {{ $t('app.builder.validators.addValidator') }}
                   </v-btn>
                 </div>
               </div>
@@ -505,7 +505,7 @@
                       mdi-menu-down
                     </v-icon>
                   </v-btn>
-                  Depends On
+                  {{ $t('app.builder.dependsOn.dependsOn') }}
                 </div>
                 <div v-show="!dependenciesCollapsed">
                   <div>
@@ -520,7 +520,7 @@
                         :items="dependencyGroupTypes"
                         item-text="text"
                         item-value="value"
-                        label="Type"
+                        :label="$t('app.builder.dependsOn.type')"
                       >
                         <template v-slot:selection="{ item }">
                           <span>{{ item.text[lang] }}</span>
@@ -594,7 +594,7 @@
                                     </v-icon>
                                   </v-btn>
                                 </template>
-                                <span>Remove question</span>
+                                <span>{{ $t('app.builder.group.question.removeQuestion') }}</span>
                               </v-tooltip>
                             </div>
                           </div>
@@ -610,7 +610,7 @@
                             small
                             @click="addQuestionDependency(dependencyGroup)"
                           >
-                            Add question
+                            {{ $t('app.builder.dependsOn.addQuestion') }}
                           </v-btn>
                         </div>
                       </div>
@@ -634,7 +634,7 @@
                               </v-icon>
                             </v-btn>
                           </template>
-                          <span>Remove dependency group</span>
+                          <span>{{ $t('app.builder.dependsOn.removDependencyGroup') }}</span>
                         </v-tooltip>
                       </div>
                     </div>
@@ -643,7 +643,7 @@
                         small
                         @click="addDependencyGroup()"
                       >
-                        Add Dependency Group
+                        {{ $t('app.builder.dependsOn.addDependencyGroup') }}
                       </v-btn>
                     </div>
                   </div>
@@ -660,7 +660,7 @@
     >
       <v-card>
         <v-card-title class="headline">
-          Delete?
+          {{ $t('app.builder.group.delete') }}
         </v-card-title>
 
         <v-card-actions>
@@ -671,14 +671,14 @@
             text
             @click="confirmed()"
           >
-            Yes
+            {{ $t('app.builder.group.yes') }}
           </v-btn>
 
           <v-btn
             text
             @click="confirmDialogOpen = false"
           >
-            No
+            {{ $t('app.builder.group.no') }}
           </v-btn>
         </v-card-actions>
       </v-card>

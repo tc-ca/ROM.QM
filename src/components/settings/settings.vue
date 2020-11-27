@@ -63,7 +63,7 @@
       >
         <v-list-item-content>
           <v-list-item-title>
-            Home
+            {{ $t('app.navigations.home') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -74,7 +74,7 @@
       >
         <v-list-item-content>
           <v-list-item-title>
-            Questionnaire
+            {{ $t('app.navigations.questionnaire') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -85,7 +85,7 @@
       >
         <v-list-item-content>
           <v-list-item-title>
-            Builder
+            {{ $t('app.navigations.builder') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -96,7 +96,7 @@
       >
         <v-list-item-content>
           <v-list-item-title>
-            Questionnaire pulling from dynamics
+            {{ $t('app.navigations.qFromDynamics') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -107,7 +107,7 @@
       >
         <v-list-item-content>
           <v-list-item-title>
-            Questionnaire pulling from state
+            {{ $t('app.navigations.qFromState') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>

@@ -13,7 +13,7 @@
           <span>{{ $t('app.questionnaire.collapseAll') }}</span>
         </v-btn>
         <v-btn @click="validateQ()">
-          Validate
+          {{ $t('app.questionnaire.validate') }}
         </v-btn>
       </v-col>
     </v-row>
