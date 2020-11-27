@@ -164,7 +164,8 @@ export default {
   },
   computed: {
     questionText () {
-      return `${this.index + 1}. ${this.question.text[this.lang]}`
+      // return `${this.index + 1}. ${this.question.text[this.lang]}`
+      return `${this.question.text[this.lang]}`
     },
     ...mapState({
       lang: state => {
