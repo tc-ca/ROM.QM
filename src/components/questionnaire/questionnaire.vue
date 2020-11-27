@@ -1,23 +1,24 @@
 <template>
-  <div>
-    <v-row>
-      <v-col cols="1">
+  <div class="center-questionnaire">
+    <v-row class="text-left">
+      <v-col>
         <v-btn
           @click="expandAll()"
         >
           <span>{{ $t('app.questionnaire.expandAll') }}</span>
         </v-btn>
-      </v-col>
-      <v-col cols="1">
         <v-btn
           @click="collapseAll()"
         >
           <span>{{ $t('app.questionnaire.collapseAll') }}</span>
         </v-btn>
+        <v-btn @click="validateQ()">
+          Validate
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="7">
+      <v-col>
         <v-form
           ref="questionaire_form"
           v-model="valid"
@@ -38,15 +39,6 @@
             />
           </v-expansion-panels>
         </v-form>
-      </v-col>
-      <v-col cols="5">
-        <v-row justify="end">
-          <v-col class="col-auto">
-            <v-btn @click="validateQ()">
-              Validate
-            </v-btn>
-          </v-col>
-        </v-row>
       </v-col>
     </v-row>
   </div>
