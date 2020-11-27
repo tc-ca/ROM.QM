@@ -13,10 +13,8 @@ export const getters = {
 
 export const actions = {
   async SetLegislationsStateToLocalData({ commit }) {
-    if (!state.legislations) {
-      const data = await GetLegislationFromLocalImportModule();
-      commit("SetLegislations", data);
-    }
+    const data = await GetLegislationFromLocalImportModule();
+    commit("SetLegislations", data);
   },
   async SetLegislationsState({ commit }, payload) {
     //////////////////////
@@ -33,7 +31,10 @@ export const mutations = {
 };
 
 async function GetLegislationFromLocalImportModule() {
-  const data = await import("../../api/legislation").then(module => {
+  //TODO 
+  //legislationDictionnary = render
+  //legislation = builder
+  const data = await import("../../api/legislationDictionnary").then(module => {
     return module.default;
   });
   return data;

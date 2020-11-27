@@ -9,12 +9,12 @@
         #actions
       >
         <v-icon
-          v-if="expansion && isValid === false"
+          v-if="expand && isValid === false"
           color="red"
         >
           mdi-exclamation
         </v-icon>
-        <v-icon v-if="expansion">
+        <v-icon v-if="expand">
           mdi-menu-down
         </v-icon>
       </template>
@@ -28,7 +28,7 @@
       <!--eslint-enable-->
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
-      <div :class="{'mt-6': expansion}">
+      <div :class="{'mt-6': expand}">
         <response
           :question="question"
           :group="group"
@@ -44,7 +44,7 @@
           >
             <v-sheet class="pa-4">
               <v-text-field
-                v-model="selResponseOptions.searchProvisions"
+                v-model="selectedResponseOption.searchProvisions"
                 label="Search"
                 outlined
                 hide-details
@@ -54,19 +54,21 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="selResponseOptions.selectedProvisions"
+                v-model="selectedResponseOption.selectedProvisions"
                 selectable
-                item-text="DisplayEnglishText"
+                :item-text="'title.' + lang"
                 item-key="id"
                 selection-type="leaf"
-                :search="selResponseOptions.searchProvisions"
-                :filter="selResponseOptions.filterProvisions"
-                :items="selResponseOptions.provisions"
+                :search="selectedResponseOption.searchProvisions"
+                :filter="selectedResponseOption.filterProvisions"
+                :items="provisions"
               />
             </v-card-text>
           </v-card>
         </div>
       </div>
+
+      <br>
 
       <supplementary-info
         v-if="displaySupplementaryInfo"
@@ -77,6 +79,7 @@
 
       <div>
         <v-expansion-panels
+          v-model="expansionPanelsValue"
           hover
           focusable
           multiple
@@ -89,7 +92,7 @@
             :group="group"
             :index="questionIndex"
             :in-repeated-group="inRepeatedGroup"
-            :expansion="true"
+            :expand="expand"
             @error="onChildError"
           />
         </v-expansion-panels>
@@ -99,7 +102,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+// import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
@@ -124,6 +127,11 @@ export default {
     },
     inRepeatedGroup: {
       type: Boolean, required: true
+    },
+    expand: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
@@ -131,22 +139,30 @@ export default {
       displayViolationInfo: false,
       displaySupplementaryInfo: false,
       isValid: null,
-      selResponseOptions: [],
+      selectedResponseOption: [],
       selResponses: [],
-      expansion: true,
       provisions: []
     }
   },
   computed: {
     questionText () {
-      return `${this.index + 1}. ${this.question.text[this.lang]}`
+      // return `${this.index + 1}. ${this.question.text[this.lang]}`
+      return `${this.question.text[this.lang]}`
+    },
+    expansionPanelsValue () {
+      if (this.expand) {
+        let indexes = []
+        for (let i = 0; i < this.question.childQuestions.length; i++) {
+          indexes.push(i)
+        }
+        return indexes
+      } else {
+        return []
+      }
     },
     ...mapState({
       lang: state => {
-        if (!state || !state.app) {
-          return 'en-US'
-        }
-        return state.app.settings.lang
+        return 'en'
       }
     })
   },
@@ -154,80 +170,61 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-    loadSelectedItems (selectedProvisions) {
-      var provisions = this.$store.state.legislations.legislations
-      var obj = _.cloneDeep(provisions)
-      var cloneObj = _.cloneDeep(provisions)
-      let str = selectedProvisions
+    loadSelectedItems (responseOption) {
+      let dictionnairyOfProvisions = this.$store.state.legislations.legislations
+      // let provisionsToSelect = responseOption.responseOption
+      let provisionsToDisplay = responseOption.provisions
 
-      let first = 0
-      let second = 0
-      let third = 0
+      for (let index = 0; index < provisionsToDisplay.length; index++) {
+        // get the key from array
+        let provisionId = provisionsToDisplay[index]
 
-      obj.forEach(iterate)
+        // map to the value i want to extract
+        console.log('rehydratedProvision', dictionnairyOfProvisions[provisionId])
 
-      function iterate (item, index, array) {
-        first = index
-        if (item.children.length > 0) {
-          item.children.forEach(iterate2)
-          if (cloneObj[first].children.length > 0) {
-            var x = true
-            for (let i = 0; i < cloneObj[first].children.length; i++) {
-              if (cloneObj[first].children[i] !== undefined) {
-                x = false
-              }
-            }
-            if (x && !str.includes(cloneObj[first].id)) {
-              delete cloneObj[first]
-            }
-          }
-        } else {
-          if (!str.includes(item.id)) {
-            delete cloneObj[first]
-          }
-        }
+        var rehydratedProvision = dictionnairyOfProvisions[provisionId]
+        this.provisions.push(rehydratedProvision)
       }
 
-      function iterate2 (item, index, array) {
-        second = index
-        if (item.children.length > 0) {
-          item.children.forEach(iterate3)
-          if (cloneObj[first].children[second].children.length > 0) {
-            var x = true
-            for (let i = 0; i < cloneObj[first].children[second].children.length; i++) {
-              if (cloneObj[first].children[second].children[i] !== undefined) {
-                x = false
-              }
-            }
-            if (x && !str.includes(cloneObj[first].children[second].id)) {
-              delete cloneObj[first].children[second]
-            }
+      // deep merge function
+      function merge (current, update) {
+        Object.keys(update).forEach(function (key) {
+          // if update[key] exist, and it's not a string or array,
+          // we go in one level deeper
+
+          if (Object.prototype.hasOwnProperty.call(current, key) &&
+            typeof current[key] === 'object' &&
+            !(current[key] instanceof Array)) {
+            merge(current[key], update[key])
+
+            // if update[key] doesn't exist in current, or it's a string
+            // or array, then assign/overwrite current[key] to update[key]
+          } else {
+            current[key] = update[key]
           }
-        } else {
-          if (!str.includes(item.id)) {
-            delete cloneObj[first].children[second]
-          }
-        }
+        })
+        return current
       }
 
-      function iterate3 (item, index, array) {
-        third = index
-        if (!str.includes(item.id)) {
-          delete cloneObj[first].children[second].children[third]
-        }
+      const tree = (rowsArray, keysArray) => {
+        return rowsArray.reduce((acc, row) => {
+          const groupBy = (row, keys) => {
+            const [first, ...rest] = keys
+
+            if (!first) return [row]
+
+            return {
+              [row[first]]: groupBy(row, rest)
+            }
+          }
+          acc = merge(groupBy(row, keysArray), acc)
+          return acc
+        }, {})
       }
 
-      cloneObj = cloneObj.filter(function (e) { return e != null })
-      cloneObj.forEach(q => {
-        if (q.children.length > 0) {
-          q.forEach(q1 => {
-            q1 = q1.filter(function (e) { return e != null })
-          })
-          q = q.filter(function (e) { return e != null })
-        }
-      })
+      var answer = tree(this.provisions, responseOption.provisions)
 
-      return cloneObj
+      console.log(JSON.stringify(answer))
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
@@ -244,24 +241,20 @@ export default {
       this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
-      this.selResponseOptions = null
-      /* eslint-disable no-debugger */
-      // debugger
       if (this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
-
         if (responseOption) {
           if (responseOption.provisions == null) {
-            this.displayViolationInfo = !!((responseOption.selectedProvisions && responseOption.selectedProvisions.length > 0))
-            this.loadSelectedItems(responseOption.selectedProvisions)
+            this.displayViolationInfo = false
           } else {
-            this.displayViolationInfo = !!((responseOption.provisions && responseOption.provisions.length > 0))
+            this.loadSelectedItems(responseOption)
+            this.displayViolationInfo = true
           }
         } else {
           this.displayViolationInfo = false
         }
-        this.selResponseOptions = responseOption // _.cloneDeep(this.question.responseOptions[index])
-        this.selResponseOptions.selectedProvisions = responseOption.selectedProvisions
+        this.selectedResponseOption = responseOption
+        this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
       }
     },
     updateDependants (args) {

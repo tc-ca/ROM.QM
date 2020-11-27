@@ -9,7 +9,7 @@ localVue.use(Vuex)
 
 let group = {
   primaryKey: 'Group 1',
-  title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+  title: { 'en': 'Group', 'fr': 'Group FR' },
   isRepeatable: false,
   isVisible: false,
   showKey: '', // TODO: do we need this

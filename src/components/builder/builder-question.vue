@@ -169,7 +169,7 @@ export default {
     ...mapState({
       lang: state => {
         if (!state || !state.app) {
-          return 'en-US'
+          return 'en'
         }
         return state.app.settings.lang
       }

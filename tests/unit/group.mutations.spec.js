@@ -34,7 +34,7 @@ describe('Test Group component Vuex Mutations', () => {
   test('updateGroupHtmlElementId', () => {
     const group = {
       primaryKey: 'Group1',
-      title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+      title: { 'en': 'Group', 'fr': 'Group FR' },
       domSuffix: '',
       htmlElementId: '',
       questions: []
@@ -57,7 +57,7 @@ describe('Test Group component Vuex Mutations', () => {
       groups: [
         {
           primaryKey: 'Group1',
-          title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+          title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
           showKey: '',
@@ -74,7 +74,7 @@ describe('Test Group component Vuex Mutations', () => {
     // simulate copying of group 1
     const copyOfGroup1 = {
       primaryKey: 'Group1',
-      title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+      title: { 'en': 'Group', 'fr': 'Group FR' },
       isRepeatable: false,
       isVisible: false,
       showKey: '',
@@ -96,7 +96,7 @@ describe('Test Group component Vuex Mutations', () => {
       groups: [
         {
           primaryKey: 'Group1',
-          title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+          title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
           showKey: '',
@@ -108,7 +108,7 @@ describe('Test Group component Vuex Mutations', () => {
         },
         {
           primaryKey: 'Group2',
-          title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+          title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
           showKey: '',
@@ -124,7 +124,7 @@ describe('Test Group component Vuex Mutations', () => {
 
     const groupToBeRemoved = {
       primaryKey: 'Group2',
-      title: { 'en-US': 'Group', 'fr-FR': 'Group FR' },
+      title: { 'en': 'Group', 'fr': 'Group FR' },
       isRepeatable: false,
       isVisible: false,
       showKey: '',
