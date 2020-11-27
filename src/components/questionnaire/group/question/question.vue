@@ -221,7 +221,12 @@ export default {
       }
 
       // create a root node, set to some number and null for the below algorith to know its the root
-      data.push({ id: '-1', parentLegislationId: null })
+      data.push({ id: '-1',
+        parentLegislationId: null,
+        'title': {
+          'en': 'root',
+          'fr': 'root'
+        } })
 
       console.log('new data', data)
 
