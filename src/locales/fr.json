@@ -7,6 +7,10 @@
       "darkMode": "FR Dark mode ",
       "language": "FR Language",
       "settings": "FR Settings"
+    },
+    "questionnaire": {
+      "expandAll": "FR Expand All",
+      "collapseAll": "FR Collapse All"
     }
   }
 }

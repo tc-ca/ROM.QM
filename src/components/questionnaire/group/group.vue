@@ -59,10 +59,10 @@
       <v-row>
         <v-col cols="12">
           <v-expansion-panels
+            v-model="expansionPanelsValue"
             multiple
             focusable
             hover
-            :value="expansionPanelsValue"
           >
             <question
               v-for="(question, questionIndex) in group.questions"
@@ -72,6 +72,7 @@
               :group="group"
               :index="questionIndex"
               :in-repeated-group="repeatedGroup"
+              :expand="expand"
               @responseChanged="onResponseChanged"
               @error="onError"
               @group-subtitle-change="onSubtitleChange"
@@ -100,6 +101,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    expand: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -126,12 +131,15 @@ export default {
       }
     }),
     expansionPanelsValue () {
-      // TODO: this work?
-      const arr = []
-      for (let i = 0; i < this.group.questions.length; i++) {
-        arr.push(i)
+      if (this.expand) {
+        let indexes = []
+        for (let i = 0; i < this.group.questions.length; i++) {
+          indexes.push(i)
+        }
+        return indexes
+      } else {
+        return []
       }
-      return arr
     }
   },
   created () {
