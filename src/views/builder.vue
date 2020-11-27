@@ -367,7 +367,7 @@
                           </v-sheet>
                           <v-card-text>
                             <v-treeview
-                              v-model="option.selectedProvisions"
+                              v-model="option.provisions"
                               selectable
                               item-text="DisplayEnglishText"
                               item-key="id"
