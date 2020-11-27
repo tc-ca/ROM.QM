@@ -80,7 +80,7 @@
                         "matchingType": "equal"
                     },
                     "internalComment": {
-                        "option": "optional",
+                        "option": "required",
                         "value": ""
                     },
                     "externalComment": {
