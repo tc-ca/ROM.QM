@@ -301,7 +301,7 @@ export default {
     onError (error) {
       this.picture.validationStatus = !error
       if (!this.picture.validationStatus) {
-        this.picture.notification = { text: `Picture is required on question ${this.question.text[this.lang]}, please upload at least one.`, color: 'error' }
+        this.picture.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `Picture is required on this question, please upload at least one.`, color: 'error' }
       } else {
         this.picture.notification = null
       }
