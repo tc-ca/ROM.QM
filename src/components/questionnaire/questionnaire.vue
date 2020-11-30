@@ -18,7 +18,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col cols="7">
         <v-form
           ref="questionaire_form"
           v-model="valid"
@@ -41,12 +41,13 @@
           </v-expansion-panels>
         </v-form>
       </v-col>
-    </v-row>
-    <v-row
-      v-if="hasNotifications"
-      justify="space-around"
-    >
-      <questionnaire-error :notifications="notifications" />
+      <v-col
+        v-if="hasNotifications"
+        cols="5"
+        justify="space-around"
+      >
+        <questionnaire-error :notifications="notifications" />
+      </v-col>
     </v-row>
   </div>
 </template>
