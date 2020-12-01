@@ -1,6 +1,8 @@
 // TODO: optimize later, pull down only method required.
 import _ from 'lodash'
 import { pad } from '../../utils.js'
+import { v4 as uuidv4 } from 'uuid';
+
 export const state = {
   groups: [],
   groupsCopy: []
@@ -39,8 +41,8 @@ export const actions = {
 
     const copiedGroup = _.cloneDeep(targetedGroupToCopy)
 
-    // TODO Luis
     // Regenerate a new GUID for every question
+    copiedGroup.questions.forEach( q => { q.guid = uuidv4(); })
 
     // update new group order
     copiedGroup.order = insertAtEndOfTargetedRepeatedGroups

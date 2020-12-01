@@ -802,21 +802,22 @@ export default {
     changeQuestionType ($event) {
       if (this.selectedQuestion.type === 'reference') {
         console.log(this.selectedQuestion)
-        // Check if there is a Reference ID question and if it is not, create one
-        if (!BuilderService.findReferenceQuestion(this.selectedGroup)) {
-          // Do something
-          let qRf = BuilderService.createReferenceQuestion()
-          console.log(qRf)
-          if (this.selectedGroup.questions.length > 0) {
-            // Move every question one number up on the sort order
-            this.selectedGroup.questions.forEach((q) => { q.sortOrder += 1 })
+        const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
+        if (group) {
+          if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
+            let qRf = BuilderService.createReferenceQuestion()
+            console.log(qRf)
+            if (group.questions.length > 0) {
+              // Move every question one number up on the sort order
+              group.questions.forEach((q) => { q.sortOrder += 1 })
+            }
+            qRf.sortOrder = 1
+            group.questions.unshift(qRf)
+          } else {
+            // Alert and return back to the radio button type
+            alert('Only one Reference question is allowed on a Group')
+            this.selectedQuestion.type = 'text'
           }
-          qRf.sortOrder = 1
-          this.selectedGroup.questions.unshift(qRf)
-        } else {
-          // Alert and return back to the radio button type
-          alert('Only one Reference question is allowed on a Group')
-          this.selectedQuestion.type = 'text'
         }
       }
     },

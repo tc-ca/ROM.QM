@@ -1,6 +1,7 @@
 import _ from "lodash";
-import { LANGUAGE } from '../constants.js'
+import { LANGUAGE } from '../constants.js';
 import { QUESTION_TYPE } from "../data/questionTypes.js";
+import { v4 as uuidv4 } from 'uuid';
 
 /* eslint-disable no-undef */
 
@@ -38,7 +39,7 @@ function createQuestionnaire () {
 
 function createQuestion (questionnaire) {
   let id = getNextQuestionId(questionnaire)
-  // let guid = 
+  let guid = uuidv4();
   let question = {
     name: 'Question',
     id: id,
@@ -119,9 +120,12 @@ function createQuestion (questionnaire) {
 }
 
 function createReferenceQuestion () {
+  // let id = getNextQuestionId(questionnaire)
+  let guid = uuidv4();
   let question = {
     name: 'Reference ID',
     id: 0,
+    guid: guid,
     sortOrder: 1,
     isVisible: true,
     isMultiple: false,
@@ -162,9 +166,18 @@ function createReferenceQuestion () {
   return question
 }
 
-function findReferenceQuestion(group) {
-  let q = group.questions.find( q => q.type === QUESTION_TYPE.REFERENCE);
+function findReferenceQuestion(group, guid = "") {
+  let q = group.questions.find( q => (q.type === QUESTION_TYPE.REFERENCE && q.guid !== guid));
   return q;
+}
+
+function findGroupForQuestionById(groups, qGuid) {
+  let group = groups.find( g => {
+    const q = g.questions.findIndex(q => q.guid === qGuid)
+    if (q > -1) return true;
+    return false;
+  });
+  return group;
 }
 
 function createChildQuestion (questionnaire, question) {
@@ -304,5 +317,6 @@ export default {
   createValidator,
   createDependencyGroup,
   processBuilderForSave,
-  findReferenceQuestion
+  findReferenceQuestion,
+  findGroupForQuestionById
 };
