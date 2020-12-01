@@ -66,6 +66,14 @@
                 clear-icon="mdi-close-circle-outline"
               />
             </v-sheet>
+            <v-sheet class="pa-4">
+              <div class="text-left">
+                <v-btn small v-for="item in selectedResponseOption.selectedProvisions"
+                  @click="onSelectedProvisionClick(item, selectedResponseOption)"
+                  :key="item.key" style="margin-right: 5px"
+                  rounded color="primary" dark><v-icon small left dark>mdi-close</v-icon>{{ getSelectedProvisionText(item) }}</v-btn>
+              </div>
+            </v-sheet>
             <v-card-text>
               <v-treeview
                 v-model="selectedResponseOption.selectedProvisions"
@@ -184,7 +192,22 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-
+    getSelectedProvisionText (item) {
+      let provison = ''
+      let findDeep = function (data, str) {
+        return data.some(function (e) {
+          if (e.id === str) {
+            provison = e.title.en.split('-')[0]
+            return e
+          } else if (e.children) return findDeep(e.children, str)
+        })
+      }
+      findDeep(this.provisions, item)
+      return provison
+    },
+    onSelectedProvisionClick (item, options) {
+      options.selectedProvisions = options.selectedProvisions.filter(i => i !== item)
+    },
     hydrateItems (itemToHydrate, dictionary) {
       let hydratedItems = []
 
