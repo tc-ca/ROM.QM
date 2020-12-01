@@ -4,7 +4,7 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 echo "Script Path: $scriptPath"
 
 #Connection String to Environment
-$ConnectionStringDev = "Url=https://rom-dev-tcd365.crm3.dynamics.com; Username=TDG.CORE@034gc.onmicrosoft.com; Password=Oversight1!; authtype=Office365; RequireNewInstance=True"
+$ConnectionStringDev = "Url=https://xxxxxxxxx.dynamics.com; Username=xxxxxxxxx.onmicrosoft.com; Password=xxxxxxxxxxx; authtype=Office365; RequireNewInstance=True"
 
 #how long we want to wait to realize something broke
 $Timeout = 960
