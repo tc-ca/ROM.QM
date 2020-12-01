@@ -97,6 +97,7 @@
 
 <script>
 export default {
+  emits: ['violations-change'],
   data () {
     return {
       violations: null,
@@ -174,7 +175,17 @@ export default {
     //       textTwo.indexOf(searchText) > -1
     // }
   },
-
+  watch: {
+    violations: {
+      immediate: true,
+      handler (newValue, oldValue) {
+        // console.log(`Watcher evaluated. old=${oldValue}, new=${newValue}`)
+        if (newValue) {
+          this.$emit('violations-change', newValue)
+        }
+      }
+    }
+  },
   created: function () {
     this.legislations = require('../../../../../api/legislation-flat-list.js').default.data
     this.legislations2 = require('../../../../../api/legislation-hierarchy-list.js').default.data[0].children.filter(
@@ -192,14 +203,14 @@ export default {
     },
     findObjectByLabel (obj, label) {
       for (var i in obj) {
-        if (obj.hasOwnProperty(i) && i === label) {
+        if (Object.prototype.hasOwnProperty.call(obj, i) && i === label) {
           const newText =
             obj[i].length > this.descriptionLimit
               ? obj[i].slice(0, this.descriptionLimit) + '...'
               : obj[i]
           obj[i] = newText
         }
-        if (obj.hasOwnProperty(i) && i === 'children') {
+        if (Object.prototype.hasOwnProperty.call(obj, i) && i === 'children') {
           for (let index = 0; index < obj[i].length; index++) {
             this.findObjectByLabel(obj[i][index], label)
           }

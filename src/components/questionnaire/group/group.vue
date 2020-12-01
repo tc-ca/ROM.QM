@@ -8,7 +8,6 @@
         >
           mdi-exclamation
         </v-icon>
-
       </template>
       <v-row>
         <!-- Group Title -->
@@ -20,15 +19,16 @@
             {{ groupTitle }}
 
             <span
-              v-if="group.isRepeatable=== true"
+              v-if="group.isRepeatable=== true && repeatGroupTextDifferentiator !== ''"
               class="subtitle-1 text-truncate"
-            >{{ ` ${repeatGroupTextDifferentiator}` }}</span>
+            >{{ repeatGroupTextDifferentiator }}</span>
           </h2>
         </v-col>
         <v-col cols="1">
           <!-- Repeat button -->
           <v-icon
             v-if="group.isRepeatable=== true"
+            data-testid="repeatGroup"
             large
             color="primary"
             @click.native.stop="repeatGroup(group)"
@@ -44,6 +44,8 @@
           <!-- Remove button -->
           <v-icon
             v-if="group.isRepeatable=== true && repeatedGroup"
+
+            data-testid="removeGroup"
             large
             color="primary"
             @click.native.stop="removeGroup(group, index)"
@@ -57,10 +59,10 @@
       <v-row>
         <v-col cols="12">
           <v-expansion-panels
+            v-model="expansionPanelsValue"
             multiple
             focusable
             hover
-            :value="expantionPanelsValue"
           >
             <question
               v-for="(question, questionIndex) in group.questions"
@@ -70,8 +72,10 @@
               :group="group"
               :index="questionIndex"
               :in-repeated-group="repeatedGroup"
+              :expand="expand"
               @responseChanged="onResponseChanged"
               @error="onError"
+              @group-subtitle-change="onSubtitleChange"
             />
           </v-expansion-panels>
         </v-col>
@@ -86,7 +90,7 @@ import { mapState } from 'vuex'
 import Question from './question/question.vue'
 
 export default {
-
+  emits: ['responseChanged'],
   components: { Question },
 
   props: {
@@ -97,6 +101,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    expand: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -104,38 +112,36 @@ export default {
     return {
       // indicates if the group was created by using the repeat function i.e. not original
       repeatedGroup: false,
-      valid: true
+      valid: true,
+      repeatGroupTextDifferentiator: ''
     }
   },
 
   computed: {
     groupTitle () {
-      return `${this.index + 1}. ${this.group.title[this.lang]}`
+      // return `${this.index + 1}. ${this.group.title[this.lang]}`
+      return `${this.group.title[this.lang]}`
     },
-    repeatGroupTextDifferentiator () {
-      return this.$store.getters.getResponsesToShowInGroupHeader(this.group.htmlElementId).join(', ')
-    },
-    // ...mapState(['groups']),
     ...mapState({
       lang: state => {
-        if (!state || !state.app) {
-          return 'en-US'
+        if (!state || !state.settings) {
+          return 'en'
         }
-        return state.app.settings.lang
+        return state.settings.settings.lang
       }
     }),
-    expanded () {
-      return [0, 1]
-    },
-    expantionPanelsValue () {
-      const arr = []
-      for (let i = 0; i < this.group.questions.length; i++) {
-        arr.push(i)
+    expansionPanelsValue () {
+      if (this.expand) {
+        let indexes = []
+        for (let i = 0; i < this.group.questions.length; i++) {
+          indexes.push(i)
+        }
+        return indexes
+      } else {
+        return []
       }
-      return arr
     }
   },
-
   created () {
     // on repeat the last item in the array gets created hence the need for this method to update the group.order
     // uncomment console.log to obersve behavior
@@ -162,6 +168,29 @@ export default {
   },
 
   methods: {
+    onSubtitleChange () {
+      this.repeatGroupTextDifferentiator = ''
+      this.group.questions.forEach(q => {
+        if (q.violationResponse && q.violationResponse.length > 0) {
+          const args = q.violationResponse
+          let subtitle = ''
+          args.forEach(arg => {
+            if (!this.repeatGroupTextDifferentiator.includes(arg)) {
+              if (subtitle.length > 0) {
+                subtitle += ', '
+              }
+              subtitle += arg.trim()
+            }
+          })
+          if (subtitle.length > 0) {
+            if (this.repeatGroupTextDifferentiator.length > 0) {
+              this.repeatGroupTextDifferentiator += ', '
+            }
+            this.repeatGroupTextDifferentiator += subtitle.trim()
+          }
+        }
+      })
+    },
     repeatGroup (group) {
       this.$store.dispatch('repeatGroup', group)
     },

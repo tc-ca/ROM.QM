@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer v-model="showDrawer" temporary app>
+  <v-navigation-drawer
+    v-model="showDrawer"
+    temporary
+    app
+  >
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">
@@ -7,7 +11,10 @@
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list dense nav>
+    <v-list
+      dense
+      nav
+    >
       <v-list-item>
         <template>
           <v-list-item-icon>
@@ -49,31 +56,58 @@
           </v-list-item-content>
         </template>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="navigateTo('home')">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('home')"
+      >
         <v-list-item-content>
           <v-list-item-title>
-            Home
+            {{ $t('app.navigations.home') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="navigateTo('questionnaire')">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('questionnaire')"
+      >
         <v-list-item-content>
           <v-list-item-title>
-            Questionnaire
+            {{ $t('app.navigations.questionnaire') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="navigateTo('builder')">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('builder')"
+      >
         <v-list-item-content>
           <v-list-item-title>
-            Builder
+            {{ $t('app.navigations.builder') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="displaynav" link @click="loadDocumentationSafetyMarks()">
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="getQuestionnaireFromDynamics()"
+      >
         <v-list-item-content>
           <v-list-item-title>
-            Documentation and Safety Marks Example
+            {{ $t('app.navigations.qFromDynamics') }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        v-if="displaynav"
+        link
+        @click="navigateTo('questionnaire')"
+      >
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ $t('app.navigations.qFromState') }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -84,7 +118,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-import questionnaireApi from '../../services/questionnaireService'
+// import { XrmWebApi } from '../../services/questionnaireService.js'
 
 export default {
   props: {
@@ -96,7 +130,7 @@ export default {
       type: Object,
       default: function () {
         return {
-          lang: 'en-US',
+          lang: 'en',
           darkmode: true
         }
       }
@@ -117,7 +151,7 @@ export default {
     ...mapGetters({ settings: 'settings' }),
     lang: state => {
       if (!state || !state.settings) {
-        return 'en-US'
+        return 'en'
       }
       return state.settings.lang
     },
@@ -149,33 +183,26 @@ export default {
   methods: {
     ...mapActions(['saveDarkMode', 'setAppLanguage', 'setQuestionnaire']),
     setDarkMode (val) {
-      // console.log('setDarkMode')
+      console.log('setDarkMode')
       this.$vuetify.theme.dark = val
       this.saveDarkMode(val)
     },
     setLanguage (val) {
-      // console.log('setLanguage')
+      console.log('setLanguage')
       this.$i18n.locale = val
       this.setAppLanguage(val)
     },
-    navigateTo (name, schema) {
-      // console.log(name)
-
-      if (schema) {
-        this.$router.push({ name: name, params: { schema: schema } }).catch(e => {
-          // console.log(e)
+    navigateTo (name, templatejson) {
+      console.log(name)
+      if (templatejson) {
+        this.$router.push({ name: name, params: { templatejson: templatejson } }).catch(e => {
+          console.log(e)
         })
       }
 
       this.$router.push({ name: name }).catch(e => {
-        // console.log(e)
+        console.log(e)
       })
-    },
-    loadDocumentationSafetyMarks () {
-      // console.log('loadDocumentationSafetyMarks')
-      let docSafetyMark = questionnaireApi.GetQuestionnaireGroups()
-      this.$store.dispatch('setQuestionnaireGroups', docSafetyMark.groups)
-      this.navigateTo('questionnaire')
     }
   }
 }

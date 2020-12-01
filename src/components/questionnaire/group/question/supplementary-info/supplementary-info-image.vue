@@ -1,60 +1,41 @@
 <template>
-  <v-expansion-panel v-show="picture.display">
+  <v-expansion-panel v-show="displayPicture">
     <v-expansion-panel-header class="subtitle-2">
       <span>
         {{ label }}
-        <span
-          v-if="picture.required"
-          style="color: red"
-        >(required)</span>
-        <span v-else>(optional)</span>
+        <v-icon
+          v-if="isPictureRequired"
+          color="red"
+        >
+          mdi-alpha-r-box-outline
+        </v-icon>
+        <v-icon
+          v-else
+          color="primary"
+        >
+          mdi-alpha-o-box-outline
+        </v-icon>
       </span>
+      <v-spacer />
       <v-icon
-        v-if="!picture.validationStatus"
+        v-if="errorInPicture"
         color="red"
       >
-        mdi-exclamation
+        mdi-message-alert
       </v-icon>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
       <v-row>
         <v-col>
-          <!-- Camera Button -->
-          <app-camera
-            max-image-size="640x480"
-            on-capture-emit="imageCaptured"
-            @imageCaptured="addImageToArray($event); updateResponseStore();"
-          >
-            <v-btn
-              slot-scope="{openDeviceCam}"
-              color="teal"
-              fab
-              @click="openDeviceCam"
-            >
-              <v-icon>mdi-camera-plus-outline</v-icon>
-            </v-btn>
-          </app-camera>
+          <v-file-input
+            prepend-icon="mdi-camera-plus-outline"
+            hide-input
+            accept="image/*"
+            @change="onFileChange"
+          />
         </v-col>
         <v-col>
           <v-btn-toggle rounded>
-            <!-- Retake Photo Button  -->
-
-            <app-camera
-              max-image-size="640x480"
-              on-capture-emit="imageCapturedtest"
-              @imageCapturedtest="changeImage($event); updateResponseStore();"
-            >
-              <v-btn
-                slot-scope="{openDeviceCam}"
-                :disabled="!imageNoteExist"
-                fab
-                @click="openDeviceCam"
-              >
-                <v-icon>mdi-camera-retake</v-icon>
-              </v-btn>
-            </app-camera>
-            <!-- Edit Photo Button  -->
-
             <v-btn
               v-model="speedDialOpen"
               fab
@@ -186,14 +167,11 @@
 <script>
 
 /* eslint-disable no-undef */
-import '@resconet/jsbridge/src/JSBridge.js'
 import moment from 'moment'
-import base64Images from '../../../../../api/base64-images.js'
-import AppCamera from '../../../../base-camera/base-camera.vue'
 import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 
 export default {
-  components: { AppCamera },
+  components: { },
 
   props: {
     picture: {
@@ -221,34 +199,62 @@ export default {
   data: function () {
     return {
       images: [],
+      curImg: '',
       galleryIndex: 0,
       speedDialOpen: false,
       rules: [
         value => !this.picture.display || !this.picture.required ? true : this.images.length > 0 || 'Required.'
-      ]
+      ],
+      validationStatus: false,
+      notification: null
     }
   },
 
   computed: {
     imageNoteExist () {
       return this.images[this.galleryIndex] !== undefined
+    },
+    displayPicture () {
+      return !this.picture.display
+    },
+    isPictureRequired () {
+      return this.picture.option === 'required'
+    },
+    errorInPicture () {
+      return this.displayPicture && this.isPictureRequired && !this.images.length > 0
     }
   },
   mounted () {
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
-        let error = this.picture.display && this.picture.required && !this.images.length > 0
+        let error = this.displayPicture && this.isPictureRequired && !this.images.length > 0
         // console.log('$refs.validationInput.validations ' + error)
         this.onError(error)
       }
     )
   },
   methods: {
+    onFileChange (e) {
+      if (!e) {
+        return
+      }
+      this.createImage(e)
+    },
+    createImage (file) {
+      var reader = new FileReader()
+      var vm = this
 
-    addImageToArray (base64) {
+      reader.onload = (e) => {
+        vm.curImg = e.target.result
+        this.addImageToArray()
+      }
+      reader.readAsDataURL(file)
+    },
+
+    addImageToArray () {
       if (this.images.length < MAX_IMAGE_UPLOADS_PER_ANSWER) {
-        this.images.push({ base64String: base64, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
+        this.images.push({ base64String: this.curImg, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
         // this.images.push(base64)
         this.next()
       } else {
@@ -285,14 +291,20 @@ export default {
     },
 
     updateResponseStore: function () {
-      const question = this.question
-      const group = this.group
-      const saveToProp = this.saveToProp
-      const response = this.images
-      this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
+      // Need to be changed because the updateSupplementaryInfo on the response store was deleted
+      // const question = this.question
+      // const group = this.group
+      // const saveToProp = this.saveToProp
+      // const response = this.images
+      // this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
     },
     onError (error) {
       this.picture.validationStatus = !error
+      if (!this.picture.validationStatus) {
+        this.picture.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `Picture is required on this question, please upload at least one.`, color: 'error' }
+      } else {
+        this.picture.notification = null
+      }
       this.$emit('error', error)
     }
   }

@@ -9,11 +9,11 @@
         color="white"
         @click="showSettings = !showSettings"
       />
-      <v-toolbar-title>
-        {{ questionnaire.title[lang] }}
-      </v-toolbar-title>
+      <v-toolbar-title />
       <v-spacer />
+
       <v-btn
+        v-if="env === 'development'"
         id="save"
         icon
         color="white"
@@ -52,14 +52,14 @@
 </template>
 
 <script>
-
 import { LANGUAGE } from './constants.js'
 
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
 import { mapActions, mapState } from 'vuex'
-import builderService from './services/builderService.js'
+
+const env = process.env.NODE_ENV || 'development'
 
 export default {
   name: 'App',
@@ -77,19 +77,26 @@ export default {
       type: String,
       default: LANGUAGE.ENGLISH
     },
-    schema: {
+    templatejson: {
       type: String,
-      default: 'Documentation and Safety Marks'
+      default: 'Documentation and Safety Marks',
+      required: false
     },
     displayAppNav: {
       type: Boolean,
-      default: true
+      default: !process.env.VUE_APP_DISPLAY_NAV
+    },
+    templateid: {
+      type: String,
+      default: '',
+      required: false
     }
   },
   data: function () {
     return {
       showLegislationSearchModal: false,
-      showSettings: false
+      showSettings: false,
+      env: process.env.NODE_ENV || 'development'
     }
   },
   computed: {
@@ -98,21 +105,14 @@ export default {
       return `${this.questionnaire.title[this.language]}`
     },
     ...mapState({
-      language: state => {
-        // console.log('App.vue: language computed ' + state + ')')
+      language: (state) => {
+        console.log('App.vue: language computed ' + state + ')')
         if (state == null || !state.settings) {
           return LANGUAGE.ENGLISH
         }
         return state.settings.settings.lang
       },
-      questionnaire: state => {
-        // console.log('App.vue: questionnaire computed ' + state + ')')
-        if (!state || !state.app) {
-          return builderService.createQuestionnaire()
-        }
-        return state.settings.questionnaire
-      },
-      settings: state => {
+      settings: (state) => {
         if (state == null || !state.settings) {
           return {
             lang: LANGUAGE.ENGLISH,
@@ -126,28 +126,61 @@ export default {
   watch: {
     // required for Field Service, as this.lang not available from the created hook method ONLY when app is reading code from tdgwoodservice.js, has to do with how the page is loaded in.
     lang (value, oldValue) {
-      // console.log('App.vue: lang watch ' + value + ')')
+      console.log('App.vue: lang watch ' + value + ')')
       this.setLanguage()
     },
     settings (value, oldValue) {
-      // console.log('App.vue: settings watch ' + value)
+      console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
     }
   },
-  created: function () {
-    this.$router.push({ name: this.page }).catch(e => {
+  created: async function () {
+    const page = this.page
+    if (env === 'development') {
+      switch (page) {
+        case 'builder':
+          await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
+          break
+        case 'questionnaire':
+          await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
+          break
+        default:
+          break
+      }
+      await this.$store.dispatch('SetMockQuestionnaireResponse')
+    }
+
+    this.$router.push({ name: this.page }).catch((e) => {
       // console.log(e)
     })
   },
   methods: {
-    ...mapActions([ 'setAppLanguage', 'setSettings' ]),
+    ...mapActions(['setAppLanguage', 'setSettings']),
     setLanguage () {
-      // console.log('App.vue: setLanguage (' + this.lang + ')')
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    save () {
-      this.setSettings(this.settings)
+    /**
+     * Sets the questionnaire state, which is used to render the on screen elements, a valid json must be passed.
+     */
+    Render (questionnaire) {
+      const page = this.page
+      if (questionnaire) {
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+      }
+    },
+    /**
+    * Returns current state of questionnaire
+    */
+    GetState () {
+      this.$store.dispatch('RemoveBuilderCircularDependencies')
+      return this.$store.state.questionnaire.questionnaire
+    },
+    /**
+    * Sets legislations state
+    */
+    SetLegislations (legislations) {
+      this.$store.dispatch('SetLegislationsState', { legislations })
     }
   }
 
@@ -163,5 +196,4 @@ export default {
   /* color: #2c3e50; */
   /* margin-top: 60px; */
 }
-
 </style>

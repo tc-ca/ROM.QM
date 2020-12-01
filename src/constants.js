@@ -1,19 +1,6 @@
 module.exports = Object.freeze({
   LANGUAGE: {
-    ENGLISH: 'en-US',
-    FRENCH: 'fr-FR'
-  },
-
-  FIELD_REQUIREMENT: {
-    OPTIONAL: '948010000',
-    REQUIRED: '948010001',
-    NOT_APPLICABLE: '948010002'
-  },
-  PROBLEM_TYPE: {
-    PROBLEM_YES: '948010000',
-    PROBLEM_NO: '948010001',
-    PROBLEM_NEAR: '948010002'
+    ENGLISH: 'en',
+    FRENCH: 'fr'
   }
-
-}
-)
+});

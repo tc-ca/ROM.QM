@@ -5,46 +5,48 @@
     :value="[]"
   >
     <supplementary-info-comment
-      :comment="supplementaryInfo.externalComment"
-      label="External Comment"
-      hint="External comments will be available to the public"
+      v-if="displayExternalComment"
+      :comment="question.externalComment"
+      :label="$t('app.questionnaire.group.question.externalComment')"
+      :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
       :question="question"
       save-to-prop="externalComment"
-      @error="error"
+      @error="onError"
     />
     <supplementary-info-comment
-      :comment="supplementaryInfo.internalComment"
-      label="Internal Comment"
-      hint="Internal comments will only be made available to internal stakeholders"
+      v-if="displayInternalComment"
+      :comment="question.internalComment"
+      :label="$t('app.questionnaire.group.question.internalComment')"
+      :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"
       :question="question"
       save-to-prop="internalComment"
-      @error="error"
+      @error="onError"
     />
     <supplementary-info-image
-      :picture="supplementaryInfo.picture"
-      label="Photos"
+      v-if="displayPicture"
+      :picture="question.picture"
+      :label="$t('app.questionnaire.group.question.photos')"
       :group="group"
       :question="question"
       save-to-prop="images"
-      @error="error"
+      @error="onError"
     />
   </v-expansion-panels>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
 
 export default {
+  emits: ['error'],
+  name: 'SupplementaryInfo',
   components: { SupplementaryInfoComment, SupplementaryInfoImage },
 
   props: {
-    supplementaryInfoRule: {
-      type: Object,
-      required: true
-    },
     question: {
       type: Object,
       required: true
@@ -54,8 +56,27 @@ export default {
       required: true
     }
   },
+  computed: {
+    displayInternalComment () {
+      return this.question.internalComment.option !== 'n/a'
+    },
+    displayExternalComment () {
+      return this.question.externalComment.option !== 'n/a'
+    },
+    displayPicture () {
+      return this.question.picture.option !== 'n/a'
+    },
+    ...mapState({
+      lang: state => {
+        if (!state || !state.settings) {
+          return 'en'
+        }
+        return state.settings.settings.lang
+      }
+    })
+  },
   methods: {
-    error (error) {
+    onError (error) {
       this.$emit('error', error)
     }
   }

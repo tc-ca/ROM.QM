@@ -1,7 +1,6 @@
-
 export const state = {
   settings: {
-    lang: 'en-US',
+    lang: 'en',
     darkMode: false
   }
 }

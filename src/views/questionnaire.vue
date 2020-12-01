@@ -1,28 +1,25 @@
 <template>
-  <questionnaire
-    ref="questionnaire"
-    :schema="'test'"
-  />
+  <div>
+    <questionnaire />
+  </div>
 </template>
 
 <script>
-// TODO: figure out this usage for :schema
-
 import Questionnaire from '../components/questionnaire/questionnaire.vue'
+const env = process.env.NODE_ENV || 'development'
 
 export default {
   components: {
     Questionnaire
   },
-  props: {
-    schema: {
-      type: String,
-      default: ''
+  async mounted () {
+    if (env === 'development') {
+      await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
+      await this.$store.dispatch('SetMockQuestionnaireResponse')
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

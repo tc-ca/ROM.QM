@@ -74,7 +74,7 @@
                     focusable
                     multiple
                   >
-                    <question
+                    <builder-question
                       v-for="(question, questionIndex) in group.questions"
                       :key="questionIndex"
                       :question="question"
@@ -97,7 +97,7 @@
                           class="col-auto"
                         >
                           <v-btn @click="addQuestion($event, group)">
-                            Add question
+                            {{ $t('app.builder.group.question.addQuestion') }}
                           </v-btn>
                         </v-col>
                         <v-col
@@ -122,7 +122,7 @@
                                 </v-icon>
                               </v-btn>
                             </template>
-                            <span>Remove group</span>
+                            <span>{{ $t('app.builder.group.removeGroup') }}</span>
                           </v-tooltip>
                         </v-col>
                       </v-row>
@@ -137,15 +137,18 @@
           class="mt-2 center"
         >
           <v-btn @click="addGroup()">
-            Add group
+            {{ $t('app.builder.group.addGroup') }}
           </v-btn>
         </div>
       </v-col>
       <v-col cols="5">
-        <v-row justify="end">
+        <v-row
+          v-if="env==='development'"
+          justify="end"
+        >
           <v-col class="col-auto">
             <v-btn @click="save()">
-              Save
+              {{ $t('app.builder.save') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -153,15 +156,23 @@
           <v-col>
             <v-text-field
               v-model="questionnaire.name"
-              label="Questionnaire name"
+              :label="$t('app.builder.questionnaireName')"
             />
           </v-col>
         </v-row>
         <v-row v-if="selectedGroup">
           <v-col>
             <v-text-field
+              v-model="selectedGroup.primaryKey"
+              :label="$t('app.builder.group.groupName')"
+            />
+            <v-text-field
               v-model="selectedGroup.title[eng]"
-              label="Group name En"
+              label="Group text En"
+            />
+            <v-text-field
+              v-model="selectedGroup.title[fr]"
+              label="Group text Fr"
             />
             <v-checkbox
               v-model="selectedGroup.isVisible"
@@ -177,7 +188,7 @@
           <v-col>
             <v-text-field
               v-model="selectedQuestion.name"
-              label="Question name"
+              :label="$t('app.builder.questionName')"
             />
             <v-text-field
               v-model="selectedQuestion.text[eng]"
@@ -192,57 +203,69 @@
               item-text="text"
               item-value="value"
               :items="questionTypes"
-              label="Question Type"
-            />
+              :label="$t('app.builder.questionType')"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
             <v-text-field
               v-model="selectedQuestion.sortOrder"
               dense
               type="number"
-              label="Sort Order"
+              :label="$t('app.builder.sortOrder')"
               @change="sortQuestions(selectedQuestion)"
             />
+            <v-select
+              v-model="selectedQuestion.internalComment.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              :label="$t('app.builder.internalComments')"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
+            <v-select
+              v-model="selectedQuestion.externalComment.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              :label="$t('app.builder.externalComments')"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
+            <v-select
+              v-model="selectedQuestion.picture.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              :label="$t('app.builder.picture')"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
             <v-checkbox
               v-model="selectedQuestion.isVisible"
               dense
-              label="Visible by default"
+              :label="$t('app.builder.visibleByDefault')"
             />
-
-            <div>
-              <div>
-                <v-btn
-                  small
-                  icon
-                  @click="tougleViolations()"
-                >
-                  <v-icon v-if="violationsCollapsed">
-                    mdi-menu-right
-                  </v-icon>
-                  <v-icon v-if="!violationsCollapsed">
-                    mdi-menu-down
-                  </v-icon>
-                </v-btn>
-                Violation
-              </div>
-              <div
-                v-show="!violationsCollapsed"
-                class="bordered pa-2 ml-2 my-2"
-              >
-                <v-select
-                  v-model="selectedQuestion.violationInfo.matchingType"
-                  dense
-                  item-text="text"
-                  item-value="value"
-                  :items="dependencyValidationActions"
-                  label="Rules are violated when response is"
-                  @change="onViolationInfoChanged"
-                />
-                <v-text-field
-                  v-model="selectedQuestion.violationInfo.responseToMatch"
-                  dense
-                  label="to"
-                />
-              </div>
-            </div>
 
             <div
               v-if="selectedQuestion.type === 'select' || selectedQuestion.type === 'radio' "
@@ -251,7 +274,7 @@
                 <v-btn
                   small
                   icon
-                  @click="tougleOptions()"
+                  @click="toggleOptions()"
                 >
                   <v-icon v-if="optionsCollapsed">
                     mdi-menu-right
@@ -260,7 +283,7 @@
                     mdi-menu-down
                   </v-icon>
                 </v-btn>
-                Response Options
+                {{ $t('app.builder.responseOptions.responseOptions') }}
               </div>
               <div v-show="!optionsCollapsed">
                 <div
@@ -276,17 +299,17 @@
                   <v-text-field
                     v-model="option.text[fr]"
                     dense
-                    label="Oprion text Fr"
+                    label="Option text Fr"
                   />
                   <v-text-field
                     v-model.number="option.sortOrder"
                     dense
-                    label="Sort Order"
+                    :label="$t('app.builder.responseOptions.sortOrder')"
                   />
                   <v-text-field
                     v-model="option.value"
                     dense
-                    label="value"
+                    :label="$t('app.builder.responseOptions.value')"
                   />
                   <div class="right">
                     <v-tooltip
@@ -308,8 +331,55 @@
                           </v-icon>
                         </v-btn>
                       </template>
-                      <span>Remove response option</span>
+                      <span>{{ $t('app.builder.responseOptions.removResponseoption') }}</span>
                     </v-tooltip>
+                  </div>
+                  <div>
+                    <div>
+                      <v-btn
+                        small
+                        icon
+                        @click="toggleProvisions(option)"
+                      >
+                        <v-icon v-if="!option.isProvisionCollapsed">
+                          mdi-menu-right
+                        </v-icon>
+                        <v-icon v-if="option.isProvisionCollapsed">
+                          mdi-menu-down
+                        </v-icon>
+                      </v-btn>
+                      {{ $t('app.builder.responseOptions.provisions.provisions') }}
+                    </div>
+                    <div v-show="option.isProvisionCollapsed">
+                      <div>
+                        <v-card
+                          class="mx-auto"
+                        >
+                          <v-sheet class="pa-4">
+                            <v-text-field
+                              v-model="option.searchProvisions"
+                              :label="$t('app.builder.responseOptions.provisions.search')"
+                              outlined
+                              hide-details
+                              clearable
+                              clear-icon="mdi-close-circle-outline"
+                            />
+                          </v-sheet>
+                          <v-card-text>
+                            <v-treeview
+                              v-model="option.provisions"
+                              selectable
+                              item-text="DisplayEnglishText"
+                              item-key="id"
+                              selection-type="leaf"
+                              :search="option.searchProvisions"
+                              :filter="option.filterProvisions"
+                              :items="provisions"
+                            />
+                          </v-card-text>
+                        </v-card>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="right">
@@ -317,7 +387,7 @@
                     small
                     @click="addOption()"
                   >
-                    Add option
+                    {{ $t('app.builder.responseOptions.addOption') }}
                   </v-btn>
                 </div>
               </div>
@@ -327,7 +397,7 @@
                 <v-btn
                   small
                   icon
-                  @click="tougleValidators()"
+                  @click="toggleValidators()"
                 >
                   <v-icon v-if="validatorsCollapsed">
                     mdi-menu-right
@@ -336,7 +406,7 @@
                     mdi-menu-down
                   </v-icon>
                 </v-btn>
-                Validators
+                {{ $t('app.builder.validators.validators') }}
               </div>
               <div
                 v-show="!validatorsCollapsed"
@@ -349,12 +419,12 @@
                   <v-text-field
                     v-model="validationRule.name"
                     dense
-                    label="Name"
+                    :label="$t('app.builder.validators.name')"
                   />
                   <v-checkbox
                     v-model="validationRule.enabled"
                     dense
-                    label="Enabled"
+                    :label="$t('app.builder.validators.enabled')"
                   />
                   <v-select
                     v-model="validationRule.type"
@@ -362,8 +432,15 @@
                     item-text="text"
                     item-value="value"
                     :items="validatorTypes"
-                    label="Type"
-                  />
+                    :label="$t('app.builder.validators.type')"
+                  >
+                    <template v-slot:selection="{ item }">
+                      <span>{{ item.text[lang] }}</span>
+                    </template>
+                    <template v-slot:item="{ item }">
+                      <span>{{ item.text[lang] }}</span>
+                    </template>
+                  </v-select>
                   <v-text-field
                     v-show="validationRule.type !== 'require'"
                     v-model="validationRule.value"
@@ -373,7 +450,7 @@
                   <v-text-field
                     v-model="validationRule.errorMessage[eng]"
                     dense
-                    label="Error message"
+                    label="En: Error message"
                   />
                   <v-text-field
                     v-model="validationRule.errorMessage[fr]"
@@ -400,7 +477,7 @@
                           </v-icon>
                         </v-btn>
                       </template>
-                      <span>Remove validatior</span>
+                      <span>{{ $t('app.builder.validators.removeValidator') }}</span>
                     </v-tooltip>
                   </div>
                 </div>
@@ -409,7 +486,7 @@
                     small
                     @click="addValidator()"
                   >
-                    Add validator
+                    {{ $t('app.builder.validators.addValidator') }}
                   </v-btn>
                 </div>
               </div>
@@ -418,7 +495,7 @@
                   <v-btn
                     small
                     icon
-                    @click="tougleDependencies()"
+                    @click="toggleDependencies()"
                   >
                     <v-icon v-if="dependenciesCollapsed">
                       mdi-menu-right
@@ -427,7 +504,7 @@
                       mdi-menu-down
                     </v-icon>
                   </v-btn>
-                  Depends On
+                  {{ $t('app.builder.dependsOn.dependsOn') }}
                 </div>
                 <div v-show="!dependenciesCollapsed">
                   <div>
@@ -442,8 +519,15 @@
                         :items="dependencyGroupTypes"
                         item-text="text"
                         item-value="value"
-                        label="Type"
-                      />
+                        :label="$t('app.builder.dependsOn.type')"
+                      >
+                        <template v-slot:selection="{ item }">
+                          <span>{{ item.text[lang] }}</span>
+                        </template>
+                        <template v-slot:item="{ item }">
+                          <span>{{ item.text[lang] }}</span>
+                        </template>
+                      </v-select>
                       <v-select
                         v-show="dependencyGroup.ruleType === 'validation' || dependencyGroup.ruleType === 'validationValue'"
                         v-model="dependencyGroup.childValidatorName"
@@ -476,7 +560,14 @@
                               item-value="value"
                               :items="dependencyValidationActions"
                               label="to be"
-                            />
+                            >
+                              <template v-slot:selection="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                              <template v-slot:item="{ item }">
+                                <span>{{ item.text[lang] }}</span>
+                              </template>
+                            </v-select>
                             <v-text-field
                               v-model="questionDependency.validationValue"
                               dense
@@ -502,7 +593,7 @@
                                     </v-icon>
                                   </v-btn>
                                 </template>
-                                <span>Remove question</span>
+                                <span>{{ $t('app.builder.group.question.removeQuestion') }}</span>
                               </v-tooltip>
                             </div>
                           </div>
@@ -518,7 +609,7 @@
                             small
                             @click="addQuestionDependency(dependencyGroup)"
                           >
-                            Add question
+                            {{ $t('app.builder.dependsOn.addQuestion') }}
                           </v-btn>
                         </div>
                       </div>
@@ -542,7 +633,7 @@
                               </v-icon>
                             </v-btn>
                           </template>
-                          <span>Remove dependency group</span>
+                          <span>{{ $t('app.builder.dependsOn.removDependencyGroup') }}</span>
                         </v-tooltip>
                       </div>
                     </div>
@@ -551,57 +642,9 @@
                         small
                         @click="addDependencyGroup()"
                       >
-                        Add Dependency Group
+                        {{ $t('app.builder.dependsOn.addDependencyGroup') }}
                       </v-btn>
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div>
-                  <v-btn
-                    small
-                    icon
-                    @click="tougleProvisions()"
-                  >
-                    <v-icon v-if="provisionsCollapsed">
-                      mdi-menu-right
-                    </v-icon>
-                    <v-icon v-if="!provisionsCollapsed">
-                      mdi-menu-down
-                    </v-icon>
-                  </v-btn>
-                  Provisions
-                </div>
-                <div v-show="!provisionsCollapsed">
-                  <div>
-                    <v-card
-                      class="mx-auto"
-                    >
-                      <v-sheet class="pa-4">
-                        <v-text-field
-                          v-model="searchProvisions"
-                          label="Search"
-                          outlined
-                          hide-details
-                          clearable
-                          clear-icon="mdi-close-circle-outline"
-                        />
-                      </v-sheet>
-                      <v-card-text>
-                        <v-treeview
-                          selectable
-                          item-text="Text"
-                          item-key="Text"
-                          selection-type="leaf"
-                          return-object
-                          :search="searchProvisions"
-                          :filter="filterProvisions"
-                          :items="provisions"
-                        />
-                      </v-card-text>
-                    </v-card>
                   </div>
                 </div>
               </div>
@@ -616,7 +659,7 @@
     >
       <v-card>
         <v-card-title class="headline">
-          Delete?
+          {{ $t('app.builder.group.delete') }}
         </v-card-title>
 
         <v-card-actions>
@@ -627,14 +670,14 @@
             text
             @click="confirmed()"
           >
-            Yes
+            {{ $t('app.builder.group.yes') }}
           </v-btn>
 
           <v-btn
             text
             @click="confirmDialogOpen = false"
           >
-            No
+            {{ $t('app.builder.group.no') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -643,56 +686,30 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import { LANGUAGE } from '../constants.js'
-import Question from '../components/builder/question'
+import BUILDER from '../data/builderLookupTypes'
+import BuilderQuestion from '../components/builder/builder-question'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
-// import utils from '../utils'
 
 export default {
   name: 'Builder',
   components: {
-    Question
-  },
-  props: {
-    schema:
-    {
-      type: String,
-      required: false,
-      default: ''
-    },
-    settings:
-    {
-      type: Object,
-      required: false,
-      default: function () {
-        return {
-          lang: LANGUAGE.ENGLISH,
-          darkMode: false
-        }
-      }
-    }
+    BuilderQuestion
   },
   data () {
     return {
-      questionnaire: {
-        title: {
-          [LANGUAGE.ENGLISH]: 'General Questionnaire',
-          [LANGUAGE.FRENCH]: 'FR General Questionnaire'
-        },
-        groups: [],
-        lang: 'en-US'
-      },
+      questionnaire: null,
       selectedGroup: null,
       selectedQuestion: null,
-      questionTypes: [{ value: 'text', text: 'Text' }, { value: 'radio', text: 'Radio' }, { value: 'select', text: 'Select' }, { value: 'number', text: 'Number' }, { value: 'image', text: 'Image' }],
+      questionTypes: BUILDER.QUESTION_TYPES,
+      optionTypes: BUILDER.OPTION_TYPES,
       optionsCollapsed: true,
-      validatorTypes: [{ value: 'require', text: 'Require' }, { value: 'min', text: 'Min' }, { value: 'max', text: 'Max' }, { value: 'minLength', text: 'Min Length' }, { value: 'maxLength', text: 'Max Length' }],
+      validatorTypes: BUILDER.VALIDATOR_TYPES,
       validatorsCollapsed: true,
       dependenciesCollapsed: true,
-      dependencyGroupTypes: [{ value: 'visibility', text: 'Visibility' }, { value: 'validation', text: 'Enable validator' }, { value: 'validationValue', text: 'Set validator value' }],
-      dependencyValidationActions: [{ value: null, text: '--' }, { value: 'equal', text: 'Equal' }, { value: 'notEqual', text: 'Not equal' }, { value: 'greaterThen', text: 'Greater then' }, { value: 'lessThen', text: 'Less then' }, { value: 'lengthLessThen', text: 'Length less then' }, { value: 'lengthGreaterThen', text: 'Length greater then' }],
+      dependencyGroupTypes: BUILDER.DEPENDENCY_GROUP_TYPES,
+      dependencyValidationActions: BUILDER.DEPENDENCY_VALIDATION_ACTIONS,
       questions: [],
       confirmDialogOpen: false,
       confirmCallback: null,
@@ -702,14 +719,13 @@ export default {
       provisions: null,
       searchProvisions: null,
       groupPanels: [],
-      questionPanels: []
+      questionPanels: [],
+      selectedProvisions: [],
+      questionProvisions: [],
+      env: process.env.NODE_ENV
     }
   },
   computed: {
-    lang () {
-      // console.log('App.vue: language computed ' + this.settings.lang + ')')
-      return this.settings.lang
-    },
     eng () {
       return LANGUAGE.ENGLISH
     },
@@ -725,30 +741,38 @@ export default {
           return []
         }
         return state.group
+      },
+      lang: state => {
+        if (!state || !state.settings) {
+          return LANGUAGE.ENGLISH
+        }
+        return state.settings.settings.lang
       }
     })
   },
-  watch: {
-    schema (value, oldValue) {
-      this.$store.dispatch('getQuestionnaireGroups', value)
-    },
-    settings (value, oldValue) {
-      this.$store.dispatch('getSettings', value)
-    }
-  },
   created () {
-    this.provisions = require('../api/legislation-hierarchy-list.js').default.data[0].children.filter(
-      (x) => {
-        if (x.Label.trim() === '1.16') {
-          return x.children
-        }
-      }
-    )[0].children
-
-    this.questionnaire = BuilderService.createQuestionnaire()
+    // on create event, build the basic definition of questionnaire builder
+    const questionnaire = BuilderService.createQuestionnaire()
+    const page = 'builder'
+    // put the definition in the store
+    this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+    this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
+    // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case 'setQuestionnaire':
+          this.questionnaire = state.questionnaire.questionnaire
 
+          break
+        case 'SetLegislations':
+          this.provisions = this.$store.state.legislations.legislations
+          break
+        default:
+          break
+      }
+    })
   },
   methods: {
     addGroup () {
@@ -783,8 +807,6 @@ export default {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
       group.questions.push(question)
-
-      // const qInstance = utils.getQuestionReference(this.questionnaire.groups, question)
 
       this.addQuestionToIndex(question)
 
@@ -834,13 +856,16 @@ export default {
       this.selectedGroup = null
       this.selectedQuestion = question
     },
-    save () {
-      this.$store.dispatch('save', this.questionnaire)
+    async save (id) {
+      const page = 'builder'
+      console.log(this.questionnaire)
+      const questionnaire = this.questionnaire
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
     },
-    tougleOptions () {
+    toggleOptions () {
       this.optionsCollapsed = !this.optionsCollapsed
     },
     removeResponseOption (option) {
@@ -862,10 +887,10 @@ export default {
         }
       }
     },
-    tougleValidators () {
+    toggleValidators () {
       this.validatorsCollapsed = !this.validatorsCollapsed
     },
-    tougleDependencies () {
+    toggleDependencies () {
       this.dependenciesCollapsed = !this.dependenciesCollapsed
     },
     addDependencyGroup () {
@@ -918,11 +943,11 @@ export default {
         this.selectedQuestion.violationInfo.responseToMatch = null
       }
     },
-    tougleViolations () {
+    toggleViolations () {
       this.violationsCollapsed = !this.violationsCollapsed
     },
-    tougleProvisions () {
-      this.provisionsCollapsed = !this.provisionsCollapsed
+    toggleProvisions (option) {
+      option.isProvisionCollapsed = !option.isProvisionCollapsed
     }
   }
 }

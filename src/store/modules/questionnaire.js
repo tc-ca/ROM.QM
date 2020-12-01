@@ -1,66 +1,68 @@
-import _ from 'lodash'
+import builderService from "../../services/builderService";
 
 export const state = {
-  groups: [],
-  groupsCopy: [],
-  questionnaire: {}
-}
-export const actions = {
-  save ({ dispatch }, questionnaire) {
-    // first save to state for use in questionnaire
-    let groups = _.cloneDeep(questionnaire.groups)
+  questionnaire: null
+};
 
-    let populateDependantsOnDependency = (q) => {
-      q.dependencyGroups.forEach(dg => {
-        dg.questionDependencies.forEach(qd => qd.dependsOnQuestion.dependants.push(q))
-      })
-      q.childQuestions.forEach(cq => populateDependantsOnDependency(cq))
-    }
-
-    groups.forEach(g => {
-      g.questions.forEach(q => {
-        populateDependantsOnDependency(q)
-      })
-    })
-    dispatch('setQuestionnaireGroups', groups)
-    state.questionnaire = questionnaire
-
-    // then serialize for saving
-    questionnaire = _.cloneDeep(questionnaire)
-
-    let populateDependantsOnDependencyIds = (q) => {
-      q.dependencyGroups.forEach(dg => {
-        dg.questionDependencies.forEach(qd => qd.dependsOnQuestion.dependants.push(q.id))
-      })
-      q.childQuestions.forEach(cq => populateDependantsOnDependencyIds(cq))
-    }
-
-    questionnaire.groups.forEach(g => {
-      g.questions.forEach(q => {
-        populateDependantsOnDependencyIds(q)
-      })
-    })
-
-    let removeCircularRefFromDependency = (question) => {
-      question.dependencyGroups.forEach(dg => {
-        dg.questionDependencies.forEach(qd => { qd.dependsOnQuestion = qd.dependsOnQuestion.id })
-      })
-
-      question.childQuestions.forEach(cq => removeCircularRefFromDependency(cq))
-    }
-
-    questionnaire.groups.forEach(g => {
-      g.questions.forEach(q => {
-        removeCircularRefFromDependency(q)
-      })
-    })
-
-    // console.log(JSON.stringify(questionnaire, null, 2))
+export const getters = {
+  getQuestionnaire(state) {
+    return state.questionnaire;
   }
-}
+};
+
+export const actions = {
+  async SetMockQuestionnaireResponse({ commit , dispatch }) {
+    const data = await SetMockQuestionnaireResponseImportModule();
+    commit("setQuestionnaire", data);
+    dispatch("setQuestionnaireGroups", data.groups);
+  },
+  SetQuestionnaireState({ commit, dispatch }, payload) {
+    const { questionnaire, page } = payload;
+    switch (page) {
+      case "builder":
+        {
+          // builder does some processing before setting state
+          
+          const {
+            questionnaireData,
+            groupsData
+          } = builderService.processBuilderForSave(questionnaire);
+          commit("setQuestionnaire", questionnaireData);
+          dispatch("setQuestionnaireGroups", groupsData);
+        }
+        break;
+      case "questionnaire":
+        {
+          commit("setQuestionnaire", questionnaire);
+          dispatch("setQuestionnaireGroups", questionnaire.groups);
+        }
+
+               break;
+             default:
+               break;
+           }
+         },
+         RemoveBuilderCircularDependencies({ commit, state, dispatch,}) {
+         const questionnaire = state.questionnaire
+         
+           const {
+             questionnaireData,
+             groupsData
+           } = builderService.processBuilderForSave(questionnaire);
+           commit("setQuestionnaire", questionnaireData);
+           dispatch("setQuestionnaireGroups", groupsData);
+         }
+       };
 
 export const mutations = {
-  setQuestionnaire (state, payload) {
-    state.questionnaire = payload
+  setQuestionnaire(state, payload) {
+    state.questionnaire = payload;
   }
+};
+
+async function SetMockQuestionnaireResponseImportModule() {
+  const data = await import("../../api/betaAnswers").then(module => {
+    return module.default;
+  });
+  return data;
 }

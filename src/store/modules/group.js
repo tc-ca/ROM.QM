@@ -1,16 +1,13 @@
 // TODO: optimize later, pull down only method required.
 import _ from 'lodash'
 import { pad } from '../../utils.js'
-import questionnaireService from '../../services/questionnaireService.js'
-
 export const state = {
   groups: [],
   groupsCopy: []
-
 }
 
 export const getters = {
-  getTargetedRepeatedGroups (state, getters) {
+  getTargetedRepeatedGroups (state) {
     return (primaryKey) => {
       return state.groups.filter(x => x.primaryKey === primaryKey)
     }
@@ -23,20 +20,11 @@ export const actions = {
     commit('setGroups', { groups })
     commit('copyGroups', { groupsCopy })
   },
-  getQuestionnaireGroups ({ commit }, schema) {
-    if (state.groups.length === 0) {
-      // todo do a real fetch using woodfordIntegration.js
-      const groups = questionnaireService.GetQuestionnaireGroups(schema)
-      const groupsCopy = _.cloneDeep(groups)
-      commit('setGroups', { groups })
-      commit('copyGroups', { groupsCopy })
-    }
-  },
+
   repeatGroup ({ commit, state, getters }, group) {
     // get all similar groups
     // const targetedRepeatedGroups = state.questionnaire.groups.filter(x => x.primaryKey === group.primaryKey) // TODO: remove
     const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
-
     // get starting reference for group in the collection of group array i.e. starting point/index 4
     const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.order)
     const startReference = Math.min(...repeatedGroupsOrders)
@@ -84,7 +72,7 @@ export const mutations = {
     const { groupsCopy } = payload
     state.groupsCopy = groupsCopy
   },
-
+  // TODO: lowercase function name
   UpdateGroupOrder (state, payload) {
     const { group, order } = payload
     group.order = order
@@ -104,7 +92,7 @@ export const mutations = {
 
   removeGroup (state, payload) {
     const { group } = payload
-    for (let index = state.groups.length - 1; index--;) {
+    for (let index = state.groups.length; index--;) {
       if (state.groups[index].order === group.order) {
         state.groups.splice(index, 1)
       }

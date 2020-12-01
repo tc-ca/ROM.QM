@@ -1,14 +1,14 @@
 <template>
   <div>
     <text-response
-      v-if="question.type === 'text'"
+      v-if="question.type === text"
       :question="question"
       @change="onChange"
       @error="onError"
     />
 
     <radio-response
-      v-if="question.type === 'radio'"
+      v-if="question.type === radio"
       :group="group"
       :question="question"
       @change="onChange"
@@ -16,7 +16,7 @@
     />
 
     <select-response
-      v-if="question.type === 'select'"
+      v-if="question.type === select"
       :group="group"
       :question="question"
       @change="onChange"
@@ -24,7 +24,7 @@
     />
 
     <image-response
-      v-if="question.type === 'image'"
+      v-if="question.type === image"
       :group="group"
       :question="question"
       @change="onChange"
@@ -32,7 +32,7 @@
     />
 
     <number-response
-      v-if="question.type === 'number'"
+      v-if="question.type === number"
       :group="group"
       :question="question"
       @change="onChange"
@@ -48,8 +48,10 @@ import RadioResponse from './radio-response'
 import SelectResponse from './select-response'
 import ImageResponse from './image-response'
 import NumberResponse from './number-response'
+import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {
+  emits: ['change', 'error'],
   components: { TextResponse, RadioResponse, SelectResponse, ImageResponse, NumberResponse },
   props: {
     question: {
@@ -64,11 +66,11 @@ export default {
 
   data () {
     return {
-      chips: 'chips',
-      select: 'select',
-      multiple: 'multiple',
-      radio: 'radio',
-      text: 'text'
+      text: QUESTION_TYPE.TEXT,
+      radio: QUESTION_TYPE.RADIO,
+      select: QUESTION_TYPE.SELECT,
+      image: QUESTION_TYPE.IMAGE,
+      number: QUESTION_TYPE.NUMBER
     }
   },
 
