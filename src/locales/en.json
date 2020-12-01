@@ -73,6 +73,10 @@
       "validate": "Validate",
       "group": {
         "question": {
+          "referenceId": "Reference ID",
+          "referenceIdPlaceHolder": "Enter Reference ID",
+          "violationCount": "Violation Count",
+          "violationCountPlaceHolder": "Enter number of violations",
           "externalComment": "External Comment",
           "externalCommentInfo": "External comments will be available to the public",
           "internalComment": "Internal Comment",

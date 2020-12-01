@@ -42,6 +42,20 @@
           <v-card
             class="mx-auto"
           >
+          <v-sheet class="pa-4">
+          <v-text-field
+              v-model="question.violationInfo.referenceID"
+              :label="$t('app.questionnaire.group.question.referenceId')"
+              :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+              outline
+            />
+            <v-text-field
+              v-model="question.violationInfo.violationCount"
+              :label="$t('app.questionnaire.group.question.violationCount')"
+              :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+              outline
+            />
+            </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
                 v-model="selectedResponseOption.searchProvisions"
