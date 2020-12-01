@@ -4,7 +4,7 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 echo "Script Path: $scriptPath"
 
 #Connection String to Environment
-$ConnectionStringDev = "Url=https://xxxxxxxxxxxxxxx.dynamics.com; Username=xxxxxxxxxxxx@034gc.onmicrosoft.com; Password=xxxxxxxxxxxxxxx; authtype=Office365; RequireNewInstance=True"
+$ConnectionStringDev = "Url=xxxxxxxxxxx.dynamics.com; Username=xxxxxxxxxxx.onmicrosoft.com; Password=xxxxxxxxxxx; authtype=Office365; RequireNewInstance=True"
 
 #how long we want to wait to realize something broke
 $Timeout = 960
@@ -38,4 +38,8 @@ $json | ForEach-Object {
 
 echo "Publishing All Customizations"
 Publish-XrmCustomizations -ConnectionString $ConnectionStringDev -Timeout $Timeout
+<<<<<<< HEAD
 echo "Publishing Customizations Complete"
+=======
+echo "Publishing Customizations Complete"
+>>>>>>> cb6407841fe5cb23b05b1d77105ca141a649d428
