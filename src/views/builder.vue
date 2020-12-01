@@ -204,7 +204,7 @@
               item-value="value"
               :items="questionTypes"
               :label="$t('app.builder.questionType')"
-              @change="changeQuestionType($event, group)"
+              @change="changeQuestionType($event)"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -799,20 +799,20 @@ export default {
         }
       }
     },
-    changeQuestionType ($event, group) {
+    changeQuestionType ($event) {
       if (this.selectedQuestion.type === 'reference') {
         console.log(this.selectedQuestion)
         // Check if there is a Reference ID question and if it is not, create one
-        if (!BuilderService.findReferenceQuestion(group)) {
+        if (!BuilderService.findReferenceQuestion(this.selectedGroup)) {
           // Do something
           let qRf = BuilderService.createReferenceQuestion()
           console.log(qRf)
-          if (group.questions.length > 0) {
+          if (this.selectedGroup.questions.length > 0) {
             // Move every question one number up on the sort order
-            group.questions.forEach((q) => { q.sortOrder += 1 })
+            this.selectedGroup.questions.forEach((q) => { q.sortOrder += 1 })
           }
           qRf.sortOrder = 1
-          group.questions.unshift(qRf)
+          this.selectedGroup.questions.unshift(qRf)
         } else {
           // Alert and return back to the radio button type
           alert('Only one Reference question is allowed on a Group')

@@ -38,6 +38,10 @@ export const actions = {
     const targetedGroupToCopy = state.groupsCopy.find(copy => copy.primaryKey === group.primaryKey)
 
     const copiedGroup = _.cloneDeep(targetedGroupToCopy)
+
+    // TODO Luis
+    // Regenerate a new GUID for every question
+
     // update new group order
     copiedGroup.order = insertAtEndOfTargetedRepeatedGroups
 

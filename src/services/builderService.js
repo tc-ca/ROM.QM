@@ -38,9 +38,11 @@ function createQuestionnaire () {
 
 function createQuestion (questionnaire) {
   let id = getNextQuestionId(questionnaire)
+  // let guid = 
   let question = {
     name: 'Question',
     id: id,
+    guid: guid,
     sortOrder: id,
     isVisible: true,
     isMultiple: true,
