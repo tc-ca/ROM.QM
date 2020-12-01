@@ -115,9 +115,58 @@ function createQuestion (questionnaire) {
   return question
 }
 
-function createChildQuestion (questionnaire, queistion) {
+function createReferenceQuestion () {
+  let question = {
+    name: 'Reference ID',
+    id: 0,
+    sortOrder: 1,
+    isVisible: true,
+    isMultiple: false,
+    text: {
+      [LANGUAGE.ENGLISH]: 'Reference ID',
+      [LANGUAGE.FRENCH]: 'FR: Reference ID'
+    },
+    type: 'text', // text, number, select, radio, boolean, image...
+    response: null,
+    responseOptions: [],
+    validationRules: [
+      {
+        name: 'require', // use it as a reference for parent question to enable/disable validator
+        enabled: true,
+        type: 'require', // min, max....
+        value: null,
+        errorMessage: {
+          [LANGUAGE.ENGLISH]: 'Required',
+          [LANGUAGE.FRENCH]: 'FR: Required'
+        }
+      }
+    ],
+    violationInfo: {},
+    internalComment: {
+      option: 'optional', value: ''
+    },
+    externalComment: {
+      option: 'optional', value: ''
+    },
+    picture: {},
+    childQuestions: [],
+    dependants: [],
+    dependencyGroups: []
+  }
+
+  question.name = 'Reference ID'
+
+  return question
+}
+
+function findReferenceQuestion(group) {
+  let q = group.find( q => q.id === 0);
+  return q;
+}
+
+function createChildQuestion (questionnaire, question) {
   let q = createQuestion(questionnaire)
-  q.sortOrder = queistion.childQuestions.length + 1
+  q.sortOrder = question.childQuestions.length + 1
   return q
 }
 
@@ -245,10 +294,12 @@ export default {
   createGroup,
   createQuestionnaire,
   createQuestion,
+  createReferenceQuestion,
   createProvisions,
   createChildQuestion,
   createResponseOption,
   createValidator,
   createDependencyGroup,
-  processBuilderForSave
+  processBuilderForSave,
+  findReferenceQuestion
 };

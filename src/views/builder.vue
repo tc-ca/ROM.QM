@@ -181,6 +181,7 @@
             <v-checkbox
               v-model="selectedGroup.isRepeatable"
               :label="'Is Repeatable'"
+              @change="repeatableAction($event)"
             />
           </v-col>
         </v-row>
@@ -780,6 +781,20 @@ export default {
     })
   },
   methods: {
+    repeatableAction ($event) {
+      if ($event) {
+        // Check if there is a Reference ID question and if it is not, create one
+        if (!BuilderService.findReferenceQuestion(this.selectedGroup)) {
+          let rq = BuilderService.createReferenceQuestion()
+          console.log(JSON.stringify(rq))
+          // Put the sort order to 1
+          // Push all the other sort order +1
+          // Add the question to the begining of the group
+        }
+      } else {
+        // Check if there is a Reference Id question and if it is, delete it?
+      }
+    },
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
     },
@@ -827,6 +842,10 @@ export default {
       this.confirmCallbackArgs = [group, question]
     },
     removeQuestion (group, question) {
+      if (this.selectedQuestion.id === 0 || this.selectedQuestion.name === 'Reference ID') {
+        // This is the Reference question, it can't be removed this way.
+        return
+      }
       if (this.selectedQuestion === question) {
         this.selectedQuestion = null
       }
