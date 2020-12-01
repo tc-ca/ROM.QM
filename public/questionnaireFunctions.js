@@ -81,7 +81,6 @@ async function InitializeQuestionnaireRender(dynParams) {
     let template = await getTemplateDataByServiceTaskId(serviceTaskId);
     //set the questionnaire state for the app to display json questionnaire
     questionnaireVueInstance.Render(template);
-    return;
   }
   else {
         // get json to render
