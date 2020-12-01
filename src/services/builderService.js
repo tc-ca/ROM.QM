@@ -160,7 +160,7 @@ function createReferenceQuestion () {
 }
 
 function findReferenceQuestion(group) {
-  let q = group.find( q => q.id === 0);
+  let q = group.questions.find( q => q.id === 0);
   return q;
 }
 
