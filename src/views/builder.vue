@@ -387,7 +387,7 @@
                     small
                     @click="addOption()"
                   >
-                    $t('app.builder.responseOptions.addOption')
+                    {{ $t('app.builder.responseOptions.addOption') }}
                   </v-btn>
                 </div>
               </div>
