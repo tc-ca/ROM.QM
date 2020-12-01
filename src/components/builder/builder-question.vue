@@ -164,14 +164,15 @@ export default {
   },
   computed: {
     questionText () {
-      return `${this.index + 1}. ${this.question.text[this.lang]}`
+      // return `${this.index + 1}. ${this.question.text[this.lang]}`
+      return `${this.question.text[this.lang]}`
     },
     ...mapState({
       lang: state => {
-        if (!state || !state.app) {
+        if (!state || !state.settings) {
           return 'en'
         }
-        return state.app.settings.lang
+        return state.settings.settings.lang
       }
       // selectedQuestion: state => state.builder.selectedQuestion
     })
