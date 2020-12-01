@@ -368,7 +368,7 @@
                           </v-sheet>
                           <v-card-text>
                             <v-treeview
-                              v-model="option.selectedProvisions"
+                              v-model="option.provisions"
                               selectable
                               item-text="DisplayEnglishText"
                               item-key="id"
@@ -377,7 +377,6 @@
                               :filter="option.filterProvisions"
                               :items="provisions"
                             />
-                            {{ option.filterProvisions }}
                           </v-card-text>
                         </v-card>
                       </div>
@@ -761,9 +760,6 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
-    // const provs = BuilderService.GetLegislations()
-    // this.$store.dispatch('SetLegislations', { provs })
-
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {
@@ -773,7 +769,6 @@ export default {
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
-
           break
         default:
           break

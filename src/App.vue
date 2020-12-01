@@ -135,8 +135,18 @@ export default {
     }
   },
   created: async function () {
+    const page = this.page
     if (env === 'development') {
-      await this.$store.dispatch('SetLegislationsStateToLocalData')
+      switch (page) {
+        case 'builder':
+          await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
+          break
+        case 'questionnaire':
+          await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
+          break
+        default:
+          break
+      }
       await this.$store.dispatch('SetMockQuestionnaireResponse')
     }
 

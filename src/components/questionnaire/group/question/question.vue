@@ -170,35 +170,46 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
+
+    hydrateItems (itemToHydrate, dictionary) {
+      let hydratedItems = []
+
+      for (let index = 0; index < itemToHydrate.length; index++) {
+        // get the key from array
+        let key = itemToHydrate[index]
+        // alert('provisionId' + provisionsToDisplay[index])
+
+        // map to the value i want to extract
+        console.log('rehydratedProvision', dictionary[key])
+        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
+
+        var rehydratedProvision = dictionary[key]
+        hydratedItems.push(rehydratedProvision)
+      }
+      return hydratedItems
+    },
     loadSelectedItems (responseOption) {
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
       // let provisionsToSelect = responseOption.responseOption
       let provisionsToDisplay = responseOption.provisions
-      let test = []
-      for (let index = 0; index < provisionsToDisplay.length; index++) {
-        // get the key from array
-        let provisionId = provisionsToDisplay[index]
-        // alert('provisionId' + provisionsToDisplay[index])
+      let hydratedItems = this.hydrateItems(provisionsToDisplay, dictionnairyOfProvisions)
 
-        // map to the value i want to extract
-        console.log('rehydratedProvision', dictionnairyOfProvisions[provisionId])
-        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
+      let cloneHydratedItems = _.cloneDeep(hydratedItems)
+      // const uniqueParents = onlyUniqueObj(cloneHydratedItems, 'id')
 
-        var rehydratedProvision = dictionnairyOfProvisions[provisionId]
-        test.push(rehydratedProvision)
-      }
-      console.log('my suff', test)
+      const hydratedParentIds = cloneHydratedItems.map(x => x.parentLegislationId)
+      //
+      const uniqHydratedParentIds = [...new Set(hydratedParentIds)]
+      let hydratedParents = this.hydrateItems(uniqHydratedParentIds, dictionnairyOfProvisions)
 
-      let data = _.cloneDeep(test)
-      // const data = [
-      //   { id: 2, parentId: 1 }, // no parent
-      //   { id: 3, parentId: 2 },
-      //   { id: 4, parentId: 2 },
-      //   { id: 5, parentId: 1 }, // no parent
-      //   { id: 6, parentId: 5 },
-      //   { id: 7, parentId: 5 },
-      //   { id: 8, parentId: 19 } // no parent
-      // ]
+      // set to the main root
+      hydratedParents.forEach(x => {
+        x.parentLegislationId = '-1'
+      })
+      // console.log('my hydrated parents', JSON.stringify(hydratedParents))
+
+      const combinedHydratedItems = hydratedItems.concat(hydratedParents)
+      let data = _.cloneDeep(combinedHydratedItems)
 
       const ids = data.map(x => x.id)
       const parentids = data.map(x => x.parentLegislationId)
@@ -221,7 +232,12 @@ export default {
       }
 
       // create a root node, set to some number and null for the below algorith to know its the root
-      data.push({ id: '-1', parentLegislationId: null })
+      data.push({ id: '-1',
+        parentLegislationId: null,
+        'title': {
+          'en': 'root',
+          'fr': 'root'
+        } })
 
       console.log('new data', data)
 
