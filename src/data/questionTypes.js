@@ -4,6 +4,7 @@
     SELECT: "select",
     IMAGE: "image",
     NUMBER: "number",
+    REFERENCE: "reference"
   }
 
 export {

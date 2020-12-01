@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { LANGUAGE } from '../constants.js'
+import { QUESTION_TYPE } from "../data/questionTypes.js";
 
 /* eslint-disable no-undef */
 
@@ -126,7 +127,7 @@ function createReferenceQuestion () {
       [LANGUAGE.ENGLISH]: 'Reference ID',
       [LANGUAGE.FRENCH]: 'FR: Reference ID'
     },
-    type: 'text', // text, number, select, radio, boolean, image...
+    type: QUESTION_TYPE.REFERENCE, // text, number, select, radio, boolean, image...
     response: null,
     responseOptions: [],
     validationRules: [
@@ -160,7 +161,7 @@ function createReferenceQuestion () {
 }
 
 function findReferenceQuestion(group) {
-  let q = group.questions.find( q => q.id === 0);
+  let q = group.questions.find( q => q.type === QUESTION_TYPE.REFERENCE);
   return q;
 }
 

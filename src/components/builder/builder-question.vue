@@ -178,6 +178,24 @@ export default {
     })
   },
   methods: {
+    /*
+    repeatableAction ($event) {
+      if ($event) {
+        // Check if there is a Reference ID question and if it is not, create one
+        if (!BuilderService.findReferenceQuestion(this.selectedGroup)) {
+          let rq = BuilderService.createReferenceQuestion()
+          console.log(JSON.stringify(rq))
+          // Put the sort order to 1
+          rq.sortOrder = 1
+          // Push all the other sort order +1
+          this.selectedGroup.questions.forEach()
+          // Add the question to the begining of the group
+        }
+      } else {
+        // Check if there is a Reference Id question and if it is, delete it?
+      }
+    },
+    */
     addQuestion ($event) {
       $event.stopPropagation()
 

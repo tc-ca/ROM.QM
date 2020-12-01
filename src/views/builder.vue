@@ -181,7 +181,6 @@
             <v-checkbox
               v-model="selectedGroup.isRepeatable"
               :label="'Is Repeatable'"
-              @change="repeatableAction($event)"
             />
           </v-col>
         </v-row>
@@ -205,6 +204,7 @@
               item-value="value"
               :items="questionTypes"
               :label="$t('app.builder.questionType')"
+              @change="changeQuestionType($event, group)"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -776,20 +776,6 @@ export default {
     })
   },
   methods: {
-    repeatableAction ($event) {
-      if ($event) {
-        // Check if there is a Reference ID question and if it is not, create one
-        if (!BuilderService.findReferenceQuestion(this.selectedGroup)) {
-          let rq = BuilderService.createReferenceQuestion()
-          console.log(JSON.stringify(rq))
-          // Put the sort order to 1
-          // Push all the other sort order +1
-          // Add the question to the begining of the group
-        }
-      } else {
-        // Check if there is a Reference Id question and if it is, delete it?
-      }
-    },
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
     },
@@ -810,6 +796,27 @@ export default {
             this.selectedGroup = null
           }
           break
+        }
+      }
+    },
+    changeQuestionType ($event, group) {
+      if (this.selectedQuestion.type === 'reference') {
+        console.log(this.selectedQuestion)
+        // Check if there is a Reference ID question and if it is not, create one
+        if (!BuilderService.findReferenceQuestion(group)) {
+          // Do something
+          let qRf = BuilderService.createReferenceQuestion()
+          console.log(qRf)
+          if (group.questions.length > 0) {
+            // Move every question one number up on the sort order
+            group.questions.forEach((q) => { q.sortOrder += 1 })
+          }
+          qRf.sortOrder = 1
+          group.questions.unshift(qRf)
+        } else {
+          // Alert and return back to the radio button type
+          alert('Only one Reference question is allowed on a Group')
+          this.selectedQuestion.type = 'text'
         }
       }
     },
