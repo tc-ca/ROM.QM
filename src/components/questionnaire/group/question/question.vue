@@ -106,6 +106,7 @@ import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
+import { QUESTION_TYPE } from '../../../../data/questionTypes'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change'],
@@ -170,7 +171,6 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
-
     hydrateItems (itemToHydrate, dictionary) {
       let hydratedItems = []
 
@@ -275,6 +275,9 @@ export default {
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
       this.$emit('responseChanged')
+      if (this.question.type === QUESTION_TYPE.REFERENCE) {
+        this.$emit('group-subtitle-change')
+      }
     },
     updateSupplementaryInfoVisibility (args) {
       this.displaySupplementaryInfo = (args && args.value)

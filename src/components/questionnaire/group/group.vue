@@ -19,7 +19,7 @@
             {{ groupTitle }}
 
             <span
-              v-if="group.isRepeatable=== true && repeatGroupTextDifferentiator !== ''"
+              v-if="showGroupSubtitle"
               class="subtitle-1 text-truncate"
             >{{ repeatGroupTextDifferentiator }}</span>
           </h2>
@@ -88,6 +88,7 @@
 
 import { mapState } from 'vuex'
 import Question from './question/question.vue'
+import BuilderService from '../../../services/builderService'
 
 export default {
   emits: ['responseChanged'],
@@ -118,6 +119,12 @@ export default {
   },
 
   computed: {
+    showGroupSubtitle () {
+      if (this.repeatGroupTextDifferentiator !== '') {
+        if (this.group.isRepeatable === true || this.activegroupHasReferenceQuestion()) return true
+      }
+      return false
+    },
     groupTitle () {
       // return `${this.index + 1}. ${this.group.title[this.lang]}`
       return `${this.group.title[this.lang]}`
@@ -168,6 +175,9 @@ export default {
   },
 
   methods: {
+    activegroupHasReferenceQuestion () {
+      return (!!BuilderService.findReferenceQuestion(this.group))
+    },
     onSubtitleChange () {
       this.repeatGroupTextDifferentiator = ''
       this.group.questions.forEach(q => {
