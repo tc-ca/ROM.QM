@@ -188,6 +188,7 @@
           <v-col>
             <v-text-field
               v-model="selectedQuestion.name"
+              :disabled="selectedQuestion.type === reference"
               :label="$t('app.builder.questionName')"
             />
             <v-text-field
@@ -204,6 +205,7 @@
               item-value="value"
               :items="questionTypes"
               :label="$t('app.builder.questionType')"
+              @change="changeQuestionType($event)"
             >
               <template v-slot:selection="{ item }">
                 <span>{{ item.text[lang] }}</span>
@@ -214,6 +216,7 @@
             </v-select>
             <v-text-field
               v-model="selectedQuestion.sortOrder"
+              :disabled="selectedQuestion.type === reference"
               dense
               type="number"
               :label="$t('app.builder.sortOrder')"
@@ -247,247 +250,150 @@
                 <span>{{ item.text[lang] }}</span>
               </template>
             </v-select>
-            <v-select
-              v-model="selectedQuestion.picture.option"
-              item-text="text"
-              item-value="value"
-              :items="optionTypes"
-              :label="$t('app.builder.picture')"
-            >
-              <template v-slot:selection="{ item }">
-                <span>{{ item.text[lang] }}</span>
-              </template>
-              <template v-slot:item="{ item }">
-                <span>{{ item.text[lang] }}</span>
-              </template>
-            </v-select>
-            <v-checkbox
-              v-model="selectedQuestion.isVisible"
-              dense
-              :label="$t('app.builder.visibleByDefault')"
-            />
+            <div v-if="selectedQuestion.type !== reference">
+              <v-select
+                v-model="selectedQuestion.picture.option"
+                item-text="text"
+                item-value="value"
+                :items="optionTypes"
+                :label="$t('app.builder.picture')"
+              >
+                <template v-slot:selection="{ item }">
+                  <span>{{ item.text[lang] }}</span>
+                </template>
+                <template v-slot:item="{ item }">
+                  <span>{{ item.text[lang] }}</span>
+                </template>
+              </v-select>
+              <v-checkbox
+                v-model="selectedQuestion.isVisible"
+                dense
+                :label="$t('app.builder.visibleByDefault')"
+              />
 
-            <div
-              v-if="selectedQuestion.type === 'select' || selectedQuestion.type === 'radio' "
-            >
-              <div>
-                <v-btn
-                  small
-                  icon
-                  @click="toggleOptions()"
-                >
-                  <v-icon v-if="optionsCollapsed">
-                    mdi-menu-right
-                  </v-icon>
-                  <v-icon v-if="!optionsCollapsed">
-                    mdi-menu-down
-                  </v-icon>
-                </v-btn>
-                {{ $t('app.builder.responseOptions.responseOptions') }}
-              </div>
-              <div v-show="!optionsCollapsed">
-                <div
-                  v-for="(option, index) in selectedQuestion.responseOptions"
-                  :key="index"
-                  class="bordered ml-2 pa-2 my-2"
-                >
-                  <v-text-field
-                    v-model="option.text[eng]"
-                    dense
-                    label="Option text En"
-                  />
-                  <v-text-field
-                    v-model="option.text[fr]"
-                    dense
-                    label="Option text Fr"
-                  />
-                  <v-text-field
-                    v-model.number="option.sortOrder"
-                    dense
-                    :label="$t('app.builder.responseOptions.sortOrder')"
-                  />
-                  <v-text-field
-                    v-model="option.value"
-                    dense
-                    :label="$t('app.builder.responseOptions.value')"
-                  />
-                  <div class="right">
-                    <v-tooltip
-                      top
-                      open-delay="300"
-                    >
-                      <template #activator="{ on, attrs }">
+              <div
+                v-if="selectedQuestion.type === 'select' || selectedQuestion.type === 'radio' "
+              >
+                <div>
+                  <v-btn
+                    small
+                    icon
+                    @click="toggleOptions()"
+                  >
+                    <v-icon v-if="optionsCollapsed">
+                      mdi-menu-right
+                    </v-icon>
+                    <v-icon v-if="!optionsCollapsed">
+                      mdi-menu-down
+                    </v-icon>
+                  </v-btn>
+                  {{ $t('app.builder.responseOptions.responseOptions') }}
+                </div>
+                <div v-show="!optionsCollapsed">
+                  <div
+                    v-for="(option, index) in selectedQuestion.responseOptions"
+                    :key="index"
+                    class="bordered ml-2 pa-2 my-2"
+                  >
+                    <v-text-field
+                      v-model="option.text[eng]"
+                      dense
+                      label="Option text En"
+                    />
+                    <v-text-field
+                      v-model="option.text[fr]"
+                      dense
+                      label="Option text Fr"
+                    />
+                    <v-text-field
+                      v-model.number="option.sortOrder"
+                      dense
+                      :label="$t('app.builder.responseOptions.sortOrder')"
+                    />
+                    <v-text-field
+                      v-model="option.value"
+                      dense
+                      :label="$t('app.builder.responseOptions.value')"
+                    />
+                    <div class="right">
+                      <v-tooltip
+                        top
+                        open-delay="300"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <v-btn
+                            small
+                            icon
+                            @click="removeResponseOption(option)"
+                          >
+                            <v-icon
+                              small
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              mdi-delete
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>{{ $t('app.builder.responseOptions.removResponseoption') }}</span>
+                      </v-tooltip>
+                    </div>
+                    <div>
+                      <div>
                         <v-btn
                           small
                           icon
-                          @click="removeResponseOption(option)"
+                          @click="toggleProvisions(option)"
                         >
-                          <v-icon
-                            small
-                            v-bind="attrs"
-                            v-on="on"
-                          >
-                            mdi-delete
+                          <v-icon v-if="!option.isProvisionCollapsed">
+                            mdi-menu-right
+                          </v-icon>
+                          <v-icon v-if="option.isProvisionCollapsed">
+                            mdi-menu-down
                           </v-icon>
                         </v-btn>
-                      </template>
-                      <span>{{ $t('app.builder.responseOptions.removResponseoption') }}</span>
-                    </v-tooltip>
-                  </div>
-                  <div>
-                    <div>
-                      <v-btn
-                        small
-                        icon
-                        @click="toggleProvisions(option)"
-                      >
-                        <v-icon v-if="!option.isProvisionCollapsed">
-                          mdi-menu-right
-                        </v-icon>
-                        <v-icon v-if="option.isProvisionCollapsed">
-                          mdi-menu-down
-                        </v-icon>
-                      </v-btn>
-                      {{ $t('app.builder.responseOptions.provisions.provisions') }}
-                    </div>
-                    <div v-show="option.isProvisionCollapsed">
-                      <div>
-                        <v-card
-                          class="mx-auto"
-                        >
-                          <v-sheet class="pa-4">
-                            <v-text-field
-                              v-model="option.searchProvisions"
-                              :label="$t('app.builder.responseOptions.provisions.search')"
-                              outlined
-                              hide-details
-                              clearable
-                              clear-icon="mdi-close-circle-outline"
-                            />
-                          </v-sheet>
-                          <v-card-text>
-                            <v-treeview
-                              v-model="option.provisions"
-                              selectable
-                              item-text="DisplayEnglishText"
-                              item-key="id"
-                              selection-type="leaf"
-                              :search="option.searchProvisions"
-                              :filter="option.filterProvisions"
-                              :items="provisions"
-                            />
-                          </v-card-text>
-                        </v-card>
+                        {{ $t('app.builder.responseOptions.provisions.provisions') }}
+                      </div>
+                      <div v-show="option.isProvisionCollapsed">
+                        <div>
+                          <v-card
+                            class="mx-auto"
+                          >
+                            <v-sheet class="pa-4">
+                              <v-text-field
+                                v-model="option.searchProvisions"
+                                :label="$t('app.builder.responseOptions.provisions.search')"
+                                outlined
+                                hide-details
+                                clearable
+                                clear-icon="mdi-close-circle-outline"
+                              />
+                            </v-sheet>
+                            <v-card-text>
+                              <v-treeview
+                                v-model="option.provisions"
+                                selectable
+                                item-text="DisplayEnglishText"
+                                item-key="id"
+                                selection-type="leaf"
+                                :search="option.searchProvisions"
+                                :filter="option.filterProvisions"
+                                :items="provisions"
+                              />
+                            </v-card-text>
+                          </v-card>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="right">
-                  <v-btn
-                    small
-                    @click="addOption()"
-                  >
-                    {{ $t('app.builder.responseOptions.addOption') }}
-                  </v-btn>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div>
-                <v-btn
-                  small
-                  icon
-                  @click="toggleValidators()"
-                >
-                  <v-icon v-if="validatorsCollapsed">
-                    mdi-menu-right
-                  </v-icon>
-                  <v-icon v-if="!validatorsCollapsed">
-                    mdi-menu-down
-                  </v-icon>
-                </v-btn>
-                {{ $t('app.builder.validators.validators') }}
-              </div>
-              <div
-                v-show="!validatorsCollapsed"
-              >
-                <div
-                  v-for="(validationRule, index) in selectedQuestion.validationRules"
-                  :key="index"
-                  class="bordered pa-2 ml-2 my-2"
-                >
-                  <v-text-field
-                    v-model="validationRule.name"
-                    dense
-                    :label="$t('app.builder.validators.name')"
-                  />
-                  <v-checkbox
-                    v-model="validationRule.enabled"
-                    dense
-                    :label="$t('app.builder.validators.enabled')"
-                  />
-                  <v-select
-                    v-model="validationRule.type"
-                    dense
-                    item-text="text"
-                    item-value="value"
-                    :items="validatorTypes"
-                    :label="$t('app.builder.validators.type')"
-                  >
-                    <template v-slot:selection="{ item }">
-                      <span>{{ item.text[lang] }}</span>
-                    </template>
-                    <template v-slot:item="{ item }">
-                      <span>{{ item.text[lang] }}</span>
-                    </template>
-                  </v-select>
-                  <v-text-field
-                    v-show="validationRule.type !== 'require'"
-                    v-model="validationRule.value"
-                    dense
-                    label="value"
-                  />
-                  <v-text-field
-                    v-model="validationRule.errorMessage[eng]"
-                    dense
-                    label="En: Error message"
-                  />
-                  <v-text-field
-                    v-model="validationRule.errorMessage[fr]"
-                    dense
-                    label="Fr: Error message"
-                  />
                   <div class="right">
-                    <v-tooltip
-                      top
-                      open-delay="300"
+                    <v-btn
+                      small
+                      @click="addOption()"
                     >
-                      <template #activator="{ on, attrs }">
-                        <v-btn
-                          small
-                          icon
-                          @click="removeValidator(validationRule)"
-                        >
-                          <v-icon
-                            small
-                            v-bind="attrs"
-                            v-on="on"
-                          >
-                            mdi-delete
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.builder.validators.removeValidator') }}</span>
-                    </v-tooltip>
+                      {{ $t('app.builder.responseOptions.addOption') }}
+                    </v-btn>
                   </div>
-                </div>
-                <div class="right">
-                  <v-btn
-                    small
-                    @click="addValidator()"
-                  >
-                    {{ $t('app.builder.validators.addValidator') }}
-                  </v-btn>
                 </div>
               </div>
               <div>
@@ -495,155 +401,254 @@
                   <v-btn
                     small
                     icon
-                    @click="toggleDependencies()"
+                    @click="toggleValidators()"
                   >
-                    <v-icon v-if="dependenciesCollapsed">
+                    <v-icon v-if="validatorsCollapsed">
                       mdi-menu-right
                     </v-icon>
-                    <v-icon v-if="!dependenciesCollapsed">
+                    <v-icon v-if="!validatorsCollapsed">
                       mdi-menu-down
                     </v-icon>
                   </v-btn>
-                  {{ $t('app.builder.dependsOn.dependsOn') }}
+                  {{ $t('app.builder.validators.validators') }}
                 </div>
-                <div v-show="!dependenciesCollapsed">
-                  <div>
-                    <div
-                      v-for="(dependencyGroup, index) in selectedQuestion.dependencyGroups"
-                      :key="index"
-                      class="bordered pa-2 ml-2 my-2"
+                <div
+                  v-show="!validatorsCollapsed"
+                >
+                  <div
+                    v-for="(validationRule, index) in selectedQuestion.validationRules"
+                    :key="index"
+                    class="bordered pa-2 ml-2 my-2"
+                  >
+                    <v-text-field
+                      v-model="validationRule.name"
+                      dense
+                      :label="$t('app.builder.validators.name')"
+                    />
+                    <v-checkbox
+                      v-model="validationRule.enabled"
+                      dense
+                      :label="$t('app.builder.validators.enabled')"
+                    />
+                    <v-select
+                      v-model="validationRule.type"
+                      dense
+                      item-text="text"
+                      item-value="value"
+                      :items="validatorTypes"
+                      :label="$t('app.builder.validators.type')"
                     >
-                      <v-select
-                        v-model="dependencyGroup.ruleType"
-                        dense
-                        :items="dependencyGroupTypes"
-                        item-text="text"
-                        item-value="value"
-                        :label="$t('app.builder.dependsOn.type')"
+                      <template v-slot:selection="{ item }">
+                        <span>{{ item.text[lang] }}</span>
+                      </template>
+                      <template v-slot:item="{ item }">
+                        <span>{{ item.text[lang] }}</span>
+                      </template>
+                    </v-select>
+                    <v-text-field
+                      v-show="validationRule.type !== 'require'"
+                      v-model="validationRule.value"
+                      dense
+                      label="value"
+                    />
+                    <v-text-field
+                      v-model="validationRule.errorMessage[eng]"
+                      dense
+                      label="En: Error message"
+                    />
+                    <v-text-field
+                      v-model="validationRule.errorMessage[fr]"
+                      dense
+                      label="Fr: Error message"
+                    />
+                    <div class="right">
+                      <v-tooltip
+                        top
+                        open-delay="300"
                       >
-                        <template v-slot:selection="{ item }">
-                          <span>{{ item.text[lang] }}</span>
-                        </template>
-                        <template v-slot:item="{ item }">
-                          <span>{{ item.text[lang] }}</span>
-                        </template>
-                      </v-select>
-                      <v-select
-                        v-show="dependencyGroup.ruleType === 'validation' || dependencyGroup.ruleType === 'validationValue'"
-                        v-model="dependencyGroup.childValidatorName"
-                        dense
-                        :items="selectedQuestion.validationRules"
-                        item-text="name"
-                        label="Validator"
-                      />
-
-                      <div
-                        class="bordered pa-2"
-                      >
-                        <div
-                          v-for="(questionDependency, i) in dependencyGroup.questionDependencies"
-                          :key="i"
-                        >
-                          <div class="bordered pa-2 my-2">
-                            <v-select
-                              v-model="questionDependency.dependsOnQuestion"
-                              dense
-                              item-text="name"
-                              :items="questions"
-                              label="Question"
-                              return-object
-                            />
-                            <v-select
-                              v-model="questionDependency.validationAction"
-                              dense
-                              item-text="text"
-                              item-value="value"
-                              :items="dependencyValidationActions"
-                              label="to be"
+                        <template #activator="{ on, attrs }">
+                          <v-btn
+                            small
+                            icon
+                            @click="removeValidator(validationRule)"
+                          >
+                            <v-icon
+                              small
+                              v-bind="attrs"
+                              v-on="on"
                             >
-                              <template v-slot:selection="{ item }">
-                                <span>{{ item.text[lang] }}</span>
-                              </template>
-                              <template v-slot:item="{ item }">
-                                <span>{{ item.text[lang] }}</span>
-                              </template>
-                            </v-select>
-                            <v-text-field
-                              v-model="questionDependency.validationValue"
-                              dense
-                              label="to"
-                            />
-                            <div class="right">
-                              <v-tooltip
-                                top
-                                open-delay="300"
+                              mdi-delete
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>{{ $t('app.builder.validators.removeValidator') }}</span>
+                      </v-tooltip>
+                    </div>
+                  </div>
+                  <div class="right">
+                    <v-btn
+                      small
+                      @click="addValidator()"
+                    >
+                      {{ $t('app.builder.validators.addValidator') }}
+                    </v-btn>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <v-btn
+                      small
+                      icon
+                      @click="toggleDependencies()"
+                    >
+                      <v-icon v-if="dependenciesCollapsed">
+                        mdi-menu-right
+                      </v-icon>
+                      <v-icon v-if="!dependenciesCollapsed">
+                        mdi-menu-down
+                      </v-icon>
+                    </v-btn>
+                    {{ $t('app.builder.dependsOn.dependsOn') }}
+                  </div>
+                  <div v-show="!dependenciesCollapsed">
+                    <div>
+                      <div
+                        v-for="(dependencyGroup, index) in selectedQuestion.dependencyGroups"
+                        :key="index"
+                        class="bordered pa-2 ml-2 my-2"
+                      >
+                        <v-select
+                          v-model="dependencyGroup.ruleType"
+                          dense
+                          :items="dependencyGroupTypes"
+                          item-text="text"
+                          item-value="value"
+                          :label="$t('app.builder.dependsOn.type')"
+                        >
+                          <template v-slot:selection="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                          <template v-slot:item="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                        </v-select>
+                        <v-select
+                          v-show="dependencyGroup.ruleType === 'validation' || dependencyGroup.ruleType === 'validationValue'"
+                          v-model="dependencyGroup.childValidatorName"
+                          dense
+                          :items="selectedQuestion.validationRules"
+                          item-text="name"
+                          label="Validator"
+                        />
+
+                        <div
+                          class="bordered pa-2"
+                        >
+                          <div
+                            v-for="(questionDependency, i) in dependencyGroup.questionDependencies"
+                            :key="i"
+                          >
+                            <div class="bordered pa-2 my-2">
+                              <v-select
+                                v-model="questionDependency.dependsOnQuestion"
+                                dense
+                                item-text="name"
+                                :items="questions"
+                                label="Question"
+                                return-object
+                              />
+                              <v-select
+                                v-model="questionDependency.validationAction"
+                                dense
+                                item-text="text"
+                                item-value="value"
+                                :items="dependencyValidationActions"
+                                label="to be"
                               >
-                                <template #activator="{ on, attrs }">
-                                  <v-btn
-                                    small
-                                    icon
-                                    @click="removeQuestoionDependency(dependencyGroup, questionDependency)"
-                                  >
-                                    <v-icon
-                                      small
-                                      v-bind="attrs"
-                                      v-on="on"
-                                    >
-                                      mdi-delete
-                                    </v-icon>
-                                  </v-btn>
+                                <template v-slot:selection="{ item }">
+                                  <span>{{ item.text[lang] }}</span>
                                 </template>
-                                <span>{{ $t('app.builder.group.question.removeQuestion') }}</span>
-                              </v-tooltip>
+                                <template v-slot:item="{ item }">
+                                  <span>{{ item.text[lang] }}</span>
+                                </template>
+                              </v-select>
+                              <v-text-field
+                                v-model="questionDependency.validationValue"
+                                dense
+                                label="to"
+                              />
+                              <div class="right">
+                                <v-tooltip
+                                  top
+                                  open-delay="300"
+                                >
+                                  <template #activator="{ on, attrs }">
+                                    <v-btn
+                                      small
+                                      icon
+                                      @click="removeQuestoionDependency(dependencyGroup, questionDependency)"
+                                    >
+                                      <v-icon
+                                        small
+                                        v-bind="attrs"
+                                        v-on="on"
+                                      >
+                                        mdi-delete
+                                      </v-icon>
+                                    </v-btn>
+                                  </template>
+                                  <span>{{ $t('app.builder.group.question.removeQuestion') }}</span>
+                                </v-tooltip>
+                              </div>
+                            </div>
+                            <div
+                              v-if="i < dependencyGroup.questionDependencies.length - 1"
+                              class="ml-2"
+                            >
+                              and
                             </div>
                           </div>
-                          <div
-                            v-if="i < dependencyGroup.questionDependencies.length - 1"
-                            class="ml-2"
-                          >
-                            and
+                          <div class="right">
+                            <v-btn
+                              small
+                              @click="addQuestionDependency(dependencyGroup)"
+                            >
+                              {{ $t('app.builder.dependsOn.addQuestion') }}
+                            </v-btn>
                           </div>
                         </div>
                         <div class="right">
-                          <v-btn
-                            small
-                            @click="addQuestionDependency(dependencyGroup)"
+                          <v-tooltip
+                            top
+                            open-delay="300"
                           >
-                            {{ $t('app.builder.dependsOn.addQuestion') }}
-                          </v-btn>
+                            <template #activator="{ on, attrs }">
+                              <v-btn
+                                small
+                                icon
+                                @click="removeDependencyGroup(dependencyGroup)"
+                              >
+                                <v-icon
+                                  small
+                                  v-bind="attrs"
+                                  v-on="on"
+                                >
+                                  mdi-delete
+                                </v-icon>
+                              </v-btn>
+                            </template>
+                            <span>{{ $t('app.builder.dependsOn.removDependencyGroup') }}</span>
+                          </v-tooltip>
                         </div>
                       </div>
                       <div class="right">
-                        <v-tooltip
-                          top
-                          open-delay="300"
+                        <v-btn
+                          small
+                          @click="addDependencyGroup()"
                         >
-                          <template #activator="{ on, attrs }">
-                            <v-btn
-                              small
-                              icon
-                              @click="removeDependencyGroup(dependencyGroup)"
-                            >
-                              <v-icon
-                                small
-                                v-bind="attrs"
-                                v-on="on"
-                              >
-                                mdi-delete
-                              </v-icon>
-                            </v-btn>
-                          </template>
-                          <span>{{ $t('app.builder.dependsOn.removDependencyGroup') }}</span>
-                        </v-tooltip>
+                          {{ $t('app.builder.dependsOn.addDependencyGroup') }}
+                        </v-btn>
                       </div>
-                    </div>
-                    <div class="right">
-                      <v-btn
-                        small
-                        @click="addDependencyGroup()"
-                      >
-                        {{ $t('app.builder.dependsOn.addDependencyGroup') }}
-                      </v-btn>
                     </div>
                   </div>
                 </div>
@@ -692,6 +697,7 @@ import BuilderQuestion from '../components/builder/builder-question'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
+import { QUESTION_TYPE } from '../data/questionTypes'
 
 export default {
   name: 'Builder',
@@ -723,7 +729,9 @@ export default {
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],
-      questionProvisions: []
+      questionProvisions: [],
+      env: process.env.NODE_ENV, // ?
+      reference: QUESTION_TYPE.REFERENCE
     }
   },
   computed: {
@@ -796,6 +804,37 @@ export default {
             this.selectedGroup = null
           }
           break
+        }
+      }
+    },
+    changeQuestionType ($event) {
+      if (this.selectedQuestion.type === 'reference') {
+        console.log(this.selectedQuestion)
+        const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
+        if (group) {
+          if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
+            let qRf = BuilderService.createReferenceQuestion()
+            console.log(qRf)
+            if (group.questions.length > 0) {
+              // Move every question one number up on the sort order
+              group.questions.forEach((q) => { q.sortOrder += 1 })
+            }
+            qRf.sortOrder = 1
+            group.questions.unshift(qRf)
+            // Move question from the end to the start of the list
+            const index = group.questions.findIndex(q => q.guid === this.selectedQuestion.guid)
+            if (index > -1) {
+              group.questions.splice(index, 1)
+              // Rebuidl the question Panels
+              this.questionPanels = []
+              group.questions.forEach(q => { this.questionPanels.push(q.sortOrder) })
+              this.selectedQuestion = qRf
+            }
+          } else {
+            // Alert and return back to the radio button type
+            alert('Only one Reference question is allowed on a Group')
+            this.selectedQuestion.type = 'text'
+          }
         }
       }
     },

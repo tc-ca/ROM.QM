@@ -4,9 +4,7 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 echo "Script Path: $scriptPath"
 
 #Connection String to Environment
-
 $ConnectionStringDev = "Url=xxxxxxxxxxx.dynamics.com; Username=xxxxxxxxxxx.onmicrosoft.com; Password=xxxxxxxxxxx; authtype=Office365; RequireNewInstance=True"
-
 
 #how long we want to wait to realize something broke
 $Timeout = 960
@@ -42,4 +40,3 @@ echo "Publishing All Customizations"
 Publish-XrmCustomizations -ConnectionString $ConnectionStringDev -Timeout $Timeout
 
 echo "Publishing Customizations Complete"
-

@@ -58,7 +58,10 @@
             <v-col
               class="col-auto"
             >
-              <v-btn @click="addQuestion($event)">
+              <v-btn
+                :disabled="question.type === reference"
+                @click="addQuestion($event)"
+              >
                 {{ $t('app.builder.group.question.addChildQuestion') }}
               </v-btn>
             </v-col>
@@ -128,6 +131,7 @@
 import { mapState } from 'vuex'
 import Response from './response/response'
 import BuilderService from '../../services/builderService'
+import { QUESTION_TYPE } from '../../data/questionTypes'
 
 export default {
   name: 'BuilderQuestion',
@@ -159,7 +163,8 @@ export default {
   data () {
     return {
       confirmDialogOpen: false,
-      childQuestionPanels: []
+      childQuestionPanels: [],
+      reference: QUESTION_TYPE.REFERENCE
     }
   },
   computed: {

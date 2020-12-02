@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 
 export function pad (n, width, z) {
   z = z || '0'
@@ -71,6 +72,12 @@ export function hydrateItems (itemToHydrate, dictionary) {
 
 
 export function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang = 'en', color = 'error') {
-  const notice = { header: `Question: ${q.text[lang]}`, text: text, icon: icon, color: color };
+  const notice = { 
+    guid: uuidv4(),
+    header: `Question: ${q.text[lang]}`, 
+    text: text, 
+    icon: icon, 
+    color: color 
+  };
   return notice;
 }

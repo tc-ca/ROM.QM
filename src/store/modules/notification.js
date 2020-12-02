@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const namespaced = true
 
 export const state = {
@@ -15,6 +17,7 @@ export const getters = {
 
 export const actions = {
   show ({ commit }, notification) {
+    if (!notification.guid) notification.guid = uuidv4();
     notification.showing = true
     notification.color = notification.color || 'success'
     notification.timeout = notification.timeout || 3000
@@ -22,6 +25,7 @@ export const actions = {
     commit('SET_NOTIFICATIONS', notification)
   },
   addNotification ({ commit }, notification) {
+    if (!notification.guid) notification.guid = uuidv4();
     notification.showing = false
     notification.color = notification.color || 'success'
     notification.timeout = notification.timeout || 6000

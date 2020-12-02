@@ -36,6 +36,13 @@ const QUESTION_TYPES = [
       [LANGUAGE.ENGLISH]: "Image",
       [LANGUAGE.FRENCH]: "Fr: Image"
     }
+  },
+  {
+    value: QUESTION_TYPE.REFERENCE,
+    text: {
+      [LANGUAGE.ENGLISH]: "Reference",
+      [LANGUAGE.FRENCH]: "Fr: Reference"
+    }
   }
 ];
 
