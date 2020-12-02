@@ -38,8 +38,5 @@ $json | ForEach-Object {
 
 echo "Publishing All Customizations"
 Publish-XrmCustomizations -ConnectionString $ConnectionStringDev -Timeout $Timeout
-<<<<<<< HEAD
+
 echo "Publishing Customizations Complete"
-=======
-echo "Publishing Customizations Complete"
->>>>>>> cb6407841fe5cb23b05b1d77105ca141a649d428

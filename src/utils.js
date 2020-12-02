@@ -34,31 +34,42 @@ export function groupBy (collection, property) {
   return result
 }
 
-export function getQuestionReference (groups, question) {
-  for (let i = 0; i < groups.length; i++) {
-    if (groups[i].questions !== null && groups[i].questions.length > 0) {
-      const questionMatch = getQuestionReferenceRecurse(groups[i].questions, question)
-      if (questionMatch !== null) return questionMatch
+export function buildTreeFromFlatList(data, parentKey) {
+  const idMapping = data.reduce((acc, el, i) => {
+    acc[el.id] = i;
+    return acc;
+  }, {});
+
+  let root;
+  console.log(data.length);
+  data.forEach(el => {
+    // Handle the root element
+    if (el[parentKey] === null) {
+      root = el;
+      return;
     }
-  }
+    // Use our mapping to locate the parent element in our data array
+    const parentEl = data[idMapping[el[parentKey]]];
+    // Add our current el to its parent's `children` array
+    parentEl.children = [...(parentEl.children || []), el];
+  });
+  return root
 }
 
-export function getQuestionReferenceRecurse (questions, question) {
-  if (questions === null) return null
-  if (questions !== null && questions.length > 0) {
-    for (let qi = 0; qi < questions.length; qi++) {
-      if (questions[qi].childQuestions !== null && questions[qi].childQuestions.length > 0) {
-        const childMatch = getQuestionReferenceRecurse(questions[qi].childQuestions, question)
-        if (childMatch !== null) return childMatch
-      }
+export function hydrateItems (itemToHydrate, dictionary) {
+    let hydratedItems = []
 
-      if (question === questions[qi]) {
-        return questions[qi]
-      }
+    for (let index = 0; index < itemToHydrate.length; index++) {
+      // get the key from array
+      let key = itemToHydrate[index]
+      // map to the value i want to extract
+      let value = dictionary[key]
+      hydratedItems.push(value)
     }
-  }
-  return null
-}
+    return hydratedItems
+    }
+
+
 
 export function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang = 'en', color = 'error') {
   const notice = { 

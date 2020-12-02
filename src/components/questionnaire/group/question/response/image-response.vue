@@ -172,10 +172,11 @@ import moment from 'moment'
 import base64Images from '../../../../../api/base64-images.js'
 import AppCamera from '../../../../base-camera/base-camera.vue'
 import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
+import BaseMixin from '../../../../../mixins/base'
 
 export default {
   components: { AppCamera },
-
+  mixins: [BaseMixin],
   props: {
     question: {
       type: Object,
@@ -260,7 +261,7 @@ export default {
     },
 
     changeImage (base64) {
-      if (process.env.NODE_ENV === 'production') {
+      if (this.envProd) {
         this.images[this.galleryIndex].base64String = base64
       } else {
         this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`

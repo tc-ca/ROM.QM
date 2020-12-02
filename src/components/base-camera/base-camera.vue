@@ -4,8 +4,10 @@
 /* eslint-disable no-undef */
 import '@resconet/jsbridge/src/JSBridge.js'
 import base64Images from '../../api/base64-images.js'
+import BaseMixin from '../../mixins/base'
 
 export default {
+  mixins: [BaseMixin],
   props: {
     maxImageSize: {
       type: String,
@@ -24,7 +26,7 @@ export default {
   methods: {
     OpenCam () {
       var vm = this
-      if (process.env.NODE_ENV === 'production') {
+      if (envProd) {
         var service = new MobileCRM.Services.DocumentService()
         service.maxImageSize = this.maxImageSize // maxImageSize can have one of following values: "Default", "640x480", "1024x768", "1600x1200", "2048x1536", "2592x1936"
         service.capturePhoto(
