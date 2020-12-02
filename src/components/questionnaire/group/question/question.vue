@@ -42,6 +42,20 @@
           <v-card
             class="mx-auto"
           >
+          <v-sheet class="pa-4">
+          <v-text-field
+              v-model="question.violationInfo.referenceID"
+              :label="$t('app.questionnaire.group.question.referenceId')"
+              :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+              outline
+            />
+            <v-text-field
+              v-model="question.violationInfo.violationCount"
+              :label="$t('app.questionnaire.group.question.violationCount')"
+              :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+              outline
+            />
+            </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
                 v-model="selectedResponseOption.searchProvisions"
@@ -51,6 +65,14 @@
                 clearable
                 clear-icon="mdi-close-circle-outline"
               />
+            </v-sheet>
+            <v-sheet class="pa-4">
+              <div class="text-left">
+                <v-btn small v-for="item in selectedResponseOption.selectedProvisions"
+                  @click="onSelectedProvisionClick(item, selectedResponseOption)"
+                  :key="item.key" style="margin-right: 5px"
+                  rounded color="primary" dark><v-icon small left dark>mdi-close</v-icon>{{ getSelectedProvisionText(item) }}</v-btn>
+              </div>
             </v-sheet>
             <v-card-text>
               <v-treeview
@@ -171,7 +193,39 @@ export default {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   methods: {
+    getSelectedProvisionText (item) {
+      let provison = ''
+      let findDeep = function (data, str) {
+        return data.some(function (e) {
+          if (e.id === str) {
+            provison = e.title.en.split('-')[0]
+            return e
+          } else if (e.children) return findDeep(e.children, str)
+        })
+      }
+      findDeep(this.provisions, item)
+      return provison
+    },
+    onSelectedProvisionClick (item, options) {
+      options.selectedProvisions = options.selectedProvisions.filter(i => i !== item)
+    },
+    hydrateItems (itemToHydrate, dictionary) {
+      let hydratedItems = []
 
+      for (let index = 0; index < itemToHydrate.length; index++) {
+        // get the key from array
+        let key = itemToHydrate[index]
+        // alert('provisionId' + provisionsToDisplay[index])
+
+        // map to the value i want to extract
+        console.log('rehydratedProvision', dictionary[key])
+        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
+
+        var rehydratedProvision = dictionary[key]
+        hydratedItems.push(rehydratedProvision)
+      }
+      return hydratedItems
+    },
     loadProvisions (responseOption) {
       // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
