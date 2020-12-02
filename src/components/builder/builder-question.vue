@@ -58,7 +58,10 @@
             <v-col
               class="col-auto"
             >
-              <v-btn @click="addQuestion($event)">
+              <v-btn
+                :disabled="question.type === reference"
+                @click="addQuestion($event)"
+              >
                 {{ $t('app.builder.group.question.addChildQuestion') }}
               </v-btn>
             </v-col>
@@ -128,6 +131,7 @@
 import { mapState } from 'vuex'
 import Response from './response/response'
 import BuilderService from '../../services/builderService'
+import { QUESTION_TYPE } from '../../data/questionTypes'
 
 export default {
   name: 'BuilderQuestion',
@@ -159,7 +163,8 @@ export default {
   data () {
     return {
       confirmDialogOpen: false,
-      childQuestionPanels: []
+      childQuestionPanels: [],
+      reference: QUESTION_TYPE.REFERENCE
     }
   },
   computed: {
@@ -178,24 +183,6 @@ export default {
     })
   },
   methods: {
-    /*
-    repeatableAction ($event) {
-      if ($event) {
-        // Check if there is a Reference ID question and if it is not, create one
-        if (!BuilderService.findReferenceQuestion(this.selectedGroup)) {
-          let rq = BuilderService.createReferenceQuestion()
-          console.log(JSON.stringify(rq))
-          // Put the sort order to 1
-          rq.sortOrder = 1
-          // Push all the other sort order +1
-          this.selectedGroup.questions.forEach()
-          // Add the question to the begining of the group
-        }
-      } else {
-        // Check if there is a Reference Id question and if it is, delete it?
-      }
-    },
-    */
     addQuestion ($event) {
       $event.stopPropagation()
 

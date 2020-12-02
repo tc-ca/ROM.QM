@@ -1,7 +1,7 @@
 <template>
   <div>
     <text-response
-      v-if="question.type === text"
+      v-if="question.type === text || question.type === reference"
       :question="question"
       @change="onChange"
       @error="onError"
@@ -70,7 +70,8 @@ export default {
       radio: QUESTION_TYPE.RADIO,
       select: QUESTION_TYPE.SELECT,
       image: QUESTION_TYPE.IMAGE,
-      number: QUESTION_TYPE.NUMBER
+      number: QUESTION_TYPE.NUMBER,
+      reference: QUESTION_TYPE.REFERENCE
     }
   },
 
