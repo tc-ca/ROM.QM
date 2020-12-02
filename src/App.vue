@@ -13,7 +13,7 @@
       <v-spacer />
 
       <v-btn
-        v-if="env === 'development'"
+        v-if="envDev"
         id="save"
         icon
         color="white"
@@ -33,7 +33,6 @@
       </v-btn>
     </v-app-bar>
     <settings
-      :displaynav="displayAppNav"
       :show="showSettings"
       @appsettings="settings"
       @close="showSettings = false"
@@ -48,6 +47,12 @@
       :show-modal="showLegislationSearchModal"
       @hideModal="showLegislationSearchModal = false"
     />
+    <div v-if="envDev">
+      environment: {{ env }}
+    </div>
+    <div v-if="envDev">
+      load local data: {{ loadLocalData }}
+    </div>
   </v-app>
 </template>
 
@@ -57,9 +62,8 @@ import { LANGUAGE } from './constants.js'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
+import BaseMixin from './mixins/base'
 import { mapActions, mapState } from 'vuex'
-
-const env = process.env.NODE_ENV || 'development'
 
 export default {
   name: 'App',
@@ -68,6 +72,7 @@ export default {
     LegislationSearchModal,
     Settings
   },
+  mixins: [BaseMixin],
   props: {
     page: {
       type: String,
@@ -82,10 +87,6 @@ export default {
       default: 'Documentation and Safety Marks',
       required: false
     },
-    displayAppNav: {
-      type: Boolean,
-      default: !process.env.VUE_APP_DISPLAY_NAV
-    },
     templateid: {
       type: String,
       default: '',
@@ -95,8 +96,7 @@ export default {
   data: function () {
     return {
       showLegislationSearchModal: false,
-      showSettings: false,
-      env: process.env.NODE_ENV || 'development'
+      showSettings: false
     }
   },
   computed: {
@@ -136,7 +136,7 @@ export default {
   },
   created: async function () {
     const page = this.page
-    if (env === 'development') {
+    if (this.loadLocalData) {
       switch (page) {
         case 'builder':
           await this.$store.dispatch('SetTreeLegislationsStateToLocalData')

@@ -6,14 +6,15 @@
 
 <script>
 import Questionnaire from '../components/questionnaire/questionnaire.vue'
-const env = process.env.NODE_ENV || 'development'
+import BaseMixin from '../mixins/base'
 
 export default {
   components: {
     Questionnaire
   },
+  mixins: [BaseMixin],
   async mounted () {
-    if (env === 'development') {
+    if (this.loadLocalData) {
       await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
       await this.$store.dispatch('SetMockQuestionnaireResponse')
     }

@@ -58,8 +58,6 @@ import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
 
-// let env = process.env.NODE_ENV || 'development'
-
 export default {
   components: { QuestionnaireGroup, QuestionnaireError },
 

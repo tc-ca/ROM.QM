@@ -143,7 +143,7 @@
       </v-col>
       <v-col cols="5">
         <v-row
-          v-if="env==='development'"
+          v-if="envDev"
           justify="end"
         >
           <v-col class="col-auto">
@@ -689,6 +689,7 @@
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
 import BuilderQuestion from '../components/builder/builder-question'
+import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
 
@@ -697,6 +698,7 @@ export default {
   components: {
     BuilderQuestion
   },
+  mixins: [BaseMixin],
   data () {
     return {
       questionnaire: null,
@@ -721,8 +723,7 @@ export default {
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],
-      questionProvisions: [],
-      env: process.env.NODE_ENV
+      questionProvisions: []
     }
   },
   computed: {
