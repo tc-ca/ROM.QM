@@ -42,19 +42,19 @@
           <v-card
             class="mx-auto"
           >
-          <v-sheet class="pa-4">
-          <v-text-field
-              v-model="question.violationInfo.referenceID"
-              :label="$t('app.questionnaire.group.question.referenceId')"
-              :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
-              outline
-            />
-            <v-text-field
-              v-model="question.violationInfo.violationCount"
-              :label="$t('app.questionnaire.group.question.violationCount')"
-              :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-              outline
-            />
+            <v-sheet class="pa-4">
+              <v-text-field
+                v-model="question.violationInfo.referenceID"
+                :label="$t('app.questionnaire.group.question.referenceId')"
+                :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+                outline
+              />
+              <v-text-field
+                v-model="question.violationInfo.violationCount"
+                :label="$t('app.questionnaire.group.question.violationCount')"
+                :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                outline
+              />
             </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
@@ -68,10 +68,24 @@
             </v-sheet>
             <v-sheet class="pa-4">
               <div class="text-left">
-                <v-btn small v-for="item in selectedResponseOption.selectedProvisions"
+                <v-btn
+                  v-for="item in selectedResponseOption.selectedProvisions"
+                  :key="item.key"
+                  small
+                  style="margin-right: 5px"
+                  rounded
+                  color="primary"
+                  dark
                   @click="onSelectedProvisionClick(item, selectedResponseOption)"
-                  :key="item.key" style="margin-right: 5px"
-                  rounded color="primary" dark><v-icon small left dark>mdi-close</v-icon>{{ getSelectedProvisionText(item) }}</v-btn>
+                >
+                  <v-icon
+                    small
+                    left
+                    dark
+                  >
+                    mdi-close
+                  </v-icon>{{ getSelectedProvisionText(item) }}
+                </v-btn>
               </div>
             </v-sheet>
             <v-card-text>
@@ -194,6 +208,7 @@ export default {
   mounted () {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
     this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
+    this.displaySupplementaryInfo = this.isReferenceQuestion
   },
   methods: {
     getSelectedProvisionText (item) {
@@ -290,7 +305,7 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value)
+      this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
     },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
@@ -300,7 +315,7 @@ export default {
             this.displayViolationInfo = false
           } else {
             this.loadProvisions(responseOption)
-            this.displayViolationInfo = true
+            this.displayViolationInfo = !this.isReferenceQuestion
           }
         } else {
           this.displayViolationInfo = false
