@@ -188,6 +188,7 @@
           <v-col>
             <v-text-field
               v-model="selectedQuestion.name"
+              :disabled="selectedQuestion.type === reference"
               :label="$t('app.builder.questionName')"
             />
             <v-text-field
@@ -215,7 +216,7 @@
             </v-select>
             <v-text-field
               v-model="selectedQuestion.sortOrder"
-              :disabled="selectedQuestion.type === questionTypes.REFERENCE"
+              :disabled="selectedQuestion.type === reference"
               dense
               type="number"
               :label="$t('app.builder.sortOrder')"

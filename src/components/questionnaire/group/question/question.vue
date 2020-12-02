@@ -37,7 +37,7 @@
         />
       </div>
 
-      <div v-if="displayViolationInfo">
+      <div v-if="displayViolationInfo && !isReferenceQuestion">
         <div>
           <v-card
             class="mx-auto"
@@ -77,7 +77,7 @@
         @error="onError"
       />
 
-      <div>
+      <div v-if="!isReferenceQuestion">
         <v-expansion-panels
           v-model="expansionPanelsValue"
           hover
@@ -109,7 +109,7 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 
 export default {
-  emits: ['error', 'responseChanged', 'group-subtitle-change'],
+  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
   name: 'Question',
   components: { Response, SupplementaryInfo },
 
@@ -142,7 +142,8 @@ export default {
       isValid: null,
       selectedResponseOption: [],
       selResponses: [],
-      provisions: []
+      provisions: [],
+      isReferenceQuestion: false
     }
   },
   computed: {
@@ -169,6 +170,7 @@ export default {
   },
   mounted () {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
+    this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
   },
   methods: {
     hydrateItems (itemToHydrate, dictionary) {
@@ -275,8 +277,8 @@ export default {
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
       this.$emit('responseChanged')
-      if (this.question.type === QUESTION_TYPE.REFERENCE) {
-        this.$emit('group-subtitle-change')
+      if (this.isReferenceQuestion) {
+        this.$emit('reference-change')
       }
     },
     updateSupplementaryInfoVisibility (args) {
