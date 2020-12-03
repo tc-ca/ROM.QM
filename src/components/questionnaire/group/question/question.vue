@@ -45,6 +45,7 @@
             <v-sheet class="pa-4">
               <v-text-field
                 v-model="question.violationInfo.referenceID"
+                :disabled="isViolationInfoReferenceIdDisabled"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 outline
@@ -144,6 +145,7 @@ import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
+import BuilderService from '../../../../services/builderService'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
@@ -180,7 +182,9 @@ export default {
       selectedResponseOption: [],
       selResponses: [],
       provisions: [],
-      isReferenceQuestion: false
+      isReferenceQuestion: false,
+      isReferenceQuestionInGroup: false,
+      isViolationInfoReferenceIdDisabled: false
     }
   },
   computed: {
@@ -207,10 +211,25 @@ export default {
   },
   mounted () {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
-    this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-    this.displaySupplementaryInfo = this.isReferenceQuestion
+    this.updateReferenceID()
   },
   methods: {
+    updateReferenceID () {
+      this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
+      this.displaySupplementaryInfo = this.isReferenceQuestion
+      if (!this.isReferenceQuestion) {
+        const rQ = BuilderService.findReferenceQuestion(this.group)
+        if (rQ) {
+          this.isViolationInfoReferenceIdDisabled = false
+          this.isReferenceQuestionInGroup = true
+          this.question.violationInfo.referenceID = rQ.response
+          this.isViolationInfoReferenceIdDisabled = true
+          this.isViolationInfoReferenceIdDisabled = true
+        }
+      } else {
+        this.isReferenceQuestionInGroup = true
+      }
+    },
     getSelectedProvisionText (item) {
       let provison = ''
       let findDeep = function (data, str) {
@@ -226,6 +245,7 @@ export default {
     },
     onSelectedProvisionClick (item, options) {
       options.selectedProvisions = options.selectedProvisions.filter(i => i !== item)
+      this.$emit('group-subtitle-change')
     },
     hydrateItems (itemToHydrate, dictionary) {
       let hydratedItems = []
@@ -322,6 +342,7 @@ export default {
         }
         this.selectedResponseOption = responseOption
         this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
+        this.$emit('group-subtitle-change')
       }
     },
     updateDependants (args) {

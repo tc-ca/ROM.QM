@@ -185,6 +185,14 @@ export default {
         console.log(JSON.stringify(rQ))
         if (rQ && rQ.response) {
           this.groupSubtitle = rQ.response
+          this.group.questions.forEach(q => {
+            if (q.guid !== rQ.guid) {
+              q.violationInfo.referenceID = rQ.response
+            }
+          })
+          this.$refs.groupQuestion.forEach(gq => {
+            gq.updateReferenceID()
+          })
         }
       }
     },
