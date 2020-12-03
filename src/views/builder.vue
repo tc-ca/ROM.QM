@@ -2,146 +2,149 @@
   <div>
     <v-row>
       <v-col cols="7">
-        <v-expansion-panels
-          v-model="groupPanels"
-          focusable
-          multiple
-          class="v-expansion-panel"
-        >
-          <v-expansion-panel
-            v-for="(group, groupIndex) in questionnaire.groups"
-            ref="questionGroup"
-            :key="groupIndex"
-            :group="group"
-            :index="groupIndex"
-            :class="{selected: group === selectedGroup}"
+        <div>
+          <v-expansion-panels
+            v-model="groupPanels"
+            focusable
+            multiple
+            class="v-expansion-panel"
           >
-            <v-expansion-panel-header
-              disable-icon-rotate
-              ripple
+            <v-expansion-panel
+              v-for="(group, groupIndex) in questionnaire.groups"
+              ref="questionGroup"
+              :key="groupIndex"
+              :group="group"
+              :index="groupIndex"
+              :class="{selected: group === selectedGroup}"
             >
-              <template #actions>
-                <v-icon
-                  x-large
-                  medium
-                  color="primary"
-                >
-                  $expand
-                </v-icon>
-              </template>
-              <v-row>
-                <!-- Group Title -->
-                <v-col
-                  cols="9"
-                  class="pl-1"
-                >
-                  <h2 class="subtitle-1">
-                    {{ getTitle(group) }}
-                  </h2>
-                </v-col>
-                <v-col cols="1">
-                  <!-- Repeat button -->
+              <v-expansion-panel-header
+                disable-icon-rotate
+                ripple
+              >
+                <template #actions>
                   <v-icon
-                    v-if="group.isRepeatable=== true"
-                    large
+                    x-large
+                    medium
                     color="primary"
                   >
-                    mdi-plus
+                    $expand
                   </v-icon>
-                </v-col>
+                </template>
+                <v-row>
+                  <!-- Group Title -->
+                  <v-col
+                    cols="9"
+                    class="pl-1"
+                  >
+                    <h2 class="subtitle-1">
+                      {{ getTitle(group) }}
+                    </h2>
+                  </v-col>
+                  <v-col cols="1">
+                    <!-- Repeat button -->
+                    <v-icon
+                      v-if="group.isRepeatable=== true"
+                      large
+                      color="primary"
+                    >
+                      mdi-plus
+                    </v-icon>
+                  </v-col>
 
-                <v-col
-                  cols="1"
-                  class="mr-4"
-                >
-                  <!-- Remove button -->
-                  <v-icon
-                    v-if="group.isRepeatable === true"
-                    large
-                    color="primary"
+                  <v-col
+                    cols="1"
+                    class="mr-4"
                   >
-                    mdi-minus
-                  </v-icon>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content eager>
-              <v-row @click="editGroup($event, group)">
-                <v-col cols="12">
-                  <v-expansion-panels
-                    v-model="questionPanels"
-                    hover
-                    focusable
-                    multiple
-                  >
-                    <builder-question
-                      v-for="(question, questionIndex) in group.questions"
-                      :key="questionIndex"
-                      :question="question"
-                      :selected-question="selectedQuestion"
-                      :group="group"
-                      :questionnaire="questionnaire"
-                      :index="questionIndex"
-                      @editQuestion="editQuestion"
-                      @childQuestionAdded="addQuestionToIndex"
-                      @childQuestionRemoved="onRemovedQuestionFromIndex"
-                      @removeQuestion="confirmRemoveQuestion"
-                    />
-                    <v-expansion-panel>
-                      <v-row
-                        justify="center"
-                        align="center"
-                        class="ma-2"
-                      >
-                        <v-col
-                          class="col-auto"
+                    <!-- Remove button -->
+                    <v-icon
+                      v-if="group.isRepeatable === true"
+                      large
+                      color="primary"
+                    >
+                      mdi-minus
+                    </v-icon>
+                  </v-col>
+                </v-row>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content eager>
+                <v-row @click="editGroup($event, group)">
+                  <v-col cols="12">
+                    <v-expansion-panels
+                      v-model="questionPanels"
+                      hover
+                      focusable
+                      multiple
+                    >
+                      <builder-question
+                        v-for="(question, questionIndex) in group.questions"
+                        :key="questionIndex"
+                        :question="question"
+                        :selected-question="selectedQuestion"
+                        :group="group"
+                        :questionnaire="questionnaire"
+                        :index="questionIndex"
+                        @editQuestion="editQuestion"
+                        @childQuestionAdded="addQuestionToIndex"
+                        @childQuestionRemoved="onRemovedQuestionFromIndex"
+                        @removeQuestion="confirmRemoveQuestion"
+                      />
+                      <v-expansion-panel>
+                        <v-row
+                          justify="center"
+                          align="center"
+                          class="ma-2"
                         >
-                          <v-btn @click="addQuestion($event, group)">
-                            {{ $t('app.builder.group.question.addQuestion') }}
-                          </v-btn>
-                        </v-col>
-                        <v-col
-                          class="col-auto"
-                        >
-                          <v-tooltip
-                            top
-                            open-delay="300"
+                          <v-col
+                            class="col-auto"
                           >
-                            <template #activator="{ on, attrs }">
-                              <v-btn
-                                small
-                                icon
-                                @click="confirmRemoveGroup(group)"
-                              >
-                                <v-icon
+                            <v-btn @click="addQuestion($event, group)">
+                              {{ $t('app.builder.group.question.addQuestion') }}
+                            </v-btn>
+                          </v-col>
+                          <v-col
+                            class="col-auto"
+                          >
+                            <v-tooltip
+                              top
+                              open-delay="300"
+                            >
+                              <template #activator="{ on, attrs }">
+                                <v-btn
                                   small
-                                  v-bind="attrs"
-                                  v-on="on"
+                                  icon
+                                  @click="confirmRemoveGroup(group)"
                                 >
-                                  mdi-delete
-                                </v-icon>
-                              </v-btn>
-                            </template>
-                            <span>{{ $t('app.builder.group.removeGroup') }}</span>
-                          </v-tooltip>
-                        </v-col>
-                      </v-row>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-        <div
-          class="mt-2 center"
-        >
-          <v-btn @click="addGroup()">
-            {{ $t('app.builder.group.addGroup') }}
-          </v-btn>
+                                  <v-icon
+                                    small
+                                    v-bind="attrs"
+                                    v-on="on"
+                                  >
+                                    mdi-delete
+                                  </v-icon>
+                                </v-btn>
+                              </template>
+                              <span>{{ $t('app.builder.group.removeGroup') }}</span>
+                            </v-tooltip>
+                          </v-col>
+                        </v-row>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
+                  </v-col>
+                </v-row>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+          <div
+            class="mt-2 center"
+          >
+            <v-btn @click="addGroup()">
+              {{ $t('app.builder.group.addGroup') }}
+            </v-btn>
+          </div>
         </div>
       </v-col>
       <v-col cols="5">
+        <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:85%;overflow-y: auto;overflow-x: hidden">
         <v-row
           v-if="envDev"
           justify="end"
@@ -653,9 +656,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </v-col>
-        </v-row>
+            </v-col>
+          </v-row>
+        </div>
       </v-col>
     </v-row>
     <v-dialog
