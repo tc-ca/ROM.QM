@@ -18,6 +18,7 @@
 				{
 					"name": "3.01",
 					"id": 1,
+					"guid": "922b21ae-d9ea-4d60-857a-715ca10d5b47",
 					"sortOrder": 1,
 					"isVisible": true,
 					"isMultiple": true,
@@ -113,6 +114,7 @@
 				{
 					"name": "3.02",
 					"id": 2,
+					"guid": "8f8b1149-eab4-4b1b-9264-45b582b515f8",
 					"sortOrder": 2,
 					"isVisible": true,
 					"isMultiple": true,
@@ -241,6 +243,7 @@
 				{
 					"name": "Question 3",
 					"id": 3,
+					"guid": "c94863d0-3dc9-49c6-ac7a-b2e270b795fd",
 					"sortOrder": 3,
 					"isVisible": true,
 					"isMultiple": true,
@@ -364,6 +367,7 @@
 				{
 					"name": "Question 4",
 					"id": 4,
+					"guid": "6b284e28-3f00-4578-a69a-a402ced14b10",
 					"sortOrder": 4,
 					"isVisible": true,
 					"isMultiple": true,
@@ -497,6 +501,7 @@
 				{
 					"name": "4.06",
 					"id": 5,
+					"guid": "af669e9d-bfbb-4559-8292-99e1625d3b44",
 					"sortOrder": 5,
 					"isVisible": true,
 					"isMultiple": true,
@@ -598,6 +603,7 @@
 				{
 					"name": "6.01",
 					"id": 6,
+					"guid": "1719fda7-cfe5-43c2-98d5-ffe8f8cd09f1",
 					"sortOrder": 6,
 					"isVisible": true,
 					"isMultiple": true,
@@ -707,6 +713,7 @@
 				{
 					"name": "6.02",
 					"id": 7,
+					"guid": "12bb3245-c7ba-4b15-b12c-df2fa1f7a07a",
 					"sortOrder": 7,
 					"isVisible": true,
 					"isMultiple": true,
@@ -806,6 +813,7 @@
 				{
 					"name": "6.03",
 					"id": 8,
+					"guid": "8c7cdb7e-8897-47aa-8454-67829675d707",
 					"sortOrder": 8,
 					"isVisible": true,
 					"isMultiple": true,
@@ -899,6 +907,7 @@
 				{
 					"name": "6.04",
 					"id": 9,
+					"guid": "f16f46bb-b2ee-4130-8ed9-205906afe08b",
 					"sortOrder": 9,
 					"isVisible": true,
 					"isMultiple": true,

@@ -145,111 +145,115 @@
       </v-col>
       <v-col cols="5">
         <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:85%;overflow-y: auto;overflow-x: hidden">
-          <v-row
-            v-if="env==='development'"
-            justify="end"
-          >
-            <v-col class="col-auto">
-              <v-btn @click="save()">
-                {{ $t('app.builder.save') }}
-              </v-btn>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="questionnaire.name"
-                :label="$t('app.builder.questionnaireName')"
-              />
-            </v-col>
-          </v-row>
-          <v-row v-if="selectedGroup">
-            <v-col>
-              <v-text-field
-                v-model="selectedGroup.primaryKey"
-                :label="$t('app.builder.group.groupName')"
-              />
-              <v-text-field
-                v-model="selectedGroup.title[eng]"
-                label="Group text En"
-              />
-              <v-text-field
-                v-model="selectedGroup.title[fr]"
-                label="Group text Fr"
-              />
-              <v-checkbox
-                v-model="selectedGroup.isVisible"
-                :label="'Is Visible'"
-              />
-              <v-checkbox
-                v-model="selectedGroup.isRepeatable"
-                :label="'Is Repeatable'"
-              />
-            </v-col>
-          </v-row>
-          <v-row v-if="selectedQuestion">
-            <v-col>
-              <v-text-field
-                v-model="selectedQuestion.name"
-                :label="$t('app.builder.questionName')"
-              />
-              <v-text-field
-                v-model="selectedQuestion.text[eng]"
-                label="Question text En"
-              />
-              <v-text-field
-                v-model="selectedQuestion.text[fr]"
-                label="Question text Fr"
-              />
-              <v-select
-                v-model="selectedQuestion.type"
-                item-text="text"
-                item-value="value"
-                :items="questionTypes"
-                :label="$t('app.builder.questionType')"
-              >
-                <template v-slot:selection="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-                <template v-slot:item="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-              </v-select>
-              <v-text-field
-                v-model="selectedQuestion.sortOrder"
-                dense
-                type="number"
-                :label="$t('app.builder.sortOrder')"
-                @change="sortQuestions(selectedQuestion)"
-              />
-              <v-select
-                v-model="selectedQuestion.internalComment.option"
-                item-text="text"
-                item-value="value"
-                :items="optionTypes"
-                :label="$t('app.builder.internalComments')"
-              >
-                <template v-slot:selection="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-                <template v-slot:item="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-              </v-select>
-              <v-select
-                v-model="selectedQuestion.externalComment.option"
-                item-text="text"
-                item-value="value"
-                :items="optionTypes"
-                :label="$t('app.builder.externalComments')"
-              >
-                <template v-slot:selection="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-                <template v-slot:item="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-              </v-select>
+        <v-row
+          v-if="envDev"
+          justify="end"
+        >
+          <v-col class="col-auto">
+            <v-btn @click="save()">
+              {{ $t('app.builder.save') }}
+            </v-btn>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field
+              v-model="questionnaire.name"
+              :label="$t('app.builder.questionnaireName')"
+            />
+          </v-col>
+        </v-row>
+        <v-row v-if="selectedGroup">
+          <v-col>
+            <v-text-field
+              v-model="selectedGroup.primaryKey"
+              :label="$t('app.builder.group.groupName')"
+            />
+            <v-text-field
+              v-model="selectedGroup.title[eng]"
+              label="Group text En"
+            />
+            <v-text-field
+              v-model="selectedGroup.title[fr]"
+              label="Group text Fr"
+            />
+            <v-checkbox
+              v-model="selectedGroup.isVisible"
+              :label="'Is Visible'"
+            />
+            <v-checkbox
+              v-model="selectedGroup.isRepeatable"
+              :label="'Is Repeatable'"
+            />
+          </v-col>
+        </v-row>
+        <v-row v-if="selectedQuestion">
+          <v-col>
+            <v-text-field
+              v-model="selectedQuestion.name"
+              :disabled="selectedQuestion.type === reference"
+              :label="$t('app.builder.questionName')"
+            />
+            <v-text-field
+              v-model="selectedQuestion.text[eng]"
+              label="Question text En"
+            />
+            <v-text-field
+              v-model="selectedQuestion.text[fr]"
+              label="Question text Fr"
+            />
+            <v-select
+              v-model="selectedQuestion.type"
+              item-text="text"
+              item-value="value"
+              :items="questionTypes"
+              :label="$t('app.builder.questionType')"
+              @change="changeQuestionType($event)"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
+            <v-text-field
+              v-model="selectedQuestion.sortOrder"
+              :disabled="selectedQuestion.type === reference"
+              dense
+              type="number"
+              :label="$t('app.builder.sortOrder')"
+              @change="sortQuestions(selectedQuestion)"
+            />
+            <v-select
+              v-model="selectedQuestion.internalComment.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              :label="$t('app.builder.internalComments')"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
+            <v-select
+              v-model="selectedQuestion.externalComment.option"
+              item-text="text"
+              item-value="value"
+              :items="optionTypes"
+              :label="$t('app.builder.externalComments')"
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <span>{{ item.text[lang] }}</span>
+              </template>
+            </v-select>
+            <div v-if="selectedQuestion.type !== reference">
               <v-select
                 v-model="selectedQuestion.picture.option"
                 item-text="text"
@@ -693,14 +697,17 @@
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
 import BuilderQuestion from '../components/builder/builder-question'
+import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState } from 'vuex'
+import { QUESTION_TYPE } from '../data/questionTypes'
 
 export default {
   name: 'Builder',
   components: {
     BuilderQuestion
   },
+  mixins: [BaseMixin],
   data () {
     return {
       questionnaire: null,
@@ -726,7 +733,8 @@ export default {
       questionPanels: [],
       selectedProvisions: [],
       questionProvisions: [],
-      env: process.env.NODE_ENV
+      env: process.env.NODE_ENV, // ?
+      reference: QUESTION_TYPE.REFERENCE
     }
   },
   computed: {
@@ -799,6 +807,37 @@ export default {
             this.selectedGroup = null
           }
           break
+        }
+      }
+    },
+    changeQuestionType ($event) {
+      if (this.selectedQuestion.type === 'reference') {
+        console.log(this.selectedQuestion)
+        const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
+        if (group) {
+          if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
+            let qRf = BuilderService.createReferenceQuestion()
+            console.log(qRf)
+            if (group.questions.length > 0) {
+              // Move every question one number up on the sort order
+              group.questions.forEach((q) => { q.sortOrder += 1 })
+            }
+            qRf.sortOrder = 1
+            group.questions.unshift(qRf)
+            // Move question from the end to the start of the list
+            const index = group.questions.findIndex(q => q.guid === this.selectedQuestion.guid)
+            if (index > -1) {
+              group.questions.splice(index, 1)
+              // Rebuidl the question Panels
+              this.questionPanels = []
+              group.questions.forEach(q => { this.questionPanels.push(q.sortOrder) })
+              this.selectedQuestion = qRf
+            }
+          } else {
+            // Alert and return back to the radio button type
+            alert('Only one Reference question is allowed on a Group')
+            this.selectedQuestion.type = 'text'
+          }
         }
       }
     },

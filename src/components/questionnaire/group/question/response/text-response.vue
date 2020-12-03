@@ -7,6 +7,8 @@
       filled
       dense
       validate-on-blur
+      clearable
+      clear-icon="mdi-close-circle"
       :rules="validationRulesFuncs"
       @change="onChange($event)"
       @update:error="onError($event)"

@@ -57,7 +57,7 @@
         </template>
       </v-list-item>
       <v-list-item
-        v-if="displaynav"
+        v-if="envDev"
         link
         @click="navigateTo('home')"
       >
@@ -68,7 +68,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item
-        v-if="displaynav"
+        v-if="envDev"
         link
         @click="navigateTo('questionnaire')"
       >
@@ -79,7 +79,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item
-        v-if="displaynav"
+        v-if="envDev"
         link
         @click="navigateTo('builder')"
       >
@@ -90,7 +90,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item
-        v-if="displaynav"
+        v-if="envDev"
         link
         @click="getQuestionnaireFromDynamics()"
       >
@@ -101,7 +101,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item
-        v-if="displaynav"
+        v-if="envDev"
         link
         @click="navigateTo('questionnaire')"
       >
@@ -118,9 +118,10 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { LANGUAGES } from '../../config.js'
-// import { XrmWebApi } from '../../services/questionnaireService.js'
+import BaseMixin from '../../mixins/base'
 
 export default {
+  mixins: [BaseMixin],
   props: {
     show: {
       type: Boolean,
@@ -134,10 +135,6 @@ export default {
           darkmode: true
         }
       }
-    },
-    displaynav: {
-      type: Boolean,
-      default: true
     }
   },
   data () {
@@ -172,12 +169,6 @@ export default {
       this.darkMode = this.appsettings.darkMode
       this.$vuetify.theme.dark = this.appsettings.darkMode
       this.language = this.appsettings.lang
-    }
-
-    const env = process.env.NODE_ENV || 'development'
-
-    if (env === 'development') {
-      this.displaynav = true
     }
   },
   methods: {

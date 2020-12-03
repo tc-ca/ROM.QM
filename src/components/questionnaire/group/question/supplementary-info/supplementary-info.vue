@@ -24,15 +24,17 @@
       save-to-prop="internalComment"
       @error="onError"
     />
-    <supplementary-info-image
-      v-if="displayPicture"
-      :picture="question.picture"
-      :label="$t('app.questionnaire.group.question.photos')"
-      :group="group"
-      :question="question"
-      save-to-prop="images"
-      @error="onError"
-    />
+    <div v-if="!isReferenceQuestion">
+      <supplementary-info-image
+        v-if="displayPicture"
+        :picture="question.picture"
+        :label="$t('app.questionnaire.group.question.photos')"
+        :group="group"
+        :question="question"
+        save-to-prop="images"
+        @error="onError"
+      />
+    </div>
   </v-expansion-panels>
 </template>
 
@@ -40,6 +42,7 @@
 import { mapState } from 'vuex'
 import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
+import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {
   emits: ['error'],
@@ -57,6 +60,9 @@ export default {
     }
   },
   computed: {
+    isReferenceQuestion () {
+      return this.question.type === QUESTION_TYPE.REFERENCE
+    },
     displayInternalComment () {
       return this.question.internalComment.option !== 'n/a'
     },

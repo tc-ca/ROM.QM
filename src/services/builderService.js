@@ -1,5 +1,7 @@
 import _ from "lodash";
-import { LANGUAGE } from '../constants.js'
+import { LANGUAGE } from '../constants.js';
+import { QUESTION_TYPE } from "../data/questionTypes.js";
+import { v4 as uuidv4 } from 'uuid';
 
 /* eslint-disable no-undef */
 
@@ -37,9 +39,11 @@ function createQuestionnaire () {
 
 function createQuestion (questionnaire) {
   let id = getNextQuestionId(questionnaire)
+  let guid = uuidv4();
   let question = {
     name: 'Question',
     id: id,
+    guid: guid,
     sortOrder: id,
     isVisible: true,
     isMultiple: true,
@@ -115,9 +119,70 @@ function createQuestion (questionnaire) {
   return question
 }
 
-function createChildQuestion (questionnaire, queistion) {
+function createReferenceQuestion () {
+  // let id = getNextQuestionId(questionnaire)
+  let guid = uuidv4();
+  let question = {
+    name: 'Reference ID',
+    id: 0,
+    guid: guid,
+    sortOrder: 1,
+    isVisible: true,
+    isMultiple: false,
+    text: {
+      [LANGUAGE.ENGLISH]: 'Reference ID',
+      [LANGUAGE.FRENCH]: 'FR: Reference ID'
+    },
+    type: QUESTION_TYPE.REFERENCE, // text, number, select, radio, boolean, image...
+    response: null,
+    responseOptions: [],
+    validationRules: [
+      {
+        name: 'require', // use it as a reference for parent question to enable/disable validator
+        enabled: true,
+        type: 'require', // min, max....
+        value: null,
+        errorMessage: {
+          [LANGUAGE.ENGLISH]: 'Required',
+          [LANGUAGE.FRENCH]: 'FR: Required'
+        }
+      }
+    ],
+    violationInfo: {},
+    internalComment: {
+      option: 'optional', value: ''
+    },
+    externalComment: {
+      option: 'optional', value: ''
+    },
+    picture: {},
+    childQuestions: [],
+    dependants: [],
+    dependencyGroups: []
+  }
+
+  question.name = 'Reference ID'
+
+  return question
+}
+
+function findReferenceQuestion(group, guid = "") {
+  let q = group.questions.find( q => (q.type === QUESTION_TYPE.REFERENCE && q.guid !== guid));
+  return q;
+}
+
+function findGroupForQuestionById(groups, qGuid) {
+  let group = groups.find( g => {
+    const q = g.questions.findIndex(q => q.guid === qGuid)
+    if (q > -1) return true;
+    return false;
+  });
+  return group;
+}
+
+function createChildQuestion (questionnaire, question) {
   let q = createQuestion(questionnaire)
-  q.sortOrder = queistion.childQuestions.length + 1
+  q.sortOrder = question.childQuestions.length + 1
   return q
 }
 
@@ -245,10 +310,13 @@ export default {
   createGroup,
   createQuestionnaire,
   createQuestion,
+  createReferenceQuestion,
   createProvisions,
   createChildQuestion,
   createResponseOption,
   createValidator,
   createDependencyGroup,
-  processBuilderForSave
+  processBuilderForSave,
+  findReferenceQuestion,
+  findGroupForQuestionById
 };

@@ -19,9 +19,9 @@
             {{ groupTitle }}
 
             <span
-              v-if="group.isRepeatable=== true && repeatGroupTextDifferentiator !== ''"
+              v-if="showGroupSubtitle"
               class="subtitle-1 text-truncate"
-            >{{ repeatGroupTextDifferentiator }}</span>
+            >{{ groupSubtitle }}</span>
           </h2>
         </v-col>
         <v-col cols="1">
@@ -75,7 +75,8 @@
               :expand="expand"
               @responseChanged="onResponseChanged"
               @error="onError"
-              @group-subtitle-change="onSubtitleChange"
+              @group-subtitle-change="onSubtitleChanged"
+              @reference-change="onReferenceChanged"
             />
           </v-expansion-panels>
         </v-col>
@@ -88,6 +89,7 @@
 
 import { mapState } from 'vuex'
 import Question from './question/question.vue'
+import BuilderService from '../../../services/builderService'
 
 export default {
   emits: ['responseChanged'],
@@ -113,11 +115,20 @@ export default {
       // indicates if the group was created by using the repeat function i.e. not original
       repeatedGroup: false,
       valid: true,
-      repeatGroupTextDifferentiator: ''
+      groupSubtitle: ''
     }
   },
 
   computed: {
+    activegroupHasReferenceQuestion () {
+      return (!!BuilderService.findReferenceQuestion(this.group))
+    },
+    showGroupSubtitle () {
+      if (this.groupSubtitle !== '') {
+        if (this.group.isRepeatable === true || this.activegroupHasReferenceQuestion) return true
+      }
+      return false
+    },
     groupTitle () {
       // return `${this.index + 1}. ${this.group.title[this.lang]}`
       return `${this.group.title[this.lang]}`
@@ -168,14 +179,32 @@ export default {
   },
 
   methods: {
-    onSubtitleChange () {
-      this.repeatGroupTextDifferentiator = ''
+    onReferenceChanged () {
+      if (this.activegroupHasReferenceQuestion) {
+        const rQ = BuilderService.findReferenceQuestion(this.group)
+        console.log(JSON.stringify(rQ))
+        if (rQ && rQ.response) {
+          this.groupSubtitle = rQ.response
+          this.group.questions.forEach(q => {
+            if (q.guid !== rQ.guid) {
+              q.violationInfo.referenceID = rQ.response
+            }
+          })
+          this.$refs.groupQuestion.forEach(gq => {
+            gq.updateReferenceID()
+          })
+        }
+      }
+    },
+    onSubtitleChanged () {
+      if (this.activegroupHasReferenceQuestion) return
+      this.groupSubtitle = ''
       this.group.questions.forEach(q => {
         if (q.violationResponse && q.violationResponse.length > 0) {
           const args = q.violationResponse
           let subtitle = ''
           args.forEach(arg => {
-            if (!this.repeatGroupTextDifferentiator.includes(arg)) {
+            if (!this.groupSubtitle.includes(arg)) {
               if (subtitle.length > 0) {
                 subtitle += ', '
               }
@@ -183,10 +212,10 @@ export default {
             }
           })
           if (subtitle.length > 0) {
-            if (this.repeatGroupTextDifferentiator.length > 0) {
-              this.repeatGroupTextDifferentiator += ', '
+            if (this.groupSubtitle.length > 0) {
+              this.groupSubtitle += ', '
             }
-            this.repeatGroupTextDifferentiator += subtitle.trim()
+            this.groupSubtitle += subtitle.trim()
           }
         }
       })
