@@ -20,6 +20,7 @@
       </template>
 
       <div
+        ref="myQ"
         :style="{fontSize:'16px !important'}"
       >
         <!-- eslint-disable vue/no-v-html -->
@@ -70,14 +71,14 @@
             <v-sheet class="pa-4">
               <div class="text-left">
                 <v-btn
-                  v-for="item in selectedResponseOption.selectedProvisions"
+                  v-for="item in selProvisions"
                   :key="item.key"
                   small
                   style="margin-right: 5px"
                   rounded
                   color="primary"
                   dark
-                  @click="onSelectedProvisionClick(item, selectedResponseOption)"
+                  @click="onSelectedProvisionClick(item)"
                 >
                   <v-icon
                     small
@@ -91,7 +92,7 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="selectedResponseOption.selectedProvisions"
+                v-model="selProvisions"
                 selectable
                 :item-text="'title.' + lang"
                 item-key="id"
@@ -182,6 +183,7 @@ export default {
       selectedResponseOption: [],
       selResponses: [],
       provisions: [],
+      selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
       isViolationInfoReferenceIdDisabled: false
@@ -209,9 +211,20 @@ export default {
       }
     })
   },
+  watch: {
+    selProvisions: {
+      handler () {
+        console.log('Bananna!')
+        this.selectedResponseOption.selectedProvisions = this.selProvisions
+        this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
+      },
+      deep: true
+    }
+  },
   mounted () {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
     this.updateReferenceID()
+    this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
     updateReferenceID () {
@@ -243,9 +256,17 @@ export default {
       findDeep(this.provisions, item)
       return provison
     },
-    onSelectedProvisionClick (item, options) {
-      options.selectedProvisions = options.selectedProvisions.filter(i => i !== item)
-      this.$emit('group-subtitle-change')
+    getSelectedProvisionsId () {
+      let list = []
+      this.selectedResponseOption.selectedProvisions.forEach(p => {
+        list.push(this.getSelectedProvisionText(p).trim())
+      })
+      console.log('apple')
+      return list
+    },
+    onSelectedProvisionClick (item) {
+      this.selProvisions = this.selProvisions.filter(i => i !== item)
+      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     hydrateItems (itemToHydrate, dictionary) {
       let hydratedItems = []
@@ -312,7 +333,7 @@ export default {
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
-      this.$emit('group-subtitle-change')
+      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
       this.updateViolationInfo(args)
@@ -342,7 +363,7 @@ export default {
         }
         this.selectedResponseOption = responseOption
         this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
-        this.$emit('group-subtitle-change')
+        // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
       }
     },
     updateDependants (args) {
