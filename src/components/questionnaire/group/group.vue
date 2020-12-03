@@ -196,27 +196,13 @@ export default {
         }
       }
     },
-    onSubtitleChanged () {
+    onSubtitleChanged (provitionsTitles) {
       if (this.activegroupHasReferenceQuestion) return
-      this.groupSubtitle = ''
-      this.group.questions.forEach(q => {
-        if (q.violationResponse && q.violationResponse.length > 0) {
-          const args = q.violationResponse
-          let subtitle = ''
-          args.forEach(arg => {
-            if (!this.groupSubtitle.includes(arg)) {
-              if (subtitle.length > 0) {
-                subtitle += ', '
-              }
-              subtitle += arg.trim()
-            }
-          })
-          if (subtitle.length > 0) {
-            if (this.groupSubtitle.length > 0) {
-              this.groupSubtitle += ', '
-            }
-            this.groupSubtitle += subtitle.trim()
-          }
+      // this.groupSubtitle = ''
+      provitionsTitles.forEach(pT => {
+        if (!this.groupSubtitle.includes(pT.trim())) {
+          if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
+          this.groupSubtitle += pT.trim()
         }
       })
     },

@@ -258,10 +258,11 @@ export default {
     },
     getSelectedProvisionsId () {
       let list = []
-      this.selectedResponseOption.selectedProvisions.forEach(p => {
-        list.push(this.getSelectedProvisionText(p).trim())
-      })
-      console.log('apple')
+      if (this.selectedResponseOption && this.selectedResponseOption.selectedProvisions) {
+        this.selectedResponseOption.selectedProvisions.forEach(p => {
+          list.push(this.getSelectedProvisionText(p).trim())
+        })
+      }
       return list
     },
     onSelectedProvisionClick (item) {
