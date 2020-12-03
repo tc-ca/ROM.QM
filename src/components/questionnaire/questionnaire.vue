@@ -19,34 +19,45 @@
     </v-row>
     <v-row>
       <v-col cols="7">
-        <v-form
-          ref="questionaire_form"
-          v-model="valid"
-          justify="start"
-        >
-          <v-expansion-panels
-            v-model="expansionPanels"
-            focusable
-            multiple
-            class="v-expansion-panel"
+        <div>
+          <v-form
+            ref="questionaire_form"
+            v-model="valid"
+            justify="start"
           >
-            <questionnaire-group
-              v-for="(group, groupIndex) in group.groups"
-              ref="questionGroup"
-              :key="groupIndex"
-              :group="group"
-              :index="groupIndex"
-              :expand="expand"
-            />
-          </v-expansion-panels>
-        </v-form>
+            <v-expansion-panels
+              v-model="expansionPanels"
+              focusable
+              multiple
+              class="v-expansion-panel"
+            >
+              <questionnaire-group
+                v-for="(group, groupIndex) in group.groups"
+                ref="questionGroup"
+                :key="groupIndex"
+                :group="group"
+                :index="groupIndex"
+                :expand="expand"
+              />
+            </v-expansion-panels>
+          </v-form>
+        </div>
       </v-col>
       <v-col
         v-if="hasNotifications"
         cols="5"
         justify="space-around"
       >
-        <questionnaire-error :notifications="notifications" />
+        <v-row>
+          <v-col>
+            <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:75%;overflow-y: auto;">
+              <questionnaire-error
+                :notifications="notifications"
+                @notification:click="onNotificationClick"
+              />
+            </div>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </div>
