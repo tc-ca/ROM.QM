@@ -214,9 +214,9 @@ export default {
   watch: {
     selProvisions: {
       handler () {
-        console.log('Bananna!')
         this.selectedResponseOption.selectedProvisions = this.selProvisions
-        this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
+        this.selectedResponseOption.selectedProvisionsTitles = this.getSelectedProvisionsId()
+        this.$emit('group-subtitle-change')
       },
       deep: true
     }
@@ -260,7 +260,7 @@ export default {
       let list = []
       if (this.selectedResponseOption && this.selectedResponseOption.selectedProvisions) {
         this.selectedResponseOption.selectedProvisions.forEach(p => {
-          list.push(this.getSelectedProvisionText(p).trim())
+          list.push(this.getSelectedProvisionText(p).trim().toUpperCase())
         })
       }
       return list

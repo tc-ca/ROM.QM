@@ -17,12 +17,13 @@
         >
           <h2 class="subtitle-1">
             {{ groupTitle }}
-
-            <span
-              v-if="showGroupSubtitle"
-              class="subtitle-1 text-truncate"
-            >{{ groupSubtitle }}</span>
           </h2>
+          <h3
+            v-if="showGroupSubtitle"
+            class="subtitle-1 text-truncate"
+          >
+            {{ groupSubtitle }}
+          </h3>
         </v-col>
         <v-col cols="1">
           <!-- Repeat button -->
@@ -130,7 +131,6 @@ export default {
       return false
     },
     groupTitle () {
-      // return `${this.index + 1}. ${this.group.title[this.lang]}`
       return `${this.group.title[this.lang]}`
     },
     ...mapState({
@@ -182,9 +182,8 @@ export default {
     onReferenceChanged () {
       if (this.activegroupHasReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
-        console.log(JSON.stringify(rQ))
         if (rQ && rQ.response) {
-          this.groupSubtitle = rQ.response
+          this.groupSubtitle = `REFERENCE ID: ${rQ.response}`
           this.group.questions.forEach(q => {
             if (q.guid !== rQ.guid) {
               q.violationInfo.referenceID = rQ.response
@@ -196,15 +195,23 @@ export default {
         }
       }
     },
-    onSubtitleChanged (provitionsTitles) {
+    onSubtitleChanged () {
       if (this.activegroupHasReferenceQuestion) return
-      // this.groupSubtitle = ''
-      provitionsTitles.forEach(pT => {
-        if (!this.groupSubtitle.includes(pT.trim())) {
-          if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
-          this.groupSubtitle += pT.trim()
-        }
-      })
+      this.groupSubtitle = ''
+      if (this.group && this.group.questions) {
+        this.group.questions.forEach(question => {
+          question.responseOptions.forEach(responseOption => {
+            if (responseOption.selectedProvisionsTitles) {
+              responseOption.selectedProvisionsTitles.forEach(title => {
+                if (!this.groupSubtitle.includes(title)) {
+                  if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
+                  this.groupSubtitle += title
+                }
+              })
+            }
+          })
+        })
+      }
     },
     repeatGroup (group) {
       this.$store.dispatch('repeatGroup', group)
