@@ -128,6 +128,7 @@ import _ from 'lodash'
 import { mapState } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
+import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change'],
@@ -225,82 +226,51 @@ export default {
       }
       return hydratedItems
     },
-    loadSelectedItems (responseOption) {
+    loadProvisions (responseOption) {
+      // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
-      // let provisionsToSelect = responseOption.responseOption
-      let provisionsToDisplay = responseOption.provisions
-      let hydratedItems = this.hydrateItems(provisionsToDisplay, dictionnairyOfProvisions)
+      let provisions = hydrateItems(responseOption.provisions, this.$store.state.legislations.legislations)
 
-      let cloneHydratedItems = _.cloneDeep(hydratedItems)
-      // const uniqueParents = onlyUniqueObj(cloneHydratedItems, 'id')
+      // we need to get the parent nodes to have an actual tree or list will be flat
+      const parentIds = provisions.map(x => x.parentLegislationId)
+      const uniqueParentIds = [...new Set(parentIds)]
+      let parentProvisions = hydrateItems(uniqueParentIds, dictionnairyOfProvisions)
+      const rootNodeId = '-1'
 
-      const hydratedParentIds = cloneHydratedItems.map(x => x.parentLegislationId)
-      //
-      const uniqHydratedParentIds = [...new Set(hydratedParentIds)]
-      let hydratedParents = this.hydrateItems(uniqHydratedParentIds, dictionnairyOfProvisions)
-
-      // set to the main root
-      hydratedParents.forEach(x => {
-        x.parentLegislationId = '-1'
+      // set the parent parent to non existant or else we will build up further the tree
+      parentProvisions.forEach(x => {
+        x.parentLegislationId = rootNodeId
       })
-      // console.log('my hydrated parents', JSON.stringify(hydratedParents))
 
-      const combinedHydratedItems = hydratedItems.concat(hydratedParents)
-      let data = _.cloneDeep(combinedHydratedItems)
+      const childrenAndAsscociatedParentProvision = provisions.concat(parentProvisions)
+      let data = _.cloneDeep(childrenAndAsscociatedParentProvision)
 
       const ids = data.map(x => x.id)
       const parentids = data.map(x => x.parentLegislationId)
-      console.log('i', ids)
-      console.log('p', parentids)
 
-      const uniq = [...new Set(ids)]
-      // const uniqP = [...new Set(parentids)];
+      const uniqueIds = [...new Set(ids)]
 
-      // [null, 1, 2, 5, 19]
-      // console.log(uniqP)
       for (var i = 0; i < ids.length; i++) {
-        if (uniq.includes(parentids[i])) {
-          console.log('yes, parent is found', data[i].parentLegislationId)
+        if (uniqueIds.includes(parentids[i])) {
+          // parent found
+          continue
         } else {
-          console.log('no, parent is not found', data[i].parentLegislationId)
-          // if you dont have a parent will will just set it to the root node
-          data[i].parentLegislationId = -1
+          // if you dont have a parent we will just set it to the root node
+          data[i].parentLegislationId = rootNodeId
         }
       }
 
-      // create a root node, set to some number and null for the below algorith to know its the root
-      data.push({ id: '-1',
+      // create a root node, set to id -1 and set parentLegislationId to null for the below algorithm buildTreeFromFlatList to know its the root
+      data.push({ id: rootNodeId,
         parentLegislationId: null,
         'title': {
           'en': 'root',
           'fr': 'root'
         } })
 
-      console.log('new data', data)
+      const root = buildTreeFromFlatList(data, 'parentLegislationId')
 
-      const idMapping = data.reduce((acc, el, i) => {
-        acc[el.id] = i
-        return acc
-      }, {})
-
-      let root
-      console.log(data.length)
-      data.forEach(el => {
-        console.log('el', el)
-        // Handle the root element
-        if (el.parentLegislationId === null) {
-          root = el
-          return
-        }
-        // Use our mapping to locate the parent element in our data array
-        const parentEl = data[idMapping[el.parentLegislationId]]
-        // Add our current el to its parent's `children` array
-        parentEl.children = [...(parentEl.children || []), el]
-      })
-      console.log('new tree', JSON.stringify(root.children))
-      console.log('provisions', JSON.stringify(this.provisions))
       this.provisions = root.children
-      // console.log(JSON.stringify(answer))
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
@@ -323,7 +293,7 @@ export default {
           if (responseOption.provisions == null) {
             this.displayViolationInfo = false
           } else {
-            this.loadSelectedItems(responseOption)
+            this.loadProvisions(responseOption)
             this.displayViolationInfo = true
           }
         } else {
