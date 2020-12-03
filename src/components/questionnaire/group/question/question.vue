@@ -42,19 +42,20 @@
           <v-card
             class="mx-auto"
           >
-          <v-sheet class="pa-4">
-          <v-text-field
-              v-model="question.violationInfo.referenceID"
-              :label="$t('app.questionnaire.group.question.referenceId')"
-              :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
-              outline
-            />
-            <v-text-field
-              v-model="question.violationInfo.violationCount"
-              :label="$t('app.questionnaire.group.question.violationCount')"
-              :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-              outline
-            />
+            <v-sheet class="pa-4">
+              <v-text-field
+                v-model="question.violationInfo.referenceID"
+                :disabled="isViolationInfoReferenceIdDisabled"
+                :label="$t('app.questionnaire.group.question.referenceId')"
+                :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+                outline
+              />
+              <v-text-field
+                v-model="question.violationInfo.violationCount"
+                :label="$t('app.questionnaire.group.question.violationCount')"
+                :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                outline
+              />
             </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
@@ -68,10 +69,24 @@
             </v-sheet>
             <v-sheet class="pa-4">
               <div class="text-left">
-                <v-btn small v-for="item in selectedResponseOption.selectedProvisions"
+                <v-btn
+                  v-for="item in selectedResponseOption.selectedProvisions"
+                  :key="item.key"
+                  small
+                  style="margin-right: 5px"
+                  rounded
+                  color="primary"
+                  dark
                   @click="onSelectedProvisionClick(item, selectedResponseOption)"
-                  :key="item.key" style="margin-right: 5px"
-                  rounded color="primary" dark><v-icon small left dark>mdi-close</v-icon>{{ getSelectedProvisionText(item) }}</v-btn>
+                >
+                  <v-icon
+                    small
+                    left
+                    dark
+                  >
+                    mdi-close
+                  </v-icon>{{ getSelectedProvisionText(item) }}
+                </v-btn>
               </div>
             </v-sheet>
             <v-card-text>
@@ -130,6 +145,7 @@ import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
+import BuilderService from '../../../../services/builderService'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
@@ -166,7 +182,9 @@ export default {
       selectedResponseOption: [],
       selResponses: [],
       provisions: [],
-      isReferenceQuestion: false
+      isReferenceQuestion: false,
+      isReferenceQuestionInGroup: false,
+      isViolationInfoReferenceIdDisabled: false
     }
   },
   computed: {
@@ -193,9 +211,25 @@ export default {
   },
   mounted () {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
-    this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
+    this.updateReferenceID()
   },
   methods: {
+    updateReferenceID () {
+      this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
+      this.displaySupplementaryInfo = this.isReferenceQuestion
+      if (!this.isReferenceQuestion) {
+        const rQ = BuilderService.findReferenceQuestion(this.group)
+        if (rQ) {
+          this.isViolationInfoReferenceIdDisabled = false
+          this.isReferenceQuestionInGroup = true
+          this.question.violationInfo.referenceID = rQ.response
+          this.isViolationInfoReferenceIdDisabled = true
+          this.isViolationInfoReferenceIdDisabled = true
+        }
+      } else {
+        this.isReferenceQuestionInGroup = true
+      }
+    },
     getSelectedProvisionText (item) {
       let provison = ''
       let findDeep = function (data, str) {
@@ -211,6 +245,7 @@ export default {
     },
     onSelectedProvisionClick (item, options) {
       options.selectedProvisions = options.selectedProvisions.filter(i => i !== item)
+      this.$emit('group-subtitle-change')
     },
     hydrateItems (itemToHydrate, dictionary) {
       let hydratedItems = []
@@ -290,7 +325,7 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value)
+      this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
     },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
@@ -300,13 +335,14 @@ export default {
             this.displayViolationInfo = false
           } else {
             this.loadProvisions(responseOption)
-            this.displayViolationInfo = true
+            this.displayViolationInfo = !this.isReferenceQuestion
           }
         } else {
           this.displayViolationInfo = false
         }
         this.selectedResponseOption = responseOption
         this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
+        this.$emit('group-subtitle-change')
       }
     },
     updateDependants (args) {
