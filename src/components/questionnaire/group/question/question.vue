@@ -42,19 +42,19 @@
           <v-card
             class="mx-auto"
           >
-          <v-sheet class="pa-4">
-          <v-text-field
-              v-model="question.violationInfo.referenceID"
-              :label="$t('app.questionnaire.group.question.referenceId')"
-              :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
-              outline
-            />
-            <v-text-field
-              v-model="question.violationInfo.violationCount"
-              :label="$t('app.questionnaire.group.question.violationCount')"
-              :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-              outline
-            />
+            <v-sheet class="pa-4">
+              <v-text-field
+                v-model="question.violationInfo.referenceID"
+                :label="$t('app.questionnaire.group.question.referenceId')"
+                :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+                outline
+              />
+              <v-text-field
+                v-model="question.violationInfo.violationCount"
+                :label="$t('app.questionnaire.group.question.violationCount')"
+                :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                outline
+              />
             </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
@@ -68,10 +68,24 @@
             </v-sheet>
             <v-sheet class="pa-4">
               <div class="text-left">
-                <v-btn small v-for="item in selectedResponseOption.selectedProvisions"
+                <v-btn
+                  v-for="item in selectedResponseOption.selectedProvisions"
+                  :key="item.key"
+                  small
+                  style="margin-right: 5px"
+                  rounded
+                  color="primary"
+                  dark
                   @click="onSelectedProvisionClick(item, selectedResponseOption)"
-                  :key="item.key" style="margin-right: 5px"
-                  rounded color="primary" dark><v-icon small left dark>mdi-close</v-icon>{{ getSelectedProvisionText(item) }}</v-btn>
+                >
+                  <v-icon
+                    small
+                    left
+                    dark
+                  >
+                    mdi-close
+                  </v-icon>{{ getSelectedProvisionText(item) }}
+                </v-btn>
               </div>
             </v-sheet>
             <v-card-text>
@@ -125,7 +139,7 @@
 
 <script>
 import _ from 'lodash'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
@@ -170,9 +184,17 @@ export default {
     }
   },
   computed: {
+    // mix the getters into computed with object spread operator
+    ...mapGetters([
+      'getFlatListOfAllQuestions'
+      // ...
+    ]),
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
+    },
+    flatList () {
+      return this.$store.getters.getFlatListOfAllQuestions
     },
     expansionPanelsValue () {
       if (this.expand) {
@@ -313,8 +335,9 @@ export default {
       this.question.response = args.value
       if (this.question.dependants) {
         for (let i = 0; i < this.question.dependants.length; i++) {
-          let dependentQuestion = this.question.dependants[i]
-          this.updateChildQuestionOnDependencies(dependentQuestion)
+          let dependentId = this.question.dependants[i]
+          const question = this.getFlatListOfAllQuestions.find(x => x.id === dependentId)
+          this.updateChildQuestionOnDependencies(question)
         }
       }
     },
@@ -325,7 +348,9 @@ export default {
         let groupMatch = true
         for (let j = 0; j < group.questionDependencies.length; j++) {
           let dependancy = group.questionDependencies[j]
-          let dependsOnQuestion = dependancy.dependsOnQuestion
+          let dependsOnQuestionId = dependancy.dependsOnQuestion
+          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.id === dependsOnQuestionId)
+
           if (dependancy.validationAction === 'equal') {
             if (!(dependsOnQuestion.response === dependancy.validationValue)) {
               groupMatch = false
