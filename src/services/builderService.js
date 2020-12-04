@@ -78,6 +78,7 @@ function createQuestion (questionnaire) {
         value: 'false',
         provisions: [],
         selectedProvisions: [],
+        selectedProvisionsTitles: [],
         searchProvisions: null,
         isProvisionCollapsed: false,
       }
