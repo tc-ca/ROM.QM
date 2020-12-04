@@ -1,6 +1,7 @@
 <template>
   <v-expansion-panel
     v-show="question.isVisible"
+    ref="qPanel"
   >
     <v-expansion-panel-header
       ripple
@@ -20,7 +21,6 @@
       </template>
 
       <div
-        ref="myQ"
         :style="{fontSize:'16px !important'}"
       >
         <!-- eslint-disable vue/no-v-html -->
@@ -28,7 +28,9 @@
       </div>
       <!--eslint-enable-->
     </v-expansion-panel-header>
-    <v-expansion-panel-content eager>
+    <v-expansion-panel-content
+      eager
+    >
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
@@ -214,7 +216,6 @@ export default {
   watch: {
     selProvisions: {
       handler () {
-        console.log('Bananna!')
         this.selectedResponseOption.selectedProvisions = this.selProvisions
         this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
       },
@@ -258,10 +259,11 @@ export default {
     },
     getSelectedProvisionsId () {
       let list = []
-      this.selectedResponseOption.selectedProvisions.forEach(p => {
-        list.push(this.getSelectedProvisionText(p).trim())
-      })
-      console.log('apple')
+      if (this.selectedResponseOption && this.selectedResponseOption.selectedProvisions) {
+        this.selectedResponseOption.selectedProvisions.forEach(p => {
+          list.push(this.getSelectedProvisionText(p).trim())
+        })
+      }
       return list
     },
     onSelectedProvisionClick (item) {
