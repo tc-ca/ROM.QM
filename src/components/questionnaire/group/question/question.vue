@@ -365,7 +365,9 @@ export default {
           this.displayViolationInfo = false
         }
         this.selectedResponseOption = responseOption
-        this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
+        if (responseOption && responseOption.selectedProvisions) {
+          this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
+        }
         // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
       }
     },

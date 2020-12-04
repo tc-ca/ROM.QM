@@ -817,7 +817,7 @@ export default {
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
-            let qRf = BuilderService.createReferenceQuestion()
+            let qRf = BuilderService.createReferenceQuestion(this.questionnaire)
             console.log(qRf)
             if (group.questions.length > 0) {
               // Move every question one number up on the sort order
