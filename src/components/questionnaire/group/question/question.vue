@@ -332,8 +332,8 @@ export default {
       this.question.response = args.value
       if (this.question.dependants) {
         for (let i = 0; i < this.question.dependants.length; i++) {
-          let dependentId = this.question.dependants[i].id
-          const question = this.getFlatListOfAllQuestions.find(x => x.id === dependentId)
+          let dependentGuid = this.question.dependants[i].guid
+          const question = this.getFlatListOfAllQuestions.find(x => x.guid === dependentGuid)
           this.updateChildQuestionOnDependencies(question)
         }
       }
@@ -345,8 +345,8 @@ export default {
         let groupMatch = true
         for (let j = 0; j < group.questionDependencies.length; j++) {
           let dependancy = group.questionDependencies[j]
-          let dependsOnQuestionId = dependancy.dependsOnQuestion.id
-          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.id === dependsOnQuestionId)
+          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
+          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
 
           if (dependancy.validationAction === 'equal') {
             if (!(dependsOnQuestion.response === dependancy.validationValue)) {
