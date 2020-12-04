@@ -134,6 +134,7 @@ import BuilderService from '../../services/builderService'
 import { QUESTION_TYPE } from '../../data/questionTypes'
 
 export default {
+  emits: ['childQuestionAdded', 'removeQuestion', 'childQuestionRemoved', 'editQuestion'],
   name: 'BuilderQuestion',
   components: {
     Response
