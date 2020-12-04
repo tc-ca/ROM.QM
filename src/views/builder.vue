@@ -813,7 +813,6 @@ export default {
     },
     changeQuestionType ($event) {
       if (this.selectedQuestion.type === QUESTION_TYPE.REFERENCE) {
-        console.log(this.selectedQuestion)
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
@@ -834,15 +833,12 @@ export default {
               this.selectedQuestion = qRf
             }
           } else {
-            // Alert and return back to the radio button type
+            // Alert and return back to the text type, the closest type to Reference Question
             this.$store.dispatch('notification/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
-            // alert('Only one Reference question is allowed on a Group')
             this.selectedQuestion.type = 'text'
           }
         } else {
-          // Alert and return back to the radio button type
           this.$store.dispatch('notification/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
-          // alert('A Reference question is only allowed on a Group Top Level, not as a Child Question')
           this.selectedQuestion.type = 'text'
         }
       }
@@ -886,7 +882,7 @@ export default {
       if (question.type === QUESTION_TYPE.REFERENCE) {
         // Move all the sortOrder 1 position up
         if (group.questions.length > 0) {
-          // Move every question one number up on the sort order
+          // Move every question one number down on the sort order
           group.questions.forEach((q) => { q.sortOrder -= 1 })
         }
       }
