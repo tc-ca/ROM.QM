@@ -812,13 +812,12 @@ export default {
       }
     },
     changeQuestionType ($event) {
-      if (this.selectedQuestion.type === 'reference') {
+      if (this.selectedQuestion.type === QUESTION_TYPE.REFERENCE) {
         console.log(this.selectedQuestion)
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
             let qRf = BuilderService.createReferenceQuestion(this.questionnaire)
-            console.log(qRf)
             if (group.questions.length > 0) {
               // Move every question one number up on the sort order
               group.questions.forEach((q) => { q.sortOrder += 1 })
@@ -839,6 +838,10 @@ export default {
             alert('Only one Reference question is allowed on a Group')
             this.selectedQuestion.type = 'text'
           }
+        } else {
+          // Alert and return back to the radio button type
+          alert('A Reference question is only allowed on a Group, not as a Child Question')
+          this.selectedQuestion.type = 'text'
         }
       }
     },
@@ -877,6 +880,14 @@ export default {
         }
       }
       this.onRemovedQuestionFromIndex(question)
+      // In case that the question removed is a Reference Question
+      if (question.type === QUESTION_TYPE.REFERENCE) {
+        // Move all the sortOrder 1 position up
+        if (group.questions.length > 0) {
+          // Move every question one number up on the sort order
+          group.questions.forEach((q) => { q.sortOrder -= 1 })
+        }
+      }
     },
     onRemovedQuestionFromIndex (question) {
       if (this.selectedQuestion === question) {
