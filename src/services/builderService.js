@@ -78,6 +78,7 @@ function createQuestion (questionnaire) {
         value: 'false',
         provisions: [],
         selectedProvisions: [],
+        selectedProvisionsTitles: [],
         searchProvisions: null,
         isProvisionCollapsed: false,
       }
@@ -119,51 +120,61 @@ function createQuestion (questionnaire) {
   return question
 }
 
-function createReferenceQuestion () {
-  // let id = getNextQuestionId(questionnaire)
-  let guid = uuidv4();
-  let question = {
-    name: 'Reference ID',
-    id: 0,
-    guid: guid,
-    sortOrder: 1,
-    isVisible: true,
-    isMultiple: false,
-    text: {
-      [LANGUAGE.ENGLISH]: 'Reference ID',
-      [LANGUAGE.FRENCH]: 'FR: Reference ID'
-    },
-    type: QUESTION_TYPE.REFERENCE, // text, number, select, radio, boolean, image...
-    response: null,
-    responseOptions: [],
-    validationRules: [
-      {
-        name: 'require', // use it as a reference for parent question to enable/disable validator
-        enabled: true,
-        type: 'require', // min, max....
-        value: null,
-        errorMessage: {
-          [LANGUAGE.ENGLISH]: 'Required',
-          [LANGUAGE.FRENCH]: 'FR: Required'
-        }
-      }
-    ],
-    violationInfo: {},
-    internalComment: {
-      option: 'optional', value: ''
-    },
-    externalComment: {
-      option: 'optional', value: ''
-    },
-    picture: {},
-    childQuestions: [],
-    dependants: [],
-    dependencyGroups: []
+function createReferenceQuestion (questionnaire) {
+  let rQuestion = createQuestion(questionnaire)
+  rQuestion.name = 'Reference ID'
+  rQuestion.id = 0
+  rQuestion.sortOrder = 1
+  rQuestion.isMultiple = false
+  rQuestion.text = {
+    [LANGUAGE.ENGLISH]: 'Reference ID',
+    [LANGUAGE.FRENCH]: 'FR: Reference ID'
   }
+  rQuestion.type = QUESTION_TYPE.REFERENCE
 
-  question.name = 'Reference ID'
+  // let guid = uuidv4();
+  // let question = {
+  //   name: 'Reference ID',
+  //   id: 0,
+  //   guid: guid,
+  //   sortOrder: 1,
+  //   isVisible: true,
+  //   isMultiple: false,
+  //   text: {
+  //     [LANGUAGE.ENGLISH]: 'Reference ID',
+  //     [LANGUAGE.FRENCH]: 'FR: Reference ID'
+  //   },
+  //   type: QUESTION_TYPE.REFERENCE, // text, number, select, radio, boolean, image...
+  //   response: null,
+  //   responseOptions: [],
+  //   validationRules: [
+  //     {
+  //       name: 'require', // use it as a reference for parent question to enable/disable validator
+  //       enabled: true,
+  //       type: 'require', // min, max....
+  //       value: null,
+  //       errorMessage: {
+  //         [LANGUAGE.ENGLISH]: 'Required',
+  //         [LANGUAGE.FRENCH]: 'FR: Required'
+  //       }
+  //     }
+  //   ],
+  //   violationInfo: {},
+  //   internalComment: {
+  //     option: 'optional', value: ''
+  //   },
+  //   externalComment: {
+  //     option: 'optional', value: ''
+  //   },
+  //   picture: {},
+  //   childQuestions: [],
+  //   dependants: [],
+  //   dependencyGroups: []
+  // }
 
-  return question
+  // question.name = 'Reference ID'
+
+  return rQuestion
 }
 
 function findReferenceQuestion(group, guid = "") {

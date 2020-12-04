@@ -1,6 +1,7 @@
 <template>
   <v-expansion-panel
     v-show="question.isVisible"
+    ref="qPanel"
   >
     <v-expansion-panel-header
       ripple
@@ -27,7 +28,9 @@
       </div>
       <!--eslint-enable-->
     </v-expansion-panel-header>
-    <v-expansion-panel-content eager>
+    <v-expansion-panel-content
+      eager
+    >
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
@@ -45,6 +48,7 @@
             <v-sheet class="pa-4">
               <v-text-field
                 v-model="question.violationInfo.referenceID"
+                :disabled="isViolationInfoReferenceIdDisabled"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 outline
@@ -69,14 +73,14 @@
             <v-sheet class="pa-4">
               <div class="text-left">
                 <v-btn
-                  v-for="item in selectedResponseOption.selectedProvisions"
+                  v-for="item in selProvisions"
                   :key="item.key"
                   small
                   style="margin-right: 5px"
                   rounded
                   color="primary"
                   dark
-                  @click="onSelectedProvisionClick(item, selectedResponseOption)"
+                  @click="onSelectedProvisionClick(item)"
                 >
                   <v-icon
                     small
@@ -90,7 +94,7 @@
             </v-sheet>
             <v-card-text>
               <v-treeview
-                v-model="selectedResponseOption.selectedProvisions"
+                v-model="selProvisions"
                 selectable
                 :item-text="'title.' + lang"
                 item-key="id"
@@ -144,6 +148,7 @@ import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
+import BuilderService from '../../../../services/builderService'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
@@ -180,7 +185,10 @@ export default {
       selectedResponseOption: [],
       selResponses: [],
       provisions: [],
-      isReferenceQuestion: false
+      selProvisions: [],
+      isReferenceQuestion: false,
+      isReferenceQuestionInGroup: false,
+      isViolationInfoReferenceIdDisabled: false
     }
   },
   computed: {
@@ -210,11 +218,38 @@ export default {
       }
     })
   },
+  watch: {
+    selProvisions: {
+      handler () {
+        this.selectedResponseOption.selectedProvisions = this.selProvisions
+        this.selectedResponseOption.selectedProvisionsTitles = this.getSelectedProvisionsId()
+        this.$emit('group-subtitle-change')
+      },
+      deep: true
+    }
+  },
   mounted () {
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
-    this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
+    this.updateReferenceID()
+    this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    updateReferenceID () {
+      this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
+      this.displaySupplementaryInfo = this.isReferenceQuestion
+      if (!this.isReferenceQuestion) {
+        const rQ = BuilderService.findReferenceQuestion(this.group)
+        if (rQ) {
+          this.isViolationInfoReferenceIdDisabled = false
+          this.isReferenceQuestionInGroup = true
+          this.question.violationInfo.referenceID = rQ.response
+          this.isViolationInfoReferenceIdDisabled = true
+          this.isViolationInfoReferenceIdDisabled = true
+        }
+      } else {
+        this.isReferenceQuestionInGroup = true
+      }
+    },
     getSelectedProvisionText (item) {
       let provison = ''
       let findDeep = function (data, str) {
@@ -228,8 +263,18 @@ export default {
       findDeep(this.provisions, item)
       return provison
     },
-    onSelectedProvisionClick (item, options) {
-      options.selectedProvisions = options.selectedProvisions.filter(i => i !== item)
+    getSelectedProvisionsId () {
+      let list = []
+      if (this.selectedResponseOption && this.selectedResponseOption.selectedProvisions) {
+        this.selectedResponseOption.selectedProvisions.forEach(p => {
+          list.push(this.getSelectedProvisionText(p).trim().toUpperCase())
+        })
+      }
+      return list
+    },
+    onSelectedProvisionClick (item) {
+      this.selProvisions = this.selProvisions.filter(i => i !== item)
+      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     hydrateItems (itemToHydrate, dictionary) {
       let hydratedItems = []
@@ -296,7 +341,7 @@ export default {
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
-      this.$emit('group-subtitle-change')
+      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
       this.updateViolationInfo(args)
@@ -309,7 +354,7 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value)
+      this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
     },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
@@ -319,13 +364,16 @@ export default {
             this.displayViolationInfo = false
           } else {
             this.loadProvisions(responseOption)
-            this.displayViolationInfo = true
+            this.displayViolationInfo = !this.isReferenceQuestion
           }
         } else {
           this.displayViolationInfo = false
         }
         this.selectedResponseOption = responseOption
-        this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
+        if (responseOption && responseOption.selectedProvisions) {
+          this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
+        }
+        // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
       }
     },
     updateDependants (args) {

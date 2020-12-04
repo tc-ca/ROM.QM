@@ -15,7 +15,11 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <!-- eslint-disable vue/no-v-html -->
-            <v-list-item-title v-html="notification.header" />
+            <v-list-item-title
+              class="actionLink"
+              @click="$emit('notification:click', notification)"
+              v-html="notification.header"
+            />
             <v-list-item-subtitle v-html="notification.text" />
           </v-list-item-content>
         </v-list-item>
@@ -44,4 +48,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.actionLink:hover {
+  color: crimson;
+  cursor:pointer;
+  text-decoration: underline;
+}
+</style>

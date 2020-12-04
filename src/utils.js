@@ -71,13 +71,17 @@ export function hydrateItems (itemToHydrate, dictionary) {
 
 
 
-export function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang = 'en', color = 'error') {
+export function buildNotificationObject (q, text, groupIndex, queIndex, depth, icon = 'mdi-message-alert', lang = 'en', color = 'error', timeout = 5000) {
   const notice = { 
     guid: uuidv4(),
     header: `Question: ${q.text[lang]}`, 
     text: text, 
     icon: icon, 
-    color: color 
+    color: color,
+    groupIndex: groupIndex,
+    questionId: queIndex,
+    depth: depth,
+    timeout: timeout
   };
   return notice;
 }
