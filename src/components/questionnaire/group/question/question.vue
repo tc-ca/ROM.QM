@@ -1,6 +1,7 @@
 <template>
   <v-expansion-panel
     v-show="question.isVisible"
+    ref="qPanel"
   >
     <v-expansion-panel-header
       ripple
@@ -20,7 +21,6 @@
       </template>
 
       <div
-        ref="myQ"
         :style="{fontSize:'16px !important'}"
       >
         <!-- eslint-disable vue/no-v-html -->
@@ -28,7 +28,9 @@
       </div>
       <!--eslint-enable-->
     </v-expansion-panel-header>
-    <v-expansion-panel-content eager>
+    <v-expansion-panel-content
+      eager
+    >
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
