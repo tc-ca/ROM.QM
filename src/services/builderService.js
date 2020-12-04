@@ -257,8 +257,14 @@ function processBuilderForSave(questionnaire){
 
   let populateDependantsOnDependency = q => {
     q.dependencyGroups.forEach(dg => {
-      dg.questionDependencies.forEach(qd =>
-        qd.dependsOnQuestion.dependants.push(q)
+      dg.questionDependencies.forEach(qd =>{
+        
+        //if dependents prop does not exist, its has been process already i.e. circular dependencies has been removed already.
+        if (qd.dependsOnQuestion.dependants){
+          qd.dependsOnQuestion.dependants.push(q);
+        }
+
+      }
       );
     });
     q.childQuestions.forEach(cq => populateDependantsOnDependency(cq));
@@ -274,7 +280,12 @@ function processBuilderForSave(questionnaire){
   let populateDependantsOnDependencyIds = q => {
     q.dependencyGroups.forEach(dg => {
       dg.questionDependencies.forEach(qd =>
-        qd.dependsOnQuestion.dependants.push(q.id)
+        {
+          //if dependents prop does not exist, its has been process already i.e. circular dependencies has been removed already.
+          if (qd.dependsOnQuestion.dependants) {
+            qd.dependsOnQuestion.dependants.push({ id: q.id });
+          }
+        }
       );
     });
     q.childQuestions.forEach(cq => populateDependantsOnDependencyIds(cq));
@@ -289,7 +300,7 @@ function processBuilderForSave(questionnaire){
   let removeCircularRefFromDependency = question => {
     question.dependencyGroups.forEach(dg => {
       dg.questionDependencies.forEach(qd => {
-        qd.dependsOnQuestion = qd.dependsOnQuestion.id;
+        qd.dependsOnQuestion = { id: qd.dependsOnQuestion.id };
       });
     });
 

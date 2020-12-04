@@ -553,6 +553,7 @@
                                 v-model="questionDependency.dependsOnQuestion"
                                 dense
                                 item-text="name"
+                                item-value="id"
                                 :items="questions"
                                 label="Question"
                                 return-object

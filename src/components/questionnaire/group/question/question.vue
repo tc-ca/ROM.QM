@@ -193,9 +193,6 @@ export default {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
     },
-    flatList () {
-      return this.$store.getters.getFlatListOfAllQuestions
-    },
     expansionPanelsValue () {
       if (this.expand) {
         let indexes = []
@@ -335,7 +332,7 @@ export default {
       this.question.response = args.value
       if (this.question.dependants) {
         for (let i = 0; i < this.question.dependants.length; i++) {
-          let dependentId = this.question.dependants[i]
+          let dependentId = this.question.dependants[i].id
           const question = this.getFlatListOfAllQuestions.find(x => x.id === dependentId)
           this.updateChildQuestionOnDependencies(question)
         }
@@ -348,7 +345,7 @@ export default {
         let groupMatch = true
         for (let j = 0; j < group.questionDependencies.length; j++) {
           let dependancy = group.questionDependencies[j]
-          let dependsOnQuestionId = dependancy.dependsOnQuestion
+          let dependsOnQuestionId = dependancy.dependsOnQuestion.id
           let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.id === dependsOnQuestionId)
 
           if (dependancy.validationAction === 'equal') {
