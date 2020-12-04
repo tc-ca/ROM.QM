@@ -268,8 +268,14 @@ function processBuilderForSave(questionnaire){
 
   let populateDependantsOnDependency = q => {
     q.dependencyGroups.forEach(dg => {
-      dg.questionDependencies.forEach(qd =>
-        qd.dependsOnQuestion.dependants.push(q)
+      dg.questionDependencies.forEach(qd =>{
+        
+        //if dependents prop does not exist, its has been process already i.e. circular dependencies has been removed already.
+        if (qd.dependsOnQuestion.dependants){
+          qd.dependsOnQuestion.dependants.push(q);
+        }
+
+      }
       );
     });
     q.childQuestions.forEach(cq => populateDependantsOnDependency(cq));
@@ -282,25 +288,30 @@ function processBuilderForSave(questionnaire){
   });
 
 
-  let populateDependantsOnDependencyIds = q => {
+  let populateDependantsOnDependencyGuids = q => {
     q.dependencyGroups.forEach(dg => {
       dg.questionDependencies.forEach(qd =>
-        qd.dependsOnQuestion.dependants.push(q.id)
+        {
+          //if dependents prop does not exist, its has been process already i.e. circular dependencies has been removed already.
+          if (qd.dependsOnQuestion.dependants) {
+            qd.dependsOnQuestion.dependants.push({ guid: q.guid });
+          }
+        }
       );
     });
-    q.childQuestions.forEach(cq => populateDependantsOnDependencyIds(cq));
+    q.childQuestions.forEach(cq => populateDependantsOnDependencyGuids(cq));
   };
 
   questionnaire.groups.forEach(g => {
     g.questions.forEach(q => {
-      populateDependantsOnDependencyIds(q);
+      populateDependantsOnDependencyGuids(q);
     });
   });
 
   let removeCircularRefFromDependency = question => {
     question.dependencyGroups.forEach(dg => {
       dg.questionDependencies.forEach(qd => {
-        qd.dependsOnQuestion = qd.dependsOnQuestion.id;
+        qd.dependsOnQuestion = { guid: qd.dependsOnQuestion.guid };
       });
     });
 

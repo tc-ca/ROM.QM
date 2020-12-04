@@ -556,6 +556,7 @@
                                   v-model="questionDependency.dependsOnQuestion"
                                   dense
                                   item-text="name"
+                                  item-value="guid"
                                   :items="questions"
                                   label="Question"
                                   return-object
@@ -700,7 +701,7 @@ import BUILDER from '../data/builderLookupTypes'
 import BuilderQuestion from '../components/builder/builder-question'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
 
 export default {
@@ -760,7 +761,12 @@ export default {
           return LANGUAGE.ENGLISH
         }
         return state.settings.settings.lang
-      }
+      },
+      // mix the getters into computed with object spread operator
+      ...mapGetters([
+        'getFlatListOfAllQuestions'
+      // ...
+      ])
     })
   },
   created () {
@@ -777,7 +783,7 @@ export default {
       switch (mutation.type) {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
-
+          this.questions = this.getFlatListOfAllQuestions
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations

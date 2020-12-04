@@ -143,7 +143,7 @@
 
 <script>
 import _ from 'lodash'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
@@ -192,6 +192,11 @@ export default {
     }
   },
   computed: {
+    // mix the getters into computed with object spread operator
+    ...mapGetters([
+      'getFlatListOfAllQuestions'
+      // ...
+    ]),
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
@@ -375,8 +380,9 @@ export default {
       this.question.response = args.value
       if (this.question.dependants) {
         for (let i = 0; i < this.question.dependants.length; i++) {
-          let dependentQuestion = this.question.dependants[i]
-          this.updateChildQuestionOnDependencies(dependentQuestion)
+          let dependentGuid = this.question.dependants[i].guid
+          const question = this.getFlatListOfAllQuestions.find(x => x.guid === dependentGuid)
+          this.updateChildQuestionOnDependencies(question)
         }
       }
     },
@@ -387,7 +393,9 @@ export default {
         let groupMatch = true
         for (let j = 0; j < group.questionDependencies.length; j++) {
           let dependancy = group.questionDependencies[j]
-          let dependsOnQuestion = dependancy.dependsOnQuestion
+          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
+          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
+
           if (dependancy.validationAction === 'equal') {
             if (!(dependsOnQuestion.response === dependancy.validationValue)) {
               groupMatch = false
