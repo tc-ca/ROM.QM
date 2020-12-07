@@ -80,6 +80,7 @@ export function buildNotificationObject (q, text, groupIndex, queIndex, depth, i
     color: color,
     groupIndex: groupIndex,
     questionId: queIndex,
+    qguid: q.guid,
     depth: depth,
     timeout: timeout
   };
