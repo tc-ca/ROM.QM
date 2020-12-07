@@ -37,6 +37,18 @@
 								"fr": "FR: Yes"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -50,6 +62,18 @@
 								"fr": "FR: No"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"f3c4cb43-9df4-47b7-a928-d32db128b7d5",
@@ -73,6 +97,18 @@
 								"fr": "FR: Not Inspected"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -94,19 +130,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -133,6 +157,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -146,6 +182,18 @@
 								"fr": "Non"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"2f8155c5-e8a4-49b3-8ab5-d43e9b7f5a0f",
@@ -188,6 +236,18 @@
 								"fr": "Non Inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -209,19 +269,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -262,6 +310,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -275,6 +335,18 @@
 								"fr": "Oui"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"5e093a60-be05-4c76-a1e4-a94427ffb5af",
@@ -326,6 +398,18 @@
 								"fr": "Non Inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -347,19 +431,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -386,6 +458,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -399,6 +483,18 @@
 								"fr": "Non"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"5e093a60-be05-4c76-a1e4-a94427ffb5af",
@@ -460,6 +556,18 @@
 								"fr": "Non Inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -481,19 +589,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -520,6 +616,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -533,6 +641,18 @@
 								"fr": "Non"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"7a2bdffa-0f60-4968-82da-387242058681"
@@ -548,6 +668,18 @@
 								"fr": "Non inspectÉ"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -569,19 +701,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -622,6 +742,18 @@
 								"fr": "OUI"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -635,6 +767,18 @@
 								"fr": "NoN"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"b1b3339a-8cb8-4e6e-ac51-0693712656c2",
@@ -656,6 +800,18 @@
 								"fr": "Non inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -693,19 +849,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -732,6 +876,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -745,6 +901,18 @@
 								"fr": "Non"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"ba4fcd78-1a9a-4027-ad82-49a30c6df9ff",
@@ -772,6 +940,18 @@
 								"fr": "Non Inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -793,19 +973,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -832,6 +1000,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -845,6 +1025,18 @@
 								"fr": "Non"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"e2201c4f-c182-42c0-8e8f-0bf7bd052ce1",
@@ -866,6 +1058,18 @@
 								"fr": "Non inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -887,19 +1091,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []
@@ -926,6 +1118,18 @@
 								"fr": "Oui"
 							},
 							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [],
 							"searchProvisions": null,
@@ -939,6 +1143,18 @@
 								"fr": "Non"
 							},
 							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"selectedProvisions": [],
 							"provisions": [
 								"013d7b91-db9b-44c3-9036-8af46943d04b",
@@ -955,6 +1171,18 @@
 								"fr": "Non inspecté"
 							},
 							"value": 3,
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
 							"provisions": [],
 							"selectedProvisions": [],
 							"searchProvisions": null,
@@ -976,19 +1204,7 @@
 					"violationInfo": {
 						"responseToMatch": "false",
 						"matchingType": "equal"
-					},
-					"internalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"externalComment": {
-						"option": "optional",
-						"value": ""
-					},
-					"picture": {
-						"option": "optional",
-						"value": ""
-					},
+					},					
 					"childQuestions": [],
 					"dependants": [],
 					"dependencyGroups": []

@@ -132,6 +132,7 @@ export default {
       this.expand = false
       this.panelIndex = n.groupIndex
       this.$refs.questionGroup[n.groupIndex].$refs.groupQuestion.forEach((g, i) => {
+        g.$el.className = (i === n.questionId) ? g.$el.className + ' selected' : g.$el.className
         g.$refs.qPanel.isActive = (i === n.questionId)
       })
     },
@@ -182,6 +183,7 @@ export default {
         this.group.groups.forEach(group => {
           let queIndex = 0
           group.questions.forEach(question => {
+            debugger
             this.addQuestionNotificationsToList(question, grpIndex, queIndex, 0)
             queIndex++
           })

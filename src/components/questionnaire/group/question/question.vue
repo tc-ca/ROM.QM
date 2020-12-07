@@ -113,6 +113,7 @@
       <supplementary-info
         v-if="displaySupplementaryInfo"
         :question="question"
+        :selresponseoption="selectedResponseOption"
         :group="group"
         @error="onError"
       />
@@ -489,5 +490,10 @@ export default {
 /* .cursor-auto {
   cursor: auto;
 } */
-
+.selected {
+    box-shadow: 0 0px 5px 0 rgba(255, 0, 0, 1);
+    border-width: 1px;
+    border-style: solid;
+    border-color:  rgba(255, 0, 0, 1);
+  }
 </style>
