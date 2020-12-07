@@ -31,6 +31,15 @@
     <v-expansion-panel-content
       eager
     >
+      <v-layout
+        justify-end
+      >
+        <v-icon
+          @click="clickSampling"
+        >
+          mdi-android-messages
+        </v-icon>
+      </v-layout>
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
@@ -234,6 +243,10 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    clickSampling ($event) {
+      $event.stopPropagation()
+      alert('Sampling')
+    },
     updateReferenceID () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
       this.displaySupplementaryInfo = this.isReferenceQuestion

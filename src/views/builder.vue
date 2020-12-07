@@ -269,6 +269,11 @@
                   </template>
                 </v-select>
                 <v-checkbox
+                  v-model="selectedQuestion.isSamplingAllowed"
+                  dense
+                  :label="$t('app.builder.samplingAllowed')"
+                />
+                <v-checkbox
                   v-model="selectedQuestion.isVisible"
                   dense
                   :label="$t('app.builder.visibleByDefault')"
@@ -735,7 +740,7 @@ export default {
       questionPanels: [],
       selectedProvisions: [],
       questionProvisions: [],
-      env: process.env.NODE_ENV, // ?
+      env: process.env.NODE_ENV,
       reference: QUESTION_TYPE.REFERENCE
     }
   },

@@ -24,6 +24,7 @@
       "internalComments": "Internal Comments",
       "externalComments": "External Comments",
       "picture": "Picture(s)",
+      "samplingAllowed": "Allow Sampling Record?",
       "visibleByDefault": "Visible by default",
       "responseOptions": {
         "responseOptions": "Response Options",
