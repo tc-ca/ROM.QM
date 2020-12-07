@@ -130,8 +130,8 @@ export default {
   },
   methods: {
     onNotificationClick (n) {
-      this.expand = false
-      this.panelIndex = n.groupIndex
+      this.expand = true
+      // this.panelIndex = n.groupIndex
       this.$store.commit('errors/updateErrorNotification', n.qguid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
