@@ -205,8 +205,6 @@ export default {
       return `${this.question.text[this.lang]}`
     },
     getClassName () {
-      /* eslint-disable no-debugger */
-      debugger
       let c = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
       if (this.$refs.textArea) this.$refs.textArea.focus()
       return c
