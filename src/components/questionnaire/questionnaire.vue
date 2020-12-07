@@ -137,39 +137,38 @@ export default {
       })
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
-      /* eslint-disable no-debugger */
-      // debugger
       if (q.notification) {
         this.$store.dispatch('notification/addNotification', q.notification)
       } else if (!q.validationState || !q.response) {
         q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
         this.$store.dispatch('notification/addNotification', q.notification)
-      }
-      if (q.internalComment.notification) {
-        this.$store.dispatch('notification/addNotification', q.internalComment.notification)
-      } else if (q.internalComment.option === 'required' && q.internalComment.value.trim().length === 0) {
-        q.internalComment.notification = buildNotificationObject(q, 'Internal Comment for the question is required. Please enter a value on the comment field.', groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-        this.$store.dispatch('notification/addNotification', q.internalComment.notification)
-      }
-      if (q.externalComment.notification) {
-        this.$store.dispatch('notification/addNotification', q.externalComment.notification)
-      } else if (q.externalComment.option === 'required' && q.externalComment.value.trim().length === 0) {
-        q.externalComment.notification = buildNotificationObject(q, 'External Comment for the question is required. Please enter a value on the comment field.', groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-        this.$store.dispatch('notification/addNotification', q.externalComment.notification)
-      }
-      if (q.picture.notification) {
-        this.$store.dispatch('notification/addNotification', q.picture.notification)
-      } else if (q.picture.option === 'required' && q.picture.value.trim().length === 0) {
-        q.picture.notification = buildNotificationObject(q, 'A picture is required for this question. Please upload at least one.', groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
-        this.$store.dispatch('notification/addNotification', q.picture.notification)
+      } else {
+        q.responseOptions.forEach(op => {
+          if (op.internalComment.notification) {
+            this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+          } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+            op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${q.response} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+            this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+          }
+          if (op.externalComment.notification) {
+            this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+          } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+            op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${q.resonse} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+            this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+          }
+          if (op.picture.notification) {
+            this.$store.dispatch('notification/addNotification', op.picture.notification)
+          } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
+            op.picture.notification = buildNotificationObject(q, `A picture is required for the response type ${q.response}.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
+            this.$store.dispatch('notification/addNotification', op.picture.notification)
+          }
+        })
       }
       q.childQuestions.forEach(child => {
         this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
       })
     },
     validateQ () {
-      /* eslint-disable no-debugger */
-      // debugger
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
       })
