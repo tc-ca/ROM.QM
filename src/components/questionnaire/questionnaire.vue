@@ -130,8 +130,6 @@ export default {
   },
   methods: {
     onNotificationClick (n) {
-      /* eslint-disable no-debugger */
-      // debugger
       this.expand = false
       this.panelIndex = n.groupIndex
       this.$refs.questionGroup[n.groupIndex].$refs.groupQuestion.forEach((g, i) => {
@@ -139,8 +137,6 @@ export default {
       })
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
-      /* eslint-disable no-debugger */
-      // debugger
       if (q.notification) {
         this.$store.dispatch('notification/addNotification', q.notification)
       } else if (!q.validationState || !q.response) {
@@ -170,8 +166,6 @@ export default {
       })
     },
     validateQ () {
-      /* eslint-disable no-debugger */
-      // debugger
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
       })
