@@ -125,6 +125,9 @@ export default {
       return notices
     }
   },
+  beforeDestroy () {
+    this.$store.dispatch('notification/clearNotifications')
+  },
   methods: {
     onNotificationClick (n) {
       /* eslint-disable no-debugger */

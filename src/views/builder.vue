@@ -793,6 +793,9 @@ export default {
       }
     })
   },
+  beforeDestroy () {
+    this.$store.dispatch('notification/clearNotifications')
+  },
   methods: {
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
