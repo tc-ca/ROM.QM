@@ -148,19 +148,19 @@ export default {
           if (op.internalComment.notification) {
             this.$store.dispatch('notification/addNotification', op.internalComment.notification)
           } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
-            op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${q.response} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+            op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
             this.$store.dispatch('notification/addNotification', op.internalComment.notification)
           }
           if (op.externalComment.notification) {
             this.$store.dispatch('notification/addNotification', op.externalComment.notification)
           } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
-            op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${q.resonse} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+            op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
             this.$store.dispatch('notification/addNotification', op.externalComment.notification)
           }
           if (op.picture.notification) {
             this.$store.dispatch('notification/addNotification', op.picture.notification)
           } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
-            op.picture.notification = buildNotificationObject(q, `A picture is required for the response type ${q.response}.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
+            op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
             this.$store.dispatch('notification/addNotification', op.picture.notification)
           }
         })
