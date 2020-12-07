@@ -76,7 +76,7 @@
                   v-for="item in selProvisions"
                   :key="item.key"
                   small
-                  style="margin-right: 5px"
+                  style="margin-right: 5px; margin-bottom: 5px"
                   rounded
                   color="primary"
                   dark
