@@ -6,6 +6,7 @@
         <v-icon
           v-if="isCommentRequired"
           color="red"
+          small
         >
           mdi-alpha-r-box-outline
         </v-icon>
@@ -20,6 +21,7 @@
       <v-icon
         v-if="errorInComment"
         color="red"
+        small
       >
         mdi-message-alert
       </v-icon>
