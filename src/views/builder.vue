@@ -225,49 +225,7 @@
                 :label="$t('app.builder.sortOrder')"
                 @change="sortQuestions(selectedQuestion)"
               />
-              <v-select
-                v-model="selectedQuestion.internalComment.option"
-                item-text="text"
-                item-value="value"
-                :items="optionTypes"
-                :label="$t('app.builder.internalComments')"
-              >
-                <template v-slot:selection="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-                <template v-slot:item="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-              </v-select>
-              <v-select
-                v-model="selectedQuestion.externalComment.option"
-                item-text="text"
-                item-value="value"
-                :items="optionTypes"
-                :label="$t('app.builder.externalComments')"
-              >
-                <template v-slot:selection="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-                <template v-slot:item="{ item }">
-                  <span>{{ item.text[lang] }}</span>
-                </template>
-              </v-select>
               <div v-if="selectedQuestion.type !== reference">
-                <v-select
-                  v-model="selectedQuestion.picture.option"
-                  item-text="text"
-                  item-value="value"
-                  :items="optionTypes"
-                  :label="$t('app.builder.picture')"
-                >
-                  <template v-slot:selection="{ item }">
-                    <span>{{ item.text[lang] }}</span>
-                  </template>
-                  <template v-slot:item="{ item }">
-                    <span>{{ item.text[lang] }}</span>
-                  </template>
-                </v-select>
                 <v-checkbox
                   v-model="selectedQuestion.isVisible"
                   dense
@@ -340,6 +298,50 @@
                           </template>
                           <span>{{ $t('app.builder.responseOptions.removResponseoption') }}</span>
                         </v-tooltip>
+                      </div>
+                      <div>
+                        <v-select
+                          v-model="option.internalComment.option"
+                          item-text="text"
+                          item-value="value"
+                          :items="optionTypes"
+                          :label="$t('app.builder.internalComments')"
+                        >
+                          <template v-slot:selection="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                          <template v-slot:item="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                        </v-select>
+                        <v-select
+                          v-model="option.externalComment.option"
+                          item-text="text"
+                          item-value="value"
+                          :items="optionTypes"
+                          :label="$t('app.builder.externalComments')"
+                        >
+                          <template v-slot:selection="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                          <template v-slot:item="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                        </v-select>
+                        <v-select
+                          v-model="option.picture.option"
+                          item-text="text"
+                          item-value="value"
+                          :items="optionTypes"
+                          :label="$t('app.builder.picture')"
+                        >
+                          <template v-slot:selection="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                          <template v-slot:item="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                        </v-select>
                       </div>
                       <div>
                         <div>
@@ -920,6 +922,7 @@ export default {
     },
     async save (id) {
       const page = 'builder'
+      console.log('Save...')
       console.log(this.questionnaire)
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
@@ -1017,10 +1020,10 @@ export default {
 
 <style scoped>
   .selected {
-    box-shadow: 0 0px 5px 0 rgba(255, 0, 0, 1);
+    box-shadow: 0 0px 5px 0 rgb(10, 51, 39);
     border-width: 1px;
     border-style: solid;
-    border-color:  rgba(255, 0, 0, 1);
+    border-color:  rgb(10, 51, 39);
   }
   .bordered {
     border-width: 3px;
