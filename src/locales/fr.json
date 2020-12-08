@@ -83,7 +83,15 @@
           "internalComment": "FR Internal Comment",
           "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
           "commentRequired": "FR Comment Required",
-          "photos": "FR Photos"
+          "photos": "FR Photos",
+          "sampling": {
+            "approximateTotal": "FR Approximate Total",
+            "sampleSize": "FR Sample Size",
+            "nonCompliances": "FR Number of non-compliances",
+            "approximateTotalPlaceholder": "FR Please enter the approximate total of items",
+            "sampleSizePlaceholder": "FR Please enter the Size of the Sample",
+            "nonCompliancesPlaceholder": "Please enter the Number of non-compliances"
+          }
         }
       },
       "expandAll": "FR Expand All",

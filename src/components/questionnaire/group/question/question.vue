@@ -34,12 +34,13 @@
       eager
     >
       <v-layout
+        v-if="!isReferenceQuestion && question.isSamplingAllowed"
         justify-end
       >
         <v-icon
           @click="clickSampling"
         >
-          mdi-android-messages
+          mdi-beaker-question-outline
         </v-icon>
       </v-layout>
       <div :class="{'mt-6': expand}">
@@ -50,7 +51,12 @@
           @error="onError"
         />
       </div>
-
+      <div v-if="displaySamplingRecord">
+        <sampling-record
+          :question="question"
+          :group="group"
+        />
+      </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
         <div>
           <v-card
@@ -161,11 +167,12 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
+import SamplingRecord from './sampling/sampling-record'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
   name: 'Question',
-  components: { Response, SupplementaryInfo },
+  components: { Response, SupplementaryInfo, SamplingRecord },
 
   props: {
     question: {
@@ -200,7 +207,8 @@ export default {
       selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
-      isViolationInfoReferenceIdDisabled: false
+      isViolationInfoReferenceIdDisabled: false,
+      displaySamplingRecord: false
     }
   },
   computed: {
@@ -256,7 +264,11 @@ export default {
   methods: {
     clickSampling ($event) {
       $event.stopPropagation()
-      alert('Sampling')
+      if (!this.isReferenceQuestion) {
+        this.displaySamplingRecord = !this.displaySamplingRecord
+      } else {
+        this.displaySamplingRecord = false
+      }
     },
     updateReferenceID () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
