@@ -63,13 +63,13 @@ function createQuestion (questionnaire) {
         },
         value: 'true',
         internalComment: {
-          option: 'required', value: ''
+          option: 'optional', value: ''
         },
         externalComment: {
-          option: 'required', value: ''
+          option: 'optional', value: ''
         },
         picture: {
-          option: 'required', value: ''
+          option: 'optional', value: ''
         },
         provisions: [],
         selectedProvisions: [],
@@ -89,7 +89,7 @@ function createQuestion (questionnaire) {
           option: 'optional', value: ''
         },
         externalComment: {
-          option: 'optional', value: ''
+          option: 'required', value: ''
         },
         picture: {
           option: 'optional', value: ''
