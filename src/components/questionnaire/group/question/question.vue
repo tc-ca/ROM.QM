@@ -2,6 +2,8 @@
   <v-expansion-panel
     v-show="question.isVisible"
     ref="qPanel"
+    :active="isPanelActive"
+    :class="getClassName"
   >
     <v-expansion-panel-header
       ripple
@@ -85,7 +87,7 @@
                   v-for="item in selProvisions"
                   :key="item.key"
                   small
-                  style="margin-right: 5px"
+                  style="margin-right: 5px; margin-bottom: 5px"
                   rounded
                   color="primary"
                   dark
@@ -122,6 +124,7 @@
       <supplementary-info
         v-if="displaySupplementaryInfo"
         :question="question"
+        :selresponseoption="selectedResponseOption"
         :group="group"
         @error="onError"
       />
@@ -209,6 +212,14 @@ export default {
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
+    },
+    getClassName () {
+      let c = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
+      if (this.$refs.textArea) this.$refs.textArea.focus()
+      return c
+    },
+    isPanelActive () {
+      return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
     expansionPanelsValue () {
       if (this.expand) {
@@ -510,5 +521,10 @@ export default {
 /* .cursor-auto {
   cursor: auto;
 } */
-
+.selected {
+    box-shadow: 0 0px 5px 0 rgba(255, 0, 0, 1);
+    border-width: 1px;
+    border-style: solid;
+    border-color:  rgba(255, 0, 0, 1);
+  }
 </style>

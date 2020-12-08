@@ -6,7 +6,7 @@
   >
     <supplementary-info-comment
       v-if="displayExternalComment"
-      :comment="question.externalComment"
+      :comment="selresponseoption.externalComment"
       :label="$t('app.questionnaire.group.question.externalComment')"
       :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
@@ -16,7 +16,7 @@
     />
     <supplementary-info-comment
       v-if="displayInternalComment"
-      :comment="question.internalComment"
+      :comment="selresponseoption.internalComment"
       :label="$t('app.questionnaire.group.question.internalComment')"
       :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"
@@ -27,7 +27,7 @@
     <div v-if="!isReferenceQuestion">
       <supplementary-info-image
         v-if="displayPicture"
-        :picture="question.picture"
+        :picture="selresponseoption.picture"
         :label="$t('app.questionnaire.group.question.photos')"
         :group="group"
         :question="question"
@@ -54,6 +54,10 @@ export default {
       type: Object,
       required: true
     },
+    selresponseoption: {
+      type: Object,
+      required: true
+    },
     group: {
       type: Object,
       required: true
@@ -64,13 +68,13 @@ export default {
       return this.question.type === QUESTION_TYPE.REFERENCE
     },
     displayInternalComment () {
-      return this.question.internalComment.option !== 'n/a'
+      return this.selresponseoption.internalComment.option !== 'n/a'
     },
     displayExternalComment () {
-      return this.question.externalComment.option !== 'n/a'
+      return this.selresponseoption.externalComment.option !== 'n/a'
     },
     displayPicture () {
-      return this.question.picture.option !== 'n/a'
+      return this.selresponseoption.picture.option !== 'n/a'
     },
     ...mapState({
       lang: state => {

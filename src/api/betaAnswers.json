@@ -1,189 +1,213 @@
 {
-        "name": "Questionnaire 1",
-        "title": {
-            "en": "Questionnaire Title EN",
-            "fr": "Questionnaire Title EN"
-        },
-        "groups": [
-            {
-                "primaryKey": "Group 1",
-                "title": {
-                    "en": "New Group",
-                    "fr": "Fr: New Group"
-                },
-                "isRepeatable": false,
-                "isVisible": true,
-                "order": 0,
-                "questions": [
-                    {
-                        "name": "Question 1",
-                        "id": 1,
-                        "guid": "be60c1ef-3679-4f9e-a82d-eb1770ce3328",
-                        "sortOrder": 1,
-                        "isVisible": true,
-                        "isMultiple": true,
-                        "text": {
-                            "en": "Question text",
-                            "fr": "FR: Question text"
-                        },
-                        "type": "radio",
-                        "response": null,
-                        "responseOptions": [
-                            {
-                                "id": 1,
-                                "sortOrder": 1,
-                                "text": {
-                                    "en": "Yes",
-                                    "fr": "FR: Yes"
-                                },
-                                "value": "true",
-                                "provisions": [],
-                                "selectedProvisions": [],
-                                "searchProvisions": null,
-                                "isProvisionCollapsed": false
-                            },
-                            {
-                                "id": 2,
-                                "sortOrder": 2,
-                                "text": {
-                                    "en": "No",
-                                    "fr": "FR: No"
-                                },
-                                "value": "false",
-                                "provisions": [],
-                                "selectedProvisions": [],
-                                "searchProvisions": null,
-                                "isProvisionCollapsed": false
-                            }
-                        ],
-                        "validationRules": [
-                            {
-                                "name": "require",
-                                "enabled": true,
-                                "type": "require",
-                                "value": null,
-                                "errorMessage": {
-                                    "en": "Required",
-                                    "fr": "FR: Required"
-                                }
-                            }
-                        ],
-                        "violationInfo": {
-                            "responseToMatch": "false",
-                            "matchingType": "equal"
-                        },
-                        "internalComment": {
-                            "option": "optional",
-                            "value": ""
-                        },
-                        "externalComment": {
-                            "option": "optional",
-                            "value": ""
-                        },
-                        "picture": {
-                            "option": "optional",
-                            "value": ""
-                        },
-                        "childQuestions": [],
-                        "dependants": [
-                            {
-                                "guid": "d596ff0b-da06-4f75-a663-662db7deff3f"
-                            }
-                        ],
-                        "dependencyGroups": []
-                    },
-                    {
-                        "name": "Question 2",
-                        "id": 2,
-                        "guid": "d596ff0b-da06-4f75-a663-662db7deff3f",
-                        "sortOrder": 2,
-                        "isVisible": false,
-                        "isMultiple": true,
-                        "text": {
-                            "en": "Question text",
-                            "fr": "FR: Question text"
-                        },
-                        "type": "radio",
-                        "response": null,
-                        "responseOptions": [
-                            {
-                                "id": 1,
-                                "sortOrder": 1,
-                                "text": {
-                                    "en": "Yes",
-                                    "fr": "FR: Yes"
-                                },
-                                "value": "true",
-                                "provisions": [],
-                                "selectedProvisions": [],
-                                "searchProvisions": null,
-                                "isProvisionCollapsed": false
-                            },
-                            {
-                                "id": 2,
-                                "sortOrder": 2,
-                                "text": {
-                                    "en": "No",
-                                    "fr": "FR: No"
-                                },
-                                "value": "false",
-                                "provisions": [],
-                                "selectedProvisions": [],
-                                "searchProvisions": null,
-                                "isProvisionCollapsed": false
-                            }
-                        ],
-                        "validationRules": [
-                            {
-                                "name": "require",
-                                "enabled": true,
-                                "type": "require",
-                                "value": null,
-                                "errorMessage": {
-                                    "en": "Required",
-                                    "fr": "FR: Required"
-                                }
-                            }
-                        ],
-                        "violationInfo": {
-                            "responseToMatch": "false",
-                            "matchingType": "equal"
-                        },
-                        "internalComment": {
-                            "option": "optional",
-                            "value": ""
-                        },
-                        "externalComment": {
-                            "option": "optional",
-                            "value": ""
-                        },
-                        "picture": {
-                            "option": "optional",
-                            "value": ""
-                        },
-                        "childQuestions": [],
-                        "dependants": [],
-                        "dependencyGroups": [
-                            {
-                                "ruleType": "visibility",
-                                "childValidatorName": null,
-                                "questionDependencies": [
-                                    {
-                                        "dependsOnQuestion": {
-                                            "guid": "be60c1ef-3679-4f9e-a82d-eb1770ce3328"
-                                        },
-                                        "validationAction": "equal",
-                                        "validationValue": "true"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "domSuffix": "prop value created virtually",
-                "htmlElementId": "prop value created virtually"
-            }
-        ],
-        "templateid": ""
-    
+	"name": "Questionnaire 1",
+	"title": {
+		"en": "Questionnaire Title EN",
+		"fr": "Questionnaire Title EN"
+	},
+	"groups": [
+		{
+			"primaryKey": "Group 1",
+			"title": {
+				"en": "New Group",
+				"fr": "Fr: New Group"
+			},
+			"isRepeatable": false,
+			"isVisible": true,
+			"order": 0,
+			"questions": [
+				{
+					"name": "Question 1",
+					"id": 1,
+					"guid": "be60c1ef-3679-4f9e-a82d-eb1770ce3328",
+					"sortOrder": 1,
+					"isVisible": true,
+					"isMultiple": true,
+					"text": {
+						"en": "Question text",
+						"fr": "FR: Question text"
+					},
+					"type": "radio",
+					"response": null,
+					"responseOptions": [
+						{
+							"id": 1,
+							"sortOrder": 1,
+							"text": {
+								"en": "Yes",
+								"fr": "FR: Yes"
+							},
+							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
+							"provisions": [],
+							"selectedProvisions": [],
+							"searchProvisions": null,
+							"isProvisionCollapsed": false
+						},
+						{
+							"id": 2,
+							"sortOrder": 2,
+							"text": {
+								"en": "No",
+								"fr": "FR: No"
+							},
+							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
+							"provisions": [],
+							"selectedProvisions": [],
+							"searchProvisions": null,
+							"isProvisionCollapsed": false
+						}
+					],
+					"validationRules": [
+						{
+							"name": "require",
+							"enabled": true,
+							"type": "require",
+							"value": null,
+							"errorMessage": {
+								"en": "Required",
+								"fr": "FR: Required"
+							}
+						}
+					],
+					"violationInfo": {
+						"responseToMatch": "false",
+						"matchingType": "equal"
+					},                        
+					"childQuestions": [],
+					"dependants": [
+						{
+							"guid": "d596ff0b-da06-4f75-a663-662db7deff3f"
+						}
+					],
+					"dependencyGroups": []
+				},
+				{
+					"name": "Question 2",
+					"id": 2,
+					"guid": "d596ff0b-da06-4f75-a663-662db7deff3f",
+					"sortOrder": 2,
+					"isVisible": false,
+					"isMultiple": true,
+					"text": {
+						"en": "Question text",
+						"fr": "FR: Question text"
+					},
+					"type": "radio",
+					"response": null,
+					"responseOptions": [
+						{
+							"id": 1,
+							"sortOrder": 1,
+							"text": {
+								"en": "Yes",
+								"fr": "FR: Yes"
+							},
+							"value": "true",
+							"internalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "required",
+								"value": ""
+							},
+							"picture": {
+								"option": "required",
+								"value": ""
+							},
+							"provisions": [],
+							"selectedProvisions": [],
+							"searchProvisions": null,
+							"isProvisionCollapsed": false
+						},
+						{
+							"id": 2,
+							"sortOrder": 2,
+							"text": {
+								"en": "No",
+								"fr": "FR: No"
+							},
+							"value": "false",
+							"internalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"externalComment": {
+								"option": "optional",
+								"value": ""
+							},
+							"picture": {
+								"option": "optional",
+								"value": ""
+							},
+							"provisions": [],
+							"selectedProvisions": [],
+							"searchProvisions": null,
+							"isProvisionCollapsed": false
+						}
+					],
+					"validationRules": [
+						{
+							"name": "require",
+							"enabled": true,
+							"type": "require",
+							"value": null,
+							"errorMessage": {
+								"en": "Required",
+								"fr": "FR: Required"
+							}
+						}
+					],
+					"violationInfo": {
+						"responseToMatch": "false",
+						"matchingType": "equal"
+					},                        
+					"childQuestions": [],
+					"dependants": [],
+					"dependencyGroups": [
+						{
+							"ruleType": "visibility",
+							"childValidatorName": null,
+							"questionDependencies": [
+								{
+									"dependsOnQuestion": {
+										"guid": "be60c1ef-3679-4f9e-a82d-eb1770ce3328"
+									},
+									"validationAction": "equal",
+									"validationValue": "true"
+								}
+							]
+						}
+					]
+				}
+			],
+			"domSuffix": "prop value created virtually",
+			"htmlElementId": "prop value created virtually"
+		}
+	],
+	"templateid": ""
+
 }

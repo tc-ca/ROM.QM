@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as group from '@/store/modules/group.js'
 import * as notification from '@/store/modules/notification.js'
+import * as errors from '@/store/modules/errors.js'
 import * as settings from '@/store/modules/settings.js'
 import * as questionnaire from '@/store/modules/questionnaire.js'
 import * as legislations from "@/store/modules/legislations.js";
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     group,
     notification,
+    errors,
     settings,
     questionnaire,
     legislations

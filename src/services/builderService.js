@@ -64,6 +64,15 @@ function createQuestion (questionnaire) {
           [LANGUAGE.FRENCH]: 'FR: Yes'
         },
         value: 'true',
+        internalComment: {
+          option: 'required', value: ''
+        },
+        externalComment: {
+          option: 'required', value: ''
+        },
+        picture: {
+          option: 'required', value: ''
+        },
         provisions: [],
         selectedProvisions: [],
         searchProvisions: null,
@@ -78,6 +87,15 @@ function createQuestion (questionnaire) {
           [LANGUAGE.FRENCH]: 'FR: No'
         },
         value: 'false',
+        internalComment: {
+          option: 'optional', value: ''
+        },
+        externalComment: {
+          option: 'optional', value: ''
+        },
+        picture: {
+          option: 'optional', value: ''
+        },
         provisions: [],
         selectedProvisions: [],
         selectedProvisionsTitles: [],
@@ -100,16 +118,7 @@ function createQuestion (questionnaire) {
     violationInfo: {
       responseToMatch: 'false', // value to compare to question.response. If matches then supplementaryInfo rule is applied
       matchingType: 'equal' // notEqual, greaterThen, lessThen...
-    },
-    internalComment: {
-      option: 'optional', value: ''
-    },
-    externalComment: {
-      option: 'optional', value: ''
-    },
-    picture: {
-      option: 'optional', value: ''
-    },
+    },    
     childQuestions: [
 
     ],
