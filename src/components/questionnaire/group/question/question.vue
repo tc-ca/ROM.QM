@@ -290,23 +290,6 @@ export default {
       this.selProvisions = this.selProvisions.filter(i => i !== item)
       // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
-    hydrateItems (itemToHydrate, dictionary) {
-      let hydratedItems = []
-
-      for (let index = 0; index < itemToHydrate.length; index++) {
-        // get the key from array
-        let key = itemToHydrate[index]
-        // alert('provisionId' + provisionsToDisplay[index])
-
-        // map to the value i want to extract
-        console.log('rehydratedProvision', dictionary[key])
-        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
-
-        var rehydratedProvision = dictionary[key]
-        hydratedItems.push(rehydratedProvision)
-      }
-      return hydratedItems
-    },
     loadProvisions (responseOption) {
       // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
