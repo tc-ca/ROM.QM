@@ -94,15 +94,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['group']),
-    ...mapState({
-      lang: state => {
-        if (!state || !state.settings) {
-          return 'en'
-        }
-        return state.settings.settings.lang
-      },
-      expansionPanels () {
+    expansionPanels: {
+      get () {
         let indexes = []
         if (this.expand) {
           for (let i = 0; i < this.group.groups.length; i++) {
@@ -115,6 +108,16 @@ export default {
         } else {
           return []
         }
+      },
+      set () {}
+    },
+    ...mapState(['group']),
+    ...mapState({
+      lang: state => {
+        if (!state || !state.settings) {
+          return 'en'
+        }
+        return state.settings.settings.lang
       }
     }),
     hasNotifications () {

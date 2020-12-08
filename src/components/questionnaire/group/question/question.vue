@@ -212,16 +212,19 @@ export default {
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
-    expansionPanelsValue () {
-      if (this.expand) {
-        let indexes = []
-        for (let i = 0; i < this.question.childQuestions.length; i++) {
-          indexes.push(i)
+    expansionPanelsValue: {
+      get () {
+        if (this.expand) {
+          let indexes = []
+          for (let i = 0; i < this.question.childQuestions.length; i++) {
+            indexes.push(i)
+          }
+          return indexes
+        } else {
+          return []
         }
-        return indexes
-      } else {
-        return []
-      }
+      },
+      set () { }
     },
     ...mapState({
       lang: state => {
@@ -368,6 +371,8 @@ export default {
       this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
     },
     updateViolationInfo (args) {
+      /* eslint-disable no-debugger */
+      debugger
       if (this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
