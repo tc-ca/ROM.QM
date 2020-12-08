@@ -1,10 +1,17 @@
 
 #Script Location
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
-echo "Script Path: $scriptPath"
+Write-Output "Script Path: $scriptPath"
+
+Get-Content publishingScripts\password.txt | Where-Object {$_.length -gt 0} | Where-Object {!$_.StartsWith("#")} | ForEach-Object {
+    $var = $_.Split('=',2).Trim()
+    New-Variable -Scope Local -Name $var[0] -Value $var[1]
+	Write-Output "$($var[0]) = $($var[1])"
+	Write-Output "ConnectionString = $ConnectionStringQA"
+}
 
 #Connection String to Environment
-$ConnectionStringDev = "Url=xxxxxxxxxxx.dynamics.com; Username=xxxxxxxxxxx.onmicrosoft.com; Password=xxxxxxxxxxx; authtype=Office365; RequireNewInstance=True"
+#$ConnectionStringQA = "Url=xxxxxxxxxxx.dynamics.com; Username=xxxxxxxxxxx.onmicrosoft.com; Password=xxxxxxxxxxx; authtype=Office365; RequireNewInstance=True"
 
 #how long we want to wait to realize something broke
 $Timeout = 960
@@ -19,24 +26,23 @@ $WebResourceJsonMappingPath = "$scriptPath\webresourceMapping.json"
 #$xrmCIToolkit = "C:\Users\Aaron\Google Drive\Work\TDG Core\Source\dyn365-ce-vsts-tasks\BuildTools\Xrm.CI.Framework.BuildTools\Lib\xRMCIFramework\9.0.0\Xrm.Framework.CI.PowerShell.Cmdlets.dll"
 $xrmCIToolkit = "$scriptPath\Xrm.Framework.CI.PowerShell.Cmdlets.dll"
 
-echo "Importing CIToolkit: $xrmCIToolkit" 
+Write-Output "Importing CIToolkit: $xrmCIToolkit" 
 Import-Module $xrmCIToolkit
-echo "Imported CIToolkit"
+Write-Output "Imported CIToolkit"
 
 $json = Get-Content -Raw -Path $WebResourceJsonMappingPath | ConvertFrom-Json
 
-echo $json
+Write-Output $json
 
 $json | ForEach-Object {
     $_.files | ForEach-Object {
 	    $WebResourcePath = [System.Uri]::UnescapeDataString([System.IO.Path]::Combine($WebResourceFolderPath, $_.file))
-	    echo "Updating Web Resource: $WebResourcePath"   
-	    Set-XrmWebResource -Path $WebResourcePath -UniqueName $_.uniquename -Publish $False -ConnectionString $ConnectionStringDev -Timeout $Timeout -Verbose
-	    echo "Updated Web Resource"
+	    Write-Output "Updating Web Resource: $WebResourcePath"   
+	    Set-XrmWebResource -Path $WebResourcePath -UniqueName $_.uniquename -Publish $False -ConnectionString $ConnectionStringQA -Timeout $Timeout -Verbose
+	    Write-Output "Updated Web Resource"
     }
 }
 
-echo "Publishing All Customizations"
-Publish-XrmCustomizations -ConnectionString $ConnectionStringDev -Timeout $Timeout
-
-echo "Publishing Customizations Complete"
+Write-Output "Publishing All Customizations"
+Publish-XrmCustomizations -ConnectionString $ConnectionStringQA -Timeout $Timeout
+Write-Output "Publishing Customizations Complete"
