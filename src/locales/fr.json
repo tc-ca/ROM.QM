@@ -90,7 +90,8 @@
             "nonCompliances": "FR Number of non-compliances",
             "approximateTotalPlaceholder": "FR Please enter the approximate total of items",
             "sampleSizePlaceholder": "FR Please enter the Size of the Sample",
-            "nonCompliancesPlaceholder": "Please enter the Number of non-compliances"
+            "nonCompliancesPlaceholder": "FR Please enter the Number of non-compliances",
+            "samplingTooltip": "FR Sampling Record"
           }
         }
       },

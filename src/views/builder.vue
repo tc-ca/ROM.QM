@@ -230,6 +230,7 @@
                   v-model="selectedQuestion.isSamplingAllowed"
                   dense
                   :label="$t('app.builder.samplingAllowed')"
+                  @change="setSamplingRecord()"
                 />
                 <v-checkbox
                   v-model="selectedQuestion.isVisible"
@@ -804,6 +805,19 @@ export default {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    setSamplingRecord () {
+      if (this.selectedQuestion) {
+        if (this.selectedQuestion.isSamplingAllowed) {
+          this.selectedQuestion.samplingRecord = {
+            aproximateTotal: '',
+            sampleSize: '',
+            nonCompliances: ''
+          }
+        } else {
+          this.selectedQuestion.samplingRecord = null
+        }
+      }
+    },
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
     },

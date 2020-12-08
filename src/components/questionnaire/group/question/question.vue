@@ -37,11 +37,18 @@
         v-if="!isReferenceQuestion && question.isSamplingAllowed"
         justify-end
       >
-        <v-icon
-          @click="clickSampling"
-        >
-          mdi-beaker-question-outline
-        </v-icon>
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              v-bind="attrs"
+              v-on="on"
+              @click="clickSampling"
+            >
+              mdi-book-open-page-variant-outline
+            </v-icon>
+          </template>
+          <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+        </v-tooltip>
       </v-layout>
       <div :class="{'mt-6': expand}">
         <response
@@ -54,7 +61,6 @@
       <div v-if="displaySamplingRecord">
         <sampling-record
           :question="question"
-          :group="group"
         />
       </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
