@@ -371,8 +371,6 @@ export default {
       this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
     },
     updateViolationInfo (args) {
-      /* eslint-disable no-debugger */
-      debugger
       if (this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {

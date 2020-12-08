@@ -140,36 +140,38 @@ export default {
       this.$store.commit('errors/updateErrorNotification', n.qguid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
-      if (q.notification) {
-        this.$store.dispatch('notification/addNotification', q.notification)
-      } else if (!q.validationState || !q.response) {
-        q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
-        this.$store.dispatch('notification/addNotification', q.notification)
-      } else {
-        q.responseOptions.forEach(op => {
-          if (op.internalComment.notification) {
-            this.$store.dispatch('notification/addNotification', op.internalComment.notification)
-          } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
-            op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-            this.$store.dispatch('notification/addNotification', op.internalComment.notification)
-          }
-          if (op.externalComment.notification) {
-            this.$store.dispatch('notification/addNotification', op.externalComment.notification)
-          } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
-            op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-            this.$store.dispatch('notification/addNotification', op.externalComment.notification)
-          }
-          if (op.picture.notification) {
-            this.$store.dispatch('notification/addNotification', op.picture.notification)
-          } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
-            op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
-            this.$store.dispatch('notification/addNotification', op.picture.notification)
-          }
+      if (q.isVisible) {
+        if (q.notification) {
+          this.$store.dispatch('notification/addNotification', q.notification)
+        } else if (!q.validationState || !q.response) {
+          q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
+          this.$store.dispatch('notification/addNotification', q.notification)
+        } else {
+          q.responseOptions.forEach(op => {
+            if (op.internalComment.notification) {
+              this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+            } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+              op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+              this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+            }
+            if (op.externalComment.notification) {
+              this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+            } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+              op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+              this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+            }
+            if (op.picture.notification) {
+              this.$store.dispatch('notification/addNotification', op.picture.notification)
+            } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
+              op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
+              this.$store.dispatch('notification/addNotification', op.picture.notification)
+            }
+          })
+        }
+        q.childQuestions.forEach(child => {
+          this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
         })
       }
-      q.childQuestions.forEach(child => {
-        this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
-      })
     },
     validateQ () {
       this.$refs.questionGroup.forEach(group => {
