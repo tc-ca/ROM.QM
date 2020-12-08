@@ -111,13 +111,15 @@ export default {
       },
       set () {}
     },
-    ...mapState(['group']),
     ...mapState({
       lang: state => {
         if (!state || !state.settings) {
           return 'en'
         }
         return state.settings.settings.lang
+      },
+      group: state => {
+        return state.group
       }
     }),
     hasNotifications () {
