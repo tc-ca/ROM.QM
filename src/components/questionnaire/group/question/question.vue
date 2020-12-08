@@ -2,6 +2,8 @@
   <v-expansion-panel
     v-show="question.isVisible"
     ref="qPanel"
+    :active="isPanelActive"
+    :class="getClassName"
   >
     <v-expansion-panel-header
       ripple
@@ -201,6 +203,14 @@ export default {
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
+    },
+    getClassName () {
+      let c = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
+      if (this.$refs.textArea) this.$refs.textArea.focus()
+      return c
+    },
+    isPanelActive () {
+      return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
     expansionPanelsValue () {
       if (this.expand) {

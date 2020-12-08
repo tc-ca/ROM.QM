@@ -130,12 +130,9 @@ export default {
   },
   methods: {
     onNotificationClick (n) {
-      this.expand = false
-      this.panelIndex = n.groupIndex
-      this.$refs.questionGroup[n.groupIndex].$refs.groupQuestion.forEach((g, i) => {
-        g.$el.className = (i === n.questionId) ? g.$el.className + ' selected' : g.$el.className
-        g.$refs.qPanel.isActive = (i === n.questionId)
-      })
+      this.expand = true
+      // this.panelIndex = n.groupIndex
+      this.$store.commit('errors/updateErrorNotification', n.qguid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
       if (q.notification) {
