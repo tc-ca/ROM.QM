@@ -33,6 +33,23 @@
     <v-expansion-panel-content
       eager
     >
+      <v-layout
+        v-if="!isReferenceQuestion && question.isSamplingAllowed"
+        justify-end
+      >
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              v-bind="attrs"
+              v-on="on"
+              @click="clickSampling"
+            >
+              mdi-book-open-page-variant-outline
+            </v-icon>
+          </template>
+          <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+        </v-tooltip>
+      </v-layout>
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
@@ -41,7 +58,11 @@
           @error="onError"
         />
       </div>
-
+      <div v-if="displaySamplingRecord">
+        <sampling-record
+          :question="question"
+        />
+      </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
         <div>
           <v-card
@@ -152,11 +173,12 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
+import SamplingRecord from './sampling/sampling-record'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
   name: 'Question',
-  components: { Response, SupplementaryInfo },
+  components: { Response, SupplementaryInfo, SamplingRecord },
 
   props: {
     question: {
@@ -191,7 +213,8 @@ export default {
       selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
-      isViolationInfoReferenceIdDisabled: false
+      isViolationInfoReferenceIdDisabled: false,
+      displaySamplingRecord: false
     }
   },
   computed: {
@@ -248,6 +271,14 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    clickSampling ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        this.displaySamplingRecord = !this.displaySamplingRecord
+      } else {
+        this.displaySamplingRecord = false
+      }
+    },
     updateReferenceID () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
       this.displaySupplementaryInfo = this.isReferenceQuestion

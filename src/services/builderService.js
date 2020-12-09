@@ -53,6 +53,8 @@ function createQuestion (questionnaire) {
     },
     type: 'radio', // text, number, select, radio, boolean, image...
     response: null,
+    isSamplingAllowed: false,
+    samplingRecord: null,
     responseOptions: [
       {
         id: 1,
@@ -140,49 +142,6 @@ function createReferenceQuestion (questionnaire) {
     [LANGUAGE.FRENCH]: 'FR: Reference ID'
   }
   rQuestion.type = QUESTION_TYPE.REFERENCE
-
-  // let guid = uuidv4();
-  // let question = {
-  //   name: 'Reference ID',
-  //   id: 0,
-  //   guid: guid,
-  //   sortOrder: 1,
-  //   isVisible: true,
-  //   isMultiple: false,
-  //   text: {
-  //     [LANGUAGE.ENGLISH]: 'Reference ID',
-  //     [LANGUAGE.FRENCH]: 'FR: Reference ID'
-  //   },
-  //   type: QUESTION_TYPE.REFERENCE, // text, number, select, radio, boolean, image...
-  //   response: null,
-  //   responseOptions: [],
-  //   validationRules: [
-  //     {
-  //       name: 'require', // use it as a reference for parent question to enable/disable validator
-  //       enabled: true,
-  //       type: 'require', // min, max....
-  //       value: null,
-  //       errorMessage: {
-  //         [LANGUAGE.ENGLISH]: 'Required',
-  //         [LANGUAGE.FRENCH]: 'FR: Required'
-  //       }
-  //     }
-  //   ],
-  //   violationInfo: {},
-  //   internalComment: {
-  //     option: 'optional', value: ''
-  //   },
-  //   externalComment: {
-  //     option: 'optional', value: ''
-  //   },
-  //   picture: {},
-  //   childQuestions: [],
-  //   dependants: [],
-  //   dependencyGroups: []
-  // }
-
-  // question.name = 'Reference ID'
-
   return rQuestion
 }
 

@@ -24,6 +24,7 @@
       "internalComments": "Internal Comments",
       "externalComments": "External Comments",
       "picture": "Picture(s)",
+      "samplingAllowed": "Allow Sampling Record?",
       "visibleByDefault": "Visible by default",
       "responseOptions": {
         "responseOptions": "Response Options",
@@ -82,7 +83,22 @@
           "internalComment": "Internal Comment",
           "internalCommentInfo": "Internal comments will only be made available to internal stakeholders",
           "commentRequired": "Comment Required",
-          "photos": "Photos"
+          "photos": "Photos",
+          "sampling": {
+            "approximateTotal": "Approximate Total",
+            "sampleSize": "Sample Size",
+            "nonCompliances": "Number of non-compliances",
+            "approximateTotalPlaceholder": "Please enter the approximate total of items",
+            "sampleSizePlaceholder": "Please enter the Size of the Sample",
+            "nonCompliancesPlaceholder": "Please enter the Number of non-compliances",
+            "samplingTooltip": "Sampling Record",
+            "EM_ApproximateTotalRequired": "Approximate Total is required",
+            "EM_ApproximateTotalGreaterThan1": "Approximate Total have to be greater than 1",
+            "EM_SampleSizeRequired": "Sample Size is required",
+            "EM_SampleSizeGreaterThan1": "Sample Size have to be greater than 1",
+            "EM_NonComplianceRequired": "Number of non-Compliance is required",
+            "EM_NonComplianceGreaterPositive": "Number of non-Compliance have to be 0 or greater than 0"
+          }
         }
       },
       "expandAll": "Expand All",

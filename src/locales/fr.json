@@ -24,6 +24,7 @@
       "internalComments": "FR Internal Comments",
       "externalComments": "FR External Comments",
       "picture": "FR Picture(s)",
+      "samplingAllowed": "FR Allow Sampling Record?",
       "visibleByDefault": "FR Visible by default",
       "responseOptions": {
         "responseOptions": "FR Response Options",
@@ -82,7 +83,22 @@
           "internalComment": "FR Internal Comment",
           "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
           "commentRequired": "FR Comment Required",
-          "photos": "FR Photos"
+          "photos": "FR Photos",
+          "sampling": {
+            "approximateTotal": "FR Approximate Total",
+            "sampleSize": "FR Sample Size",
+            "nonCompliances": "FR Number of non-compliances",
+            "approximateTotalPlaceholder": "FR Please enter the approximate total of items",
+            "sampleSizePlaceholder": "FR Please enter the Size of the Sample",
+            "nonCompliancesPlaceholder": "FR Please enter the Number of non-compliances",
+            "samplingTooltip": "FR Sampling Record",
+            "EM_ApproximateTotalRequired": "FR Approximate Total is required",
+            "EM_ApproximateTotalGreaterThan1": "FR Approximate Total have to be greater than 1",
+            "EM_SampleSizeRequired": "FR Sample Size is required",
+            "EM_SampleSizeGreaterThan1": "FR Sample Size have to be greater than 1",
+            "EM_NonComplianceRequired": "FR Number of non-Compliance is required",
+            "EM_NonComplianceGreaterPositive": "FR Number of non-Compliance have to be 0 or greater than 0"
+          }
         }
       },
       "expandAll": "FR Expand All",
