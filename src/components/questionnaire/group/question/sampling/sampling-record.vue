@@ -10,8 +10,8 @@
       type="number"
       min="1"
       :error-messages="errorMessagesTotal"
-      :rules="[ () => !!question.samplingRecord.approximateTotal || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
-                () => question.samplingRecord.approximateTotal && question.samplingRecord.approximateTotal > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequiredGreatherThan1'),
+      :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
+                (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalGreaterThan1'),
                 validateNumbers
       ]"
     />
@@ -26,8 +26,8 @@
       min="1"
       :max="question.samplingRecord.approximateTotal"
       :error-messages="errorMessagesSize"
-      :rules="[ () => !!question.samplingRecord.sampleSize || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
-                () => question.samplingRecord.sampleSize && question.samplingRecord.sampleSize > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
+      :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
+                (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
                 validateNumbers
       ]"
     />
@@ -42,8 +42,8 @@
       min="0"
       :max="question.samplingRecord.sampleSize"
       :error-messages="errorMessagesCompliances"
-      :rules="[ () => !!question.samplingRecord.nonCompliances || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
-                () => question.samplingRecord.nonCompliances && question.samplingRecord.nonCompliances >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
+      :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
+                (value) => value && value >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
                 validateNumbers
       ]"
     />
