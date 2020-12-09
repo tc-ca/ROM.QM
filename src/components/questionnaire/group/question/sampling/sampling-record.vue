@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-text-field
-      ref="question.samplingRecord.aproximateTotal"
-      v-model.number="question.samplingRecord.aproximateTotal"
+      ref="question.samplingRecord.approximateTotal"
+      v-model.number="question.samplingRecord.approximateTotal"
       :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
       :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
       clearable
@@ -10,7 +10,10 @@
       type="number"
       min="1"
       :error-messages="errorMessagesTotal"
-      :rules="[validateApproximateTotal, validateSamplingSize, validateSamplingCompliance]"
+      :rules="[ () => !!question.samplingRecord.approximateTotal || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
+                () => question.samplingRecord.approximateTotal && question.samplingRecord.approximateTotal > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequiredGreatherThan1'),
+                validateNumbers
+      ]"
     />
     <v-text-field
       ref="question.samplingRecord.sampleSize"
@@ -21,8 +24,12 @@
       outlined
       type="number"
       min="1"
+      :max="question.samplingRecord.approximateTotal"
       :error-messages="errorMessagesSize"
-      :rules="[validateApproximateTotal, validateSamplingSize, validateSamplingCompliance]"
+      :rules="[ () => !!question.samplingRecord.sampleSize || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
+                () => question.samplingRecord.sampleSize && question.samplingRecord.sampleSize > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
+                validateNumbers
+      ]"
     />
     <v-text-field
       ref="question.samplingRecord.nonCompliances"
@@ -33,8 +40,12 @@
       outlined
       type="number"
       min="0"
+      :max="question.samplingRecord.sampleSize"
       :error-messages="errorMessagesCompliances"
-      :rules="[validateApproximateTotal, validateSamplingSize, validateSamplingCompliance]"
+      :rules="[ () => !!question.samplingRecord.nonCompliances || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
+                () => question.samplingRecord.nonCompliances && question.samplingRecord.nonCompliances >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
+                validateNumbers
+      ]"
     />
   </div>
 </template>
@@ -66,74 +77,27 @@ export default {
   created () {
     if (!this.question.samplingRecord) {
       this.question.samplingRecord = {
-        aproximateTotal: '',
+        approximateTotal: '',
         sampleSize: '',
         nonCompliances: ''
       }
     }
   },
   methods: {
-    validateApproximateTotal () {
+    validateNumbers () {
       this.errorMessagesTotal = ''
-      if (this.question.samplingRecord.aproximateTotal === '' &&
-          this.question.samplingRecord.sampleSize === '' &&
-          this.question.samplingRecord.nonCompliances === '') {
-        return true
-      }
-      if (this.question.samplingRecord.aproximateTotal < 1) {
-        this.errorMessagesTotal = 'Approximate Total have to be higher than 1'
-        return false
-      }
-
-      if ((this.question.samplingRecord.aproximateTotal === '') && (this.question.samplingRecord.sampleSize > 0 || this.question.samplingRecord.nonCompliances > 0)) {
-        this.errorMessagesTotal = 'Approximate Total is required'
-        return false
-      }
-
-      // Validation of Values
-      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
-        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.sampleSize) {
-          this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
-          return false
-        }
-      }
-
-      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.nonCompliances) {
-          this.errorMessagesTotal = 'Approximate Total have to be higher than Number of non-Compliance'
-          return false
-        }
-      }
-
-      return true
-    },
-    validateSamplingSize () {
       this.errorMessagesSize = ''
-      if (this.question.samplingRecord.aproximateTotal === '' &&
+      this.errorMessagesCompliances = ''
+
+      if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
           this.question.samplingRecord.nonCompliances === '') {
         return true
       }
 
-      if (this.question.samplingRecord.sampleSize === '' &&
-          this.question.samplingRecord.nonCompliances === '') {
-        return true
-      }
-
-      if (this.question.samplingRecord.sampleSize < 1) {
-        this.errorMessagesSize = 'Sample Size have to be higher than 1'
-        return false
-      }
-
-      if (this.question.samplingRecord.nonCompliances > 0 && this.question.samplingRecord.sampleSize === '') {
-        this.errorMessagesSize = 'Sample Size is required'
-        return false
-      }
-
-      // Validation of Values
-      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
-        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.sampleSize) {
-          this.errorMessagesSize = 'Sample Size have to be higher than Approximate Total'
+      if (this.question.samplingRecord.approximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
+        if (this.question.samplingRecord.approximateTotal < this.question.samplingRecord.sampleSize) {
+          this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
           return false
         }
       }
@@ -141,35 +105,6 @@ export default {
       if (this.question.samplingRecord.sampleSize > 1 && this.question.samplingRecord.nonCompliances > 0) {
         if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
           this.errorMessagesSize = 'Sample Size have to be higher than Number of non-Compliance'
-          return false
-        }
-      }
-
-      return true
-    },
-    validateSamplingCompliance () {
-      this.errorMessagesCompliances = ''
-      if (this.question.samplingRecord.aproximateTotal === '' &&
-          this.question.samplingRecord.sampleSize === '' &&
-          this.question.samplingRecord.nonCompliances === '') {
-        return true
-      }
-      if (this.question.samplingRecord.nonCompliances < 0) {
-        this.errorMessagesCompliances = 'Number of non-compliances have to be 0 or higher'
-        return false
-      }
-
-      // Validation of Values
-      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.nonCompliances) {
-          this.errorMessagesCompliances = 'Non-Compliance have to be lower than Approximate Total'
-          return false
-        }
-      }
-
-      if (this.question.samplingRecord.sampleSize > 1 && this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
-          this.errorMessagesCompliances = 'Non-Compliance have to be lower than Sample Size'
           return false
         }
       }

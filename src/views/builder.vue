@@ -809,7 +809,7 @@ export default {
       if (this.selectedQuestion) {
         if (this.selectedQuestion.isSamplingAllowed) {
           this.selectedQuestion.samplingRecord = {
-            aproximateTotal: '',
+            approximateTotal: '',
             sampleSize: '',
             nonCompliances: ''
           }
