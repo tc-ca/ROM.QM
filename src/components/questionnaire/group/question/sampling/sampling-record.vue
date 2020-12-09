@@ -10,7 +10,7 @@
       type="number"
       min="1"
       :error-messages="errorMessagesTotal"
-      :rules="[validateSamplingTotal, validateFullValues]"
+      :rules="[validateApproximateTotal, validateSamplingSize, validateSamplingCompliance]"
     />
     <v-text-field
       ref="question.samplingRecord.sampleSize"
@@ -22,7 +22,7 @@
       type="number"
       min="1"
       :error-messages="errorMessagesSize"
-      :rules="[validateSamplingSize, validateFullValues]"
+      :rules="[validateApproximateTotal, validateSamplingSize, validateSamplingCompliance]"
     />
     <v-text-field
       ref="question.samplingRecord.nonCompliances"
@@ -34,7 +34,7 @@
       type="number"
       min="0"
       :error-messages="errorMessagesCompliances"
-      :rules="[validateSamplingCompliance, validateFullValues]"
+      :rules="[validateApproximateTotal, validateSamplingSize, validateSamplingCompliance]"
     />
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    validateSamplingTotal () {
+    validateApproximateTotal () {
       this.errorMessagesTotal = ''
       if (this.question.samplingRecord.aproximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
@@ -85,12 +85,26 @@ export default {
         return false
       }
 
-      if (this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.aproximateTotal === '') {
-          this.errorMessagesTotal = 'Approximate Total is required'
+      if ((this.question.samplingRecord.aproximateTotal === '') && (this.question.samplingRecord.sampleSize > 0 || this.question.samplingRecord.nonCompliances > 0)) {
+        this.errorMessagesTotal = 'Approximate Total is required'
+        return false
+      }
+
+      // Validation of Values
+      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
+        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.sampleSize) {
+          this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
           return false
         }
       }
+
+      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.nonCompliances > 0) {
+        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.nonCompliances) {
+          this.errorMessagesTotal = 'Approximate Total have to be higher than Number of non-Compliance'
+          return false
+        }
+      }
+
       return true
     },
     validateSamplingSize () {
@@ -100,17 +114,37 @@ export default {
           this.question.samplingRecord.nonCompliances === '') {
         return true
       }
+
+      if (this.question.samplingRecord.sampleSize === '' &&
+          this.question.samplingRecord.nonCompliances === '') {
+        return true
+      }
+
       if (this.question.samplingRecord.sampleSize < 1) {
         this.errorMessagesSize = 'Sample Size have to be higher than 1'
         return false
       }
 
-      if (this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.sampleSize === '') {
-          this.errorMessagesSize = 'Sample Size is required'
+      if (this.question.samplingRecord.nonCompliances > 0 && this.question.samplingRecord.sampleSize === '') {
+        this.errorMessagesSize = 'Sample Size is required'
+        return false
+      }
+
+      // Validation of Values
+      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
+        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.sampleSize) {
+          this.errorMessagesSize = 'Sample Size have to be higher than Approximate Total'
           return false
         }
       }
+
+      if (this.question.samplingRecord.sampleSize > 1 && this.question.samplingRecord.nonCompliances > 0) {
+        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
+          this.errorMessagesSize = 'Sample Size have to be higher than Number of non-Compliance'
+          return false
+        }
+      }
+
       return true
     },
     validateSamplingCompliance () {
@@ -125,28 +159,22 @@ export default {
         return false
       }
 
-      return true
-    },
-    validateFullValues () {
-      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.sampleSize > 1 && this.question.samplingRecord.nonCompliances > 0) {
-        this.errorMessagesTotal = ''
-        this.errorMessagesSize = ''
-        this.errorMessagesCompliances = ''
-        if (this.question.samplingRecord.sampleSize > 1 || this.question.samplingRecord.nonCompliances > 0) {
-          if (this.question.samplingRecord.aproximateTotal === '') {
-            this.errorMessagesTotal = 'Approximate Total is required'
-            return false
-          }
-          if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.sampleSize) {
-            this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
-            return false
-          }
-        }
-        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
-          this.errorMessagesSize = 'Sample size have to be higher than the Number of non-Compliances'
+      // Validation of Values
+      if (this.question.samplingRecord.aproximateTotal > 1 && this.question.samplingRecord.nonCompliances > 0) {
+        if (this.question.samplingRecord.aproximateTotal < this.question.samplingRecord.nonCompliances) {
+          this.errorMessagesCompliances = 'Non-Compliance have to be lower than Approximate Total'
           return false
         }
       }
+
+      if (this.question.samplingRecord.sampleSize > 1 && this.question.samplingRecord.nonCompliances > 0) {
+        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
+          this.errorMessagesCompliances = 'Non-Compliance have to be lower than Sample Size'
+          return false
+        }
+      }
+
+      return true
     }
   }
 }
