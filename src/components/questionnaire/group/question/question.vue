@@ -35,17 +35,23 @@
     >
       <v-layout
         v-if="!isReferenceQuestion && question.isSamplingAllowed"
+        class="pt-2"
         justify-end
       >
         <v-tooltip right>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon
+            <v-btn
+              rounded
               v-bind="attrs"
               v-on="on"
               @click="clickSampling"
             >
-              mdi-book-open-page-variant-outline
-            </v-icon>
+              <v-icon
+                normal
+              >
+                mdi-book-open-page-variant-outline
+              </v-icon>
+            </v-btn>
           </template>
           <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
         </v-tooltip>

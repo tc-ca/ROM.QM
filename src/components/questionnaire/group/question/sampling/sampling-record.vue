@@ -1,53 +1,87 @@
 <template>
-  <div>
-    <v-text-field
-      ref="question.samplingRecord.approximateTotal"
-      v-model.number="question.samplingRecord.approximateTotal"
-      :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
-      :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
-      clearable
-      outlined
-      type="number"
-      min="1"
-      :error-messages="errorMessagesTotal"
-      :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
-                (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalGreaterThan1'),
-                validateNumbers
-      ]"
-    />
-    <v-text-field
-      ref="question.samplingRecord.sampleSize"
-      v-model.number="question.samplingRecord.sampleSize"
-      :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
-      :hint="$t('app.questionnaire.group.question.sampling.sampleSizePlaceholder')"
-      clearable
-      outlined
-      type="number"
-      min="1"
-      :max="question.samplingRecord.approximateTotal"
-      :error-messages="errorMessagesSize"
-      :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
-                (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
-                validateNumbers
-      ]"
-    />
-    <v-text-field
-      ref="question.samplingRecord.nonCompliances"
-      v-model.number="question.samplingRecord.nonCompliances"
-      :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
-      :hint="$t('app.questionnaire.group.question.sampling.nonCompliancesPlaceholder')"
-      clearable
-      outlined
-      type="number"
-      min="0"
-      :max="question.samplingRecord.sampleSize"
-      :error-messages="errorMessagesCompliances"
-      :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
-                (value) => value && value >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
-                validateNumbers
-      ]"
-    />
-  </div>
+  <v-container>
+    <v-row>
+      <span
+        class="my-4 mx-auto font-weight-black"
+      >
+        Sampling Record
+      </span>
+    </v-row>
+    <v-row
+      no-gutters
+      dense
+      justify="center"
+    >
+      <v-col cols="11">
+        <v-text-field
+          ref="question.samplingRecord.approximateTotal"
+          v-model.number="question.samplingRecord.approximateTotal"
+          :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
+          :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
+          clearable
+          outlined
+          dense
+          type="number"
+          min="1"
+          :error-messages="errorMessagesTotal"
+          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
+                    (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalGreaterThan1'),
+                    validateNumbers
+          ]"
+        />
+      </v-col>
+    </v-row>
+    <v-row
+      no-gutters
+      dense
+      justify="center"
+    >
+      <v-col cols="11">
+        <v-text-field
+          ref="question.samplingRecord.sampleSize"
+          v-model.number="question.samplingRecord.sampleSize"
+          :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
+          :hint="$t('app.questionnaire.group.question.sampling.sampleSizePlaceholder')"
+          clearable
+          outlined
+          dense
+          type="number"
+          min="1"
+          :max="question.samplingRecord.approximateTotal"
+          :error-messages="errorMessagesSize"
+          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
+                    (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
+                    validateNumbers
+          ]"
+        />
+      </v-col>
+    </v-row>
+    <v-row
+      no-gutters
+      dense
+      justify="center"
+    >
+      <v-col cols="11">
+        <v-text-field
+          ref="question.samplingRecord.nonCompliances"
+          v-model.number="question.samplingRecord.nonCompliances"
+          :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
+          :hint="$t('app.questionnaire.group.question.sampling.nonCompliancesPlaceholder')"
+          clearable
+          outlined
+          dense
+          type="number"
+          min="0"
+          :max="question.samplingRecord.sampleSize"
+          :error-messages="errorMessagesCompliances"
+          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
+                    (value) => value && value >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
+                    validateNumbers
+          ]"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
