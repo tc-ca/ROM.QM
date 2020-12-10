@@ -134,7 +134,7 @@
       <br>
 
       <supplementary-info
-        v-if="displaySupplementaryInfo"
+        v-if="displaySupplementaryInfo && !isReferenceQuestion"
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
@@ -281,7 +281,7 @@ export default {
     },
     updateReferenceID () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-      this.displaySupplementaryInfo = this.isReferenceQuestion
+      // this.displaySupplementaryInfo = this.isReferenceQuestion
       if (!this.isReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
         if (rQ) {
@@ -399,7 +399,8 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
+      // this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
+      this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
