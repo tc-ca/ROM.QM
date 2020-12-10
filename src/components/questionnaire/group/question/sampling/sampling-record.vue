@@ -1,5 +1,86 @@
 <template>
-  <div>
+  <v-container>
+    <v-row
+      justify="space-around"
+    >
+      <span>Sampling Record</span>
+    </v-row>
+    <v-row
+      no-gutters
+      dense
+      justify="center"
+    >
+      <v-col md="10">
+        <v-text-field
+          ref="question.samplingRecord.approximateTotal"
+          v-model.number="question.samplingRecord.approximateTotal"
+          :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
+          :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
+          clearable
+          outlined
+          dense
+          type="number"
+          min="1"
+          :error-messages="errorMessagesTotal"
+          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
+                    (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalGreaterThan1'),
+                    validateNumbers
+          ]"
+        />
+      </v-col>
+    </v-row>
+    <v-row
+      no-gutters
+      dense
+      justify="center"
+    >
+      <v-col md="10">
+        <v-text-field
+          ref="question.samplingRecord.sampleSize"
+          v-model.number="question.samplingRecord.sampleSize"
+          :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
+          :hint="$t('app.questionnaire.group.question.sampling.sampleSizePlaceholder')"
+          clearable
+          outlined
+          dense
+          type="number"
+          min="1"
+          :max="question.samplingRecord.approximateTotal"
+          :error-messages="errorMessagesSize"
+          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
+                    (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
+                    validateNumbers
+          ]"
+        />
+      </v-col>
+    </v-row>
+    <v-row
+      no-gutters
+      dense
+      justify="center"
+    >
+      <v-col md="10">
+        <v-text-field
+          ref="question.samplingRecord.nonCompliances"
+          v-model.number="question.samplingRecord.nonCompliances"
+          :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
+          :hint="$t('app.questionnaire.group.question.sampling.nonCompliancesPlaceholder')"
+          clearable
+          outlined
+          dense
+          type="number"
+          min="0"
+          :max="question.samplingRecord.sampleSize"
+          :error-messages="errorMessagesCompliances"
+          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
+                    (value) => value && value >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
+                    validateNumbers
+          ]"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
+  <!-- <div>
     <v-text-field
       ref="question.samplingRecord.approximateTotal"
       v-model.number="question.samplingRecord.approximateTotal"
@@ -7,6 +88,7 @@
       :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
       clearable
       outlined
+      dense
       type="number"
       min="1"
       :error-messages="errorMessagesTotal"
@@ -22,6 +104,7 @@
       :hint="$t('app.questionnaire.group.question.sampling.sampleSizePlaceholder')"
       clearable
       outlined
+      dense
       type="number"
       min="1"
       :max="question.samplingRecord.approximateTotal"
@@ -38,6 +121,7 @@
       :hint="$t('app.questionnaire.group.question.sampling.nonCompliancesPlaceholder')"
       clearable
       outlined
+      dense
       type="number"
       min="0"
       :max="question.samplingRecord.sampleSize"
@@ -47,7 +131,7 @@
                 validateNumbers
       ]"
     />
-  </div>
+  </div> -->
 </template>
 
 <script>
