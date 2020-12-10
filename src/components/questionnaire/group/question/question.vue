@@ -46,15 +46,12 @@
               v-on="on"
               @click="clickSampling"
             >
-              <v-icon>mdi-book-open-page-variant-outline</v-icon>
+              <v-icon
+                normal
+              >
+                mdi-book-open-page-variant-outline
+              </v-icon>
             </v-btn>
-            <!-- <v-icon
-              v-bind="attrs"
-              v-on="on"
-              @click="clickSampling"
-            >
-              mdi-book-open-page-variant-outline
-            </v-icon> -->
           </template>
           <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
         </v-tooltip>
