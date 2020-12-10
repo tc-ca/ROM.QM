@@ -3,7 +3,9 @@
     <v-row
       justify="space-around"
     >
-      <span>Sampling Record</span>
+      <v-span>
+        Sampling Record
+      </v-span>
     </v-row>
     <v-row
       no-gutters
