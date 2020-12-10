@@ -87,7 +87,7 @@
           "sampling": {
             "approximateTotal": "FR Approximate Total",
             "sampleSize": "FR Sample Size",
-            "nonCompliances": "FR Number of non-compliances",
+            "nonCompliances": "FR Non-compliances",
             "approximateTotalPlaceholder": "FR Please enter the approximate total of items",
             "sampleSizePlaceholder": "FR Please enter the Size of the Sample",
             "nonCompliancesPlaceholder": "FR Please enter the Number of non-compliances",
