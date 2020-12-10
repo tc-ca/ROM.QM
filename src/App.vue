@@ -91,7 +91,8 @@ export default {
       type: String,
       default: '',
       required: false
-    }
+    },
+    isDirty: Boolean
   },
   data: function () {
     return {

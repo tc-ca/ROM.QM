@@ -65,6 +65,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import _ from 'lodash'
+
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
@@ -129,6 +131,25 @@ export default {
       const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
       return notices
     }
+  },
+  watch: {
+    group: {
+      handler () {
+        console.log('Group object changed!')
+        // eslint-disable-next-line no-debugger
+        // debugger
+        // this.$store.commit('objectstate/updateNewQuestionnaireState', this.group)
+        // let o = this.$store.state.objectstate.questionnaire.oldQuestionnaire.groups
+        // let n = this.group.groups
+        this.$root.isDirty = _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
+      },
+      deep: true
+    }
+  },
+  mounted () {
+    console.log('Questionnaire loaded!')
+    this.$store.commit('objectstate/updateOldQuestionnaireState', _.cloneDeep(this.group))
+    // this.$store.commit('objectstate/updateNewQuestionnaireState', this.group)
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
@@ -203,6 +224,7 @@ export default {
       this.expand = false
     },
     expandAll () {
+      console.log('isDirty? ' + this.$root.isDirty)
       this.panelIndex = null
       this.expand = true
     }
