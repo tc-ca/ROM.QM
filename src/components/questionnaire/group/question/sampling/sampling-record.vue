@@ -18,10 +18,8 @@
           v-model.number="question.samplingRecord.approximateTotal"
           :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
           :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
-          prepend-inner-icon="mdi-file-table-box-multiple-outline"
+          prepend-icon="mdi-file-table-box-multiple-outline"
           clearable
-          outlined
-          dense
           type="number"
           min="1"
           :error-messages="errorMessagesTotal"
@@ -43,10 +41,8 @@
           v-model.number="question.samplingRecord.sampleSize"
           :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
           :hint="$t('app.questionnaire.group.question.sampling.sampleSizePlaceholder')"
-          prepend-inner-icon="mdi-file-table-box-outline"
+          prepend-icon="mdi-file-table-box-outline"
           clearable
-          outlined
-          dense
           type="number"
           min="1"
           :max="question.samplingRecord.approximateTotal"
@@ -69,10 +65,8 @@
           v-model.number="question.samplingRecord.nonCompliances"
           :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
           :hint="$t('app.questionnaire.group.question.sampling.nonCompliancesPlaceholder')"
-          prepend-inner-icon="mdi-file-table-outline"
+          prepend-icon="mdi-file-table-outline"
           clearable
-          outlined
-          dense
           type="number"
           min="0"
           :max="question.samplingRecord.sampleSize"
