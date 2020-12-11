@@ -33,6 +33,29 @@
     <v-expansion-panel-content
       eager
     >
+      <v-layout
+        v-if="!isReferenceQuestion && question.isSamplingAllowed"
+        class="pt-2"
+        justify-end
+      >
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              rounded
+              v-bind="attrs"
+              v-on="on"
+              @click="clickSampling"
+            >
+              <v-icon
+                normal
+              >
+                mdi-book-open-page-variant-outline
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+        </v-tooltip>
+      </v-layout>
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
@@ -41,7 +64,11 @@
           @error="onError"
         />
       </div>
-
+      <div v-if="displaySamplingRecord">
+        <sampling-record
+          :question="question"
+        />
+      </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
         <div>
           <v-card
@@ -113,7 +140,7 @@
       <br>
 
       <supplementary-info
-        v-if="displaySupplementaryInfo"
+        v-if="displaySupplementaryInfo && !isReferenceQuestion"
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
@@ -152,11 +179,12 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
+import SamplingRecord from './sampling/sampling-record'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
   name: 'Question',
-  components: { Response, SupplementaryInfo },
+  components: { Response, SupplementaryInfo, SamplingRecord },
 
   props: {
     question: {
@@ -191,7 +219,8 @@ export default {
       selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
-      isViolationInfoReferenceIdDisabled: false
+      isViolationInfoReferenceIdDisabled: false,
+      displaySamplingRecord: false
     }
   },
   computed: {
@@ -280,9 +309,17 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    clickSampling ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        this.displaySamplingRecord = !this.displaySamplingRecord
+      } else {
+        this.displaySamplingRecord = false
+      }
+    },
     updateReferenceID () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-      this.displaySupplementaryInfo = this.isReferenceQuestion
+      // this.displaySupplementaryInfo = this.isReferenceQuestion
       if (!this.isReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
         if (rQ) {
@@ -383,11 +420,10 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
+      // this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
+      this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
-      /* eslint-disable no-debugger */
-      debugger
       if (this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
