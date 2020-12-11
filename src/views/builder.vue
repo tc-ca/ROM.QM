@@ -730,6 +730,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
 import BuilderQuestion from '../components/builder/builder-question'
@@ -813,6 +814,7 @@ export default {
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
           this.$store.dispatch('InitializeRef')
+          this.$store.commit('objectstate/updateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
@@ -826,6 +828,9 @@ export default {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    isDirty () {
+      return _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
+    },
     setSamplingRecord () {
       if (this.selectedQuestion) {
         if (this.selectedQuestion.isSamplingAllowed) {
