@@ -1,5 +1,19 @@
 <template>
   <div>
+    <v-autocomplete
+      v-model="provisionFilter"
+      filled=""
+      rounded=""
+      :items="searchableProvisions"
+      color="primary"
+      hide-no-data
+      hide-selected
+      :item-text="'title.' + lang"
+      item-key="id"
+      placeholder="Start typing to Search"
+      return-object
+      @input="updateProvisionFilter"
+    />
     <v-row>
       <v-col>
         <v-btn
@@ -73,24 +87,13 @@ export default {
   components: { QuestionnaireGroup, QuestionnaireError },
 
   props: {
-    templatejson:
-    {
-      type: String,
-      required: false,
-      default: ''
-    },
-    templateid:
-    {
-      type: String,
-      required: false,
-      default: ''
-    }
   },
   data () {
     return {
       valid: false,
       expand: true,
-      panelIndex: Number
+      panelIndex: Number,
+      provisionFilter: null
     }
   },
   computed: {
@@ -120,6 +123,22 @@ export default {
       },
       group: state => {
         return state.group
+      },
+      searchableProvisions: state => {
+        if ((state.questionnaire.questionnaire === null) || (state.legislations.legislations === null)) {
+          return []
+        }
+        const searchableProvisions = state.questionnaire.questionnaire.searchableProvisions
+        let dictionnairyOfProvisions = state.legislations.legislations
+        let provisions = []
+
+        searchableProvisions.forEach(x => {
+          const hydratedItem = dictionnairyOfProvisions[x.leg]
+          const newProvision = { ...x, ...hydratedItem }
+          provisions.push(newProvision)
+        })
+
+        return provisions
       }
     }),
     hasNotifications () {
@@ -205,6 +224,10 @@ export default {
     expandAll () {
       this.panelIndex = null
       this.expand = true
+    },
+    updateProvisionFilter () {
+      const provisionFilter = this.provisionFilter
+      this.$store.dispatch('UpdateProvisionFilter', { provisionFilter })
     }
   }
 }
