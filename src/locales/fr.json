@@ -25,6 +25,7 @@
       "externalComments": "FR External Comments",
       "picture": "FR Picture(s)",
       "samplingAllowed": "FR Allow Sampling Record?",
+      "isRepeatable": "FR Is Repeatable?",
       "visibleByDefault": "FR Visible by default",
       "responseOptions": {
         "responseOptions": "FR Response Options",
@@ -73,6 +74,8 @@
     "questionnaire": {
       "validate": "FR Validate",
       "group": {
+        "repeatGroup": "FR Repeat Group",
+        "deleteGroup": "FR Delete Group",
         "question": {
           "referenceId": "FR Reference ID",
           "referenceIdPlaceHolder": "FR Enter Reference ID",
@@ -84,6 +87,10 @@
           "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
           "commentRequired": "FR Comment Required",
           "photos": "FR Photos",
+          "repeatable": {
+            "repeatQuestion": "FR Repeat this question",
+            "deleteQuestion": "FR Delete this repeated question"
+          },
           "sampling": {
             "approximateTotal": "FR Approximate Total",
             "sampleSize": "FR Sample Size",

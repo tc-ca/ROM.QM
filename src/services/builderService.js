@@ -56,6 +56,8 @@ function createQuestion (questionnaire) {
     response: null,
     isSamplingAllowed: false,
     samplingRecord: null,
+    isRepeatable: false,
+    isRepeated: false,
     responseOptions: [
       {
         id: 1,
@@ -230,7 +232,6 @@ function createDependencyGroup () {
     questionDependencies: []
   }
 }
-
 
 function processBuilderForSave(questionnaire){
   let groups = _.cloneDeep(questionnaire.groups);

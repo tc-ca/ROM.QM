@@ -31,7 +31,6 @@
                   </v-icon>
                 </template>
                 <v-row>
-                  <!-- Group Title -->
                   <v-col
                     cols="9"
                     class="pl-1"
@@ -40,33 +39,54 @@
                       {{ getTitle(group) }}
                     </h2>
                   </v-col>
-                  <v-col cols="1">
-                    <!-- Repeat button -->
-                    <v-icon
-                      v-if="group.isRepeatable=== true"
-                      large
-                      color="primary"
-                    >
-                      mdi-plus
-                    </v-icon>
-                  </v-col>
-
-                  <v-col
-                    cols="1"
-                    class="mr-4"
-                  >
-                    <!-- Remove button -->
-                    <v-icon
-                      v-if="group.isRepeatable === true"
-                      large
-                      color="primary"
-                    >
-                      mdi-minus
-                    </v-icon>
-                  </v-col>
                 </v-row>
               </v-expansion-panel-header>
               <v-expansion-panel-content eager>
+                <!-- <v-layout
+                  v-if="group.isRepeatable"
+                  class="pt-2"
+                  justify-end
+                >
+                  <v-spacer />
+                  <div v-if="group.isRepeatable">
+                    <v-tooltip left>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          rounded
+                          v-bind="attrs"
+                          v-on="on"
+                          @click.native.stop="repeatGroup"
+                        >
+                          <v-icon
+                            normal
+                            color="primary"
+                          >
+                            mdi-book-plus-multiple-outline
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('app.questionnaire.group.repeatGroup') }}</span>
+                    </v-tooltip>
+                    <v-tooltip right>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          rounded
+                          v-bind="attrs"
+                          v-on="on"
+                          @click.native.stop="removeGroup"
+                        >
+                          <v-icon
+                            normal
+                            color="primary"
+                          >
+                            mdi-book-minus-multiple-outline
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
+                    </v-tooltip>
+                  </div>
+                </v-layout> -->
                 <v-row @click="editGroup($event, group)">
                   <v-col cols="12">
                     <v-expansion-panels
@@ -231,6 +251,11 @@
                   dense
                   :label="$t('app.builder.samplingAllowed')"
                   @change="setSamplingRecord()"
+                />
+                <v-checkbox
+                  v-model="selectedQuestion.isRepeatable"
+                  dense
+                  :label="$t('app.builder.isRepeatable')"
                 />
                 <v-checkbox
                   v-model="selectedQuestion.isVisible"
