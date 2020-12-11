@@ -1,16 +1,13 @@
+import _ from "lodash";
 import builderService from "../../services/builderService";
 
 export const state = {
-  questionnaire: null
+  questionnaire: null,
+  questionProvisionReference: {},
+  provisionFilter: null
 };
 
-function GetChildrenQuestion(question) {
-  let questions = [];
-  question.childQuestions.forEach(childQuestion => {
-    questions.push(childQuestion);
-  });
-  return questions;
-}
+
 
 export const getters = {
   getQuestionnaire(state) {
@@ -45,7 +42,6 @@ export const getters = {
     });
     // return questions.map(x => x.id); for debugging
     return questions;
-
   }
 };
 
@@ -81,6 +77,7 @@ export const actions = {
         break;
     }
   },
+
   RemoveBuilderCircularDependencies({ commit, state, dispatch }) {
     const questionnaire = state.questionnaire;
 
@@ -90,14 +87,142 @@ export const actions = {
     } = builderService.processBuilderForSave(questionnaire);
     commit("setQuestionnaire", questionnaireData);
     dispatch("setQuestionnaireGroups", groupsData);
+  },
+
+  UpdateSearchableProvisions({ commit }, payload) {
+    const { provisions, questionGuid } = payload;
+
+    //how many provisions is the question tied to
+    //check if the question exist in ref
+    let diffArray = [];
+
+    const questionReferenceExist =
+      state.questionProvisionReference[questionGuid];
+
+    const oldCount = questionReferenceExist
+      ? state.questionProvisionReference[questionGuid].legs.length
+      : 0;
+    const newCount = provisions.length;
+
+    if (newCount > oldCount) {
+      provisions.forEach(provision => {
+        const provisionKey = provision;
+        const provisionExist = state.questionnaire.searchableProvisions.find(
+          p => p.leg === provisionKey
+        );
+  
+        const isQuestionAttachedToProvision = provisionExist? provisionExist.questions.includes(questionGuid):false
+
+        if (!isQuestionAttachedToProvision) {
+          commit("addSearchableProvision", {
+            provisionKey,
+            questionGuid
+          });
+        }
+      });
+    } else if (newCount < oldCount) {
+      //check arrays and see difference, that difference needs to be removed
+      const referenceProvisions =
+        state.questionProvisionReference[questionGuid].legs;
+      diffArray = _.difference(referenceProvisions, provisions);
+
+      commit("removeSearchableProvision", {
+        questionGuid,
+        provisionsToBeRemoveFrom: diffArray
+      });
+    }
+
+    commit("setRef", {
+      provisions,
+      questionGuid
+    });
+
+  },
+
+  UpdateProvisionFilter({ commit }, payload) {
+    commit("updateProvisionFilter", payload);
+  },
+
+  InitializeRef({ commit, getters }) {
+    const questions = getters.getFlatListOfAllQuestions;
+    commit("initializeRef", { questions });
   }
 };
 
 export const mutations = {
   setQuestionnaire(state, payload) {
     state.questionnaire = payload;
+  },
+
+  addSearchableProvision(state, payload) {
+    const { provisionKey, questionGuid } = payload;
+
+    if (!state.questionnaire.searchableProvisions) {
+      state.questionnaire.searchableProvisions = [];
+    }
+    state.questionnaire.searchableProvisions.push({
+      leg: provisionKey,
+      questions: [questionGuid]
+    });
+  },
+
+  removeSearchableProvision(state, payload) {
+    const { provisionsToBeRemoveFrom, questionGuid } = payload;
+
+    provisionsToBeRemoveFrom.forEach(item => {
+      let provision = state.questionnaire.searchableProvisions.find(
+        x => x.leg === item
+      );
+
+      const newArray = _.remove(provision.questions, questionGuid);
+
+      if (newArray.length === 0) {
+        let provisionIndex = state.questionnaire.searchableProvisions.findIndex(
+          x => x.leg === item
+        );
+        state.questionnaire.searchableProvisions.splice(provisionIndex, 1);
+      }
+      provision.questions = newArray;
+
+    });
+  },
+
+  setRef(state, payload) {
+    const { provisions, questionGuid } = payload;
+
+    //wipe it clean each time
+    state.questionProvisionReference[questionGuid] = {};
+
+    state.questionProvisionReference[questionGuid].legs = provisions;
+  },
+
+  initializeRef(state, payload) {
+    const { questions } = payload;
+
+    let provisions = [];
+    questions.forEach(q => {
+      state.questionProvisionReference[q.guid] = { legs: [] };
+      q.responseOptions.forEach(r => {
+        provisions = provisions.concat(r.provisions);
+      });
+      state.questionProvisionReference[q.guid].legs = provisions;
+      provisions = [];
+    });
+  },
+
+  updateProvisionFilter(state, payload) {
+    const { provisionFilter } = payload;
+    state.provisionFilter = provisionFilter;
   }
 };
+
+function GetChildrenQuestion(question) {
+  let questions = [];
+  question.childQuestions.forEach(childQuestion => {
+    questions.push(childQuestion);
+  });
+  return questions;
+}
 
 async function SetMockQuestionnaireResponseImportModule() {
   const data = await import("../../api/betaAnswers").then(module => {

@@ -415,6 +415,7 @@
                                   :search="option.searchProvisions"
                                   :filter="option.filterProvisions"
                                   :items="provisions"
+                                  @input="updateSearchableProvisions($event)"
                                 />
                               </v-card-text>
                             </v-card>
@@ -768,7 +769,6 @@ export default {
       questionPanels: [],
       selectedProvisions: [],
       questionProvisions: [],
-      env: process.env.NODE_ENV,
       reference: QUESTION_TYPE.REFERENCE
     }
   },
@@ -803,11 +803,6 @@ export default {
     })
   },
   created () {
-    // on create event, build the basic definition of questionnaire builder
-    const questionnaire = BuilderService.createQuestionnaire()
-    const page = 'builder'
-    // put the definition in the store
-    this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
@@ -817,6 +812,7 @@ export default {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
+          this.$store.dispatch('InitializeRef')
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
@@ -1057,6 +1053,10 @@ export default {
     },
     toggleProvisions (option) {
       option.isProvisionCollapsed = !option.isProvisionCollapsed
+    },
+    updateSearchableProvisions (provisions) {
+      const questionGuid = this.selectedQuestion.guid
+      this.$store.dispatch('UpdateSearchableProvisions', { provisions, questionGuid })
     }
   }
 }
