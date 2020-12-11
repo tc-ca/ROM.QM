@@ -233,6 +233,11 @@
                   @change="setSamplingRecord()"
                 />
                 <v-checkbox
+                  v-model="selectedQuestion.isRepeatable"
+                  dense
+                  :label="$t('app.builder.isRepeatable')"
+                />
+                <v-checkbox
                   v-model="selectedQuestion.isVisible"
                   dense
                   :label="$t('app.builder.visibleByDefault')"

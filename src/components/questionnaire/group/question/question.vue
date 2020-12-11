@@ -34,27 +34,68 @@
       eager
     >
       <v-layout
-        v-if="!isReferenceQuestion && question.isSamplingAllowed"
+        v-if="isQuestionToolbarVisible"
         class="pt-2"
         justify-end
       >
-        <v-tooltip right>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              rounded
-              v-bind="attrs"
-              v-on="on"
-              @click="clickSampling"
-            >
-              <v-icon
-                normal
+        <div v-if="question.isRepeatable">
+          <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="repeatQuestion"
               >
-                mdi-book-open-page-variant-outline
-              </v-icon>
-            </v-btn>
-          </template>
-          <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
-        </v-tooltip>
+                <v-icon
+                  normal
+                >
+                  mdi-book-plus-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatQuestion') }}</span>
+          </v-tooltip>
+        </div>
+        <div v-if="question.isRepeated">
+          <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="deleteRepeatedQuestion"
+              >
+                <v-icon
+                  normal
+                >
+                  mdi-book-minus-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.deleteQuestion') }}</span>
+          </v-tooltip>
+        </div>
+        <v-spacer />
+        <div v-if="question.isSamplingAllowed">
+          <v-tooltip right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="clickSampling"
+              >
+                <v-icon
+                  normal
+                >
+                  mdi-book-open-page-variant-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+          </v-tooltip>
+        </div>
       </v-layout>
       <div :class="{'mt-6': expand}">
         <response
@@ -241,6 +282,11 @@ export default {
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
+    isQuestionToolbarVisible () {
+      if (this.question.isReferenceQuestion) return false
+      if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
+      return false
+    },
     expansionPanelsValue: {
       get () {
         if (this.expand) {
@@ -277,6 +323,18 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    repeatQuestion ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        alert('Repeat question')
+      }
+    },
+    deleteRepeatedQuestion ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        alert('Delete repeated question')
+      }
+    },
     clickSampling ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion) {

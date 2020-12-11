@@ -55,6 +55,8 @@ function createQuestion (questionnaire) {
     response: null,
     isSamplingAllowed: false,
     samplingRecord: null,
+    isRepeatable: false,
+    isRepeated: false,
     responseOptions: [
       {
         id: 1,
