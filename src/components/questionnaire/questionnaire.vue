@@ -132,29 +132,14 @@ export default {
       return notices
     }
   },
-  watch: {
-    group: {
-      handler () {
-        console.log('Group object changed!')
-        // eslint-disable-next-line no-debugger
-        // debugger
-        // this.$store.commit('objectstate/updateNewQuestionnaireState', this.group)
-        // let o = this.$store.state.objectstate.questionnaire.oldQuestionnaire.groups
-        // let n = this.group.groups
-        this.$root.isDirty = _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
-      },
-      deep: true
-    }
-  },
-  mounted () {
-    console.log('Questionnaire loaded!')
-    this.$store.commit('objectstate/updateOldQuestionnaireState', _.cloneDeep(this.group))
-    // this.$store.commit('objectstate/updateNewQuestionnaireState', this.group)
-  },
+
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    isDirty () {
+      return _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
+    },
     onNotificationClick (n) {
       this.expand = true
       // this.panelIndex = n.groupIndex
