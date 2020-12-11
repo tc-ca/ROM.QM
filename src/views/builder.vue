@@ -66,7 +66,20 @@
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
-              <v-expansion-panel-content eager>
+              <builder-group
+                :group="group"
+                :selected-question="selectedQuestion"
+                :questionnaire="questionnaire"
+                :panelindex="questionPanels"
+                @editGroup="editGroup"
+                @editQuestion="editQuestion"
+                @childQuestionAdded="addQuestionToIndex"
+                @childQuestionRemoved="onRemovedQuestionFromIndex"
+                @removeQuestion="confirmRemoveQuestion"
+                @addQuestion="addQuestion"
+                @confirmRemoveGroup="confirmRemoveGroup"
+              />
+              <!-- <v-expansion-panel-content eager>
                 <v-row @click="editGroup($event, group)">
                   <v-col cols="12">
                     <v-expansion-panels
@@ -131,7 +144,7 @@
                     </v-expansion-panels>
                   </v-col>
                 </v-row>
-              </v-expansion-panel-content>
+              </v-expansion-panel-content> -->
             </v-expansion-panel>
           </v-expansion-panels>
           <div
@@ -706,7 +719,8 @@
 <script>
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
-import BuilderQuestion from '../components/builder/builder-question'
+// import BuilderQuestion from '../components/builder/builder-question'
+import BuilderGroup from '../components/builder/builder-group'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
@@ -715,7 +729,8 @@ import { QUESTION_TYPE } from '../data/questionTypes'
 export default {
   name: 'Builder',
   components: {
-    BuilderQuestion
+    // BuilderQuestion,
+    BuilderGroup
   },
   mixins: [BaseMixin],
   data () {
@@ -776,6 +791,13 @@ export default {
       // ...
       ])
     })
+  },
+  watch: {
+    questionPanels: {
+      handler () {
+        console.log(this.questionPanels)
+      }
+    }
   },
   created () {
     // on create event, build the basic definition of questionnaire builder
@@ -874,6 +896,7 @@ export default {
       }
     },
     addQuestion ($event, group) {
+      console.log('qqqqqqq')
       // don't propagate the event up to the group or else the group will gain focus over the question
       $event.stopPropagation()
 
