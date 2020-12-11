@@ -10,7 +10,6 @@
         </v-icon>
       </template>
       <v-row>
-        <!-- Group Title -->
         <v-col
           cols="9"
           class="pl-1"
@@ -25,35 +24,6 @@
             {{ groupSubtitle }}
           </h3>
         </v-col>
-        <v-col cols="1">
-          <!-- Repeat button -->
-          <v-icon
-            v-if="group.isRepeatable=== true"
-            data-testid="repeatGroup"
-            large
-            color="primary"
-            @click.native.stop="repeatGroup(group)"
-          >
-            mdi-plus
-          </v-icon>
-        </v-col>
-
-        <v-col
-          cols="1"
-          class="mr-4"
-        >
-          <!-- Remove button -->
-          <v-icon
-            v-if="group.isRepeatable=== true && repeatedGroup"
-
-            data-testid="removeGroup"
-            large
-            color="primary"
-            @click.native.stop="removeGroup(group, index)"
-          >
-            mdi-minus
-          </v-icon>
-        </v-col>
       </v-row>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
@@ -65,6 +35,53 @@
             focusable
             hover
           >
+            <v-layout
+              v-if="group.isRepeatable"
+              class="pt-2"
+              justify-end
+            >
+              <v-spacer />
+              <div v-if="group.isRepeatable">
+                <v-tooltip left>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      rounded
+                      v-bind="attrs"
+                      v-on="on"
+                      @click.native.stop="repeatGroup"
+                    >
+                      <v-icon
+                        normal
+                        color="primary"
+                      >
+                        mdi-book-plus-multiple-outline
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{ $t('app.questionnaire.group.repeatGroup') }}</span>
+                </v-tooltip>
+              </div>
+              <div v-if="group.isRepeatable && repeatedGroup">
+                <v-tooltip right>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      rounded
+                      v-bind="attrs"
+                      v-on="on"
+                      @click.native.stop="removeGroup"
+                    >
+                      <v-icon
+                        normal
+                        color="primary"
+                      >
+                        mdi-book-minus-multiple-outline
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
+                </v-tooltip>
+              </div>
+            </v-layout>
             <question
               v-for="(question, questionIndex) in group.questions"
               ref="groupQuestion"
@@ -216,11 +233,11 @@ export default {
         })
       }
     },
-    repeatGroup (group) {
-      this.$store.dispatch('repeatGroup', group)
+    repeatGroup () {
+      this.$store.dispatch('repeatGroup', this.group)
     },
-    removeGroup (group) {
-      this.$store.dispatch('removeGroup', group)
+    removeGroup () {
+      this.$store.dispatch('removeGroup', this.group)
     },
     onResponseChanged () {
       this.valid = this.areAllQuestionsValid(this.group.questions)

@@ -25,10 +25,8 @@
       <div
         :style="{fontSize:'16px !important'}"
       >
-        <!-- eslint-disable vue/no-v-html -->
         <span class="text-break">{{ questionText }}</span>
       </div>
-      <!--eslint-enable-->
     </v-expansion-panel-header>
     <v-expansion-panel-content
       eager
@@ -39,7 +37,7 @@
         justify-end
       >
         <div v-if="question.isRepeatable">
-          <v-tooltip left>
+          <v-tooltip right>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 rounded
@@ -49,6 +47,7 @@
               >
                 <v-icon
                   normal
+                  color="primary"
                 >
                   mdi-book-plus-outline
                 </v-icon>
@@ -58,7 +57,7 @@
           </v-tooltip>
         </div>
         <div v-if="question.isRepeated">
-          <v-tooltip left>
+          <v-tooltip right>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 rounded
@@ -68,6 +67,7 @@
               >
                 <v-icon
                   normal
+                  color="primary"
                 >
                   mdi-book-minus-outline
                 </v-icon>
@@ -88,6 +88,7 @@
               >
                 <v-icon
                   normal
+                  color="primary"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>

@@ -74,6 +74,8 @@
     "questionnaire": {
       "validate": "Validate",
       "group": {
+        "repeatGroup": "Repeat Group",
+        "deleteGroup": "Delete Group",
         "question": {
           "referenceId": "Reference ID",
           "referenceIdPlaceHolder": "Enter Reference ID",
