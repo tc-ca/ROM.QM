@@ -3,12 +3,7 @@ export const state = {
 };
 
 export const getters = {
-  GetLegislationFromLocalData(state) {
-    return state.legislations;
-  },
-  NeedToLoadLegislations(state) {
-    return state.legislations === null;
-  }
+
 };
 
 export const actions = {
