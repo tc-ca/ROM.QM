@@ -7,13 +7,7 @@ export const state = {
   provisionFilter: null
 };
 
-function GetChildrenQuestion(question) {
-  let questions = [];
-  question.childQuestions.forEach(childQuestion => {
-    questions.push(childQuestion);
-  });
-  return questions;
-}
+
 
 export const getters = {
   getQuestionnaire(state) {
@@ -83,16 +77,17 @@ export const actions = {
         break;
     }
   },
-  // RemoveBuilderCircularDependencies({ commit, state, dispatch }) {
-  //   const questionnaire = state.questionnaire;
 
-  //   const {
-  //     questionnaireData,
-  //     groupsData
-  //   } = builderService.processBuilderForSave(questionnaire);
-  //   commit("setQuestionnaire", questionnaireData);
-  //   dispatch("setQuestionnaireGroups", groupsData);
-  // }
+  RemoveBuilderCircularDependencies({ commit, state, dispatch }) {
+    const questionnaire = state.questionnaire;
+
+    const {
+      questionnaireData,
+      groupsData
+    } = builderService.processBuilderForSave(questionnaire);
+    commit("setQuestionnaire", questionnaireData);
+    dispatch("setQuestionnaireGroups", groupsData);
+  },
 
   UpdateSearchableProvisions({ commit }, payload) {
     const { provisions, questionGuid } = payload;
@@ -142,48 +137,6 @@ export const actions = {
       questionGuid
     });
 
-    // provisions.forEach(provision => {
-    //   const provisionKey = provision;
-
-    //   const provisionExist = state.questionnaire.searchableProvisions.find(
-    //     p => p.leg === provisionKey
-    //   );
-
-    //   // console.log("ProvisionKey", provisionKey);
-
-    //   if (!provisionExist) {
-    //     commit("addSearchableProvision", {
-    //       provisionKey,
-    //       questionGuid
-    //     });
-    //   } else {
-    //     const isQuestionAttachedToProvision = provisionExist.questions.includes(
-    //       questionGuid
-    //     );
-    //     //add questions
-
-    //     switch (condition) {
-    //       case "add":
-    //         if (!isQuestionAttachedToProvision) {
-    //           commit("addSearchableProvision", {
-    //             provisionKey,
-    //             questionGuid
-    //           });
-    //         }
-
-    //         break;
-    //       case "remove":
-    //         // commit("removeSearchableProvision", {
-    //         //   questionGuid,
-    //         //   provisionsToBeRemoveFrom: diffArray,
-    //         // });
-    //         break;
-
-    //       default:
-    //         break;
-    //     }
-    //   }
-    // });
   },
 
   UpdateProvisionFilter({ commit }, payload) {
@@ -221,10 +174,6 @@ export const mutations = {
         x => x.leg === item
       );
 
-      console.log(
-        "old searchable",
-        JSON.stringify(state.questionnaire.searchableProvisions)
-      );
       const newArray = _.remove(provision.questions, questionGuid);
 
       if (newArray.length === 0) {
@@ -234,13 +183,7 @@ export const mutations = {
         state.questionnaire.searchableProvisions.splice(provisionIndex, 1);
       }
       provision.questions = newArray;
-      // console.log(newArray);
-      console.log(
-        "new searchable",
-        JSON.stringify(state.questionnaire.searchableProvisions)
-      );
 
-      //TODO: if provisions do not have any questions asscoiated to it, delete the provision from the arary
     });
   },
 
@@ -255,11 +198,6 @@ export const mutations = {
 
   initializeRef(state, payload) {
     const { questions } = payload;
-
-    //wipe it clean each time
-    // state.questionProvisionReference[questionGuid] = {};
-
-    // state.questionProvisionReference[questionGuid].legs = provisions;
 
     let provisions = [];
     questions.forEach(q => {
@@ -277,6 +215,14 @@ export const mutations = {
     state.provisionFilter = provisionFilter;
   }
 };
+
+function GetChildrenQuestion(question) {
+  let questions = [];
+  question.childQuestions.forEach(childQuestion => {
+    questions.push(childQuestion);
+  });
+  return questions;
+}
 
 async function SetMockQuestionnaireResponseImportModule() {
   const data = await import("../../api/betaAnswers").then(module => {
