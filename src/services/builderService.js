@@ -33,7 +33,8 @@ function createQuestionnaire () {
       [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
     },
     groups: [],
-    templateid: ''
+    templateid: '',
+    searchableProvisions: []
   }
 }
 
@@ -337,6 +338,14 @@ function processBuilderForSave(questionnaire){
 
 }
 
+async function GetMockQuestionnaireFromImportModule() {
+  const data = await import("../api/betaAnswers.json").then(module => {
+    return module.default;
+  });
+  return data;
+}
+
+
 export default {
   createGroup,
   createQuestionnaire,
@@ -349,5 +358,6 @@ export default {
   createDependencyGroup,
   processBuilderForSave,
   findReferenceQuestion,
-  findGroupForQuestionById
+  findGroupForQuestionById,
+  GetMockQuestionnaireFromImportModule
 };

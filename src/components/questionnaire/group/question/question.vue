@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel
-    v-show="question.isVisible"
+    v-show="question.isVisible && filteredByProvisionSearch"
     ref="qPanel"
     :active="isPanelActive"
     :class="getClassName"
@@ -200,6 +200,14 @@ export default {
       'getFlatListOfAllQuestions'
       // ...
     ]),
+    ...mapState({
+      lang: state => {
+        return 'en'
+      },
+      provisionFilter: state => {
+        return state.questionnaire.provisionFilter
+      }
+    }),
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
@@ -226,11 +234,35 @@ export default {
       },
       set () { }
     },
-    ...mapState({
-      lang: state => {
-        return 'en'
+    filteredByProvisionSearch () {
+      if (this.provisionFilter) {
+        let dependants = []
+        let dependsArray = []
+
+        if (this.question.dependants) {
+          dependants = this.question.dependants.map(x => x.guid)
+        }
+
+        if (this.question.dependencyGroups) {
+          dependsArray = []
+          this.question.dependencyGroups.forEach(x => {
+            x.questionDependencies.forEach(y => {
+              dependsArray.push(y.dependsOnQuestion.guid)
+            })
+          })
+        }
+        const hasQuestion = this.provisionFilter.questions.includes(this.question.guid)
+        const hasDependants = this.provisionFilter.questions.some(q => {
+          return dependants.includes(q)
+        })
+        const hasDepends = this.provisionFilter.questions.some(q => {
+          return dependsArray.includes(q)
+        })
+
+        return hasQuestion || hasDependants || hasDepends
       }
-    })
+      return true
+    }
   },
   watch: {
     selProvisions: {
@@ -293,7 +325,7 @@ export default {
     loadProvisions (responseOption) {
       // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
-      let provisions = hydrateItems(responseOption.provisions, this.$store.state.legislations.legislations)
+      let provisions = hydrateItems(responseOption.provisions, dictionnairyOfProvisions)
 
       // we need to get the parent nodes to have an actual tree or list will be flat
       const parentIds = provisions.map(x => x.parentLegislationId)
