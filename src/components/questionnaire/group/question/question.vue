@@ -374,6 +374,14 @@ export default {
         })
       }
     },
+    decreaseSortOrder (question) {
+      question.sortOrder -= 1
+      if (question.childQuestions) {
+        question.childQuestions.forEach(cq => {
+          this.decreaseSortOder(cq)
+        })
+      }
+    },
     repeatQuestion ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion) {
@@ -386,12 +394,10 @@ export default {
         if (questionIndex > -1) {
           questionIndex++
           this.group.questions.splice(questionIndex, 0, nQuestion)
-          console.log(JSON.stringify(this.group))
           // Fix the sortOrder for all the questions after the original question
           for (let x = questionIndex; x < this.group.questions.length; x++) {
             this.increaseSortOder(this.group.questions[x])
           }
-          console.log(JSON.stringify(this.group))
         }
       }
     },
@@ -402,12 +408,14 @@ export default {
       }
     },
     onDeleteChildRepeatedQuestion (cQuestion) {
-      alert('Delete child question with guid: ' + cQuestion.guid)
       if (this.question.childQuestions) {
         const index = this.question.childQuestions.findIndex(cq => cq.guid === cQuestion.guid)
         if (index > -1) {
           this.question.childQuestions.splice(index, 1)
-          // this.$emit('childRepeatedQuestionRemoved', cQuestion)
+          // Fix the sortOrder for all the questions after the original question
+          for (let x = index; x < this.question.childQuestions.length; x++) {
+            this.decreaseSortOder(this.question.childQuestions[x])
+          }
         }
       }
     },

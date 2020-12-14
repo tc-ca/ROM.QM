@@ -200,11 +200,22 @@ export default {
   },
 
   methods: {
+    decreaseSortOrder (question) {
+      question.sortOrder -= 1
+      if (question.childQuestions) {
+        question.childQuestions.forEach(cq => {
+          this.decreaseSortOder(cq)
+        })
+      }
+    },
     onDeleteRepeatedQuestion (question) {
-      alert('Delete question with GUID: ' + question.guid)
       const index = this.group.questions.findIndex(q => q.guid === question.guid)
       if (index > -1) {
         this.group.questions.splice(index, 1)
+        // Fix the sortOrder for all the questions after the original question
+        for (let x = index; x < this.group.questions.length; x++) {
+          this.decreaseSortOder(this.group.questions[x])
+        }
       }
     },
     onReferenceChanged () {
