@@ -202,6 +202,10 @@ export default {
   methods: {
     onDeleteRepeatedQuestion (question) {
       alert('Delete question with GUID: ' + question.guid)
+      const index = this.group.questions.findIndex(q => q.guid === question.guid)
+      if (index > -1) {
+        this.group.questions.splice(index, 1)
+      }
     },
     onReferenceChanged () {
       if (this.activegroupHasReferenceQuestion) {

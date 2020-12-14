@@ -206,6 +206,7 @@
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
             @error="onChildError"
+            @delete-repeated-question="onDeleteChildRepeatedQuestion"
           />
         </v-expansion-panels>
       </div>
@@ -398,6 +399,16 @@ export default {
       $event.stopPropagation()
       if (!this.isReferenceQuestion && !this.question.isRepeatable && this.question.isRepeated) {
         this.$emit('delete-repeated-question', this.question)
+      }
+    },
+    onDeleteChildRepeatedQuestion (cQuestion) {
+      alert('Delete child question with guid: ' + cQuestion.guid)
+      if (this.question.childQuestions) {
+        const index = this.question.childQuestions.findIndex(cq => cq.guid === cQuestion.guid)
+        if (index > -1) {
+          this.question.childQuestions.splice(index, 1)
+          // this.$emit('childRepeatedQuestionRemoved', cQuestion)
+        }
       }
     },
     clickSampling ($event) {
