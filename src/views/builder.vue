@@ -880,8 +880,9 @@ export default {
             if (index > -1) {
               group.questions.splice(index, 1)
               // Rebuidl the question Panels
-              this.questionPanels = []
-              group.questions.forEach(q => { this.questionPanels.push(q.sortOrder) })
+              // this.questionPanels = []
+              group.expansionPanels = []
+              group.questions.forEach(q => { group.expansionPanels.push(q.sortOrder) })
               this.selectedQuestion = qRf
             }
           } else {
@@ -896,7 +897,6 @@ export default {
       }
     },
     addQuestion ($event, group) {
-      console.log('qqqqqqq')
       // don't propagate the event up to the group or else the group will gain focus over the question
       $event.stopPropagation()
 
@@ -905,10 +905,10 @@ export default {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
       group.questions.push(question)
-
       this.addQuestionToIndex(question)
 
-      this.questionPanels.push(question.sortOrder)
+      group.expansionPanels = []
+      group.expansionPanels.push(group.questions.length)
     },
     addQuestionToIndex (question) {
       this.questions.push(question)

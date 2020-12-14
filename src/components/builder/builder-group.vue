@@ -3,6 +3,7 @@
     <v-row @click="editGroup($event, group)">
       <v-col cols="12">
         <v-expansion-panels
+          v-model="group.expansionPanels"
           hover
           focusable
           multiple
@@ -117,6 +118,15 @@ export default {
         return state.settings.settings.lang
       }
     })
+  },
+  watch: {
+    panelindex: {
+      handler () {
+        console.log('group-builder index: ')
+        console.log(this.panelindex)
+        console.log(this.group)
+      }
+    }
   },
   methods: {
     editGroup ($event, group) {
