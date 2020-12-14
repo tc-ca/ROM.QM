@@ -222,9 +222,10 @@ import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
-  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
+  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
 
@@ -356,16 +357,47 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    getNewGUID (question) {
+      question.guid = uuidv4()
+      if (question.childQuestions) {
+        question.childQuestions.forEach(cq => {
+          this.getNewGUID(cq)
+        })
+      }
+    },
+    increaseSortOder (question) {
+      question.sortOrder += 1
+      if (question.childQuestions) {
+        question.childQuestions.forEach(cq => {
+          this.increaseSortOder(cq)
+        })
+      }
+    },
     repeatQuestion ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion) {
-        alert('Repeat question')
+        let nQuestion = _.cloneDeep(this.question)
+        // Regenerate a new GUID for every question inside
+        this.getNewGUID(nQuestion)
+        nQuestion.isRepeatable = false
+        nQuestion.isRepeated = true
+        let questionIndex = this.group.questions.findIndex(q => q.guid === this.question.guid)
+        if (questionIndex > -1) {
+          questionIndex++
+          this.group.questions.splice(questionIndex, 0, nQuestion)
+          console.log(JSON.stringify(this.group))
+          // Fix the sortOrder for all the questions after the original question
+          for (let x = questionIndex; x < this.group.questions.length; x++) {
+            this.increaseSortOder(this.group.questions[x])
+          }
+          console.log(JSON.stringify(this.group))
+        }
       }
     },
     deleteRepeatedQuestion ($event) {
       $event.stopPropagation()
-      if (!this.isReferenceQuestion) {
-        alert('Delete repeated question')
+      if (!this.isReferenceQuestion && !this.question.isRepeatable && this.question.isRepeated) {
+        this.$emit('delete-repeated-question', this.question)
       }
     },
     clickSampling ($event) {

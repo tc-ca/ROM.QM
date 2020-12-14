@@ -95,6 +95,7 @@
               @error="onError"
               @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
+              @delete-repeated-question="onDeleteRepeatedQuestion"
             />
           </v-expansion-panels>
         </v-col>
@@ -199,6 +200,9 @@ export default {
   },
 
   methods: {
+    onDeleteRepeatedQuestion (question) {
+      alert('Delete question with GUID: ' + question.guid)
+    },
     onReferenceChanged () {
       if (this.activegroupHasReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
