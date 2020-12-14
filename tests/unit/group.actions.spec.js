@@ -1,5 +1,6 @@
 
 import { actions } from '../../src/store/modules/group'
+import _ from 'lodash'
 
 describe('Test Group component Vuex Actions', () => {
   test('setQuestionnaireGroups', async () => {
@@ -18,36 +19,63 @@ describe('Test Group component Vuex Actions', () => {
     })
   })
 
-  test('repeated group should be placed into the correct position', async () => {
-    const theOriginalListOfGroups = [
-      {
-        primaryKey: 'Group1',
-        order: 0
-      },
-      {
-        primaryKey: 'Group1',
-        order: 1
-      },
-      {
-        primaryKey: 'Group2',
-        order: 2
-      },
-      {
-        primaryKey: 'Group3',
-        order: 3
-      }
-    ]
+  let group0 = {
+    primaryKey: 'Group 1',
+    title: {
+      'en': 'New Group',
+      'fr': 'Fr: New Group'
+    },
+    isRepeatable: true,
+    isVisible: true,
+    questions: [],
+    order: 0
+  }
 
-    let filteredSimilarGroups = [
-      {
-        primaryKey: 'Group1',
-        order: 0
-      },
-      {
-        primaryKey: 'Group1',
-        order: 1
-      }
-    ]
+  let group1 = {
+    primaryKey: 'Group 1',
+    title: {
+      'en': 'New Group',
+      'fr': 'Fr: New Group'
+    },
+    isRepeatable: true,
+    isVisible: true,
+    questions: [],
+    order: 1
+  }
+
+  let group2 = {
+    primaryKey: 'Group 2',
+    title: {
+      'en': 'New Group',
+      'fr': 'Fr: New Group'
+    },
+    isRepeatable: true,
+    isVisible: true,
+    questions: [],
+    order: 2
+  }
+
+  let group3 = {
+    primaryKey: 'Group 3',
+    title: {
+      'en': 'New Group',
+      'fr': 'Fr: New Group'
+    },
+    isRepeatable: true,
+    isVisible: true,
+    questions: [],
+    order: 3
+  }
+
+  test('repeated group should be placed into the correct position', async () => {
+    let theOriginalListOfGroups = []
+    theOriginalListOfGroups.push(group0)
+    theOriginalListOfGroups.push(group1)
+    theOriginalListOfGroups.push(group2)
+    theOriginalListOfGroups.push(group3)
+
+    let filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.primaryKey !== 'Group 2' && e.primaryKey !== 'Group 3'))
+
     const context = {
       commit: jest.fn(),
       getters: { getTargetedRepeatedGroups: () => filteredSimilarGroups }, // get all similar groups with similar identifying attribute in this case based on the primaryKey
@@ -57,46 +85,50 @@ describe('Test Group component Vuex Actions', () => {
     }
 
     // tests copying group from index 0
+    let expected = _.cloneDeep(theOriginalListOfGroups[0])
+    expected.order = 2
+
     actions.repeatGroup(context, theOriginalListOfGroups[0])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
-      copiedGroup: { order: 2, primaryKey: 'Group1' },
+      copiedGroup: expected,
       insertAt: 2
     })
 
     // tests copying group from index 1
+    let expected1 = _.cloneDeep(theOriginalListOfGroups[0])
+    expected1.order = 2
+
     actions.repeatGroup(context, theOriginalListOfGroups[1])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
-      copiedGroup: { order: 2, primaryKey: 'Group1' },
+      copiedGroup: expected1,
       insertAt: 2
     })
 
     // reset filtered groups to correct set
-    filteredSimilarGroups = [
-      {
-        primaryKey: 'Group2',
-        order: 2
-      }
-    ]
+    filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.primaryKey === 'Group 2'))
 
     // tests copying group from index 2
+    let expected2 = _.cloneDeep(theOriginalListOfGroups[2])
+    expected2.order = 3
+
     actions.repeatGroup(context, theOriginalListOfGroups[2])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
-      copiedGroup: { order: 3, primaryKey: 'Group2' },
+      copiedGroup: expected2,
       insertAt: 3
     })
 
     // reset filtered groups to correct set
-    filteredSimilarGroups = [
-      {
-        primaryKey: 'Group3',
-        order: 3
-      }
-    ]
+    // reset filtered groups to correct set
+    filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.primaryKey === 'Group 3'))
+
+    // tests copying group from index 2
+    let expected3 = _.cloneDeep(theOriginalListOfGroups[3])
+    expected3.order = 4
 
     // tests copying group from index 3
     actions.repeatGroup(context, theOriginalListOfGroups[3])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
-      copiedGroup: { order: 4, primaryKey: 'Group3' },
+      copiedGroup: expected3,
       insertAt: 4
     })
   })
