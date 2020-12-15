@@ -41,117 +41,19 @@
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
-              <v-expansion-panel-content eager>
-                <!-- <v-layout
-                  v-if="group.isRepeatable"
-                  class="pt-2"
-                  justify-end
-                >
-                  <v-spacer />
-                  <div v-if="group.isRepeatable">
-                    <v-tooltip left>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          rounded
-                          v-bind="attrs"
-                          v-on="on"
-                          @click.native.stop="repeatGroup"
-                        >
-                          <v-icon
-                            normal
-                            color="primary"
-                          >
-                            mdi-book-plus-multiple-outline
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.questionnaire.group.repeatGroup') }}</span>
-                    </v-tooltip>
-                    <v-tooltip right>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          rounded
-                          v-bind="attrs"
-                          v-on="on"
-                          @click.native.stop="removeGroup"
-                        >
-                          <v-icon
-                            normal
-                            color="primary"
-                          >
-                            mdi-book-minus-multiple-outline
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
-                    </v-tooltip>
-                  </div>
-                </v-layout> -->
-                <v-row @click="editGroup($event, group)">
-                  <v-col cols="12">
-                    <v-expansion-panels
-                      v-model="questionPanels"
-                      hover
-                      focusable
-                      multiple
-                    >
-                      <builder-question
-                        v-for="(question, questionIndex) in group.questions"
-                        :key="questionIndex"
-                        :question="question"
-                        :selected-question="selectedQuestion"
-                        :group="group"
-                        :questionnaire="questionnaire"
-                        :index="questionIndex"
-                        @editQuestion="editQuestion"
-                        @childQuestionAdded="addQuestionToIndex"
-                        @childQuestionRemoved="onRemovedQuestionFromIndex"
-                        @removeQuestion="confirmRemoveQuestion"
-                      />
-                      <v-expansion-panel>
-                        <v-row
-                          justify="center"
-                          align="center"
-                          class="ma-2"
-                        >
-                          <v-col
-                            class="col-auto"
-                          >
-                            <v-btn @click="addQuestion($event, group)">
-                              {{ $t('app.builder.group.question.addQuestion') }}
-                            </v-btn>
-                          </v-col>
-                          <v-col
-                            class="col-auto"
-                          >
-                            <v-tooltip
-                              top
-                              open-delay="300"
-                            >
-                              <template #activator="{ on, attrs }">
-                                <v-btn
-                                  small
-                                  icon
-                                  @click="confirmRemoveGroup(group)"
-                                >
-                                  <v-icon
-                                    small
-                                    v-bind="attrs"
-                                    v-on="on"
-                                  >
-                                    mdi-delete
-                                  </v-icon>
-                                </v-btn>
-                              </template>
-                              <span>{{ $t('app.builder.group.removeGroup') }}</span>
-                            </v-tooltip>
-                          </v-col>
-                        </v-row>
-                      </v-expansion-panel>
-                    </v-expansion-panels>
-                  </v-col>
-                </v-row>
-              </v-expansion-panel-content>
+              <builder-group
+                :group="group"
+                :selected-question="selectedQuestion"
+                :questionnaire="questionnaire"
+                :panelindex="questionPanels"
+                @editGroup="editGroup"
+                @editQuestion="editQuestion"
+                @childQuestionAdded="addQuestionToIndex"
+                @childQuestionRemoved="onRemovedQuestionFromIndex"
+                @removeQuestion="confirmRemoveQuestion"
+                @addQuestion="addQuestion"
+                @confirmRemoveGroup="confirmRemoveGroup"
+              />
             </v-expansion-panel>
           </v-expansion-panels>
           <div
@@ -733,7 +635,8 @@
 import _ from 'lodash'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
-import BuilderQuestion from '../components/builder/builder-question'
+// import BuilderQuestion from '../components/builder/builder-question'
+import BuilderGroup from '../components/builder/builder-group'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
@@ -742,7 +645,8 @@ import { QUESTION_TYPE } from '../data/questionTypes'
 export default {
   name: 'Builder',
   components: {
-    BuilderQuestion
+    // BuilderQuestion,
+    BuilderGroup
   },
   mixins: [BaseMixin],
   data () {
@@ -884,8 +788,9 @@ export default {
             if (index > -1) {
               group.questions.splice(index, 1)
               // Rebuidl the question Panels
-              this.questionPanels = []
-              group.questions.forEach(q => { this.questionPanels.push(q.sortOrder) })
+              // this.questionPanels = []
+              group.expansionPanels = []
+              group.questions.forEach(q => { group.expansionPanels.push(q.sortOrder) })
               this.selectedQuestion = qRf
             }
           } else {
@@ -908,10 +813,10 @@ export default {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
       group.questions.push(question)
-
       this.addQuestionToIndex(question)
 
-      this.questionPanels.push(question.sortOrder)
+      group.expansionPanels = []
+      group.expansionPanels.push(group.questions.length)
     },
     addQuestionToIndex (question) {
       this.questions.push(question)
