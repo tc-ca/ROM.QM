@@ -220,7 +220,7 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
+import { buildTreeFromFlatList, hydrateItems, getCollectionParent } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 import { v4 as uuidv4 } from 'uuid'
@@ -366,22 +366,6 @@ export default {
         })
       }
     },
-    increaseSortOder (question) {
-      question.sortOrder += 1
-      if (question.childQuestions) {
-        question.childQuestions.forEach(cq => {
-          this.increaseSortOder(cq)
-        })
-      }
-    },
-    decreaseSortOrder (question) {
-      question.sortOrder -= 1
-      if (question.childQuestions) {
-        question.childQuestions.forEach(cq => {
-          this.decreaseSortOder(cq)
-        })
-      }
-    },
     repeatQuestion ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion) {
@@ -390,14 +374,23 @@ export default {
         this.getNewGUID(nQuestion)
         nQuestion.isRepeatable = false
         nQuestion.isRepeated = true
-        let questionIndex = this.group.questions.findIndex(q => q.guid === this.question.guid)
-        if (questionIndex > -1) {
-          questionIndex++
-          this.group.questions.splice(questionIndex, 0, nQuestion)
-          // Fix the sortOrder for all the questions after the original question
-          for (let x = questionIndex; x < this.group.questions.length; x++) {
-            this.increaseSortOder(this.group.questions[x])
+
+        let collection = getCollectionParent(this.group, this.question.guid)
+        if (collection) {
+          let index = collection.findIndex(q => q.guid === this.question.guid)
+          if (index > -1) {
+            index++
+            collection.splice(index, 0, nQuestion)
+            // Fix the sortOrder for all the questions after the original question
+            for (let x = index; x < collection.length; x++) {
+              collection[x].sortOrder += 1
+            }
           }
+        } else {
+          // Something is wrong
+          alert('Something went wrong, check the console')
+          console.log(JSON.stringify(this.group))
+          console.log(JSON.stringify(this.question))
         }
       }
     },
@@ -414,7 +407,7 @@ export default {
           this.question.childQuestions.splice(index, 1)
           // Fix the sortOrder for all the questions after the original question
           for (let x = index; x < this.question.childQuestions.length; x++) {
-            this.decreaseSortOder(this.question.childQuestions[x])
+            this.question.childQuestions[x].sortOrder -= 1
           }
         }
       }

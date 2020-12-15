@@ -69,8 +69,6 @@ export function hydrateItems (itemToHydrate, dictionary) {
     return hydratedItems
     }
 
-
-
 export function buildNotificationObject (q, text, groupIndex, queIndex, depth, icon = 'mdi-message-alert', lang = 'en', color = 'error', timeout = 5000) {
   const notice = { 
     guid: uuidv4(),
@@ -85,4 +83,28 @@ export function buildNotificationObject (q, text, groupIndex, queIndex, depth, i
     timeout: timeout
   };
   return notice;
+}
+
+export function findParentInCollection(collection, guid) {
+  if (collection.findIndex( q => q.guid === guid) > -1 ) return collection;
+  let result = null;
+  let x = 0;
+  for(x = 0; result === null && x < collection.length; x++) {
+    if(collection[x].childQuestions && collection[x].childQuestions.length > 0) {
+      result = findParentInCollection(collection[x].childQuestions, guid)
+    }
+  }
+  return result
+}
+
+export function getCollectionParent(group, guid) {
+  if (group.questions.findIndex(q => q.guid === guid) > -1) return group.questions;
+  let result = null;
+  let x = 0;
+  for(x = 0; result === null && x < group.questions.length; x++) {
+    if(group.questions[x].childQuestions && group.questions[x].childQuestions.length > 0) {
+      result = findParentInCollection(group.questions[x].childQuestions, guid)
+    }
+  }
+  return result;
 }
