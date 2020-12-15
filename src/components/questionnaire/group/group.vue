@@ -97,6 +97,7 @@
               @error="onError"
               @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
+              @delete-repeated-question="onDeleteRepeatedQuestion"
             />
           </v-expansion-panels>
         </v-col>
@@ -201,6 +202,16 @@ export default {
   },
 
   methods: {
+    onDeleteRepeatedQuestion (question) {
+      const index = this.group.questions.findIndex(q => q.guid === question.guid)
+      if (index > -1) {
+        this.group.questions.splice(index, 1)
+        // Fix the sortOrder for all the questions after the original question
+        for (let x = index; x < this.group.questions.length; x++) {
+          this.group.questions[x].sortOrder -= 1
+        }
+      }
+    },
     onReferenceChanged () {
       if (this.activegroupHasReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
