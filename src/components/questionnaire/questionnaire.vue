@@ -79,6 +79,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import _ from 'lodash'
+
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
@@ -149,10 +151,14 @@ export default {
       return notices
     }
   },
+
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    isDirty () {
+      return _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
+    },
     onNotificationClick (n) {
       this.expand = true
       // this.panelIndex = n.groupIndex

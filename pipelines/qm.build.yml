@@ -6,33 +6,69 @@ trigger:
   paths:
     exclude:
     - Pipelines/*
-    
-pool:
-  vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- task: Npm@1
-  inputs:
-    command: 'install'
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run build'
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run test:unit'
-- task: CopyFiles@2
-  inputs:
-    Contents: 'dist/**' # Pull the build directory (Vue)
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  inputs: 
-    pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
-    ArtifactName: 'WebResources' # output artifact named www
+stages:
+- stage: BuildAndPublishArtifact
+  pool:
+      vmImage: 'vs2017-win2016'
+  jobs:
+  - job: BuildAndPublishArtifact
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+    - task: Npm@1
+      inputs:
+        command: 'install'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run test:unit'
+    - task: CopyFiles@2
+      inputs:
+        Contents: 'dist/**' # Pull the build directory (Vue)
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs: 
+        pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+        ArtifactName: 'WebResources' # output artifact named www
+- stage: UpdateWebResources
+  jobs:
+  - deployment: Deploy
+    condition: succeeded()
+    pool:
+      vmImage: 'vs2017-win2016'
+    environment: DEV
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'WebResources'
+              itemPattern: 'WebResources/**'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          - task: MSCRMToolInstaller@12
+            inputs:
+              nugetFeed: 'official'
+              psFeed: 'official'
+          - task: MSCRMPing@12
+            inputs:
+              crmConnectionString: '$(ConnectionString)'
+          - task: MSCRMUpdateWebResource@12
+            inputs:
+              crmConnectionString: '$(ConnectionString)'
+              webResourceDeploymentType: 'jsonMapping'
+              webResourceFolderPath: '$(System.ArtifactsDirectory)'
+              webResourceJsonMappingPath: '$(Build.SourcesDirectory)\publishingScripts\webresourceMapping.json'
+              failIfWebResourceNotFound: false
+              publish: true
+              solutionName: 'TC_GlobalCore'
+              crmConnectionTimeout: 360

@@ -187,6 +187,11 @@ export default {
     */
     SetLegislations (legislations) {
       this.$store.dispatch('SetLegislationsState', { legislations })
+    },
+    checkIsDirty () {
+      // Need to find a better solution to invoke child method
+      if (this.$route.name === 'questionnaire') return this.$children[0].$children[2].$children[0].$children[0].isDirty()
+      else if (this.$route.name === 'builder') return this.$children[0].$children[2].$children[0].isDirty()
     }
   }
 
