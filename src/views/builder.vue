@@ -31,7 +31,6 @@
                   </v-icon>
                 </template>
                 <v-row>
-                  <!-- Group Title -->
                   <v-col
                     cols="9"
                     class="pl-1"
@@ -40,33 +39,54 @@
                       {{ getTitle(group) }}
                     </h2>
                   </v-col>
-                  <v-col cols="1">
-                    <!-- Repeat button -->
-                    <v-icon
-                      v-if="group.isRepeatable=== true"
-                      large
-                      color="primary"
-                    >
-                      mdi-plus
-                    </v-icon>
-                  </v-col>
-
-                  <v-col
-                    cols="1"
-                    class="mr-4"
-                  >
-                    <!-- Remove button -->
-                    <v-icon
-                      v-if="group.isRepeatable === true"
-                      large
-                      color="primary"
-                    >
-                      mdi-minus
-                    </v-icon>
-                  </v-col>
                 </v-row>
               </v-expansion-panel-header>
               <v-expansion-panel-content eager>
+                <!-- <v-layout
+                  v-if="group.isRepeatable"
+                  class="pt-2"
+                  justify-end
+                >
+                  <v-spacer />
+                  <div v-if="group.isRepeatable">
+                    <v-tooltip left>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          rounded
+                          v-bind="attrs"
+                          v-on="on"
+                          @click.native.stop="repeatGroup"
+                        >
+                          <v-icon
+                            normal
+                            color="primary"
+                          >
+                            mdi-book-plus-multiple-outline
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('app.questionnaire.group.repeatGroup') }}</span>
+                    </v-tooltip>
+                    <v-tooltip right>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          rounded
+                          v-bind="attrs"
+                          v-on="on"
+                          @click.native.stop="removeGroup"
+                        >
+                          <v-icon
+                            normal
+                            color="primary"
+                          >
+                            mdi-book-minus-multiple-outline
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
+                    </v-tooltip>
+                  </div>
+                </v-layout> -->
                 <v-row @click="editGroup($event, group)">
                   <v-col cols="12">
                     <v-expansion-panels
@@ -227,6 +247,17 @@
               />
               <div v-if="selectedQuestion.type !== reference">
                 <v-checkbox
+                  v-model="selectedQuestion.isSamplingAllowed"
+                  dense
+                  :label="$t('app.builder.samplingAllowed')"
+                  @change="setSamplingRecord()"
+                />
+                <v-checkbox
+                  v-model="selectedQuestion.isRepeatable"
+                  dense
+                  :label="$t('app.builder.isRepeatable')"
+                />
+                <v-checkbox
                   v-model="selectedQuestion.isVisible"
                   dense
                   :label="$t('app.builder.visibleByDefault')"
@@ -384,6 +415,7 @@
                                   :search="option.searchProvisions"
                                   :filter="option.filterProvisions"
                                   :items="provisions"
+                                  @input="updateSearchableProvisions($event)"
                                 />
                               </v-card-text>
                             </v-card>
@@ -698,6 +730,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
 import BuilderQuestion from '../components/builder/builder-question'
@@ -737,7 +770,6 @@ export default {
       questionPanels: [],
       selectedProvisions: [],
       questionProvisions: [],
-      env: process.env.NODE_ENV, // ?
       reference: QUESTION_TYPE.REFERENCE
     }
   },
@@ -772,11 +804,6 @@ export default {
     })
   },
   created () {
-    // on create event, build the basic definition of questionnaire builder
-    const questionnaire = BuilderService.createQuestionnaire()
-    const page = 'builder'
-    // put the definition in the store
-    this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
@@ -786,6 +813,8 @@ export default {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
+          this.$store.dispatch('InitializeRef')
+          this.$store.commit('objectstate/updateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
@@ -799,6 +828,22 @@ export default {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    isDirty () {
+      return _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
+    },
+    setSamplingRecord () {
+      if (this.selectedQuestion) {
+        if (this.selectedQuestion.isSamplingAllowed) {
+          this.selectedQuestion.samplingRecord = {
+            approximateTotal: '',
+            sampleSize: '',
+            nonCompliances: ''
+          }
+        } else {
+          this.selectedQuestion.samplingRecord = null
+        }
+      }
+    },
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
     },
@@ -1013,6 +1058,10 @@ export default {
     },
     toggleProvisions (option) {
       option.isProvisionCollapsed = !option.isProvisionCollapsed
+    },
+    updateSearchableProvisions (provisions) {
+      const questionGuid = this.selectedQuestion.guid
+      this.$store.dispatch('UpdateSearchableProvisions', { provisions, questionGuid })
     }
   }
 }

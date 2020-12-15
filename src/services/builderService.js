@@ -33,7 +33,8 @@ function createQuestionnaire () {
       [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
     },
     groups: [],
-    templateid: ''
+    templateid: '',
+    searchableProvisions: []
   }
 }
 
@@ -53,6 +54,10 @@ function createQuestion (questionnaire) {
     },
     type: 'radio', // text, number, select, radio, boolean, image...
     response: null,
+    isSamplingAllowed: false,
+    samplingRecord: null,
+    isRepeatable: false,
+    isRepeated: false,
     responseOptions: [
       {
         id: 1,
@@ -63,13 +68,13 @@ function createQuestion (questionnaire) {
         },
         value: 'true',
         internalComment: {
-          option: 'required', value: ''
+          option: 'optional', value: ''
         },
         externalComment: {
-          option: 'required', value: ''
+          option: 'optional', value: ''
         },
         picture: {
-          option: 'required', value: ''
+          option: 'optional', value: ''
         },
         provisions: [],
         selectedProvisions: [],
@@ -89,7 +94,7 @@ function createQuestion (questionnaire) {
           option: 'optional', value: ''
         },
         externalComment: {
-          option: 'optional', value: ''
+          option: 'required', value: ''
         },
         picture: {
           option: 'optional', value: ''
@@ -140,49 +145,6 @@ function createReferenceQuestion (questionnaire) {
     [LANGUAGE.FRENCH]: 'FR: Reference ID'
   }
   rQuestion.type = QUESTION_TYPE.REFERENCE
-
-  // let guid = uuidv4();
-  // let question = {
-  //   name: 'Reference ID',
-  //   id: 0,
-  //   guid: guid,
-  //   sortOrder: 1,
-  //   isVisible: true,
-  //   isMultiple: false,
-  //   text: {
-  //     [LANGUAGE.ENGLISH]: 'Reference ID',
-  //     [LANGUAGE.FRENCH]: 'FR: Reference ID'
-  //   },
-  //   type: QUESTION_TYPE.REFERENCE, // text, number, select, radio, boolean, image...
-  //   response: null,
-  //   responseOptions: [],
-  //   validationRules: [
-  //     {
-  //       name: 'require', // use it as a reference for parent question to enable/disable validator
-  //       enabled: true,
-  //       type: 'require', // min, max....
-  //       value: null,
-  //       errorMessage: {
-  //         [LANGUAGE.ENGLISH]: 'Required',
-  //         [LANGUAGE.FRENCH]: 'FR: Required'
-  //       }
-  //     }
-  //   ],
-  //   violationInfo: {},
-  //   internalComment: {
-  //     option: 'optional', value: ''
-  //   },
-  //   externalComment: {
-  //     option: 'optional', value: ''
-  //   },
-  //   picture: {},
-  //   childQuestions: [],
-  //   dependants: [],
-  //   dependencyGroups: []
-  // }
-
-  // question.name = 'Reference ID'
-
   return rQuestion
 }
 
@@ -271,7 +233,6 @@ function createDependencyGroup () {
   }
 }
 
-
 function processBuilderForSave(questionnaire){
   let groups = _.cloneDeep(questionnaire.groups);
 
@@ -337,6 +298,14 @@ function processBuilderForSave(questionnaire){
 
 }
 
+async function GetMockQuestionnaireFromImportModule() {
+  const data = await import("../api/betaAnswers.json").then(module => {
+    return module.default;
+  });
+  return data;
+}
+
+
 export default {
   createGroup,
   createQuestionnaire,
@@ -349,5 +318,6 @@ export default {
   createDependencyGroup,
   processBuilderForSave,
   findReferenceQuestion,
-  findGroupForQuestionById
+  findGroupForQuestionById,
+  GetMockQuestionnaireFromImportModule
 };

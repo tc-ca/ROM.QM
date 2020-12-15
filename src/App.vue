@@ -58,7 +58,7 @@
 
 <script>
 import { LANGUAGE } from './constants.js'
-
+import BuilderService from './services/builderService'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import Settings from './components/settings/settings.vue'
@@ -136,7 +136,10 @@ export default {
   },
   created: async function () {
     const page = this.page
-    if (this.loadLocalData) {
+    if (this.envDev && this.loadLocalData) {
+      const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+
       switch (page) {
         case 'builder':
           await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
@@ -147,7 +150,10 @@ export default {
         default:
           break
       }
-      await this.$store.dispatch('SetMockQuestionnaireResponse')
+    } else if (this.envDev && !this.loadLocalData) {
+      const questionnaire = BuilderService.createQuestionnaire()
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+      await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
     }
 
     this.$router.push({ name: this.page }).catch((e) => {
@@ -181,6 +187,11 @@ export default {
     */
     SetLegislations (legislations) {
       this.$store.dispatch('SetLegislationsState', { legislations })
+    },
+    checkIsDirty () {
+      // Need to find a better solution to invoke child method
+      if (this.$route.name === 'questionnaire') return this.$children[0].$children[2].$children[0].$children[0].isDirty()
+      else if (this.$route.name === 'builder') return this.$children[0].$children[2].$children[0].isDirty()
     }
   }
 

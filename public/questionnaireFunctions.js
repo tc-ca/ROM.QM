@@ -248,6 +248,7 @@ async function getTemplateDataByServiceTaskId(serviceTaskId) {
     function success(result) {
         data = result["ovs_questionnaireresultjson"];
 
+        // eslint-disable-next-line no-prototype-builtins
         if (result.hasOwnProperty("msdyn_tasktype")) {
           serviceTaskTypeId = result["msdyn_tasktype"]["msdyn_servicetasktypeid"];
         }
@@ -269,6 +270,7 @@ async function GetTemplateByServiceTaskType(serviceTaskTypeId){
   await Xrm.WebApi.online.retrieveRecord("msdyn_servicetasktype", serviceTaskTypeId, "?$select=msdyn_name&$expand=ovs_QuestionnaireTemplate($select=qm_sytemplateid,qm_templatejsontxt)").then(
     function success(result) {
         var msdyn_name = result["msdyn_name"];
+        // eslint-disable-next-line no-prototype-builtins
         if (result.hasOwnProperty("ovs_QuestionnaireTemplate")) {
             var ovs_QuestionnaireTemplate_qm_sytemplateid = result["ovs_QuestionnaireTemplate"]["qm_sytemplateid"];
             var templateJson  = result["ovs_QuestionnaireTemplate"]["qm_templatejsontxt"];

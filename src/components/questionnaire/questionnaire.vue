@@ -1,5 +1,19 @@
 <template>
   <div>
+    <v-autocomplete
+      v-model="provisionFilter"
+      filled=""
+      rounded=""
+      :items="searchableProvisions"
+      color="primary"
+      hide-no-data
+      hide-selected
+      :item-text="'title.' + lang"
+      item-key="id"
+      placeholder="Start typing to Search"
+      return-object
+      @input="updateProvisionFilter"
+    />
     <v-row>
       <v-col>
         <v-btn
@@ -65,6 +79,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import _ from 'lodash'
+
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
@@ -73,36 +89,18 @@ export default {
   components: { QuestionnaireGroup, QuestionnaireError },
 
   props: {
-    templatejson:
-    {
-      type: String,
-      required: false,
-      default: ''
-    },
-    templateid:
-    {
-      type: String,
-      required: false,
-      default: ''
-    }
   },
   data () {
     return {
       valid: false,
       expand: true,
-      panelIndex: Number
+      panelIndex: Number,
+      provisionFilter: null
     }
   },
   computed: {
-    ...mapState(['group']),
-    ...mapState({
-      lang: state => {
-        if (!state || !state.settings) {
-          return 'en'
-        }
-        return state.settings.settings.lang
-      },
-      expansionPanels () {
+    expansionPanels: {
+      get () {
         let indexes = []
         if (this.expand) {
           for (let i = 0; i < this.group.groups.length; i++) {
@@ -115,6 +113,34 @@ export default {
         } else {
           return []
         }
+      },
+      set () {}
+    },
+    ...mapState({
+      lang: state => {
+        if (!state || !state.settings) {
+          return 'en'
+        }
+        return state.settings.settings.lang
+      },
+      group: state => {
+        return state.group
+      },
+      searchableProvisions: state => {
+        if ((state.questionnaire.questionnaire === null) || (state.legislations.legislations === null)) {
+          return []
+        }
+        const searchableProvisions = state.questionnaire.questionnaire.searchableProvisions
+        let dictionnairyOfProvisions = state.legislations.legislations
+        let provisions = []
+
+        searchableProvisions.forEach(x => {
+          const hydratedItem = dictionnairyOfProvisions[x.leg]
+          const newProvision = { ...x, ...hydratedItem }
+          provisions.push(newProvision)
+        })
+
+        return provisions
       }
     }),
     hasNotifications () {
@@ -125,46 +151,52 @@ export default {
       return notices
     }
   },
+
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    isDirty () {
+      return _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
+    },
     onNotificationClick (n) {
       this.expand = true
       // this.panelIndex = n.groupIndex
       this.$store.commit('errors/updateErrorNotification', n.qguid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
-      if (q.notification) {
-        this.$store.dispatch('notification/addNotification', q.notification)
-      } else if (!q.validationState || !q.response) {
-        q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
-        this.$store.dispatch('notification/addNotification', q.notification)
-      } else {
-        q.responseOptions.forEach(op => {
-          if (op.internalComment.notification) {
-            this.$store.dispatch('notification/addNotification', op.internalComment.notification)
-          } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
-            op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-            this.$store.dispatch('notification/addNotification', op.internalComment.notification)
-          }
-          if (op.externalComment.notification) {
-            this.$store.dispatch('notification/addNotification', op.externalComment.notification)
-          } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
-            op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-            this.$store.dispatch('notification/addNotification', op.externalComment.notification)
-          }
-          if (op.picture.notification) {
-            this.$store.dispatch('notification/addNotification', op.picture.notification)
-          } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
-            op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
-            this.$store.dispatch('notification/addNotification', op.picture.notification)
-          }
+      if (q.isVisible) {
+        if (q.notification) {
+          this.$store.dispatch('notification/addNotification', q.notification)
+        } else if (!q.validationState || !q.response) {
+          q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
+          this.$store.dispatch('notification/addNotification', q.notification)
+        } else {
+          q.responseOptions.forEach(op => {
+            if (op.internalComment.notification) {
+              this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+            } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+              op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+              this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+            }
+            if (op.externalComment.notification) {
+              this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+            } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+              op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+              this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+            }
+            if (op.picture.notification) {
+              this.$store.dispatch('notification/addNotification', op.picture.notification)
+            } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
+              op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
+              this.$store.dispatch('notification/addNotification', op.picture.notification)
+            }
+          })
+        }
+        q.childQuestions.forEach(child => {
+          this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
         })
       }
-      q.childQuestions.forEach(child => {
-        this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
-      })
     },
     validateQ () {
       this.$refs.questionGroup.forEach(group => {
@@ -198,6 +230,10 @@ export default {
     expandAll () {
       this.panelIndex = null
       this.expand = true
+    },
+    updateProvisionFilter () {
+      const provisionFilter = this.provisionFilter
+      this.$store.dispatch('UpdateProvisionFilter', { provisionFilter })
     }
   }
 }

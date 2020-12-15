@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel
-    v-show="question.isVisible"
+    v-show="question.isVisible && filteredByProvisionSearch"
     ref="qPanel"
     :active="isPanelActive"
     :class="getClassName"
@@ -25,14 +25,79 @@
       <div
         :style="{fontSize:'16px !important'}"
       >
-        <!-- eslint-disable vue/no-v-html -->
         <span class="text-break">{{ questionText }}</span>
       </div>
-      <!--eslint-enable-->
     </v-expansion-panel-header>
     <v-expansion-panel-content
       eager
     >
+      <v-layout
+        v-if="isQuestionToolbarVisible"
+        class="pt-2"
+        justify-end
+      >
+        <div v-if="question.isRepeatable">
+          <v-tooltip right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="repeatQuestion"
+              >
+                <v-icon
+                  normal
+                  color="primary"
+                >
+                  mdi-book-plus-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatQuestion') }}</span>
+          </v-tooltip>
+        </div>
+        <div v-if="question.isRepeated">
+          <v-tooltip right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="deleteRepeatedQuestion"
+              >
+                <v-icon
+                  normal
+                  color="primary"
+                >
+                  mdi-book-minus-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.deleteQuestion') }}</span>
+          </v-tooltip>
+        </div>
+        <v-spacer />
+        <div v-if="question.isSamplingAllowed">
+          <v-tooltip right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="clickSampling"
+              >
+                <v-icon
+                  normal
+                  color="primary"
+                >
+                  mdi-book-open-page-variant-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+          </v-tooltip>
+        </div>
+      </v-layout>
       <div :class="{'mt-6': expand}">
         <response
           :question="question"
@@ -41,7 +106,11 @@
           @error="onError"
         />
       </div>
-
+      <div v-if="displaySamplingRecord">
+        <sampling-record
+          :question="question"
+        />
+      </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
         <div>
           <v-card
@@ -113,7 +182,7 @@
       <br>
 
       <supplementary-info
-        v-if="displaySupplementaryInfo"
+        v-if="displaySupplementaryInfo && !isReferenceQuestion"
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
@@ -152,11 +221,12 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { buildTreeFromFlatList, hydrateItems } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
+import SamplingRecord from './sampling/sampling-record'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
   name: 'Question',
-  components: { Response, SupplementaryInfo },
+  components: { Response, SupplementaryInfo, SamplingRecord },
 
   props: {
     question: {
@@ -191,7 +261,8 @@ export default {
       selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
-      isViolationInfoReferenceIdDisabled: false
+      isViolationInfoReferenceIdDisabled: false,
+      displaySamplingRecord: false
     }
   },
   computed: {
@@ -200,6 +271,14 @@ export default {
       'getFlatListOfAllQuestions'
       // ...
     ]),
+    ...mapState({
+      lang: state => {
+        return 'en'
+      },
+      provisionFilter: state => {
+        return state.questionnaire.provisionFilter
+      }
+    }),
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
@@ -212,22 +291,54 @@ export default {
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
-    expansionPanelsValue () {
-      if (this.expand) {
-        let indexes = []
-        for (let i = 0; i < this.question.childQuestions.length; i++) {
-          indexes.push(i)
-        }
-        return indexes
-      } else {
-        return []
-      }
+    isQuestionToolbarVisible () {
+      if (this.question.isReferenceQuestion) return false
+      if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
+      return false
     },
-    ...mapState({
-      lang: state => {
-        return 'en'
+    expansionPanelsValue: {
+      get () {
+        if (this.expand) {
+          let indexes = []
+          for (let i = 0; i < this.question.childQuestions.length; i++) {
+            indexes.push(i)
+          }
+          return indexes
+        } else {
+          return []
+        }
+      },
+      set () { }
+    },
+    filteredByProvisionSearch () {
+      if (this.provisionFilter) {
+        let dependants = []
+        let dependsArray = []
+
+        if (this.question.dependants) {
+          dependants = this.question.dependants.map(x => x.guid)
+        }
+
+        if (this.question.dependencyGroups) {
+          dependsArray = []
+          this.question.dependencyGroups.forEach(x => {
+            x.questionDependencies.forEach(y => {
+              dependsArray.push(y.dependsOnQuestion.guid)
+            })
+          })
+        }
+        const hasQuestion = this.provisionFilter.questions.includes(this.question.guid)
+        const hasDependants = this.provisionFilter.questions.some(q => {
+          return dependants.includes(q)
+        })
+        const hasDepends = this.provisionFilter.questions.some(q => {
+          return dependsArray.includes(q)
+        })
+
+        return hasQuestion || hasDependants || hasDepends
       }
-    })
+      return true
+    }
   },
   watch: {
     selProvisions: {
@@ -245,9 +356,29 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    repeatQuestion ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        alert('Repeat question')
+      }
+    },
+    deleteRepeatedQuestion ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        alert('Delete repeated question')
+      }
+    },
+    clickSampling ($event) {
+      $event.stopPropagation()
+      if (!this.isReferenceQuestion) {
+        this.displaySamplingRecord = !this.displaySamplingRecord
+      } else {
+        this.displaySamplingRecord = false
+      }
+    },
     updateReferenceID () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-      this.displaySupplementaryInfo = this.isReferenceQuestion
+      // this.displaySupplementaryInfo = this.isReferenceQuestion
       if (!this.isReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
         if (rQ) {
@@ -287,27 +418,10 @@ export default {
       this.selProvisions = this.selProvisions.filter(i => i !== item)
       // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
-    hydrateItems (itemToHydrate, dictionary) {
-      let hydratedItems = []
-
-      for (let index = 0; index < itemToHydrate.length; index++) {
-        // get the key from array
-        let key = itemToHydrate[index]
-        // alert('provisionId' + provisionsToDisplay[index])
-
-        // map to the value i want to extract
-        console.log('rehydratedProvision', dictionary[key])
-        // alert('rehydratedProvision' + JSON.stringify(dictionnairyOfProvisions[provisionId]))
-
-        var rehydratedProvision = dictionary[key]
-        hydratedItems.push(rehydratedProvision)
-      }
-      return hydratedItems
-    },
     loadProvisions (responseOption) {
       // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
-      let provisions = hydrateItems(responseOption.provisions, this.$store.state.legislations.legislations)
+      let provisions = hydrateItems(responseOption.provisions, dictionnairyOfProvisions)
 
       // we need to get the parent nodes to have an actual tree or list will be flat
       const parentIds = provisions.map(x => x.parentLegislationId)
@@ -365,7 +479,8 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
+      // this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
+      this.displaySupplementaryInfo = (args && args.value)
     },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
