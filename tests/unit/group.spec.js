@@ -7,22 +7,21 @@ const vuetify = new Vuetify()
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-let group = {
-  primaryKey: 'Group 1',
-  title: { 'en': 'Group', 'fr': 'Group FR' },
-  isRepeatable: false,
-  isVisible: false,
-  showKey: '', // TODO: do we need this
-  hideKey: '', // TODO: do we need this
-  order: 0,
-  domSuffix: '#000', // i.e #000
-  htmlElementId: '#000', // FIXME: still think we need this
-  questions: []
-}
-
 describe('Group.vue', () => {
   let actions
   let store
+
+  let group = {
+    primaryKey: 'Group 1',
+    title: {
+      'en': 'New Group',
+      'fr': 'Fr: New Group'
+    },
+    isRepeatable: true,
+    isVisible: true,
+    questions: [],
+    order: 0
+  }
 
   // mock
   beforeEach(() => {

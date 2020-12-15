@@ -51,6 +51,7 @@
                       @click.native.stop="repeatGroup"
                     >
                       <v-icon
+                        data-testid="repeatGroup"
                         normal
                         color="primary"
                       >
@@ -71,6 +72,7 @@
                       @click.native.stop="removeGroup"
                     >
                       <v-icon
+                        data-testid="repeatGroup"
                         normal
                         color="primary"
                       >
