@@ -72,7 +72,7 @@
                       @click.native.stop="removeGroup"
                     >
                       <v-icon
-                        data-testid="repeatGroup"
+                        data-testid="removeGroup"
                         normal
                         color="primary"
                       >

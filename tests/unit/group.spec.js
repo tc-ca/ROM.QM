@@ -72,9 +72,8 @@ describe('Group.vue', () => {
     })
     // must await until the dom has our element
     await wrapper.vm.$nextTick
-    expect(
-      wrapper.find('[data-testid="repeatGroup"]').isVisible()
-    ).toBe(true)
+
+    expect(wrapper.findAll('[data-testid="repeatGroup"]').length).toEqual(1)
   })
 
   it('renders group repeat button when group is set to be repeatable and the group is a copy', async () => {
@@ -92,9 +91,7 @@ describe('Group.vue', () => {
     })
     // must await until the dom has our element
     await wrapper.vm.$nextTick
-    expect(
-      wrapper.find('[data-testid="repeatGroup"]').isVisible()
-    ).toBe(true)
+    expect(wrapper.findAll('[data-testid="repeatGroup"]').length).toEqual(1)
   })
 
   it('does not render group repeat button when group is not repeatable', async () => {
