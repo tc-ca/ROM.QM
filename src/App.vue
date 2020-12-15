@@ -9,27 +9,27 @@
         color="white"
         @click="showSettings = !showSettings"
       />
-      <v-toolbar-title />
       <v-spacer />
 
+      <v-expand-x-transition>
+        <v-card
+          v-show="expandProvisionSearch"
+          width="80%"
+          class="mx-auto "
+        >
+          <provision-search />
+        </v-card>
+      </v-expand-x-transition>
+
       <v-btn
-        v-if="envDev"
-        id="save"
+        id=""
         icon
         color="white"
-        data-qtn-id="save"
-        @click="save()"
+        @click="expandProvisionSearch = !expandProvisionSearch"
       >
-        <v-icon data-qtn-id="save">
-          mdi-content-save
+        <v-icon>
+          mdi-magnify
         </v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        color="white"
-        @click="showLegislationSearchModal = true"
-      >
-        <v-icon>mdi-database-search</v-icon>
       </v-btn>
     </v-app-bar>
     <settings
@@ -61,6 +61,8 @@ import { LANGUAGE } from './constants.js'
 import BuilderService from './services/builderService'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
+import ProvisionSearch from './components/provision-search/provision-search.vue'
+
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
 import { mapActions, mapState } from 'vuex'
@@ -70,7 +72,8 @@ export default {
   components: {
     NotificationContainer,
     LegislationSearchModal,
-    Settings
+    Settings,
+    ProvisionSearch
   },
   mixins: [BaseMixin],
   props: {
@@ -96,7 +99,8 @@ export default {
   data: function () {
     return {
       showLegislationSearchModal: false,
-      showSettings: false
+      showSettings: false,
+      expandProvisionSearch: false
     }
   },
   computed: {

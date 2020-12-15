@@ -311,7 +311,7 @@ export default {
       set () { }
     },
     filteredByProvisionSearch () {
-      if (this.provisionFilter) {
+      if (this.provisionFilter && this.provisionFilter.length > 0) {
         let dependants = []
         let dependsArray = []
 
@@ -327,13 +327,10 @@ export default {
             })
           })
         }
-        const hasQuestion = this.provisionFilter.questions.includes(this.question.guid)
-        const hasDependants = this.provisionFilter.questions.some(q => {
-          return dependants.includes(q)
-        })
-        const hasDepends = this.provisionFilter.questions.some(q => {
-          return dependsArray.includes(q)
-        })
+
+        const hasQuestion = this.provisionFilter.some(p => p.questions.includes(this.question.guid))
+        const hasDependants = this.provisionFilter.some(p => p.questions.some(q => dependants.includes(q)))
+        const hasDepends = this.provisionFilter.some(p => p.questions.some(q => dependsArray.includes(q)))
 
         return hasQuestion || hasDependants || hasDepends
       }

@@ -1,19 +1,5 @@
 <template>
   <div>
-    <v-autocomplete
-      v-model="provisionFilter"
-      filled=""
-      rounded=""
-      :items="searchableProvisions"
-      color="primary"
-      hide-no-data
-      hide-selected
-      :item-text="'title.' + lang"
-      item-key="id"
-      placeholder="Start typing to Search"
-      return-object
-      @input="updateProvisionFilter"
-    />
     <v-row>
       <v-col>
         <v-btn
@@ -95,7 +81,11 @@ export default {
       valid: false,
       expand: true,
       panelIndex: Number,
-      provisionFilter: null
+      provisionFilter: null,
+      searchInput: null,
+      testData: null,
+      comboxchanged: false,
+      provisionList: []
     }
   },
   computed: {
@@ -151,7 +141,6 @@ export default {
       return notices
     }
   },
-
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
   },
