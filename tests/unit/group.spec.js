@@ -7,22 +7,21 @@ const vuetify = new Vuetify()
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-let group = {
-  primaryKey: 'Group 1',
-  title: { 'en': 'Group', 'fr': 'Group FR' },
-  isRepeatable: false,
-  isVisible: false,
-  showKey: '', // TODO: do we need this
-  hideKey: '', // TODO: do we need this
-  order: 0,
-  domSuffix: '#000', // i.e #000
-  htmlElementId: '#000', // FIXME: still think we need this
-  questions: []
-}
-
 describe('Group.vue', () => {
   let actions
   let store
+
+  let group = {
+    primaryKey: 'Group 1',
+    title: {
+      'en': 'New Group',
+      'fr': 'Fr: New Group'
+    },
+    isRepeatable: true,
+    isVisible: true,
+    questions: [],
+    order: 0
+  }
 
   // mock
   beforeEach(() => {
@@ -73,9 +72,8 @@ describe('Group.vue', () => {
     })
     // must await until the dom has our element
     await wrapper.vm.$nextTick
-    expect(
-      wrapper.find('[data-testid="repeatGroup"]').isVisible()
-    ).toBe(true)
+
+    expect(wrapper.findAll('[data-testid="repeatGroup"]').length).toEqual(1)
   })
 
   it('renders group repeat button when group is set to be repeatable and the group is a copy', async () => {
@@ -93,9 +91,7 @@ describe('Group.vue', () => {
     })
     // must await until the dom has our element
     await wrapper.vm.$nextTick
-    expect(
-      wrapper.find('[data-testid="repeatGroup"]').isVisible()
-    ).toBe(true)
+    expect(wrapper.findAll('[data-testid="repeatGroup"]').length).toEqual(1)
   })
 
   it('does not render group repeat button when group is not repeatable', async () => {
