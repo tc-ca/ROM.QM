@@ -1,6 +1,6 @@
 <template>
   <div>
-    <questionnaire />
+    <questionnaire ref="questionnaire" />
   </div>
 </template>
 

@@ -39,7 +39,7 @@
     />
     <v-content>
       <v-container class="px-2">
-        <router-view />
+        <router-view ref="routerView" />
       </v-container>
     </v-content>
     <notification-container />
@@ -189,9 +189,8 @@ export default {
       this.$store.dispatch('SetLegislationsState', { legislations })
     },
     checkIsDirty () {
-      // Need to find a better solution to invoke child method
-      if (this.$route.name === 'questionnaire') return this.$children[0].$children[2].$children[0].$children[0].isDirty()
-      else if (this.$route.name === 'builder') return this.$children[0].$children[2].$children[0].isDirty()
+      if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()
+      else if (this.$route.name === 'builder') return this.$refs.routerView.isDirty()
     }
   }
 
