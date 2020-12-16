@@ -219,10 +219,6 @@ export default {
     expandAll () {
       this.panelIndex = null
       this.expand = true
-    },
-    updateProvisionFilter () {
-      const provisionFilter = this.provisionFilter
-      this.$store.dispatch('UpdateProvisionFilter', { provisionFilter })
     }
   }
 }
