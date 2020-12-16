@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel
-    v-show="question.isVisible && filteredByProvisionSearch"
+    v-show="isVisible"
     ref="qPanel"
     :active="isPanelActive"
     :class="getClassName"
@@ -224,7 +224,7 @@ import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 
 export default {
-  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change'],
+  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'update-group-question-count'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
 
@@ -335,6 +335,9 @@ export default {
         return hasQuestion || hasDependants || hasDepends
       }
       return true
+    },
+    isVisible () {
+      return this.question.isVisible && this.filteredByProvisionSearch
     }
   },
   watch: {
@@ -345,6 +348,13 @@ export default {
         this.$emit('group-subtitle-change')
       },
       deep: true
+    },
+    isVisible (value, oldValue) {
+      if (value === true) {
+        this.$emit('update-group-question-count', 1)
+      } else {
+        this.$emit('update-group-question-count', -1)
+      }
     }
   },
   mounted () {

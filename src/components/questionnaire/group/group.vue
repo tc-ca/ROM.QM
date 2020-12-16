@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panel>
+  <v-expansion-panel v-show="isVisible">
     <v-expansion-panel-header>
       <template #actions>
         <v-icon
@@ -86,6 +86,7 @@
               v-for="(question, questionIndex) in group.questions"
               ref="groupQuestion"
               :key="questionIndex"
+              :data-group-id="group.htmlElementId"
               :question="question"
               :group="group"
               :index="questionIndex"
@@ -95,6 +96,7 @@
               @error="onError"
               @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
+              @update-group-question-count="onUpdateGroupQuestionCount"
             />
           </v-expansion-panels>
         </v-col>
@@ -133,7 +135,8 @@ export default {
       // indicates if the group was created by using the repeat function i.e. not original
       repeatedGroup: false,
       valid: true,
-      groupSubtitle: ''
+      groupSubtitle: '',
+      questionCount: 0
     }
   },
 
@@ -171,6 +174,9 @@ export default {
         }
       },
       set () { }
+    },
+    isVisible () {
+      return this.group.isVisible && this.questionCount > 0
     }
   },
   created () {
@@ -185,7 +191,6 @@ export default {
 
     this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
-
   updated () {
     // on update group.order is updated with shifted position/index in the array
     // uncomment console.log to obersve behavior
@@ -196,6 +201,10 @@ export default {
 
     this.$store.dispatch('updateGroupOrder', { group, index })
     this.$store.dispatch('updateGroupHtmlElementId', { group })
+  },
+  mounted () {
+    // sets the default value based on visibility of the component
+    this.questionCount = this.$el.querySelectorAll(`[data-group-id='${this.group.htmlElementId}']:not([style*='display: none'])`).length
   },
 
   methods: {
@@ -259,6 +268,9 @@ export default {
         }
       }
       return true
+    },
+    onUpdateGroupQuestionCount (count) {
+      this.questionCount += count
     }
   }
 }

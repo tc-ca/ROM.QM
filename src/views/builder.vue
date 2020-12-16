@@ -813,7 +813,7 @@ export default {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
-          this.$store.dispatch('InitializeRef')
+          this.$store.dispatch('InitializeSearchableProvisionRef')
           this.$store.commit('objectstate/updateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'SetLegislations':
@@ -1061,7 +1061,7 @@ export default {
     },
     updateSearchableProvisions (provisions) {
       const questionGuid = this.selectedQuestion.guid
-      this.$store.dispatch('UpdateSearchableProvisions', { provisions, questionGuid })
+      this.$store.dispatch('UpdateSearchableProvisionsState', { provisions, questionGuid })
     }
   }
 }

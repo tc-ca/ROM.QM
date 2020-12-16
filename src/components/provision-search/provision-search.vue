@@ -12,7 +12,7 @@
     item-key="id"
     hint="Find a question through provision"
     @keydown.enter="isMenuActive(false)"
-    @input="updateProvisionFilterInState"
+    @input="updateProvisionFilter"
   />
 </template>
 
@@ -55,12 +55,12 @@ export default {
     })
   },
   watch: {
-    searchInput: function (value) {
+    searchInput (value) {
       if (value) {
         this.provisions = this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase()))
       } else {
         this.provisions = []
-        this.$store.dispatch('UpdateProvisionFilter', { provisionFilter: [] })
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [] })
       }
     }
   },
@@ -68,16 +68,16 @@ export default {
     isMenuActive (value) {
       this.$refs.provisionSearch.isMenuActive = value
     },
-    updateProvisionFilterInState (value) {
+    updateProvisionFilter (value) {
       // object means the item was selected from combobox list else a string will be returned if the user types something not in the list.
       if (typeof value === 'object' && value !== null) {
-        this.$store.dispatch('UpdateProvisionFilter', { provisionFilter: [value] })
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [value] })
       } else if (value === null) {
         // set to empty array
-        this.$store.dispatch('UpdateProvisionFilter', { provisionFilter: [] })
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [] })
       } else {
         // in this case of string its a generic search, and pass all the provisions found while filtering
-        this.$store.dispatch('UpdateProvisionFilter', { provisionFilter: this.provisions })
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: this.provisions })
       }
     }
 
