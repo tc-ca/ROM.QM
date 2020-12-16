@@ -36,10 +36,32 @@
         class="pt-2"
         justify-end
       >
+        <v-spacer />
+        <div v-if="question.isSamplingAllowed">
+          <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                v-on="on"
+                @click="clickSampling"
+              >
+                <v-icon
+                  normal
+                  color="primary"
+                >
+                  mdi-book-open-page-variant-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+          </v-tooltip>
+        </div>
         <div v-if="question.isRepeatable">
           <v-tooltip right>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
+                class="ml-2"
                 rounded
                 v-bind="attrs"
                 v-on="on"
@@ -60,6 +82,7 @@
           <v-tooltip right>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
+                class="ml-2"
                 rounded
                 v-bind="attrs"
                 v-on="on"
@@ -74,27 +97,6 @@
               </v-btn>
             </template>
             <span>{{ $t('app.questionnaire.group.question.repeatable.deleteQuestion') }}</span>
-          </v-tooltip>
-        </div>
-        <v-spacer />
-        <div v-if="question.isSamplingAllowed">
-          <v-tooltip right>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                rounded
-                v-bind="attrs"
-                v-on="on"
-                @click="clickSampling"
-              >
-                <v-icon
-                  normal
-                  color="primary"
-                >
-                  mdi-book-open-page-variant-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
           </v-tooltip>
         </div>
       </v-layout>

@@ -66,6 +66,7 @@
                 <v-tooltip right>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
+                      class="ml-2"
                       rounded
                       v-bind="attrs"
                       v-on="on"
