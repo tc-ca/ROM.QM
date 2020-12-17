@@ -51,6 +51,7 @@
                       @click.native.stop="repeatGroup"
                     >
                       <v-icon
+                        data-testid="repeatGroup"
                         normal
                         color="primary"
                       >
@@ -65,12 +66,14 @@
                 <v-tooltip right>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
+                      class="ml-2"
                       rounded
                       v-bind="attrs"
                       v-on="on"
                       @click.native.stop="removeGroup"
                     >
                       <v-icon
+                        data-testid="removeGroup"
                         normal
                         color="primary"
                       >
@@ -97,6 +100,7 @@
               @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
               @update-group-question-count="onUpdateGroupQuestionCount"
+              @delete-repeated-question="onDeleteRepeatedQuestion"
             />
           </v-expansion-panels>
         </v-col>
@@ -208,6 +212,16 @@ export default {
   },
 
   methods: {
+    onDeleteRepeatedQuestion (question) {
+      const index = this.group.questions.findIndex(q => q.guid === question.guid)
+      if (index > -1) {
+        this.group.questions.splice(index, 1)
+        // Fix the sortOrder for all the questions after the original question
+        for (let x = index; x < this.group.questions.length; x++) {
+          this.group.questions[x].sortOrder -= 1
+        }
+      }
+    },
     onReferenceChanged () {
       if (this.activegroupHasReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)

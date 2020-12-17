@@ -18,6 +18,7 @@ function createGroup (questionnaire) {
   group.isVisible = true
   group.order = id
   group.questions = []
+  group.expansionPanels = []
   group.domSuffix = 'prop value created virtually'
   group.htmlElementId = 'prop value created virtually'
 
