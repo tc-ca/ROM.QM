@@ -208,6 +208,7 @@
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
             @error="onChildError"
+            @repeat-question="onRepeatChildQuestion"
             @delete-repeated-question="onDeleteChildRepeatedQuestion"
           />
         </v-expansion-panels>
@@ -222,10 +223,9 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { buildTreeFromFlatList, hydrateItems, getCollectionParent } from '../../../../utils.js'
+import { buildTreeFromFlatList, hydrateItems, setNewGUID } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
-import { v4 as uuidv4 } from 'uuid'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question'],
@@ -360,42 +360,10 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
-    getNewGUID (question) {
-      question.guid = uuidv4()
-      if (question.childQuestions) {
-        question.childQuestions.forEach(cq => {
-          this.getNewGUID(cq)
-        })
-      }
-    },
     repeatQuestion ($event) {
       $event.stopPropagation()
-      if (!this.isReferenceQuestion) {
-        let nQuestion = _.cloneDeep(this.question)
-        // Regenerate a new GUID for every question inside
-        this.getNewGUID(nQuestion)
-        nQuestion.isRepeatable = false
-        nQuestion.isRepeated = true
-
-        let collection = getCollectionParent(this.group, this.question.guid)
-        if (collection) {
-          nQuestion.sortOrder = collection.length
-          collection.push(nQuestion)
-          // let index = collection.findIndex(q => q.guid === this.question.guid)
-          // if (index > -1) {
-          //   index++
-          //   collection.splice(index, 0, nQuestion)
-          //   // Fix the sortOrder for all the questions after the original question
-          //   for (let x = index; x < collection.length; x++) {
-          //     collection[x].sortOrder += 1
-          //   }
-          // }
-        } else {
-          // Something is wrong
-          alert('Something went wrong, check the console')
-          console.log(JSON.stringify(this.group))
-          console.log(JSON.stringify(this.question))
-        }
+      if (!this.isReferenceQuestion && this.question.isRepeatable) {
+        this.$emit('repeat-question', this.question.guid)
       }
     },
     deleteRepeatedQuestion ($event) {
@@ -404,15 +372,34 @@ export default {
         this.$emit('delete-repeated-question', this.question)
       }
     },
+    onRepeatChildQuestion (cQuestionGuid) {
+      if (this.question.childQuestions) {
+        let questionIdx = this.question.childQuestions.findIndex(cq => cq.guid === cQuestionGuid)
+        if (questionIdx > -1) {
+          let nQuestion = _.cloneDeep(this.question.childQuestions[questionIdx])
+          // Regenerate a new GUID for every question inside
+          setNewGUID(nQuestion)
+          nQuestion.isRepeatable = false
+          nQuestion.isRepeated = true
+          this.question.childQuestions.splice(questionIdx + 1, 0, nQuestion)
+          // Fix the sortOrder for all the questions after the original question
+          for (let x = 0; x < this.question.childQuestions.length; x++) {
+            this.question.childQuestions[x].sortOrder = x + 1
+          }
+          this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
+        }
+      }
+    },
     onDeleteChildRepeatedQuestion (cQuestion) {
       if (this.question.childQuestions) {
         const index = this.question.childQuestions.findIndex(cq => cq.guid === cQuestion.guid)
         if (index > -1) {
           this.question.childQuestions.splice(index, 1)
           // Fix the sortOrder for all the questions after the original question
-          for (let x = index; x < this.question.childQuestions.length; x++) {
-            this.question.childQuestions[x].sortOrder -= 1
+          for (let x = 0; x < this.question.childQuestions.length; x++) {
+            this.question.childQuestions[x].sortOrder = x + 1
           }
+          this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
         }
       }
     },

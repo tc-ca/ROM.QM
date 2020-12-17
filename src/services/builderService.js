@@ -317,8 +317,9 @@ export default {
   createResponseOption,
   createValidator,
   createDependencyGroup,
-  processBuilderForSave,
   findReferenceQuestion,
   findGroupForQuestionById,
-  GetMockQuestionnaireFromImportModule
+  getNextQuestionId,
+  GetMockQuestionnaireFromImportModule,
+  processBuilderForSave
 };
