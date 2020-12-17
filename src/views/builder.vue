@@ -94,6 +94,7 @@
               <v-text-field
                 v-model="selectedGroup.title[eng]"
                 label="Group text En"
+                @change="onGroupTextChange(selectedGroup)"
               />
               <v-text-field
                 v-model="selectedGroup.title[fr]"
@@ -119,6 +120,7 @@
               <v-text-field
                 v-model="selectedQuestion.text[eng]"
                 label="Question text En"
+                @change="onQuestionTextChange(selectedQuestion)"
               />
               <v-text-field
                 v-model="selectedQuestion.text[fr]"
@@ -190,9 +192,15 @@
                       class="bordered ml-2 pa-2 my-2"
                     >
                       <v-text-field
+                        v-model="option.name"
+                        dense
+                        label="Option Name"
+                      />
+                      <v-text-field
                         v-model="option.text[eng]"
                         dense
                         label="Option text En"
+                        @change="onOptionTextChange(option)"
                       />
                       <v-text-field
                         v-model="option.text[fr]"
@@ -641,6 +649,7 @@ import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
+import { generateName } from '../utils.js'
 
 export default {
   name: 'Builder',
@@ -735,6 +744,30 @@ export default {
     isDirty () {
       return _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
     },
+    onGroupTextChange (selectedGroup) {
+      selectedGroup.primaryKey = generateName(selectedGroup.title[LANGUAGE.ENGLISH], 'group', this.questionnaire.name)
+      selectedGroup.questions.forEach(q => {
+        this.onQuestionTextChange(q)
+      })
+    },
+    onQuestionTextChange (question) {
+      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'question', this.questionnaire.name, this.selectedGroup.primaryKey)
+      if (question.childQuestions) {
+        question.childQuestions.forEach(q => {
+          this.onQuestionTextChange(q)
+          if (q.responseOptions) {
+            q.responseOptions.forEach(o => {
+              this.onOptionTextChange(o)
+            })
+          }
+        })
+      }
+    },
+    onOptionTextChange (option) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      option.name = generateName(option.text[LANGUAGE.ENGLISH], 'response', '', '', this.selectedQuestion.name)
+    },
     setSamplingRecord () {
       if (this.selectedQuestion) {
         if (this.selectedQuestion.isSamplingAllowed) {
@@ -808,7 +841,7 @@ export default {
       // don't propagate the event up to the group or else the group will gain focus over the question
       $event.stopPropagation()
 
-      let question = BuilderService.createQuestion(this.questionnaire)
+      let question = BuilderService.createQuestion(this.questionnaire, group)
       if (group.questions.length > 0) {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
@@ -817,6 +850,9 @@ export default {
 
       group.expansionPanels = []
       group.expansionPanels.push(group.questions.length)
+
+      this.selectedGroup = group
+      this.selectedQuestion = question
     },
     addQuestionToIndex (question) {
       this.questions.push(question)
@@ -867,7 +903,7 @@ export default {
       this.selectedQuestion = null
     },
     editQuestion (group, question) {
-      this.selectedGroup = null
+      this.selectedGroup = group
       this.selectedQuestion = question
     },
     async save (id) {

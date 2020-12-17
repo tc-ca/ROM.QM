@@ -6,6 +6,23 @@ export function pad (n, width, z) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
 }
 
+export function generateName (name, type, templatename = '', groupname = '', questionaname = '') {
+  if (!name) return name
+
+  let n = name.replace(/[aeiou]/ig,'').replace(/\s+/g, '').substring(0, 15).toUpperCase()
+  switch (type.toLowerCase()) {
+    case 'template': n = 'TMPLT_' + n
+      break
+    case 'group': n = 'GRP_' + n + '_' + templatename
+      break
+    case 'question': n = 'QTN_' + n + '_' + groupname
+      break
+    case 'response': n = 'RSPNS_' + n + '_' + questionaname
+      break
+  }
+  return n
+}
+
 // works on primitive types
 export function onlyUnique (value, index, self) {
   return self.indexOf(value) === index

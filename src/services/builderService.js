@@ -2,18 +2,18 @@ import _ from "lodash";
 import { LANGUAGE } from '../constants.js';
 import { QUESTION_TYPE } from "../data/questionTypes.js";
 import { v4 as uuidv4 } from 'uuid';
+import { generateName } from '../utils'
 
 /* eslint-disable no-undef */
 
 function createGroup (questionnaire) {
   let group = {}
   const id = getNextGroupId(questionnaire)
-
-  group.primaryKey = `Group ${id + 1}`
   group.title = {
     [LANGUAGE.ENGLISH]: 'New Group',
     [LANGUAGE.FRENCH]: 'Fr: New Group'
   }
+  group.primaryKey = generateName(group.title[LANGUAGE.ENGLISH], 'group', questionnaire.name)
   group.isRepeatable = false
   group.isVisible = true
   group.order = id
@@ -26,9 +26,9 @@ function createGroup (questionnaire) {
   return group
 }
 
-function createQuestionnaire () {
+function createQuestionnaire (templatename) {
   return {
-    name: 'Questionnaire 1',
+    name: generateName(templatename, 'template'),
     title: {
       [LANGUAGE.ENGLISH]: 'Questionnaire Title EN',
       [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
@@ -39,11 +39,14 @@ function createQuestionnaire () {
   }
 }
 
-function createQuestion (questionnaire) {
+function createQuestion (questionnaire, group) {
+  debugger
   let id = getNextQuestionId(questionnaire)
   let guid = uuidv4();
+  let questionName = generateName('Question', 'question', questionnaire.name, group.primaryKey)
+
   let question = {
-    name: 'Question',
+    name: questionName,
     id: id,
     guid: guid,
     sortOrder: id,
@@ -62,6 +65,7 @@ function createQuestion (questionnaire) {
     responseOptions: [
       {
         id: 1,
+        name: generateName('Response Yes', 'response', '', '', questionName),
         sortOrder: 1,
         text: {
           [LANGUAGE.ENGLISH]: 'Yes',
@@ -85,6 +89,7 @@ function createQuestion (questionnaire) {
       },
       {
         id: 2,
+        name: generateName('Response No', 'response', '', '', questionName),
         sortOrder: 2,
         text: {
           [LANGUAGE.ENGLISH]: 'No',
@@ -130,13 +135,13 @@ function createQuestion (questionnaire) {
     dependencyGroups: []
   }
 
-  question.name = 'Question ' + id
+  // question.name = 'Question ' + id
 
   return question
 }
 
-function createReferenceQuestion (questionnaire) {
-  let rQuestion = createQuestion(questionnaire)
+function createReferenceQuestion (questionnaire, group) {
+  let rQuestion = createQuestion(questionnaire, group)
   rQuestion.name = 'Reference ID'
   rQuestion.id = 0
   rQuestion.sortOrder = 1
@@ -163,8 +168,8 @@ function findGroupForQuestionById(groups, qGuid) {
   return group;
 }
 
-function createChildQuestion (questionnaire, question) {
-  let q = createQuestion(questionnaire)
+function createChildQuestion (questionnaire, question, group) {
+  let q = createQuestion(questionnaire, group)
   q.sortOrder = question.childQuestions.length + 1
   return q
 }
@@ -200,6 +205,7 @@ function createResponseOption (question) {
   let id = question.responseOptions.length + 1
   return {
     id: id,
+    name: generateName(`Option ${id}`, 'response', '', '', question.Name),
     sortOrder: id,
     text: {
       [LANGUAGE.ENGLISH]: `Option ${id}`,
