@@ -379,15 +379,17 @@ export default {
 
         let collection = getCollectionParent(this.group, this.question.guid)
         if (collection) {
-          let index = collection.findIndex(q => q.guid === this.question.guid)
-          if (index > -1) {
-            index++
-            collection.splice(index, 0, nQuestion)
-            // Fix the sortOrder for all the questions after the original question
-            for (let x = index; x < collection.length; x++) {
-              collection[x].sortOrder += 1
-            }
-          }
+          nQuestion.sortOrder = collection.length
+          collection.push(nQuestion)
+          // let index = collection.findIndex(q => q.guid === this.question.guid)
+          // if (index > -1) {
+          //   index++
+          //   collection.splice(index, 0, nQuestion)
+          //   // Fix the sortOrder for all the questions after the original question
+          //   for (let x = index; x < collection.length; x++) {
+          //     collection[x].sortOrder += 1
+          //   }
+          // }
         } else {
           // Something is wrong
           alert('Something went wrong, check the console')
@@ -559,57 +561,59 @@ export default {
       }
     },
     updateChildQuestionOnDependencies (question) {
-      for (let i = 0; i < question.dependencyGroups.length; i++) {
-        let group = question.dependencyGroups[i]
+      if (question && question.dependencyGroups) {
+        for (let i = 0; i < question.dependencyGroups.length; i++) {
+          let group = question.dependencyGroups[i]
 
-        let groupMatch = true
-        for (let j = 0; j < group.questionDependencies.length; j++) {
-          let dependancy = group.questionDependencies[j]
-          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
+          let groupMatch = true
+          for (let j = 0; j < group.questionDependencies.length; j++) {
+            let dependancy = group.questionDependencies[j]
+            let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
+            let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
 
-          if (dependancy.validationAction === 'equal') {
-            if (!(dependsOnQuestion.response === dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'notEqual') {
-            if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'greaterThen') {
-            if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lessThen') {
-            if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthLessThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthGreaterThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
-              groupMatch = false
-              break
+            if (dependancy.validationAction === 'equal') {
+              if (!(dependsOnQuestion.response === dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'notEqual') {
+              if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'greaterThen') {
+              if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lessThen') {
+              if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lengthLessThen') {
+              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lengthGreaterThen') {
+              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
             }
           }
-        }
 
-        if (group.ruleType === 'visibility') {
-          question.isVisible = groupMatch
-        } else if (group.ruleType === 'validation') {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-          rule.enabled = groupMatch
-        } else if (group.ruleType === 'validationValue' && groupMatch) {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+          if (group.ruleType === 'visibility') {
+            question.isVisible = groupMatch
+          } else if (group.ruleType === 'validation') {
+            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+            rule.enabled = groupMatch
+          } else if (group.ruleType === 'validationValue' && groupMatch) {
+            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
 
-          rule.value = group.questionDependencies[0].parentQuestion.response
+            rule.value = group.questionDependencies[0].parentQuestion.response
+          }
         }
       }
     },

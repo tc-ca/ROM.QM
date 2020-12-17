@@ -47,7 +47,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             },
                             "provisions": [
                                 "145b6d54-bd3e-4dd6-a201-1fc252ea7689",
@@ -95,7 +95,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             },
                             "provisions": [],
                             "selectedProvisions": [],
@@ -160,7 +160,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             },
                             "provisions": [],
                             "selectedProvisions": [],
@@ -185,7 +185,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             },
                             "provisions": [],
                             "selectedProvisions": [],
@@ -260,7 +260,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             },
                             "provisions": [
                                 "fe852602-4fb0-4101-b42b-78c2dc2c1f38"
@@ -287,7 +287,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             },
                             "provisions": [],
                             "selectedProvisions": [],

@@ -75,7 +75,7 @@ function createQuestion (questionnaire) {
           option: 'optional', value: ''
         },
         picture: {
-          option: 'optional', value: ''
+          option: 'optional', value: []
         },
         provisions: [],
         selectedProvisions: [],
@@ -98,7 +98,7 @@ function createQuestion (questionnaire) {
           option: 'required', value: ''
         },
         picture: {
-          option: 'optional', value: ''
+          option: 'optional', value: []
         },
         provisions: [],
         selectedProvisions: [],
