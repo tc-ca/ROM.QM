@@ -222,7 +222,7 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { buildTreeFromFlatList, hydrateItems, getCollectionParent } from '../../../../utils.js'
+import { buildTreeFromFlatList, hydrateItems, getCollectionParent, GetAllChildrenQuestions } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 import { v4 as uuidv4 } from 'uuid'
@@ -332,12 +332,16 @@ export default {
           })
         }
 
-        const hasQuestion = this.provisionFilter.some(p => p.questions.includes(this.question.guid))
-        const hasDependants = this.provisionFilter.some(p => p.questions.some(q => dependants.includes(q)))
-        const hasDepends = this.provisionFilter.some(p => p.questions.some(q => dependsArray.includes(q)))
+        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
 
-        return hasQuestion || hasDependants || hasDepends
+        const foundInQuestion = this.provisionFilter.some(p => p.questions.includes(this.question.guid))
+        const foundInDependants = this.provisionFilter.some(p => p.questions.some(q => dependants.includes(q)))
+        const foundInDepends = this.provisionFilter.some(p => p.questions.some(q => dependsArray.includes(q)))
+        const foundInChildren = this.provisionFilter.some(p => p.questions.some(q => childrenGuids.includes(q)))
+
+        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
       }
+
       return true
     },
     isVisible () {
