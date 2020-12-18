@@ -1,6 +1,9 @@
 <template>
   <div>
-    <questionnaire ref="questionnaire" />
+    <questionnaire
+      ref="questionnaire"
+      @clear-provision-search-field="onClearProvisionSearchField"
+    />
   </div>
 </template>
 
@@ -9,6 +12,8 @@ import Questionnaire from '../components/questionnaire/questionnaire.vue'
 import BaseMixin from '../mixins/base'
 
 export default {
+  emits: ['clear-provision-search-field'],
+
   components: {
     Questionnaire
   },
@@ -16,6 +21,11 @@ export default {
   async mounted () {
     if (this.loadLocalData) {
       await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
+    }
+  },
+  methods: {
+    onClearProvisionSearchField () {
+      this.$emit('clear-provision-search-field')
     }
   }
 }
