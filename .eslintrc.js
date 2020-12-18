@@ -12,6 +12,12 @@ module.exports = {
   },
 
   parser: "babel-eslint",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  
   extends: ["eslint:recommended"],
   overrides: [
     {

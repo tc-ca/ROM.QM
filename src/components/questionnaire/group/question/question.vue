@@ -199,15 +199,15 @@
           multiple
         >
           <question
-            v-for="(childQuestion, questionIndex) in question.childQuestions"
+            v-for="childQuestion in question.childQuestions"
             ref="groupQuestion"
-            :key="questionIndex"
+            :key="childQuestion.guid"
             :question="childQuestion"
             :group="group"
-            :index="questionIndex"
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
             @error="onChildError"
+            @repeat-question="onRepeatChildQuestion"
             @delete-repeated-question="onDeleteChildRepeatedQuestion"
           />
         </v-expansion-panels>
@@ -222,10 +222,9 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { buildTreeFromFlatList, hydrateItems, getCollectionParent, GetAllChildrenQuestions } from '../../../../utils.js'
+import { buildTreeFromFlatList, hydrateItems, setNewGUID, GetAllChildrenQuestions } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
-import { v4 as uuidv4 } from 'uuid'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
@@ -239,10 +238,6 @@ export default {
     },
     group: {
       type: Object,
-      required: true
-    },
-    index: {
-      type: Number,
       required: true
     },
     inRepeatedGroup: {
@@ -376,40 +371,10 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
-    getNewGUID (question) {
-      question.guid = uuidv4()
-      if (question.childQuestions) {
-        question.childQuestions.forEach(cq => {
-          this.getNewGUID(cq)
-        })
-      }
-    },
     repeatQuestion ($event) {
       $event.stopPropagation()
-      if (!this.isReferenceQuestion) {
-        let nQuestion = _.cloneDeep(this.question)
-        // Regenerate a new GUID for every question inside
-        this.getNewGUID(nQuestion)
-        nQuestion.isRepeatable = false
-        nQuestion.isRepeated = true
-
-        let collection = getCollectionParent(this.group, this.question.guid)
-        if (collection) {
-          let index = collection.findIndex(q => q.guid === this.question.guid)
-          if (index > -1) {
-            index++
-            collection.splice(index, 0, nQuestion)
-            // Fix the sortOrder for all the questions after the original question
-            for (let x = index; x < collection.length; x++) {
-              collection[x].sortOrder += 1
-            }
-          }
-        } else {
-          // Something is wrong
-          alert('Something went wrong, check the console')
-          console.log(JSON.stringify(this.group))
-          console.log(JSON.stringify(this.question))
-        }
+      if (!this.isReferenceQuestion && this.question.isRepeatable) {
+        this.$emit('repeat-question', this.question.guid)
       }
     },
     deleteRepeatedQuestion ($event) {
@@ -418,15 +383,34 @@ export default {
         this.$emit('delete-repeated-question', this.question)
       }
     },
+    onRepeatChildQuestion (cQuestionGuid) {
+      if (this.question.childQuestions) {
+        let questionIdx = this.question.childQuestions.findIndex(cq => cq.guid === cQuestionGuid)
+        if (questionIdx > -1) {
+          let nQuestion = _.cloneDeep(this.question.childQuestions[questionIdx])
+          setNewGUID(nQuestion)
+          let questionnaire = this.$store.getters['getQuestionnaire']
+          nQuestion.id = BuilderService.getNextQuestionId(questionnaire)
+          nQuestion.isRepeatable = false
+          nQuestion.isRepeated = true
+          nQuestion.sortOrder = this.question.childQuestions[questionIdx].sortOrder + 1
+          for (let x = questionIdx + 1; x < this.question.childQuestions.length; x++) {
+            this.question.childQuestions[x].sortOrder = this.question.childQuestions[x].sortOrder + 1
+          }
+          this.question.childQuestions.splice(questionIdx + 1, 0, nQuestion)
+        }
+      }
+    },
     onDeleteChildRepeatedQuestion (cQuestion) {
       if (this.question.childQuestions) {
         const index = this.question.childQuestions.findIndex(cq => cq.guid === cQuestion.guid)
         if (index > -1) {
           this.question.childQuestions.splice(index, 1)
           // Fix the sortOrder for all the questions after the original question
-          for (let x = index; x < this.question.childQuestions.length; x++) {
-            this.question.childQuestions[x].sortOrder -= 1
+          for (let x = 0; x < this.question.childQuestions.length; x++) {
+            this.question.childQuestions[x].sortOrder = x + 1
           }
+          this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
         }
       }
     },
@@ -575,57 +559,59 @@ export default {
       }
     },
     updateChildQuestionOnDependencies (question) {
-      for (let i = 0; i < question.dependencyGroups.length; i++) {
-        let group = question.dependencyGroups[i]
+      if (question && question.dependencyGroups) {
+        for (let i = 0; i < question.dependencyGroups.length; i++) {
+          let group = question.dependencyGroups[i]
 
-        let groupMatch = true
-        for (let j = 0; j < group.questionDependencies.length; j++) {
-          let dependancy = group.questionDependencies[j]
-          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
+          let groupMatch = true
+          for (let j = 0; j < group.questionDependencies.length; j++) {
+            let dependancy = group.questionDependencies[j]
+            let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
+            let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
 
-          if (dependancy.validationAction === 'equal') {
-            if (!(dependsOnQuestion.response === dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'notEqual') {
-            if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'greaterThen') {
-            if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lessThen') {
-            if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthLessThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthGreaterThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
-              groupMatch = false
-              break
+            if (dependancy.validationAction === 'equal') {
+              if (!(dependsOnQuestion.response === dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'notEqual') {
+              if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'greaterThen') {
+              if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lessThen') {
+              if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lengthLessThen') {
+              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lengthGreaterThen') {
+              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
+                groupMatch = false
+                break
+              }
             }
           }
-        }
 
-        if (group.ruleType === 'visibility') {
-          question.isVisible = groupMatch
-        } else if (group.ruleType === 'validation') {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-          rule.enabled = groupMatch
-        } else if (group.ruleType === 'validationValue' && groupMatch) {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+          if (group.ruleType === 'visibility') {
+            question.isVisible = groupMatch
+          } else if (group.ruleType === 'validation') {
+            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+            rule.enabled = groupMatch
+          } else if (group.ruleType === 'validationValue' && groupMatch) {
+            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
 
-          rule.value = group.questionDependencies[0].parentQuestion.response
+            rule.value = group.questionDependencies[0].parentQuestion.response
+          }
         }
       }
     },

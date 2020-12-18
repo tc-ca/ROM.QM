@@ -68,7 +68,7 @@
             <v-window v-model="galleryIndex">
               <!-- Gallery  -->
               <v-window-item
-                v-for="(image, index) in images"
+                v-for="(image, index) in picture.value"
                 :key="index"
               >
                 <!-- Image -->
@@ -81,7 +81,7 @@
             </v-window>
             <!-- Bubbles -->
             <v-card-actions
-              v-if="images.length > 1 "
+              v-if="picture.value.length > 1 "
               class="justify-space-between"
             >
               <v-spacer />
@@ -92,7 +92,7 @@
                     class="text-center"
                   >
                     <v-item
-                      v-for="(image, index) in images"
+                      v-for="(image, index) in picture.value"
                       :key="index"
                       v-slot="{ active, toggle }"
                     >
@@ -120,12 +120,12 @@
               class="subtitle-1"
             >
               <div class="text-truncate">
-                {{ images[galleryIndex].title }}
+                {{ picture.value[galleryIndex].title }}
               </div>
             </v-card-title>
             <v-card-subtitle v-if="imageNoteExist">
               <div class="text-no-wrap text-truncate">
-                {{ images[galleryIndex].comment }}
+                {{ picture.value[galleryIndex].comment }}
               </div>
             </v-card-subtitle>
 
@@ -133,7 +133,7 @@
             <v-card-text ref="title">
               <div v-if="speedDialOpen && imageNoteExist">
                 <v-textarea
-                  v-model="images[galleryIndex].title"
+                  v-model="picture.value[galleryIndex].title"
                   auto-grow
                   outlined
                   dense
@@ -142,7 +142,7 @@
                   @change="updateResponseStore()"
                 />
                 <v-textarea
-                  v-model="images[galleryIndex].comment"
+                  v-model="picture.value[galleryIndex].comment"
                   auto-grow
                   outlined
                   dense
@@ -158,7 +158,7 @@
       </v-row>
       <v-input
         ref="validationInput"
-        v-model="images.length"
+        v-model="picture.value.length"
         :rules="rules"
         @update:error="onError"
       />
@@ -200,12 +200,12 @@ export default {
 
   data: function () {
     return {
-      images: [],
+      // images: [],
       curImg: '',
       galleryIndex: 0,
       speedDialOpen: false,
       rules: [
-        value => !this.picture.display || !this.picture.required ? true : this.images.length > 0 || 'Required.'
+        value => !this.picture.display || !this.picture.required ? true : this.picture.value.length > 0 || 'Required.'
       ],
       validationStatus: false,
       notification: null
@@ -214,7 +214,7 @@ export default {
 
   computed: {
     imageNoteExist () {
-      return this.images[this.galleryIndex] !== undefined
+      return this.picture.value[this.galleryIndex] !== undefined
     },
     displayPicture () {
       return !this.picture.display
@@ -223,14 +223,14 @@ export default {
       return this.picture.option === 'required'
     },
     errorInPicture () {
-      return this.displayPicture && this.isPictureRequired && !this.images.length > 0
+      return this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
     }
   },
   mounted () {
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
-        let error = this.displayPicture && this.isPictureRequired && !this.images.length > 0
+        let error = this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
         // console.log('$refs.validationInput.validations ' + error)
         this.onError(error)
       }
@@ -255,8 +255,8 @@ export default {
     },
 
     addImageToArray () {
-      if (this.images.length < MAX_IMAGE_UPLOADS_PER_ANSWER) {
-        this.images.push({ base64String: this.curImg, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
+      if (this.picture.value.length < MAX_IMAGE_UPLOADS_PER_ANSWER) {
+        this.picture.value.push({ base64String: this.curImg, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
         // this.images.push(base64)
         this.next()
       } else {
@@ -266,7 +266,7 @@ export default {
     },
 
     removeImage (index) {
-      this.images.splice(index, 1)
+      this.picture.value.splice(index, 1)
       // need to jump forward twice (to move forward once) as the array has been altered.
       this.next()
       this.next()
@@ -274,21 +274,22 @@ export default {
 
     changeImage (base64) {
       if (this.envProd) {
-        this.images[this.galleryIndex].base64String = base64
+        this.picture.value[this.galleryIndex].base64String = base64
       } else {
-        this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
+        // this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
+        // this.picture.value[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
       }
     },
 
     next () {
-      this.galleryIndex = this.galleryIndex + 1 === this.images.length
+      this.galleryIndex = this.galleryIndex + 1 === this.picture.value.length
         ? 0
         : this.galleryIndex + 1
     },
 
     prev () {
       this.galleryIndex = this.galleryIndex - 1 < 0
-        ? this.images.length - 1
+        ? this.picture.value.length - 1
         : this.galleryIndex - 1
     },
 

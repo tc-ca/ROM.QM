@@ -139,3 +139,12 @@ function GetChildQuestions(question) {
   });
   return questions;
 }
+export function setNewGUID (question) {
+  question.guid = uuidv4()
+  if (question.childQuestions) {
+    question.childQuestions.forEach(cq => {
+      this.setNewGUID(cq)
+    })
+  }
+}
+

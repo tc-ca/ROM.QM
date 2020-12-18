@@ -21,7 +21,6 @@ export default {
   async mounted () {
     if (this.loadLocalData) {
       await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
-      await this.$store.dispatch('SetMockQuestionnaireResponse')
     }
   },
   methods: {
