@@ -15,13 +15,14 @@
 
       <v-expand-x-transition>
         <v-card
-          v-show="expandProvisionSearch"
+          v-show="expandProvisionSearchField"
           width="80%"
           class="mx-auto "
         >
           <provision-search
             :clear-provision-search-text="clearProvisionSearchText"
             @set-clear-provision-search-false="setClearProvisionSearchFalse"
+            @shrink-provision-search-field="shrinkProvisionSearchField"
           />
         </v-card>
       </v-expand-x-transition>
@@ -30,7 +31,7 @@
         id=""
         icon
         color="white"
-        @click="expandProvisionSearch = !expandProvisionSearch"
+        @click="expandProvisionSearchField = !expandProvisionSearchField"
       >
         <v-icon>
           mdi-magnify
@@ -110,7 +111,7 @@ export default {
     return {
       showLegislationSearchModal: false,
       showSettings: false,
-      expandProvisionSearch: false,
+      expandProvisionSearchField: false,
       clearProvisionSearchText: false
     }
   },
@@ -201,6 +202,9 @@ export default {
     },
     setClearProvisionSearchFalse () {
       this.clearProvisionSearchText = false
+    },
+    shrinkProvisionSearchField () {
+      this.expandProvisionSearchField = false
     }
   }
 
