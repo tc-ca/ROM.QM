@@ -31,18 +31,32 @@ async function GetTreeLegislationFromLocalImportModule() {
   //TODO 
   //legislationDictionnary = render
   //legislation = builder
-  const data = await import("../../api/legislation.json").then(module => {
-    return module.default;
-  });
-  return data;
+  const axios = await import('axios')
+
+  let response = await axios.get('/static/legislation.json')
+    .catch(function (error) {
+      // handle error
+      console.log(error)
+    })
+
+  console.log(response)
+
+  return response.data;
 }
 
 async function GetFlatLegislationFromLocalImportModule() {
   //TODO
   //legislationDictionnary = render
   //legislation = builder
-  const data = await import("../../api/legislationDictionnary").then(module => {
-    return module.default;
-  });
-  return data;
+  const axios = await import('axios')
+
+  let response = await axios.get('/static/legislationDictionnary.json')
+    .catch(function (error) {
+      // handle error
+      console.log(error)
+    })
+
+  console.log(response)
+
+  return response.data;
 }

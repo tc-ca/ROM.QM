@@ -225,8 +225,15 @@ function GetChildrenQuestion(question) {
 }
 
 async function SetMockQuestionnaireResponseImportModule() {
-  const data = await import("../../api/betaAnswers").then(module => {
-    return module.default;
-  });
-  return data;
+  const axios = await import('axios')
+
+  let response = await axios.get('/static/betaAnswers.json')
+    .catch(function (error) {
+      // handle error
+      console.log(error)
+    })
+
+  console.log(response)
+
+  return response.data;
 }
