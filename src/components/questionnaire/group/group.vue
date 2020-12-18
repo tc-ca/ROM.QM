@@ -86,12 +86,11 @@
               </div>
             </v-layout>
             <question
-              v-for="(question, questionIndex) in group.questions"
+              v-for="question in group.questions"
               ref="groupQuestion"
-              :key="questionIndex"
+              :key="question.guid"
               :question="question"
               :group="group"
-              :index="questionIndex"
               :in-repeated-group="repeatedGroup"
               :expand="expand"
               @responseChanged="onResponseChanged"
@@ -215,8 +214,7 @@ export default {
         for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
           this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
         }
-        // this.group.questions.splice(questionIdx + 1, 0, nQuestion)
-        this.group.questions.push(nQuestion)
+        this.group.questions.splice(questionIdx + 1, 0, nQuestion)
         // this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
       } else {
         alert('Something went wrong, check the console')
@@ -225,14 +223,17 @@ export default {
       }
     },
     onDeleteRepeatedQuestion (question) {
-      const index = this.group.questions.findIndex(q => q.guid === question.guid)
-      if (index > -1) {
-        this.group.questions.splice(index, 1)
-        // Fix the sortOrder for all the questions after the original question
-        for (let x = index; x < this.group.questions.length; x++) {
-          this.group.questions[x].sortOrder = this.group.questions[x].sortOrder - 1
+      const questionIdx = this.group.questions.findIndex(q => q.guid === question.guid)
+      if (questionIdx > -1) {
+        for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
+          this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
         }
-        this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
+        this.group.questions.splice(questionIdx, 1)
+        // this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
+      } else {
+        alert('Something went very wrong, check the console')
+        console.log(JSON.stringify(this.group))
+        console.log(JSON.stringify(this.question))
       }
     },
     onReferenceChanged () {

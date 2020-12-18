@@ -199,12 +199,11 @@
           multiple
         >
           <question
-            v-for="(childQuestion, questionIndex) in question.childQuestions"
+            v-for="childQuestion in question.childQuestions"
             ref="groupQuestion"
-            :key="questionIndex"
+            :key="childQuestion.guid"
             :question="childQuestion"
             :group="group"
-            :index="questionIndex"
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
             @error="onChildError"
@@ -239,10 +238,6 @@ export default {
     },
     group: {
       type: Object,
-      required: true
-    },
-    index: {
-      type: Number,
       required: true
     },
     inRepeatedGroup: {
@@ -377,16 +372,16 @@ export default {
         let questionIdx = this.question.childQuestions.findIndex(cq => cq.guid === cQuestionGuid)
         if (questionIdx > -1) {
           let nQuestion = _.cloneDeep(this.question.childQuestions[questionIdx])
-          // Regenerate a new GUID for every question inside
           setNewGUID(nQuestion)
+          let questionnaire = this.$store.getters['getQuestionnaire']
+          nQuestion.id = BuilderService.getNextQuestionId(questionnaire)
           nQuestion.isRepeatable = false
           nQuestion.isRepeated = true
-          this.question.childQuestions.splice(questionIdx + 1, 0, nQuestion)
-          // Fix the sortOrder for all the questions after the original question
-          for (let x = 0; x < this.question.childQuestions.length; x++) {
-            this.question.childQuestions[x].sortOrder = x + 1
+          nQuestion.sortOrder = this.question.childQuestions[questionIdx].sortOrder + 1
+          for (let x = questionIdx + 1; x < this.question.childQuestions.length; x++) {
+            this.question.childQuestions[x].sortOrder = this.question.childQuestions[x].sortOrder + 1
           }
-          this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
+          this.question.childQuestions.splice(questionIdx + 1, 0, nQuestion)
         }
       }
     },
