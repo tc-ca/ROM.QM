@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel
-    v-show="question.isVisible && filteredByProvisionSearch"
+    v-show="isVisible"
     ref="qPanel"
     :active="isPanelActive"
     :class="getClassName"
@@ -222,12 +222,12 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { buildTreeFromFlatList, hydrateItems, setNewGUID } from '../../../../utils.js'
+import { buildTreeFromFlatList, hydrateItems, setNewGUID, GetAllChildrenQuestions } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 
 export default {
-  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question'],
+  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
 
@@ -309,8 +309,13 @@ export default {
       },
       set () { }
     },
-    filteredByProvisionSearch () {
-      if (this.provisionFilter) {
+    filteredInByProvisionSearch () {
+      if (this.provisionFilter === null) {
+        // no active search display all questions
+        return true
+      }
+      if (this.provisionFilter && this.provisionFilter.length > 0) {
+        // active search check to see if question should be shown or not
         let dependants = []
         let dependsArray = []
 
@@ -326,17 +331,21 @@ export default {
             })
           })
         }
-        const hasQuestion = this.provisionFilter.questions.includes(this.question.guid)
-        const hasDependants = this.provisionFilter.questions.some(q => {
-          return dependants.includes(q)
-        })
-        const hasDepends = this.provisionFilter.questions.some(q => {
-          return dependsArray.includes(q)
-        })
 
-        return hasQuestion || hasDependants || hasDepends
+        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
+
+        const foundInQuestion = this.provisionFilter.some(p => p.questions.includes(this.question.guid))
+        const foundInDependants = this.provisionFilter.some(p => p.questions.some(q => dependants.includes(q)))
+        const foundInDepends = this.provisionFilter.some(p => p.questions.some(q => dependsArray.includes(q)))
+        const foundInChildren = this.provisionFilter.some(p => p.questions.some(q => childrenGuids.includes(q)))
+
+        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
       }
-      return true
+      // search resulted in no provisions found therefore hide all questions
+      return false
+    },
+    isVisible () {
+      return this.question.isVisible && this.filteredInByProvisionSearch
     }
   },
   watch: {
@@ -347,6 +356,13 @@ export default {
         this.$emit('group-subtitle-change')
       },
       deep: true
+    },
+    isVisible (value, oldValue) {
+      if (value === true) {
+        this.$emit('update-group-question-count', 1)
+      } else {
+        this.$emit('update-group-question-count', -1)
+      }
     }
   },
   mounted () {
