@@ -58,9 +58,6 @@ export default {
     searchInput (value) {
       if (value) {
         this.provisions = this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase()))
-      } else {
-        this.provisions = []
-        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [] })
       }
     }
   },
@@ -68,14 +65,17 @@ export default {
     isMenuActive (value) {
       this.$refs.provisionSearch.isMenuActive = value
     },
+    // note: combobox input always returns object if item is selected from list or string if something is inputted.
     updateProvisionFilter (value) {
-      // object means the item was selected from combobox list else a string will be returned if the user types something not in the list.
       if (typeof value === 'object' && value !== null) {
+        // item was selected from combobox list
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [value] })
-      } else if (value === null) {
-        // set to empty array
-        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [] })
+      } else if (value === null || value.trim() === '') {
+        // blank input
+        // as the user has not really inputted anything i.e blank search so we wont filter and to do that we must set provision filter to null
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
       } else {
+        // typed in search
         // in this case of string its a generic search, and pass all the provisions found while filtering
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: this.provisions })
       }

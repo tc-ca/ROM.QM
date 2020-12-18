@@ -314,8 +314,13 @@ export default {
       },
       set () { }
     },
-    filteredByProvisionSearch () {
+    filteredInByProvisionSearch () {
+      if (this.provisionFilter === null) {
+        // no active search display all questions
+        return true
+      }
       if (this.provisionFilter && this.provisionFilter.length > 0) {
+        // active search check to see if question should be shown or not
         let dependants = []
         let dependsArray = []
 
@@ -341,11 +346,11 @@ export default {
 
         return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
       }
-
-      return true
+      // search resulted in no provisions found therefore hide all questions
+      return false
     },
     isVisible () {
-      return this.question.isVisible && this.filteredByProvisionSearch
+      return this.question.isVisible && this.filteredInByProvisionSearch
     }
   },
   watch: {
