@@ -751,6 +751,8 @@ export default {
       })
     },
     onQuestionTextChange (question) {
+      // eslint-disable-next-line no-debugger
+      debugger
       question.name = generateName(question.text[LANGUAGE.ENGLISH], 'question', this.questionnaire.name, this.selectedGroup.primaryKey)
       if (question.childQuestions) {
         question.childQuestions.forEach(q => {
@@ -761,6 +763,11 @@ export default {
             })
           }
         })
+        if (question.responseOptions) {
+          question.responseOptions.forEach(o => {
+            this.onOptionTextChange(o)
+          })
+        }
       }
     },
     onOptionTextChange (option) {
@@ -851,8 +858,8 @@ export default {
       group.expansionPanels = []
       group.expansionPanels.push(group.questions.length)
 
-      this.selectedGroup = group
-      this.selectedQuestion = question
+      // this.selectedGroup = group
+      // this.selectedQuestion = question
     },
     addQuestionToIndex (question) {
       this.questions.push(question)
