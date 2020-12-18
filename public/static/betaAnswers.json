@@ -6,7 +6,7 @@
         },
         "groups": [
             {
-                "primaryKey": "Group 1",
+                "primaryKey": "Group1",
                 "title": {
                     "en": "New Group",
                     "fr": "Fr: New Group"
