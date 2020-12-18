@@ -753,7 +753,24 @@ export default {
     onQuestionTextChange (question) {
       // eslint-disable-next-line no-debugger
       debugger
-      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'question', this.questionnaire.name, this.selectedGroup.primaryKey)
+      let questiontext = question.text[LANGUAGE.ENGLISH]
+
+      switch (question.type) {
+        case QUESTION_TYPE.TEXT: questiontext = 'TXT'
+          break
+        case QUESTION_TYPE.RADIO: questiontext = 'RD'
+          break
+        case QUESTION_TYPE.SELECT: questiontext = 'SLCT'
+          break
+        case QUESTION_TYPE.IMAGE: questiontext = 'IMG'
+          break
+        case QUESTION_TYPE.NUMBER: questiontext = 'NBR'
+          break
+        case QUESTION_TYPE.REFERENCE: questiontext = 'REF'
+          break
+      }
+
+      question.name = generateName(questiontext, 'question', this.questionnaire.name, this.selectedGroup.primaryKey)
       if (question.childQuestions) {
         question.childQuestions.forEach(q => {
           this.onQuestionTextChange(q)
@@ -841,6 +858,15 @@ export default {
         } else {
           this.$store.dispatch('notification/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
           this.selectedQuestion.type = 'text'
+        }
+      }
+      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO ||
+          this.selectedQuestion.type !== QUESTION_TYPE.SELECT) {
+        this.selectedQuestion.responseOptions = null
+        this.onQuestionTextChange(this.selectedQuestion)
+      } else {
+        if (this.selectedQuestion.responseOptions == null) {
+          this.selectedQuestion.responseOptions = this.builderService.createResponseOption(this.selectedQuestion)
         }
       }
     },

@@ -23,6 +23,11 @@ export function generateName (name, type, templatename = '', groupname = '', que
   return n
 }
 
+export function generateName1 (name, prefix, postfix) {
+  if (!name) return name
+  return prefix + '_' + name.replace(/[aeiou]/ig,'').replace(/\s+/g, '').substring(0, 15).toUpperCase() + '_' + postfix
+}
+
 // works on primitive types
 export function onlyUnique (value, index, self) {
   return self.indexOf(value) === index
