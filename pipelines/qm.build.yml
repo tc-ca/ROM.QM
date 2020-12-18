@@ -62,12 +62,37 @@ stages:
           - task: MSCRMPing@12
             inputs:
               crmConnectionString: '$(ConnectionString)'
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "============================================"
+                Write-Host "System.DefaultWorkingDirectory"
+                Get-ChildItem -Path "$(System.DefaultWorkingDirectory)"
+                Write-Host "============================================"
+                Write-Host "Agent.BuildDirectory"
+                Get-ChildItem -Path "$(Agent.BuildDirectory)"
+                Write-Host "============================================"
+                Write-Host ""
+                Write-Host "============================================"
+                Write-Host "Build.ArtifactStagingDirectory"
+                Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
+                Write-Host "============================================"
+                Write-Host "============================================"
+                Write-Host "Build.BinariesDirectory"
+                Get-ChildItem -Path "$(Build.BinariesDirectory)"
+                Write-Host "============================================"
+                Write-Host "============================================"
+                Write-Host "Build.SourcesDirectory"
+                Get-ChildItem -Path "$(Build.SourcesDirectory)"
+                Write-Host "============================================"
+              errorActionPreference: 'continue'
           - task: MSCRMUpdateWebResource@12
             inputs:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
               webResourceFolderPath: '$(System.ArtifactsDirectory)'
-              webResourceJsonMappingPath: '$(Build.SourcesDirectory)\publishingScripts\webresourceMapping.json'
+              webResourceJsonMappingPath: '$(Build.SourcesDirectory)\ROM.QM\publishingScripts\webresourceMapping.json'
               failIfWebResourceNotFound: false
               publish: true
               solutionName: 'TC_GlobalCore'
