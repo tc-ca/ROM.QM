@@ -86,18 +86,18 @@
               </div>
             </v-layout>
             <question
-              v-for="(question, questionIndex) in group.questions"
+              v-for="question in group.questions"
               ref="groupQuestion"
-              :key="questionIndex"
+              :key="question.guid"
               :question="question"
               :group="group"
-              :index="questionIndex"
               :in-repeated-group="repeatedGroup"
               :expand="expand"
               @responseChanged="onResponseChanged"
               @error="onError"
               @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
+              @repeat-question="onRepeatQuestion"
               @delete-repeated-question="onDeleteRepeatedQuestion"
             />
           </v-expansion-panels>
@@ -109,9 +109,11 @@
 
 <script>
 
+import _ from 'lodash'
 import { mapState } from 'vuex'
 import Question from './question/question.vue'
 import BuilderService from '../../../services/builderService'
+import { setNewGUID } from '../../../utils.js'
 
 export default {
   emits: ['responseChanged'],
@@ -131,7 +133,6 @@ export default {
       default: true
     }
   },
-
   data: function () {
     return {
       // indicates if the group was created by using the repeat function i.e. not original
@@ -140,7 +141,6 @@ export default {
       groupSubtitle: ''
     }
   },
-
   computed: {
     activegroupHasReferenceQuestion () {
       return (!!BuilderService.findReferenceQuestion(this.group))
@@ -189,7 +189,6 @@ export default {
 
     this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
-
   updated () {
     // on update group.order is updated with shifted position/index in the array
     // uncomment console.log to obersve behavior
@@ -201,16 +200,40 @@ export default {
     this.$store.dispatch('updateGroupOrder', { group, index })
     this.$store.dispatch('updateGroupHtmlElementId', { group })
   },
-
   methods: {
-    onDeleteRepeatedQuestion (question) {
-      const index = this.group.questions.findIndex(q => q.guid === question.guid)
-      if (index > -1) {
-        this.group.questions.splice(index, 1)
-        // Fix the sortOrder for all the questions after the original question
-        for (let x = index; x < this.group.questions.length; x++) {
-          this.group.questions[x].sortOrder -= 1
+    onRepeatQuestion (questionGuid) {
+      let questionIdx = this.group.questions.findIndex(q => q.guid === questionGuid)
+      if (questionIdx > -1) {
+        let nQuestion = _.cloneDeep(this.group.questions[questionIdx])
+        setNewGUID(nQuestion)
+        let questionnaire = this.$store.getters['getQuestionnaire']
+        nQuestion.id = BuilderService.getNextQuestionId(questionnaire)
+        nQuestion.isRepeatable = false
+        nQuestion.isRepeated = true
+        nQuestion.sortOrder = this.group.questions[questionIdx].sortOrder + 1
+        for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
+          this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
         }
+        this.group.questions.splice(questionIdx + 1, 0, nQuestion)
+        // this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
+      } else {
+        alert('Something went wrong, check the console')
+        console.log(JSON.stringify(this.group))
+        console.log(JSON.stringify(this.question))
+      }
+    },
+    onDeleteRepeatedQuestion (question) {
+      const questionIdx = this.group.questions.findIndex(q => q.guid === question.guid)
+      if (questionIdx > -1) {
+        for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
+          this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
+        }
+        this.group.questions.splice(questionIdx, 1)
+        // this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
+      } else {
+        alert('Something went very wrong, check the console')
+        console.log(JSON.stringify(this.group))
+        console.log(JSON.stringify(this.question))
       }
     },
     onReferenceChanged () {

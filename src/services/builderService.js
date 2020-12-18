@@ -18,7 +18,6 @@ function createGroup (questionnaire) {
   group.isVisible = true
   group.order = id
   group.questions = []
-  group.order = id
   group.expansionPanels = []
   group.domSuffix = 'prop value created virtually'
   group.htmlElementId = 'prop value created virtually'
@@ -75,7 +74,7 @@ function createQuestion (questionnaire) {
           option: 'optional', value: ''
         },
         picture: {
-          option: 'optional', value: ''
+          option: 'optional', value: []
         },
         provisions: [],
         selectedProvisions: [],
@@ -98,7 +97,7 @@ function createQuestion (questionnaire) {
           option: 'required', value: ''
         },
         picture: {
-          option: 'optional', value: ''
+          option: 'optional', value: []
         },
         provisions: [],
         selectedProvisions: [],
@@ -317,8 +316,9 @@ export default {
   createResponseOption,
   createValidator,
   createDependencyGroup,
-  processBuilderForSave,
   findReferenceQuestion,
   findGroupForQuestionById,
-  GetMockQuestionnaireFromImportModule
+  getNextQuestionId,
+  GetMockQuestionnaireFromImportModule,
+  processBuilderForSave
 };
