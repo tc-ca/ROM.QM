@@ -21,6 +21,14 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'QuestionnaireSearch',
+  emits: ['set-clear-provision-search-false'],
+
+  props: {
+    clearProvisionSearchText: {
+      type: Boolean,
+      required: true
+    }
+  },
   data () {
     return {
       searchInput: null,
@@ -58,6 +66,12 @@ export default {
     searchInput (value) {
       if (value) {
         this.provisions = this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase()))
+      }
+    },
+    clearProvisionSearchText (value, oldValue) {
+      if (value) {
+        this.searchInput = null
+        this.$emit('set-clear-provision-search-false')
       }
     }
   },

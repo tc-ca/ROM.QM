@@ -116,7 +116,7 @@ import Question from './question/question.vue'
 import BuilderService from '../../../services/builderService'
 
 export default {
-  emits: ['responseChanged'],
+  emits: ['responseChanged', 'update-group-count'],
   components: { Question },
 
   props: {
@@ -181,6 +181,15 @@ export default {
     },
     isVisible () {
       return this.group.isVisible && this.questionCount > 0
+    }
+  },
+  watch: {
+    isVisible (value, oldValue) {
+      if (value === true) {
+        this.$emit('update-group-count', 1)
+      } else {
+        this.$emit('update-group-count', -1)
+      }
     }
   },
   created () {
@@ -260,6 +269,9 @@ export default {
       this.$store.dispatch('repeatGroup', this.group)
     },
     removeGroup () {
+      // need to the update-group-count event in the removal as the events in the isVisibility watch are not emitted
+      // when a groups is removed, note this event is not need the above repeatGroup Method
+      this.$emit('update-group-count', -1)
       this.$store.dispatch('removeGroup', this.group)
     },
     onResponseChanged () {

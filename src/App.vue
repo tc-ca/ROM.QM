@@ -1,5 +1,7 @@
 <template>
-  <v-app id="app">
+  <v-app
+    id="app"
+  >
     <v-app-bar
       app
       hide-on-scroll
@@ -17,7 +19,10 @@
           width="80%"
           class="mx-auto "
         >
-          <provision-search />
+          <provision-search
+            :clear-provision-search-text="clearProvisionSearchText"
+            @set-clear-provision-search-false="setClearProvisionSearchFalse"
+          />
         </v-card>
       </v-expand-x-transition>
 
@@ -38,8 +43,13 @@
       @close="showSettings = false"
     />
     <v-content>
-      <v-container class="px-2">
-        <router-view ref="routerView" />
+      <v-container
+        class="px-2"
+      >
+        <router-view
+          ref="routerView"
+          @clear-provision-search-field="setClearProvisionSearchTrue"
+        />
       </v-container>
     </v-content>
     <notification-container />
@@ -100,7 +110,8 @@ export default {
     return {
       showLegislationSearchModal: false,
       showSettings: false,
-      expandProvisionSearch: false
+      expandProvisionSearch: false,
+      clearProvisionSearchText: false
     }
   },
   computed: {
@@ -195,6 +206,12 @@ export default {
     checkIsDirty () {
       if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()
       else if (this.$route.name === 'builder') return this.$refs.routerView.isDirty()
+    },
+    setClearProvisionSearchTrue () {
+      this.clearProvisionSearchText = true
+    },
+    setClearProvisionSearchFalse () {
+      this.clearProvisionSearchText = false
     }
   }
 

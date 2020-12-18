@@ -1,65 +1,102 @@
 <template>
   <div>
-    <v-row>
-      <v-col>
-        <v-btn
-          @click="expandAll()"
-        >
-          <span>{{ $t('app.questionnaire.expandAll') }}</span>
-        </v-btn>
-        <v-btn
-          @click="collapseAll()"
-        >
-          <span>{{ $t('app.questionnaire.collapseAll') }}</span>
-        </v-btn>
-        <v-btn @click="validateQ()">
-          {{ $t('app.questionnaire.validate') }}
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="7">
-        <div>
-          <v-form
-            ref="questionaire_form"
-            v-model="valid"
-            justify="start"
+    <div v-show="isVisible">
+      <v-row>
+        <v-col>
+          <v-btn
+            @click="expandAll()"
           >
-            <v-expansion-panels
-              v-model="expansionPanels"
-              focusable
-              multiple
-              class="v-expansion-panel"
+            <span>{{ $t('app.questionnaire.expandAll') }}</span>
+          </v-btn>
+          <v-btn
+            @click="collapseAll()"
+          >
+            <span>{{ $t('app.questionnaire.collapseAll') }}</span>
+          </v-btn>
+          <v-btn @click="validateQ()">
+            {{ $t('app.questionnaire.validate') }}
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="7">
+          <div>
+            <v-form
+              ref="questionaire_form"
+              v-model="valid"
+              justify="start"
             >
-              <questionnaire-group
-                v-for="(group, groupIndex) in group.groups"
-                ref="questionGroup"
-                :key="groupIndex"
-                :group="group"
-                :index="groupIndex"
-                :expand="expand"
-              />
-            </v-expansion-panels>
-          </v-form>
-        </div>
-      </v-col>
-      <v-col
-        v-if="hasNotifications"
-        cols="5"
-        justify="space-around"
+              <v-expansion-panels
+                v-model="expansionPanels"
+                focusable
+                multiple
+                class="v-expansion-panel"
+              >
+                <questionnaire-group
+                  v-for="(group, groupIndex) in group.groups"
+                  ref="questionGroup"
+                  :key="groupIndex"
+                  :group="group"
+                  :index="groupIndex"
+                  :expand="expand"
+                  data-group-id="group"
+                  @update-group-count="onUpdateGroupCount"
+                />
+              </v-expansion-panels>
+            </v-form>
+          </div>
+        </v-col>
+        <v-col
+          v-if="hasNotifications"
+          cols="5"
+          justify="space-around"
+        >
+          <v-row>
+            <v-col>
+              <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:75%;overflow-y: auto;">
+                <questionnaire-error
+                  :notifications="notifications"
+                  @notification:click="onNotificationClick"
+                />
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </div>
+    <div v-show="!isVisible">
+      <v-card
+        elevation="2"
       >
-        <v-row>
-          <v-col>
-            <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:75%;overflow-y: auto;">
-              <questionnaire-error
-                :notifications="notifications"
-                @notification:click="onNotificationClick"
-              />
-            </div>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+        <v-card-title>
+          Sorry, no questions matching the provision search criteria.
+        </v-card-title>
+        <v-card-text>
+          <p>Search Suggestions</p>
+          <div class="text--primary">
+            <ul>
+              <li>
+                Check your spelling
+              </li>
+              <li>
+                Try more general words
+              </li>
+              <li>
+                Search by provision label (Example: "3.5 (1) (c)")
+              </li>
+              <li>
+                Select a provision from the list of suggestions
+              </li>
+            </ul>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn @click="clearProvisionSearchField">
+            Clear Search
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
   </div>
 </template>
 
@@ -72,6 +109,7 @@ import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
 
 export default {
+  emits: ['clear-provision-search-field'],
   components: { QuestionnaireGroup, QuestionnaireError },
 
   props: {
@@ -81,11 +119,7 @@ export default {
       valid: false,
       expand: true,
       panelIndex: Number,
-      provisionFilter: null,
-      searchInput: null,
-      testData: null,
-      comboxchanged: false,
-      provisionList: []
+      groupCount: 0
     }
   },
   computed: {
@@ -139,7 +173,18 @@ export default {
     notifications () {
       const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
       return notices
+    },
+    isVisible () {
+      return this.groupCount > 0
     }
+  },
+  mounted () {
+    // sets the default value based on visibility of the component
+    this.$nextTick(function () {
+    // Code that will run only after the
+    // entire view has been rendered
+      this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
+    })
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
@@ -219,6 +264,12 @@ export default {
     expandAll () {
       this.panelIndex = null
       this.expand = true
+    },
+    onUpdateGroupCount (count) {
+      this.groupCount += count
+    },
+    clearProvisionSearchField () {
+      this.$emit('clear-provision-search-field')
     }
   }
 }
