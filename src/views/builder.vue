@@ -4,10 +4,10 @@
       <v-col cols="7">
         <div>
           <div v-if="!questionnaire || !questionnaire.groups">
-            Loading...
+            {{ $t('app.builder.loading') }}
           </div>
           <div v-else-if="!questionnaire.groups.length">
-            Click Add Group to start creating a new Questionnaire
+            {{ $t('app.builder.noGroups') }}
           </div>
           <v-expansion-panels
             v-else
@@ -87,6 +87,7 @@
           <v-row>
             <v-col>
               <v-text-field
+                v-if="questionnaire"
                 v-model="questionnaire.name"
                 :label="$t('app.builder.questionnaireName')"
               />
@@ -718,6 +719,10 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
+    if (this.loadLocalData) {
+      this.$store.dispatch('SetTreeLegislationsStateToLocalData')
+    }
+
     // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {

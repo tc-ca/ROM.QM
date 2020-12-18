@@ -16,6 +16,8 @@
       "qFromState": "FR Questionnaire pulling from state"
     },
     "builder": {
+      "noGroups": "FR Click Add Group to start creating a new Questionnaire!",
+      "loading": "FR Loading...",
       "save": "FR Save",
       "questionnaireName": "FR Questionnaire Name",
       "questionName": "FR Question Name",

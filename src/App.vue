@@ -139,17 +139,6 @@ export default {
     if (this.envDev && this.loadLocalData) {
       const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-
-      switch (page) {
-        case 'builder':
-          await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
-          break
-        case 'questionnaire':
-          await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
-          break
-        default:
-          break
-      }
     } else if (this.envDev && !this.loadLocalData) {
       const questionnaire = BuilderService.createQuestionnaire()
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
