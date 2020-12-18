@@ -57,7 +57,6 @@
 </template>
 
 <script>
-let mockData = null
 
 export default {
   props: {
@@ -94,9 +93,18 @@ export default {
     }
   },
 
-  created: function () {
-    mockData = require('../../api/legislation.json')
-    this.legislations = mockData
+  created: async function () {
+    const axios = await import('axios')
+
+    let response = await axios.get('/static/legislation.json')
+      .catch(function (error) {
+        // handle error
+        console.log(error)
+      })
+
+    console.log(response)
+
+    this.legislations = response.data
   },
 
   methods: {

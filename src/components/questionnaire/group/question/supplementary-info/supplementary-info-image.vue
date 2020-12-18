@@ -276,7 +276,7 @@ export default {
       if (this.envProd) {
         this.images[this.galleryIndex].base64String = base64
       } else {
-        this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
+        // this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
       }
     },
 

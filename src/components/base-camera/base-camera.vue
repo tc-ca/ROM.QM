@@ -3,7 +3,6 @@
 <script>
 /* eslint-disable no-undef */
 import '@resconet/jsbridge/src/JSBridge.js'
-import base64Images from '../../api/base64-images.js'
 import BaseMixin from '../../mixins/base'
 
 export default {
@@ -45,7 +44,7 @@ export default {
           MobileCRM.bridge.alert
         )
       } else {
-        vm.$emit(vm.onCaptureEmit, `data:image/jpeg;base64,${base64Images.image_001}`)
+        // vm.$emit(vm.onCaptureEmit, `data:image/jpeg;base64,${base64Images.image_001}`)
       }
     }
   },

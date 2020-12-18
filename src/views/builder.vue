@@ -3,7 +3,14 @@
     <v-row>
       <v-col cols="7">
         <div>
+          <div v-if="!questionnaire || !questionnaire.groups">
+            Loading...
+          </div>
+          <div v-else-if="!questionnaire.groups.length">
+            Click Add Group to start creating a new Questionnaire
+          </div>
           <v-expansion-panels
+            v-else
             v-model="groupPanels"
             focusable
             multiple
@@ -690,7 +697,7 @@ export default {
     ...mapState({
       group: state => {
         if (!state || !state.group) {
-          return []
+          return [ { groups: [] } ]
         }
         return state.group
       },

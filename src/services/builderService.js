@@ -300,10 +300,20 @@ function processBuilderForSave(questionnaire){
 }
 
 async function GetMockQuestionnaireFromImportModule() {
-  const data = await import("../api/betaAnswers.json").then(module => {
-    return module.default;
-  });
-  return data;
+  if(process.env.NODE_ENV !== 'production') 
+  {
+    const axios = await import('axios')
+
+    let response = await axios.get('/static/betaAnswers.json')
+      .catch(function (error) {
+        // handle error
+        console.log(error)
+      })
+
+    console.log(response)
+
+    return response.data;
+  }
 }
 
 

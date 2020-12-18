@@ -169,7 +169,6 @@
 import { mapState } from 'vuex'
 import '@resconet/jsbridge/src/JSBridge.js'
 import moment from 'moment'
-import base64Images from '../../../../../api/base64-images.js'
 import AppCamera from '../../../../base-camera/base-camera.vue'
 import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
@@ -260,11 +259,9 @@ export default {
       this.$emit('change', this.images)
     },
 
-    changeImage (base64) {
+    async changeImage (base64) {
       if (this.envProd) {
         this.images[this.galleryIndex].base64String = base64
-      } else {
-        this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
       }
       this.$emit('change', this.images)
     },
