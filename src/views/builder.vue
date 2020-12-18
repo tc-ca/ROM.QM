@@ -650,7 +650,6 @@ import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
 import { generateName } from '../utils.js'
-
 export default {
   name: 'Builder',
   components: {
@@ -745,14 +744,12 @@ export default {
       return _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
     },
     onGroupTextChange (selectedGroup) {
-      selectedGroup.primaryKey = generateName(selectedGroup.title[LANGUAGE.ENGLISH], 'group', this.questionnaire.name)
+      selectedGroup.primaryKey = generateName(selectedGroup.title[LANGUAGE.ENGLISH], 'GRP', this.questionnaire.name)
       selectedGroup.questions.forEach(q => {
         this.onQuestionTextChange(q)
       })
     },
     onQuestionTextChange (question) {
-      // eslint-disable-next-line no-debugger
-      debugger
       let questiontext = question.text[LANGUAGE.ENGLISH]
 
       switch (question.type) {
@@ -770,7 +767,7 @@ export default {
           break
       }
 
-      question.name = generateName(questiontext, 'question', this.questionnaire.name, this.selectedGroup.primaryKey)
+      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'QTN', questiontext + '_' + this.selectedGroup.primaryKey)
       if (question.childQuestions) {
         question.childQuestions.forEach(q => {
           this.onQuestionTextChange(q)
@@ -788,9 +785,7 @@ export default {
       }
     },
     onOptionTextChange (option) {
-      // eslint-disable-next-line no-debugger
-      debugger
-      option.name = generateName(option.text[LANGUAGE.ENGLISH], 'response', '', '', this.selectedQuestion.name)
+      option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
     },
     setSamplingRecord () {
       if (this.selectedQuestion) {
@@ -884,7 +879,7 @@ export default {
       group.expansionPanels = []
       group.expansionPanels.push(group.questions.length)
 
-      // this.selectedGroup = group
+      this.selectedGroup = group
       // this.selectedQuestion = question
     },
     addQuestionToIndex (question) {

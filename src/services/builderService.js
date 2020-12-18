@@ -13,7 +13,7 @@ function createGroup (questionnaire) {
     [LANGUAGE.ENGLISH]: 'New Group',
     [LANGUAGE.FRENCH]: 'Fr: New Group'
   }
-  group.primaryKey = generateName(group.title[LANGUAGE.ENGLISH], 'group', questionnaire.name)
+  group.primaryKey = generateName(group.title[LANGUAGE.ENGLISH], 'GRP', questionnaire.name)
   group.isRepeatable = false
   group.isVisible = true
   group.order = id
@@ -28,7 +28,7 @@ function createGroup (questionnaire) {
 
 function createQuestionnaire (templatename) {
   return {
-    name: generateName(templatename, 'template'),
+    name: generateName(templatename, 'TMPLT', ''),
     title: {
       [LANGUAGE.ENGLISH]: 'Questionnaire Title EN',
       [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
@@ -40,10 +40,9 @@ function createQuestionnaire (templatename) {
 }
 
 function createQuestion (questionnaire, group) {
-  debugger
   let id = getNextQuestionId(questionnaire)
   let guid = uuidv4();
-  let questionName = generateName('Question', 'question', questionnaire.name, group.primaryKey)
+  let questionName = generateName('Question', 'QTN', 'RD_' + group.primaryKey)
 
   let question = {
     name: questionName,
@@ -65,7 +64,7 @@ function createQuestion (questionnaire, group) {
     responseOptions: [
       {
         id: 1,
-        name: generateName('Response Yes', 'response', '', '', questionName),
+        name: generateName('Response Yes', 'RSPNS', questionName),
         sortOrder: 1,
         text: {
           [LANGUAGE.ENGLISH]: 'Yes',
@@ -89,7 +88,7 @@ function createQuestion (questionnaire, group) {
       },
       {
         id: 2,
-        name: generateName('Response No', 'response', '', '', questionName),
+        name: generateName('Response No', 'RSPNS', questionName),
         sortOrder: 2,
         text: {
           [LANGUAGE.ENGLISH]: 'No',
@@ -205,7 +204,7 @@ function createResponseOption (question) {
   let id = question.responseOptions.length + 1
   return {
     id: id,
-    name: generateName(`Option ${id}`, 'response', '', '', question.Name),
+    name: generateName(`Option ${id}`, 'RSPNS', question.Name),
     sortOrder: id,
     text: {
       [LANGUAGE.ENGLISH]: `Option ${id}`,
