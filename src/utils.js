@@ -108,3 +108,34 @@ export function getCollectionParent(group, guid) {
   }
   return result;
 }
+
+
+
+export function GetAllChildrenQuestions(question)
+{
+  const questions = []
+       let childrenQuestions = GetChildQuestions(question);
+       let childrenCount = childrenQuestions.length;
+
+       while (childrenCount > 0) {
+         for (let index = 0; index < childrenQuestions.length; index++) {
+           let childQuestion = childrenQuestions[index];
+           //add child question to array
+           questions.push(childQuestion);
+           //check to see if child has children
+           const children = GetChildQuestions(childQuestion);
+           //
+           childrenCount = children.length;
+           //wtv children questions that have been found will add it to the loop/queue for processing
+           childrenQuestions = childrenQuestions.concat(children);
+         }
+       }
+       return questions
+}
+function GetChildQuestions(question) {
+  let questions = [];
+  question.childQuestions.forEach(childQuestion => {
+    questions.push(childQuestion);
+  });
+  return questions;
+}
