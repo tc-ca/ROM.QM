@@ -1,0 +1,51 @@
+{
+    "webresources": [
+        {
+            "root": "Webresources/qm_",
+            "files": [
+                {
+                    "uniquename": "qm_builder.html",
+                    "file": "../dist/builder.html",
+                    "description": null,
+                    "ts": null
+                },
+                {
+                    "uniquename": "qm_app.css",
+                    "file": "../dist/css/app.css",
+                    "description": null,
+                    "ts": null
+                },
+                {
+                    "uniquename": "qm_chunk-vendors.css",
+                    "file": "../dist/css/chunk-vendors.css",
+                    "description": null,
+                    "ts": null
+                },
+                {
+                    "uniquename": "qm_favicon.ico",
+                    "file": "../dist/favicon.ico",
+                    "description": null,
+                    "ts": null
+                },
+                {
+                    "uniquename": "qm_app.js",
+                    "file": "../dist/js/app.js",
+                    "description": null,
+                    "ts": null
+                },
+                {
+                    "uniquename": "qm_chunk-vendors.js",
+                    "file": "../dist/js/chunk-vendors.js",
+                    "description": null,
+                    "ts": null
+                },
+                {
+                    "uniquename": "qm_render.html",
+                    "file": "../dist/render.html",
+                    "description": null,
+                    "ts": null
+                }
+            ]
+        }
+    ]
+}
