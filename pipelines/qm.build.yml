@@ -48,13 +48,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              buildType: 'current'
-              downloadType: 'single'
-              artifactName: 'WebResources'
-              itemPattern: 'WebResources/**'
-              downloadPath: '$(System.ArtifactsDirectory)'
           - task: MSCRMToolInstaller@12
             inputs:
               nugetFeed: 'official'
@@ -87,13 +80,27 @@ stages:
                 Get-ChildItem -Path "$(Build.SourcesDirectory)"
                 Write-Host "============================================"
               errorActionPreference: 'continue'
+          - task: MSCRMGetLatestPatch@12
+            name: GetLatestPatchTask
+            inputs:
+              crmConnectionString: '$(ConnectionString)'
+              solutionName: '$(SolutionName)'
+              existsVariableName: 'PatchExists'
+              patchVariableName: 'LatestPatchName'
+          - powershell: |
+              Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.PatchExists]$(PatchExists)"
+              Write-Host "##vso[task.setvariable variable=task.GetLatestPatchTask.LatestPatchName]$(LatestPatchName)"
+              Write-Host "Patch Exists =  $(PatchExists)"
+              Write-Host "Latest Patch Name =  $(LatestPatchName)"
+              Write-Host "${{ eq('$(PatchExists)', 'False') }}"
+              Write-Host variables['task.GetLatestPatchTask.PatchExists']
           - task: MSCRMUpdateWebResource@12
             inputs:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
-              webResourceFolderPath: '$(System.ArtifactsDirectory)'
-              webResourceJsonMappingPath: '$(Build.SourcesDirectory)\ROM.QM\publishingScripts\webresourceMapping.json'
+              webResourceFolderPath: '..\WebResources\dist'
+              webResourceJsonMappingPath: 'webresourceMapping.json'
               failIfWebResourceNotFound: false
               publish: true
-              solutionName: 'TC_GlobalCore'
+              solutionName: '$(SolutionName)'
               crmConnectionTimeout: 360

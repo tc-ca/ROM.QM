@@ -58,11 +58,28 @@
       :show-modal="showLegislationSearchModal"
       @hideModal="showLegislationSearchModal = false"
     />
-    <div v-if="envDev">
-      environment: {{ env }}
+    <div style="font-size: small; margin-left: 10px">
+      <div v-if="envDev">
+        Environment: {{ env }}
+      </div>
+      <div v-if="envDev">
+        Load local data: {{ loadLocalData }}
+      </div>
     </div>
-    <div v-if="envDev">
-      load local data: {{ loadLocalData }}
+    <div>
+      <v-btn
+        v-show="fab"
+        v-scroll="onScroll"
+        fab
+        dark
+        fixed
+        bottom
+        right
+        color="primary"
+        @click="scrollToTop"
+      >
+        <v-icon>mdi-arrow-up</v-icon>
+      </v-btn>
     </div>
   </v-app>
 </template>
@@ -109,6 +126,7 @@ export default {
   },
   data: function () {
     return {
+      fab: false,
       showLegislationSearchModal: false,
       showSettings: false,
       expandProvisionSearchField: false,
@@ -205,6 +223,14 @@ export default {
     },
     shrinkProvisionSearchField () {
       this.expandProvisionSearchField = false
+    },
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    scrollToTop () {
+      this.$vuetify.goTo(0)
     }
   }
 
