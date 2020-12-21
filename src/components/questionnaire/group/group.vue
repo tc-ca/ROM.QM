@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panel>
+  <v-expansion-panel v-show="isVisible">
     <v-expansion-panel-header>
       <template #actions>
         <v-icon
@@ -89,6 +89,7 @@
               v-for="question in group.questions"
               ref="groupQuestion"
               :key="question.guid"
+              :data-group-id="group.htmlElementId"
               :question="question"
               :group="group"
               :in-repeated-group="repeatedGroup"
@@ -97,6 +98,7 @@
               @error="onError"
               @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
+              @update-group-question-count="onUpdateGroupQuestionCount"
               @repeat-question="onRepeatQuestion"
               @delete-repeated-question="onDeleteRepeatedQuestion"
             />
@@ -116,7 +118,7 @@ import BuilderService from '../../../services/builderService'
 import { setNewGUID } from '../../../utils.js'
 
 export default {
-  emits: ['responseChanged'],
+  emits: ['responseChanged', 'update-group-count'],
   components: { Question },
 
   props: {
@@ -138,7 +140,8 @@ export default {
       // indicates if the group was created by using the repeat function i.e. not original
       repeatedGroup: false,
       valid: true,
-      groupSubtitle: ''
+      groupSubtitle: '',
+      questionCount: 0
     }
   },
   computed: {
@@ -175,6 +178,18 @@ export default {
         }
       },
       set () { }
+    },
+    isVisible () {
+      return this.group.isVisible && this.questionCount > 0
+    }
+  },
+  watch: {
+    isVisible (value, oldValue) {
+      if (value === true) {
+        this.$emit('update-group-count', 1)
+      } else {
+        this.$emit('update-group-count', -1)
+      }
     }
   },
   created () {
@@ -200,6 +215,11 @@ export default {
     this.$store.dispatch('updateGroupOrder', { group, index })
     this.$store.dispatch('updateGroupHtmlElementId', { group })
   },
+  mounted () {
+    // sets the default value based on visibility of the component
+    this.questionCount = this.$el.querySelectorAll(`[data-group-id='${this.group.htmlElementId}']:not([style*='display: none'])`).length
+  },
+
   methods: {
     onRepeatQuestion (questionGuid) {
       let questionIdx = this.group.questions.findIndex(q => q.guid === questionGuid)
@@ -274,6 +294,9 @@ export default {
       this.$store.dispatch('repeatGroup', this.group)
     },
     removeGroup () {
+      // need to the update-group-count event in the removal as the events in the isVisibility watch are not emitted
+      // when a groups is removed, note this event is not need the above repeatGroup Method
+      this.$emit('update-group-count', -1)
       this.$store.dispatch('removeGroup', this.group)
     },
     onResponseChanged () {
@@ -296,6 +319,9 @@ export default {
         }
       }
       return true
+    },
+    onUpdateGroupQuestionCount (count) {
+      this.questionCount += count
     }
   }
 }

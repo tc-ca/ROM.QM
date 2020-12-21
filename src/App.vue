@@ -1,5 +1,7 @@
 <template>
-  <v-app id="app">
+  <v-app
+    id="app"
+  >
     <v-app-bar
       app
       hide-on-scroll
@@ -9,27 +11,31 @@
         color="white"
         @click="showSettings = !showSettings"
       />
-      <v-toolbar-title />
       <v-spacer />
 
+      <v-expand-x-transition>
+        <v-card
+          v-show="expandProvisionSearchField"
+          width="80%"
+          class="mx-auto "
+        >
+          <provision-search
+            :clear-provision-search-text="clearProvisionSearchText"
+            @set-clear-provision-search-false="setClearProvisionSearchFalse"
+            @shrink-provision-search-field="shrinkProvisionSearchField"
+          />
+        </v-card>
+      </v-expand-x-transition>
+
       <v-btn
-        v-if="envDev"
-        id="save"
+        id=""
         icon
         color="white"
-        data-qtn-id="save"
-        @click="save()"
+        @click="expandProvisionSearchField = !expandProvisionSearchField"
       >
-        <v-icon data-qtn-id="save">
-          mdi-content-save
+        <v-icon>
+          mdi-magnify
         </v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        color="white"
-        @click="showLegislationSearchModal = true"
-      >
-        <v-icon>mdi-database-search</v-icon>
       </v-btn>
     </v-app-bar>
     <settings
@@ -38,8 +44,13 @@
       @close="showSettings = false"
     />
     <v-content>
-      <v-container class="px-2">
-        <router-view ref="routerView" />
+      <v-container
+        class="px-2"
+      >
+        <router-view
+          ref="routerView"
+          @clear-provision-search-field="setClearProvisionSearchTrue"
+        />
       </v-container>
     </v-content>
     <notification-container />
@@ -61,6 +72,8 @@ import { LANGUAGE } from './constants.js'
 import BuilderService from './services/builderService'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
+import ProvisionSearch from './components/provision-search/provision-search.vue'
+
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
 import { mapActions, mapState } from 'vuex'
@@ -70,7 +83,8 @@ export default {
   components: {
     NotificationContainer,
     LegislationSearchModal,
-    Settings
+    Settings,
+    ProvisionSearch
   },
   mixins: [BaseMixin],
   props: {
@@ -96,7 +110,9 @@ export default {
   data: function () {
     return {
       showLegislationSearchModal: false,
-      showSettings: false
+      showSettings: false,
+      expandProvisionSearchField: false,
+      clearProvisionSearchText: false
     }
   },
   computed: {
@@ -180,6 +196,15 @@ export default {
     checkIsDirty () {
       if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()
       else if (this.$route.name === 'builder') return this.$refs.routerView.isDirty()
+    },
+    setClearProvisionSearchTrue () {
+      this.clearProvisionSearchText = true
+    },
+    setClearProvisionSearchFalse () {
+      this.clearProvisionSearchText = false
+    },
+    shrinkProvisionSearchField () {
+      this.expandProvisionSearchField = false
     }
   }
 
