@@ -58,11 +58,13 @@
       :show-modal="showLegislationSearchModal"
       @hideModal="showLegislationSearchModal = false"
     />
-    <div v-if="envDev">
-      environment: {{ env }}
-    </div>
-    <div v-if="envDev">
-      load local data: {{ loadLocalData }}
+    <div style="font-size: small; margin-left: 10px">
+      <div v-if="envDev">
+        Environment: {{ env }}
+      </div>
+      <div v-if="envDev">
+        Load local data: {{ loadLocalData }}
+      </div>
     </div>
   </v-app>
 </template>
