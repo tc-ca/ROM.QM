@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { LANGUAGE } from '../../constants.js'
 
 export default {
   props: {
@@ -86,26 +88,48 @@ export default {
       })
     },
     items () {
-      return this.legislations.map(legislation => {
-        const description = `${legislation.LegislationReference} ${legislation.LegislationTextEnglish}`
-        return Object.assign({}, legislation, { description })
-      })
-    }
-  },
+      if (!this.legislations) {
+        return []
+      } else {
+        return this.legislations.map(legislation => {
+          let description = ''
 
+          if (this.language === 'en') {
+            description = `${legislation.Label} ${legislation.DisplayEnglishText}`
+          } else {
+            description = `${legislation.Label} ${legislation.DisplayFrenchText}`
+          }
+
+          return Object.assign({}, legislation, { description })
+        })
+      }
+    },
+    ...mapState({
+      language: (state) => {
+        if (state == null || !state.settings) {
+          return LANGUAGE.ENGLISH
+        }
+        return state.settings.settings.lang
+      }
+    })
+  },
   created: async function () {
-    const axios = await import('axios')
 
-    let response = await axios.get('/static/legislation.json')
-      .catch(function (error) {
-        // handle error
-        console.log(error)
-      })
-
-    console.log(response)
-
-    this.legislations = response.data
   },
+  // mounted () {
+  //   // i want to listen for legislation being set
+  //   this.$store.subscribe((mutation, state) => {
+  //     switch (mutation.type) {
+  //       case 'SetLegislations':
+  //         console.log('legislation-search-model "SetLegislations"')
+
+  //         this.legislations = this.$store.state.legislations.legislations
+  //         break
+  //       default:
+  //         break
+  //     }
+  //   })
+  // },
 
   methods: {
     hideModal () {

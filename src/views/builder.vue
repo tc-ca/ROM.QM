@@ -319,7 +319,7 @@
                                 <v-treeview
                                   v-model="option.provisions"
                                   selectable
-                                  item-text="DisplayEnglishText"
+                                  :item-text="lang === eng ? 'DisplayEnglishText' : 'DisplayFrenchText'"
                                   item-key="id"
                                   selection-type="leaf"
                                   :search="option.searchProvisions"
@@ -676,8 +676,8 @@ export default {
       confirmCallbackArgs: null,
       violationsCollapsed: true,
       provisionsCollapsed: true,
-      provisions: null,
-      searchProvisions: null,
+      provisions: [],
+      searchProvisions: [],
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],
@@ -719,7 +719,7 @@ export default {
     this.questionnaire = this.$store.state.questionnaire.questionnaire
   },
   mounted () {
-    if (this.loadLocalData) {
+    if (this.envDev && this.loadLocalData) {
       this.$store.dispatch('SetTreeLegislationsStateToLocalData')
     }
 

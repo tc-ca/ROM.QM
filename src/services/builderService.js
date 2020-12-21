@@ -209,6 +209,18 @@ function createResponseOption (question) {
     selectedProvisions: [],
     searchProvisions: null,
     isProvisionCollapsed: false,
+    internalComment: {
+      option: "optional",
+      value: ""
+    },
+    externalComment: {
+      option: "optional",
+      value: ""
+    },
+    picture: {
+      option: "optional",
+      value: ""
+    }
   }
 }
 
