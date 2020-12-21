@@ -89,16 +89,17 @@
               <v-text-field
                 v-if="questionnaire"
                 v-model="questionnaire.name"
+                disabled
                 :label="$t('app.builder.questionnaireName')"
               />
             </v-col>
           </v-row>
           <v-row v-if="selectedGroup">
             <v-col>
-              <v-text-field
+              <!-- <v-text-field
                 v-model="selectedGroup.primaryKey"
                 :label="$t('app.builder.group.groupName')"
-              />
+              /> -->
               <v-text-field
                 v-model="selectedGroup.title[eng]"
                 label="Group text En"
@@ -120,11 +121,11 @@
           </v-row>
           <v-row v-if="selectedQuestion">
             <v-col>
-              <v-text-field
+              <!-- <v-text-field
                 v-model="selectedQuestion.name"
                 :disabled="selectedQuestion.type === reference"
                 :label="$t('app.builder.questionName')"
-              />
+              /> -->
               <v-text-field
                 v-model="selectedQuestion.text[eng]"
                 label="Question text En"
@@ -199,11 +200,11 @@
                       :key="index"
                       class="bordered ml-2 pa-2 my-2"
                     >
-                      <v-text-field
+                      <!-- <v-text-field
                         v-model="option.name"
                         dense
                         label="Option Name"
-                      />
+                      /> -->
                       <v-text-field
                         v-model="option.text[eng]"
                         dense
