@@ -8,7 +8,9 @@ export function pad (n, width, z) {
 
 export function generateName (name, prefix, postfix) {
   if (!name) return name
-  return prefix + '_' + name.replace(/[aeiou]/ig,'').replace(/\s+/g, '').substring(0, 15).toUpperCase() + '_' + postfix
+  let cn = prefix + '_' + name.replace(/[aeiou]/ig,'').replace(/\s+/g, '').substring(0, 15).toUpperCase()
+  if (postfix) cn += '_' + postfix
+  return cn
 }
 
 // works on primitive types

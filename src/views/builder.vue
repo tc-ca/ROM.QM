@@ -85,14 +85,14 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
+            <!-- <v-col>
               <v-text-field
                 v-if="questionnaire"
                 v-model="questionnaire.name"
                 disabled
                 :label="$t('app.builder.questionnaireName')"
               />
-            </v-col>
+            </v-col> -->
           </v-row>
           <v-row v-if="selectedGroup">
             <v-col>
@@ -659,6 +659,7 @@ import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
 import { generateName } from '../utils.js'
+
 export default {
   name: 'Builder',
   components: {
