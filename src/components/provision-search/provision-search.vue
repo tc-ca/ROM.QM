@@ -13,6 +13,7 @@
     hint="Find a question through provision"
     @keydown.enter="isMenuActive(false)"
     @input="updateProvisionFilter"
+    @blur="shrinkProvisionSearchField"
   />
 </template>
 
@@ -21,7 +22,7 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'QuestionnaireSearch',
-  emits: ['set-clear-provision-search-false'],
+  emits: ['set-clear-provision-search-false', 'shrink-provision-search-field'],
 
   props: {
     clearProvisionSearchText: {
@@ -84,14 +85,31 @@ export default {
       if (typeof value === 'object' && value !== null) {
         // item was selected from combobox list
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [value] })
-      } else if (value === null || value.trim() === '') {
-        // blank input
-        // as the user has not really inputted anything i.e blank search so we wont filter and to do that we must set provision filter to null
+      } else if (value === null) {
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
-      } else {
-        // typed in search
+      } else if (typeof value === 'string') {
+        if (value && !value.trim()) {
+          // blank input
+        // as the user has not really inputted anything i.e blank search so we wont filter and to do that we must set provision filter to null
+          this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
+        } else {
+          // typed in search
         // in this case of string its a generic search, and pass all the provisions found while filtering
-        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: this.provisions })
+          this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: this.provisions })
+        }
+      }
+    },
+    shrinkProvisionSearchField () {
+      if (this.provisions.length > 0) {
+        this.$emit('shrink-provision-search-field')
+      }
+      if (this.model === null) {
+        this.$emit('shrink-provision-search-field')
+      }
+      if (typeof this.model === 'string') {
+        if (this.model && !this.model.trim()) {
+          this.$emit('shrink-provision-search-field')
+        }
       }
     }
 
