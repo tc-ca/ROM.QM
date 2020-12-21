@@ -26,13 +26,13 @@ function createGroup (questionnaire) {
   return group
 }
 
-function createQuestionnaire (templatename) {
+function createQuestionnaire () {
   return {
-    name: generateName(templatename, 'TMPLT', ''),
     title: {
       [LANGUAGE.ENGLISH]: 'Questionnaire Title EN',
       [LANGUAGE.FRENCH]: 'Questionnaire Title EN'
     },
+    name: generateName('Questionnaire Title EN', 'TMPLT', ''),
     groups: [],
     templateid: '',
     searchableProvisions: []

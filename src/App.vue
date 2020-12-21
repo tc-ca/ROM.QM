@@ -151,7 +151,7 @@ export default {
           break
       }
     } else if (this.envDev && !this.loadLocalData) {
-      const questionnaire = BuilderService.createQuestionnaire(this.templatejson)
+      const questionnaire = BuilderService.createQuestionnaire()
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
     }
