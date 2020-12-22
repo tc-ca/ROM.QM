@@ -99,7 +99,7 @@ stages:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
               webResourceFolderPath: '$(Agent.BuildDirectory)\WebResources\dist'
-              webResourceJsonMappingPath: 'webresourceMapping.json'
+              webResourceJsonMappingPath: '$(Agent.BuildDirectory)\WebResources\dist\webresourceMapping.json'
               failIfWebResourceNotFound: false
               publish: true
               solutionName: '$(LatestPatchName)'
