@@ -98,9 +98,14 @@ stages:
             inputs:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
-              webResourceFolderPath: '..\WebResources\dist'
-              webResourceJsonMappingPath: 'webresourceMapping.json'
+              webResourceFolderPath: '$(Agent.BuildDirectory)\WebResources\dist'
+              webResourceJsonMappingPath: '$(Agent.BuildDirectory)\WebResources\dist\webresourceMapping.json'
               failIfWebResourceNotFound: false
               publish: true
-              solutionName: '$(SolutionName)'
+              solutionName: '$(LatestPatchName)'
               crmConnectionTimeout: 360
+          - task: MSCRMCopySolutionComponents@12
+            inputs:
+              crmConnectionString: '$(ConnectionString)'
+              fromSolutionName: '$(QMSolutionName)'
+              toSolutionName: '$(SolutionName)'

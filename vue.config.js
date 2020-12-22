@@ -23,6 +23,7 @@ module.exports = {
   },
 
   configureWebpack: {
+
     entry: {
       app: './src/main.js'
     },
@@ -33,10 +34,9 @@ module.exports = {
 
 
     output: {
-      filename: "[name].js",
-      chunkFilename: "[name].js"
+      filename: "./js/[name].js",
+      chunkFilename: "./js/[name].js"
     },
-
 
     optimization: {
       splitChunks:{
@@ -56,5 +56,12 @@ module.exports = {
         minSize: 0
       } 
     }
-  }
+  },
+
+  chainWebpack: (config) => {
+    config.plugin("copy").tap(([options]) => {
+      options[0].ignore.push("static/**");
+      return [options];
+    });
+  },
 }
