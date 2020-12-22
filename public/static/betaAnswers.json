@@ -809,5 +809,6 @@
           "leg": "fe852602-4fb0-4101-b42b-78c2dc2c1f38",
           "questions": ["faefaf11-4cc3-4397-b97b-9c01046698db"]
       }
-  ]
+  ],
+  "readOnly": false
 }
