@@ -98,9 +98,9 @@ stages:
             inputs:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
-              webResourceFolderPath: 'WebResources\dist'
-              webResourceJsonMappingPath: 'WebResources\dist\webresourceMapping.json'
+              webResourceFolderPath: '$(Agent.BuildDirectory)\WebResources\dist'
+              webResourceJsonMappingPath: 'webresourceMapping.json'
               failIfWebResourceNotFound: false
               publish: true
-              solutionName: '$(SolutionName)'
+              solutionName: '$(LatestPatchName)'
               crmConnectionTimeout: 360
