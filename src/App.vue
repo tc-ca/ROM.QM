@@ -70,12 +70,13 @@
       <v-btn
         v-show="fab"
         v-scroll="onScroll"
+        class="btnTop"
         fab
         dark
         fixed
         bottom
         right
-        color="primary"
+        color="warning"
         @click="scrollToTop"
       >
         <v-icon>mdi-arrow-up</v-icon>
@@ -245,5 +246,8 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   /* margin-top: 60px; */
+}
+.btnTop i:hover{
+  transform: scale(1.80);
 }
 </style>
