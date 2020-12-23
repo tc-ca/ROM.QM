@@ -45,6 +45,10 @@ export const getters = {
 
 export const actions = {
 
+  setQuestionnaireReadOnlyStatus({commit}, payload) {
+    commit("setQuestionnaireReadOnlyStatus", payload)
+  },
+
   async SetMockQuestionnaireResponse({ commit, dispatch }) {
     const data = await SetMockQuestionnaireResponseImportModule();
     commit("setQuestionnaire", data);
@@ -156,6 +160,10 @@ export const actions = {
 export const mutations = {
   setQuestionnaire(state, payload) {
     state.questionnaire = payload;
+  },
+
+  setQuestionnaireReadOnlyStatus(state, payload) {
+    state.questionnaire.readOnly = payload
   },
 
   addSearchableProvision(state, payload) {

@@ -16,6 +16,11 @@
           <v-btn @click="validateQ()">
             {{ $t('app.questionnaire.validate') }}
           </v-btn>
+          <v-btn @click="setReadOnly()">
+            <span>{{ $t('app.questionnaire.setReadOnly') }}</span>
+            <span v-if="isReadOnly">{{ $t('app.general.false') }}</span>
+            <span v-else>{{ $t('app.general.true') }}</span>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -174,6 +179,11 @@ export default {
       const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
       return notices
     },
+    isReadOnly () {
+      const q = this.$store.getters['getQuestionnaire']
+      if (q) return q.readOnly
+      else return false
+    },
     isVisible () {
       return this.groupCount > 0
     }
@@ -190,6 +200,13 @@ export default {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    setReadOnly () {
+      const q = this.$store.getters['getQuestionnaire']
+      if (q) {
+        q.readOnly = !q.readOnly
+        this.$store.dispatch('setQuestionnaireReadOnlyStatus', q.readOnly)
+      }
+    },
     isDirty () {
       return _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
     },

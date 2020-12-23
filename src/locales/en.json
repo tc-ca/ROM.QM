@@ -111,7 +111,12 @@
         }
       },
       "expandAll": "Expand All",
-      "collapseAll": "Collapse All"
+      "collapseAll": "Collapse All",
+      "setReadOnly": "Set ReadOnly to "
+    },
+    "general": {
+      "true": "True",
+      "false": "False"
     }
   }
 }
