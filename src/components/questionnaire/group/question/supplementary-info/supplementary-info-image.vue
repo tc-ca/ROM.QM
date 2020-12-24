@@ -13,6 +13,7 @@
         <v-icon
           v-else
           color="primary"
+          small
         >
           mdi-alpha-o-box-outline
         </v-icon>
