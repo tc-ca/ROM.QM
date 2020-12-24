@@ -13,6 +13,7 @@
         <v-icon
           v-else
           color="primary"
+          small
         >
           mdi-alpha-o-box-outline
         </v-icon>
@@ -46,7 +47,7 @@
         <v-icon
           v-if="comment.required"
           slot="append"
-          large
+          small
           color="red"
         >
           mdi-exclamation
