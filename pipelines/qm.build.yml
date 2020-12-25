@@ -108,4 +108,4 @@ stages:
             inputs:
               crmConnectionString: '$(ConnectionString)'
               fromSolutionName: '$(QMSolutionName)'
-              toSolutionName: '$(SolutionName)'
+              toSolutionName: '$(LatestPatchName)'
