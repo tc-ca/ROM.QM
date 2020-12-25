@@ -55,6 +55,12 @@ stages:
           - task: MSCRMPing@12
             inputs:
               crmConnectionString: '$(ConnectionString)'
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'WebResources'
+              downloadPath: '$(System.ArtifactsDirectory)'
           - task: PowerShell@2
             inputs:
               targetType: 'inline'
@@ -68,8 +74,8 @@ stages:
                 Write-Host "============================================"
                 Write-Host ""
                 Write-Host "============================================"
-                Write-Host "Build.ArtifactStagingDirectory"
-                Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
+                Write-Host "System.ArtifactsDirectory"
+                Get-ChildItem -Path "$(System.ArtifactsDirectory)"
                 Write-Host "============================================"
                 Write-Host "============================================"
                 Write-Host "Build.BinariesDirectory"
@@ -98,8 +104,8 @@ stages:
             inputs:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
-              webResourceFolderPath: '$(Agent.BuildDirectory)\WebResources\dist'
-              webResourceJsonMappingPath: '$(Agent.BuildDirectory)\WebResources\dist\webresourceMapping.json'
+              webResourceFolderPath: '$(System.ArtifactsDirectory)\WebResources\dist'
+              webResourceJsonMappingPath: '$(System.ArtifactsDirectory)\WebResources\dist\webresourceMapping.json'
               failIfWebResourceNotFound: false
               publish: true
               solutionName: '$(LatestPatchName)'
