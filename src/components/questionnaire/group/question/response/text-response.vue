@@ -5,6 +5,7 @@
       v-model="value"
       outlined
       filled
+      :disabled="readOnly"
       dense
       validate-on-blur
       clearable
@@ -24,6 +25,10 @@ export default {
   props: {
     question: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

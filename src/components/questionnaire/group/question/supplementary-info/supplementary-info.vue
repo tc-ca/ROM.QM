@@ -11,6 +11,7 @@
       :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
       :question="question"
+      :read-only="readOnly"
       save-to-prop="externalComment"
       @error="onError"
     />
@@ -21,6 +22,7 @@
       :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"
       :question="question"
+      :read-only="readOnly"
       save-to-prop="internalComment"
       @error="onError"
     />
@@ -31,6 +33,7 @@
         :label="$t('app.questionnaire.group.question.photos')"
         :group="group"
         :question="question"
+        :read-only="readOnly"
         save-to-prop="images"
         @error="onError"
       />
@@ -60,6 +63,10 @@ export default {
     },
     group: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

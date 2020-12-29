@@ -37,6 +37,7 @@
         dense
         outlined
         clearable
+        :disabled="readOnly"
         clear-icon="mdi-close-circle"
         :placeholder="placeholderText"
         rows="1"
@@ -86,6 +87,10 @@ export default {
     },
     saveToProp: {
       type: String,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },
