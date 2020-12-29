@@ -3,39 +3,54 @@
     <div v-show="isVisible">
       <v-row>
         <v-col
-          cols="9"
+          cols="6"
           align="left"
           justify="space-around"
         >
           <v-btn
+            color="primary"
+            elevation="2"
+            medium
+            rounded
             @click="expandAll()"
           >
             <span>{{ $t('app.questionnaire.expandAll') }}</span>
           </v-btn>
           <v-btn
+            color="primary"
+            elevation="2"
+            medium
+            rounded
             @click="collapseAll()"
           >
             <span>{{ $t('app.questionnaire.collapseAll') }}</span>
           </v-btn>
-          <v-btn @click="validateQ()">
-            {{ $t('app.questionnaire.validate') }}
+          <v-btn
+            color="primary"
+            elevation="2"
+            medium
+            rounded
+            @click="validateQ()"
+          >
+            <span>{{ $t('app.questionnaire.validate') }}</span>
           </v-btn>
         </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="7">
+        <v-col
+          cols="3"
+          align="left"
+          justify="space-around"
+        >
           <v-btn
             class="white--text"
             :color="readOnly ? 'red' : 'green'"
             elevation="2"
-            large
+            medium
             rounded
             @click="setReadOnly()"
           >
             <span v-if="!readOnly">{{ $t('app.general.active') }}</span>
             <span v-else>{{ $t('app.general.inactive') }}</span>
           </v-btn>
-          <v-spacer />
         </v-col>
       </v-row>
       <v-row>
