@@ -111,10 +111,11 @@
         }
       },
       "expandAll": "Expand All",
-      "collapseAll": "Collapse All",
-      "setReadOnly": "Set ReadOnly to "
+      "collapseAll": "Collapse All"
     },
     "general": {
+      "active": "Active",
+      "inactive": "Inactive",
       "true": "True",
       "false": "False"
     }

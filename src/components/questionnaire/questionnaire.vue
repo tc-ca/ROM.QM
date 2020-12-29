@@ -2,7 +2,11 @@
   <div>
     <div v-show="isVisible">
       <v-row>
-        <v-col>
+        <v-col
+          cols="9"
+          align="left"
+          justify="space-around"
+        >
           <v-btn
             @click="expandAll()"
           >
@@ -16,11 +20,22 @@
           <v-btn @click="validateQ()">
             {{ $t('app.questionnaire.validate') }}
           </v-btn>
-          <v-btn @click="setReadOnly()">
-            <span>{{ $t('app.questionnaire.setReadOnly') }}</span>
-            <span v-if="isReadOnly">{{ $t('app.general.false') }}</span>
-            <span v-else>{{ $t('app.general.true') }}</span>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="7">
+          <v-btn
+            class="white--text"
+            :color="readOnly ? 'red' : 'green'"
+            elevation="2"
+            large
+            rounded
+            @click="setReadOnly()"
+          >
+            <span v-if="!readOnly">{{ $t('app.general.active') }}</span>
+            <span v-else>{{ $t('app.general.inactive') }}</span>
           </v-btn>
+          <v-spacer />
         </v-col>
       </v-row>
       <v-row>
@@ -180,11 +195,6 @@ export default {
     notifications () {
       const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
       return notices
-    },
-    isReadOnly () {
-      const q = this.$store.getters['getQuestionnaire']
-      if (q) return q.readOnly
-      else return false
     },
     isVisible () {
       return this.groupCount > 0
