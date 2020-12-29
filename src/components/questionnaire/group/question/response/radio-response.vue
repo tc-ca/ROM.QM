@@ -8,6 +8,7 @@
       <input
         :id="`${group.domSuffix}-${question.id}-${indexControl}`"
         v-model="selectedOption"
+        :disabled="readOnly"
         :value="option"
         type="radio"
         @change="onChange"
@@ -17,6 +18,7 @@
     <v-input
       ref="validationControl"
       v-model="selectedOption"
+      :disabled="readOnly"
       :rules="validationRulesFuncs"
       @update:error="onError"
     />
@@ -38,6 +40,10 @@ export default {
     },
     group: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

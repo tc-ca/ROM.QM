@@ -34,7 +34,8 @@ function createQuestionnaire () {
     name: generateName('Questionnaire Title EN', 'TMPLT', ''),
     groups: [],
     templateid: '',
-    searchableProvisions: []
+    searchableProvisions: [],
+    readOnly: false
   }
 }
 

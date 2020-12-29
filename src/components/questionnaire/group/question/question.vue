@@ -43,6 +43,7 @@
               <v-btn
                 rounded
                 v-bind="attrs"
+                :disabled="readOnly"
                 v-on="on"
                 @click="clickSampling"
               >
@@ -64,6 +65,7 @@
                 class="ml-2"
                 rounded
                 v-bind="attrs"
+                :disabled="readOnly"
                 v-on="on"
                 @click="repeatQuestion"
               >
@@ -85,6 +87,7 @@
                 class="ml-2"
                 rounded
                 v-bind="attrs"
+                :disabled="readOnly"
                 v-on="on"
                 @click="deleteRepeatedQuestion"
               >
@@ -104,6 +107,7 @@
         <response
           :question="question"
           :group="group"
+          :read-only="readOnly"
           @change="onUserResponseChanged"
           @error="onError"
         />
@@ -111,6 +115,7 @@
       <div v-if="displaySamplingRecord">
         <sampling-record
           :question="question"
+          :read-only="readOnly"
         />
       </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
@@ -121,13 +126,14 @@
             <v-sheet class="pa-4">
               <v-text-field
                 v-model="question.violationInfo.referenceID"
-                :disabled="isViolationInfoReferenceIdDisabled"
+                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 outline
               />
               <v-text-field
                 v-model="question.violationInfo.violationCount"
+                :disabled="readOnly"
                 :label="$t('app.questionnaire.group.question.violationCount')"
                 :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
                 outline
@@ -137,6 +143,7 @@
               <v-text-field
                 v-model="selectedResponseOption.searchProvisions"
                 label="Search"
+                :disabled="readOnly"
                 outlined
                 hide-details
                 clearable
@@ -148,6 +155,7 @@
                 <v-btn
                   v-for="item in selProvisions"
                   :key="item.key"
+                  :disabled="readOnly"
                   small
                   style="margin-right: 5px; margin-bottom: 5px"
                   rounded
@@ -168,7 +176,8 @@
             <v-card-text>
               <v-treeview
                 v-model="selProvisions"
-                selectable
+                :selectable="!readOnly"
+                :disabled="readOnly"
                 item-key="id"
                 selection-type="leaf"
                 :search="selectedResponseOption.searchProvisions"
@@ -193,6 +202,7 @@
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
+        :read-only="readOnly"
         @error="onError"
       />
 
@@ -211,6 +221,7 @@
             :group="group"
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
+            :read-only="readOnly"
             @error="onChildError"
             @repeat-question="onRepeatChildQuestion"
             @delete-repeated-question="onDeleteChildRepeatedQuestion"
@@ -252,6 +263,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    readOnly: {
+      type: Boolean,
+      required: true
     }
   },
   data () {

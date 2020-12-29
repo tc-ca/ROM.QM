@@ -16,6 +16,11 @@
           <v-btn @click="validateQ()">
             {{ $t('app.questionnaire.validate') }}
           </v-btn>
+          <v-btn @click="setReadOnly()">
+            <span>{{ $t('app.questionnaire.setReadOnly') }}</span>
+            <span v-if="isReadOnly">{{ $t('app.general.false') }}</span>
+            <span v-else>{{ $t('app.general.true') }}</span>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -39,6 +44,7 @@
                   :group="group"
                   :index="groupIndex"
                   :expand="expand"
+                  :read-only="readOnly"
                   data-group-id="group"
                   @update-group-count="onUpdateGroupCount"
                 />
@@ -119,7 +125,8 @@ export default {
       valid: false,
       expand: true,
       panelIndex: Number,
-      groupCount: 0
+      groupCount: 0,
+      readOnly: false
     }
   },
   computed: {
@@ -174,6 +181,11 @@ export default {
       const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
       return notices
     },
+    isReadOnly () {
+      const q = this.$store.getters['getQuestionnaire']
+      if (q) return q.readOnly
+      else return false
+    },
     isVisible () {
       return this.groupCount > 0
     }
@@ -185,11 +197,26 @@ export default {
     // entire view has been rendered
       this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
     })
+    // Get the ReadOnly value for the questionnarie
+    const q = this.$store.getters['getQuestionnaire']
+    if (q) {
+      this.readOnly = q.readOnly
+    } else {
+      this.readOnly = false
+    }
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
+    setReadOnly () {
+      const q = this.$store.getters['getQuestionnaire']
+      if (q) {
+        this.readOnly = !this.readOnly
+        q.readOnly = this.readOnly
+        this.$store.dispatch('setQuestionnaireReadOnlyStatus', q.readOnly)
+      }
+    },
     isDirty () {
       return _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
     },

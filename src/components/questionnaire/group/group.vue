@@ -47,6 +47,7 @@
                     <v-btn
                       rounded
                       v-bind="attrs"
+                      :disabled="readOnly"
                       v-on="on"
                       @click.native.stop="repeatGroup"
                     >
@@ -69,6 +70,7 @@
                       class="ml-2"
                       rounded
                       v-bind="attrs"
+                      :disabled="readOnly"
                       v-on="on"
                       @click.native.stop="removeGroup"
                     >
@@ -94,6 +96,7 @@
               :group="group"
               :in-repeated-group="repeatedGroup"
               :expand="expand"
+              :read-only="readOnly"
               @responseChanged="onResponseChanged"
               @error="onError"
               @group-subtitle-change="onSubtitleChanged"
@@ -133,6 +136,10 @@ export default {
     expand: {
       type: Boolean,
       default: true
+    },
+    readOnly: {
+      type: Boolean,
+      required: true
     }
   },
   data: function () {
