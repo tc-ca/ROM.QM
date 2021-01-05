@@ -804,7 +804,9 @@ export default {
       }
     },
     onOptionTextChange (option) {
-      option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
+      if (option) {
+        option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
+      }
     },
     setSamplingRecord () {
       if (this.selectedQuestion) {
