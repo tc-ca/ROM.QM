@@ -657,7 +657,6 @@
 import _ from 'lodash'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
-// import BuilderQuestion from '../components/builder/builder-question'
 import BuilderGroup from '../components/builder/builder-group'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
@@ -668,7 +667,6 @@ import { generateName } from '../utils.js'
 export default {
   name: 'Builder',
   components: {
-    // BuilderQuestion,
     BuilderGroup
   },
   mixins: [BaseMixin],
@@ -849,7 +847,7 @@ export default {
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
-            let qRf = BuilderService.createReferenceQuestion(this.questionnaire)
+            let qRf = BuilderService.createReferenceQuestion(this.questionnaire, group)
             if (group.questions.length > 0) {
               // Move every question one number up on the sort order
               group.questions.forEach((q) => { q.sortOrder += 1 })
@@ -877,7 +875,8 @@ export default {
         }
       }
       if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO ||
-          this.selectedQuestion.type !== QUESTION_TYPE.SELECT) {
+          this.selectedQuestion.type !== QUESTION_TYPE.SELECT ||
+          this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
         this.selectedQuestion.responseOptions = null
         this.onQuestionTextChange(this.selectedQuestion)
       } else {
@@ -958,7 +957,7 @@ export default {
     async save (id) {
       const page = 'builder'
       console.log('Save...')
-      console.log(this.questionnaire)
+      // console.log(JSON.stringify(this.questionnaire))
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },

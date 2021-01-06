@@ -59,10 +59,7 @@
           :disabled="readOnly"
           :max="question.samplingRecord.sampleSize"
           :error-messages="errorMessagesCompliances"
-          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
-                    (value) => value && value >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
-                    validateNumbers
-          ]"
+          :rules="[ validateNumbers ]"
         />
       </v-col>
     </v-row>
@@ -121,6 +118,14 @@ export default {
       if (this.question.samplingRecord.approximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
         if (this.question.samplingRecord.approximateTotal < this.question.samplingRecord.sampleSize) {
           this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
+          return false
+        }
+        if (this.question.samplingRecord.nonCompliances === '') {
+          this.errorMessagesCompliances = 'Number of non-Compliance is required'
+          return false
+        }
+        if (this.question.samplingRecord.nonCompliances < 0) {
+          this.errorMessagesCompliances = 'Number of non-Compliance have to be 0 or greater than 0'
           return false
         }
       }
