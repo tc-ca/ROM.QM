@@ -1,6 +1,5 @@
 {
     "root": "Webresources/qm_",
-    "solution": "TC_GlobalCore",
     "files": [
     {
         "uniquename": "qm_builder.html",

@@ -174,13 +174,13 @@ export default {
       const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
       await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-    } else if (this.envDev && !this.loadLocalData) {
+    } else {
       const questionnaire = BuilderService.createQuestionnaire()
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     }
 
     this.$router.push({ name: this.page }).catch((e) => {
-      // console.log(e)
+      console.log(e)
     })
   },
   methods: {

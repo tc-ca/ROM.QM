@@ -1,0 +1,1152 @@
+{
+    [
+        {
+            "@odata.etag": "W/\"16595934\"",
+            "qm_legislationcharacteristicelbl": "MAY",
+            "qm_legislationcharacteristicflbl": "FR_MAY",
+            "qm_name": "MAY",
+            "qm_tylegislationcharacteristicid": "e655d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595935\"",
+            "qm_legislationcharacteristicelbl": "MUST",
+            "qm_legislationcharacteristicflbl": "FR_MUST",
+            "qm_name": "MUST",
+            "qm_tylegislationcharacteristicid": "e755d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595936\"",
+            "qm_legislationcharacteristicelbl": "UNLESS",
+            "qm_legislationcharacteristicflbl": "FR_UNLESS",
+            "qm_name": "UNLESS",
+            "qm_tylegislationcharacteristicid": "e855d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595946\"",
+            "qm_legislationcharacteristicelbl": "CONSIGNOR",
+            "qm_legislationcharacteristicflbl": "FR_CONSIGNOR",
+            "qm_name": "CONSIGNOR",
+            "qm_tylegislationcharacteristicid": "ea55d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595947\"",
+            "qm_legislationcharacteristicelbl": "CARRIER",
+            "qm_legislationcharacteristicflbl": "FR_CARRIER",
+            "qm_name": "CARRIER",
+            "qm_tylegislationcharacteristicid": "eb55d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"13593867\"",
+            "qm_legislationcharacteristicelbl": null,
+            "qm_legislationcharacteristicflbl": null,
+            "qm_name": "IMPORTER",
+            "qm_tylegislationcharacteristicid": "ec55d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595940\"",
+            "qm_legislationcharacteristicelbl": "EXEMPTION",
+            "qm_legislationcharacteristicflbl": "FR_EXEMPTION",
+            "qm_name": "EXEMPTION",
+            "qm_tylegislationcharacteristicid": "ed55d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595945\"",
+            "qm_legislationcharacteristicelbl": "ERAP",
+            "qm_legislationcharacteristicflbl": "FR_ERAP",
+            "qm_name": "ERAP",
+            "qm_tylegislationcharacteristicid": "ee55d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595933\"",
+            "qm_legislationcharacteristicelbl": "PROVISION",
+            "qm_legislationcharacteristicflbl": "FR_PROVISION",
+            "qm_name": "PROVISION",
+            "qm_tylegislationcharacteristicid": "ef55d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595939\"",
+            "qm_legislationcharacteristicelbl": "LARGE MEANS OF CONTAINMENT",
+            "qm_legislationcharacteristicflbl": "FR_LARGE MEANS OF CONTAINMENT",
+            "qm_name": "LARGE MEANS OF CONTAINMENT",
+            "qm_tylegislationcharacteristicid": "f055d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595943\"",
+            "qm_legislationcharacteristicelbl": "SMALL MEANS OF CONTAINMENT",
+            "qm_legislationcharacteristicflbl": "FR_SMALL MEANS OF CONTAINMENT",
+            "qm_name": "SMALL MEANS OF CONTAINMENT",
+            "qm_tylegislationcharacteristicid": "f155d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595937\"",
+            "qm_legislationcharacteristicelbl": "MEANS OF CONTAINMENT",
+            "qm_legislationcharacteristicflbl": "FR_MEANS OF CONTAINMENT",
+            "qm_name": "MEANS OF CONTAINMENT",
+            "qm_tylegislationcharacteristicid": "f255d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595944\"",
+            "qm_legislationcharacteristicelbl": "CLASS",
+            "qm_legislationcharacteristicflbl": "FR_CLASS",
+            "qm_name": "CLASS",
+            "qm_tylegislationcharacteristicid": "f355d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16595938\"",
+            "qm_legislationcharacteristicelbl": "UN NUMBER",
+            "qm_legislationcharacteristicflbl": "FR_UN NUMBER",
+            "qm_name": "UN NUMBER",
+            "qm_tylegislationcharacteristicid": "f455d4a9-401e-eb11-a813-000d3af3a7a7"
+        },
+        {
+            "@odata.etag": "W/\"16577077\"",
+            "qm_legislationcharacteristicelbl": "New Demo Char",
+            "qm_legislationcharacteristicflbl": "New Demo Char",
+            "qm_name": "New Demo Char",
+            "qm_tylegislationcharacteristicid": "b08d6e65-013b-eb11-a813-000d3af3fc19"
+        },
+        {
+            "@odata.etag": "W/\"16596078\"",
+            "qm_legislationcharacteristicelbl": "UN0059",
+            "qm_legislationcharacteristicflbl": "FR_UN0059",
+            "qm_name": "UN0059",
+            "qm_tylegislationcharacteristicid": "02b358a0-6976-496e-b3a7-02ebf0f7b480"
+        },
+        {
+            "@odata.etag": "W/\"16596049\"",
+            "qm_legislationcharacteristicelbl": "UN1267",
+            "qm_legislationcharacteristicflbl": "FR_UN1267",
+            "qm_name": "UN1267",
+            "qm_tylegislationcharacteristicid": "2f5fc1f5-d46c-4c6f-b5b3-03cf521276fc"
+        },
+        {
+            "@odata.etag": "W/\"16596071\"",
+            "qm_legislationcharacteristicelbl": "UN2031",
+            "qm_legislationcharacteristicflbl": "FR_UN2031",
+            "qm_name": "UN2031",
+            "qm_tylegislationcharacteristicid": "53611509-1181-475d-9261-041733bf674f"
+        },
+        {
+            "@odata.etag": "W/\"16596059\"",
+            "qm_legislationcharacteristicelbl": "UN1486",
+            "qm_legislationcharacteristicflbl": "FR_UN1486",
+            "qm_name": "UN1486",
+            "qm_tylegislationcharacteristicid": "924b828c-6ef7-4e78-a86c-0ca810937c0d"
+        },
+        {
+            "@odata.etag": "W/\"16595976\"",
+            "qm_legislationcharacteristicelbl": "UN0432",
+            "qm_legislationcharacteristicflbl": "FR_UN0432",
+            "qm_name": "UN0432",
+            "qm_tylegislationcharacteristicid": "5b514705-8cde-4e27-a8d9-14adb1306a51"
+        },
+        {
+            "@odata.etag": "W/\"16595949\"",
+            "qm_legislationcharacteristicelbl": "UN2037",
+            "qm_legislationcharacteristicflbl": "FR_UN2037",
+            "qm_name": "UN2037",
+            "qm_tylegislationcharacteristicid": "92b28c32-2799-4d36-8828-168b7d9bbcab"
+        },
+        {
+            "@odata.etag": "W/\"16596060\"",
+            "qm_legislationcharacteristicelbl": "UN1487",
+            "qm_legislationcharacteristicflbl": "FR_UN1487",
+            "qm_name": "UN1487",
+            "qm_tylegislationcharacteristicid": "94a9feea-3a51-44ad-bf0f-1872d203c236"
+        },
+        {
+            "@odata.etag": "W/\"16596082\"",
+            "qm_legislationcharacteristicelbl": "UN0083",
+            "qm_legislationcharacteristicflbl": "FR_UN0083",
+            "qm_name": "UN0083",
+            "qm_tylegislationcharacteristicid": "7c05ec31-7c14-4a86-b3fa-1b18043bd336"
+        },
+        {
+            "@odata.etag": "W/\"16595998\"",
+            "qm_legislationcharacteristicelbl": "UN1077",
+            "qm_legislationcharacteristicflbl": "FR_UN1077",
+            "qm_name": "UN1077",
+            "qm_tylegislationcharacteristicid": "41c3457d-1a5a-4e7e-bfac-1bb3b3cb35c0"
+        },
+        {
+            "@odata.etag": "W/\"16596092\"",
+            "qm_legislationcharacteristicelbl": "UN1223",
+            "qm_legislationcharacteristicflbl": "FR_UN1223",
+            "qm_name": "UN1223",
+            "qm_tylegislationcharacteristicid": "b1f7d8ba-7dc7-4018-b435-1d23566a6224"
+        },
+        {
+            "@odata.etag": "W/\"16595956\"",
+            "qm_legislationcharacteristicelbl": "UN0161",
+            "qm_legislationcharacteristicflbl": "FR_UN0161",
+            "qm_name": "UN0161",
+            "qm_tylegislationcharacteristicid": "7db3d178-861f-4d54-9b32-1d3a8a174130"
+        },
+        {
+            "@odata.etag": "W/\"16596021\"",
+            "qm_legislationcharacteristicelbl": "UN3241",
+            "qm_legislationcharacteristicflbl": "FR_UN3241",
+            "qm_name": "UN3241",
+            "qm_tylegislationcharacteristicid": "00161ccf-88e0-41b9-b997-1d9c50114a11"
+        },
+        {
+            "@odata.etag": "W/\"16596001\"",
+            "qm_legislationcharacteristicelbl": "UN1002",
+            "qm_legislationcharacteristicflbl": "FR_UN1002",
+            "qm_name": "UN1002",
+            "qm_tylegislationcharacteristicid": "545faaf1-0607-495b-b0ad-21b55bb842e3"
+        },
+        {
+            "@odata.etag": "W/\"16596068\"",
+            "qm_legislationcharacteristicelbl": "UN1942",
+            "qm_legislationcharacteristicflbl": "FR_UN1942",
+            "qm_name": "UN1942",
+            "qm_tylegislationcharacteristicid": "1bce5b34-2572-4b18-994d-227e51c330b9"
+        },
+        {
+            "@odata.etag": "W/\"16596016\"",
+            "qm_legislationcharacteristicelbl": "UN3221",
+            "qm_legislationcharacteristicflbl": "FR_UN3221",
+            "qm_name": "UN3221",
+            "qm_tylegislationcharacteristicid": "b83bf209-f116-428b-9832-22cfaf3bba6e"
+        },
+        {
+            "@odata.etag": "W/\"16596056\"",
+            "qm_legislationcharacteristicelbl": "UN1261",
+            "qm_legislationcharacteristicflbl": "FR_UN1261",
+            "qm_name": "UN1261",
+            "qm_tylegislationcharacteristicid": "8e50a2f7-2a8a-4315-a422-22f1c8a8482e"
+        },
+        {
+            "@odata.etag": "W/\"16596058\"",
+            "qm_legislationcharacteristicelbl": "UN1485",
+            "qm_legislationcharacteristicflbl": "FR_UN1485",
+            "qm_name": "UN1485",
+            "qm_tylegislationcharacteristicid": "809e9fd9-bfbb-403e-9ffe-233575540584"
+        },
+        {
+            "@odata.etag": "W/\"16596005\"",
+            "qm_legislationcharacteristicelbl": "UN1066",
+            "qm_legislationcharacteristicflbl": "FR_UN1066",
+            "qm_name": "UN1066",
+            "qm_tylegislationcharacteristicid": "6f094ff4-8375-41d4-9092-23fe1022249b"
+        },
+        {
+            "@odata.etag": "W/\"16595941\"",
+            "qm_legislationcharacteristicelbl": "Has UN Number(s)",
+            "qm_legislationcharacteristicflbl": "FR_Has UN Number(s)",
+            "qm_name": "Has UN Number(s)",
+            "qm_tylegislationcharacteristicid": "9f142bfa-b825-41b4-a4e9-2681b55f8610"
+        },
+        {
+            "@odata.etag": "W/\"16596098\"",
+            "qm_legislationcharacteristicelbl": "UN2795",
+            "qm_legislationcharacteristicflbl": "FR_UN2795",
+            "qm_name": "UN2795",
+            "qm_tylegislationcharacteristicid": "3fa67fd8-68ec-495e-b771-26853c23f396"
+        },
+        {
+            "@odata.etag": "W/\"16596000\"",
+            "qm_legislationcharacteristicelbl": "UN1001",
+            "qm_legislationcharacteristicflbl": "FR_UN1001",
+            "qm_name": "UN1001",
+            "qm_tylegislationcharacteristicid": "9721504b-ad48-4868-8137-26a77dd32f07"
+        },
+        {
+            "@odata.etag": "W/\"16596031\"",
+            "qm_legislationcharacteristicelbl": "UN2814",
+            "qm_legislationcharacteristicflbl": "FR_UN2814",
+            "qm_name": "UN2814",
+            "qm_tylegislationcharacteristicid": "c52b3b7c-d3ec-41bf-b6cd-279a8b1515a4"
+        },
+        {
+            "@odata.etag": "W/\"16595985\"",
+            "qm_legislationcharacteristicelbl": "UN0403",
+            "qm_legislationcharacteristicflbl": "FR_UN0403",
+            "qm_name": "UN0403",
+            "qm_tylegislationcharacteristicid": "5317726e-2338-4c1c-b87c-284387c7a2d2"
+        },
+        {
+            "@odata.etag": "W/\"16596087\"",
+            "qm_legislationcharacteristicelbl": "UN0332",
+            "qm_legislationcharacteristicflbl": "FR_UN0332",
+            "qm_name": "UN0332",
+            "qm_tylegislationcharacteristicid": "df3621e9-158b-4407-9b7b-29b23bb2f905"
+        },
+        {
+            "@odata.etag": "W/\"16595980\"",
+            "qm_legislationcharacteristicelbl": "UN0503",
+            "qm_legislationcharacteristicflbl": "FR_UN0503",
+            "qm_name": "UN0503",
+            "qm_tylegislationcharacteristicid": "0089d040-c79c-4218-a223-29d4afa0e29c"
+        },
+        {
+            "@odata.etag": "W/\"16595988\"",
+            "qm_legislationcharacteristicelbl": "UN1005",
+            "qm_legislationcharacteristicflbl": "FR_UN1005",
+            "qm_name": "UN1005",
+            "qm_tylegislationcharacteristicid": "19e0a158-dd51-4957-b4cd-2ab86bdccd96"
+        },
+        {
+            "@odata.etag": "W/\"16596028\"",
+            "qm_legislationcharacteristicelbl": "UN3270",
+            "qm_legislationcharacteristicflbl": "FR_UN3270",
+            "qm_name": "UN3270",
+            "qm_tylegislationcharacteristicid": "afb660d9-4d96-4e8f-9ebf-2deccd0493e6"
+        },
+        {
+            "@odata.etag": "W/\"16596007\"",
+            "qm_legislationcharacteristicelbl": "UN1202",
+            "qm_legislationcharacteristicflbl": "FR_UN1202",
+            "qm_name": "UN1202",
+            "qm_tylegislationcharacteristicid": "0da012ae-9fd3-4a55-a074-2eb9ba350b4b"
+        },
+        {
+            "@odata.etag": "W/\"16596039\"",
+            "qm_legislationcharacteristicelbl": "UN3156",
+            "qm_legislationcharacteristicflbl": "FR_UN3156",
+            "qm_name": "UN3156",
+            "qm_tylegislationcharacteristicid": "c9c88212-5c85-48a4-965e-3030afb1aecc"
+        },
+        {
+            "@odata.etag": "W/\"16596074\"",
+            "qm_legislationcharacteristicelbl": "UN3370",
+            "qm_legislationcharacteristicflbl": "FR_UN3370",
+            "qm_name": "UN3370",
+            "qm_tylegislationcharacteristicid": "28cd7d1e-74de-47c1-9cbd-306c582de387"
+        },
+        {
+            "@odata.etag": "W/\"16596051\"",
+            "qm_legislationcharacteristicelbl": "UN1863",
+            "qm_legislationcharacteristicflbl": "FR_UN1863",
+            "qm_name": "UN1863",
+            "qm_tylegislationcharacteristicid": "778829c1-6701-4a3c-aa0e-352e556251f9"
+        },
+        {
+            "@odata.etag": "W/\"16595978\"",
+            "qm_legislationcharacteristicelbl": "UN0499",
+            "qm_legislationcharacteristicflbl": "FR_UN0499",
+            "qm_name": "UN0499",
+            "qm_tylegislationcharacteristicid": "55ca55d7-094f-4e82-921e-35cb2aad55b6"
+        },
+        {
+            "@odata.etag": "W/\"16595958\"",
+            "qm_legislationcharacteristicelbl": "UN0186",
+            "qm_legislationcharacteristicflbl": "FR_UN0186",
+            "qm_name": "UN0186",
+            "qm_tylegislationcharacteristicid": "b415f58f-1a55-4776-a239-3d4e9d2426a5"
+        },
+        {
+            "@odata.etag": "W/\"16595953\"",
+            "qm_legislationcharacteristicelbl": "UN0055",
+            "qm_legislationcharacteristicflbl": "FR_UN0055",
+            "qm_name": "UN0055",
+            "qm_tylegislationcharacteristicid": "b810471d-07ac-492c-bf81-3d511d6c16ad"
+        },
+        {
+            "@odata.etag": "W/\"16596097\"",
+            "qm_legislationcharacteristicelbl": "UN2794",
+            "qm_legislationcharacteristicflbl": "FR_UN2794",
+            "qm_name": "UN2794",
+            "qm_tylegislationcharacteristicid": "619fb5ed-ab8c-4a84-a01c-3e4580268331"
+        },
+        {
+            "@odata.etag": "W/\"16596054\"",
+            "qm_legislationcharacteristicelbl": "UN3295",
+            "qm_legislationcharacteristicflbl": "FR_UN3295",
+            "qm_name": "UN3295",
+            "qm_tylegislationcharacteristicid": "4a382960-0a89-4e1d-adb9-3fd077513d35"
+        },
+        {
+            "@odata.etag": "W/\"16596063\"",
+            "qm_legislationcharacteristicelbl": "UN1498",
+            "qm_legislationcharacteristicflbl": "FR_UN1498",
+            "qm_name": "UN1498",
+            "qm_tylegislationcharacteristicid": "7b2fbfdc-4e68-4baa-a348-40e55cb4c3cd"
+        },
+        {
+            "@odata.etag": "W/\"16595963\"",
+            "qm_legislationcharacteristicelbl": "UN0312",
+            "qm_legislationcharacteristicflbl": "FR_UN0312",
+            "qm_name": "UN0312",
+            "qm_tylegislationcharacteristicid": "e200049d-1b61-4719-a568-41ce814d8867"
+        },
+        {
+            "@odata.etag": "W/\"16596018\"",
+            "qm_legislationcharacteristicelbl": "UN3231",
+            "qm_legislationcharacteristicflbl": "FR_UN3231",
+            "qm_name": "UN3231",
+            "qm_tylegislationcharacteristicid": "200d45d4-53ba-42b2-b1ca-425d231fa63c"
+        },
+        {
+            "@odata.etag": "W/\"16596099\"",
+            "qm_legislationcharacteristicelbl": "UN2800",
+            "qm_legislationcharacteristicflbl": "FR_UN2800",
+            "qm_name": "UN2800",
+            "qm_tylegislationcharacteristicid": "038dfdac-7d01-4cd3-8f92-42671ddf1811"
+        },
+        {
+            "@odata.etag": "W/\"16596077\"",
+            "qm_legislationcharacteristicelbl": "UN0042",
+            "qm_legislationcharacteristicflbl": "FR_UN0042",
+            "qm_name": "UN0042",
+            "qm_tylegislationcharacteristicid": "a94c99ee-44b9-4eb3-8c16-43120c805266"
+        },
+        {
+            "@odata.etag": "W/\"16595975\"",
+            "qm_legislationcharacteristicelbl": "UN0431",
+            "qm_legislationcharacteristicflbl": "FR_UN0431",
+            "qm_name": "UN0431",
+            "qm_tylegislationcharacteristicid": "05ed8907-e5d2-414c-a16f-44634020ec73"
+        },
+        {
+            "@odata.etag": "W/\"16595973\"",
+            "qm_legislationcharacteristicelbl": "UN0404",
+            "qm_legislationcharacteristicflbl": "FR_UN0404",
+            "qm_name": "UN0404",
+            "qm_tylegislationcharacteristicid": "6e640499-6ab2-483d-b7b2-45f86021377d"
+        },
+        {
+            "@odata.etag": "W/\"16595987\"",
+            "qm_legislationcharacteristicelbl": "UN0493",
+            "qm_legislationcharacteristicflbl": "FR_UN0493",
+            "qm_name": "UN0493",
+            "qm_tylegislationcharacteristicid": "ee1c5dbb-fb7d-42c3-8270-47855db145f8"
+        },
+        {
+            "@odata.etag": "W/\"16595983\"",
+            "qm_legislationcharacteristicelbl": "UN0509",
+            "qm_legislationcharacteristicflbl": "FR_UN0509",
+            "qm_name": "UN0509",
+            "qm_tylegislationcharacteristicid": "31862c97-2ca8-48f7-b162-4cbde6c977a0"
+        },
+        {
+            "@odata.etag": "W/\"16595994\"",
+            "qm_legislationcharacteristicelbl": "UN1075",
+            "qm_legislationcharacteristicflbl": "FR_UN1075",
+            "qm_name": "UN1075",
+            "qm_tylegislationcharacteristicid": "3c4473c2-b410-4b4d-85e3-5053858c9a05"
+        },
+        {
+            "@odata.etag": "W/\"16596034\"",
+            "qm_legislationcharacteristicelbl": "UN3091",
+            "qm_legislationcharacteristicflbl": "FR_UN3091",
+            "qm_name": "UN3091",
+            "qm_tylegislationcharacteristicid": "55c05464-9233-414a-9863-515be3027b96"
+        },
+        {
+            "@odata.etag": "W/\"16595966\"",
+            "qm_legislationcharacteristicelbl": "UN0336",
+            "qm_legislationcharacteristicflbl": "FR_UN0336",
+            "qm_name": "UN0336",
+            "qm_tylegislationcharacteristicid": "d9305379-d98a-4f5e-9c85-5303d4bfb3fe"
+        },
+        {
+            "@odata.etag": "W/\"16596019\"",
+            "qm_legislationcharacteristicelbl": "UN3232",
+            "qm_legislationcharacteristicflbl": "FR_UN3232",
+            "qm_name": "UN3232",
+            "qm_tylegislationcharacteristicid": "c3869a44-6dbe-49d6-9a70-546a90207631"
+        },
+        {
+            "@odata.etag": "W/\"16596040\"",
+            "qm_legislationcharacteristicelbl": "UN3157",
+            "qm_legislationcharacteristicflbl": "FR_UN3157",
+            "qm_name": "UN3157",
+            "qm_tylegislationcharacteristicid": "833bf354-4151-46e8-9a42-550c7e454ddd"
+        },
+        {
+            "@odata.etag": "W/\"16596090\"",
+            "qm_legislationcharacteristicelbl": "UN1263",
+            "qm_legislationcharacteristicflbl": "FR_UN1263",
+            "qm_name": "UN1263",
+            "qm_tylegislationcharacteristicid": "d52c0bac-ff23-440a-a87f-550ce933077b"
+        },
+        {
+            "@odata.etag": "W/\"16596050\"",
+            "qm_legislationcharacteristicelbl": "UN1268",
+            "qm_legislationcharacteristicflbl": "FR_UN1268",
+            "qm_name": "UN1268",
+            "qm_tylegislationcharacteristicid": "bf0a9e25-4657-4330-8748-56231b70a840"
+        },
+        {
+            "@odata.etag": "W/\"16596017\"",
+            "qm_legislationcharacteristicelbl": "UN3222",
+            "qm_legislationcharacteristicflbl": "FR_UN3222",
+            "qm_name": "UN3222",
+            "qm_tylegislationcharacteristicid": "859bebc6-efaa-44af-a956-5698b810ce7d"
+        },
+        {
+            "@odata.etag": "W/\"16596096\"",
+            "qm_legislationcharacteristicelbl": "UN3530",
+            "qm_legislationcharacteristicflbl": "FR_UN3530",
+            "qm_name": "UN3530",
+            "qm_tylegislationcharacteristicid": "48a02d03-bb89-4a65-9914-582b46ba8576"
+        },
+        {
+            "@odata.etag": "W/\"16595954\"",
+            "qm_legislationcharacteristicelbl": "UN0105",
+            "qm_legislationcharacteristicflbl": "FR_UN0105",
+            "qm_name": "UN0105",
+            "qm_tylegislationcharacteristicid": "a5d73128-d8dd-47d5-9693-5b22c71c7b8e"
+        },
+        {
+            "@odata.etag": "W/\"16595996\"",
+            "qm_legislationcharacteristicelbl": "UN1012",
+            "qm_legislationcharacteristicflbl": "FR_UN1012",
+            "qm_name": "UN1012",
+            "qm_tylegislationcharacteristicid": "ff6c3f2c-fc36-4cae-9e8f-5b8f6bd4572b"
+        },
+        {
+            "@odata.etag": "W/\"16595984\"",
+            "qm_legislationcharacteristicelbl": "UN0510",
+            "qm_legislationcharacteristicflbl": "FR_UN0510",
+            "qm_name": "UN0510",
+            "qm_tylegislationcharacteristicid": "48baf521-59f3-4155-9792-5d0876b83954"
+        },
+        {
+            "@odata.etag": "W/\"16596072\"",
+            "qm_legislationcharacteristicelbl": "UN2032",
+            "qm_legislationcharacteristicflbl": "FR_UN2032",
+            "qm_name": "UN2032",
+            "qm_tylegislationcharacteristicid": "00e254e4-6dfe-4972-b8e3-5d563bf488c2"
+        },
+        {
+            "@odata.etag": "W/\"16596100\"",
+            "qm_legislationcharacteristicelbl": "UN1496",
+            "qm_legislationcharacteristicflbl": "FR_UN1496",
+            "qm_name": "UN1496",
+            "qm_tylegislationcharacteristicid": "0ce5a403-7265-4ca2-b5e9-5e21384fc5c9"
+        },
+        {
+            "@odata.etag": "W/\"16596053\"",
+            "qm_legislationcharacteristicelbl": "UN1993",
+            "qm_legislationcharacteristicflbl": "FR_UN1993",
+            "qm_name": "UN1993",
+            "qm_tylegislationcharacteristicid": "5d37df37-406f-47be-98f3-5eba6aa427ff"
+        },
+        {
+            "@odata.etag": "W/\"16596036\"",
+            "qm_legislationcharacteristicelbl": "UN3481",
+            "qm_legislationcharacteristicflbl": "FR_UN3481",
+            "qm_name": "UN3481",
+            "qm_tylegislationcharacteristicid": "b467ba01-8f59-4440-b66b-60a75845a7ab"
+        },
+        {
+            "@odata.etag": "W/\"16596002\"",
+            "qm_legislationcharacteristicelbl": "UN1006",
+            "qm_legislationcharacteristicflbl": "FR_UN1006",
+            "qm_name": "UN1006",
+            "qm_tylegislationcharacteristicid": "6ca8032e-8b09-412d-94ab-6186f75c5c25"
+        },
+        {
+            "@odata.etag": "W/\"16595959\"",
+            "qm_legislationcharacteristicelbl": "UN0191",
+            "qm_legislationcharacteristicflbl": "FR_UN0191",
+            "qm_name": "UN0191",
+            "qm_tylegislationcharacteristicid": "ffd087ec-962d-4a8d-9c07-61d742ee0ab8"
+        },
+        {
+            "@odata.etag": "W/\"16596006\"",
+            "qm_legislationcharacteristicelbl": "UN1072",
+            "qm_legislationcharacteristicflbl": "FR_UN1072",
+            "qm_name": "UN1072",
+            "qm_tylegislationcharacteristicid": "d07c9020-51ce-46d2-99dd-69361bc3d68f"
+        },
+        {
+            "@odata.etag": "W/\"16596093\"",
+            "qm_legislationcharacteristicelbl": "UN3166",
+            "qm_legislationcharacteristicflbl": "FR_UN3166",
+            "qm_name": "UN3166",
+            "qm_tylegislationcharacteristicid": "c27f6d2c-3d32-432e-93ac-6975e3caf857"
+        },
+        {
+            "@odata.etag": "W/\"16596020\"",
+            "qm_legislationcharacteristicelbl": "UN2956",
+            "qm_legislationcharacteristicflbl": "FR_UN2956",
+            "qm_name": "UN2956",
+            "qm_tylegislationcharacteristicid": "482f4a1b-32b5-4a58-b845-6cbb2146dee8"
+        },
+        {
+            "@odata.etag": "W/\"16595977\"",
+            "qm_legislationcharacteristicelbl": "UN0454",
+            "qm_legislationcharacteristicflbl": "FR_UN0454",
+            "qm_name": "UN0454",
+            "qm_tylegislationcharacteristicid": "55d08ab9-0657-4153-b833-6e96b4e6910a"
+        },
+        {
+            "@odata.etag": "W/\"16596013\"",
+            "qm_legislationcharacteristicelbl": "UN3102",
+            "qm_legislationcharacteristicflbl": "FR_UN3102",
+            "qm_name": "UN3102",
+            "qm_tylegislationcharacteristicid": "bd496b21-b3c0-433e-aa31-6ed3d994de05"
+        },
+        {
+            "@odata.etag": "W/\"16596035\"",
+            "qm_legislationcharacteristicelbl": "UN3480",
+            "qm_legislationcharacteristicflbl": "FR_UN3480",
+            "qm_name": "UN3480",
+            "qm_tylegislationcharacteristicid": "c2b76a8d-b9bb-4c95-a53a-70ca2143a04f"
+        },
+        {
+            "@odata.etag": "W/\"16595993\"",
+            "qm_legislationcharacteristicelbl": "UN2672",
+            "qm_legislationcharacteristicflbl": "FR_UN2672",
+            "qm_name": "UN2672",
+            "qm_tylegislationcharacteristicid": "37b908fd-9a29-4174-9135-735f63ddc9ae"
+        },
+        {
+            "@odata.etag": "W/\"16596091\"",
+            "qm_legislationcharacteristicelbl": "UN1219",
+            "qm_legislationcharacteristicflbl": "FR_UN1219",
+            "qm_name": "UN1219",
+            "qm_tylegislationcharacteristicid": "e100b647-748f-4507-a5ad-78e93fdfc601"
+        },
+        {
+            "@odata.etag": "W/\"16596062\"",
+            "qm_legislationcharacteristicelbl": "UN1495",
+            "qm_legislationcharacteristicflbl": "FR_UN1495",
+            "qm_name": "UN1495",
+            "qm_tylegislationcharacteristicid": "9b175f9b-1be5-4c7a-80bc-79d137886bb0"
+        },
+        {
+            "@odata.etag": "W/\"16596085\"",
+            "qm_legislationcharacteristicelbl": "UN0241",
+            "qm_legislationcharacteristicflbl": "FR_UN0241",
+            "qm_name": "UN0241",
+            "qm_tylegislationcharacteristicid": "51f5df44-e3a6-4bae-9976-7c8e6281bf24"
+        },
+        {
+            "@odata.etag": "W/\"16596011\"",
+            "qm_legislationcharacteristicelbl": "UN1044",
+            "qm_legislationcharacteristicflbl": "FR_UN1044",
+            "qm_name": "UN1044",
+            "qm_tylegislationcharacteristicid": "3bc544b9-022a-4f1b-8e2a-7d94c10d9c01"
+        },
+        {
+            "@odata.etag": "W/\"16595960\"",
+            "qm_legislationcharacteristicelbl": "UN0197",
+            "qm_legislationcharacteristicflbl": "FR_UN0197",
+            "qm_name": "UN0197",
+            "qm_tylegislationcharacteristicid": "2dd27e66-5a7d-436a-9a9f-7dbd3fda5e54"
+        },
+        {
+            "@odata.etag": "W/\"16596027\"",
+            "qm_legislationcharacteristicelbl": "UN2907",
+            "qm_legislationcharacteristicflbl": "FR_UN2907",
+            "qm_name": "UN2907",
+            "qm_tylegislationcharacteristicid": "1f3b9dca-9a0e-471b-a33c-7e1c9a155a9e"
+        },
+        {
+            "@odata.etag": "W/\"16596033\"",
+            "qm_legislationcharacteristicelbl": "UN3090",
+            "qm_legislationcharacteristicflbl": "FR_UN3090",
+            "qm_name": "UN3090",
+            "qm_tylegislationcharacteristicid": "753acb24-cd3e-4626-ae72-7f358ad0b5ec"
+        },
+        {
+            "@odata.etag": "W/\"16596064\"",
+            "qm_legislationcharacteristicelbl": "UN1499",
+            "qm_legislationcharacteristicflbl": "FR_UN1499",
+            "qm_name": "UN1499",
+            "qm_tylegislationcharacteristicid": "69ecb2fa-4b22-4f6a-9b47-83f044302dc2"
+        },
+        {
+            "@odata.etag": "W/\"16595952\"",
+            "qm_legislationcharacteristicelbl": "UN0044",
+            "qm_legislationcharacteristicflbl": "FR_UN0044",
+            "qm_name": "UN0044",
+            "qm_tylegislationcharacteristicid": "d11372d9-a83d-4218-8f46-83faadcd05e3"
+        },
+        {
+            "@odata.etag": "W/\"16595986\"",
+            "qm_legislationcharacteristicelbl": "UN0453",
+            "qm_legislationcharacteristicflbl": "FR_UN0453",
+            "qm_name": "UN0453",
+            "qm_tylegislationcharacteristicid": "dc7abab6-1a09-40ea-959d-85e068935c4a"
+        },
+        {
+            "@odata.etag": "W/\"16595964\"",
+            "qm_legislationcharacteristicelbl": "UN0323",
+            "qm_legislationcharacteristicflbl": "FR_UN0323",
+            "qm_name": "UN0323",
+            "qm_tylegislationcharacteristicid": "eefb5427-16c5-4be0-9dae-86bfdb1aeff3"
+        },
+        {
+            "@odata.etag": "W/\"16595995\"",
+            "qm_legislationcharacteristicelbl": "UN1011",
+            "qm_legislationcharacteristicflbl": "FR_UN1011",
+            "qm_name": "UN1011",
+            "qm_tylegislationcharacteristicid": "fd2d0085-2e95-4982-ac1a-86d7d4ece871"
+        },
+        {
+            "@odata.etag": "W/\"16595990\"",
+            "qm_legislationcharacteristicelbl": "UN1203",
+            "qm_legislationcharacteristicflbl": "FR_UN1203",
+            "qm_name": "UN1203",
+            "qm_tylegislationcharacteristicid": "21df525b-c40e-4895-ac5b-86fcbe2ba85e"
+        },
+        {
+            "@odata.etag": "W/\"16595979\"",
+            "qm_legislationcharacteristicelbl": "UN0501",
+            "qm_legislationcharacteristicflbl": "FR_UN0501",
+            "qm_name": "UN0501",
+            "qm_tylegislationcharacteristicid": "e2e9b1dc-ddee-48ed-9862-87f861a36b0f"
+        },
+        {
+            "@odata.etag": "W/\"16596043\"",
+            "qm_legislationcharacteristicelbl": "UN0301",
+            "qm_legislationcharacteristicflbl": "FR_UN0301",
+            "qm_name": "UN0301",
+            "qm_tylegislationcharacteristicid": "b008038d-1406-4534-b99d-8884fc9e8b30"
+        },
+        {
+            "@odata.etag": "W/\"16596024\"",
+            "qm_legislationcharacteristicelbl": "UN2555",
+            "qm_legislationcharacteristicflbl": "FR_UN2555",
+            "qm_name": "UN2555",
+            "qm_tylegislationcharacteristicid": "51acc2c2-24ca-4fd6-8d5c-8a707ee9fee0"
+        },
+        {
+            "@odata.etag": "W/\"16596044\"",
+            "qm_legislationcharacteristicelbl": "UN3475",
+            "qm_legislationcharacteristicflbl": "FR_UN3475",
+            "qm_name": "UN3475",
+            "qm_tylegislationcharacteristicid": "d725becb-ae1f-4863-88ef-8ab594577627"
+        },
+        {
+            "@odata.etag": "W/\"16595965\"",
+            "qm_legislationcharacteristicelbl": "UN0335",
+            "qm_legislationcharacteristicflbl": "FR_UN0335",
+            "qm_name": "UN0335",
+            "qm_tylegislationcharacteristicid": "f7f4d31a-e91a-4067-bd1d-8bcf1a2d7f82"
+        },
+        {
+            "@odata.etag": "W/\"16596010\"",
+            "qm_legislationcharacteristicelbl": "UN3291",
+            "qm_legislationcharacteristicflbl": "FR_UN3291",
+            "qm_name": "UN3291",
+            "qm_tylegislationcharacteristicid": "b2ee4561-670e-49ae-a942-8c336b1823fb"
+        },
+        {
+            "@odata.etag": "W/\"16595967\"",
+            "qm_legislationcharacteristicelbl": "UN0337",
+            "qm_legislationcharacteristicflbl": "FR_UN0337",
+            "qm_name": "UN0337",
+            "qm_tylegislationcharacteristicid": "23ab5dae-f303-426c-88c4-8fcfaa81f77b"
+        },
+        {
+            "@odata.etag": "W/\"16596067\"",
+            "qm_legislationcharacteristicelbl": "UN1826",
+            "qm_legislationcharacteristicflbl": "FR_UN1826",
+            "qm_name": "UN1826",
+            "qm_tylegislationcharacteristicid": "eb014da1-7248-4563-a53c-906399422649"
+        },
+        {
+            "@odata.etag": "W/\"16595971\"",
+            "qm_legislationcharacteristicelbl": "UN0373",
+            "qm_legislationcharacteristicflbl": "FR_UN0373",
+            "qm_name": "UN0373",
+            "qm_tylegislationcharacteristicid": "a94b1eae-abb3-41e7-89ba-90af265ddf5e"
+        },
+        {
+            "@odata.etag": "W/\"16596069\"",
+            "qm_legislationcharacteristicelbl": "UN2014",
+            "qm_legislationcharacteristicflbl": "FR_UN2014",
+            "qm_name": "UN2014",
+            "qm_tylegislationcharacteristicid": "93f11f1a-680f-44e8-933e-9319c67fc62c"
+        },
+        {
+            "@odata.etag": "W/\"16596070\"",
+            "qm_legislationcharacteristicelbl": "UN2015",
+            "qm_legislationcharacteristicflbl": "FR_UN2015",
+            "qm_name": "UN2015",
+            "qm_tylegislationcharacteristicid": "1ea5234f-7406-4d0a-ae48-960cee718992"
+        },
+        {
+            "@odata.etag": "W/\"16596042\"",
+            "qm_legislationcharacteristicelbl": "UN2978",
+            "qm_legislationcharacteristicflbl": "FR_UN2978",
+            "qm_name": "UN2978",
+            "qm_tylegislationcharacteristicid": "3e28a99e-aba4-4641-adef-9617c40e97fe"
+        },
+        {
+            "@odata.etag": "W/\"16595955\"",
+            "qm_legislationcharacteristicelbl": "UN0131",
+            "qm_legislationcharacteristicflbl": "FR_UN0131",
+            "qm_name": "UN0131",
+            "qm_tylegislationcharacteristicid": "8e8a8f1a-2446-4ea8-9510-99ec5a1a3d48"
+        },
+        {
+            "@odata.etag": "W/\"16595997\"",
+            "qm_legislationcharacteristicelbl": "UN1055",
+            "qm_legislationcharacteristicflbl": "FR_UN1055",
+            "qm_name": "UN1055",
+            "qm_tylegislationcharacteristicid": "aa24969c-e506-47ff-b85e-9a7495a7215f"
+        },
+        {
+            "@odata.etag": "W/\"16596029\"",
+            "qm_legislationcharacteristicelbl": "UN3319",
+            "qm_legislationcharacteristicflbl": "FR_UN3319",
+            "qm_name": "UN3319",
+            "qm_tylegislationcharacteristicid": "db4c9095-1a71-4310-bf08-9b8a700fb7c5"
+        },
+        {
+            "@odata.etag": "W/\"16596047\"",
+            "qm_legislationcharacteristicelbl": "UN0334",
+            "qm_legislationcharacteristicflbl": "FR_UN0334",
+            "qm_name": "UN0334",
+            "qm_tylegislationcharacteristicid": "9e10fbb2-4867-40dc-aa01-9be312f0f3a9"
+        },
+        {
+            "@odata.etag": "W/\"16596003\"",
+            "qm_legislationcharacteristicelbl": "UN1013",
+            "qm_legislationcharacteristicflbl": "FR_UN1013",
+            "qm_name": "UN1013",
+            "qm_tylegislationcharacteristicid": "97daa651-a0cd-4fec-9f32-9f5957d43dbb"
+        },
+        {
+            "@odata.etag": "W/\"16595991\"",
+            "qm_legislationcharacteristicelbl": "UN1978",
+            "qm_legislationcharacteristicflbl": "FR_UN1978",
+            "qm_name": "UN1978",
+            "qm_tylegislationcharacteristicid": "a5d92b6b-832a-4fae-b3eb-a0d134d5ff62"
+        },
+        {
+            "@odata.etag": "W/\"16596076\"",
+            "qm_legislationcharacteristicelbl": "UN0030",
+            "qm_legislationcharacteristicflbl": "FR_UN0030",
+            "qm_name": "UN0030",
+            "qm_tylegislationcharacteristicid": "9deeb6bd-0d90-483e-83e5-a65a42c9f62a"
+        },
+        {
+            "@odata.etag": "W/\"16596004\"",
+            "qm_legislationcharacteristicelbl": "UN1060",
+            "qm_legislationcharacteristicflbl": "FR_UN1060",
+            "qm_name": "UN1060",
+            "qm_tylegislationcharacteristicid": "45cb5849-622c-4aed-89b3-a759c8bb3b3d"
+        },
+        {
+            "@odata.etag": "W/\"16596038\"",
+            "qm_legislationcharacteristicelbl": "UN1073",
+            "qm_legislationcharacteristicflbl": "FR_UN1073",
+            "qm_name": "UN1073",
+            "qm_tylegislationcharacteristicid": "738e3f88-769b-4d71-8118-a8d3c09e0a1e"
+        },
+        {
+            "@odata.etag": "W/\"16595951\"",
+            "qm_legislationcharacteristicelbl": "UN0014",
+            "qm_legislationcharacteristicflbl": "FR_UN0014",
+            "qm_name": "UN0014",
+            "qm_tylegislationcharacteristicid": "1438c5f6-7313-458c-9215-a97cecc912ca"
+        },
+        {
+            "@odata.etag": "W/\"16596057\"",
+            "qm_legislationcharacteristicelbl": "UN1357",
+            "qm_legislationcharacteristicflbl": "FR_UN1357",
+            "qm_name": "UN1357",
+            "qm_tylegislationcharacteristicid": "3611921c-e5b3-4500-93a5-abaecb0afb48"
+        },
+        {
+            "@odata.etag": "W/\"16596055\"",
+            "qm_legislationcharacteristicelbl": "UN3494",
+            "qm_legislationcharacteristicflbl": "FR_UN3494",
+            "qm_name": "UN3494",
+            "qm_tylegislationcharacteristicid": "7c52408e-5ba3-4c57-a636-acb9af2412d7"
+        },
+        {
+            "@odata.etag": "W/\"16596030\"",
+            "qm_legislationcharacteristicelbl": "UN3344",
+            "qm_legislationcharacteristicflbl": "FR_UN3344",
+            "qm_name": "UN3344",
+            "qm_tylegislationcharacteristicid": "d202f2e3-687e-458d-8559-b11324d374c2"
+        },
+        {
+            "@odata.etag": "W/\"16596048\"",
+            "qm_legislationcharacteristicelbl": "UN1170",
+            "qm_legislationcharacteristicflbl": "FR_UN1170",
+            "qm_name": "UN1170",
+            "qm_tylegislationcharacteristicid": "a5087cac-2c06-4d45-95ca-b21c1a23bfd9"
+        },
+        {
+            "@odata.etag": "W/\"16595972\"",
+            "qm_legislationcharacteristicelbl": "UN0378",
+            "qm_legislationcharacteristicflbl": "FR_UN0378",
+            "qm_name": "UN0378",
+            "qm_tylegislationcharacteristicid": "04c5ea5e-a6f1-42bf-84a9-b3ab7da59415"
+        },
+        {
+            "@odata.etag": "W/\"16596012\"",
+            "qm_legislationcharacteristicelbl": "UN3101",
+            "qm_legislationcharacteristicflbl": "FR_UN3101",
+            "qm_name": "UN3101",
+            "qm_tylegislationcharacteristicid": "6bf8246c-ce17-4644-a93f-b7c9df19450b"
+        },
+        {
+            "@odata.etag": "W/\"16596037\"",
+            "qm_legislationcharacteristicelbl": "UN3359",
+            "qm_legislationcharacteristicflbl": "FR_UN3359",
+            "qm_name": "UN3359",
+            "qm_tylegislationcharacteristicid": "2406c81a-9440-4445-aa73-bc0b85aec34d"
+        },
+        {
+            "@odata.etag": "W/\"16596022\"",
+            "qm_legislationcharacteristicelbl": "UN3242",
+            "qm_legislationcharacteristicflbl": "FR_UN3242",
+            "qm_name": "UN3242",
+            "qm_tylegislationcharacteristicid": "bd20fdda-c3c2-4c12-927f-c16fb62336b2"
+        },
+        {
+            "@odata.etag": "W/\"16596061\"",
+            "qm_legislationcharacteristicelbl": "UN1489",
+            "qm_legislationcharacteristicflbl": "FR_UN1489",
+            "qm_name": "UN1489",
+            "qm_tylegislationcharacteristicid": "4cb02d80-bc2b-42bb-a4be-c18a58da677b"
+        },
+        {
+            "@odata.etag": "W/\"16595961\"",
+            "qm_legislationcharacteristicelbl": "UN0276",
+            "qm_legislationcharacteristicflbl": "FR_UN0276",
+            "qm_name": "UN0276",
+            "qm_tylegislationcharacteristicid": "b0f3e40b-ec88-414a-a758-c4e7fb103e95"
+        },
+        {
+            "@odata.etag": "W/\"16596052\"",
+            "qm_legislationcharacteristicelbl": "UN1987",
+            "qm_legislationcharacteristicflbl": "FR_UN1987",
+            "qm_name": "UN1987",
+            "qm_tylegislationcharacteristicid": "cde14ac1-a0d9-4f8c-842a-c71324628de7"
+        },
+        {
+            "@odata.etag": "W/\"16595950\"",
+            "qm_legislationcharacteristicelbl": "UN0012",
+            "qm_legislationcharacteristicflbl": "FR_UN0012",
+            "qm_name": "UN0012",
+            "qm_tylegislationcharacteristicid": "861561d0-0336-431b-b623-c780c2c63570"
+        },
+        {
+            "@odata.etag": "W/\"16596032\"",
+            "qm_legislationcharacteristicelbl": "UN2900",
+            "qm_legislationcharacteristicflbl": "FR_UN2900",
+            "qm_name": "UN2900",
+            "qm_tylegislationcharacteristicid": "fb8299e0-c249-4d93-9c08-c85704df40d7"
+        },
+        {
+            "@odata.etag": "W/\"16595974\"",
+            "qm_legislationcharacteristicelbl": "UN0405",
+            "qm_legislationcharacteristicflbl": "FR_UN0405",
+            "qm_name": "UN0405",
+            "qm_tylegislationcharacteristicid": "5742e73c-56b9-4db7-aa4c-c87f3aba5241"
+        },
+        {
+            "@odata.etag": "W/\"16595992\"",
+            "qm_legislationcharacteristicelbl": "UN2857",
+            "qm_legislationcharacteristicflbl": "FR_UN2857",
+            "qm_name": "UN2857",
+            "qm_tylegislationcharacteristicid": "005fc8f1-156a-495e-acd6-ce4cb4c55c67"
+        },
+        {
+            "@odata.etag": "W/\"16596025\"",
+            "qm_legislationcharacteristicelbl": "UN2556",
+            "qm_legislationcharacteristicflbl": "FR_UN2556",
+            "qm_name": "UN2556",
+            "qm_tylegislationcharacteristicid": "601e8173-bc35-4285-bcd1-d180107fd58a"
+        },
+        {
+            "@odata.etag": "W/\"16596101\"",
+            "qm_legislationcharacteristicelbl": "UN1791",
+            "qm_legislationcharacteristicflbl": "FR_UN1791",
+            "qm_name": "UN1791",
+            "qm_tylegislationcharacteristicid": "cc44a636-0118-450d-b46d-d34f3d368b0c"
+        },
+        {
+            "@odata.etag": "W/\"16596088\"",
+            "qm_legislationcharacteristicelbl": "UN0360",
+            "qm_legislationcharacteristicflbl": "FR_UN0360",
+            "qm_name": "UN0360",
+            "qm_tylegislationcharacteristicid": "81e0584b-07d6-423f-8bb4-d3f9bdcf38ca"
+        },
+        {
+            "@odata.etag": "W/\"16596089\"",
+            "qm_legislationcharacteristicelbl": "UN3175",
+            "qm_legislationcharacteristicflbl": "FR_UN3175",
+            "qm_name": "UN3175",
+            "qm_tylegislationcharacteristicid": "b5b80b94-ee60-4b75-95c5-d5afeee6b7ef"
+        },
+        {
+            "@odata.etag": "W/\"16596065\"",
+            "qm_legislationcharacteristicelbl": "UN1511",
+            "qm_legislationcharacteristicflbl": "FR_UN1511",
+            "qm_name": "UN1511",
+            "qm_tylegislationcharacteristicid": "ef614121-f1da-4c9c-94b3-d5d8232c3fbc"
+        },
+        {
+            "@odata.etag": "W/\"16595981\"",
+            "qm_legislationcharacteristicelbl": "UN0505",
+            "qm_legislationcharacteristicflbl": "FR_UN0505",
+            "qm_name": "UN0505",
+            "qm_tylegislationcharacteristicid": "aa073a10-53c9-4fa3-afd4-d7150079c7ca"
+        },
+        {
+            "@odata.etag": "W/\"16596046\"",
+            "qm_legislationcharacteristicelbl": "UN0333",
+            "qm_legislationcharacteristicflbl": "FR_UN0333",
+            "qm_name": "UN0333",
+            "qm_tylegislationcharacteristicid": "96cbf355-7fb3-4caa-8bc4-dbade52b0992"
+        },
+        {
+            "@odata.etag": "W/\"16596041\"",
+            "qm_legislationcharacteristicelbl": "UN2977",
+            "qm_legislationcharacteristicflbl": "FR_UN2977",
+            "qm_name": "UN2977",
+            "qm_tylegislationcharacteristicid": "fe1fe5d8-ddb2-49d5-96ac-def26e0748cf"
+        },
+        {
+            "@odata.etag": "W/\"16595999\"",
+            "qm_legislationcharacteristicelbl": "UN1969",
+            "qm_legislationcharacteristicflbl": "FR_UN1969",
+            "qm_name": "UN1969",
+            "qm_tylegislationcharacteristicid": "6fd4517f-c5d8-47d8-838d-df473ff8b8b3"
+        },
+        {
+            "@odata.etag": "W/\"16596015\"",
+            "qm_legislationcharacteristicelbl": "UN3112",
+            "qm_legislationcharacteristicflbl": "FR_UN3112",
+            "qm_name": "UN3112",
+            "qm_tylegislationcharacteristicid": "a4e0211a-6db4-4039-a2d1-e2b0c2e6a318"
+        },
+        {
+            "@odata.etag": "W/\"16595942\"",
+            "qm_legislationcharacteristicelbl": "Has Classes",
+            "qm_legislationcharacteristicflbl": "FR_Has Classes",
+            "qm_name": "Has Classes",
+            "qm_tylegislationcharacteristicid": "015a09bf-e8c9-4a71-aec6-e39fae616881"
+        },
+        {
+            "@odata.etag": "W/\"16596075\"",
+            "qm_legislationcharacteristicelbl": "UN0190",
+            "qm_legislationcharacteristicflbl": "FR_UN0190",
+            "qm_name": "UN0190",
+            "qm_tylegislationcharacteristicid": "eb907931-a2a5-4126-8ae6-e4a2b89c4310"
+        },
+        {
+            "@odata.etag": "W/\"16596086\"",
+            "qm_legislationcharacteristicelbl": "UN0331",
+            "qm_legislationcharacteristicflbl": "FR_UN0331",
+            "qm_name": "UN0331",
+            "qm_tylegislationcharacteristicid": "c9650580-168f-44b4-bd38-e5fd3386a694"
+        },
+        {
+            "@odata.etag": "W/\"16596008\"",
+            "qm_legislationcharacteristicelbl": "UN3373",
+            "qm_legislationcharacteristicflbl": "FR_UN3373",
+            "qm_name": "UN3373",
+            "qm_tylegislationcharacteristicid": "58b81090-dc0b-487f-b692-e65b40faea7f"
+        },
+        {
+            "@odata.etag": "W/\"16596014\"",
+            "qm_legislationcharacteristicelbl": "UN3111",
+            "qm_legislationcharacteristicflbl": "FR_UN3111",
+            "qm_name": "UN3111",
+            "qm_tylegislationcharacteristicid": "d0b537d5-734f-4451-b138-e7f28b9db0c2"
+        },
+        {
+            "@odata.etag": "W/\"16596081\"",
+            "qm_legislationcharacteristicelbl": "UN0082",
+            "qm_legislationcharacteristicflbl": "FR_UN0082",
+            "qm_name": "UN0082",
+            "qm_tylegislationcharacteristicid": "b95e0ce2-8452-4e50-af35-e8198552fe1f"
+        },
+        {
+            "@odata.etag": "W/\"16596066\"",
+            "qm_legislationcharacteristicelbl": "UN1796",
+            "qm_legislationcharacteristicflbl": "FR_UN1796",
+            "qm_name": "UN1796",
+            "qm_tylegislationcharacteristicid": "91cc21ae-207c-4536-81a1-e8efd9ae8936"
+        },
+        {
+            "@odata.etag": "W/\"16596095\"",
+            "qm_legislationcharacteristicelbl": "UN3529",
+            "qm_legislationcharacteristicflbl": "FR_UN3529",
+            "qm_name": "UN3529",
+            "qm_tylegislationcharacteristicid": "ac4483ae-795a-4a6a-8813-ea6b9b992ea9"
+        },
+        {
+            "@odata.etag": "W/\"16596023\"",
+            "qm_legislationcharacteristicelbl": "UN3251",
+            "qm_legislationcharacteristicflbl": "FR_UN3251",
+            "qm_name": "UN3251",
+            "qm_tylegislationcharacteristicid": "ad0abd81-2bf9-4e34-a846-edc84a79406f"
+        },
+        {
+            "@odata.etag": "W/\"16596026\"",
+            "qm_legislationcharacteristicelbl": "UN2557",
+            "qm_legislationcharacteristicflbl": "FR_UN2557",
+            "qm_name": "UN2557",
+            "qm_tylegislationcharacteristicid": "aed9dd44-1029-4234-b577-f1bb1b8b39ab"
+        },
+        {
+            "@odata.etag": "W/\"16596080\"",
+            "qm_legislationcharacteristicelbl": "UN0081",
+            "qm_legislationcharacteristicflbl": "FR_UN0081",
+            "qm_name": "UN0081",
+            "qm_tylegislationcharacteristicid": "a269de33-72e2-4151-afca-f5a38e397315"
+        },
+        {
+            "@odata.etag": "W/\"16595957\"",
+            "qm_legislationcharacteristicelbl": "UN0173",
+            "qm_legislationcharacteristicflbl": "FR_UN0173",
+            "qm_name": "UN0173",
+            "qm_tylegislationcharacteristicid": "eeb36514-d44f-47ac-922a-f6dd01360752"
+        },
+        {
+            "@odata.etag": "W/\"16595982\"",
+            "qm_legislationcharacteristicelbl": "UN0507",
+            "qm_legislationcharacteristicflbl": "FR_UN0507",
+            "qm_name": "UN0507",
+            "qm_tylegislationcharacteristicid": "08563dab-454e-4bc9-9bae-f77279235b20"
+        },
+        {
+            "@odata.etag": "W/\"16595948\"",
+            "qm_legislationcharacteristicelbl": "UN1950",
+            "qm_legislationcharacteristicflbl": "FR_UN1950",
+            "qm_name": "UN1950",
+            "qm_tylegislationcharacteristicid": "21ad1d24-adc1-4b62-a576-f81a12215325"
+        },
+        {
+            "@odata.etag": "W/\"16595970\"",
+            "qm_legislationcharacteristicelbl": "UN0351",
+            "qm_legislationcharacteristicflbl": "FR_UN0351",
+            "qm_name": "UN0351",
+            "qm_tylegislationcharacteristicid": "b5ff4d83-70d0-415c-8632-f889c2f5932b"
+        },
+        {
+            "@odata.etag": "W/\"16596094\"",
+            "qm_legislationcharacteristicelbl": "UN3528",
+            "qm_legislationcharacteristicflbl": "FR_UN3528",
+            "qm_name": "UN3528",
+            "qm_tylegislationcharacteristicid": "d1055517-86b1-4157-9dcf-f8c5d448fd38"
+        },
+        {
+            "@odata.etag": "W/\"16596084\"",
+            "qm_legislationcharacteristicelbl": "UN0084",
+            "qm_legislationcharacteristicflbl": "FR_UN0084",
+            "qm_name": "UN0084",
+            "qm_tylegislationcharacteristicid": "6cb5c275-6663-452f-9ae4-fad2da9570b5"
+        },
+        {
+            "@odata.etag": "W/\"16596073\"",
+            "qm_legislationcharacteristicelbl": "UN3149",
+            "qm_legislationcharacteristicflbl": "FR_UN3149",
+            "qm_name": "UN3149",
+            "qm_tylegislationcharacteristicid": "5ebeb613-cd43-4dc2-b6e1-fd51f9f8ba1c"
+        },
+        {
+            "@odata.etag": "W/\"16596079\"",
+            "qm_legislationcharacteristicelbl": "UN0065",
+            "qm_legislationcharacteristicflbl": "FR_UN0065",
+            "qm_name": "UN0065",
+            "qm_tylegislationcharacteristicid": "e903ea32-24b6-44a9-b9ba-feb3a7b55370"
+        }
+    ]
+}
