@@ -79,6 +79,11 @@
             justify="end"
           >
             <v-col class="col-auto">
+              <v-btn @click="clearQuestionnaire()">
+                {{ $t('app.builder.clear') }}
+              </v-btn>
+            </v-col>
+            <v-col class="col-auto">
               <v-btn @click="save()">
                 {{ $t('app.builder.save') }}
               </v-btn>
@@ -954,7 +959,12 @@ export default {
       this.selectedGroup = group
       this.selectedQuestion = question
     },
-    async save (id) {
+    clearQuestionnaire () {
+      alert('Clear the Questionnarie')
+      this.questionnaire = BuilderService.createQuestionnaire()
+      this.save()
+    },
+    save () {
       const page = 'builder'
       console.log('Save...')
       // console.log(JSON.stringify(this.questionnaire))

@@ -19,6 +19,7 @@
       "noGroups": "Click Add Group to start creating a new Questionnaire!",
       "loading": "Loading...",
       "save": "Save",
+      "clear": "Clear",
       "questionnaireName": "Questionnaire Name",
       "questionName": "Question Name",
       "questionType": "Question Type",
