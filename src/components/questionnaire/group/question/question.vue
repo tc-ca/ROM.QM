@@ -566,7 +566,7 @@ export default {
       }
     },
     updateViolationInfo (args) {
-      if (this.question.responseOptions.length > 0) {
+      if (this.question.responseOptions && this.question.responseOptions.length > 0) {
         let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
           if (responseOption.provisions == null || responseOption.provisions.length === 0) {

@@ -139,6 +139,19 @@ function createQuestion (questionnaire, group) {
   return question
 }
 
+function convertToReferenceQuestion(rQuestion) {
+  rQuestion.name = 'Reference ID'
+  rQuestion.id = 0
+  rQuestion.sortOrder = 1
+  rQuestion.isMultiple = false
+  rQuestion.text = {
+    [LANGUAGE.ENGLISH]: 'Reference ID',
+    [LANGUAGE.FRENCH]: 'FR: Reference ID'
+  }
+  rQuestion.type = QUESTION_TYPE.REFERENCE
+  return rQuestion
+}
+
 function createReferenceQuestion (questionnaire, group) {
   let rQuestion = createQuestion(questionnaire, group)
   rQuestion.name = 'Reference ID'
@@ -150,6 +163,7 @@ function createReferenceQuestion (questionnaire, group) {
     [LANGUAGE.FRENCH]: 'FR: Reference ID'
   }
   rQuestion.type = QUESTION_TYPE.REFERENCE
+  rQuestion.responseOptions = []
   return rQuestion
 }
 
@@ -339,6 +353,7 @@ export default {
   createQuestionnaire,
   createQuestion,
   createReferenceQuestion,
+  convertToReferenceQuestion,
   createProvisions,
   createChildQuestion,
   createResponseOption,

@@ -19,6 +19,7 @@
       "noGroups": "FR Click Add Group to start creating a new Questionnaire!",
       "loading": "FR Loading...",
       "save": "FR Save",
+      "clear": "FR Clear",
       "questionnaireName": "FR Questionnaire Name",
       "questionName": "FR Question Name",
       "questionType": "FR Question Type",
