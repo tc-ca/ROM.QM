@@ -21,6 +21,7 @@
           prepend-icon="mdi-file-table-box-multiple-outline"
           type="number"
           min="1"
+          :disabled="readOnly"
           :error-messages="errorMessagesTotal"
           :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
                     (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalGreaterThan1'),
@@ -37,6 +38,7 @@
           prepend-icon="mdi-file-table-box-outline"
           type="number"
           min="1"
+          :disabled="readOnly"
           :max="question.samplingRecord.approximateTotal"
           :error-messages="errorMessagesSize"
           :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
@@ -54,6 +56,7 @@
           prepend-icon="mdi-file-table-outline"
           type="number"
           min="0"
+          :disabled="readOnly"
           :max="question.samplingRecord.sampleSize"
           :error-messages="errorMessagesCompliances"
           :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
@@ -72,6 +75,10 @@ export default {
   props: {
     question: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

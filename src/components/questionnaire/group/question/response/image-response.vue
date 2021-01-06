@@ -11,6 +11,7 @@
           <v-btn
             slot-scope="{openDeviceCam}"
             color="teal"
+            :disabled="readOnly"
             fab
             @click="openDeviceCam"
           >
@@ -29,7 +30,7 @@
           >
             <v-btn
               slot-scope="{openDeviceCam}"
-              :disabled="!imageNoteExist"
+              :disabled="!imageNoteExist || readOnly"
               fab
               @click="openDeviceCam"
             >
@@ -41,7 +42,7 @@
           <v-btn
             v-model="speedDialOpen"
             fab
-            :disabled="!imageNoteExist"
+            :disabled="!imageNoteExist || readOnly"
           >
             <v-icon v-if="speedDialOpen">
               mdi-close
@@ -53,7 +54,7 @@
           <!-- Delete Photo Button  -->
 
           <v-btn
-            :disabled="!imageNoteExist"
+            :disabled="!imageNoteExist || readOnly"
             fab
             @click.stop="removeImage(galleryIndex); updateResponseStore();"
           >
@@ -99,6 +100,7 @@
                     <v-btn
                       x-small
                       :input-value="active"
+                      :disabled="readOnly"
                       icon
                       @click="toggle"
                     >
@@ -136,6 +138,7 @@
                 v-model="images[galleryIndex].title"
                 auto-grow
                 outlined
+                :disabled="readOnly"
                 dense
                 rows="1"
                 label="Title"
@@ -145,6 +148,7 @@
                 v-model="images[galleryIndex].comment"
                 auto-grow
                 outlined
+                :disabled="readOnly"
                 dense
                 placeholder=" "
                 rows="1"
@@ -160,6 +164,7 @@
       ref="validationInput"
       v-model="images.length"
       :rules="validationRules"
+      :disabled="readOnly"
       @update:error="onError"
     />
   </div>
@@ -179,6 +184,10 @@ export default {
   props: {
     question: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

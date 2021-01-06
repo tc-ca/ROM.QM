@@ -10,6 +10,7 @@
       :chips="question.isChips"
       :multiple="question.isMultiple"
       outlined
+      :disabled="readOnly"
       label="select"
       return-object
       validate-on-blur
@@ -26,6 +27,10 @@ export default {
   props: {
     question: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

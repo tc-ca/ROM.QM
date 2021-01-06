@@ -1,11 +1,10 @@
-
 trigger:
   branches:
     include:
     - development
   paths:
     exclude:
-    - Pipelines/*
+    - pipelines/*
 
 stages:
 - stage: BuildAndPublishArtifact
@@ -14,6 +13,38 @@ stages:
   jobs:
   - job: BuildAndPublishArtifact
     steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "============================================"
+          Write-Host "System.DefaultWorkingDirectory"
+          Get-ChildItem -Path "$(System.DefaultWorkingDirectory)"
+          Write-Host "============================================"
+          Write-Host "Agent.BuildDirectory"
+          Get-ChildItem -Path "$(Agent.BuildDirectory)"
+          Write-Host "============================================"
+          Write-Host ""
+          Write-Host "============================================"
+          Write-Host "System.ArtifactsDirectory"
+          Get-ChildItem -Path "$(System.ArtifactsDirectory)"
+          Write-Host "============================================"
+          Write-Host "============================================"
+          Write-Host "Build.BinariesDirectory"
+          Get-ChildItem -Path "$(Build.BinariesDirectory)"
+          Write-Host "============================================"
+          Write-Host "============================================"
+          Write-Host "Build.SourcesDirectory"
+          Get-ChildItem -Path "$(Build.SourcesDirectory)"
+          Write-Host "============================================"
+        errorActionPreference: 'continue'
+    - task: DeleteFiles@1
+      inputs:
+        SourceFolder: '$(Build.ArtifactStagingDirectory)'
+        Contents: |
+          **
+          **/**
+        RemoveSourceFolder: true
     - task: NodeTool@0
       inputs:
         versionSpec: '10.x'
@@ -31,8 +62,10 @@ stages:
         customCommand: 'run test:unit'
     - task: CopyFiles@2
       inputs:
-        Contents: 'dist/**' # Pull the build directory (Vue)
+        Contents: 'dist/**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        CleanTargetFolder: true
+        OverWrite: true
     - task: PublishBuildArtifacts@1
       inputs: 
         pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
@@ -68,8 +101,8 @@ stages:
                 Write-Host "============================================"
                 Write-Host ""
                 Write-Host "============================================"
-                Write-Host "Build.ArtifactStagingDirectory"
-                Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)"
+                Write-Host "System.ArtifactsDirectory"
+                Get-ChildItem -Path "$(System.ArtifactsDirectory)"
                 Write-Host "============================================"
                 Write-Host "============================================"
                 Write-Host "Build.BinariesDirectory"
@@ -94,13 +127,18 @@ stages:
               Write-Host "Latest Patch Name =  $(LatestPatchName)"
               Write-Host "${{ eq('$(PatchExists)', 'False') }}"
               Write-Host variables['task.GetLatestPatchTask.PatchExists']
+          - task: MSCRMCopySolutionComponents@12
+            inputs:
+              crmConnectionString: '$(ConnectionString)'
+              fromSolutionName: '$(QMSolutionName)'
+              toSolutionName: '$(LatestPatchName)'
           - task: MSCRMUpdateWebResource@12
             inputs:
               crmConnectionString: '$(ConnectionString)'
               webResourceDeploymentType: 'jsonMapping'
-              webResourceFolderPath: '..\WebResources\dist'
-              webResourceJsonMappingPath: 'webresourceMapping.json'
-              failIfWebResourceNotFound: false
+              webResourceFolderPath: '$(Agent.BuildDirectory)\WebResources\dist'
+              webResourceJsonMappingPath: '$(Agent.BuildDirectory)\WebResources\dist\webresourceMapping.json'
+              failIfWebResourceNotFound: true
               publish: true
-              solutionName: '$(SolutionName)'
+              solutionName: '$(LatestPatchName)'
               crmConnectionTimeout: 360

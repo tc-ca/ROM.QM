@@ -112,6 +112,12 @@
       },
       "expandAll": "FR Expand All",
       "collapseAll": "FR Collapse All"
+    },
+    "general": {
+      "active": "FR Active",
+      "inactive": "FR Inactive",
+      "true": "FR True",
+      "false": "FR False"
     }
   }
 }

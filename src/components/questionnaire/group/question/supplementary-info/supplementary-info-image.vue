@@ -13,6 +13,7 @@
         <v-icon
           v-else
           color="primary"
+          small
         >
           mdi-alpha-o-box-outline
         </v-icon>
@@ -32,6 +33,7 @@
           <v-file-input
             prepend-icon="mdi-camera-plus-outline"
             hide-input
+            :disabled="readOnly"
             accept="image/*"
             @change="onFileChange"
           />
@@ -41,7 +43,7 @@
             <v-btn
               v-model="speedDialOpen"
               fab
-              :disabled="!imageNoteExist"
+              :disabled="!imageNoteExist || readOnly"
             >
               <v-icon v-if="speedDialOpen">
                 mdi-close
@@ -53,7 +55,7 @@
             <!-- Delete Photo Button  -->
 
             <v-btn
-              :disabled="!imageNoteExist"
+              :disabled="!imageNoteExist || readOnly"
               fab
               @click.stop="removeImage(galleryIndex); updateResponseStore();"
             >
@@ -100,6 +102,7 @@
                         x-small
                         :input-value="active"
                         icon
+                        :disabled="readOnly"
                         @click="toggle"
                       >
                         <v-icon x-small>
@@ -136,6 +139,7 @@
                   v-model="picture.value[galleryIndex].title"
                   auto-grow
                   outlined
+                  :disabled="readOnly"
                   dense
                   rows="1"
                   label="Title"
@@ -145,6 +149,7 @@
                   v-model="picture.value[galleryIndex].comment"
                   auto-grow
                   outlined
+                  :disabled="readOnly"
                   dense
                   placeholder=" "
                   rows="1"
@@ -159,6 +164,7 @@
       <v-input
         ref="validationInput"
         v-model="picture.value.length"
+        :disabled="readOnly"
         :rules="rules"
         @update:error="onError"
       />
@@ -194,6 +200,10 @@ export default {
     },
     saveToProp: {
       type: String,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },
@@ -256,6 +266,10 @@ export default {
 
     addImageToArray () {
       if (this.picture.value.length < MAX_IMAGE_UPLOADS_PER_ANSWER) {
+        // This is temporary, until all the questions will come with the right data structure
+        if (!Array.isArray(this.picture.value)) {
+          this.picture.value = []
+        }
         this.picture.value.push({ base64String: this.curImg, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
         // this.images.push(base64)
         this.next()

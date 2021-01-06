@@ -43,6 +43,7 @@
               <v-btn
                 rounded
                 v-bind="attrs"
+                :disabled="readOnly"
                 v-on="on"
                 @click="clickSampling"
               >
@@ -64,6 +65,7 @@
                 class="ml-2"
                 rounded
                 v-bind="attrs"
+                :disabled="readOnly"
                 v-on="on"
                 @click="repeatQuestion"
               >
@@ -85,6 +87,7 @@
                 class="ml-2"
                 rounded
                 v-bind="attrs"
+                :disabled="readOnly"
                 v-on="on"
                 @click="deleteRepeatedQuestion"
               >
@@ -104,6 +107,7 @@
         <response
           :question="question"
           :group="group"
+          :read-only="readOnly"
           @change="onUserResponseChanged"
           @error="onError"
         />
@@ -111,6 +115,7 @@
       <div v-if="displaySamplingRecord">
         <sampling-record
           :question="question"
+          :read-only="readOnly"
         />
       </div>
       <div v-if="displayViolationInfo && !isReferenceQuestion">
@@ -121,13 +126,14 @@
             <v-sheet class="pa-4">
               <v-text-field
                 v-model="question.violationInfo.referenceID"
-                :disabled="isViolationInfoReferenceIdDisabled"
+                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 outline
               />
               <v-text-field
                 v-model="question.violationInfo.violationCount"
+                :disabled="readOnly"
                 :label="$t('app.questionnaire.group.question.violationCount')"
                 :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
                 outline
@@ -137,6 +143,7 @@
               <v-text-field
                 v-model="selectedResponseOption.searchProvisions"
                 label="Search"
+                :disabled="readOnly"
                 outlined
                 hide-details
                 clearable
@@ -148,6 +155,7 @@
                 <v-btn
                   v-for="item in selProvisions"
                   :key="item.key"
+                  :disabled="readOnly"
                   small
                   style="margin-right: 5px; margin-bottom: 5px"
                   rounded
@@ -168,14 +176,20 @@
             <v-card-text>
               <v-treeview
                 v-model="selProvisions"
-                selectable
-                :item-text="'title.' + lang"
+                :selectable="!readOnly"
+                :disabled="readOnly"
                 item-key="id"
                 selection-type="leaf"
                 :search="selectedResponseOption.searchProvisions"
                 :filter="selectedResponseOption.filterProvisions"
                 :items="provisions"
-              />
+              >
+                <template v-slot:label="{ item }">
+                  <div class="truncated">
+                    <div>{{ item.title[lang] }}</div>
+                  </div>
+                </template>
+              </v-treeview>
             </v-card-text>
           </v-card>
         </div>
@@ -188,6 +202,7 @@
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
+        :read-only="readOnly"
         @error="onError"
       />
 
@@ -206,6 +221,7 @@
             :group="group"
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
+            :read-only="readOnly"
             @error="onChildError"
             @repeat-question="onRepeatChildQuestion"
             @delete-repeated-question="onDeleteChildRepeatedQuestion"
@@ -247,6 +263,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    readOnly: {
+      type: Boolean,
+      required: true
     }
   },
   data () {
@@ -525,8 +545,25 @@ export default {
       }
     },
     updateSupplementaryInfoVisibility (args) {
-      // this.displaySupplementaryInfo = (args && args.value) || (this.isReferenceQuestion)
       this.displaySupplementaryInfo = (args && args.value)
+      if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
+    },
+    updateSupplementaryInfo (args) {
+      if (this.question.type === QUESTION_TYPE.RADIO) {
+        let orgOption = this.question.responseOptions.find(q => q.internalComment.value !== '' ||
+          q.externalComment.value !== '' || q.picture.value !== '')
+        let selOption = this.question.responseOptions.find(q => q.value === args.value)
+
+        if (orgOption) {
+          selOption.internalComment.value = orgOption.internalComment.value
+          selOption.externalComment.value = orgOption.externalComment.value
+          selOption.picture.value = orgOption.picture.value
+
+          orgOption.internalComment.value = ''
+          orgOption.externalComment.value = ''
+          orgOption.picture.value = ''
+        }
+      }
     },
     updateViolationInfo (args) {
       if (this.question.responseOptions.length > 0) {
@@ -650,31 +687,52 @@ export default {
 </script>
 
 <style scoped>
-/* .v-card {
-  border: none !important;
-
-}
-.v-card__title {
-  padding: 0px 4px 0px !important;
-  margin: 0px !important;
-  font-weight: normal !important;
-
-}
-.v-card__text {
-  padding: 0px 4px 0px !important;
-  margin: 0px !important;
-} */
-/* .v-expansion-panel-header--active::before {
-  opacity: 0 !important;
-} */
-
-/* .cursor-auto {
-  cursor: auto;
-} */
 .selected {
     box-shadow: 0 0px 5px 0 rgba(255, 0, 0, 1);
     border-width: 1px;
     border-style: solid;
     border-color:  rgba(255, 0, 0, 1);
   }
+  .truncated div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    padding: .5em;
+
+    width: auto;
+    max-width: 90%;
+    -webkit-transition: max-width linear .5s;
+    transition: max-width linear .5s;
+  }
+  .truncated:hover div {
+    overflow: visible;
+    white-space: normal;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    /* Non standard for webkit*/
+      word-break: break-word;
+
+  -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+          hyphens: auto;
+
+    max-width: 100%;
+    width: 100%;
+    z-index: 1; /* stack above subsequent cells */
+  }
+  .truncated:hover div:before {
+    background-color: #d3e9f1ef;
+    border: 1px solid #ddd;
+    content: "";
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-radius: 5px;
+    position: absolute;
+    z-index:-1; /* stack below truncated text */
+  }
+
 </style>

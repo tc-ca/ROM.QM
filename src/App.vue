@@ -70,12 +70,13 @@
       <v-btn
         v-show="fab"
         v-scroll="onScroll"
+        class="btnTop"
         fab
         dark
         fixed
         bottom
         right
-        color="primary"
+        color="warning"
         @click="scrollToTop"
       >
         <v-icon>mdi-arrow-up</v-icon>
@@ -172,7 +173,6 @@ export default {
     const page = this.page
     if (this.envDev && this.loadLocalData) {
       const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
-      await this.$store.dispatch('SetTreeLegislationsStateToLocalData')
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     } else {
       const questionnaire = BuilderService.createQuestionnaire()
@@ -245,5 +245,8 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   /* margin-top: 60px; */
+}
+.btnTop i:hover{
+  transform: scale(1.80);
 }
 </style>

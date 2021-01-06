@@ -3,6 +3,7 @@
     <text-response
       v-if="question.type === text || question.type === reference"
       :question="question"
+      :read-only="readOnly"
       @change="onChange"
       @error="onError"
     />
@@ -11,6 +12,7 @@
       v-if="question.type === radio"
       :group="group"
       :question="question"
+      :read-only="readOnly"
       @change="onChange"
       @error="onError"
     />
@@ -19,6 +21,7 @@
       v-if="question.type === select"
       :group="group"
       :question="question"
+      :read-only="readOnly"
       @change="onChange"
       @error="onError"
     />
@@ -27,6 +30,7 @@
       v-if="question.type === image"
       :group="group"
       :question="question"
+      :read-only="readOnly"
       @change="onChange"
       @error="onError"
     />
@@ -35,6 +39,7 @@
       v-if="question.type === number"
       :group="group"
       :question="question"
+      :read-only="readOnly"
       @change="onChange"
       @error="onError"
     />
@@ -60,6 +65,10 @@ export default {
     },
     group: {
       type: Object,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

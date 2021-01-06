@@ -13,6 +13,7 @@
         <v-icon
           v-else
           color="primary"
+          small
         >
           mdi-alpha-o-box-outline
         </v-icon>
@@ -36,6 +37,7 @@
         dense
         outlined
         clearable
+        :disabled="readOnly"
         clear-icon="mdi-close-circle"
         :placeholder="placeholderText"
         rows="1"
@@ -46,7 +48,7 @@
         <v-icon
           v-if="comment.required"
           slot="append"
-          large
+          small
           color="red"
         >
           mdi-exclamation
@@ -85,6 +87,10 @@ export default {
     },
     saveToProp: {
       type: String,
+      required: true
+    },
+    readOnly: {
+      type: Boolean,
       required: true
     }
   },

@@ -112,6 +112,12 @@
       },
       "expandAll": "Expand All",
       "collapseAll": "Collapse All"
+    },
+    "general": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "true": "True",
+      "false": "False"
     }
   }
 }
