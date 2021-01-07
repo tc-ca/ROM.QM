@@ -879,14 +879,14 @@ export default {
           this.selectedQuestion.type = 'text'
         }
       }
-      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO ||
-          this.selectedQuestion.type !== QUESTION_TYPE.SELECT ||
+      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
+          this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
           this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
         this.selectedQuestion.responseOptions = null
         this.onQuestionTextChange(this.selectedQuestion)
       } else {
         if (this.selectedQuestion.responseOptions == null) {
-          this.selectedQuestion.responseOptions = this.builderService.createResponseOption(this.selectedQuestion)
+          this.selectedQuestion.responseOptions = BuilderService.createResponseOption(this.selectedQuestion)
         }
       }
     },
