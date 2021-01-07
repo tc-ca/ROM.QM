@@ -79,13 +79,23 @@
             justify="end"
           >
             <v-col class="col-auto">
-              <v-btn @click="clearQuestionnaire()">
-                {{ $t('app.builder.clear') }}
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="clearQuestionnaire()"
+              >
+                <span>{{ $t('app.builder.clear') }}</span>
               </v-btn>
             </v-col>
             <v-col class="col-auto">
-              <v-btn @click="save()">
-                {{ $t('app.builder.save') }}
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="save()"
+              >
+                <span>{{ $t('app.builder.save') }}</span>
               </v-btn>
             </v-col>
           </v-row>
