@@ -960,7 +960,6 @@ export default {
       this.selectedQuestion = question
     },
     clearQuestionnaire () {
-      alert('Clear the Questionnarie')
       this.questionnaire = BuilderService.createQuestionnaire()
       this.save()
     },
