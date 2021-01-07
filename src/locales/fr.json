@@ -52,6 +52,9 @@
       "dependsOn": {
         "dependsOn": "FR Depends On",
         "type": "FR Type",
+        "question": "FR Question",
+        "tobe": "FR to be",
+        "to": "FR to",
         "addQuestion": "FR Add Question",
         "removDependencyGroup": "FR Remove dependency group",
         "addDependencyGroup": "FR Add Dependency Group"

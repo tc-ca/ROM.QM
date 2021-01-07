@@ -518,10 +518,10 @@
                                 <v-select
                                   v-model="questionDependency.dependsOnQuestion"
                                   dense
-                                  item-text="name"
+                                  :item-text="'text.' + lang"
                                   item-value="guid"
                                   :items="questions"
-                                  label="Question"
+                                  :label="$t('app.builder.dependsOn.question')"
                                   return-object
                                 />
                                 <v-select
@@ -530,7 +530,7 @@
                                   item-text="text"
                                   item-value="value"
                                   :items="dependencyValidationActions"
-                                  label="to be"
+                                  :label="$t('app.builder.dependsOn.tobe')"
                                 >
                                   <template v-slot:selection="{ item }">
                                     <span>{{ item.text[lang] }}</span>
@@ -542,7 +542,7 @@
                                 <v-text-field
                                   v-model="questionDependency.validationValue"
                                   dense
-                                  label="to"
+                                  :label="$t('app.builder.dependsOn.to')"
                                 />
                                 <div class="right">
                                   <v-tooltip

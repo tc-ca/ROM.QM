@@ -52,6 +52,9 @@
       "dependsOn": {
         "dependsOn": "Depends On",
         "type": "Type",
+        "question": "Question",
+        "tobe": "to be",
+        "to": "to",
         "addQuestion": "Add Question",
         "removDependencyGroup": "Remove dependency group",
         "addDependencyGroup": "Add Dependency Group"
