@@ -751,7 +751,7 @@ export default {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
-          this.$store.commit('objectstate/updateQuestionnaireState', _.cloneDeep(this.questionnaire))
+          this.$store.dispatch('objectstate/UpdateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
