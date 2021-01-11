@@ -229,6 +229,7 @@ export default {
     } else {
       this.readOnly = false
     }
+    this.$store.dispatch('setQuestionnaireGroups', this.group.groups)
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
