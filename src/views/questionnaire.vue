@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import BuilderService from '../services/builderService'
 import Questionnaire from '../components/questionnaire/questionnaire.vue'
 import BaseMixin from '../mixins/base'
 
@@ -18,8 +19,15 @@ export default {
     Questionnaire
   },
   mixins: [BaseMixin],
+
   async mounted () {
-    if (this.loadLocalData) {
+    // if env= dev and loadLocalData then set the questionnaire state to local copy else the state will be set explicility outside in app.vue
+    if (this.envDev && this.loadLocalData) {
+      const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page: 'questionnaire' })
+    }
+    // if env= dev load the provisions else the state will be set explicility outside in app.vue
+    if (this.envDev) {
       await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
     }
   },
