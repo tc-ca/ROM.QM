@@ -190,6 +190,17 @@ export default {
       this.setAppLanguage(this.lang)
     },
     /**
+     * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.
+     */
+    SetReadOnly (readOnly) {
+      const q = this.$store.getters['getQuestionnaire']
+      if (q) {
+        alert('LM: Doing the ReadOnly function')
+        q.readOnly = readOnly
+        this.$store.dispatch('setQuestionnaireReadOnlyStatus', q.readOnly)
+      }
+    },
+    /**
      * Sets the questionnaire state, which is used to render the on screen elements, a valid json must be passed.
      */
     Render (questionnaire) {
