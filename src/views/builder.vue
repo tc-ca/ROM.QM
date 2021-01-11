@@ -743,22 +743,15 @@ export default {
       ])
     })
   },
-  created () {
-    this.questionnaire = this.$store.state.questionnaire.questionnaire
-  },
-  mounted () {
-    if (this.envDev && this.loadLocalData) {
-      this.$store.dispatch('SetTreeLegislationsStateToLocalData')
-    }
-
-    // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
+  async mounted () {
+    // run this code first
+    // so we can subscribe to mutation within this method
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
-          this.$store.dispatch('InitializeSearchableProvisionRef')
-          this.$store.commit('objectstate/updateQuestionnaireState', _.cloneDeep(this.questionnaire))
+          this.$store.dispatch('objectstate/UpdateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
@@ -767,6 +760,24 @@ export default {
           break
       }
     })
+
+    let template = null
+    // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
+    if (this.envDev && this.loadLocalData) {
+      template = await BuilderService.GetMockQuestionnaireFromImportModule()
+    } else {
+      // default to empty template
+      template = BuilderService.createQuestionnaire()
+    }
+
+    this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
+
+    // if env= dev load the provisions else the state will be set explicility outside in app.vue
+    if (this.envDev && this.loadLocalData) {
+      this.$store.dispatch('SetTreeLegislationsStateToLocalData')
+    }
+
+    this.$store.dispatch('InitializeSearchableProvisionRef')
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
