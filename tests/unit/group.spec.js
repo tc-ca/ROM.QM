@@ -62,7 +62,7 @@ describe('Group.vue', () => {
 
     // mounts the component and gives usus access to functions that will help us to test function
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order },
+      propsData: { group, index: group.order, readOnly: false },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -81,7 +81,7 @@ describe('Group.vue', () => {
     group.domSuffix = '#001'
     // mounts the component and gives usus access to functions that will help us to test function
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order },
+      propsData: { group, index: group.order, readOnly: false },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -98,7 +98,7 @@ describe('Group.vue', () => {
     group.isRepeatable = false
 
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order },
+      propsData: { group, index: group.order, readOnly: false },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -118,7 +118,7 @@ describe('Group.vue', () => {
     group.domSuffix = '#001'
 
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order },
+      propsData: { group, index: group.order, readOnly: false },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -138,7 +138,7 @@ describe('Group.vue', () => {
     group.isRepeatable = false
 
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order },
+      propsData: { group, index: group.order, readOnly: false },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -159,7 +159,7 @@ describe('Group.vue', () => {
     group.domSuffix = '#000'
 
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order },
+      propsData: { group, index: group.order, readOnly: false },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
