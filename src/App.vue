@@ -43,6 +43,11 @@
       @appsettings="settings"
       @close="showSettings = false"
     />
+    <characteristic-filter
+      :show="showSettings"
+      @appsettings="settings"
+      @close="showSettings = false"
+    />
     <v-content>
       <v-container
         class="px-2"
@@ -91,6 +96,7 @@ import BuilderService from './services/builderService'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import ProvisionSearch from './components/provision-search/provision-search.vue'
+import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
 
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
@@ -102,7 +108,8 @@ export default {
     NotificationContainer,
     LegislationSearchModal,
     Settings,
-    ProvisionSearch
+    ProvisionSearch,
+    CharacteristicFilter
   },
   mixins: [BaseMixin],
   props: {

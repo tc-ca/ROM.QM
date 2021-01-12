@@ -1,10 +1,12 @@
 import _ from "lodash";
 import builderService from "../../services/builderService";
+import { onlyUniqueObj } from '../../utils'
 
 export const state = {
   questionnaire: null,
   searchableProvisionRef: {},
   provisionFilter: null,
+  tagFilter: []
 };
 
 export const getters = {
@@ -40,13 +42,37 @@ export const getters = {
     });
     // return questions.map(x => x.id); for debugging
     return questions;
+  },
+
+  getSearchableProvisions(state, getters, rootState) {
+    const questionnaire = state.questionnaire;
+    const legislations = rootState.legislations.legislations
+
+    if (
+      questionnaire === null || legislations === null
+    ) {
+      return [];
+    }
+    const searchableProvisions = questionnaire.searchableProvisions;
+    let dictionaryOfProvisions = legislations;
+    let provisions = [];
+
+    searchableProvisions.forEach(x => {
+      const hydratedItem = dictionaryOfProvisions[x.leg];
+      const newProvision = { ...x, ...hydratedItem };
+      provisions.push(newProvision);
+    });
+    return provisions;
+  },
+
+  getAllAppliedTagProvisions(state) {
+    return state.tagFilter.map(x => x.characteristicProvisions);
   }
 };
 
 export const actions = {
-
-  setQuestionnaireReadOnlyStatus({commit}, payload) {
-    commit("setQuestionnaireReadOnlyStatus", payload)
+  setQuestionnaireReadOnlyStatus({ commit }, payload) {
+    commit("setQuestionnaireReadOnlyStatus", payload);
   },
 
   async SetMockQuestionnaireResponse({ commit, dispatch }) {
@@ -96,44 +122,43 @@ export const actions = {
   UpdateSearchableProvisionsState({ commit }, payload) {
     const { provisions, questionGuid } = payload;
 
-      // add provisions not already added to the searchableProvisions list.
-      provisions.forEach(provision => {
-        const provisionId = provision;
-        const foundProvision = state.questionnaire.searchableProvisions.find(
-          p => p.leg === provisionId
-        );
+    // add provisions not already added to the searchableProvisions list.
+    provisions.forEach(provision => {
+      const provisionId = provision;
+      const foundProvision = state.questionnaire.searchableProvisions.find(
+        p => p.leg === provisionId
+      );
 
-        const isQuestionAttachedToProvision = foundProvision? foundProvision.questions.includes(questionGuid): false;
+      const isQuestionAttachedToProvision = foundProvision
+        ? foundProvision.questions.includes(questionGuid)
+        : false;
 
-        if (!isQuestionAttachedToProvision) {
-          commit("addSearchableProvision", {
-            provision: foundProvision,
-            provisionId,
-            questionGuid
-          });
-        }
-      });
+      if (!isQuestionAttachedToProvision) {
+        commit("addSearchableProvision", {
+          provision: foundProvision,
+          provisionId,
+          questionGuid
+        });
+      }
+    });
 
-      // removes provisions from the searchableProvision list.
-      // check arrays and see if any difference, that difference needs to be removed
-      if (state.searchableProvisionRef[questionGuid]){
-          let diffArray = [];
+    // removes provisions from the searchableProvision list.
+    // check arrays and see if any difference, that difference needs to be removed
+    if (state.searchableProvisionRef[questionGuid]) {
+      let diffArray = [];
 
-        diffArray = _.difference(
+      diffArray = _.difference(
         state.searchableProvisionRef[questionGuid].legs,
         provisions
       );
-        
-        if(diffArray.length> 0)
-        {
+
+      if (diffArray.length > 0) {
         commit("removeSearchableProvision", {
           questionGuid,
           provisionsToBeRemoveFrom: diffArray
         });
-        }
-
       }
-  
+    }
 
     commit("setSearchableProvisionRef", {
       provisions,
@@ -145,15 +170,47 @@ export const actions = {
     commit("updateProvisionFilter", payload);
   },
 
-
   /**
    * required for reloading existing builder
-   * 
+   *
    * @param {*} { commit, getters }
    */
   InitializeSearchableProvisionRef({ commit, getters }) {
     const questions = getters.getFlatListOfAllQuestions;
     commit("initializeSearchableProvisionRef", { questions });
+  },
+
+  UpdateTagFilterState({ commit, state, getters }, payload) {
+    const {
+      characteristicProvisions,
+      characteristicCategory,
+    } = payload;
+
+    const searchableProvisions = getters.getSearchableProvisions
+
+    //extract provisions from searchableProvisions
+    let hydratedCharacteristicProvisions = [];
+
+    characteristicProvisions.forEach(obj => {
+      hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(
+        searchableProvisions.filter(x => obj.provisions.includes(x.id))
+      );
+    });
+
+    // the same provision could be associated to multiple characteristics
+    // ensure a unique result set
+    hydratedCharacteristicProvisions = onlyUniqueObj(hydratedCharacteristicProvisions, "id");
+
+    const index = state.tagFilter.findIndex(
+      x => x.characteristicName === characteristicCategory
+    );
+    const isFound = index === -1 ? false : true;
+
+    commit("updateTagFilterState", {
+      isFound,
+      index,
+      characteristicProvisions: hydratedCharacteristicProvisions
+    });
   }
 };
 
@@ -163,7 +220,7 @@ export const mutations = {
   },
 
   setQuestionnaireReadOnlyStatus(state, payload) {
-    state.questionnaire.readOnly = payload
+    state.questionnaire.readOnly = payload;
   },
 
   addSearchableProvision(state, payload) {
@@ -191,7 +248,7 @@ export const mutations = {
         x => x.leg === item
       );
 
-      const updatedArrayOfQuestions = _.remove(provision.questions, (p) => {
+      const updatedArrayOfQuestions = _.remove(provision.questions, p => {
         return p !== questionGuid;
       });
 
@@ -201,11 +258,9 @@ export const mutations = {
           x => x.leg === item
         );
         state.questionnaire.searchableProvisions.splice(provisionIndex, 1);
-      }
-      else{
+      } else {
         //update the provision questions minus the provisions to be removed.
-      provision.questions = updatedArrayOfQuestions;
-
+        provision.questions = updatedArrayOfQuestions;
       }
     });
   },
@@ -236,6 +291,15 @@ export const mutations = {
   updateProvisionFilter(state, payload) {
     const { provisionFilter } = payload;
     state.provisionFilter = provisionFilter;
+  },
+  updateTagFilterState(state, payload) {
+    const { isFound, index } = payload;
+
+    if (isFound) {
+      state.tagFilter[index] = payload;
+    } else {
+      state.tagFilter.push(payload);
+    }
   }
 };
 
@@ -248,15 +312,16 @@ function GetChildrenQuestion(question) {
 }
 
 async function SetMockQuestionnaireResponseImportModule() {
-  const axios = await import('axios')
+  const axios = await import("axios");
 
-  let response = await axios.get('/static/betaAnswers.json')
-    .catch(function (error) {
+  let response = await axios
+    .get("/static/betaAnswers.json")
+    .catch(function(error) {
       // handle error
-      console.log(error)
-    })
+      console.log(error);
+    });
 
-  console.log(response)
+  console.log(response);
 
   return response.data;
 }

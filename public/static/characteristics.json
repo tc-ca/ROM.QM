@@ -1,0 +1,97 @@
+{
+    "MOC": [
+        {
+            "text": {
+                "en": "Aerosol Containers and Gas Cartridges",
+                "fr": "Aerosol Containers and Gas Cartridges (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+          {
+            "text": {
+                "en": "Cylinders, Spheres and Tubes",
+                "fr": "Cylinders, Spheres and Tubes (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+          {
+            "text": {
+                "en": "UN Cylinders, UN Tubes, UN cryogenic receptacles and MEGCs",
+                "fr": "UN Cylinders, UN Tubes, UN cryogenic receptacles and MEGCs (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+          {
+            "text": {
+                "en": "Tank Trucks and Trailers",
+                "fr": "Tank Trucks and Trailers (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+           {
+            "text": {
+                "en": "TC Portable Tanks",
+                "fr": "TC Portable Tanks (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+           {
+            "text": {
+                "en": "IBC ",
+                "fr": "IBC (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+           {
+            "text": {
+                "en": "Infectious Substances Containers",
+                "fr": "Infectious Substances Containers (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+           {
+            "text": {
+                "en": "Railway Tank Cars ",
+                "fr": "Railway Tank Cars (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+            {
+            "text": {
+                "en": "Ton Containers ",
+                "fr": "Ton Containers (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        }
+    ],
+    "Mode": [
+        {
+            "text": {
+                "en": "Air",
+                "fr": "Air (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+          {
+            "text": {
+                "en": "Marine",
+                "fr": "Marine (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+          {
+            "text": {
+                "en": "Rail",
+                "fr": "Air (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        },
+          {
+            "text": {
+                "en": "Road",
+                "fr": "Air (FR)"
+            },
+            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689"]
+        }
+    ]
+}

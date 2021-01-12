@@ -286,10 +286,11 @@ export default {
   },
   computed: {
     // mix the getters into computed with object spread operator
-    ...mapGetters([
-      'getFlatListOfAllQuestions'
-      // ...
-    ]),
+
+    ...mapGetters({
+      getFlatListOfAllQuestions: 'getFlatListOfAllQuestions',
+      provisionTagFilters: 'getAllAppliedTagProvisions'
+    }),
     ...mapState({
       lang: state => {
         return 'en'
@@ -330,6 +331,10 @@ export default {
       set () { }
     },
     filteredInByProvisionSearch () {
+      if (this.provisionTagFilters.length > 0) {
+        console.log('active')
+        this.setQuestionVisibility(false)
+      }
       if (this.provisionFilter === null) {
         // no active search display all questions
         return true
@@ -366,6 +371,14 @@ export default {
     },
     isVisible () {
       return this.question.isVisible && this.filteredInByProvisionSearch
+    },
+    test () {
+      // this.question.dependencyGroups
+
+      return true
+      // visible: true, false
+      // if (dependcyValue !== null) question.visible = depenency_value
+      // else viquestion.vsible = validationValue
     }
   },
   watch: {
