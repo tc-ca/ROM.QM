@@ -237,7 +237,17 @@ export default {
       this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
     },
     isDirty () {
-      return _.differenceWith(this.group.groups, this.group.groupsCopy, _.isEqual).length !== 0
+      let curGroups = []
+      let copyGroups = []
+      var model = { questions: null, title: null }
+      this.group.groups.forEach(g => {
+        curGroups.push(_.pick(g, _.keys(model)))
+      })
+      this.group.groupsCopy.forEach(g => {
+        copyGroups.push(_.pick(g, _.keys(model)))
+      })
+
+      return _.differenceWith(curGroups, copyGroups, _.isEqual).length !== 0
     },
     onNotificationClick (n) {
       this.expand = true

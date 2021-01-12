@@ -85,6 +85,10 @@
         "question": {
           "referenceId": "Reference ID",
           "referenceIdPlaceHolder": "Enter Reference ID",
+          "ok": "Ok",
+          "cancel": "Cancel",
+          "continue": "Continue",
+          "unselectProvisions": "Selecting a different response will remove any selected Provisions and their associated evidence. Are you sure you want to change responses?",
           "violationCount": "Violation Count",
           "violationCountPlaceHolder": "Enter number of violations",
           "externalComment": "External Comment",
