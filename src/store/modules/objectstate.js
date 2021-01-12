@@ -11,7 +11,9 @@ export const getters = {
 }
 
 export const actions = {
-  
+    UpdateQuestionnaireState({commit}, payload) {
+    commit("updateQuestionnaireState", payload);
+  },
 }
 
 export const mutations = {
