@@ -280,11 +280,13 @@ export const mutations = {
     let provisions = [];
     questions.forEach(q => {
       state.searchableProvisionRef[q.guid] = { legs: [] };
-      q.responseOptions.forEach(r => {
-        provisions = provisions.concat(r.provisions);
-      });
-      state.searchableProvisionRef[q.guid].legs = provisions;
-      provisions = [];
+      if(q.responseOptions) {
+        q.responseOptions.forEach(r => {
+          provisions = provisions.concat(r.provisions);
+        });
+        state.searchableProvisionRef[q.guid].legs = provisions;
+        provisions = [];
+      }
     });
   },
 

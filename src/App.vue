@@ -92,7 +92,6 @@
 
 <script>
 import { LANGUAGE } from './constants.js'
-import BuilderService from './services/builderService'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import ProvisionSearch from './components/provision-search/provision-search.vue'
@@ -177,17 +176,8 @@ export default {
     }
   },
   created: async function () {
-    const page = this.page
-    if (this.envDev && this.loadLocalData) {
-      const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-    } else if (this.envDev && !this.loadLocalData) {
-      const questionnaire = BuilderService.createQuestionnaire()
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-    }
-
     this.$router.push({ name: this.page }).catch((e) => {
-      // console.log(e)
+      console.log(e)
     })
   },
   methods: {

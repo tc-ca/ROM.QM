@@ -79,8 +79,23 @@
             justify="end"
           >
             <v-col class="col-auto">
-              <v-btn @click="save()">
-                {{ $t('app.builder.save') }}
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="clearQuestionnaire()"
+              >
+                <span>{{ $t('app.builder.clear') }}</span>
+              </v-btn>
+            </v-col>
+            <v-col class="col-auto">
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="save()"
+              >
+                <span>{{ $t('app.builder.save') }}</span>
               </v-btn>
             </v-col>
           </v-row>
@@ -513,10 +528,10 @@
                                 <v-select
                                   v-model="questionDependency.dependsOnQuestion"
                                   dense
-                                  item-text="name"
+                                  :item-text="'text.' + lang"
                                   item-value="guid"
                                   :items="questions"
-                                  label="Question"
+                                  :label="$t('app.builder.dependsOn.question')"
                                   return-object
                                 />
                                 <v-select
@@ -525,7 +540,7 @@
                                   item-text="text"
                                   item-value="value"
                                   :items="dependencyValidationActions"
-                                  label="to be"
+                                  :label="$t('app.builder.dependsOn.tobe')"
                                 >
                                   <template v-slot:selection="{ item }">
                                     <span>{{ item.text[lang] }}</span>
@@ -537,7 +552,7 @@
                                 <v-text-field
                                   v-model="questionDependency.validationValue"
                                   dense
-                                  label="to"
+                                  :label="$t('app.builder.dependsOn.to')"
                                 />
                                 <div class="right">
                                   <v-tooltip
@@ -657,7 +672,6 @@
 import _ from 'lodash'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
-// import BuilderQuestion from '../components/builder/builder-question'
 import BuilderGroup from '../components/builder/builder-group'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
@@ -668,7 +682,6 @@ import { generateName } from '../utils.js'
 export default {
   name: 'Builder',
   components: {
-    // BuilderQuestion,
     BuilderGroup
   },
   mixins: [BaseMixin],
@@ -730,22 +743,15 @@ export default {
       ])
     })
   },
-  created () {
-    this.questionnaire = this.$store.state.questionnaire.questionnaire
-  },
-  mounted () {
-    if (this.envDev && this.loadLocalData) {
-      this.$store.dispatch('SetTreeLegislationsStateToLocalData')
-    }
-
-    // subscribe to mutation as a mutation will be called from App.vue when watch property detects a change.
+  async mounted () {
+    // run this code first
+    // so we can subscribe to mutation within this method
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
           this.questions = this.getFlatListOfAllQuestions
-          this.$store.dispatch('InitializeSearchableProvisionRef')
-          this.$store.commit('objectstate/updateQuestionnaireState', _.cloneDeep(this.questionnaire))
+          this.$store.dispatch('objectstate/UpdateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'SetLegislations':
           this.provisions = this.$store.state.legislations.legislations
@@ -754,6 +760,24 @@ export default {
           break
       }
     })
+
+    let template = null
+    // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
+    if (this.envDev && this.loadLocalData) {
+      template = await BuilderService.GetMockQuestionnaireFromImportModule()
+    } else {
+      // default to empty template
+      template = BuilderService.createQuestionnaire()
+    }
+
+    this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
+
+    // if env= dev load the provisions else the state will be set explicility outside in app.vue
+    if (this.envDev && this.loadLocalData) {
+      this.$store.dispatch('SetTreeLegislationsStateToLocalData')
+    }
+
+    this.$store.dispatch('InitializeSearchableProvisionRef')
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
@@ -804,7 +828,9 @@ export default {
       }
     },
     onOptionTextChange (option) {
-      option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
+      if (option) {
+        option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
+      }
     },
     setSamplingRecord () {
       if (this.selectedQuestion) {
@@ -847,7 +873,7 @@ export default {
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
-            let qRf = BuilderService.createReferenceQuestion(this.questionnaire)
+            let qRf = BuilderService.createReferenceQuestion(this.questionnaire, group)
             if (group.questions.length > 0) {
               // Move every question one number up on the sort order
               group.questions.forEach((q) => { q.sortOrder += 1 })
@@ -874,13 +900,14 @@ export default {
           this.selectedQuestion.type = 'text'
         }
       }
-      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO ||
-          this.selectedQuestion.type !== QUESTION_TYPE.SELECT) {
+      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
+          this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
+          this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
         this.selectedQuestion.responseOptions = null
         this.onQuestionTextChange(this.selectedQuestion)
       } else {
         if (this.selectedQuestion.responseOptions == null) {
-          this.selectedQuestion.responseOptions = this.builderService.createResponseOption(this.selectedQuestion)
+          this.selectedQuestion.responseOptions = BuilderService.createResponseOption(this.selectedQuestion)
         }
       }
     },
@@ -953,10 +980,14 @@ export default {
       this.selectedGroup = group
       this.selectedQuestion = question
     },
-    async save (id) {
+    clearQuestionnaire () {
+      this.questionnaire = BuilderService.createQuestionnaire()
+      this.save()
+    },
+    save () {
       const page = 'builder'
       console.log('Save...')
-      console.log(this.questionnaire)
+      // console.log(JSON.stringify(this.questionnaire))
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },

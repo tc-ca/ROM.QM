@@ -19,6 +19,7 @@
       "noGroups": "FR Click Add Group to start creating a new Questionnaire!",
       "loading": "FR Loading...",
       "save": "FR Save",
+      "clear": "FR Clear",
       "questionnaireName": "FR Questionnaire Name",
       "questionName": "FR Question Name",
       "questionType": "FR Question Type",
@@ -51,6 +52,9 @@
       "dependsOn": {
         "dependsOn": "FR Depends On",
         "type": "FR Type",
+        "question": "FR Question",
+        "tobe": "FR to be",
+        "to": "FR to",
         "addQuestion": "FR Add Question",
         "removDependencyGroup": "FR Remove dependency group",
         "addDependencyGroup": "FR Add Dependency Group"
@@ -81,6 +85,10 @@
         "question": {
           "referenceId": "FR Reference ID",
           "referenceIdPlaceHolder": "FR Enter Reference ID",
+          "ok": "FR Ok",
+          "cancel": "FR Cancel",
+          "continue": "FR Continue",
+          "unselectProvisions": "FR Selecting a different response will remove any selected Provisions and their associated evidence. Are you sure you want to change responses?",
           "violationCount": "FR Violation Count",
           "violationCountPlaceHolder": "FR Enter number of violations",
           "externalComment": "FR External Comment",

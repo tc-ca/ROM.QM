@@ -23,10 +23,7 @@
           min="1"
           :disabled="readOnly"
           :error-messages="errorMessagesTotal"
-          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalRequired'),
-                    (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_ApproximateTotalGreaterThan1'),
-                    validateNumbers
-          ]"
+          :rules="[ validateTotal ]"
         />
       </v-col>
       <v-col cols="4">
@@ -41,10 +38,7 @@
           :disabled="readOnly"
           :max="question.samplingRecord.approximateTotal"
           :error-messages="errorMessagesSize"
-          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_SampleSizeRequired'),
-                    (value) => value && value > 0 || $t('app.questionnaire.group.question.sampling.EM_SampleSizeGreaterThan1'),
-                    validateNumbers
-          ]"
+          :rules="[ validateSampleSize ]"
         />
       </v-col>
       <v-col cols="4">
@@ -59,10 +53,7 @@
           :disabled="readOnly"
           :max="question.samplingRecord.sampleSize"
           :error-messages="errorMessagesCompliances"
-          :rules="[ (value) => !!value || $t('app.questionnaire.group.question.sampling.EM_NonComplianceRequired'),
-                    (value) => value && value >= 0 || $t('app.questionnaire.group.question.sampling.EM_NonComplianceGreaterPositive'),
-                    validateNumbers
-          ]"
+          :rules="[ validateNonCompliance ]"
         />
       </v-col>
     </v-row>
@@ -107,9 +98,67 @@ export default {
     }
   },
   methods: {
-    validateNumbers () {
+    validateTotal (callback = true) {
       this.errorMessagesTotal = ''
+      if (this.question.samplingRecord.approximateTotal === '' &&
+          this.question.samplingRecord.sampleSize === '' &&
+          this.question.samplingRecord.nonCompliances === '') {
+        return true
+      }
+      if (this.question.samplingRecord.sampleSize !== '' ||
+          this.question.samplingRecord.nonCompliances !== '') {
+        if (this.question.samplingRecord.approximateTotal === '') {
+          this.errorMessagesTotal = 'Approximate Total is required'
+          return false
+        }
+        if (this.question.samplingRecord.approximateTotal < 1) {
+          this.errorMessagesTotal = 'Approximate Total have to be greater than 1'
+          return false
+        }
+      }
+      if (this.question.samplingRecord.approximateTotal > 0 && this.question.samplingRecord.sampleSize > 0) {
+        if (this.question.samplingRecord.approximateTotal <= this.question.samplingRecord.sampleSize) {
+          this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
+          return false
+        }
+      }
+      if (callback) {
+        this.validateSampleSize(false)
+        this.validateNonCompliance(false)
+      }
+      return true
+    },
+    validateSampleSize (callback = true) {
       this.errorMessagesSize = ''
+      if (this.question.samplingRecord.approximateTotal === '' &&
+          this.question.samplingRecord.sampleSize === '' &&
+          this.question.samplingRecord.nonCompliances === '') {
+        return true
+      }
+      if (this.question.samplingRecord.approximateTotal !== '' ||
+          this.question.samplingRecord.nonCompliances !== '') {
+        if (this.question.samplingRecord.sampleSize === '') {
+          this.errorMessagesSize = 'Sample Size is required'
+          return false
+        }
+        if (this.question.samplingRecord.sampleSize < 1) {
+          this.errorMessagesSize = 'Sample Size have to be greater than 1'
+          return false
+        }
+      }
+      if (this.question.samplingRecord.sampleSize > 0 && this.question.samplingRecord.nonCompliances > 0) {
+        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
+          this.errorMessagesSize = 'Sample Size have to be higher than Number of non-Compliance'
+          return false
+        }
+      }
+      if (callback) {
+        this.validateTotal(false)
+        this.validateNonCompliance(false)
+      }
+      return true
+    },
+    validateNonCompliance (callback = true) {
       this.errorMessagesCompliances = ''
 
       if (this.question.samplingRecord.approximateTotal === '' &&
@@ -118,20 +167,21 @@ export default {
         return true
       }
 
-      if (this.question.samplingRecord.approximateTotal > 1 && this.question.samplingRecord.sampleSize > 1) {
-        if (this.question.samplingRecord.approximateTotal < this.question.samplingRecord.sampleSize) {
-          this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
+      if (this.question.samplingRecord.approximateTotal !== '' ||
+          this.question.samplingRecord.sampleSize !== '') {
+        if (this.question.samplingRecord.nonCompliances === '') {
+          this.errorMessagesCompliances = 'Number of non-Compliance is required'
+          return false
+        }
+        if (this.question.samplingRecord.nonCompliances < 0) {
+          this.errorMessagesCompliances = 'Number of non-Compliance have to be 0 or greater than 0'
           return false
         }
       }
-
-      if (this.question.samplingRecord.sampleSize > 1 && this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
-          this.errorMessagesSize = 'Sample Size have to be higher than Number of non-Compliance'
-          return false
-        }
+      if (callback) {
+        this.validateTotal(false)
+        this.validateSampleSize(false)
       }
-
       return true
     }
   }
