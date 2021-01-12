@@ -5,6 +5,7 @@ export const state = {
   questionnaire: null,
   searchableProvisionRef: {},
   provisionFilter: null,
+  readOnlyStatus: state.questionnaire ? false : (state.questionnaire.readOnly ? state.questionnaire.readOnly : false),
 };
 
 export const getters = {
@@ -163,7 +164,7 @@ export const mutations = {
   },
 
   setQuestionnaireReadOnlyStatus(state, payload) {
-    state.questionnaire.readOnly = payload
+    state.questionnaire.readOnly = payload;
   },
 
   addSearchableProvision(state, payload) {

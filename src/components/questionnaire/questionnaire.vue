@@ -42,13 +42,13 @@
         >
           <v-btn
             class="white--text"
-            :color="readOnly ? 'red' : 'green'"
+            :color="readOnlyStatus ? 'red' : 'green'"
             elevation="2"
             medium
             rounded
             @click="setReadOnly()"
           >
-            <span v-if="!readOnly">{{ $t('app.general.active') }}</span>
+            <span v-if="!readOnlyStatus">{{ $t('app.general.active') }}</span>
             <span v-else>{{ $t('app.general.inactive') }}</span>
           </v-btn>
         </v-col>
@@ -74,7 +74,7 @@
                   :group="group"
                   :index="groupIndex"
                   :expand="expand"
-                  :read-only="readOnly"
+                  :read-only="readOnlyStatus"
                   data-group-id="group"
                   @update-group-count="onUpdateGroupCount"
                 />
@@ -156,7 +156,6 @@ export default {
       expand: true,
       panelIndex: Number,
       groupCount: 0,
-      readOnly: false
     }
   },
   computed: {
@@ -186,6 +185,9 @@ export default {
       },
       group: state => {
         return state.group
+      },
+      readOnlyStatus: state => {
+        return state.readOnlyStatus
       },
       searchableProvisions: state => {
         if ((state.questionnaire.questionnaire === null) || (state.legislations.legislations === null)) {
@@ -218,17 +220,22 @@ export default {
   mounted () {
     // sets the default value based on visibility of the component
     this.$nextTick(function () {
-    // Code that will run only after the
-    // entire view has been rendered
+      // Code that will run only after the
+      // entire view has been rendered
       this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
+
+      // // Get the ReadOnly value for the questionnarie
+      // alert('Something')
+      // const q = this.$store.getters['getQuestionnaire']
+      // if (q) {
+      //   this.readOnly = q.readOnly
+      // } else {
+      //   this.readOnly = false
+      // }
     })
-    // Get the ReadOnly value for the questionnarie
-    const q = this.$store.getters['getQuestionnaire']
-    if (q) {
-      this.readOnly = q.readOnly
-    } else {
-      this.readOnly = false
-    }
+  },
+  updated () {
+    alert('LM: enter updated')
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
@@ -237,8 +244,7 @@ export default {
     setReadOnly () {
       const q = this.$store.getters['getQuestionnaire']
       if (q) {
-        this.readOnly = !this.readOnly
-        q.readOnly = this.readOnly
+        q.readOnly = !q.readOnly
         this.$store.dispatch('setQuestionnaireReadOnlyStatus', q.readOnly)
       }
     },
