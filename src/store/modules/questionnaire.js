@@ -4,13 +4,17 @@ import builderService from "../../services/builderService";
 export const state = {
   questionnaire: null,
   searchableProvisionRef: {},
-  provisionFilter: null,
-  readOnlyStatus: state.questionnaire ? false : (state.questionnaire.readOnly ? state.questionnaire.readOnly : false),
+  provisionFilter: null
 };
 
 export const getters = {
   getQuestionnaire(state) {
     return state.questionnaire;
+  },
+  getQuestionnaireReadOnlyStatus(state) {
+    // Just to debug
+    let resp = (state.questionnaire) ? state.questionnaire.readOnly : false;
+    return resp;
   },
   getFlatListOfAllQuestions(state) {
     let questions = [];
