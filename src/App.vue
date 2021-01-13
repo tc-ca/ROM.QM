@@ -183,7 +183,6 @@ export default {
      * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.
      */
     SetReadOnly (readOnly) {
-      alert('LM: Doing the SetReadOnly function in App.vue')
       this.$store.dispatch('setQuestionnaireReadOnlyStatus', readOnly)
     },
     /**
