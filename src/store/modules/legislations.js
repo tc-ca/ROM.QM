@@ -1,5 +1,6 @@
 export const state = {
-  legislations: null
+  legislations: null,
+  dataStructure: null
 };
 
 export const getters = {
@@ -7,23 +8,37 @@ export const getters = {
 };
 
 export const actions = {
+  // load local data in public folders
   async SetTreeLegislationsStateToLocalData({ commit }) {
     const data = await GetTreeLegislationFromLocalImportModule();
-    commit("SetLegislations", data);
+    commit("setTreeLegislations", {legislations: data, dataStructure: 'tree'});
   },
     async SetFlatLegislationsStateToLocalData({ commit }) {
     const data = await GetFlatLegislationFromLocalImportModule();
-    commit("SetLegislations", data);
+    commit("setFlatLegislations", {legislations: data, dataStructure: 'flat'});
   },
-  async SetLegislationsState({ commit }, payload) {
+
+  //loads data pass into vue instance
+  async SetTreeLegislationsState({ commit }, payload) {
     const { legislations } = payload
-    commit("SetLegislations", legislations);
+    commit("setTreeLegislations", { legislations, dataStructure: "flat" });
+  },
+    async SetFlatLegislationsState({ commit }, payload) {
+    const { legislations } = payload
+    commit("setFlatLegislations", {legislations, dataStructure: 'flat'});
   }
 };
 
 export const mutations = {
-  SetLegislations(state, payload) {
-    state.legislations = payload;
+  setTreeLegislations(state, payload) {
+    const {legislations, dataStructure} = payload
+    state.legislations = legislations;
+    state.dataStructure = dataStructure
+  },
+    setFlatLegislations(state, payload) {
+     const { legislations, dataStructure } = payload;
+     state.legislations = legislations;
+     state.dataStructure = dataStructure;
   }
 };
 

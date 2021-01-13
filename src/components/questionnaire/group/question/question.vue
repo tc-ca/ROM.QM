@@ -316,6 +316,11 @@ export default {
       if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
       return false
     },
+    isLegislationsDataAvailable () {
+      if (this.$store.state.legislations.legislations === null) { return false }
+      if (this.$store.state.legislations.dataStructure !== 'flat') { return false }
+      return true
+    },
     expansionPanelsValue: {
       get () {
         if (this.expand) {
@@ -391,9 +396,9 @@ export default {
     // so we can subscribe to mutation within this method
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {
-        case 'SetLegislations':
-        // in theory this only should/need  be run once when legislations is finally loaded into the store (async method, data takes few seconds)
-        // now safe to run methods dependant on legislations
+        case 'setFlatLegislations':
+          // in theory this only should/need  be run once when legislations is finally loaded into the store (async method, data takes few seconds)
+          // now safe to run methods dependant on legislations
           if (this.responseArgs !== null) {
             // running this method will initialize the selected responses
             this.onUserResponseChanged(this.responseArgs)
@@ -556,7 +561,7 @@ export default {
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
-      if (!this.$store.state.legislations.legislations) { return }
+      if (!this.isLegislationsDataAvailable) { return }
       this.updateViolationInfo(args)
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)

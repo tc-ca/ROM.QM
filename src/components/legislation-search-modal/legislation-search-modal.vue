@@ -116,20 +116,6 @@ export default {
   created: async function () {
 
   },
-  // mounted () {
-  //   // i want to listen for legislation being set
-  //   this.$store.subscribe((mutation, state) => {
-  //     switch (mutation.type) {
-  //       case 'SetLegislations':
-  //         console.log('legislation-search-model "SetLegislations"')
-
-  //         this.legislations = this.$store.state.legislations.legislations
-  //         break
-  //       default:
-  //         break
-  //     }
-  //   })
-  // },
 
   methods: {
     hideModal () {
