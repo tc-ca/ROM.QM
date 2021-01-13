@@ -4,12 +4,17 @@ import builderService from "../../services/builderService";
 export const state = {
   questionnaire: null,
   searchableProvisionRef: {},
-  provisionFilter: null,
+  provisionFilter: null
 };
 
 export const getters = {
   getQuestionnaire(state) {
     return state.questionnaire;
+  },
+  getQuestionnaireReadOnlyStatus(state) {
+    // Just to debug
+    let resp = (state.questionnaire) ? state.questionnaire.readOnly : false;
+    return resp;
   },
   getFlatListOfAllQuestions(state) {
     let questions = [];
@@ -163,7 +168,7 @@ export const mutations = {
   },
 
   setQuestionnaireReadOnlyStatus(state, payload) {
-    state.questionnaire.readOnly = payload
+    state.questionnaire.readOnly = payload;
   },
 
   addSearchableProvision(state, payload) {

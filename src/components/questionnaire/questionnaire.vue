@@ -218,29 +218,23 @@ export default {
   mounted () {
     // sets the default value based on visibility of the component
     this.$nextTick(function () {
-    // Code that will run only after the
-    // entire view has been rendered
+      // Code that will run only after the
+      // entire view has been rendered
       this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
     })
-    // Get the ReadOnly value for the questionnarie
-    const q = this.$store.getters['getQuestionnaire']
-    if (q) {
-      this.readOnly = q.readOnly
-    } else {
-      this.readOnly = false
-    }
+  },
+  updated () {
+    this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
+    this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
     setReadOnly () {
-      const q = this.$store.getters['getQuestionnaire']
-      if (q) {
-        this.readOnly = !this.readOnly
-        q.readOnly = this.readOnly
-        this.$store.dispatch('setQuestionnaireReadOnlyStatus', q.readOnly)
-      }
+      this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
+      this.readOnly = !this.readOnly
+      this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
     },
     isDirty () {
       let curGroups = []
