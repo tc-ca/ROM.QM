@@ -204,8 +204,18 @@ export default {
     /**
     * Sets legislations state
     */
-    SetLegislations (legislations) {
-      this.$store.dispatch('SetLegislationsState', { legislations })
+    SetLegislations (legislations, dataStructure) {
+      switch (dataStructure) {
+        case 'tree':
+          this.$store.dispatch('setTreeLegislationsState', { legislations })
+          break
+        case 'flat':
+          this.$store.dispatch('setFlatLegislationsState', { legislations })
+          break
+        default:
+          this.$store.dispatch('setFlatLegislationsState', { legislations })
+          break
+      }
     },
     checkIsDirty () {
       if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()
