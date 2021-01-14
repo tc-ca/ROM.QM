@@ -64,8 +64,8 @@ export default {
       } else {
         characteristicProvisions = this.unSelectedValues
       }
-
-      this.$store.dispatch('UpdateTagFilterState', { characteristicProvisions, characteristicCategory: 'MOC' })
+      // todo: remove this.label should be set to something else from the incoming data
+      this.$store.dispatch('UpdateTagFilterState', { characteristicProvisions, characteristicCategory: this.label })
     }
   }
 }

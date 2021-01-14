@@ -3,7 +3,6 @@
 
     app
     right
-    temporary
   >
     <v-list
       dense

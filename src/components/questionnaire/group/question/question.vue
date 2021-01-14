@@ -281,12 +281,12 @@ export default {
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
       isViolationInfoReferenceIdDisabled: false,
-      displaySamplingRecord: false
+      displaySamplingRecord: false,
+      requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility')
     }
   },
   computed: {
     // mix the getters into computed with object spread operator
-
     ...mapGetters({
       getFlatListOfAllQuestions: 'getFlatListOfAllQuestions',
       provisionTagFilters: 'getAllAppliedTagProvisions'
@@ -331,10 +331,6 @@ export default {
       set () { }
     },
     filteredInByProvisionSearch () {
-      if (this.provisionTagFilters.length > 0) {
-        console.log('active')
-        this.setQuestionVisibility(false)
-      }
       if (this.provisionFilter === null) {
         // no active search display all questions
         return true
@@ -372,13 +368,42 @@ export default {
     isVisible () {
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
-    test () {
-      // this.question.dependencyGroups
+    selectedQuestionHasProvisions () {
+      return this.question.responseOptions.some(option => option.provisions.length > 0)
+    },
+    isVisibleByAppliedTags () {
+      const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
 
-      return true
-      // visible: true, false
-      // if (dependcyValue !== null) question.visible = depenency_value
-      // else viquestion.vsible = validationValue
+      console.log(JSON.stringify(this.provisionTagFilters))
+      // question has no provisions its visibility always be set to true
+      if (!this.selectedQuestionHasProvisions) {
+        this.setQuestionVisibility(true)
+        return true
+      }
+
+      // question has provisions but has no dependency questions required to check to see if visibility should be set
+      // then check if the question is found in the applied provisions visible should set to true else false
+      if (!this.requireDependantQuestionToEnableVisibility) {
+        this.setQuestionVisibility(questionFoundInProvision) // todo refactor remove method add watch
+        return questionFoundInProvision
+      } else {
+        // question is dependent
+        // question provision is not found in applied provisions via tags then returns false.
+        // else question provision is found within the applied tags but we cannot assume it should be displayed as it depends on its dependencies rules beinng met
+
+        if (!questionFoundInProvision) {
+          this.setQuestionVisibility(false)
+          return false
+        }
+
+        // below code checking to see if depencies rules/conditions are statisfied in settting visibility
+        // note: if the question is not answer returns false and if the conditions do not match conditions of the rules it will return false
+        const groupMatchArray = this.runRule(this.question)
+        const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
+        const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+        this.setQuestionVisibility(answerMatch)
+        return answerMatch
+      }
     }
   },
   watch: {
@@ -610,6 +635,7 @@ export default {
     },
     updateChildQuestionOnDependencies (question) {
       if (question && question.dependencyGroups) {
+        let groupMatchArray = []
         for (let i = 0; i < question.dependencyGroups.length; i++) {
           let group = question.dependencyGroups[i]
 
@@ -653,7 +679,11 @@ export default {
           }
 
           if (group.ruleType === 'visibility') {
-            question.isVisible = groupMatch
+            // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
+            // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
+            groupMatchArray.push({ ruleType: 'visibility', groupMatch })
+            const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
+            question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
           } else if (group.ruleType === 'validation') {
             let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
             rule.enabled = groupMatch
@@ -693,6 +723,107 @@ export default {
         }
       }
       return true
+    },
+    setQuestionVisibility (visible) {
+      this.question.isVisible = visible
+    },
+    questionFoundInProvision (provisions) {
+      // ains abstract this out
+      // if (this.provisionFilter === null) {
+      //   // no active search display all questions
+      //   return true
+      // }
+      if (provisions && provisions.length > 0) {
+        // active search check to see if question should be shown or not
+        let dependants = []
+        let dependsArray = []
+
+        if (this.question.dependants) {
+          dependants = this.question.dependants.map(x => x.guid)
+        }
+
+        if (this.question.dependencyGroups) {
+          dependsArray = []
+          this.question.dependencyGroups.forEach(x => {
+            x.questionDependencies.forEach(y => {
+              dependsArray.push(y.dependsOnQuestion.guid)
+            })
+          })
+        }
+
+        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
+
+        const foundInQuestion = provisions.some(p => p.questions.includes(this.question.guid))
+        const foundInDependants = provisions.some(p => p.questions.some(q => dependants.includes(q)))
+        const foundInDepends = provisions.some(p => p.questions.some(q => dependsArray.includes(q)))
+        const foundInChildren = provisions.some(p => p.questions.some(q => childrenGuids.includes(q)))
+
+        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
+      }
+      // search resulted in no provisions found therefore return false
+      return false
+    },
+    runRule (question) {
+      let groupMatchArray = []
+      for (let i = 0; i < question.dependencyGroups.length; i++) {
+        let group = question.dependencyGroups[i]
+
+        let groupMatch = true
+        for (let j = 0; j < group.questionDependencies.length; j++) {
+          let dependancy = group.questionDependencies[j]
+          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
+          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
+
+          if (dependancy.validationAction === 'equal') {
+            if (!(dependsOnQuestion.response === dependancy.validationValue)) {
+              groupMatch = false
+              break
+            }
+          } else if (dependancy.validationAction === 'notEqual') {
+            if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
+              groupMatch = false
+              break
+            }
+          } else if (dependancy.validationAction === 'greaterThen') {
+            if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
+              groupMatch = false
+              break
+            }
+          } else if (dependancy.validationAction === 'lessThen') {
+            if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
+              groupMatch = false
+              break
+            }
+          } else if (dependancy.validationAction === 'lengthLessThen') {
+            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
+              groupMatch = false
+              break
+            }
+          } else if (dependancy.validationAction === 'lengthGreaterThen') {
+            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
+              groupMatch = false
+              break
+            }
+          }
+        }
+
+        groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
+
+        if (group.ruleType === 'visibility') {
+          // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
+          // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
+          const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
+          question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+        } else if (group.ruleType === 'validation') {
+          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+          rule.enabled = groupMatch
+        } else if (group.ruleType === 'validationValue' && groupMatch) {
+          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+
+          rule.value = group.questionDependencies[0].parentQuestion.response
+        }
+      }
+      return groupMatchArray
     }
   }
 }

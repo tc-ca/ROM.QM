@@ -66,7 +66,11 @@ export const getters = {
   },
 
   getAllAppliedTagProvisions(state) {
-    return state.tagFilter.map(x => x.characteristicProvisions);
+    let provisions = []
+     state.tagFilter.forEach(tag => {
+     provisions = provisions.concat(tag.provisions)
+    });
+    return provisions
   }
 };
 
@@ -202,14 +206,15 @@ export const actions = {
     hydratedCharacteristicProvisions = onlyUniqueObj(hydratedCharacteristicProvisions, "id");
 
     const index = state.tagFilter.findIndex(
-      x => x.characteristicName === characteristicCategory
+      x => x.name === characteristicCategory
     );
     const isFound = index === -1 ? false : true;
 
     commit("updateTagFilterState", {
       isFound,
       index,
-      characteristicProvisions: hydratedCharacteristicProvisions
+      characteristicProvisions: hydratedCharacteristicProvisions,
+      tag: { name: characteristicCategory, provisions: hydratedCharacteristicProvisions }
     });
   }
 };
@@ -295,12 +300,12 @@ export const mutations = {
     state.provisionFilter = provisionFilter;
   },
   updateTagFilterState(state, payload) {
-    const { isFound, index } = payload;
+    const { isFound, index, tag } = payload;
 
     if (isFound) {
-      state.tagFilter[index] = payload;
+      state.tagFilter[index] = tag;
     } else {
-      state.tagFilter.push(payload);
+      state.tagFilter.push(tag);
     }
   }
 };
