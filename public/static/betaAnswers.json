@@ -342,10 +342,30 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
+                            "provisions": [
+                                "145b6d54-bd3e-4dd6-a201-1fc252ea7689",
+                                "9241a2ae-1c61-4753-805a-be0707f41622",
+                                "77758039-206f-476d-84d9-549c571f269e",
+                                "7b298d1f-da3e-408c-a705-2558886a9b9d",
+                                "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+                                "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+                                "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+                                "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+                                "792fda3c-0696-4e90-9655-a0bb810f7b33",
+                                "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+                                "e311574a-8bac-4b5b-b092-a31182accab5",
+                                "bec23597-02d7-4422-a3db-f41e7c57d47f",
+                                "6473a679-7c58-412d-b0c2-b1678faa53e2",
+                                "b11288f8-e99e-4071-b829-8684947f3421",
+                                "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+                                "8b9e1c85-7365-4306-9c70-269bf841484b",
+                                "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+                                "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+                                "488db8ca-3022-456e-9df9-f21d2ba63791"
+                            ],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": true
                         },
                         {
                             "id": 2,
@@ -534,6 +554,121 @@
         }
     ],
     "templateid": "",
-    "searchableProvisions": [],
+    "searchableProvisions": [
+        {
+            "leg": "145b6d54-bd3e-4dd6-a201-1fc252ea7689",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "9241a2ae-1c61-4753-805a-be0707f41622",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "77758039-206f-476d-84d9-549c571f269e",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "7b298d1f-da3e-408c-a705-2558886a9b9d",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "792fda3c-0696-4e90-9655-a0bb810f7b33",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "e311574a-8bac-4b5b-b092-a31182accab5",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "bec23597-02d7-4422-a3db-f41e7c57d47f",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "6473a679-7c58-412d-b0c2-b1678faa53e2",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "b11288f8-e99e-4071-b829-8684947f3421",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "8b9e1c85-7365-4306-9c70-269bf841484b",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "488db8ca-3022-456e-9df9-f21d2ba63791",
+            "questions": [
+                "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        }
+    ],
     "readOnly": false
 }
