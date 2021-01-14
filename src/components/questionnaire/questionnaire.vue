@@ -12,6 +12,7 @@
             elevation="2"
             medium
             rounded
+            style="margin-right: 5px"
             @click="expandAll()"
           >
             <span>{{ $t('app.questionnaire.expandAll') }}</span>
@@ -21,6 +22,7 @@
             elevation="2"
             medium
             rounded
+            style="margin-right: 5px"
             @click="collapseAll()"
           >
             <span>{{ $t('app.questionnaire.collapseAll') }}</span>
