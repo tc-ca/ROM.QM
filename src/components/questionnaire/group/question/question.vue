@@ -282,7 +282,8 @@ export default {
       isReferenceQuestionInGroup: false,
       isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
-      requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility')
+      requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
+      responseArgs: null
     }
   },
   computed: {
@@ -315,6 +316,11 @@ export default {
       if (this.question.isReferenceQuestion) return false
       if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
       return false
+    },
+    isLegislationsDataAvailable () {
+      if (this.$store.state.legislations.legislations === null) { return false }
+      if (this.$store.state.legislations.dataStructure !== 'flat') { return false }
+      return true
     },
     expansionPanelsValue: {
       get () {
@@ -424,6 +430,22 @@ export default {
     }
   },
   mounted () {
+    // keep this code on top of mounted method
+    // so we can subscribe to mutation within this method
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case 'setFlatLegislations':
+          // in theory this only should/need  be run once when legislations is finally loaded into the store (async method, data takes few seconds)
+          // now safe to run methods dependant on legislations
+          if (this.responseArgs !== null) {
+            // running this method will initialize the selected responses
+            this.onUserResponseChanged(this.responseArgs)
+          }
+          break
+        default:
+          break
+      }
+    })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
     this.updateReferenceID()
     this.selProvisions = this.selectedResponseOption.selectedProvisions
@@ -573,6 +595,11 @@ export default {
       // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
+      // store the response in data property for reference use
+      this.responseArgs = args
+      // the below code is dependant legislatons data loaded (retrieval time may delay
+      // the process and therefore be empty when this method is executing)
+      if (!this.isLegislationsDataAvailable) { return }
       this.updateViolationInfo(args)
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)

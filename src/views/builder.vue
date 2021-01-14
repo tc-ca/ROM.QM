@@ -753,7 +753,7 @@ export default {
           this.questions = this.getFlatListOfAllQuestions
           this.$store.dispatch('objectstate/UpdateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
-        case 'SetLegislations':
+        case 'setTreeLegislations':
           this.provisions = this.$store.state.legislations.legislations
           break
         default:
@@ -903,11 +903,11 @@ export default {
       if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
           this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
           this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
-        this.selectedQuestion.responseOptions = null
+        this.selectedQuestion.responseOptions.length = 0
         this.onQuestionTextChange(this.selectedQuestion)
       } else {
-        if (this.selectedQuestion.responseOptions == null) {
-          this.selectedQuestion.responseOptions = BuilderService.createResponseOption(this.selectedQuestion)
+        if (this.selectedQuestion.responseOptions == null || this.selectedQuestion.responseOptions.length === 0) {
+          this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
         }
       }
     },

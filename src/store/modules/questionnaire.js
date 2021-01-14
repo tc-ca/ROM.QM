@@ -13,6 +13,11 @@ export const getters = {
   getQuestionnaire(state) {
     return state.questionnaire;
   },
+  getQuestionnaireReadOnlyStatus(state) {
+    // Just to debug
+    let resp = (state.questionnaire) ? state.questionnaire.readOnly : false;
+    return resp;
+  },
   getFlatListOfAllQuestions(state) {
     let questions = [];
     const groups = state.questionnaire.groups;
