@@ -1,0 +1,69 @@
+<template>
+  <v-navigation-drawer
+    v-model="show"
+    :width="280"
+    absolute
+    temporary
+  >
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="title">
+          Questionnaire Navigation
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-divider />
+    <v-treeview
+      dense
+      open-all
+      :items="navitems"
+    >
+      <template
+        slot="label"
+        slot-scope="props"
+      >
+        <div
+          class="actionLink"
+          @click="$emit('notification:click', props.item.name)"
+        >
+          <v-icon
+            small
+            color="primary"
+          >
+            mdi-flash-circle
+          </v-icon>
+          {{ props.item.name }}
+        </div>
+      </template>
+    </v-treeview>
+  </v-navigation-drawer>
+</template>
+
+<script>
+// import _ from 'lodash'
+export default {
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    },
+    navitems: {
+      type: Array,
+      default: null
+    }
+  },
+  data () {
+    return {
+      items: []
+    }
+  }
+}
+</script>
+<style scoped>
+.actionLink:hover {
+  color: crimson;
+  cursor:pointer;
+  /* text-decoration: underline; */
+}
+</style>

@@ -8,6 +8,13 @@
           justify="space-around"
         >
           <v-btn
+            color="pink"
+            dark
+            @click="createData()"
+          >
+            Toggle
+          </v-btn>
+          <v-btn
             color="primary"
             elevation="2"
             medium
@@ -101,6 +108,10 @@
           </v-row>
         </v-col>
       </v-row>
+      <breadcrumbs
+        :show="drawer"
+        :navitems="navItems"
+      />
     </div>
     <div v-show="!isVisible">
       <v-card
@@ -145,10 +156,11 @@ import _ from 'lodash'
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
+import breadcrumbs from '../breadcrumbs/breadcrumbs.vue'
 
 export default {
   emits: ['clear-provision-search-field'],
-  components: { QuestionnaireGroup, QuestionnaireError },
+  components: { QuestionnaireGroup, QuestionnaireError, breadcrumbs },
 
   props: {
   },
@@ -158,7 +170,9 @@ export default {
       expand: true,
       panelIndex: Number,
       groupCount: 0,
-      readOnly: false
+      readOnly: false,
+      drawer: false,
+      navItems: []
     }
   },
   computed: {
@@ -233,7 +247,38 @@ export default {
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
+    createData () {
+      // eslint-disable-next-line no-debugger
+      debugger
+      if (!this.drawer) {
+        var model = { questions: null, title: null }
+        let items = []
+        this.group.groups.forEach((g, index) => {
+          items.push(_.pick(g, _.keys(model)))
+          items[index].id = g.primaryKey
+          items[index].name = g.title.en
+        })
+        this.navItems = this.rename(items, 'questions', 'children')
+      }
+      this.drawer = !this.drawer
+    },
+    rename (obj, key, newKey) {
+      obj.forEach(o => {
+        if (o.questions) {
+          o.questions.forEach(q => {
+            q.name = q.text.en
+          })
+        }
+        if (_.includes(_.keys(o), key)) {
+          o[newKey] = _.clone(o[key], true)
+          delete o[key]
+        }
+      })
+      return obj
+    },
     setReadOnly () {
+      // eslint-disable-next-line no-debugger
+      debugger
       this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
       this.readOnly = !this.readOnly
       this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
