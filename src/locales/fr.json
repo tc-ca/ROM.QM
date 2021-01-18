@@ -99,7 +99,9 @@
           "photos": "FR Photos",
           "repeatable": {
             "repeatQuestion": "FR Repeat this question",
-            "deleteQuestion": "FR Delete this repeated question"
+            "deleteQuestion": "FR Delete this repeated question",
+            "copyNo": "FR Copy #",
+            "repeatedQuestion": "FR Repeated question"
           },
           "sampling": {
             "approximateTotal": "FR Approximate Total",
