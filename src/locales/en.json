@@ -99,7 +99,9 @@
           "photos": "Photos",
           "repeatable": {
             "repeatQuestion": "Repeat this question",
-            "deleteQuestion": "Delete this repeated question"
+            "deleteQuestion": "Delete this repeated question",
+            "copyNo": "Copy #",
+            "repeatedQuestion": "Repeated question"
           },
           "sampling": {
             "approximateTotal": "Approximate Total",
