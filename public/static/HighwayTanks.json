@@ -1,0 +1,3060 @@
+{
+    "name": "Highway Tanks - TC 406 and TC 406 Crude",
+    "title": {
+        "en": "HighwayTanks",
+        "fr": "HighwayTanks"
+    },
+    "groups": [{
+            "primaryKey": "GRP_DNTFCTNPLT(B620_Highway Tanks - TC 406 and TC 406 Crude",
+            "title": {
+                "en": "Identification Plate (B620 c. 5.1.6.1)",
+                "fr": "Plaque d'identification( B620 c. 5.1.6.1)"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 3,
+            "questions": [{
+                    "name": "QTN_TCSPCFCTNRQVLNT_TXT_GRP_DNTFCTNPLT(B620_Highway Tanks - TC 406 and TC 406 Crude",
+                    "id": 1,
+                    "sortOrder": 1,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "TC Specification or Equivalent/Substitute",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "guid": "78c1d979-3b2e-429d-89a5-851848fb14a1",
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [{
+                            "name": "QTN_RFRNCD_TXT_GRP_DNTFCTNPLT(B620_Highway Tanks - TC 406 and TC 406 Crude",
+                            "id": 42,
+                            "guid": "96376ddd-023f-42c0-a35c-d1b749a7026e",
+                            "sortOrder": 1,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "Reference ID",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "text",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": null,
+                            "validationRules": [{
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal"
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": []
+                        }
+                    ],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 2",
+                    "guid": "6748db44-92a1-42cb-b74a-00445b165a8f",
+                    "id": 2,
+                    "sortOrder": 2,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Certification Date",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "select",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 3",
+                    "id": 3,
+                    "sortOrder": 3,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Original Test Date",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 4",
+                    "id": 4,
+                    "sortOrder": 4,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Tank Manufacturer/Assembler",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 5",
+                    "id": 5,
+                    "sortOrder": 5,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Tank Serial Number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 6",
+                    "id": 6,
+                    "sortOrder": 6,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Vehicle Identification Number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 7",
+                    "id": 7,
+                    "sortOrder": 7,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "MAWP or Design Pressure",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 8",
+                    "id": 8,
+                    "sortOrder": 8,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Maximum Product Load",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 9",
+                    "id": 9,
+                    "sortOrder": 9,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Volumetric Capacity",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 10",
+                    "id": 10,
+                    "sortOrder": 10,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Lining",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": [0]
+        }, {
+            "primaryKey": "GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude",
+            "title": {
+                "en": "Filling Limits",
+                "fr": "Limite de remplissage"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 4,
+            "questions": [{
+                    "name": "QTN_MXMMPRDCTLD(B62_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude",
+                    "id": 18,
+                    "sortOrder": 18,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Maximum Product Load (B621 c. 7.3(b))",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "name": "RSPNS_YS_QTN_MXMMPRDCTLD(B62_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude"
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "name": "RSPNS_N_QTN_MXMMPRDCTLD(B62_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude"
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "QTN_2%TGVLMTRCCPCTY_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude",
+                    "id": 19,
+                    "sortOrder": 19,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "2% Outage Volumetric Capacity per Compartment  (B621 c. 7.3(d))",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "name": "RSPNS_YS_QTN_2%TGVLMTRCCPCTY_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude"
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "name": "RSPNS_N_QTN_2%TGVLMTRCCPCTY_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude"
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        }, {
+            "primaryKey": "Inspection and Test Markings Take a photo and record the following: (B620 c. 7.1 Tables 7.1 - 7.2)",
+            "title": {
+                "en": "Inspection and Test Markings",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 5,
+            "questions": [{
+                    "name": "Question 20",
+                    "id": 20,
+                    "sortOrder": 10,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Registered Facility # + Month/Year",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 11",
+                    "id": 11,
+                    "sortOrder": 11,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Visual (V) - 1 yr / 2.5 yrs for crude",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 12",
+                    "id": 12,
+                    "sortOrder": 12,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Leak (K) - 1 yr / 2.5 yrs for crude",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 13",
+                    "id": 13,
+                    "sortOrder": 13,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Internal (I) - 5 yrs (exemption for airport refueler)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 14",
+                    "id": 14,
+                    "sortOrder": 14,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Pressure (P) - 5 yrs",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 15",
+                    "id": 15,
+                    "sortOrder": 15,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Upper Coupler (UC) - 5 yrs, if applicable",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 16",
+                    "id": 16,
+                    "sortOrder": 16,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Lining - Thickness (L - T) - if applicable",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 21",
+                    "id": 21,
+                    "sortOrder": 17,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Location and Size (B620 c. 7.4)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Group 7",
+            "title": {
+                "en": "Hose Assemblies- Consider Rejection Criteria-( B620 c. 7.2.10, 7.2.10.4 & 7.2.10.6)",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 6,
+            "questions": [{
+                    "name": "Question 22",
+                    "id": 22,
+                    "sortOrder": 22,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Test Markings MM/YY",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 23",
+                    "id": 23,
+                    "sortOrder": 23,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "ID Number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 24",
+                    "id": 24,
+                    "sortOrder": 24,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "HAWP",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Securement and Integrity",
+            "title": {
+                "en": "Securement and Integrity",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 7,
+            "questions": [{
+                    "name": "Question 25",
+                    "id": 25,
+                    "sortOrder": 25,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Supports and Anchors (B620 c. 5.1.3, 5.1.4 & 5.6.7)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "compliant",
+                                "fr": "conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 26",
+                    "id": 26,
+                    "sortOrder": 26,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Shell and Head Rejection Criteria (B620 c. 7.2.1.8)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 27",
+                    "id": 27,
+                    "sortOrder": 27,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Circumferential Reinforcement B620 c. 5.6.8",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Group 9",
+            "title": {
+                "en": "Double Bulkhead Drains / Piping and Protection",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 8,
+            "questions": [{
+                    "name": "Question 28",
+                    "id": 28,
+                    "sortOrder": 28,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Double Bulkhead Drains B620 c. 5.6.2",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 29",
+                    "id": 29,
+                    "sortOrder": 29,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Piping and Protection -Leaks (B620 c. 5.6.9.2 & 5.6.9.1.6)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [{
+                            "name": "Question 30",
+                            "id": 30,
+                            "sortOrder": 1,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "Shear Sections or Suitable Guards",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "responseOptions": [{
+                                    "id": 1,
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Compliant",
+                                        "fr": "Conforme"
+                                    },
+                                    "value": "true",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }, {
+                                    "id": 2,
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "Non-compliant",
+                                        "fr": "Non-conforme"
+                                    },
+                                    "value": "false",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [{
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal"
+                            },
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": []
+                        }, {
+                            "name": "Question 31",
+                            "id": 31,
+                            "sortOrder": 2,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "Road Clearance",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "responseOptions": [{
+                                    "id": 1,
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Compliant",
+                                        "fr": "Conforme"
+                                    },
+                                    "value": "true",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }, {
+                                    "id": 2,
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "Non-compliant",
+                                        "fr": "Non-Conforme"
+                                    },
+                                    "value": "false",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [{
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal"
+                            },
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": []
+                        }
+                    ],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Group 10",
+            "title": {
+                "en": " Emergency Shut-Off Devices",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 9,
+            "questions": [{
+                    "name": "Question 32",
+                    "id": 32,
+                    "sortOrder": 32,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Internal Valves (closed), Fusible Devices, Emergency Shut-Off (B620 c. 5.6.12 & 5.7.5)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Comforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 33",
+                    "id": 33,
+                    "sortOrder": 33,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "For TC 306 /406 Crude: External Valve, Fusible Devices, Emergency Shut-Off (B620 c. 5.7.6.3 & A.9)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Group 11",
+            "title": {
+                "en": "Other Items",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 10,
+            "questions": [{
+                    "name": "Question 34",
+                    "id": 34,
+                    "sortOrder": 34,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": " Rear-End Protection-Condition and Measurement (B620 c. 5.1.5)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-Compliant",
+                                "fr": "Non conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 35",
+                    "id": 35,
+                    "sortOrder": 35,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Manhole Closures, Pressure Relief Devices,Roll Over Protection( B620 c. 5.6.6, 5.6.11, 5.7.4 & 5.6.)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Group 12",
+            "title": {
+                "en": "Loading and Unloading",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 11,
+            "questions": [{
+                    "name": "Question 36",
+                    "id": 36,
+                    "sortOrder": 36,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "MOC and hose assemblies preloading inspection done by the shipper or carrier. (B621 c. 7.1 & 7.2)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 37",
+                    "id": 37,
+                    "sortOrder": 37,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Fail-safe brake interlock system or wheel chocked. (B621 c. 7.1(h))",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 38",
+                    "id": 38,
+                    "sortOrder": 38,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Loading and unloading operations under supervision. (B621 c. 7.3 & 7.6)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 39",
+                    "id": 39,
+                    "sortOrder": 39,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "After loading and unloading, hatches, valves and other openings are closed & secured. (B621 c. 7.4 & 7.7)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 40",
+                    "id": 40,
+                    "sortOrder": 40,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "After loading and unloading the exterior surface is clean and free of residue. (B621 c. 7.4 & 7.7)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": 3,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }, {
+            "primaryKey": "Group 13",
+            "title": {
+                "en": "B620 and 49 CFR",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 12,
+            "questions": [{
+                    "name": "Question 41",
+                    "id": 41,
+                    "sortOrder": 41,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "For TC tanks –indicate the B620 edition to which the tank was built and certified with.",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 42",
+                    "id": 50,
+                    "sortOrder": 42,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "For a MC/DOT Tank – indicate the 49 CFR edition to which the tank was built and certified with.",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [{
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }, {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "internalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "externalComment": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "picture": {
+                        "option": "optional",
+                        "value": ""
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }
+    ],
+    "templateid": "",
+    "searchableProvisions": [],
+    "readOnly": false
+}

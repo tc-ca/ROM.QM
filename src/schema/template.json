@@ -1,0 +1,568 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": false,
+    "definitions": {
+        "Comment": {
+            "additionalProperties": false,
+            "properties": {
+                "option": {
+                    "$ref": "#/definitions/Option"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "option",
+                "value"
+            ],
+            "type": "object"
+        },
+        "ComparisonOperator": {
+            "enum": [
+                "equal",
+                "greaterThen",
+                "lengthGreaterThen",
+                "lengthLessThen",
+                "lessThen",
+                "notEqual"
+            ],
+            "type": "string"
+        },
+        "DependencyGroup": {
+            "additionalProperties": false,
+            "properties": {
+                "childValidatorName": {
+                    "type": "null"
+                },
+                "questionDependencies": {
+                    "items": {
+                        "$ref": "#/definitions/QuestionDependency"
+                    },
+                    "type": "array"
+                },
+                "ruleType": {
+                    "$ref": "#/definitions/DependencyGroupType"
+                }
+            },
+            "required": [
+                "childValidatorName",
+                "questionDependencies",
+                "ruleType"
+            ],
+            "type": "object"
+        },
+        "DependencyGroupType": {
+            "enum": [
+                "validation",
+                "validationValue",
+                "visibility"
+            ],
+            "type": "string"
+        },
+        "Dependent": {
+            "additionalProperties": false,
+            "properties": {
+                "guid": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "guid"
+            ],
+            "type": "object"
+        },
+        "Group": {
+            "additionalProperties": false,
+            "properties": {
+                "domSuffix": {
+                    "type": "string"
+                },
+                "expansionPanels": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "htmlElementId": {
+                    "type": "string"
+                },
+                "isRepeatable": {
+                    "type": "boolean"
+                },
+                "isVisible": {
+                    "type": "boolean"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "primaryKey": {
+                    "type": "string"
+                },
+                "questions": {
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "$ref": "#/definitions/Title"
+                }
+            },
+            "required": [
+                "domSuffix",
+                "expansionPanels",
+                "htmlElementId",
+                "isRepeatable",
+                "isVisible",
+                "order",
+                "primaryKey",
+                "questions",
+                "title"
+            ],
+            "type": "object"
+        },
+        "Option": {
+            "enum": [
+                "n/a",
+                "optional",
+                "required"
+            ],
+            "type": "string"
+        },
+        "Picture": {
+            "additionalProperties": false,
+            "properties": {
+                "option": {
+                    "$ref": "#/definitions/Option"
+                },
+                "value": {
+                    "items": {
+                        "$ref": "#/definitions/PictureItems"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "option",
+                "value"
+            ],
+            "type": "object"
+        },
+        "PictureItems": {
+            "additionalProperties": false,
+            "properties": {
+                "base64Value": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "base64Value",
+                "description",
+                "title"
+            ],
+            "type": "object"
+        },
+        "Question": {
+            "additionalProperties": false,
+            "properties": {
+                "childQuestions": {
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    },
+                    "type": "array"
+                },
+                "dependants": {
+                    "default": [
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/Dependent"
+                    },
+                    "type": "array"
+                },
+                "dependencyGroups": {
+                    "items": {
+                        "$ref": "#/definitions/DependencyGroup"
+                    },
+                    "type": "array"
+                },
+                "guid": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "number"
+                },
+                "isMultiple": {
+                    "type": "boolean"
+                },
+                "isRepeatable": {
+                    "type": "boolean"
+                },
+                "isRepeated": {
+                    "type": "boolean"
+                },
+                "isSamplingAllowed": {
+                    "type": "boolean"
+                },
+                "isVisible": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "null"
+                },
+                "responseOptions": {
+                    "items": {
+                        "$ref": "#/definitions/QuestionResponseOption"
+                    },
+                    "type": "array"
+                },
+                "samplingRecord": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/SamplingRecord"
+                        },
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "sortOrder": {
+                    "type": "number"
+                },
+                "text": {
+                    "$ref": "#/definitions/Title"
+                },
+                "type": {
+                    "$ref": "#/definitions/QuestionResponseType"
+                },
+                "validationRules": {
+                    "items": {
+                        "$ref": "#/definitions/ValidationRule"
+                    },
+                    "type": "array"
+                },
+                "violationInfo": {
+                    "$ref": "#/definitions/ViolationInfo"
+                }
+            },
+            "required": [
+                "childQuestions",
+                "dependants",
+                "dependencyGroups",
+                "guid",
+                "id",
+                "isMultiple",
+                "isVisible",
+                "name",
+                "response",
+                "responseOptions",
+                "sortOrder",
+                "text",
+                "type",
+                "validationRules",
+                "violationInfo"
+            ],
+            "type": "object"
+        },
+        "QuestionDependency": {
+            "additionalProperties": false,
+            "properties": {
+                "dependsOnQuestion": {
+                    "$ref": "#/definitions/QuestionDependencyItem"
+                },
+                "validationAction": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "equal",
+                                "greaterThen",
+                                "lengthGreaterThen",
+                                "lengthLessThen",
+                                "lessThen",
+                                "notEqual"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "validationValue": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dependsOnQuestion",
+                "validationAction",
+                "validationValue"
+            ],
+            "type": "object"
+        },
+        "QuestionDependencyItem": {
+            "additionalProperties": false,
+            "properties": {
+                "guid": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "guid"
+            ],
+            "type": "object"
+        },
+        "QuestionResponseOption": {
+            "additionalProperties": false,
+            "properties": {
+                "externalComment": {
+                    "$ref": "#/definitions/Comment"
+                },
+                "id": {
+                    "type": "number"
+                },
+                "internalComment": {
+                    "$ref": "#/definitions/Comment"
+                },
+                "isProvisionCollapsed": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "picture": {
+                    "$ref": "#/definitions/Picture"
+                },
+                "provisions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "searchProvisions": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "selectedProvisions": {
+                    "items": {
+                    },
+                    "type": "array"
+                },
+                "selectedProvisionsTitles": {
+                    "items": {
+                    },
+                    "type": "array"
+                },
+                "sortOrder": {
+                    "type": "number"
+                },
+                "text": {
+                    "$ref": "#/definitions/Title"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "externalComment",
+                "id",
+                "internalComment",
+                "isProvisionCollapsed",
+                "name",
+                "picture",
+                "provisions",
+                "searchProvisions",
+                "selectedProvisions",
+                "sortOrder",
+                "text",
+                "value"
+            ],
+            "type": "object"
+        },
+        "QuestionResponseType": {
+            "enum": [
+                "image",
+                "number",
+                "radio",
+                "reference",
+                "select",
+                "text"
+            ],
+            "type": "string"
+        },
+        "SamplingRecord": {
+            "additionalProperties": false,
+            "properties": {
+                "approximateTotal": {
+                    "type": "string"
+                },
+                "nonCompliances": {
+                    "type": "string"
+                },
+                "sampleSize": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "approximateTotal",
+                "nonCompliances",
+                "sampleSize"
+            ],
+            "type": "object"
+        },
+        "SearchableProvision": {
+            "additionalProperties": false,
+            "properties": {
+                "leg": {
+                    "type": "string"
+                },
+                "questions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "leg",
+                "questions"
+            ],
+            "type": "object"
+        },
+        "Title": {
+            "additionalProperties": false,
+            "properties": {
+                "en": {
+                    "type": "string"
+                },
+                "fr": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "en",
+                "fr"
+            ],
+            "type": "object"
+        },
+        "ValidationRule": {
+            "additionalProperties": false,
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "errorMessage": {
+                    "$ref": "#/definitions/Title"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/ValidationRuleType"
+                },
+                "value": {
+                    "type": [
+                        "null",
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "required": [
+                "enabled",
+                "errorMessage",
+                "name",
+                "type",
+                "value"
+            ],
+            "type": "object"
+        },
+        "ValidationRuleType": {
+            "enum": [
+                "max",
+                "maxLength",
+                "min",
+                "minLength",
+                "require"
+            ],
+            "type": "string"
+        },
+        "ViolationInfo": {
+            "additionalProperties": false,
+            "properties": {
+                "matchingType": {
+                    "$ref": "#/definitions/ComparisonOperator"
+                },
+                "responseToMatch": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "matchingType",
+                "responseToMatch"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "groups": {
+            "items": {
+                "$ref": "#/definitions/Group"
+            },
+            "type": "array"
+        },
+        "name": {
+            "description": "name of the template",
+            "type": "string"
+        },
+        "readOnly": {
+            "type": "boolean"
+        },
+        "searchableProvisions": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "#/definitions/SearchableProvision"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "templateid": {
+            "description": "unique id (GUID) of the template",
+            "type": "string"
+        },
+        "title": {
+            "$ref": "#/definitions/Title"
+        }
+    },
+    "required": [
+        "groups",
+        "name",
+        "readOnly",
+        "searchableProvisions",
+        "templateid",
+        "title"
+    ],
+    "type": "object"
+}
+

@@ -12,7 +12,10 @@
     "lint": "vue-cli-service lint",
     "build-storybook": "build-storybook",
     "storybook": "start-storybook -p 6006 -s public",
-    "translation-check": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
+    "translation-check": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
+    "generate-template-schema": "typescript-json-schema src/schema/template.ts Template --out src/schema/template.json --noExtraProps --required --strictNullChecks",
+    "fixTemplate": "node src/schema/fixTemplate.mjs"
+
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
@@ -51,6 +54,7 @@
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.1.2",
+    "ajv": "^7.0.3",
     "axios": "^0.21.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.1.0",
@@ -62,6 +66,7 @@
     "react-is": "^17.0.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
+    "typescript-json-schema": "^0.47.0",
     "vue-cli-plugin-i18n": "^0.6.1",
     "vue-cli-plugin-vuetify": "^2.0.3",
     "vue-template-compiler": "^2.6.10",

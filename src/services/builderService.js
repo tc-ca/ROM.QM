@@ -330,13 +330,13 @@ function processBuilderForSave(questionnaire){
 
 }
 
-async function GetMockQuestionnaireFromImportModule() {
+async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeaturedTemplate') {
   if(process.env.NODE_ENV !== 'production') 
   {
     const axios = await import('axios')
 
     // let response = await axios.get('/static/betaAnswers.json')
-    let response = await axios.get('/static/fullFeaturedTemplate.json')
+    let response = await axios.get(`/static/${templateToLoad}.json`)
       .catch(function (error) {
         // handle error
         console.log(error)

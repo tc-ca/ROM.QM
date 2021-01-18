@@ -1,9 +1,23 @@
 export interface Template {
-    name:                 string;
-    title:                Title;
-    groups:               Group[];
+    /**
+     * unique id (GUID) of the template
+     * @TJS-type string
+     */
     templateid:           string;
+
+    /**
+     * name of the template
+     * @TJS-type string
+     */
+    name:                 string;
+    
+    title:                Title;
+    
+    groups:               Group[];
+
+    /** @nullable */
     searchableProvisions: SearchableProvision[];
+
     readOnly:             boolean;
 }
 
@@ -30,15 +44,26 @@ export interface Question {
     type:               QuestionResponseType;
     response:           null;
     isSamplingAllowed?: boolean;
+
+    /** @nullable */
     samplingRecord?:    SamplingRecord | null;
+
     isRepeatable?:      boolean;
     isRepeated?:        boolean;
     responseOptions:    QuestionResponseOption[];
     validationRules:    ValidationRule[];
     violationInfo:      ViolationInfo;
     childQuestions:     Question[];
-    dependants:         string[];
+
+    /**
+    * @default []
+    */
+    dependants:         Dependent[];
     dependencyGroups:   DependencyGroup[];
+}
+
+export interface Dependent {
+    guid: string;
 }
 
 export interface DependencyGroup {
@@ -48,9 +73,15 @@ export interface DependencyGroup {
 }
 
 export interface QuestionDependency {
-    dependsOnQuestionId: string;
+    dependsOnQuestion: QuestionDependencyItem;
+
+    /** @nullable */
     validationAction:    ComparisonOperator | null;
     validationValue:     string;
+}
+
+export interface QuestionDependencyItem {
+    guid: string;
 }
 
 export interface Comment {
@@ -67,9 +98,13 @@ export interface ValidationRule {
     name:         string;
     enabled:      boolean;
     type:         ValidationRuleType;
-    value:        null | string;
+
+    /** @nullable */
+    value:        ValidationValue;
     errorMessage: Title;
 }
+
+export type ValidationValue = string | number | null;
 
 export interface ViolationInfo {
     responseToMatch: string;
@@ -83,21 +118,23 @@ export interface QuestionResponseOption {
     value:                     string;
     internalComment:           Comment;
     externalComment:           Comment;
-    picture:                   Picture[];
+    picture:                   Picture;
     provisions:                string[];
     selectedProvisions:        any[];
-    searchProvisions:          null;
+
+    /** @nullable */
+    searchProvisions:          string;
     isProvisionCollapsed:      boolean;
     name:                      string;
     selectedProvisionsTitles?: any[];
 }
 
-export interface PictureSupplimentaryInfo {
-    option:   Option;
-    pictures: Picture[];
+export interface Picture {
+    option: Option;
+    value:  PictureItems[];
 }
 
-export interface Picture {
+export interface PictureItems {
     title:       string;
     description: string;
     base64Value: string;
@@ -110,17 +147,17 @@ export interface SamplingRecord {
 }
 
 export interface SearchableProvision {
-    legislationId:  string;
-    questionIds:      string[];
+    leg: string;
+    questions:   string[];
 }
 
 export enum QuestionResponseType {
-    Reference = "Reference",
-    Image     = "Image",
-    Number    = "Number",
-    Select    = "Select",
-    Radio     = "Radio",
-    Text      = "Text",
+    Reference = "reference",
+    Image     = "image",
+    Number    = "number",
+    Select    = "select",
+    Radio     = "radio",
+    Text      = "text",
 }
 
 export enum ComparisonOperator {

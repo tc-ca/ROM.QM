@@ -1,5 +1,5 @@
 {
-    "name": "Questionnaire 1",
+    "name": "Full Featured Template",
     "title": {
         "en": "Questionnaire Title EN",
         "fr": "Questionnaire Title EN"
@@ -10,7 +10,7 @@
                 "en": "Group 1",
                 "fr": "Fr: New Group"
             },
-            "isRepeatable": false,
+            "isRepeatable": true,
             "isVisible": true,
             "order": 0,
             "questions": [{
@@ -148,7 +148,7 @@
                     "id": 2,
                     "guid": "ba098811-d8ce-4a54-9179-5d640d18344c",
                     "sortOrder": 3,
-                    "isVisible": false,
+                    "isVisible": true,
                     "isMultiple": true,
                     "text": {
                         "en": "Radio with Dependent Children ",
@@ -156,6 +156,7 @@
                     },
                     "type": "radio",
                     "response": null,
+                    "isRepeatable": true,
                     "responseOptions": [{
                             "id": 1,
                             "sortOrder": 1,
@@ -924,7 +925,7 @@
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually",
-            "expansionPanels": []
+            "expansionPanels": [2]
         }, {
             "primaryKey": "GRP_RPTBLGRP_Questionnaire 1",
             "title": {
@@ -1057,7 +1058,7 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ["23-0492-30492-30492-3049", "2-30492-30492-30492-30492-304"]
+                                "value": []
                             },
                             "provisions": [],
                             "selectedProvisions": [],

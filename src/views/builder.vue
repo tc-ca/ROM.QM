@@ -764,7 +764,8 @@ export default {
     let template = null
     // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
-      template = await BuilderService.GetMockQuestionnaireFromImportModule()
+      var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
+      template = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
     } else {
       // default to empty template
       template = BuilderService.createQuestionnaire()

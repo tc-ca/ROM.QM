@@ -23,7 +23,8 @@ export default {
   async mounted () {
     // if env= dev and loadLocalData then set the questionnaire state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
-      const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule()
+      var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
+      const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page: 'questionnaire' })
     }
     // if env= dev load the provisions else the state will be set explicility outside in app.vue
