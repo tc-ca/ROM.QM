@@ -124,6 +124,13 @@
                 v-model="selectedGroup.title[fr]"
                 label="Group text Fr"
               />
+              <v-text-field
+                v-model="selectedGroup.order"
+                dense
+                type="number"
+                label="Group order"
+                @change="sortGroups(selectedGroup)"
+              />
               <v-checkbox
                 v-model="selectedGroup.isVisible"
                 :label="'Is Visible'"
@@ -1047,6 +1054,9 @@ export default {
           break
         }
       }
+    },
+    sortGroups (group) {
+      this.questionnaire.groups.sort((a, b) => a.order - b.order)
     },
     sortQuestions (question) {
       question.sortOrder = +question.sortOrder
