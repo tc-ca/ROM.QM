@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="show"
+    v-model="display"
     :width="280"
     absolute
     temporary
@@ -25,7 +25,7 @@
       >
         <div
           class="actionLink"
-          @click="$emit('notification:click', props.item.name)"
+          @click="$emit('question:click', props.item)"
         >
           <v-icon
             small
@@ -44,7 +44,7 @@
 // import _ from 'lodash'
 export default {
   props: {
-    show: {
+    display: {
       type: Boolean,
       default: false
     },

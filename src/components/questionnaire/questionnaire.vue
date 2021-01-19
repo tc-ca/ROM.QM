@@ -108,9 +108,10 @@
           </v-row>
         </v-col>
       </v-row>
-      <breadcrumbs
-        :show="drawer"
+      <questionnaire-nav
+        :display="drawer"
         :navitems="navItems"
+        @question:click="onQuestionClick"
       />
     </div>
     <div v-show="!isVisible">
@@ -156,11 +157,11 @@ import _ from 'lodash'
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
-import breadcrumbs from '../breadcrumbs/breadcrumbs.vue'
+import QuestionnaireNav from '../questionnaire-nav/questionnaire-nav.vue'
 
 export default {
   emits: ['clear-provision-search-field'],
-  components: { QuestionnaireGroup, QuestionnaireError, breadcrumbs },
+  components: { QuestionnaireGroup, QuestionnaireError, QuestionnaireNav },
 
   props: {
   },
@@ -248,19 +249,15 @@ export default {
   },
   methods: {
     createData () {
-      // eslint-disable-next-line no-debugger
-      debugger
-      if (!this.drawer) {
-        var model = { questions: null, title: null }
-        let items = []
-        this.group.groups.forEach((g, index) => {
-          items.push(_.pick(g, _.keys(model)))
-          items[index].id = g.primaryKey
-          items[index].name = g.title.en
-        })
-        this.navItems = this.rename(items, 'questions', 'children')
-      }
-      this.drawer = !this.drawer
+      var model = { questions: null, title: null }
+      let items = []
+      this.group.groups.forEach((g, index) => {
+        items.push(_.pick(g, _.keys(model)))
+        items[index].id = g.primaryKey
+        items[index].name = g.title.en
+      })
+      this.navItems = this.rename(items, 'questions', 'children')
+      this.drawer = true
     },
     rename (obj, key, newKey) {
       obj.forEach(o => {
@@ -277,8 +274,6 @@ export default {
       return obj
     },
     setReadOnly () {
-      // eslint-disable-next-line no-debugger
-      debugger
       this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
       this.readOnly = !this.readOnly
       this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
@@ -298,8 +293,15 @@ export default {
     },
     onNotificationClick (n) {
       this.expand = true
-      // this.panelIndex = n.groupIndex
+      this.$refs.questionGroup[n.groupIndex].$refs.groupQuestion[1].$el.scrollIntoView(true)
       this.$store.commit('errors/updateErrorNotification', n.qguid)
+    },
+    onQuestionClick (q) {
+      this.expand = true
+      this.drawer = false
+      let index = this.group.groups.filter(g => g.questions.some(item => item.guid === q.guid))[0].order
+      this.$refs.questionGroup[index].$refs.groupQuestion[1].$el.scrollIntoView(true)
+      this.$store.commit('errors/updateErrorNotification', q.guid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
       if (q.isVisible) {
