@@ -1,15 +1,15 @@
 {
     "name": "Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
     "title": {
-        "en": "DesignAndManufacture",
-        "fr": "DesignAndManufacture"
+        "en": "Small Containers Design and Manufacture for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
+        "fr": "Petits contenants,Conception et fabrication destinés au transport des marchandises dangereuses conformément à la partie 1 de la norme TP14850"
     },
     "groups": [
         {
             "primaryKey": "address on application and certificate",
             "title": {
                 "en": "Address on application or certificate",
-                "fr": "l'adresse physique sur application ou  Certificat"
+                "fr": "l'adresse physique sur application ou Certificat"
             },
             "isRepeatable": false,
             "isVisible": true,
@@ -126,7 +126,7 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": [],
-                    "guid": "1ba60a1c-b948-4f17-8c3c-abd40101d1b8"
+                    "guid": "083596ab-86f6-4694-8f8c-4837b443bc83"
                 },
                 {
                     "name": "QTN_FVRFCTNNSPCTNDS",
@@ -241,7 +241,7 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": [],
-                    "guid": "52cc8348-1d07-41ea-94b7-854eb357ac0f"
+                    "guid": "4d195fee-1000-41b9-a3ca-abf24b3c8941"
                 }
             ],
             "domSuffix": "prop value created virtually",
@@ -535,12 +535,12 @@
                                     "childQuestions": [],
                                     "dependants": [],
                                     "dependencyGroups": [],
-                                    "guid": "8537111f-bdf6-4fc8-95ba-0ffe1c7eb9af"
+                                    "guid": "09cda9a6-322a-488f-8bc6-b1075d8e433f"
                                 }
                             ],
                             "dependants": [],
                             "dependencyGroups": [],
-                            "guid": "05b1a2a3-d405-4ff2-bdee-7ab9a94806cb"
+                            "guid": "39d9c1a3-ee35-4419-beef-ac6e9d8c6707"
                         }
                     ],
                     "dependants": [],
@@ -551,11 +551,12 @@
                             "questionDependencies": []
                         }
                     ],
-                    "guid": "35d6e612-b2e9-4313-b878-caf142fcb42e"
+                    "guid": "a1c1470d-74c9-4b73-aefe-34add05494b0"
                 }
             ],
             "domSuffix": "prop value created virtually",
-            "htmlElementId": "prop value created virtually"
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
         },
         {
             "primaryKey": "Other Documentation-Documentation additionnelle",
@@ -735,12 +736,12 @@
                             "childQuestions": [],
                             "dependants": [],
                             "dependencyGroups": [],
-                            "guid": "55a58111-b314-4927-8478-66884d099fc9"
+                            "guid": "4daf2be9-66a8-4750-bdc9-c996b105cdd1"
                         }
                     ],
                     "dependants": [],
                     "dependencyGroups": [],
-                    "guid": "f2dbf461-ef84-4330-b513-2630fc5d57da"
+                    "guid": "96744199-1d4d-4d57-aeb1-ce7513985327"
                 },
                 {
                     "name": "QTN_CRRNTVRSNFTP",
@@ -853,7 +854,7 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": [],
-                    "guid": "7ef61bd5-3994-44e2-a237-510bc9076153"
+                    "guid": "b8735545-0de3-4e09-8729-6e1b5023bc36"
                 },
                 {
                     "name": "QTN_NSTRMNTCLBRTNRC",
@@ -966,7 +967,7 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": [],
-                    "guid": "4ecd1f75-1c49-4118-90ba-f3db2ff2e31d"
+                    "guid": "d70f0e31-6635-441c-a9ec-ea899897ccb3"
                 },
                 {
                     "name": "QTN_STMTDNMBRFNSMLL",
@@ -1136,12 +1137,12 @@
                             "childQuestions": [],
                             "dependants": [],
                             "dependencyGroups": [],
-                            "guid": "b5e5bc1f-48c6-4cdd-a7ad-d63616b6f73a"
+                            "guid": "0f97a309-d436-41d8-97b3-ff634ed9ace1"
                         }
                     ],
                     "dependants": [],
                     "dependencyGroups": [],
-                    "guid": "e2423a37-a487-46dd-b783-727f1e346041"
+                    "guid": "9e1770dc-af2d-493f-b6c2-1ba7c332b715"
                 },
                 {
                     "name": "QTN_QSTN_RD_Other Documentation-Documentation additionnelle",
@@ -1238,53 +1239,55 @@
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually",
-            "expansionPanels": [
-                5
-            ]
+            "expansionPanels": []
         },
         {
             "title": {
-                "en": "New Group",
-                "fr": "Fr: New Group"
+                "en": "Other Violations",
+                "fr": "Autres infractions"
             },
-            "primaryKey": "GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
+            "primaryKey": "GRP_THRVLTNS_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
             "isRepeatable": false,
             "isVisible": true,
             "order": 3,
             "questions": [
                 {
-                    "name": "QTN_QSTN_RD_GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
+                    "name": "QTN_THRVLTNS_RD_GRP_THRVLTNS_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
                     "id": 13,
                     "guid": "402bf1c8-a554-4a53-b325-0a8b7453b099",
                     "sortOrder": 13,
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en": "Question text",
-                        "fr": "FR: Question text"
+                        "en": "Other Violations",
+                        "fr": "Autres Infractions"
                     },
                     "type": "radio",
                     "response": null,
-                    "isSamplingAllowed": false,
-                    "samplingRecord": null,
-                    "isRepeatable": false,
+                    "isSamplingAllowed": true,
+                    "samplingRecord": {
+                        "approximateTotal": "",
+                        "sampleSize": "",
+                        "nonCompliances": ""
+                    },
+                    "isRepeatable": true,
                     "isRepeated": false,
                     "responseOptions": [
                         {
                             "id": 1,
-                            "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
+                            "name": "RSPNS_YS_QTN_THRVLTNS_RD_GRP_THRVLTNS_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
                             "sortOrder": 1,
                             "text": {
                                 "en": "Yes",
-                                "fr": "FR: Yes"
+                                "fr": "Oui"
                             },
-                            "value": "true",
+                            "value": "False",
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "optional",
+                                "option": "required",
                                 "value": ""
                             },
                             "picture": {
@@ -1293,24 +1296,24 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "searchProvisions": null,
+                            "searchProvisions": "1.1",
                             "isProvisionCollapsed": false
                         },
                         {
                             "id": 2,
-                            "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
+                            "name": "RSPNS_N_QTN_THRVLTNS_RD_GRP_THRVLTNS_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
                             "sortOrder": 2,
                             "text": {
                                 "en": "No",
-                                "fr": "FR: No"
+                                "fr": "Non"
                             },
-                            "value": "false",
+                            "value": "true",
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "required",
+                                "option": "optional",
                                 "value": ""
                             },
                             "picture": {
@@ -1365,14 +1368,133 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [
-                1
-            ],
+            "expansionPanels": [],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
         }
     ],
     "templateid": "",
-    "searchableProvisions": [],
-    "readOnly": false
+    "readOnly": false,
+    "searchableProvisions": [
+        {
+            "leg": "d1db82e4-663b-422c-bacd-94880c994348",
+            "questions": [
+                "4d195fee-1000-41b9-a3ca-abf24b3c8941"
+            ]
+        },
+        {
+            "leg": "145b6d54-bd3e-4dd6-a201-1fc252ea7689",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "9241a2ae-1c61-4753-805a-be0707f41622",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "77758039-206f-476d-84d9-549c571f269e",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "7b298d1f-da3e-408c-a705-2558886a9b9d",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "792fda3c-0696-4e90-9655-a0bb810f7b33",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "e311574a-8bac-4b5b-b092-a31182accab5",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "bec23597-02d7-4422-a3db-f41e7c57d47f",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "6473a679-7c58-412d-b0c2-b1678faa53e2",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "b11288f8-e99e-4071-b829-8684947f3421",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "8b9e1c85-7365-4306-9c70-269bf841484b",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        },
+        {
+            "leg": "488db8ca-3022-456e-9df9-f21d2ba63791",
+            "questions": [
+                "402bf1c8-a554-4a53-b325-0a8b7453b099"
+            ]
+        }
+    ]
 }

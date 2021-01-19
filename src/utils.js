@@ -22,7 +22,12 @@ export function generateName (name, prefix, postfix, removeVowels = true) {
   return cn
 }
 
-// works on primitive types
+/**
+ * https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+ * works on primitive values
+ * example call: 
+ * var unique = a.filter(onlyUnique);
+ */
 export function onlyUnique (value, index, self) {
   return self.indexOf(value) === index
 }

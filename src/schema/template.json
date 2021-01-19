@@ -220,10 +220,17 @@
                     "type": "null"
                 },
                 "responseOptions": {
-                    "items": {
-                        "$ref": "#/definitions/QuestionResponseOption"
-                    },
-                    "type": "array"
+                    "anyOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/QuestionResponseOption"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "samplingRecord": {
                     "anyOf": [

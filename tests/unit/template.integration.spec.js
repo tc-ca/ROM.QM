@@ -11,9 +11,7 @@ import HighwayTanks from '../../public/static/HighwayTanks.json'
 import IBC from '../../public/static/IBC.json'
 import ItermediateBulk from '../../public/static/ItermediateBulk.json'
 import SelectionOfViolations from '../../public/static/SelectionOfViolations.json'
-import { group } from 'console'
-
-import { v4 as uuidv4 } from 'uuid'
+import Beta2Testing from '../../public/static/beta2Testing.json'
 
 // const vuetify = new Vuetify()
 // const localVue = createLocalVue()
@@ -30,7 +28,8 @@ const ajv = new Ajv({
     error: (message) => {
       throw new Error('AJV error: ' + message)
     }
-  }
+  },
+  allowUnionTypes: true
 })
 
 let badData = {
@@ -159,7 +158,7 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
   it('Client Template: DesignAndManufacture data should be successfully validated against the schema', () => {
     if (validate(DesignAndManufacture)) {
-      expect(DesignAndManufacture.name).toEqual('DesignAndManufacture')
+      expect(DesignAndManufacture.name).toEqual('Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850')
     }
 
     console.log(validate.errors)
@@ -169,7 +168,7 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
   it('Client Template: Highway Tanks data should be successfully validated against the schema', () => {
     if (validate(HighwayTanks)) {
-      expect(HighwayTanks.name).toEqual('HighwayTanks')
+      expect(HighwayTanks.name).toEqual('Highway Tanks - TC 406 and TC 406 Crude')
     }
 
     console.log(validate.errors)
@@ -179,7 +178,7 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
   it('Client Template: IBC data should be successfully validated against the schema', () => {
     if (validate(IBC)) {
-      expect(IBC.name).toEqual('IBC')
+      expect(IBC.name).toEqual('IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146')
     }
 
     console.log(validate.errors)
@@ -189,7 +188,7 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
   it('Client Template: ItermediateBulk data should be successfully validated against the schema', () => {
     if (validate(ItermediateBulk)) {
-      expect(ItermediateBulk.name).toEqual('ItermediateBulk')
+      expect(ItermediateBulk.name).toEqual('INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002')
     }
 
     console.log(validate.errors)
@@ -199,7 +198,17 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
   it('Client Template: SelectionOfViolations data should be successfully validated against the schema', () => {
     if (validate(SelectionOfViolations)) {
-      expect(SelectionOfViolations.name).toEqual('SelectionOfViolations')
+      expect(SelectionOfViolations.name).toEqual('selection of Violations')
+    }
+
+    console.log(validate.errors)
+
+    expect(validate.errors).toEqual(null)
+  })
+
+  it('Client Template: Beta2Testing data should be successfully validated against the schema', () => {
+    if (validate(Beta2Testing)) {
+      expect(Beta2Testing.name).toEqual('certificate (equivalency, temporary or emergency).')
     }
 
     console.log(validate.errors)

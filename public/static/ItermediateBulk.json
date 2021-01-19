@@ -4,7 +4,8 @@
         "fr": "INTERMEDIATEBULK"
     },
     "name": "INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
-    "groups": [{
+    "groups": [
+        {
             "title": {
                 "en": "COMPANY DETAILS",
                 "fr": "DÉTAILS DE LA COMPAGNIE"
@@ -13,7 +14,8 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 0,
-            "questions": [{
+            "questions": [
+                {
                     "name": "QTN_TYPFNSPCTN_SLCT_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                     "id": 1,
                     "guid": "2a52bb18-ff63-42e6-be03-84afe116deb7",
@@ -30,7 +32,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_NTL_QTN_TYPFNSPCTN_SLCT_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
@@ -55,7 +58,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_VRFCTN_QTN_TYPFNSPCTN_SLCT_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
@@ -83,7 +87,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -99,14 +104,17 @@
                         "matchingType": "equal"
                     },
                     "childQuestions": [],
-                    "dependants": [{
+                    "dependants": [
+                        {
                             "guid": "91ad851b-18b9-421f-a5a8-e3ba1b5dc57a"
-                        }, {
+                        },
+                        {
                             "guid": "379230fa-1830-4ef5-9f00-a9e68c60efc0"
                         }
                     ],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_FNTLNSPCTN,PHYS_RD_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                     "id": 3,
                     "guid": "91ad851b-18b9-421f-a5a8-e3ba1b5dc57a",
@@ -123,7 +131,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_FNTLNSPCTN,PHYS_RD_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
@@ -148,7 +157,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_FNTLNSPCTN,PHYS_RD_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
@@ -176,7 +186,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -193,10 +204,12 @@
                     },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": [{
+                    "dependencyGroups": [
+                        {
                             "ruleType": "visibility",
                             "childValidatorName": null,
-                            "questionDependencies": [{
+                            "questionDependencies": [
+                                {
                                     "dependsOnQuestion": {
                                         "guid": "2a52bb18-ff63-42e6-be03-84afe116deb7"
                                     },
@@ -206,7 +219,8 @@
                             ]
                         }
                     ]
-                }, {
+                },
+                {
                     "name": "QTN_FVRFCTNNSPCTN,P_RD_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                     "id": 4,
                     "guid": "379230fa-1830-4ef5-9f00-a9e68c60efc0",
@@ -223,7 +237,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_FVRFCTNNSPCTN,P_RD_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
@@ -248,7 +263,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_FVRFCTNNSPCTN,P_RD_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
@@ -276,7 +292,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -293,10 +310,12 @@
                     },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": [{
+                    "dependencyGroups": [
+                        {
                             "ruleType": "visibility",
                             "childValidatorName": null,
-                            "questionDependencies": [{
+                            "questionDependencies": [
+                                {
                                     "dependsOnQuestion": {
                                         "guid": "2a52bb18-ff63-42e6-be03-84afe116deb7"
                                     },
@@ -306,7 +325,8 @@
                             ]
                         }
                     ]
-                }, {
+                },
+                {
                     "name": "QTN_QVLNCYCRTFCTNMB_NBR_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                     "id": 2,
                     "guid": "6b6cda38-a8a5-4a00-8483-6477389e4111",
@@ -324,7 +344,8 @@
                     "isRepeatable": false,
                     "isRepeated": false,
                     "responseOptions": null,
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -342,7 +363,8 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_XPRYDT_NBR_GRP_CMPNYDTLS_TMPLT_QSTNNRTTLN",
                     "id": 17,
                     "guid": "ebf1ec5e-2b34-4586-94e1-a5b65d557a49",
@@ -360,7 +382,8 @@
                     "isRepeatable": false,
                     "isRepeated": false,
                     "responseOptions": null,
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -377,10 +400,12 @@
                     },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": [{
+                    "dependencyGroups": [
+                        {
                             "ruleType": "visibility",
                             "childValidatorName": null,
-                            "questionDependencies": [{
+                            "questionDependencies": [
+                                {
                                     "dependsOnQuestion": {
                                         "guid": "fa4551a2-b8a7-4901-a55c-e605141bfaf1"
                                     },
@@ -392,10 +417,11 @@
                     ]
                 }
             ],
-            "expansionPanels": [2, 5, 0, 3],
+            "expansionPanels": [],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
-        }, {
+        },
+        {
             "title": {
                 "en": "CERTIFICATE(S) OF REGISTRATION ",
                 "fr": "CERTIFICAT(S) D'INSCRIPTION"
@@ -404,7 +430,8 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 1,
-            "questions": [{
+            "questions": [
+                {
                     "name": "QTN_CRTFCT(S)FRGSTR_RD_GRP_CRTFCT(S)FRGSTR_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 5,
                     "guid": "79a2f09f-18d6-4dc2-9493-688d462f43cb",
@@ -421,7 +448,8 @@
                     "samplingRecord": null,
                     "isRepeatable": true,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_CRTFCT(S)FRGSTR_RD_GRP_CRTFCT(S)FRGSTR_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -446,7 +474,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_CRTFCT(S)FRGSTR_RD_GRP_CRTFCT(S)FRGSTR_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -472,7 +501,8 @@
                             "selectedProvisionsTitles": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 3,
                             "name": "RSPNS_N/_QTN_CRTFCT(S)FRGSTR_RD_GRP_CRTFCT(S)FRGSTR_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 3,
@@ -480,7 +510,7 @@
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
@@ -495,11 +525,12 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             }
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -514,7 +545,8 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "childQuestions": [{
+                    "childQuestions": [
+                        {
                             "name": "QTN_QSTN_RD_GRP_CRTFCT(S)FRGSTR_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "id": 6,
                             "guid": "fa4551a2-b8a7-4901-a55c-e605141bfaf1",
@@ -532,7 +564,8 @@
                             "isRepeatable": true,
                             "isRepeated": false,
                             "responseOptions": null,
-                            "validationRules": [{
+                            "validationRules": [
+                                {
                                     "name": "require",
                                     "enabled": true,
                                     "type": "require",
@@ -547,7 +580,8 @@
                                 "responseToMatch": "false",
                                 "matchingType": "equal"
                             },
-                            "childQuestions": [{
+                            "childQuestions": [
+                                {
                                     "name": "QTN_QSTN_RD_GRP_CRTFCT(S)FRGSTR_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                                     "id": 7,
                                     "guid": "b44690a4-4005-47df-ae1f-2b084a5c67fb",
@@ -565,7 +599,8 @@
                                     "isRepeatable": true,
                                     "isRepeated": false,
                                     "responseOptions": null,
-                                    "validationRules": [{
+                                    "validationRules": [
+                                        {
                                             "name": "require",
                                             "enabled": true,
                                             "type": "require",
@@ -585,16 +620,20 @@
                                     "dependencyGroups": []
                                 }
                             ],
-                            "dependants": [{
+                            "dependants": [
+                                {
                                     "guid": "0296054b-31f9-46be-986c-c5cda075f005"
-                                }, {
+                                },
+                                {
                                     "guid": "ebf1ec5e-2b34-4586-94e1-a5b65d557a49"
                                 }
                             ],
-                            "dependencyGroups": [{
+                            "dependencyGroups": [
+                                {
                                     "ruleType": "visibility",
                                     "childValidatorName": null,
-                                    "questionDependencies": [{
+                                    "questionDependencies": [
+                                        {
                                             "dependsOnQuestion": {
                                                 "guid": "79a2f09f-18d6-4dc2-9493-688d462f43cb"
                                             },
@@ -606,7 +645,8 @@
                             ]
                         }
                     ],
-                    "dependants": [{
+                    "dependants": [
+                        {
                             "guid": "fa4551a2-b8a7-4901-a55c-e605141bfaf1"
                         }
                     ],
@@ -616,7 +656,8 @@
             "expansionPanels": [],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
-        }, {
+        },
+        {
             "title": {
                 "en": "OTHER DOCUMENTATION",
                 "fr": "DOCUMENTATION ADDITIONNELLE"
@@ -625,7 +666,8 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 2,
-            "questions": [{
+            "questions": [
+                {
                     "name": "QTN_S9001CRTFCT_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 8,
                     "guid": "892fb479-6bdf-44e0-904a-1d230e221572",
@@ -642,7 +684,8 @@
                     "samplingRecord": null,
                     "isRepeatable": true,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_S9001CRTFCT_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -667,7 +710,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_S9001CRTFCT_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -693,7 +737,8 @@
                             "selectedProvisionsTitles": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 3,
                             "name": "RSPNS_N/_QTN_S9001CRTFCT_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 3,
@@ -701,7 +746,7 @@
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
@@ -716,11 +761,12 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             }
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -735,7 +781,8 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "childQuestions": [{
+                    "childQuestions": [
+                        {
                             "name": "QTN_QSTN_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "id": 9,
                             "guid": "dd20066c-82b2-4de8-a423-b4c977e1eb07",
@@ -753,7 +800,8 @@
                             "isRepeatable": false,
                             "isRepeated": false,
                             "responseOptions": null,
-                            "validationRules": [{
+                            "validationRules": [
+                                {
                                     "name": "require",
                                     "enabled": true,
                                     "type": "require",
@@ -770,10 +818,12 @@
                             },
                             "childQuestions": [],
                             "dependants": [],
-                            "dependencyGroups": [{
+                            "dependencyGroups": [
+                                {
                                     "ruleType": "visibility",
                                     "childValidatorName": null,
-                                    "questionDependencies": [{
+                                    "questionDependencies": [
+                                        {
                                             "dependsOnQuestion": {
                                                 "guid": "892fb479-6bdf-44e0-904a-1d230e221572"
                                             },
@@ -785,12 +835,14 @@
                             ]
                         }
                     ],
-                    "dependants": [{
+                    "dependants": [
+                        {
                             "guid": "dd20066c-82b2-4de8-a423-b4c977e1eb07"
                         }
                     ],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_CRRNTVRSNFCGSB-_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 10,
                     "guid": "0850e6c1-400d-4fc2-ac4f-c343b789a68a",
@@ -807,7 +859,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_CRRNTVRSNFCGSB-_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -832,7 +885,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_CRRNTVRSNFCGSB-_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -858,7 +912,8 @@
                             "selectedProvisionsTitles": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 3,
                             "name": "RSPNS_N/_QTN_CRRNTVRSNFCGSB-_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 3,
@@ -866,7 +921,7 @@
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
@@ -881,11 +936,12 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             }
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -903,7 +959,8 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_FRCD21R31BCS–NS_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 11,
                     "guid": "97c4bf43-0818-4138-8925-d7828af3f346",
@@ -920,7 +977,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_FRCD21R31BCS–NS_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -945,7 +1003,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_FRCD21R31BCS–NS_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -971,7 +1030,8 @@
                             "selectedProvisionsTitles": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 3,
                             "name": "RSPNS_N/_QTN_FRCD21R31BCS–NS_RD_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 3,
@@ -979,7 +1039,7 @@
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
@@ -994,11 +1054,12 @@
                             },
                             "picture": {
                                 "option": "optional",
-                                "value": ""
+                                "value": []
                             }
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1016,7 +1077,8 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_STMTDNMBRFNBCSM_NBR_GRP_THRDCMNTTN_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 12,
                     "guid": "3ee99a99-d765-4e89-9f73-66829b66c417",
@@ -1038,7 +1100,8 @@
                     "isRepeatable": false,
                     "isRepeated": false,
                     "responseOptions": null,
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1058,10 +1121,11 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [4],
+            "expansionPanels": [],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
-        }, {
+        },
+        {
             "title": {
                 "en": "COMPLIANCE MARKING",
                 "fr": "INDICATION DE CONFORMITÉ"
@@ -1070,7 +1134,8 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 3,
-            "questions": [{
+            "questions": [
+                {
                     "name": "QTN_CMPLNCMRKNGSCMP_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 13,
                     "guid": "7d290d74-fb77-4f5a-b966-6225156eea35",
@@ -1087,7 +1152,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_CMPLNCMRKNGSCMP_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -1112,7 +1178,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_CMPLNCMRKNGSCMP_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -1140,7 +1207,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1158,7 +1226,8 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_CPYFCMPLNCMRKNG_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 14,
                     "guid": "1025317b-6337-4f41-b9ad-613f59c777ad",
@@ -1175,7 +1244,8 @@
                     "samplingRecord": null,
                     "isRepeatable": true,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_CPYFCMPLNCMRKNG_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -1200,7 +1270,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_CPYFCMPLNCMRKNG_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -1228,7 +1299,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1246,7 +1318,8 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_QSTN_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 15,
                     "guid": "e558ea3e-0b43-4bda-a7d8-1eb66af6411b",
@@ -1263,7 +1336,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -1288,7 +1362,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -1316,7 +1391,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1334,7 +1410,8 @@
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
-                }, {
+                },
+                {
                     "name": "QTN_THRNN-CMPLNC_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                     "id": 16,
                     "guid": "13af0dcf-0997-49a4-a90b-7916c4c32b72",
@@ -1351,7 +1428,8 @@
                     "samplingRecord": null,
                     "isRepeatable": true,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_YS_QTN_THRNN-CMPLNC_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 1,
@@ -1376,7 +1454,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_N_QTN_THRNN-CMPLNC_RD_GRP_CMPLNCMRKNG_INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002",
                             "sortOrder": 2,
@@ -1404,7 +1483,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1424,7 +1504,7 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [4],
+            "expansionPanels": [],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
         }

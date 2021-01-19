@@ -50,7 +50,11 @@ export interface Question {
 
     isRepeatable?:      boolean;
     isRepeated?:        boolean;
+
+    /** @nullable */
+    // only radio and select have resonse options...currently - TODO: every type of Question should have them
     responseOptions:    QuestionResponseOption[];
+    
     validationRules:    ValidationRule[];
     violationInfo:      ViolationInfo;
     childQuestions:     Question[];

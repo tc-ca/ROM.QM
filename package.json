@@ -13,9 +13,7 @@
     "build-storybook": "build-storybook",
     "storybook": "start-storybook -p 6006 -s public",
     "translation-check": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
-    "generate-template-schema": "typescript-json-schema src/schema/template.ts Template --out src/schema/template.json --noExtraProps --required --strictNullChecks",
-    "fixTemplate": "node src/schema/fixTemplate.mjs"
-
+    "generate-template-schema": "typescript-json-schema src/schema/template.ts Template --out src/schema/template.json --noExtraProps --required --strictNullChecks"
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
