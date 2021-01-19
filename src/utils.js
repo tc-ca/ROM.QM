@@ -6,9 +6,18 @@ export function pad (n, width, z) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
 }
 
-export function generateName (name, prefix, postfix) {
+export function generateName (name, prefix, postfix, removeVowels = true) {
   if (!name) return name
-  let cn = prefix + '_' + name.replace(/[aeiou]/ig,'').replace(/\s+/g, '').substring(0, 15).toUpperCase()
+
+  let cn = name
+  if (removeVowels) {
+    cn = name.replace(/[aeiou]/ig,'')
+  }
+
+  cn = prefix + '_' + cn.replace(/\s+/g, '').     // replace whitespaces 
+                         replace(/[^a-zA-Z]+/g, '').  // replace all non alpha characters
+                         substring(0, 15).        // take first 15 characters
+                         toUpperCase()            // to upper
   if (postfix) cn += '_' + postfix
   return cn
 }
@@ -153,5 +162,13 @@ export function setNewGUID (question) {
       setNewGUID(cq)
     })
   }
+}
+
+export function isNumber (n) { 
+  return /^-?[\d.]+(?:e-?\d+)?$/.test(n); 
+} 
+
+export function isString (obj) {
+  return toString.call(obj) == '[object String]';
 }
 

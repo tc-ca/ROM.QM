@@ -4,7 +4,8 @@
         "en": "DesignAndManufacture",
         "fr": "DesignAndManufacture"
     },
-    "groups": [{
+    "groups": [
+        {
             "primaryKey": "address on application and certificate",
             "title": {
                 "en": "Address on application or certificate",
@@ -13,8 +14,9 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 0,
-            "questions": [{
-                    "name": "If initial inspection,does physical address matches address on application for registration",
+            "questions": [
+                {
+                    "name": "QTN_FNTLNSPCTNDSPHY",
                     "id": 1,
                     "sortOrder": 1,
                     "isVisible": true,
@@ -25,7 +27,8 @@
                     },
                     "type": "radio",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -36,8 +39,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_FNTLNSPCTNDSPHY"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -48,22 +65,50 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_FNTLNSPCTNDSPHY"
+                        },
+                        {
                             "id": 3,
                             "sortOrder": 3,
                             "text": {
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_FNTLNSPCTNDSPHY"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -78,23 +123,13 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": []
-                }, {
-                    "name": "If verification inspection, does physical address matches address on Certificate of Registration?",
+                    "dependencyGroups": [],
+                    "guid": "1ba60a1c-b948-4f17-8c3c-abd40101d1b8"
+                },
+                {
+                    "name": "QTN_FVRFCTNNSPCTNDS",
                     "id": 2,
                     "sortOrder": 2,
                     "isVisible": true,
@@ -105,7 +140,8 @@
                     },
                     "type": "radio",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -116,8 +152,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_FVRFCTNNSPCTNDS"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -125,25 +175,55 @@
                                 "fr": "Non"
                             },
                             "value": "false",
-                            "provisions": ["d1db82e4-663b-422c-bacd-94880c994348"],
+                            "provisions": [
+                                "d1db82e4-663b-422c-bacd-94880c994348"
+                            ],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_FVRFCTNNSPCTNDS"
+                        },
+                        {
                             "id": 3,
                             "sortOrder": 3,
                             "text": {
                                 "en": "N/A",
                                 "fr": "S.0."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": true
+                            "isProvisionCollapsed": true,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_FVRFCTNNSPCTNDS"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -158,27 +238,17 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": []
+                    "dependencyGroups": [],
+                    "guid": "52cc8348-1d07-41ea-94b7-854eb357ac0f"
                 }
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually",
             "expansionPanels": []
-        }, {
+        },
+        {
             "primaryKey": "Certificate(s) of Registration - Certificats d'inscription",
             "title": {
                 "en": "Certificate(s) of Registration ",
@@ -187,8 +257,9 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 1,
-            "questions": [{
-                    "name": "Certificate of Registration?",
+            "questions": [
+                {
+                    "name": "QTN_CRTFCTFRGSTRTN",
                     "id": 3,
                     "sortOrder": 3,
                     "isVisible": true,
@@ -199,7 +270,8 @@
                     },
                     "type": "radio",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -210,8 +282,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": true
-                        }, {
+                            "isProvisionCollapsed": true,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_CRTFCTFRGSTRTN"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -222,22 +308,50 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_CRTFCTFRGSTRTN"
+                        },
+                        {
                             "id": 3,
                             "sortOrder": 3,
                             "text": {
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_CRTFCTFRGSTRTN"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -252,20 +366,9 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "childQuestions": [{
-                            "name": "certificate Number",
+                    "childQuestions": [
+                        {
+                            "name": "QTN_CRTFCTNMBR",
                             "id": 4,
                             "sortOrder": 1,
                             "isVisible": true,
@@ -276,7 +379,8 @@
                             },
                             "type": "text",
                             "response": null,
-                            "responseOptions": [{
+                            "responseOptions": [
+                                {
                                     "id": 1,
                                     "sortOrder": 1,
                                     "text": {
@@ -287,8 +391,22 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "searchProvisions": null,
-                                    "isProvisionCollapsed": false
-                                }, {
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_YES_QTN_CRTFCTNMBR"
+                                },
+                                {
                                     "id": 2,
                                     "sortOrder": 2,
                                     "text": {
@@ -299,10 +417,24 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "searchProvisions": null,
-                                    "isProvisionCollapsed": false
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_NO_QTN_CRTFCTNMBR"
                                 }
                             ],
-                            "validationRules": [{
+                            "validationRules": [
+                                {
                                     "name": "require",
                                     "enabled": true,
                                     "type": "require",
@@ -317,20 +449,9 @@
                                 "responseToMatch": "false",
                                 "matchingType": "equal"
                             },
-                            "internalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "picture": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "childQuestions": [{
-                                    "name": "Expiry Date",
+                            "childQuestions": [
+                                {
+                                    "name": "QTN_XPRYDT",
                                     "id": 5,
                                     "sortOrder": 1,
                                     "isVisible": true,
@@ -341,7 +462,8 @@
                                     },
                                     "type": "text",
                                     "response": null,
-                                    "responseOptions": [{
+                                    "responseOptions": [
+                                        {
                                             "id": 1,
                                             "sortOrder": 1,
                                             "text": {
@@ -352,8 +474,22 @@
                                             "provisions": [],
                                             "selectedProvisions": [],
                                             "searchProvisions": null,
-                                            "isProvisionCollapsed": false
-                                        }, {
+                                            "isProvisionCollapsed": false,
+                                            "internalComment": {
+                                                "option": "optional",
+                                                "value": ""
+                                            },
+                                            "externalComment": {
+                                                "option": "optional",
+                                                "value": ""
+                                            },
+                                            "picture": {
+                                                "option": "optional",
+                                                "value": []
+                                            },
+                                            "name": "RSPNS_YES_QTN_XPRYDT"
+                                        },
+                                        {
                                             "id": 2,
                                             "sortOrder": 2,
                                             "text": {
@@ -364,10 +500,24 @@
                                             "provisions": [],
                                             "selectedProvisions": [],
                                             "searchProvisions": null,
-                                            "isProvisionCollapsed": false
+                                            "isProvisionCollapsed": false,
+                                            "internalComment": {
+                                                "option": "optional",
+                                                "value": ""
+                                            },
+                                            "externalComment": {
+                                                "option": "optional",
+                                                "value": ""
+                                            },
+                                            "picture": {
+                                                "option": "optional",
+                                                "value": []
+                                            },
+                                            "name": "RSPNS_NO_QTN_XPRYDT"
                                         }
                                     ],
-                                    "validationRules": [{
+                                    "validationRules": [
+                                        {
                                             "name": "require",
                                             "enabled": true,
                                             "type": "require",
@@ -382,39 +532,32 @@
                                         "responseToMatch": "false",
                                         "matchingType": "equal"
                                     },
-                                    "internalComment": {
-                                        "option": "optional",
-                                        "value": ""
-                                    },
-                                    "externalComment": {
-                                        "option": "optional",
-                                        "value": ""
-                                    },
-                                    "picture": {
-                                        "option": "optional",
-                                        "value": ""
-                                    },
                                     "childQuestions": [],
                                     "dependants": [],
-                                    "dependencyGroups": []
+                                    "dependencyGroups": [],
+                                    "guid": "8537111f-bdf6-4fc8-95ba-0ffe1c7eb9af"
                                 }
                             ],
                             "dependants": [],
-                            "dependencyGroups": []
+                            "dependencyGroups": [],
+                            "guid": "05b1a2a3-d405-4ff2-bdee-7ab9a94806cb"
                         }
                     ],
                     "dependants": [],
-                    "dependencyGroups": [{
+                    "dependencyGroups": [
+                        {
                             "ruleType": "visibility",
                             "childValidatorName": null,
                             "questionDependencies": []
                         }
-                    ]
+                    ],
+                    "guid": "35d6e612-b2e9-4313-b878-caf142fcb42e"
                 }
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
-        }, {
+        },
+        {
             "primaryKey": "Other Documentation-Documentation additionnelle",
             "title": {
                 "en": "Other Documentation",
@@ -423,8 +566,9 @@
             "isRepeatable": true,
             "isVisible": true,
             "order": 2,
-            "questions": [{
-                    "name": "ISO 9001 Certificate",
+            "questions": [
+                {
+                    "name": "QTN_SCRTFCTNMBR",
                     "id": 6,
                     "sortOrder": 6,
                     "isVisible": true,
@@ -435,7 +579,8 @@
                     },
                     "type": "text",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -446,8 +591,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_SCRTFCTNMBR"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -458,10 +617,24 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_SCRTFCTNMBR"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -476,20 +649,9 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "childQuestions": [{
-                            "name": "Expiry Date",
+                    "childQuestions": [
+                        {
+                            "name": "QTN_XPRYDT",
                             "id": 7,
                             "sortOrder": 1,
                             "isVisible": true,
@@ -500,7 +662,8 @@
                             },
                             "type": "text",
                             "response": null,
-                            "responseOptions": [{
+                            "responseOptions": [
+                                {
                                     "id": 1,
                                     "sortOrder": 1,
                                     "text": {
@@ -511,8 +674,22 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "searchProvisions": null,
-                                    "isProvisionCollapsed": false
-                                }, {
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_YES_QTN_XPRYDT"
+                                },
+                                {
                                     "id": 2,
                                     "sortOrder": 2,
                                     "text": {
@@ -523,10 +700,24 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "searchProvisions": null,
-                                    "isProvisionCollapsed": false
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_NO_QTN_XPRYDT"
                                 }
                             ],
-                            "validationRules": [{
+                            "validationRules": [
+                                {
                                     "name": "require",
                                     "enabled": true,
                                     "type": "require",
@@ -541,27 +732,18 @@
                                 "responseToMatch": "false",
                                 "matchingType": "equal"
                             },
-                            "internalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "picture": {
-                                "option": "optional",
-                                "value": ""
-                            },
                             "childQuestions": [],
                             "dependants": [],
-                            "dependencyGroups": []
+                            "dependencyGroups": [],
+                            "guid": "55a58111-b314-4927-8478-66884d099fc9"
                         }
                     ],
                     "dependants": [],
-                    "dependencyGroups": []
-                }, {
-                    "name": "Current version of TP14850",
+                    "dependencyGroups": [],
+                    "guid": "f2dbf461-ef84-4330-b513-2630fc5d57da"
+                },
+                {
+                    "name": "QTN_CRRNTVRSNFTP",
                     "id": 8,
                     "sortOrder": 7,
                     "isVisible": true,
@@ -572,7 +754,8 @@
                     },
                     "type": "radio",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -583,8 +766,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_CRRNTVRSNFTP"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -595,22 +792,50 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_CRRNTVRSNFTP"
+                        },
+                        {
                             "id": 3,
                             "sortOrder": 3,
                             "text": {
                                 "en": "N/A",
                                 "fr": "S.O."
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_CRRNTVRSNFTP"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -625,23 +850,13 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": []
-                }, {
-                    "name": "Question 9",
+                    "dependencyGroups": [],
+                    "guid": "7ef61bd5-3994-44e2-a237-510bc9076153"
+                },
+                {
+                    "name": "QTN_NSTRMNTCLBRTNRC",
                     "id": 9,
                     "sortOrder": 8,
                     "isVisible": true,
@@ -652,7 +867,8 @@
                     },
                     "type": "radio",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -663,8 +879,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_NSTRMNTCLBRTNRC"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -675,22 +905,50 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_NSTRMNTCLBRTNRC"
+                        },
+                        {
                             "id": 3,
                             "sortOrder": 3,
                             "text": {
                                 "en": "N/A",
                                 "fr": "N/A"
                             },
-                            "value": 3,
+                            "value": "3",
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_NSTRMNTCLBRTNRC"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -705,23 +963,13 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": []
-                }, {
-                    "name": "Estimate of MOC",
+                    "dependencyGroups": [],
+                    "guid": "4ecd1f75-1c49-4118-90ba-f3db2ff2e31d"
+                },
+                {
+                    "name": "QTN_STMTDNMBRFNSMLL",
                     "id": 10,
                     "sortOrder": 9,
                     "isVisible": true,
@@ -732,7 +980,8 @@
                     },
                     "type": "number",
                     "response": null,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "sortOrder": 1,
                             "text": {
@@ -743,8 +992,22 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
-                        }, {
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_STMTDNMBRFNSMLL"
+                        },
+                        {
                             "id": 2,
                             "sortOrder": 2,
                             "text": {
@@ -755,10 +1018,24 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_STMTDNMBRFNSMLL"
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -773,20 +1050,9 @@
                         "responseToMatch": "false",
                         "matchingType": "equal"
                     },
-                    "internalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "externalComment": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "picture": {
-                        "option": "optional",
-                        "value": ""
-                    },
-                    "childQuestions": [{
-                            "name": "Question 11",
+                    "childQuestions": [
+                        {
+                            "name": "QTN_PRMNTH",
                             "id": 11,
                             "sortOrder": 1,
                             "isVisible": true,
@@ -797,7 +1063,8 @@
                             },
                             "type": "number",
                             "response": null,
-                            "responseOptions": [{
+                            "responseOptions": [
+                                {
                                     "id": 1,
                                     "sortOrder": 1,
                                     "text": {
@@ -808,8 +1075,22 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "searchProvisions": null,
-                                    "isProvisionCollapsed": false
-                                }, {
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_YES_QTN_PRMNTH"
+                                },
+                                {
                                     "id": 2,
                                     "sortOrder": 2,
                                     "text": {
@@ -820,10 +1101,24 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "searchProvisions": null,
-                                    "isProvisionCollapsed": false
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_NO_QTN_PRMNTH"
                                 }
                             ],
-                            "validationRules": [{
+                            "validationRules": [
+                                {
                                     "name": "require",
                                     "enabled": true,
                                     "type": "require",
@@ -838,26 +1133,17 @@
                                 "responseToMatch": "false",
                                 "matchingType": "equal"
                             },
-                            "internalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "picture": {
-                                "option": "optional",
-                                "value": ""
-                            },
                             "childQuestions": [],
                             "dependants": [],
-                            "dependencyGroups": []
+                            "dependencyGroups": [],
+                            "guid": "b5e5bc1f-48c6-4cdd-a7ad-d63616b6f73a"
                         }
                     ],
                     "dependants": [],
-                    "dependencyGroups": []
-                }, {
+                    "dependencyGroups": [],
+                    "guid": "e2423a37-a487-46dd-b783-727f1e346041"
+                },
+                {
                     "name": "QTN_QSTN_RD_Other Documentation-Documentation additionnelle",
                     "id": 12,
                     "guid": "fcaa5223-c11d-43bc-9699-1f9d01cc7116",
@@ -874,7 +1160,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_Other Documentation-Documentation additionnelle",
                             "sortOrder": 1,
@@ -899,7 +1186,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_RSPNSN_QTN_QSTN_RD_Other Documentation-Documentation additionnelle",
                             "sortOrder": 2,
@@ -927,7 +1215,8 @@
                             "isProvisionCollapsed": false
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -949,8 +1238,11 @@
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually",
-            "expansionPanels": [5]
-        }, {
+            "expansionPanels": [
+                5
+            ]
+        },
+        {
             "title": {
                 "en": "New Group",
                 "fr": "Fr: New Group"
@@ -959,7 +1251,8 @@
             "isRepeatable": false,
             "isVisible": true,
             "order": 3,
-            "questions": [{
+            "questions": [
+                {
                     "name": "QTN_QSTN_RD_GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
                     "id": 13,
                     "guid": "402bf1c8-a554-4a53-b325-0a8b7453b099",
@@ -976,7 +1269,8 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [{
+                    "responseOptions": [
+                        {
                             "id": 1,
                             "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
                             "sortOrder": 1,
@@ -1001,7 +1295,8 @@
                             "selectedProvisions": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": false
-                        }, {
+                        },
+                        {
                             "id": 2,
                             "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_NWGRP_Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
                             "sortOrder": 2,
@@ -1022,14 +1317,35 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": ["145b6d54-bd3e-4dd6-a201-1fc252ea7689", "9241a2ae-1c61-4753-805a-be0707f41622", "77758039-206f-476d-84d9-549c571f269e", "7b298d1f-da3e-408c-a705-2558886a9b9d", "41b78728-24c2-4a6d-94b3-87b8dc72d677", "5b475ff2-d3ab-4de9-9eb6-33ae688efeca", "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab", "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b", "792fda3c-0696-4e90-9655-a0bb810f7b33", "7ed9ef36-aa07-4824-91e6-b119bc46a672", "e311574a-8bac-4b5b-b092-a31182accab5", "bec23597-02d7-4422-a3db-f41e7c57d47f", "6473a679-7c58-412d-b0c2-b1678faa53e2", "b11288f8-e99e-4071-b829-8684947f3421", "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1", "8b9e1c85-7365-4306-9c70-269bf841484b", "1863dfe1-a4e4-4d49-abbf-12be48e482d7", "fd9c4294-78ab-47ac-b252-808577cdfdf3", "488db8ca-3022-456e-9df9-f21d2ba63791"],
+                            "provisions": [
+                                "145b6d54-bd3e-4dd6-a201-1fc252ea7689",
+                                "9241a2ae-1c61-4753-805a-be0707f41622",
+                                "77758039-206f-476d-84d9-549c571f269e",
+                                "7b298d1f-da3e-408c-a705-2558886a9b9d",
+                                "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+                                "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+                                "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+                                "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+                                "792fda3c-0696-4e90-9655-a0bb810f7b33",
+                                "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+                                "e311574a-8bac-4b5b-b092-a31182accab5",
+                                "bec23597-02d7-4422-a3db-f41e7c57d47f",
+                                "6473a679-7c58-412d-b0c2-b1678faa53e2",
+                                "b11288f8-e99e-4071-b829-8684947f3421",
+                                "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+                                "8b9e1c85-7365-4306-9c70-269bf841484b",
+                                "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+                                "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+                                "488db8ca-3022-456e-9df9-f21d2ba63791"
+                            ],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
                             "searchProvisions": null,
                             "isProvisionCollapsed": true
                         }
                     ],
-                    "validationRules": [{
+                    "validationRules": [
+                        {
                             "name": "require",
                             "enabled": true,
                             "type": "require",
@@ -1049,7 +1365,9 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [1],
+            "expansionPanels": [
+                1
+            ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
         }

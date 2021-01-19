@@ -104,7 +104,6 @@ function flattenQuestions (groups) {
 // }
 
 describe('Template Data Validation Against TypeScript Schema', () => {
-
   it('all group id and question ids should be different', () => {
     var groupKey = 'primaryKey'
     var questionKey = 'id'

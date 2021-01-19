@@ -98,6 +98,16 @@
                 <span>{{ $t('app.builder.save') }}</span>
               </v-btn>
             </v-col>
+            <v-col class="col-auto">
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="fixit()"
+              >
+                <span>{{ $t('app.builder.fix') }}</span>
+              </v-btn>
+            </v-col>
           </v-row>
           <v-row>
             <!-- <v-col>
@@ -991,6 +1001,9 @@ export default {
       // console.log(JSON.stringify(this.questionnaire))
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+    },
+    fixit () {
+      BuilderService.fixTemplate(this.questionnaire)
     },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))

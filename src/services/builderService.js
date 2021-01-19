@@ -2,7 +2,7 @@ import _ from "lodash";
 import { LANGUAGE } from '../constants.js';
 import { QUESTION_TYPE } from "../data/questionTypes.js";
 import { v4 as uuidv4 } from 'uuid';
-import { generateName } from '../utils'
+import { generateName, isString } from '../utils'
 
 /* eslint-disable no-undef */
 
@@ -348,6 +348,171 @@ async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeatur
   }
 }
 
+/**
+ * Will find you all instances of the unique values (key) that are not unique 
+ * @param {Questionnaire Object - can be a Group, Question or Response} qObject 
+ * @param {What is the property name of the field used for uniqueness for this type of object} key 
+ */
+function FindNonUniqueIds (qObject, key) {
+  var uniqueIds = []
+  var issues = []
+  var index = 0
+
+  qObject.forEach(element => {
+    if (!uniqueIds.includes(element[key])) {
+      uniqueIds.push(element[key])
+    } else {
+      issues.push(`item ${index} has id ${element[key]} which is not unique`)
+    }
+    index++
+  })
+
+  if (issues.length > 0) {
+    console.log(issues)
+  }
+
+  return issues
+}
+
+/**
+ * will recursively flatten a list of Questions
+ * @param {Array of Questions} qs 
+ */
+function flatten (qs) {
+  var ret = []
+
+  for (var i = 0; i < qs.length; i++) {
+    let q = qs[i]
+
+    if (q.childQuestions.length > 0) {
+      ret = ret.concat(flatten(q.childQuestions))
+    }
+
+    ret.push(q)
+  }
+  return ret
+}
+
+/**
+ * Will return you a flattened list of all Questions for all items in the array
+ * @param {An Array of Groups} groups 
+ */
+function flattenQuestions (groups) {
+  var flattenedQuestions = []
+  groups.forEach(group => {
+    var qs = flatten(group.questions)
+    flattenedQuestions = flattenedQuestions.concat(qs)
+  })
+  return flattenedQuestions.sort((a, b) => (a.id > b.id) ? 1 : (b.id > a.id) ? -1 : 0)
+}
+
+/**
+ * Will attempt to make old Templates compatible with the current structure of Templates 
+ * @param {An Array of Groups} groups 
+ */
+function fixTemplate (template) {
+
+  var groups = template.groups
+  var flattenedQuestions = flattenQuestions(groups)
+
+  var qIndex;
+  var rIndex;
+  var response;
+
+  for (qIndex = 0; qIndex < flattenedQuestions.length; qIndex++) {
+    const q = flattenedQuestions[qIndex]
+
+    /**
+    * Will assign a unique guid to all Questions in all items within 
+    * the Array of Groups that do not already have one assigned to them 
+    */
+    if (!q.guid) {
+      q.guid = uuidv4()
+    }
+
+    /**
+     * re-generate question name based on its english name if it's not in our new format
+     */
+    if (!q.name || !q.name.includes('QTN')) {
+      q.name = generateName(q.text[LANGUAGE.ENGLISH], 'QTN', '')
+    }
+
+    /**
+     * move the internal comment property from the question to the responses of this question
+     */
+    if (q.internalComment) {
+      for (rIndex = 0; rIndex < q.responseOptions.length; rIndex++) {
+        response = q.responseOptions[rIndex];
+        response.internalComment = q.internalComment
+      }
+
+      delete q.internalComment
+    }
+
+    /**
+     * move the external comment property from the question to the responses of this question
+     */
+    if (q.externalComment) {
+      for (rIndex = 0; rIndex < q.responseOptions.length; rIndex++) {
+        response = q.responseOptions[rIndex];
+        response.externalComment = q.externalComment
+      }
+
+      delete q.externalComment
+    }
+
+    /**
+     * move the picture property from the question to the responses of this question
+     */
+    if (q.picture) {
+      for (rIndex = 0; rIndex < q.responseOptions.length; rIndex++) {
+        response = q.responseOptions[rIndex];
+        response.picture = q.picture
+      }
+
+      delete q.picture
+    }
+
+
+
+    /**
+     * Fix Question Responses
+     */
+    for (rIndex = 0; rIndex < q.responseOptions.length; rIndex++) {
+      response = q.responseOptions[rIndex];
+
+      /**
+       * pictures should be an array of strings, not a single string
+       */
+      if (response.picture.value === '') {
+        response.picture = {
+          "option": "optional",
+          "value": []
+        }
+      }
+
+
+      /**
+       * response values must be of type String and not number or anything else
+       * TODO: always though? maybe we revisit this in schema
+       */
+      if (!isString(response.value)) {
+        response.value = String(response.value)
+      }
+
+
+    /**
+     * generate response names for responses that do not have them
+     */
+      if (!response.name || !response.name.includes('RSPNS')){
+        response.name = generateName(response.text[LANGUAGE.ENGLISH], 'RSPNS', q.name, false)
+      }
+    }
+
+
+
+  }
+}
 
 export default {
   createGroup,
@@ -364,5 +529,8 @@ export default {
   findGroupForQuestionById,
   getNextQuestionId,
   GetMockQuestionnaireFromImportModule,
-  processBuilderForSave
+  processBuilderForSave,
+  FindNonUniqueIds,
+  flattenQuestions,
+  fixTemplate
 };
