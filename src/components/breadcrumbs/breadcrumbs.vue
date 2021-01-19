@@ -60,10 +60,15 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .actionLink:hover {
   color: crimson;
   cursor:pointer;
   /* text-decoration: underline; */
+}
+.v-treeview--dense .v-treeview-node__root {
+  overflow: auto;
+  min-height: 1px !important;
 }
 </style>
