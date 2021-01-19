@@ -639,7 +639,7 @@ export default {
 
           orgOption.internalComment.value = ''
           orgOption.externalComment.value = ''
-          orgOption.picture.value = ''
+          orgOption.picture.value = []
         }
       }
     },
