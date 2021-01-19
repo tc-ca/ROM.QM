@@ -36,6 +36,27 @@
         class="pt-2"
         justify-end
       >
+        <div v-if="question.isRepeated">
+          <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                :disabled="readOnly"
+                v-on="on"
+              >
+                <v-icon
+                  normal
+                  color="primary"
+                >
+                  mdi-arrange-send-backward
+                </v-icon>
+                <span>{{ $t('app.questionnaire.group.question.repeatable.copyNo') + ' ' + calculateRepeatedNumber() }}</span>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatedQuestion') }}</span>
+          </v-tooltip>
+        </div>
         <v-spacer />
         <div v-if="question.isSamplingAllowed">
           <v-tooltip left>
@@ -73,7 +94,7 @@
                   normal
                   color="primary"
                 >
-                  mdi-book-plus-outline
+                  mdi-plus-thick
                 </v-icon>
               </v-btn>
             </template>
@@ -95,7 +116,7 @@
                   normal
                   color="primary"
                 >
-                  mdi-book-minus-outline
+                  mdi-minus-thick
                 </v-icon>
               </v-btn>
             </template>
@@ -281,7 +302,8 @@ export default {
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
       isViolationInfoReferenceIdDisabled: false,
-      displaySamplingRecord: false
+      displaySamplingRecord: false,
+      responseArgs: null
     }
   },
   computed: {
@@ -299,8 +321,12 @@ export default {
       }
     }),
     questionText () {
-      // return `${this.index + 1}. ${this.question.text[this.lang]}`
-      return `${this.question.text[this.lang]}`
+      let text = ''
+      if (this.question.isRepeated) {
+        text = `(Copy ${this.calculateRepeatedNumber()}) `
+      }
+      text += `${this.question.text[this.lang]}`
+      return text
     },
     getClassName () {
       let c = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
@@ -314,6 +340,11 @@ export default {
       if (this.question.isReferenceQuestion) return false
       if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
       return false
+    },
+    isLegislationsDataAvailable () {
+      if (this.$store.state.legislations.legislations === null) { return false }
+      if (this.$store.state.legislations.dataStructure !== 'flat') { return false }
+      return true
     },
     expansionPanelsValue: {
       get () {
@@ -386,11 +417,53 @@ export default {
     }
   },
   mounted () {
+    // keep this code on top of mounted method
+    // so we can subscribe to mutation within this method
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case 'setFlatLegislations':
+          // in theory this only should/need  be run once when legislations is finally loaded into the store (async method, data takes few seconds)
+          // now safe to run methods dependant on legislations
+          if (this.responseArgs !== null) {
+            // running this method will initialize the selected responses
+            this.onUserResponseChanged(this.responseArgs)
+          }
+          break
+        default:
+          break
+      }
+    })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
     this.updateReferenceID()
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    calculateRepeatedNumber () {
+      let text = ''
+      if (this.question.isRepeated) {
+        let questionnaire = this.$store.getters['getQuestionnaire']
+        if (questionnaire !== null) {
+          let group = BuilderService.findGroupForQuestionById(questionnaire.groups, this.question.guid)
+          let questionIdx = group.questions.findIndex(q => q.guid === this.question.guid)
+          if (questionIdx > 0) {
+            let count = 0
+            for (let x = questionIdx - 1; x >= 0; x--) {
+              if (group.questions[x].isRepeated && !group.questions[x].isRepeatable) {
+                count++
+              } else if (group.questions[x].isRepeatable && !group.questions[x].isRepeated) {
+                count++
+              } else {
+                x = -1
+              }
+            }
+            if (count > 0) {
+              text = count.toString()
+            }
+          }
+        }
+      }
+      return text
+    },
     repeatQuestion ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion && this.question.isRepeatable) {
@@ -535,6 +608,11 @@ export default {
       // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
+      // store the response in data property for reference use
+      this.responseArgs = args
+      // the below code is dependant legislatons data loaded (retrieval time may delay
+      // the process and therefore be empty when this method is executing)
+      if (!this.isLegislationsDataAvailable) { return }
       this.updateViolationInfo(args)
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
@@ -561,7 +639,7 @@ export default {
 
           orgOption.internalComment.value = ''
           orgOption.externalComment.value = ''
-          orgOption.picture.value = ''
+          orgOption.picture.value = []
         }
       }
     },

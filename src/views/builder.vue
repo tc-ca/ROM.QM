@@ -134,6 +134,13 @@
                 v-model="selectedGroup.title[fr]"
                 label="Group text Fr"
               />
+              <v-text-field
+                v-model="selectedGroup.order"
+                dense
+                type="number"
+                label="Group order"
+                @change="sortGroups(selectedGroup)"
+              />
               <v-checkbox
                 v-model="selectedGroup.isVisible"
                 :label="'Is Visible'"
@@ -763,7 +770,7 @@ export default {
           this.questions = this.getFlatListOfAllQuestions
           this.$store.dispatch('objectstate/UpdateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
-        case 'SetLegislations':
+        case 'setTreeLegislations':
           this.provisions = this.$store.state.legislations.legislations
           break
         default:
@@ -1061,6 +1068,9 @@ export default {
           break
         }
       }
+    },
+    sortGroups (group) {
+      this.questionnaire.groups.sort((a, b) => a.order - b.order)
     },
     sortQuestions (question) {
       question.sortOrder = +question.sortOrder
