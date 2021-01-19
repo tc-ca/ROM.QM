@@ -4,14 +4,14 @@
 // import Group from '../../src/components/questionnaire/group/group.vue'
 import Ajv from 'ajv'
 import templateSchema from '../../src/schema/template.json'
-import templateData from '../../public/static/fullFeaturedTemplate.json'
-import CombinationPackagingData from '../../public/static/CombinationPackaging.json'
-import DesignAndManufacture from '../../public/static/DesignAndManufacture.json'
-import HighwayTanks from '../../public/static/HighwayTanks.json'
-import IBC from '../../public/static/IBC.json'
-import ItermediateBulk from '../../public/static/ItermediateBulk.json'
-import SelectionOfViolations from '../../public/static/SelectionOfViolations.json'
-import Beta2Testing from '../../public/static/beta2Testing.json'
+import templateData from '../../public/static/templates/fullFeaturedTemplate.json'
+import CombinationPackagingData from '../../public/static/templates/CombinationPackaging.json'
+import DesignAndManufacture from '../../public/static/templates/DesignAndManufacture.json'
+import HighwayTanks from '../../public/static/templates/HighwayTanks.json'
+import IBC from '../../public/static/templates/IBC.json'
+import ItermediateBulk from '../../public/static/templates/ItermediateBulk.json'
+import SelectionOfViolations from '../../public/static/templates/SelectionOfViolations.json'
+import Beta2Testing from '../../public/static/templates/beta2Testing.json'
 
 // const vuetify = new Vuetify()
 // const localVue = createLocalVue()
@@ -223,15 +223,11 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(badData.name).toEqual('badData')
     }
 
-    console.log(validate.errors)
-
     expect(validate.errors).not.toEqual(null)
 
     if (!ajv.validate(templateSchema, badData)) {
       expect(badData.name).toEqual('badData')
     }
-
-    console.log(validate.errors)
 
     expect(validate.errors).not.toEqual(null)
   })
