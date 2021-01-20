@@ -105,7 +105,7 @@
         :display="drawer"
         :navitems="navItems"
         @question:click="onQuestionClick"
-        @navigation-close="drawer = flag"
+        @navigation-close="drawer = $event"
       />
     </div>
     <div v-show="!isVisible">
@@ -304,6 +304,7 @@ export default {
       this.$store.commit('errors/updateErrorNotification', n.qguid)
     },
     onQuestionClick (q) {
+      if (q.guid === undefined) return
       this.expand = true
       this.drawer = false
       let index = this.group.groups.filter(g => g.questions.some(item => item.guid === q.guid))[0].order
