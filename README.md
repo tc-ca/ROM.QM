@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-[![Build Status](https://dev.azure.com/transport-canada/Inspection%20Solution%20Architecture%20WG/_apis/build/status/QM/QM.BUILD?branchName=development)](https://dev.azure.com/transport-canada/Inspection%20Solution%20Architecture%20WG/_build/latest?definitionId=409&branchName=development)
+https://dev.azure.com/transport-canada/Inspection%20Solution%20Architecture%20WG/_apis/build/status/QM/QM.BUILD?branchName=development
 
 # Introduction
 
