@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="display"
+    v-model="isVisible"
     :width="280"
     absolute
     temporary
@@ -46,7 +46,8 @@ export default {
   props: {
     display: {
       type: Boolean,
-      default: false
+      default: false,
+      required: true
     },
     navitems: {
       type: Array,
@@ -55,7 +56,15 @@ export default {
   },
   data () {
     return {
-      items: []
+      drawer: null
+    }
+  },
+  computed: {
+    isVisible: {
+      get () { return this.display },
+      set (value) {
+        if (!value) this.$emit('navigation-close', value)
+      }
     }
   }
 }

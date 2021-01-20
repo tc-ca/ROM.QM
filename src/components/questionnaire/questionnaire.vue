@@ -8,13 +8,6 @@
           justify="space-around"
         >
           <v-btn
-            color="pink"
-            dark
-            @click="createData()"
-          >
-            Toggle
-          </v-btn>
-          <v-btn
             color="primary"
             elevation="2"
             medium
@@ -112,6 +105,7 @@
         :display="drawer"
         :navitems="navItems"
         @question:click="onQuestionClick"
+        @navigation-close="drawer = flag"
       />
     </div>
     <div v-show="!isVisible">
@@ -146,6 +140,18 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+    </div>
+    <div
+      v-if="!drawer"
+      class="center"
+    >
+      <v-btn
+        color="pink"
+        dark
+        @click="createData()"
+      >
+        Navigation
+      </v-btn>
     </div>
   </div>
 </template>
@@ -256,6 +262,7 @@ export default {
         items[index].id = g.primaryKey
         items[index].name = g.title.en
       })
+      this.$vuetify.goTo(0)
       this.navItems = this.rename(items, 'questions', 'children')
       this.drawer = true
     },
@@ -390,5 +397,46 @@ export default {
   .v-expansion-panel {
     max-width: 800px;
   }
+}
+
+.center {
+  position: fixed;
+  top: 50%;
+  left: -4%;
+  width: 115px;
+  height: 0px;
+  text-align:right;
+  z-index:9999;
+  margin-top:-15px;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.center v-btn {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  background: #06c;
+  text-align:center;
+  height: 15px;
+  width: 165px;
+  padding: 8px 16px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: solid 1px #333;
+  border-left: solid 1px #333;
+  border-right: solid 1px #fff;
+}
+
+.center a:hover {
+  background: #CCC
 }
 </style>

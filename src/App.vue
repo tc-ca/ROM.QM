@@ -66,9 +66,6 @@
         Load local data: {{ loadLocalData }}
       </div>
     </div>
-    <!-- <div class="center">
-      <a href="#">Navigation</a>
-    </div> -->
     <div>
       <v-btn
         v-show="fab"
@@ -258,41 +255,4 @@ export default {
 .btnTop i:hover{
   transform: scale(1.80);
 }
-/*
-.center{
-  position: fixed;
-  top: 50%;
-  right: 0px;
-  width: 115px;
-  height: 0px;
-  text-align:right;
-  z-index:9999;
-    margin-top:-15px;
-}
-
-.center a{
-transform: rotate(-90deg);
--webkit-transform: rotate(-90deg);
--moz-transform: rotate(-90deg);
--o-transform: rotate(-90deg);
-filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-                display: block;
-                background: #06c;
-               text-align:center;
-                height: 15px;
-                width: 165px;
-                padding: 8px 16px;
-                color: #fff;
-                font-family: Arial, sans-serif;
-                font-size: 17px;
-                font-weight: bold;
-                text-decoration: none;
-                border-bottom: solid 1px #333;
-                border-left: solid 1px #333;
-                border-right: solid 1px #fff;
-}
-
-.center a:hover {
-background: #CCC
-} */
 </style>
