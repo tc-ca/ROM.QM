@@ -36,6 +36,7 @@
         class="pt-2"
         justify-end
       >
+        <!-- Please do NOT delete this, we are keeping it just in casse the users wants it back
         <div v-if="question.isRepeated">
           <v-tooltip left>
             <template v-slot:activator="{ on, attrs }">
@@ -57,6 +58,7 @@
             <span>{{ $t('app.questionnaire.group.question.repeatable.repeatedQuestion') }}</span>
           </v-tooltip>
         </div>
+        -->
         <v-spacer />
         <div v-if="question.isSamplingAllowed">
           <v-tooltip left>
@@ -323,7 +325,7 @@ export default {
     questionText () {
       let text = ''
       if (this.question.isRepeated) {
-        text = `(Copy ${this.calculateRepeatedNumber()}) `
+        text = `(Copy # ${this.calculateRepeatedNumber()}) `
       }
       text += `${this.question.text[this.lang]}`
       return text
