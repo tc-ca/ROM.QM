@@ -132,7 +132,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(templateData.name).toEqual('Full Featured Template')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
 
@@ -141,7 +143,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(templateData.name).toEqual('Full Featured Template')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(ajv.errors).toEqual(null)
   })
@@ -151,7 +155,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(CombinationPackagingData.name).toEqual('Combination packaging (4g) Design and Manufacture for the Transportation of Dangerous Goods pursuant to Part 1 of tp14850')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })
@@ -161,7 +167,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(DesignAndManufacture.name).toEqual('Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })
@@ -171,7 +179,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(HighwayTanks.name).toEqual('Highway Tanks - TC 406 and TC 406 Crude')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })
@@ -181,7 +191,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(IBC.name).toEqual('IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })
@@ -191,7 +203,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(ItermediateBulk.name).toEqual('INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })
@@ -201,7 +215,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(SelectionOfViolations.name).toEqual('selection of Violations')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })
@@ -211,7 +227,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
       expect(Beta2Testing.name).toEqual('certificate (equivalency, temporary or emergency).')
     }
 
-    console.log(validate.errors)
+    if (validate.errors > 0) {
+      console.log(validate.errors)
+    }
 
     expect(validate.errors).toEqual(null)
   })

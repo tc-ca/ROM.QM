@@ -1,13 +1,8 @@
 import _ from "lodash";
 import { LANGUAGE } from "../constants.js";
 import { QUESTION_TYPE } from "../data/questionTypes.js";
-<<<<<<< HEAD
 import { v4 as uuidv4 } from 'uuid';
 import { generateName, isString } from '../utils'
-=======
-import { v4 as uuidv4 } from "uuid";
-import { generateName } from "../utils";
->>>>>>> development
 
 /* eslint-disable no-undef */
 
