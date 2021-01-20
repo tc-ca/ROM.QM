@@ -61,7 +61,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "response": "true",
+                    "response": null,
                     "responseOptions": [{
                             "id": 1,
                             "sortOrder": 1,

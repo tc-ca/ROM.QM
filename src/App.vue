@@ -207,13 +207,13 @@ export default {
     SetLegislations (legislations, dataStructure) {
       switch (dataStructure) {
         case 'tree':
-          this.$store.dispatch('setTreeLegislationsState', { legislations })
+          this.$store.dispatch('SetTreeLegislationsState', { legislations })
           break
         case 'flat':
-          this.$store.dispatch('setFlatLegislationsState', { legislations })
+          this.$store.dispatch('SetFlatLegislationsState', { legislations })
           break
         default:
-          this.$store.dispatch('setFlatLegislationsState', { legislations })
+          this.$store.dispatch('SetFlatLegislationsState', { legislations })
           break
       }
     },
