@@ -98,6 +98,16 @@
                 <span>{{ $t('app.builder.save') }}</span>
               </v-btn>
             </v-col>
+            <v-col class="col-auto">
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="fixit()"
+              >
+                <span>{{ $t('app.builder.fix') }}</span>
+              </v-btn>
+            </v-col>
           </v-row>
           <v-row>
             <!-- <v-col>
@@ -771,7 +781,8 @@ export default {
     let template = null
     // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
-      template = await BuilderService.GetMockQuestionnaireFromImportModule()
+      var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
+      template = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
     } else {
       // default to empty template
       template = BuilderService.createQuestionnaire()
@@ -997,6 +1008,9 @@ export default {
       // console.log(JSON.stringify(this.questionnaire))
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+    },
+    fixit () {
+      BuilderService.fixTemplate(this.questionnaire)
     },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
