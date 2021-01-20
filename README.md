@@ -2,8 +2,6 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-https://dev.azure.com/transport-canada/Inspection%20Solution%20Architecture%20WG/_apis/build/status/QM/QM.BUILD?branchName=development
-
 # Introduction
 
 This repository contains all common artifacts for the Questionnaire Management components used in the TDG Core and TSIS 2.0 projects.
