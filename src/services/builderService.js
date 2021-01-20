@@ -1,8 +1,8 @@
 import _ from "lodash";
 import { LANGUAGE } from "../constants.js";
 import { QUESTION_TYPE } from "../data/questionTypes.js";
-import { v4 as uuidv4 } from "uuid";
-import { generateName } from "../utils";
+import { v4 as uuidv4 } from 'uuid';
+import { generateName, isString } from '../utils'
 
 /* eslint-disable no-undef */
 
@@ -337,13 +337,14 @@ function processBuilderForSave(questionnaire) {
   return { groupsData: groups, questionnaireData: questionnaire };
 }
 
-async function GetMockQuestionnaireFromImportModule() {
-  if (process.env.NODE_ENV !== "production") {
-    const axios = await import("axios");
+async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeaturedTemplate') {
+  if(process.env.NODE_ENV !== 'production') 
+  {
+    const axios = await import('axios')
 
-    let response = await axios
-      .get("/static/betaAnswers.json")
-      .catch(function(error) {
+    // let response = await axios.get('/static/betaAnswers.json')
+    let response = await axios.get(`/static/templates/${templateToLoad}.json`)
+      .catch(function (error) {
         // handle error
         console.log(error);
       });
@@ -352,6 +353,333 @@ async function GetMockQuestionnaireFromImportModule() {
 
     return response.data;
   }
+}
+
+/**
+ * Will find you all instances of the unique values (key) that are not unique 
+ * @param {Questionnaire Object - can be a Group, Question or Response} qObject 
+ * @param {What is the property name of the field used for uniqueness for this type of object} key 
+ */
+function FindNonUniqueIds (qObject, key) {
+  var uniqueIds = []
+  var issues = []
+  var index = 0
+
+  qObject.forEach(element => {
+    if (!uniqueIds.includes(element[key])) {
+      uniqueIds.push(element[key])
+    } else {
+      issues.push(`item ${index} has id ${element[key]} which is not unique`)
+    }
+    index++
+  })
+
+  if (issues.length > 0) {
+    console.log(issues)
+  }
+
+  return issues
+}
+
+/**
+ * will recursively flatten a list of Questions
+ * @param {Array of Questions} qs 
+ */
+function flatten (qs) {
+  var ret = []
+
+  for (var i = 0; i < qs.length; i++) {
+    let q = qs[i]
+
+    if (q.childQuestions.length > 0) {
+      ret = ret.concat(flatten(q.childQuestions))
+    }
+
+    ret.push(q)
+  }
+  return ret
+}
+
+/**
+ * Will return you a flattened list of all Questions for all items in the array
+ * @param {An Array of Groups} groups 
+ */
+function flattenQuestions (groups) {
+  var flattenedQuestions = []
+  groups.forEach(group => {
+    var qs = flatten(group.questions)
+    flattenedQuestions = flattenedQuestions.concat(qs)
+  })
+  return flattenedQuestions.sort((a, b) => (a.id > b.id) ? 1 : (b.id > a.id) ? -1 : 0)
+}
+
+/**
+ * Will attempt to make old Templates compatible with the current structure of Templates 
+ * @param {An Array of Groups} groups 
+ */
+function fixTemplate (template) {
+
+  var groups = template.groups
+  var flattenedQuestions = flattenQuestions(groups)
+  var qIndex;
+  var rIndex;
+  var gIndex;
+  var pIndex;
+  var question;
+  var response;
+  var provision;
+  var searchableProvisions = [];
+  var fixLog = []
+
+  /**
+   * Fix Template
+   */
+  if (!template.readOnly) {
+    /**
+     * Add the readOnly property to the Template if it does not exist
+     */
+    template.readOnly = false
+    fixLog.push("fixTemplate: set readOnly prop on Template to false")
+  }
+
+  /**
+   * Fix Groups
+   */
+  for (gIndex = 0; gIndex < groups.length; gIndex++) {
+    let g = groups[gIndex];
+
+    /**
+     * Groups have to have the expansionPanels Property - but reset the value if it exists
+     * TODO: this should really be removed from the JSON, its only temporary data and not important to the business
+     */
+    g.expansionPanels = []
+  }
+  fixLog.push("fixTemplate: reset/added expansionPanels prop to all Groups")
+
+  /**
+   * Fix Questions
+   */
+  for (qIndex = 0; qIndex < flattenedQuestions.length; qIndex++) {
+    question = flattenedQuestions[qIndex]
+
+    /**
+     * re-generate question name based on its english name if it's not in our new format
+     */
+    if (!question.name || !question.name.includes('QTN')) {
+      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'QTN', '')
+      fixLog.push(`fixTemplate: added/reset name prop for Question ${qIndex} to ${question.name}`)
+    }
+
+    /**
+    * Will assign a unique guid to all Questions in all items within 
+    * the Array of Groups that do not already have one assigned to them 
+    */
+    if (!question.guid) {
+      question.guid = uuidv4()
+      fixLog.push(`fixTemplate: added guid (${question.guid}) prop to Question ${question.name}`)
+    }
+
+    /**
+     * move the internal comment property from the question to the responses of this question
+     */
+    if (question.internalComment) {
+
+      if (question.type === "radio" || question.type === "select")
+      {
+        for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
+          response = question.responseOptions[rIndex];
+          response.internalComment = question.internalComment
+        }
+      }
+
+      delete question.internalComment
+
+      fixLog.push(`fixTemplate: moved internal comment prop from Question ${question.name} to Responses`)
+    }
+
+    /**
+     * move the external comment property from the question to the responses of this question
+     */
+    if (question.externalComment) {
+      if (question.type === "radio" || question.type === "select")
+      {
+        for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
+          response = question.responseOptions[rIndex];
+          response.externalComment = question.externalComment
+        }
+      }
+
+      delete question.externalComment
+
+      fixLog.push(`fixTemplate: moved external comment prop from Question ${question.name} to Responses`)
+    }
+
+    /**
+     * move the picture property from the question to the responses of this question
+     */
+    if (question.picture) {
+      if (question.type === "radio" || question.type === "select")
+      {
+        for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
+          response = question.responseOptions[rIndex];
+          response.picture = question.picture
+        }
+      }
+
+      delete question.picture
+
+      fixLog.push(`fixTemplate: moved picture prop from Question ${question.name} to Responses`)
+    }
+
+
+    /**
+     * Fix Question Responses for radio and select questions
+     */
+    if (question.type === "radio" || question.type === "select")
+    {
+      for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
+        response = question.responseOptions[rIndex];
+
+        /**
+         * Internal Comment prop should exist on Responses
+         * Might not have existed on Question to copy over
+         */
+        if (!response.internalComment)
+        {
+          response.internalComment = {
+            "option": "optional",
+            "value": ""
+          }
+          fixLog.push(`fixTemplate: added default internalComment prop for Response ${rIndex} of Question ${question.name}`)
+        }
+
+        /**
+         * External Comment prop should exist on Responses
+         * Might not have existed on Question to copy over
+         */
+        if (!response.externalComment)
+        {
+          response.externalComment = {
+            "option": "optional",
+            "value": ""
+          }
+          fixLog.push(`fixTemplate: added default externalComment prop for Response ${rIndex} of Question ${question.name}`)
+        }
+
+        /**
+         * picture prop should exist on Responses, and should be an array of strings, not a single string
+         */
+        if (!response.picture || response.picture.value === '') {
+          response.picture = {
+            "option": "optional",
+            "value": []
+          }
+          fixLog.push(`fixTemplate: added default picture prop for Response ${rIndex} of Question ${question.name}`)
+        }
+
+
+        /**
+         * response values must be of type String and not number or anything else
+         * TODO: always though? maybe we revisit this in schema
+         */
+        if (!isString(response.value)) {
+          response.value = String(response.value)
+          fixLog.push(`fixTemplate: stringified response value for Response ${rIndex} of Question ${question.name}`)
+        }
+
+
+      /**
+       * generate response names for responses that do not have them
+       */
+        if (!response.name || !response.name.includes('RSPNS')){
+          response.name = generateName(response.text[LANGUAGE.ENGLISH], 'RSPNS', question.name, false)
+          fixLog.push(`fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`)
+        }
+      }
+    } else {
+      if (question.responseOptions && question.responseOptions.length > 0) {
+        // shouldnt have any response options...TODO: or should they?
+        question.responseOptions = []
+        fixLog.push(`fixTemplate: removed response options from ${question.type} Question ${question.name}`)
+      }
+    }
+  }
+
+  /**
+   * add the searchable provisions property to the template if it doesnt exist
+   * searchableProvisions is the distinct union of all provisions for all responses in the template
+   * basically, all provisions this template is related to 
+   */
+  if (!template.searchableProvisions) {
+
+    for (qIndex = 0; qIndex < flattenedQuestions.length; qIndex++) {
+      question = flattenedQuestions[qIndex];
+
+      // only radio and select have response options
+      if (!question.responseOptions && !(question.type === "radio" || question.type === "select")) continue
+
+      for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
+        response = question.responseOptions[rIndex];
+        
+        if (response.provisions.length > 0) {
+          for (pIndex = 0; pIndex < response.provisions.length; pIndex++) {
+            /**
+             * for each provision in this response, check if there is already an item in the searchable provisions list for this provision
+             * if there is we can simply add the guidId of the question to it, else we add a new entry to the searchable provisions list 
+             */
+            provision = response.provisions[pIndex];
+            var existingSearchableProvisionIndex = searchableProvisions.findIndex(sp => sp.leg === provision)
+
+            if (existingSearchableProvisionIndex !== -1)
+            {
+              var existingSearchableProvision = searchableProvisions[existingSearchableProvisionIndex]
+              
+              if (!existingSearchableProvision.questions.includes(question.guid)) {
+                existingSearchableProvision.questions.push(question.guid)
+              }
+            } else {
+              searchableProvisions.push({
+                leg: provision,
+                questions: [question.guid]
+              })
+            }
+          }
+        }
+      }
+    }
+
+    template.searchableProvisions = searchableProvisions
+
+    fixLog.push("fixTemplate: added searchableProvisions prop to Template")
+  }
+
+
+  downloadData(fixLog, "fixItLog.json")
+  downloadData(template, "fixedTemplate.json")
+  console.log(fixLog)
+}
+
+function downloadData (data, filename){
+  if(!data) {
+      console.error('Console.save: No data')
+      return;
+  }
+
+  if(!filename) filename = 'console.json'
+
+  if(typeof data === "object"){
+      data = JSON.stringify(data, undefined, 4)
+  }
+
+  var blob = new Blob([data], {type: 'text/json'}),
+      e    = document.createEvent('MouseEvents'),
+      a    = document.createElement('a')
+
+  a.download = filename
+  a.href = window.URL.createObjectURL(blob)
+  a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
+  e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+  a.dispatchEvent(e)
 }
 
 export default {
@@ -369,5 +697,8 @@ export default {
   findGroupForQuestionById,
   getNextQuestionId,
   GetMockQuestionnaireFromImportModule,
-  processBuilderForSave
+  processBuilderForSave,
+  FindNonUniqueIds,
+  flattenQuestions,
+  fixTemplate
 };

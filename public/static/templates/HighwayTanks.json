@@ -1,0 +1,2732 @@
+{
+    "name": "Highway Tanks - TC 406 and TC 406 Crude",
+    "title": {
+        "en": "Questionnaire Title EN",
+        "fr": "Questionnaire Title EN"
+    },
+    "groups": [
+        {
+            "primaryKey": "GRP_DNTFCTNPLT(B620_Highway Tanks - TC 406 and TC 406 Crude",
+            "title": {
+                "en": "Identification Plate (B620 c. 5.1.6.1)",
+                "fr": "Plaque d'identification( B620 c. 5.1.6.1)"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 3,
+            "questions": [
+                {
+                    "name": "QTN_TCSPCFCTNRQVLNT_TXT_GRP_DNTFCTNPLT(B620_Highway Tanks - TC 406 and TC 406 Crude",
+                    "id": 1,
+                    "sortOrder": 1,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "TC Specification or Equivalent/Substitute",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [
+                        {
+                            "name": "QTN_RFRNCD_TXT_GRP_DNTFCTNPLT(B620_Highway Tanks - TC 406 and TC 406 Crude",
+                            "id": 42,
+                            "guid": "96376ddd-023f-42c0-a35c-d1b749a7026e",
+                            "sortOrder": 1,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "Reference ID",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "text",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": null,
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal"
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": []
+                        }
+                    ],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "b5226319-f163-49f8-b54b-9eadbcbd8767"
+                },
+                {
+                    "name": "QTN_CRTFCTNDT",
+                    "id": 2,
+                    "sortOrder": 2,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Certification Date",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "select",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_CRTFCTNDT"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_CRTFCTNDT"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "4e0881f8-c3b7-44a7-b436-efe4b479535c"
+                },
+                {
+                    "name": "QTN_RGNLTSTDT",
+                    "id": 3,
+                    "sortOrder": 3,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Original Test Date",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "74992b69-0800-4dab-9605-fd2bd5212e50"
+                },
+                {
+                    "name": "QTN_TNKMNFCTRRSSMBL",
+                    "id": 4,
+                    "sortOrder": 4,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Tank Manufacturer/Assembler",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "95641997-c471-4d54-9205-0a8df1979533"
+                },
+                {
+                    "name": "QTN_TNKSRLNMBR",
+                    "id": 5,
+                    "sortOrder": 5,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Tank Serial Number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "a0ef9b0e-d984-4e0e-b5d5-3407a81cd1de"
+                },
+                {
+                    "name": "QTN_VHCLDNTFCTNNMBR",
+                    "id": 6,
+                    "sortOrder": 6,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Vehicle Identification Number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "03934c79-5e68-4871-8655-7d14d4325314"
+                },
+                {
+                    "name": "QTN_MWPRDSGNPRSSR",
+                    "id": 7,
+                    "sortOrder": 7,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "MAWP or Design Pressure",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "e2953f2a-812c-444e-804f-0ad85bbceeb5"
+                },
+                {
+                    "name": "QTN_MXMMPRDCTLD",
+                    "id": 8,
+                    "sortOrder": 8,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Maximum Product Load",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "818bc213-4e28-4363-adc9-665c310d39fb"
+                },
+                {
+                    "name": "QTN_VLMTRCCPCTY",
+                    "id": 9,
+                    "sortOrder": 9,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Volumetric Capacity",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "7ca68607-5752-4496-88f3-c0d3e76e4d81"
+                },
+                {
+                    "name": "QTN_LNNG",
+                    "id": 10,
+                    "sortOrder": 10,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Lining",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "0b58c972-e07e-4e7f-b268-a28d4a6cc943"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude",
+            "title": {
+                "en": "Filling Limits",
+                "fr": "Limite de remplissage"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 4,
+            "questions": [
+                {
+                    "name": "QTN_MXMMPRDCTLD(B62_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude",
+                    "id": 18,
+                    "sortOrder": 18,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Maximum Product Load (B621 c. 7.3(b))",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "6f88b9ee-18ea-4647-8e89-46fdb36374ff"
+                },
+                {
+                    "name": "QTN_2%TGVLMTRCCPCTY_TXT_GRP_FLLNGLMTS_Highway Tanks - TC 406 and TC 406 Crude",
+                    "id": 19,
+                    "sortOrder": 19,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "2% Outage Volumetric Capacity per Compartment  (B621 c. 7.3(d))",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "958cfcc3-5664-457f-bc5e-bec9ad9b358d"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Inspection and Test Markings Take a photo and record the following: (B620 c. 7.1 Tables 7.1 - 7.2)",
+            "title": {
+                "en": "Inspection and Test Markings",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 5,
+            "questions": [
+                {
+                    "name": "QTN_RGSTRDFCLTYMNTH",
+                    "id": 20,
+                    "sortOrder": 10,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Registered Facility # + Month/Year",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "e5ff70ee-0f52-412e-aa17-672c50e2d3b4"
+                },
+                {
+                    "name": "QTN_VSLVYRYRSFRCRD",
+                    "id": 11,
+                    "sortOrder": 11,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Visual (V) - 1 yr / 2.5 yrs for crude",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "28f4e823-147e-4fa2-b141-94f989eeddad"
+                },
+                {
+                    "name": "QTN_LKKYRYRSFRCRD",
+                    "id": 12,
+                    "sortOrder": 12,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Leak (K) - 1 yr / 2.5 yrs for crude",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "f969f90e-6534-4bc6-af9e-f86061586c93"
+                },
+                {
+                    "name": "QTN_NTRNLYRSXMPTNFR",
+                    "id": 13,
+                    "sortOrder": 13,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Internal (I) - 5 yrs (exemption for airport refueler)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "72e06b8f-13a2-4a64-a756-ed830aa28139"
+                },
+                {
+                    "name": "QTN_PRSSRPYRS",
+                    "id": 14,
+                    "sortOrder": 14,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Pressure (P) - 5 yrs",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "9cbb24f8-61b6-4b40-9970-679111a83406"
+                },
+                {
+                    "name": "QTN_PPRCPLRCYRSFPPL",
+                    "id": 15,
+                    "sortOrder": 15,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Upper Coupler (UC) - 5 yrs, if applicable",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "311aac66-4f49-496d-b885-df0446716353"
+                },
+                {
+                    "name": "QTN_LNNGTHCKNSSLTFP",
+                    "id": 16,
+                    "sortOrder": 16,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Lining - Thickness (L - T) - if applicable",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_LNNGTHCKNSSLTFP"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_LNNGTHCKNSSLTFP"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "17f82b99-b1ee-47eb-8aae-3b07d38eccbf"
+                },
+                {
+                    "name": "QTN_LCTNNDSZBC",
+                    "id": 21,
+                    "sortOrder": 17,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Location and Size (B620 c. 7.4)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "5d52de26-6e73-45d2-a0a5-604a0b8f0564"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Group 7",
+            "title": {
+                "en": "Hose Assemblies- Consider Rejection Criteria-( B620 c. 7.2.10, 7.2.10.4 & 7.2.10.6)",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 6,
+            "questions": [
+                {
+                    "name": "QTN_TSTMRKNGSMMYY",
+                    "id": 22,
+                    "sortOrder": 22,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Test Markings MM/YY",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "51cb8b81-7fec-4bd2-a631-49111855cad2"
+                },
+                {
+                    "name": "QTN_DNMBR",
+                    "id": 23,
+                    "sortOrder": 23,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "ID Number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "51dd0dfa-4b9a-4938-9479-203f287fc981"
+                },
+                {
+                    "name": "QTN_HWP",
+                    "id": 24,
+                    "sortOrder": 24,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "HAWP",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "628f98f1-57c2-4138-89c6-19836c46864a"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Securement and Integrity",
+            "title": {
+                "en": "Securement and Integrity",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 7,
+            "questions": [
+                {
+                    "name": "QTN_SPPRTSNDNCHRSBC",
+                    "id": 25,
+                    "sortOrder": 25,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Supports and Anchors (B620 c. 5.1.3, 5.1.4 & 5.6.7)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "compliant",
+                                "fr": "conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_SPPRTSNDNCHRSBC"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_SPPRTSNDNCHRSBC"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "d7a123ad-ce38-4668-8a83-e7552a104576"
+                },
+                {
+                    "name": "QTN_SHLLNDHDRJCTNCR",
+                    "id": 26,
+                    "sortOrder": 26,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Shell and Head Rejection Criteria (B620 c. 7.2.1.8)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_SHLLNDHDRJCTNCR"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_SHLLNDHDRJCTNCR"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "8bf29b37-c27f-47c3-940d-5a9344e6a9ff"
+                },
+                {
+                    "name": "QTN_CRCMFRNTLRNFRCM",
+                    "id": 27,
+                    "sortOrder": 27,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Circumferential Reinforcement B620 c. 5.6.8",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_CRCMFRNTLRNFRCM"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_CRCMFRNTLRNFRCM"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "9eee9eba-d96f-49ee-a895-996b1b850260"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Group 9",
+            "title": {
+                "en": "Double Bulkhead Drains / Piping and Protection",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 8,
+            "questions": [
+                {
+                    "name": "QTN_DBLBLKHDDRNSBC",
+                    "id": 28,
+                    "sortOrder": 28,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Double Bulkhead Drains B620 c. 5.6.2",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_DBLBLKHDDRNSBC"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_DBLBLKHDDRNSBC"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "c16dcf35-bb00-458c-aa3b-6e2594cc0a7a"
+                },
+                {
+                    "name": "QTN_PPNGNDPRTCTNLKS",
+                    "id": 29,
+                    "sortOrder": 29,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Piping and Protection -Leaks (B620 c. 5.6.9.2 & 5.6.9.1.6)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_PPNGNDPRTCTNLKS"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_PPNGNDPRTCTNLKS"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [
+                        {
+                            "name": "QTN_SHRSCTNSRSTBLGR",
+                            "id": 30,
+                            "sortOrder": 1,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "Shear Sections or Suitable Guards",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Compliant",
+                                        "fr": "Conforme"
+                                    },
+                                    "value": "true",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_COMPLIANT_QTN_SHRSCTNSRSTBLGR"
+                                },
+                                {
+                                    "id": 2,
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "Non-compliant",
+                                        "fr": "Non-conforme"
+                                    },
+                                    "value": "false",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_NONCOMPLIANT_QTN_SHRSCTNSRSTBLGR"
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal"
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [],
+                            "guid": "288c923a-b748-4ba1-8cca-7bea7f034141"
+                        },
+                        {
+                            "name": "QTN_RDCLRNC",
+                            "id": 31,
+                            "sortOrder": 2,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "Road Clearance",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Compliant",
+                                        "fr": "Conforme"
+                                    },
+                                    "value": "true",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_COMPLIANT_QTN_RDCLRNC"
+                                },
+                                {
+                                    "id": 2,
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "Non-compliant",
+                                        "fr": "Non-Conforme"
+                                    },
+                                    "value": "false",
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false,
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "name": "RSPNS_NONCOMPLIANT_QTN_RDCLRNC"
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal"
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [],
+                            "guid": "c7370403-38e6-497b-97c5-bb56421cd250"
+                        }
+                    ],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "4902dd45-4cdd-49f2-980f-f436575787fb"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Group 10",
+            "title": {
+                "en": " Emergency Shut-Off Devices",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 9,
+            "questions": [
+                {
+                    "name": "QTN_NTRNLVLVSCLSDFS",
+                    "id": 32,
+                    "sortOrder": 32,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Internal Valves (closed), Fusible Devices, Emergency Shut-Off (B620 c. 5.6.12 & 5.7.5)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Comforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_NTRNLVLVSCLSDFS"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_NTRNLVLVSCLSDFS"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "251aa5d6-5dcb-4fcf-a5d5-94082fa3e3ab"
+                },
+                {
+                    "name": "QTN_FRTCCRDXTRNLVLV",
+                    "id": 33,
+                    "sortOrder": 33,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "For TC 306 /406 Crude: External Valve, Fusible Devices, Emergency Shut-Off (B620 c. 5.7.6.3 & A.9)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_FRTCCRDXTRNLVLV"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_FRTCCRDXTRNLVLV"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_FRTCCRDXTRNLVLV"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "5ff31052-7fc1-476b-b079-9e23b4ec134f"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Group 11",
+            "title": {
+                "en": "Other Items",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 10,
+            "questions": [
+                {
+                    "name": "QTN_RRNDPRTCTNCNDTN",
+                    "id": 34,
+                    "sortOrder": 34,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": " Rear-End Protection-Condition and Measurement (B620 c. 5.1.5)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_RRNDPRTCTNCNDTN"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-Compliant",
+                                "fr": "Non conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_RRNDPRTCTNCNDTN"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "97e7b0ea-46c2-4af9-93f0-93535de0b3b2"
+                },
+                {
+                    "name": "QTN_MNHLCLSRSPRSSRR",
+                    "id": 35,
+                    "sortOrder": 35,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Manhole Closures, Pressure Relief Devices,Roll Over Protection( B620 c. 5.6.6, 5.6.11, 5.7.4 & 5.6.)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Compliant",
+                                "fr": "Conforme"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_COMPLIANT_QTN_MNHLCLSRSPRSSRR"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Non-compliant",
+                                "fr": "Non-conforme"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NONCOMPLIANT_QTN_MNHLCLSRSPRSSRR"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_MNHLCLSRSPRSSRR"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "e9784540-cf74-4ced-a8d7-3fc7414ef656"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Group 12",
+            "title": {
+                "en": "Loading and Unloading",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 11,
+            "questions": [
+                {
+                    "name": "QTN_MCNDHSSSMBLSPRL",
+                    "id": 36,
+                    "sortOrder": 36,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "MOC and hose assemblies preloading inspection done by the shipper or carrier. (B621 c. 7.1 & 7.2)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_MCNDHSSSMBLSPRL"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_MCNDHSSSMBLSPRL"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_MCNDHSSSMBLSPRL"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "da1bbd44-c267-40aa-ac32-7441a38e8d54"
+                },
+                {
+                    "name": "QTN_FLSFBRKNTRLCKSY",
+                    "id": 37,
+                    "sortOrder": 37,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Fail-safe brake interlock system or wheel chocked. (B621 c. 7.1(h))",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_FLSFBRKNTRLCKSY"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_FLSFBRKNTRLCKSY"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_FLSFBRKNTRLCKSY"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "e438fc38-ca55-46ea-b89c-118840fb39da"
+                },
+                {
+                    "name": "QTN_LDNGNDNLDNGPRTN",
+                    "id": 38,
+                    "sortOrder": 38,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Loading and unloading operations under supervision. (B621 c. 7.3 & 7.6)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_LDNGNDNLDNGPRTN"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_LDNGNDNLDNGPRTN"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_LDNGNDNLDNGPRTN"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "ad71923a-9b07-4722-9edc-9cee1e07f404"
+                },
+                {
+                    "name": "QTN_FTRLDNGNDNLDNGH",
+                    "id": 39,
+                    "sortOrder": 39,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "After loading and unloading, hatches, valves and other openings are closed & secured. (B621 c. 7.4 & 7.7)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_FTRLDNGNDNLDNGH"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_FTRLDNGNDNLDNGH"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_FTRLDNGNDNLDNGH"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "f3608a7c-8c70-437b-81dc-25a01fdfcbf3"
+                },
+                {
+                    "name": "QTN_FTRLDNGNDNLDNGT",
+                    "id": 40,
+                    "sortOrder": 40,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "After loading and unloading the exterior surface is clean and free of residue. (B621 c. 7.4 & 7.7)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_YES_QTN_FTRLDNGNDNLDNGT"
+                        },
+                        {
+                            "id": 2,
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NO_QTN_FTRLDNGNDNLDNGT"
+                        },
+                        {
+                            "id": 3,
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "N/A",
+                                "fr": "S.O."
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "name": "RSPNS_NA_QTN_FTRLDNGNDNLDNGT"
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "5eab4f05-f49a-4715-8b53-4f19a15df9e6"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        },
+        {
+            "primaryKey": "Group 13",
+            "title": {
+                "en": "B620 and 49 CFR",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": true,
+            "isVisible": true,
+            "order": 12,
+            "questions": [
+                {
+                    "name": "QTN_FRTCTNKSNDCTTHB",
+                    "id": 41,
+                    "sortOrder": 41,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "For TC tanks –indicate the B620 edition to which the tank was built and certified with.",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "546a051d-0e13-4837-ace7-323f6c506cdf"
+                },
+                {
+                    "name": "QTN_FRMCDTTNKNDCTTH",
+                    "id": 43,
+                    "sortOrder": 43,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "For a MC/DOT Tank – indicate the 49 CFR edition to which the tank was built and certified with.",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "guid": "9cf0fed0-04c6-41c2-8e25-260d947200b1"
+                }
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually",
+            "expansionPanels": []
+        }
+    ],
+    "templateid": "",
+    "readOnly": false,
+    "searchableProvisions": []
+}
