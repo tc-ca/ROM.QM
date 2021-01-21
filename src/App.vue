@@ -12,7 +12,6 @@
         @click="showSettings = !showSettings"
       />
       <v-spacer />
-
       <v-expand-x-transition>
         <v-card
           v-show="expandProvisionSearchField"
@@ -26,6 +25,7 @@
           />
         </v-card>
       </v-expand-x-transition>
+      <!-- PROVISION SEARCH FILTER -->
 
       <v-btn
         id=""
@@ -37,6 +37,24 @@
           mdi-magnify
         </v-icon>
       </v-btn>
+      <!-- CHRACTERISTIC FILTER -->
+      <v-btn
+        id=""
+        icon
+        color="white"
+        @click="showCharacteristicFilter = !showCharacteristicFilter"
+      >
+        <v-badge
+          :content="5"
+          :value="true"
+          color="red"
+          overlap
+        >
+          <v-icon>
+            mdi-tune
+          </v-icon>
+        </v-badge>
+      </v-btn>
     </v-app-bar>
     <settings
       :show="showSettings"
@@ -44,9 +62,8 @@
       @close="showSettings = false"
     />
     <characteristic-filter
-      :show="showSettings"
-      @appsettings="settings"
-      @close="showSettings = false"
+      :show="showCharacteristicFilter"
+      @closeCharacteristicFilterDrawer="showCharacteristicFilter= false"
     />
     <v-content>
       <v-container
@@ -137,7 +154,9 @@ export default {
       showLegislationSearchModal: false,
       showSettings: false,
       expandProvisionSearchField: false,
-      clearProvisionSearchText: false
+      clearProvisionSearchText: false,
+      showCharacteristicFilter: false
+
     }
   },
   computed: {
@@ -214,15 +233,21 @@ export default {
     SetLegislations (legislations, dataStructure) {
       switch (dataStructure) {
         case 'tree':
-          this.$store.dispatch('setTreeLegislationsState', { legislations })
+          this.$store.dispatch('SetTreeLegislationsState', { legislations })
           break
         case 'flat':
-          this.$store.dispatch('setFlatLegislationsState', { legislations })
+          this.$store.dispatch('SetFlatLegislationsState', { legislations })
           break
         default:
-          this.$store.dispatch('setFlatLegislationsState', { legislations })
+          this.$store.dispatch('SetFlatLegislationsState', { legislations })
           break
       }
+    },
+    /**
+    * Sets legislations state
+    */
+    SetCharacteristics (characteristics) {
+      this.$store.dispatch('SetCharacteristicsState', { characteristics })
     },
     checkIsDirty () {
       if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()

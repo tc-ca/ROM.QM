@@ -1,8 +1,10 @@
 <template>
   <v-navigation-drawer
-
+    v-model="showDrawer"
     app
     right
+    temporary
+    width="100%"
   >
     <v-list
       dense
@@ -10,94 +12,54 @@
     >
       <v-list-item>
         <v-list-item-content>
+          <!-- TITLE -->
           <v-list-item-title class="title">
             Site Filter
           </v-list-item-title>
         </v-list-item-content>
+        <!-- CLOSE DRAWER ACTION BUTTON -->
         <v-list-item-action>
-          <v-icon>mdi-close</v-icon>
+          <v-btn
+            icon
+            @click="showDrawer = false"
+          >
+            <v-icon>
+              mdi-close
+            </v-icon>
+          </v-btn>
         </v-list-item-action>
       </v-list-item>
       <v-divider />
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title>MOC Type</v-list-item-title>
-          </v-list-item-content>
-        </template>
-        <v-list-item>
-          <v-list-item-content>
-            <characteristic-filter-lookup
-              :items="data.MOC"
-              label="MOC Type"
-            />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-      <v-divider />
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title>Mode</v-list-item-title>
-          </v-list-item-content>
-        </template>
-        <v-list-item>
-          <v-list-item-content>
-            <characteristic-filter-lookup
-              :items="data.Mode"
-              label="Mode"
-            />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-      <v-divider />
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title>Class and Divisions</v-list-item-title>
-          </v-list-item-content>
-        </template>
-        <v-list-item>
-          <v-list-item-content>
-            <characteristic-filter-lookup
-              :items="data.MOC"
-              label="Class and Divisions"
-            />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-      <v-divider />
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title>UN Numbers</v-list-item-title>
-          </v-list-item-content>
-        </template>
-        <v-list-item>
-          <v-list-item-content>
-            <characteristic-filter-lookup
-              :items="data.MOC"
-              label="UN Numbers"
-            />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-      <v-divider />
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title>HOTI Type</v-list-item-title>
-          </v-list-item-content>
-        </template>
-        <v-list-item>
-          <v-list-item-content>
-            <characteristic-filter-lookup
-              :items="data.MOC"
-              label="HOTI Type"
-            />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
+      <!-- FILTERS -->
+      <div
+        v-for="characteristic in characteristics"
+        :key="characteristic.id"
+      >
+        <v-list-item-content>
+          <characteristic-filter-lookup
+            :item="characteristic"
+            :items="characteristic.children"
+            :values="siteCharacteristics"
+            :label="characteristic.text[lang]"
+            @update-displayed-tags="onUpdateDisplayedTags"
+          />
+
+          <v-divider />
+        </v-list-item-content>
+      </div>
+      <!-- CHIPS -->
+      <div>
+        <v-chip
+          v-for="item in siteCharacteristics"
+
+          :key="item.id"
+          class="ma-2"
+          close
+          @click:close="removeSiteCharacteristic(item.id)"
+        >
+          {{ item.text[lang] }}
+        </v-chip>
+      </div>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -105,11 +67,11 @@
 <script>
 import BaseMixin from '../../../mixins/base'
 import CharacteristicFilterLookup from './characteristic-filter-lookup.vue'
-
 import { mapState } from 'vuex'
 
 export default {
   components: { CharacteristicFilterLookup },
+  events: ['closeCharacteristicFilterDrawer'],
   mixins: [BaseMixin],
   props: {
     show: {
@@ -119,7 +81,8 @@ export default {
   },
   data () {
     return {
-      data: {}
+      characteristics: [],
+      siteCharacteristics: []
     }
   },
   computed: {
@@ -130,24 +93,67 @@ export default {
         }
         return state.settings.settings.lang
       }
-    })
+    }),
+    showDrawer: {
+      get () {
+        return this.show
+      },
+      set (val) {
+        if (!val) {
+          this.$emit('closeCharacteristicFilterDrawer')
+        }
+      }
+    }
   },
   async mounted () {
-    this.data = await this.getCharacteristics()
+    // keep this code on top of mounted method
+    // so we can subscribe to mutation within this method
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case 'SET_CHARACTERISTICS':
+        {
+          this.characteristics = this.$store.state.characteristics.characteristics
+          const nonHydratedSiteCharacterictics = this.$store.state.characteristics.siteCharacteristics
+
+          // hydrates the site characteristics which are just list of ids, we need full objects with provisions etc...
+          for (let i = 0; i < nonHydratedSiteCharacterictics.length; i++) {
+            const dryCharacteristic = nonHydratedSiteCharacterictics[i]
+            const hydratedCharacteristic = this.findItemInCollection(this.characteristics, dryCharacteristic)
+            this.siteCharacteristics.push(hydratedCharacteristic)
+          }
+
+          break
+        }
+        default:
+          break
+      }
+    })
   },
   methods: {
-    async getCharacteristics (val) {
-      const axios = await import('axios')
-
-      let response = await axios.get('/static/characteristics.json')
-        .catch(function (error) {
-          // handle error
-          console.log(error)
-        })
-
-      console.log(response)
-
-      return response.data
+    // todo move this to util
+    findItemInCollection (collection, target) {
+      let item = null
+      for (let i = 0; i < collection.length; i++) {
+        if (collection[i].id === target) {
+          item = collection[i]
+          return item
+        } else if (collection[i].children.length > 0) {
+          item = this.findItemInCollection(collection[i].children, target)
+          if (item) {
+            return item
+          }
+          continue
+        }
+      }
+    },
+    removeSiteCharacteristic (id) {
+      const itemIndex = this.siteCharacteristics.findIndex(characteristic => characteristic.id === id)
+      if (itemIndex !== -1) {
+        this.siteCharacteristics.splice(itemIndex, 1)
+      }
+    },
+    onUpdateDisplayedTags (values) {
+      this.siteCharacteristics = values
     }
   }
 }
