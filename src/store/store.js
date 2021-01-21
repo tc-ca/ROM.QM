@@ -7,6 +7,8 @@ import * as objectstate from '@/store/modules/objectstate.js'
 import * as settings from '@/store/modules/settings.js'
 import * as questionnaire from '@/store/modules/questionnaire.js'
 import * as legislations from "@/store/modules/legislations.js";
+import * as characteristics from "@/store/modules/characteristics.js";
+
 
 Vue.use(Vuex)
 
@@ -23,7 +25,8 @@ export default new Vuex.Store({
     objectstate,
     settings,
     questionnaire,
-    legislations
+    legislations,
+    characteristics
   },
 
   state: {},
