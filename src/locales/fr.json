@@ -16,6 +16,7 @@
       "qFromState": "FR Questionnaire pulling from state"
     },
     "builder": {
+      "fix": "FR fix it",
       "noGroups": "FR Click Add Group to start creating a new Questionnaire!",
       "loading": "FR Loading...",
       "save": "FR Save",
@@ -99,7 +100,9 @@
           "photos": "FR Photos",
           "repeatable": {
             "repeatQuestion": "FR Repeat this question",
-            "deleteQuestion": "FR Delete this repeated question"
+            "deleteQuestion": "FR Delete this repeated question",
+            "copyNo": "FR Copy #",
+            "repeatedQuestion": "FR Repeated question"
           },
           "sampling": {
             "approximateTotal": "FR Approximate Total",

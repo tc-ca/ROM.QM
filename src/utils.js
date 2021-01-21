@@ -6,17 +6,28 @@ export function pad (n, width, z) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
 }
 
-export function generateName (name, prefix, postfix) {
+export function generateName (name, prefix, postfix, removeVowels = true) {
   if (!name) return name
-  let cn = prefix + '_' + name.replace(/[aeiou]/ig,'').replace(/\s+/g, '').substring(0, 15).toUpperCase()
+
+  let cn = name
+  if (removeVowels) {
+    cn = name.replace(/[aeiou]/ig,'')
+  }
+
+  cn = prefix + '_' + cn.replace(/\s+/g, '').     // replace whitespaces 
+                         replace(/[^a-zA-Z]+/g, '').  // replace all non alpha characters
+                         substring(0, 15).        // take first 15 characters
+                         toUpperCase()            // to upper
   if (postfix) cn += '_' + postfix
   return cn
 }
 
-// works on primitive types
-//// usage example:
-//var a = ['a', 1, 'a', 2, '1'];
-//var unique = a.filter(onlyUnique)
+/**
+ * https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+ * works on primitive values
+ * example call: 
+ * var unique = a.filter(onlyUnique);
+ */
 export function onlyUnique (value, index, self) {
   return self.indexOf(value) === index
 }
@@ -153,8 +164,16 @@ export function setNewGUID (question) {
   question.guid = uuidv4()
   if (question.childQuestions) {
     question.childQuestions.forEach(cq => {
-      this.setNewGUID(cq)
+      setNewGUID(cq)
     })
   }
+}
+
+export function isNumber (n) { 
+  return /^-?[\d.]+(?:e-?\d+)?$/.test(n); 
+} 
+
+export function isString (obj) {
+  return toString.call(obj) == '[object String]';
 }
 

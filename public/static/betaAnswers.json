@@ -32,8 +32,39 @@
                     "samplingRecord": null,
                     "isRepeatable": false,
                     "isRepeated": false,
-                    "responseOptions": [
-                        {
+                    "responseOptions": [],
+                    "validationRules": [{
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal"
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }, {
+                    "name": "Question 1",
+                    "id": 1,
+                    "guid": "6e424d94-7047-4783-8d3a-7c2a31b8c149",
+                    "sortOrder": 2,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Question text 1",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "responseOptions": [{
                             "id": 1,
                             "name": "RSPNS_YS_QTN_1.RLQDSNCLDDNCL_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,

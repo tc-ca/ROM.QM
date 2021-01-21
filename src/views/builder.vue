@@ -98,6 +98,16 @@
                 <span>{{ $t('app.builder.save') }}</span>
               </v-btn>
             </v-col>
+            <v-col class="col-auto">
+              <v-btn
+                color="primary"
+                elevation="2"
+                rounded
+                @click="fixit()"
+              >
+                <span>{{ $t('app.builder.fix') }}</span>
+              </v-btn>
+            </v-col>
           </v-row>
           <v-row>
             <!-- <v-col>
@@ -123,6 +133,13 @@
               <v-text-field
                 v-model="selectedGroup.title[fr]"
                 label="Group text Fr"
+              />
+              <v-text-field
+                v-model="selectedGroup.order"
+                dense
+                type="number"
+                label="Group order"
+                @change="sortGroups(selectedGroup)"
               />
               <v-checkbox
                 v-model="selectedGroup.isVisible"
@@ -764,7 +781,8 @@ export default {
     let template = null
     // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
-      template = await BuilderService.GetMockQuestionnaireFromImportModule()
+      var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
+      template = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
     } else {
       // default to empty template
       template = BuilderService.createQuestionnaire()
@@ -991,6 +1009,9 @@ export default {
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },
+    fixit () {
+      BuilderService.fixTemplate(this.questionnaire)
+    },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
     },
@@ -1047,6 +1068,9 @@ export default {
           break
         }
       }
+    },
+    sortGroups (group) {
+      this.questionnaire.groups.sort((a, b) => a.order - b.order)
     },
     sortQuestions (question) {
       question.sortOrder = +question.sortOrder

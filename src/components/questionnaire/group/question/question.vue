@@ -36,6 +36,29 @@
         class="pt-2"
         justify-end
       >
+        <!-- Please do NOT delete this, we are keeping it just in casse the users wants it back
+        <div v-if="question.isRepeated">
+          <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                rounded
+                v-bind="attrs"
+                :disabled="readOnly"
+                v-on="on"
+              >
+                <v-icon
+                  normal
+                  color="primary"
+                >
+                  mdi-arrange-send-backward
+                </v-icon>
+                <span>{{ $t('app.questionnaire.group.question.repeatable.copyNo') + ' ' + calculateRepeatedNumber() }}</span>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatedQuestion') }}</span>
+          </v-tooltip>
+        </div>
+        -->
         <v-spacer />
         <div v-if="question.isSamplingAllowed">
           <v-tooltip left>
@@ -73,7 +96,7 @@
                   normal
                   color="primary"
                 >
-                  mdi-book-plus-outline
+                  mdi-plus-thick
                 </v-icon>
               </v-btn>
             </template>
@@ -95,7 +118,7 @@
                   normal
                   color="primary"
                 >
-                  mdi-book-minus-outline
+                  mdi-minus-thick
                 </v-icon>
               </v-btn>
             </template>
@@ -301,8 +324,12 @@ export default {
       }
     }),
     questionText () {
-      // return `${this.index + 1}. ${this.question.text[this.lang]}`
-      return `${this.question.text[this.lang]}`
+      let text = ''
+      if (this.question.isRepeated) {
+        text = `(Copy # ${this.calculateRepeatedNumber()}) `
+      }
+      text += `${this.question.text[this.lang]}`
+      return text
     },
     getClassName () {
       let c = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
@@ -451,6 +478,32 @@ export default {
     this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
+    calculateRepeatedNumber () {
+      let text = ''
+      if (this.question.isRepeated) {
+        let questionnaire = this.$store.getters['getQuestionnaire']
+        if (questionnaire !== null) {
+          let group = BuilderService.findGroupForQuestionById(questionnaire.groups, this.question.guid)
+          let questionIdx = group.questions.findIndex(q => q.guid === this.question.guid)
+          if (questionIdx > 0) {
+            let count = 0
+            for (let x = questionIdx - 1; x >= 0; x--) {
+              if (group.questions[x].isRepeated && !group.questions[x].isRepeatable) {
+                count++
+              } else if (group.questions[x].isRepeatable && !group.questions[x].isRepeated) {
+                count++
+              } else {
+                x = -1
+              }
+            }
+            if (count > 0) {
+              text = count.toString()
+            }
+          }
+        }
+      }
+      return text
+    },
     repeatQuestion ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion && this.question.isRepeatable) {
@@ -626,7 +679,7 @@ export default {
 
           orgOption.internalComment.value = ''
           orgOption.externalComment.value = ''
-          orgOption.picture.value = ''
+          orgOption.picture.value = []
         }
       }
     },
