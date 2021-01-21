@@ -12,7 +12,6 @@
         @click="showSettings = !showSettings"
       />
       <v-spacer />
-
       <v-expand-x-transition>
         <v-card
           v-show="expandProvisionSearchField"
@@ -26,6 +25,7 @@
           />
         </v-card>
       </v-expand-x-transition>
+      <!-- PROVISION SEARCH FILTER -->
 
       <v-btn
         id=""
@@ -37,11 +37,35 @@
           mdi-magnify
         </v-icon>
       </v-btn>
+      <!-- CHRACTERISTIC FILTER -->
+      <v-btn
+        id=""
+        icon
+        color="white"
+        @click="showCharacteristicFilter = !showCharacteristicFilter"
+      >
+        <v-badge
+          v-if="siteCharacteristicsCount > 0"
+          :content="siteCharacteristicsCount"
+          :value="true"
+          color="red"
+          overlap
+        >
+          <v-icon>
+            mdi-tune
+          </v-icon>
+        </v-badge>
+      </v-btn>
     </v-app-bar>
     <settings
       :show="showSettings"
       @appsettings="settings"
       @close="showSettings = false"
+    />
+    <characteristic-filter
+      :show="showCharacteristicFilter"
+      @close-characteristic-filter-drawer="showCharacteristicFilter= false"
+      @update-site-characteristic-count="updateCharacteristicCount"
     />
     <v-content>
       <v-container
@@ -90,6 +114,7 @@ import { LANGUAGE } from './constants.js'
 import NotificationContainer from './components/notification-container/notification-container.vue'
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import ProvisionSearch from './components/provision-search/provision-search.vue'
+import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
 
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
@@ -101,7 +126,8 @@ export default {
     NotificationContainer,
     LegislationSearchModal,
     Settings,
-    ProvisionSearch
+    ProvisionSearch,
+    CharacteristicFilter
   },
   mixins: [BaseMixin],
   props: {
@@ -130,7 +156,9 @@ export default {
       showLegislationSearchModal: false,
       showSettings: false,
       expandProvisionSearchField: false,
-      clearProvisionSearchText: false
+      clearProvisionSearchText: false,
+      showCharacteristicFilter: false,
+      siteCharacteristicsCount: 0
     }
   },
   computed: {
@@ -216,6 +244,15 @@ export default {
           this.$store.dispatch('SetFlatLegislationsState', { legislations })
           break
       }
+    },
+    /**
+    * Sets characteristics state
+    */
+    SetCharacteristics (characteristics) {
+      this.$store.dispatch('SetCharacteristicsState', { characteristics })
+    },
+    updateCharacteristicCount (count) {
+      this.siteCharacteristicsCount = count
     },
     checkIsDirty () {
       if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()
