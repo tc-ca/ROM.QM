@@ -45,7 +45,8 @@
         @click="showCharacteristicFilter = !showCharacteristicFilter"
       >
         <v-badge
-          :content="5"
+          v-if="siteCharacteristicsCount > 0"
+          :content="siteCharacteristicsCount"
           :value="true"
           color="red"
           overlap
@@ -63,7 +64,8 @@
     />
     <characteristic-filter
       :show="showCharacteristicFilter"
-      @closeCharacteristicFilterDrawer="showCharacteristicFilter= false"
+      @close-characteristic-filter-drawer="showCharacteristicFilter= false"
+      @update-site-characteristic-count="updateCharacteristicCount"
     />
     <v-content>
       <v-container
@@ -155,8 +157,8 @@ export default {
       showSettings: false,
       expandProvisionSearchField: false,
       clearProvisionSearchText: false,
-      showCharacteristicFilter: false
-
+      showCharacteristicFilter: false,
+      siteCharacteristicsCount: 0
     }
   },
   computed: {
@@ -244,10 +246,13 @@ export default {
       }
     },
     /**
-    * Sets legislations state
+    * Sets characteristics state
     */
     SetCharacteristics (characteristics) {
       this.$store.dispatch('SetCharacteristicsState', { characteristics })
+    },
+    updateCharacteristicCount (count) {
+      this.siteCharacteristicsCount = count
     },
     checkIsDirty () {
       if (this.$route.name === 'questionnaire') return this.$refs.routerView.$refs.questionnaire.isDirty()

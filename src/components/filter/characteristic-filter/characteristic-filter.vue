@@ -4,7 +4,6 @@
     app
     right
     temporary
-    width="100%"
   >
     <v-list
       dense
@@ -71,7 +70,7 @@ import { mapState } from 'vuex'
 
 export default {
   components: { CharacteristicFilterLookup },
-  events: ['closeCharacteristicFilterDrawer'],
+  events: ['close-characteristic-filter-drawer', 'update-site-characteristic-count'],
   mixins: [BaseMixin],
   props: {
     show: {
@@ -100,9 +99,14 @@ export default {
       },
       set (val) {
         if (!val) {
-          this.$emit('closeCharacteristicFilterDrawer')
+          this.$emit('close-characteristic-filter-drawer')
         }
       }
+    }
+  },
+  watch: {
+    siteCharacteristics (newValue, oldValue) {
+      this.$emit('update-site-characteristic-count', newValue.length)
     }
   },
   async mounted () {
