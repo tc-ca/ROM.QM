@@ -16,14 +16,14 @@
             "order": 0,
             "questions": [
                 {
-                    "name": "QTN_1_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "name": "QTN_1.RLQDSNCLDDNCL_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                     "id": 1,
                     "guid": "786b58a4-e667-4bac-946d-2c18bc8ec01c",
                     "sortOrder": 1,
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en": "1",
+                        "en": "1. Are liquids included in Class 6.1?",
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
@@ -35,7 +35,7 @@
                     "responseOptions": [
                         {
                             "id": 1,
-                            "name": "RSPNS_YS_QTN_1_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_YS_QTN_1.RLQDSNCLDDNCL_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
                             "text": {
                                 "en": "Yes",
@@ -54,14 +54,16 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
+                            "provisions": [
+                                "634ab342-9d64-4ba1-9ddf-fd7a68b4ec63"
+                            ],
                             "selectedProvisions": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "searchProvisions": "",
+                            "isProvisionCollapsed": true
                         },
                         {
                             "id": 2,
-                            "name": "RSPNS_N_QTN_1_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_N_QTN_1.RLQDSNCLDDNCL_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
                             "text": {
                                 "en": "No",
@@ -112,14 +114,14 @@
                     "dependencyGroups": []
                 },
                 {
-                    "name": "QTN_2_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "name": "QTN_2.1.15(2)(C)-RN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                     "id": 2,
                     "guid": "a5ae8a52-639a-48a3-8f03-530b757a38b1",
                     "sortOrder": 2,
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en": "2",
+                        "en": "2. 1.15 (2) (c) - are included in Class 1, Explosives, except for UN numbers UN0012",
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
@@ -131,7 +133,7 @@
                     "responseOptions": [
                         {
                             "id": 1,
-                            "name": "RSPNS_YS_QTN_2_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_YS_QTN_2.1.15(2)(C)-RN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
                             "text": {
                                 "en": "Yes",
@@ -157,7 +159,7 @@
                         },
                         {
                             "id": 2,
-                            "name": "RSPNS_N_QTN_2_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_N_QTN_2.1.15(2)(C)-RN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
                             "text": {
                                 "en": "No",
@@ -176,11 +178,13 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
+                            "provisions": [
+                                "fa999d37-3e03-4fcf-b396-d1fe43bc212f"
+                            ],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
                             "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "isProvisionCollapsed": true
                         }
                     ],
                     "validationRules": [
@@ -545,9 +549,7 @@
             "expansionPanels": [
                 5,
                 1,
-                2,
-                3,
-                4
+                0
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
@@ -667,6 +669,18 @@
             "leg": "488db8ca-3022-456e-9df9-f21d2ba63791",
             "questions": [
                 "cd31da88-954c-4dd5-b418-7934a4e64dcd"
+            ]
+        },
+        {
+            "leg": "634ab342-9d64-4ba1-9ddf-fd7a68b4ec63",
+            "questions": [
+                "786b58a4-e667-4bac-946d-2c18bc8ec01c"
+            ]
+        },
+        {
+            "leg": "fa999d37-3e03-4fcf-b396-d1fe43bc212f",
+            "questions": [
+                "a5ae8a52-639a-48a3-8f03-530b757a38b1"
             ]
         }
     ],
