@@ -30,6 +30,7 @@ export default {
     // if env= dev load the provisions else the state will be set explicility outside in app.vue
     if (this.envDev) {
       await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
+      await this.$store.dispatch('SetCharacteristicsStateToLocalData')
     }
   },
   methods: {
