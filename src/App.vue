@@ -93,7 +93,7 @@
         @display-navigation=" displayNavigationQuestionnaire = ! displayNavigationQuestionnaire"
       />
     </div>
-    <div v-else-if="isBuilderPage">
+    <div v-else-if="isBuilderPage && envDev">
       <bottom-navigation-builder
         @clear="clearBuilder = !clearBuilder"
         @save="saveBuilder = !saveBuilder"
