@@ -194,6 +194,11 @@ export default {
     settings (value, oldValue) {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
+    },
+    showSettings (value, oldValue) {
+      if (this.$route.name === 'questionnaire' && this.$refs.routerView.$refs.questionnaire !== undefined) {
+        this.$refs.routerView.$refs.questionnaire.$refs.navigation.hidden = value
+      }
     }
   },
   created: async function () {

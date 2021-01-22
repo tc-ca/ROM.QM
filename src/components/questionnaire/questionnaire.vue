@@ -106,6 +106,12 @@
           </v-row>
         </v-col>
       </v-row>
+      <questionnaire-nav
+        :display="drawer"
+        :navitems="navItems"
+        @question:click="onQuestionClick"
+        @navigation-close="drawer = $event"
+      />
     </div>
     <div v-show="!isVisible">
       <v-card
@@ -140,6 +146,19 @@
         </v-card-actions>
       </v-card>
     </div>
+    <div
+      v-if="!drawer"
+      ref="navigation"
+      class="center"
+    >
+      <v-btn
+        color="pink"
+        dark
+        @click="createData()"
+      >
+        Navigation
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -150,10 +169,11 @@ import _ from 'lodash'
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
 import { buildNotificationObject } from '../../utils'
+import QuestionnaireNav from '../questionnaire-nav/questionnaire-nav.vue'
 
 export default {
   emits: ['clear-provision-search-field'],
-  components: { QuestionnaireGroup, QuestionnaireError },
+  components: { QuestionnaireGroup, QuestionnaireError, QuestionnaireNav },
 
   props: {
   },
@@ -163,7 +183,9 @@ export default {
       expand: true,
       panelIndex: Number,
       groupCount: 0,
-      readOnly: false
+      readOnly: false,
+      drawer: false,
+      navItems: []
     }
   },
   computed: {
@@ -238,6 +260,27 @@ export default {
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
+    createData () {
+      let a = JSON.stringify(this.group.groups)
+      let b = a.replaceAll('primaryKey', 'id')
+        .replaceAll('"questions":', '"children":')
+        .replaceAll('"childQuestions":', '"children":')
+        .replaceAll('"name":', '"name_o":')
+        .replaceAll('"text":', '"name":')
+        .replaceAll('"title":', '"name":')
+      const regex = /("name":{"en":([^}]+)"fr":([^}]+)})/ig
+      const regex1 = /("name":{"en":([^}]+)"fr":([^}]+)})/i
+
+      let r = b.match(regex)
+      r.forEach(i => {
+        let en = '"name":' + i.match(/"en":"([^"]+)"/ig)[0].replaceAll('"en":', '')
+        let fr = '"name":' + i.match(/"fr":"([^"]+)"/ig)[0].replaceAll('"fr":', '')
+        b = b.replace(regex1, this.lang === 'en' ? en : fr)
+      })
+      this.$vuetify.goTo(0)
+      this.navItems = JSON.parse(b)
+      this.drawer = true
+    },
     setReadOnly () {
       this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
       this.readOnly = !this.readOnly
@@ -258,8 +301,13 @@ export default {
     },
     onNotificationClick (n) {
       this.expand = true
-      // this.panelIndex = n.groupIndex
       this.$store.commit('errors/updateErrorNotification', n.qguid)
+    },
+    onQuestionClick (q) {
+      if (q.guid === undefined) return
+      this.expand = true
+      this.drawer = false
+      this.$store.commit('errors/updateErrorNotification', q.guid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
       if (q.isVisible) {
@@ -348,5 +396,46 @@ export default {
   .v-expansion-panel {
     max-width: 800px;
   }
+}
+
+.center {
+  position: fixed;
+  top: 50%;
+  left: -4%;
+  width: 115px;
+  height: 0px;
+  text-align: right;
+  z-index: 9999;
+  margin-top: -15px;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.center v-btn {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  background: #06c;
+  text-align:center;
+  height: 15px;
+  width: 165px;
+  padding: 8px 16px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: solid 1px #333;
+  border-left: solid 1px #333;
+  border-right: solid 1px #fff;
+}
+
+.center a:hover {
+  background: #CCC
 }
 </style>
