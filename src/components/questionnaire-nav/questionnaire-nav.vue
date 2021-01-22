@@ -1,45 +1,48 @@
 <template>
-  <v-navigation-drawer
-    v-model="isVisible"
-    :width="300"
-    absolute
-    temporary
-  >
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="title">
-          Questionnaire Navigation
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-
-    <v-divider />
-    <v-treeview
-      dense
-      open-all
-      :items="navitems"
+  <div>
+    <v-navigation-drawer
+      v-model="isVisible"
+      :width="300"
+      absolute
+      temporary
+      app
     >
-      <template
-        slot="label"
-        slot-scope="props"
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Questionnaire Navigation
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider />
+      <v-treeview
+        dense
+        open-all
+        :items="navitems"
       >
-        <div
-          class="truncated"
-          @click="$emit('question:click', props.item)"
+        <template
+          slot="label"
+          slot-scope="props"
         >
-          <div>
-            <v-icon
-              small
-              color="primary"
-            >
-              mdi-flash-circle
-            </v-icon>
-            {{ props.item.name }}
+          <div
+            class="truncated"
+            @click="$emit('question:click', props.item)"
+          >
+            <div>
+              <v-icon
+                small
+                color="primary"
+              >
+                mdi-flash-circle
+              </v-icon>
+              {{ props.item.name }}
+            </div>
           </div>
-        </div>
-      </template>
-    </v-treeview>
-  </v-navigation-drawer>
+        </template>
+      </v-treeview>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
@@ -83,7 +86,7 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     position: relative;
-    padding: .5em;
+    padding: .2em;
 
     width: auto;
     max-width: 90%;
@@ -120,8 +123,9 @@ export default {
     position: absolute;
     z-index:-1; /* stack below truncated text */
   }
-.v-treeview--dense .v-treeview-node__root {
-  overflow: auto;
-  min-height: 1px !important;
-}
+  .v-treeview-node__root {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+  }
 </style>
