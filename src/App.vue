@@ -185,6 +185,22 @@ export default {
       }
     })
   },
+  watch: {
+    // required for Field Service, as this.lang not available from the created hook method ONLY when app is reading code from tdgwoodservice.js, has to do with how the page is loaded in.
+    lang (value, oldValue) {
+      console.log('App.vue: lang watch ' + value + ')')
+      this.setLanguage()
+    },
+    settings (value, oldValue) {
+      console.log('App.vue: settings watch ' + value)
+      this.settings = JSON.parse(value)
+    },
+    showSettings (value, oldValue) {
+      if (this.$route.name === 'questionnaire' && this.$refs.routerView.$refs.questionnaire !== undefined) {
+        this.$refs.routerView.$refs.questionnaire.$refs.navigation.hidden = value
+      }
+    }
+  },
   created: async function () {
     this.$router.push({ name: this.page }).catch((e) => {
       console.log(e)

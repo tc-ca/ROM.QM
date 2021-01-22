@@ -348,9 +348,9 @@ export default {
       return this.provisions.length > 0
     },
     getClassName () {
-      let c = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
-      if (this.$refs.textArea) this.$refs.textArea.focus()
-      return c
+      let selClass = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
+      if (selClass === 'selected' && this.$refs.qPanel) this.$refs.qPanel.$el.scrollIntoView(true)
+      return selClass
     },
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
