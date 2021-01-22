@@ -2,66 +2,7 @@
   <div>
     <div v-show="isVisible">
       <v-row>
-        <v-col
-          cols="6"
-          align="left"
-          justify="space-around"
-        >
-          <v-btn
-            color="primary"
-            elevation="2"
-            medium
-            rounded
-            style="margin-right: 5px"
-            @click="expandAll()"
-          >
-            <span>{{ $t('app.questionnaire.expandAll') }}</span>
-          </v-btn>
-          <v-btn
-            color="primary"
-            elevation="2"
-            medium
-            rounded
-            style="margin-right: 5px"
-            @click="collapseAll()"
-          >
-            <span>{{ $t('app.questionnaire.collapseAll') }}</span>
-          </v-btn>
-          <v-btn
-            color="primary"
-            elevation="2"
-            medium
-            rounded
-            @click="validateQ()"
-          >
-            <span>{{ $t('app.questionnaire.validate') }}</span>
-          </v-btn>
-        </v-col>
-
-        <!--
-          Don't delete this comment, it is hidden the button to make the questionnaire Active/Inactive. It could be use in the future
-          for now is hidden because it is done from Dynamic 365 at this moment
-        <v-col
-          cols="3"
-          align="left"
-          justify="space-around"
-        >
-          <v-btn
-            class="white--text"
-            :color="readOnly ? 'red' : 'green'"
-            elevation="2"
-            medium
-            rounded
-            @click="setReadOnly()"
-          >
-            <span v-if="!readOnly">{{ $t('app.general.active') }}</span>
-            <span v-else>{{ $t('app.general.inactive') }}</span>
-          </v-btn>
-        </v-col>
-        -->
-      </v-row>
-      <v-row>
-        <v-col cols="7">
+        <v-col>
           <div>
             <v-form
               ref="questionaire_form"
@@ -156,14 +97,26 @@ export default {
   components: { QuestionnaireGroup, QuestionnaireError },
 
   props: {
+    expandAllProp: {
+      type: Boolean,
+      default: true
+    },
+    validateProp: {
+      type: Boolean,
+      default: false
+    },
+    readOnlyProp: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
       valid: false,
-      expand: true,
+      expand: this.expandAllProp,
       panelIndex: Number,
       groupCount: 0,
-      readOnly: false
+      readOnly: this.readOnlyProp
     }
   },
   computed: {
@@ -220,6 +173,17 @@ export default {
     },
     isVisible () {
       return this.groupCount > 0
+    }
+  },
+  watch: {
+    expandAllProp (value) {
+      this.expandPanels(value)
+    },
+    readOnlyProp () {
+      this.setReadOnly()
+    },
+    validateProp () {
+      this.validateQ()
     }
   },
   mounted () {
@@ -320,13 +284,9 @@ export default {
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
     },
-    collapseAll () {
+    expandPanels (expand) {
       this.panelIndex = null
-      this.expand = false
-    },
-    expandAll () {
-      this.panelIndex = null
-      this.expand = true
+      this.expand = expand
     },
     onUpdateGroupCount (count) {
       this.groupCount += count
@@ -344,9 +304,7 @@ export default {
     box-shadow: none;
   }
 }
-@media only screen and (min-width: 601px) {
-  .v-expansion-panel {
-    max-width: 800px;
-  }
+ @media only screen and (min-width: 601px) {
+
 }
 </style>

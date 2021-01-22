@@ -2,6 +2,10 @@
   <div>
     <questionnaire
       ref="questionnaire"
+      :expand-all-prop="expandAllPropQuestionnaire"
+      :read-only-prop="readOnlyPropQuestionnaire"
+      :validate-prop="validatePropQuestionnaire"
+
       @clear-provision-search-field="onClearProvisionSearchField"
     />
   </div>
@@ -14,11 +18,28 @@ import BaseMixin from '../mixins/base'
 
 export default {
   emits: ['clear-provision-search-field'],
-
   components: {
     Questionnaire
   },
   mixins: [BaseMixin],
+  props: {
+    expandAllPropQuestionnaire: {
+      type: Boolean,
+      default: false
+    },
+    collaspeAllPropQuestionnaire: {
+      type: Boolean,
+      default: false
+    },
+    validatePropQuestionnaire: {
+      type: Boolean,
+      default: false
+    },
+    readOnlyPropQuestionnaire: {
+      type: Boolean,
+      default: false
+    }
+  },
 
   async mounted () {
     // if env= dev and loadLocalData then set the questionnaire state to local copy else the state will be set explicility outside in app.vue
