@@ -70,7 +70,8 @@
           ref="routerView"
           :expand-all-prop-questionnaire="expandAllQuestionnaire"
           :read-only-prop-questionnaire="readOnlyQuestionnaire"
-          :validate-prop-questionnniare="validateQuestionnaire"
+          :validate-prop-questionnaire="validateQuestionnaire"
+          :navigation-display-prop-questionnniare="displayNavigationQuestionnaire"
           :clear-prop-builder="clearBuilder"
           :save-prop-builder="saveBuilder"
           :fix-it-prop-builder="fixItBuilder"
@@ -89,6 +90,7 @@
         @scroll-to-top="scrollToTop"
         @validate="validateQuestionnaire = !validateQuestionnaire"
         @set-read-only="readOnlyQuestionnaire = !readOnlyQuestionnaire"
+        @display-navigation=" displayNavigationQuestionnaire = ! displayNavigationQuestionnaire"
       />
     </div>
     <div v-else-if="isBuilderPage">
@@ -158,7 +160,8 @@ export default {
       // questionnaire related data that will be passed into the router specific component
       expandAllQuestionnaire: true,
       readOnlyQuestionnaire: false,
-      validateQuestionnanire: false,
+      validateQuestionnaire: false,
+      displayNavigationQuestionnaire: false,
       // questionnaire related data that will be passed into the router specific component
       clearBuilder: false,
       saveBuilder: false,
@@ -194,11 +197,6 @@ export default {
     settings (value, oldValue) {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
-    },
-    showSettings (value, oldValue) {
-      if (this.$route.name === 'questionnaire' && this.$refs.routerView.$refs.questionnaire !== undefined) {
-        this.$refs.routerView.$refs.questionnaire.$refs.navigation.hidden = value
-      }
     }
   },
   created: async function () {

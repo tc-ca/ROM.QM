@@ -3,7 +3,6 @@
     background-color="rgba(241, 241, 241, 0.9)"
     shift
     fixed
-    hide-on-scroll
   >
     <v-btn
       @click="clear()"

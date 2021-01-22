@@ -3,8 +3,16 @@
     background-color="rgba(241, 241, 241, 0.9)"
     shift
     fixed
-    hide-on-scroll
   >
+    <v-btn
+      @click="displayNavigation()"
+    >
+      <span>Navigation</span>
+
+      <v-icon color="green">
+        mdi-navigation
+      </v-icon>
+    </v-btn>
     <!-- EXPAND ALL BUTTON -->
 
     <v-btn
@@ -12,8 +20,10 @@
     >
       <span>Exapand All</span>
 
-      <v-icon color="purple">
-        mdi-arrow-expand-vertical
+      <v-icon
+        color="purple"
+      >
+        mdi-arrow-collapse-vertical
       </v-icon>
     </v-btn>
     <!-- COLLASPE ALL BUTTON -->
@@ -62,7 +72,7 @@
 import BaseMixin from '../../mixins/base'
 
 export default {
-  emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only'],
+  emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only', 'display-navigation'],
   mixins: [BaseMixin],
   methods: {
     expand (expand) {
@@ -76,6 +86,9 @@ export default {
     },
     setReadOnly () {
       this.$emit('set-read-only')
+    },
+    displayNavigation () {
+      this.$emit('display-navigation')
     }
   }
 }

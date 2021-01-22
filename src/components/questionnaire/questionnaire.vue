@@ -87,19 +87,6 @@
         </v-card-actions>
       </v-card>
     </div>
-    <div
-      v-if="!drawer"
-      ref="navigation"
-      class="center"
-    >
-      <v-btn
-        color="pink"
-        dark
-        @click="createData()"
-      >
-        Navigation
-      </v-btn>
-    </div>
   </div>
 </template>
 
@@ -126,6 +113,10 @@ export default {
       default: false
     },
     readOnlyProp: {
+      type: Boolean,
+      default: false
+    },
+    displayNavigationProp: {
       type: Boolean,
       default: false
     }
@@ -206,6 +197,9 @@ export default {
     },
     validateProp () {
       this.validateQ()
+    },
+    displayNavigationProp () {
+      this.displayNavigationDrawer()
     }
   },
   mounted () {
@@ -224,7 +218,7 @@ export default {
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
-    createData () {
+    displayNavigationDrawer () {
       let a = JSON.stringify(this.group.groups)
       let b = a.replaceAll('primaryKey', 'id')
         .replaceAll('"questions":', '"children":')

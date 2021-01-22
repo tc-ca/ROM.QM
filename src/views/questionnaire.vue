@@ -5,6 +5,7 @@
       :expand-all-prop="expandAllPropQuestionnaire"
       :read-only-prop="readOnlyPropQuestionnaire"
       :validate-prop="validatePropQuestionnaire"
+      :display-navigation-prop="navigationDisplayPropQuestionnniare"
 
       @clear-provision-search-field="onClearProvisionSearchField"
     />
@@ -36,6 +37,10 @@ export default {
       default: false
     },
     readOnlyPropQuestionnaire: {
+      type: Boolean,
+      default: false
+    },
+    navigationDisplayPropQuestionnniare: {
       type: Boolean,
       default: false
     }
