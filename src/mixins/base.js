@@ -14,6 +14,12 @@ export default {
     },
     envProd() {
       return this.env === "production";
+    },
+      isBuilderPage () {
+      return this.$route.name === "builder"
+    },
+      isQuestionnairePage () {
+      return this.$route.name === "questionnaire"
     }
   }
 };

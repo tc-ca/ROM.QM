@@ -16,7 +16,7 @@
         <v-card
           v-show="expandProvisionSearchField"
           width="80%"
-          class="mx-auto "
+          class="mx-auto"
         >
           <provision-search
             :clear-provision-search-text="clearProvisionSearchText"
@@ -26,16 +26,13 @@
         </v-card>
       </v-expand-x-transition>
       <!-- PROVISION SEARCH FILTER -->
-
       <v-btn
         id=""
         icon
         color="white"
         @click="expandProvisionSearchField = !expandProvisionSearchField"
       >
-        <v-icon>
-          mdi-magnify
-        </v-icon>
+        <v-icon> mdi-magnify </v-icon>
       </v-btn>
       <!-- CHRACTERISTIC FILTER -->
       <v-btn
@@ -51,9 +48,7 @@
           color="red"
           overlap
         >
-          <v-icon>
-            mdi-tune
-          </v-icon>
+          <v-icon> mdi-tune </v-icon>
         </v-badge>
       </v-btn>
     </v-app-bar>
@@ -64,7 +59,7 @@
     />
     <characteristic-filter
       :show="showCharacteristicFilter"
-      @close-characteristic-filter-drawer="showCharacteristicFilter= false"
+      @close-characteristic-filter-drawer="showCharacteristicFilter = false"
       @update-site-characteristic-count="updateCharacteristicCount"
     />
     <v-content>
@@ -73,6 +68,13 @@
       >
         <router-view
           ref="routerView"
+          :expand-all-prop-questionnaire="expandAllQuestionnaire"
+          :read-only-prop-questionnaire="readOnlyQuestionnaire"
+          :validate-prop-questionnaire="validateQuestionnaire"
+          :navigation-display-prop-questionnniare="displayNavigationQuestionnaire"
+          :clear-prop-builder="clearBuilder"
+          :save-prop-builder="saveBuilder"
+          :fix-it-prop-builder="fixItBuilder"
           @clear-provision-search-field="setClearProvisionSearchTrue"
         />
       </v-container>
@@ -82,30 +84,31 @@
       :show-modal="showLegislationSearchModal"
       @hideModal="showLegislationSearchModal = false"
     />
-    <div style="font-size: small; margin-left: 10px">
+    <div v-if="isQuestionnairePage">
+      <bottom-navigation-questionnaire
+        @expand-panels="expandAllQuestionnaire = !expandAllQuestionnaire"
+        @scroll-to-top="scrollToTop"
+        @validate="validateQuestionnaire = !validateQuestionnaire"
+        @set-read-only="readOnlyQuestionnaire = !readOnlyQuestionnaire"
+        @display-navigation=" displayNavigationQuestionnaire = ! displayNavigationQuestionnaire"
+      />
+    </div>
+    <div v-else-if="isBuilderPage">
+      <bottom-navigation-builder
+        @clear="clearBuilder = !clearBuilder"
+        @save="saveBuilder = !saveBuilder"
+        @fix-it="fixItBuilder = !fixItBuilder"
+      />
+    </div>
+
+    <!-- <div style="font-size: small; margin-left: 10px">
       <div v-if="envDev">
         Environment: {{ env }}
       </div>
       <div v-if="envDev">
         Load local data: {{ loadLocalData }}
       </div>
-    </div>
-    <div>
-      <v-btn
-        v-show="fab"
-        v-scroll="onScroll"
-        class="btnTop"
-        fab
-        dark
-        fixed
-        bottom
-        right
-        color="warning"
-        @click="scrollToTop"
-      >
-        <v-icon>mdi-arrow-up</v-icon>
-      </v-btn>
-    </div>
+    </div> -->
   </v-app>
 </template>
 
@@ -115,6 +118,8 @@ import NotificationContainer from './components/notification-container/notificat
 import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import ProvisionSearch from './components/provision-search/provision-search.vue'
 import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
+import BottomNavigationQuestionnaire from './components/bottom-navigation/bottom-navigation-questionnaire.vue'
+import BottomNavigationBuilder from './components/bottom-navigation/bottom-navigation-builder.vue'
 
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
@@ -127,7 +132,10 @@ export default {
     LegislationSearchModal,
     Settings,
     ProvisionSearch,
-    CharacteristicFilter
+    CharacteristicFilter,
+    BottomNavigationQuestionnaire,
+    BottomNavigationBuilder
+
   },
   mixins: [BaseMixin],
   props: {
@@ -138,34 +146,29 @@ export default {
     lang: {
       type: String,
       default: LANGUAGE.ENGLISH
-    },
-    templatejson: {
-      type: String,
-      default: 'Documentation and Safety Marks',
-      required: false
-    },
-    templateid: {
-      type: String,
-      default: '',
-      required: false
     }
   },
   data: function () {
     return {
-      fab: false,
+      // app related data
       showLegislationSearchModal: false,
       showSettings: false,
       expandProvisionSearchField: false,
       clearProvisionSearchText: false,
       showCharacteristicFilter: false,
-      siteCharacteristicsCount: 0
+      siteCharacteristicsCount: 0,
+      // questionnaire related data that will be passed into the router specific component
+      expandAllQuestionnaire: true,
+      readOnlyQuestionnaire: false,
+      validateQuestionnaire: false,
+      displayNavigationQuestionnaire: false,
+      // questionnaire related data that will be passed into the router specific component
+      clearBuilder: false,
+      saveBuilder: false,
+      fixItBuilder: false
     }
   },
   computed: {
-    title () {
-      // This is a test for checkin using Github Desktop
-      return `${this.questionnaire.title[this.language]}`
-    },
     ...mapState({
       language: (state) => {
         console.log('App.vue: language computed ' + state + ')')
@@ -194,11 +197,6 @@ export default {
     settings (value, oldValue) {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
-    },
-    showSettings (value, oldValue) {
-      if (this.$route.name === 'questionnaire' && this.$refs.routerView.$refs.questionnaire !== undefined) {
-        this.$refs.routerView.$refs.questionnaire.$refs.navigation.hidden = value
-      }
     }
   },
   created: async function () {
@@ -275,11 +273,6 @@ export default {
     shrinkProvisionSearchField () {
       this.expandProvisionSearchField = false
     },
-    onScroll (e) {
-      if (typeof window === 'undefined') return
-      const top = window.pageYOffset || e.target.scrollTop || 0
-      this.fab = top > 20
-    },
     scrollToTop () {
       this.$vuetify.goTo(0)
     }
@@ -296,8 +289,5 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   /* margin-top: 60px; */
-}
-.btnTop i:hover{
-  transform: scale(1.80);
 }
 </style>

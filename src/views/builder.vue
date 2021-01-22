@@ -74,41 +74,6 @@
       </v-col>
       <v-col cols="5">
         <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:85%;overflow-y: auto;overflow-x: hidden">
-          <v-row
-            v-if="envDev"
-            justify="end"
-          >
-            <v-col class="col-auto">
-              <v-btn
-                color="primary"
-                elevation="2"
-                rounded
-                @click="clearQuestionnaire()"
-              >
-                <span>{{ $t('app.builder.clear') }}</span>
-              </v-btn>
-            </v-col>
-            <v-col class="col-auto">
-              <v-btn
-                color="primary"
-                elevation="2"
-                rounded
-                @click="save()"
-              >
-                <span>{{ $t('app.builder.save') }}</span>
-              </v-btn>
-            </v-col>
-            <v-col class="col-auto">
-              <v-btn
-                color="primary"
-                elevation="2"
-                rounded
-                @click="fixit()"
-              >
-                <span>{{ $t('app.builder.fix') }}</span>
-              </v-btn>
-            </v-col>
-          </v-row>
           <v-row>
             <!-- <v-col>
               <v-text-field
@@ -702,6 +667,20 @@ export default {
     BuilderGroup
   },
   mixins: [BaseMixin],
+  props: {
+    clearPropBuilder: {
+      type: Boolean,
+      default: false
+    },
+    savePropBuilder: {
+      type: Boolean,
+      default: false
+    },
+    fixItPropBuilder: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       questionnaire: null,
@@ -759,6 +738,17 @@ export default {
       // ...
       ])
     })
+  },
+  watch: {
+    clearPropBuilder () {
+      this.clearQuestionnaire()
+    },
+    savePropBuilder () {
+      this.save()
+    },
+    FixItPropBuilder () {
+      this.fixit()
+    }
   },
   async mounted () {
     // run this code first
