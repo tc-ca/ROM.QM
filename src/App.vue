@@ -201,6 +201,9 @@ export default {
       console.log(e)
     })
   },
+  updated () {
+    console.log(JSON.stringify(this.$store.state.questionnaire.questionnaire))
+  },
   methods: {
     ...mapActions(['setAppLanguage', 'setSettings']),
     setLanguage () {
