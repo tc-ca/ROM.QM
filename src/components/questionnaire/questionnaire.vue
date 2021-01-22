@@ -41,7 +41,6 @@
         <!--
           Don't delete this comment, it is hidden the button to make the questionnaire Active/Inactive. It could be use in the future
           for now is hidden because it is done from Dynamic 365 at this moment
-        -->
         <v-col
           cols="3"
           align="left"
@@ -59,6 +58,7 @@
             <span v-else>{{ $t('app.general.inactive') }}</span>
           </v-btn>
         </v-col>
+        -->
       </v-row>
       <v-row>
         <v-col cols="7">
