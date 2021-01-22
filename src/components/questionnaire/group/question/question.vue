@@ -205,7 +205,7 @@
                 selection-type="leaf"
                 :search="selectedResponseOption.searchProvisions"
                 :filter="selectedResponseOption.filterProvisions"
-                :items="provisions"
+                :items="treeDataProvisions"
               >
                 <template v-slot:label="{ item }">
                   <div class="truncated">
@@ -261,7 +261,7 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { buildTreeFromFlatList, hydrateItems, setNewGUID, GetAllChildrenQuestions } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, setNewGUID, GetAllChildrenQuestions } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 
@@ -299,7 +299,7 @@ export default {
       isValid: null,
       selectedResponseOption: [],
       selResponses: [],
-      provisions: [],
+      treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
@@ -330,6 +330,22 @@ export default {
       }
       text += `${this.question.text[this.lang]}`
       return text
+    },
+    provisions () {
+      if (this.isLegislationsDataAvailable) {
+        let provisions = []
+        let dictionnairyOfProvisions = this.$store.state.legislations.legislations
+        this.question.responseOptions.forEach(option => {
+          provisions = provisions.concat(option.provisions)
+        })
+
+        const uniqueProvisions = provisions.filter(onlyUnique)
+        return hydrateItems(uniqueProvisions, dictionnairyOfProvisions)
+      }
+      return []
+    },
+    hasProvisions () {
+      return this.provisions.length > 0
     },
     getClassName () {
       let selClass = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
@@ -581,7 +597,7 @@ export default {
           } else if (e.children) return findDeep(e.children, str)
         })
       }
-      findDeep(this.provisions, item)
+      findDeep(this.treeDataProvisions, item)
       return provison
     },
     getSelectedProvisionsId () {
@@ -595,10 +611,10 @@ export default {
     },
     onSelectedProvisionClick (item) {
       this.selProvisions = this.selProvisions.filter(i => i !== item)
-      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
+    // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     loadProvisions (responseOption) {
-      // legs in store should be key, value form
+    // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
       let provisions = hydrateItems(responseOption.provisions, dictionnairyOfProvisions)
 
@@ -623,10 +639,10 @@ export default {
 
       for (var i = 0; i < ids.length; i++) {
         if (uniqueIds.includes(parentids[i])) {
-          // parent found
+        // parent found
           continue
         } else {
-          // if you dont have a parent we will just set it to the root node
+        // if you dont have a parent we will just set it to the root node
           data[i].parentLegislationId = rootNodeId
         }
       }
@@ -641,14 +657,14 @@ export default {
 
       const root = buildTreeFromFlatList(data, 'parentLegislationId')
 
-      this.provisions = root.children
+      this.treeDataProvisions = root.children
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
-      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
+    // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
-      // store the response in data property for reference use
+    // store the response in data property for reference use
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
@@ -700,7 +716,7 @@ export default {
         if (responseOption && responseOption.selectedProvisions) {
           this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
         }
-        // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
+      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
       }
     },
     updateDependants (args) {
@@ -759,8 +775,8 @@ export default {
           }
 
           if (group.ruleType === 'visibility') {
-            // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
-            // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
+          // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
+          // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
             groupMatchArray.push({ ruleType: 'visibility', groupMatch })
             const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
             question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
@@ -808,13 +824,13 @@ export default {
       this.question.isVisible = visible
     },
     questionFoundInProvision (provisions) {
-      // ains abstract this out
-      // if (this.provisionFilter === null) {
-      //   // no active search display all questions
-      //   return true
-      // }
+    // ains abstract this out
+    // if (this.provisionFilter === null) {
+    //   // no active search display all questions
+    //   return true
+    // }
       if (provisions && provisions.length > 0) {
-        // active search check to see if question should be shown or not
+      // active search check to see if question should be shown or not
         let dependants = []
         let dependsArray = []
 
@@ -890,8 +906,8 @@ export default {
         groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
 
         if (group.ruleType === 'visibility') {
-          // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
-          // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
+        // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
+        // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
           const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
           question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
         } else if (group.ruleType === 'validation') {
