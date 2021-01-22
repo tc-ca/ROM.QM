@@ -272,58 +272,9 @@ export default {
         let fr = '"name":' + i.match(/"fr":"([^"]+)"/ig)[0].replaceAll('"fr":', '')
         b = b.replace(regex1, this.lang === 'en' ? en : fr)
       })
-      // let c = b.replaceAll(regex, b.match(regex)[1])
-      // console.log(c)
-
-      // var model = { questions: null, title: null }
-      // let items = []
-      // this.group.groups.forEach((g, index) => {
-      //   if (g.isVisible) {
-      //     items.push(_.pick(g, _.keys(model)))
-      //     items[index].id = g.primaryKey
-      //     items[index].name = g.title.en
-      //   }
-      // })
       this.$vuetify.goTo(0)
-      this.navItems = JSON.parse(b) // this.rename(items, 'questions', 'children')
+      this.navItems = JSON.parse(b)
       this.drawer = true
-    },
-    rename (obj, key, newKey) {
-      obj.forEach(o => {
-        if (o.questions) {
-          o.questions.forEach(q => {
-            if (q.isVisible) {
-              q.name = q.text.en
-              if (q.childQuestions !== undefined && q.childQuestions.length > 0) {
-                this.renameChild(q, 'childQuestions', newKey)
-              }
-            } else {
-              _.remove(o.questions, q)
-            }
-          })
-        }
-        if (_.includes(_.keys(o), key)) {
-          o[newKey] = _.clone(o[key], true)
-          delete o[key]
-        }
-      })
-      return obj
-    },
-    renameChild (obj, key, newKey) {
-      if (obj.childQuestions !== undefined && obj.childQuestions.length > 0) {
-        obj.childQuestions.forEach(q => {
-          if (q.isVisible) {
-            this.renameChild(q, 'childQuestions', newKey)
-          } else {
-            _.remove(obj.childQuestions, q)
-          }
-        })
-      }
-      if (_.includes(_.keys(obj), key)) {
-        obj[newKey] = _.clone(obj[key], true)
-        delete obj[key]
-      }
-      return obj
     },
     setReadOnly () {
       this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
@@ -345,19 +296,12 @@ export default {
     },
     onNotificationClick (n) {
       this.expand = true
-      this.$refs.questionGroup[n.groupIndex].$refs.groupQuestion[1].$el.scrollIntoView(true)
       this.$store.commit('errors/updateErrorNotification', n.qguid)
     },
     onQuestionClick (q) {
-      // eslint-disable-next-line no-debugger
-      debugger
       if (q.guid === undefined) return
       this.expand = true
       this.drawer = false
-      let grpIndex = this.group.groups.findIndex(g => g.questions.some(item => item.guid === q.guid))
-      let qIndex = this.group.groups[grpIndex].questions.findIndex(item => item.guid === q.guid)
-
-      this.$refs.questionGroup[grpIndex].$refs.groupQuestion[qIndex].$el.scrollIntoView(true)
       this.$store.commit('errors/updateErrorNotification', q.guid)
     },
     addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
