@@ -2,66 +2,7 @@
   <div>
     <div v-show="isVisible">
       <v-row>
-        <v-col
-          cols="6"
-          align="left"
-          justify="space-around"
-        >
-          <v-btn
-            color="primary"
-            elevation="2"
-            medium
-            rounded
-            style="margin-right: 5px"
-            @click="expandAll()"
-          >
-            <span>{{ $t('app.questionnaire.expandAll') }}</span>
-          </v-btn>
-          <v-btn
-            color="primary"
-            elevation="2"
-            medium
-            rounded
-            style="margin-right: 5px"
-            @click="collapseAll()"
-          >
-            <span>{{ $t('app.questionnaire.collapseAll') }}</span>
-          </v-btn>
-          <v-btn
-            color="primary"
-            elevation="2"
-            medium
-            rounded
-            @click="validateQ()"
-          >
-            <span>{{ $t('app.questionnaire.validate') }}</span>
-          </v-btn>
-        </v-col>
-
-        <!--
-          Don't delete this comment, it is hidden the button to make the questionnaire Active/Inactive. It could be use in the future
-          for now is hidden because it is done from Dynamic 365 at this moment
-        <v-col
-          cols="3"
-          align="left"
-          justify="space-around"
-        >
-          <v-btn
-            class="white--text"
-            :color="readOnly ? 'red' : 'green'"
-            elevation="2"
-            medium
-            rounded
-            @click="setReadOnly()"
-          >
-            <span v-if="!readOnly">{{ $t('app.general.active') }}</span>
-            <span v-else>{{ $t('app.general.inactive') }}</span>
-          </v-btn>
-        </v-col>
-        -->
-      </v-row>
-      <v-row>
-        <v-col cols="7">
+        <v-col>
           <div>
             <v-form
               ref="questionaire_form"
@@ -146,19 +87,6 @@
         </v-card-actions>
       </v-card>
     </div>
-    <div
-      v-if="!drawer"
-      ref="navigation"
-      class="center"
-    >
-      <v-btn
-        color="pink"
-        dark
-        @click="createData()"
-      >
-        Navigation
-      </v-btn>
-    </div>
   </div>
 </template>
 
@@ -176,14 +104,30 @@ export default {
   components: { QuestionnaireGroup, QuestionnaireError, QuestionnaireNav },
 
   props: {
+    expandAllProp: {
+      type: Boolean,
+      default: true
+    },
+    validateProp: {
+      type: Boolean,
+      default: false
+    },
+    readOnlyProp: {
+      type: Boolean,
+      default: false
+    },
+    displayNavigationProp: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
       valid: false,
-      expand: true,
+      expand: this.expandAllProp,
       panelIndex: Number,
       groupCount: 0,
-      readOnly: false,
+      readOnly: this.readOnlyProp,
       drawer: false,
       navItems: []
     }
@@ -244,6 +188,20 @@ export default {
       return this.groupCount > 0
     }
   },
+  watch: {
+    expandAllProp (value) {
+      this.expandPanels(value)
+    },
+    readOnlyProp () {
+      this.setReadOnly()
+    },
+    validateProp () {
+      this.validateQ()
+    },
+    displayNavigationProp () {
+      this.displayNavigationDrawer()
+    }
+  },
   mounted () {
     // sets the default value based on visibility of the component
     this.$nextTick(function () {
@@ -260,7 +218,7 @@ export default {
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
-    createData () {
+    displayNavigationDrawer () {
       let a = JSON.stringify(this.group.groups)
       let b = a.replaceAll('primaryKey', 'id')
         .replaceAll('"questions":', '"children":')
@@ -368,13 +326,9 @@ export default {
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }
     },
-    collapseAll () {
+    expandPanels (expand) {
       this.panelIndex = null
-      this.expand = false
-    },
-    expandAll () {
-      this.panelIndex = null
-      this.expand = true
+      this.expand = expand
     },
     onUpdateGroupCount (count) {
       this.groupCount += count
@@ -392,10 +346,8 @@ export default {
     box-shadow: none;
   }
 }
-@media only screen and (min-width: 601px) {
-  .v-expansion-panel {
-    max-width: 800px;
-  }
+ @media only screen and (min-width: 601px) {
+
 }
 
 .center {
