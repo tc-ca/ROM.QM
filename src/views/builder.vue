@@ -660,7 +660,7 @@ import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
 import { generateName } from '../utils.js'
-import { BlobServiceClient } from '@azure/storage-blob'
+
 export default {
   name: 'Builder',
   components: {
@@ -853,56 +853,8 @@ export default {
         }
       }
     },
-    accessBlob: async function () {
-      // eslint-disable-next-line no-debugger
-      debugger
-      const blobSasUrl = 'https://romstorageaccount.blob.core.windows.net/romblobcontainermsdn?sv=2019-12-12&si=romblobcontainermsdn-176D01CC0C8&sr=c&sig=z9%2FMkjsPGeXod4Znnvh5JgySFQmTneTB9ommA66ti4Y%3D'
-      const blobServiceClient = new BlobServiceClient(blobSasUrl)
-      const containerName = 'romblobcontainermsdn'
-
-      const containerClient = blobServiceClient.getContainerClient(containerName)
-      console.log(containerClient)
-
-      try {
-        let iter = containerClient.listBlobsFlat()
-        let blobItem = await iter.next()
-        while (!blobItem.done) {
-          console.log(blobItem.value.name)
-          blobItem = await iter.next()
-        }
-      } catch (error) {
-        console.log(error.message)
-      }
-    },
-    azureBlobData () {
-      // eslint-disable-next-line no-debugger
-      debugger
-      const blobSasUrl = 'https://romstorageaccount.blob.core.windows.net/romblobcontainermsdn?sv=2019-12-12&si=romblobcontainermsdn-176D01CC0C8&sr=c&sig=z9%2FMkjsPGeXod4Znnvh5JgySFQmTneTB9ommA66ti4Y%3D'
-      // Create a new BlobServiceClient
-      const blobServiceClient = new BlobServiceClient(blobSasUrl)
-      const containerName = 'romblobcontainermsdn'
-
-      const containerClient = blobServiceClient.getContainerClient(containerName)
-
-      const listFiles = async () => {
-        try {
-          let iter = containerClient.listBlobsFlat()
-          let blobItem = await iter.next()
-          while (!blobItem.done) {
-            // eslint-disable-next-line no-debugger
-            debugger
-            console.log(blobItem.value.name)
-            blobItem = await iter.next()
-          }
-        } catch (error) {
-          console.log(error.message)
-        }
-      }
-      console.log(listFiles)
-    },
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
-      this.accessBlob()
     },
     confirmed () {
       this.confirmDialogOpen = false

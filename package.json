@@ -16,7 +16,6 @@
     "generate-template-schema": "typescript-json-schema src/schema/template.ts Template --out src/schema/template.json --noExtraProps --required --strictNullChecks"
   },
   "dependencies": {
-    "@azure/storage-blob": "^12.3.0",
     "@mdi/font": "^5.8.55",
     "@resconet/jsbridge": "^12.3.2",
     "@storybook/addon-a11y": "^6.0.27",
