@@ -129,7 +129,8 @@ export default {
       groupCount: 0,
       readOnly: this.readOnlyProp,
       drawer: false,
-      navItems: []
+      navItems: [],
+      flagTimer: null
     }
   },
   computed: {
@@ -209,6 +210,7 @@ export default {
       // entire view has been rendered
       this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
     })
+    this.isDirty()
   },
   updated () {
     this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
@@ -255,7 +257,10 @@ export default {
         copyGroups.push(_.pick(g, _.keys(model)))
       })
 
-      return _.differenceWith(curGroups, copyGroups, _.isEqual).length !== 0
+      this.$root.$children[0].isFormDirty = _.differenceWith(curGroups, copyGroups, _.isEqual).length !== 0
+
+      this.flagTimer = setTimeout(() => this.isDirty(), 3000)
+      if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
     onNotificationClick (n) {
       this.expand = true
