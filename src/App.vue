@@ -62,7 +62,7 @@
       @close-characteristic-filter-drawer="showCharacteristicFilter = false"
       @update-site-characteristic-count="updateCharacteristicCount"
     />
-    <v-content>
+    <v-main>
       <v-container
         class="px-2"
       >
@@ -78,7 +78,7 @@
           @clear-provision-search-field="setClearProvisionSearchTrue"
         />
       </v-container>
-    </v-content>
+    </v-main>
     <notification-container />
     <legislation-search-modal
       :show-modal="showLegislationSearchModal"
@@ -162,7 +162,7 @@ export default {
       readOnlyQuestionnaire: false,
       validateQuestionnaire: false,
       displayNavigationQuestionnaire: false,
-      // questionnaire related data that will be passed into the router specific component
+      // builder related data that will be passed into the router specific component
       clearBuilder: false,
       saveBuilder: false,
       fixItBuilder: false
