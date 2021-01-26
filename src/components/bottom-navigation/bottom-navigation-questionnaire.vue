@@ -1,8 +1,8 @@
 <template>
   <v-bottom-navigation
     background-color="rgba(241, 241, 241, 0.9)"
-    shift
     fixed
+    color="primary"
   >
     <v-btn
       @click="displayNavigation()"
@@ -13,25 +13,21 @@
         mdi-navigation
       </v-icon>
     </v-btn>
-    <!-- EXPAND ALL BUTTON -->
-
-    <v-btn
-      @click="expand(true)"
-    >
-      <span>Exapand All</span>
+    <!-- COLLASPE ALL BUTTON -->
+    <v-btn @click="expand()">
+      <span v-if="isExpandPanelsData==false">Expand All </span>
+      <span v-if="isExpandPanelsData===true">Collaspe All</span>
 
       <v-icon
+        v-if="isExpandPanelsData===false"
         color="purple"
       >
-        mdi-arrow-collapse-vertical
+        mdi-arrow-expand-vertical
       </v-icon>
-    </v-btn>
-    <!-- COLLASPE ALL BUTTON -->
-
-    <v-btn @click="expand(false)">
-      <span>collaspe all</span>
-
-      <v-icon color="purple">
+      <v-icon
+        v-if="isExpandPanelsData===true"
+        color="purple"
+      >
         mdi-arrow-collapse-vertical
       </v-icon>
     </v-btn>
@@ -60,8 +56,19 @@
       v-if="envDev"
       @click="setReadOnly"
     >
-      <span>Read Only</span>
-      <v-icon color="purple">
+      <span v-if="!isReadOnlyData">Lock data</span>
+      <span v-if="isReadOnlyData">Unlock data</span>
+
+      <v-icon
+        v-if="isReadOnlyData"
+        color="purple"
+      >
+        mdi-lock-outline
+      </v-icon>
+      <v-icon
+        v-if="!isReadOnlyData"
+        color="purple"
+      >
         mdi-lock-open-outline
       </v-icon>
     </v-btn>
@@ -74,9 +81,27 @@ import BaseMixin from '../../mixins/base'
 export default {
   emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only', 'display-navigation'],
   mixins: [BaseMixin],
+  props: {
+    isExpandPanels: {
+
+      type: Boolean,
+      required: true
+    },
+    isReadOnly: {
+      type: Boolean,
+      required: true
+    }
+  },
+  data: function () {
+    return {
+      isExpandPanelsData: this.isExpandPanels,
+      isReadOnlyData: this.isReadOnly
+    }
+  },
   methods: {
-    expand (expand) {
-      this.$emit('expand-panels', expand)
+    expand () {
+      this.isExpandPanelsData = !this.isExpandPanelsData
+      this.$emit('expand-panels', !this.isExpandPanelsData)
     },
     scrollToTop () {
       this.$emit('scroll-to-top')
@@ -85,6 +110,7 @@ export default {
       this.$emit('validate')
     },
     setReadOnly () {
+      this.isReadOnlyData = !this.isReadOnlyData
       this.$emit('set-read-only')
     },
     displayNavigation () {
