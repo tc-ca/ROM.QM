@@ -237,7 +237,7 @@ export default {
     RunValidation () {
       let grpIndex = 0
       const questionnaire = this.$store.state.questionnaire.questionnaire
-      console.log(JSON.stringify(questionnaire))
+      // console.log(JSON.stringify(questionnaire))
       questionnaire.groups.forEach(group => {
         let queIndex = 0
         group.questions.forEach(question => {
