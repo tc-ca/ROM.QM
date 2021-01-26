@@ -1,8 +1,8 @@
 <template>
   <v-bottom-navigation
     background-color="rgba(241, 241, 241, 0.9)"
-    shift
     fixed
+    color="primary"
   >
     <v-btn
       @click="displayNavigation()"
@@ -13,25 +13,21 @@
         mdi-navigation
       </v-icon>
     </v-btn>
-    <!-- EXPAND ALL BUTTON -->
-
-    <v-btn
-      @click="expand(true)"
-    >
-      <span>Exapand All</span>
+    <!-- COLLASPE ALL BUTTON -->
+    <v-btn @click="expand()">
+      <span v-if="isExpand===false">Expand All </span>
+      <span v-if="isExpand===true">Collaspe All</span>
 
       <v-icon
+        v-if="isExpand===false"
         color="purple"
       >
-        mdi-arrow-collapse-vertical
+        mdi-arrow-expand-vertical
       </v-icon>
-    </v-btn>
-    <!-- COLLASPE ALL BUTTON -->
-
-    <v-btn @click="expand(false)">
-      <span>collaspe all</span>
-
-      <v-icon color="purple">
+      <v-icon
+        v-if="isExpand===true"
+        color="purple"
+      >
         mdi-arrow-collapse-vertical
       </v-icon>
     </v-btn>
@@ -60,7 +56,7 @@
       v-if="envDev"
       @click="setReadOnly"
     >
-      <span>Read Only</span>
+      <span>Make Read Only</span>
       <v-icon color="purple">
         mdi-lock-open-outline
       </v-icon>
@@ -74,9 +70,15 @@ import BaseMixin from '../../mixins/base'
 export default {
   emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only', 'display-navigation'],
   mixins: [BaseMixin],
+  data: function () {
+    return {
+      isExpand: true
+    }
+  },
   methods: {
-    expand (expand) {
-      this.$emit('expand-panels', expand)
+    expand () {
+      this.isExpand = !this.isExpand
+      this.$emit('expand-panels', !this.isExpand)
     },
     scrollToTop () {
       this.$emit('scroll-to-top')
