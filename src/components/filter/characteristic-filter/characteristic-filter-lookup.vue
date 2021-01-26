@@ -102,6 +102,9 @@ export default {
       return this.model.length
     }
   },
+  mounted () {
+    this.updateProvisionFilter()
+  },
   methods: {
     updateProvisionFilter () {
       let characteristicProvisions = []

@@ -421,9 +421,14 @@ export default {
       return this.question.responseOptions.some(option => option.provisions.length > 0)
     },
     isVisibleByAppliedTags () {
+      // if there is nothing in the tag filters, then there is nothing to apply and therefore default all questions to visible.
+      if (this.provisionTagFilters.length === 0) {
+        this.setQuestionVisibility(true)
+        return true
+      }
+
       const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
 
-      // console.log(JSON.stringify(this.provisionTagFilters))
       // question has no provisions its visibility always be set to true
       if (!this.selectedQuestionHasProvisions) {
         this.setQuestionVisibility(true)
