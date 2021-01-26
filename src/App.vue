@@ -90,6 +90,8 @@
     />
     <div v-if="isQuestionnairePage">
       <bottom-navigation-questionnaire
+        :is-expand-panels="expandAllQuestionnaire"
+        :is-read-only="readOnlyQuestionnaire"
         @expand-panels="expandAllQuestionnaire = !expandAllQuestionnaire"
         @scroll-to-top="scrollToTop"
         @validate="validateQuestionnaire = !validateQuestionnaire"

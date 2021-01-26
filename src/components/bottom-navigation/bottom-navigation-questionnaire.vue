@@ -7,7 +7,7 @@
     <v-btn
       @click="displayNavigation()"
     >
-      <span>Navigation</span>
+      <span>Open Navigation</span>
 
       <v-icon color="green">
         mdi-navigation
@@ -15,17 +15,17 @@
     </v-btn>
     <!-- COLLASPE ALL BUTTON -->
     <v-btn @click="expand()">
-      <span v-if="isExpand===false">Expand All </span>
-      <span v-if="isExpand===true">Collaspe All</span>
+      <span v-if="isExpandPanelsData==false">Expand All </span>
+      <span v-if="isExpandPanelsData===true">Collaspe All</span>
 
       <v-icon
-        v-if="isExpand===false"
+        v-if="isExpandPanelsData===false"
         color="purple"
       >
         mdi-arrow-expand-vertical
       </v-icon>
       <v-icon
-        v-if="isExpand===true"
+        v-if="isExpandPanelsData===true"
         color="purple"
       >
         mdi-arrow-collapse-vertical
@@ -56,8 +56,19 @@
       v-if="envDev"
       @click="setReadOnly"
     >
-      <span>Make Read Only</span>
-      <v-icon color="purple">
+      <span v-if="!isReadOnlyData">Lock data</span>
+      <span v-if="isReadOnlyData">Unlock data</span>
+
+      <v-icon
+        v-if="isReadOnlyData"
+        color="purple"
+      >
+        mdi-lock-outline
+      </v-icon>
+      <v-icon
+        v-if="!isReadOnlyData"
+        color="purple"
+      >
         mdi-lock-open-outline
       </v-icon>
     </v-btn>
@@ -70,15 +81,27 @@ import BaseMixin from '../../mixins/base'
 export default {
   emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only', 'display-navigation'],
   mixins: [BaseMixin],
+  props: {
+    isExpandPanels: {
+
+      type: Boolean,
+      required: true
+    },
+    isReadOnly: {
+      type: Boolean,
+      required: true
+    }
+  },
   data: function () {
     return {
-      isExpand: true
+      isExpandPanelsData: this.isExpandPanels,
+      isReadOnlyData: this.isReadOnly
     }
   },
   methods: {
     expand () {
-      this.isExpand = !this.isExpand
-      this.$emit('expand-panels', !this.isExpand)
+      this.isExpandPanelsData = !this.isExpandPanelsData
+      this.$emit('expand-panels', !this.isExpandPanelsData)
     },
     scrollToTop () {
       this.$emit('scroll-to-top')
@@ -87,6 +110,7 @@ export default {
       this.$emit('validate')
     },
     setReadOnly () {
+      this.isReadOnlyData = !this.isReadOnlyData
       this.$emit('set-read-only')
     },
     displayNavigation () {
