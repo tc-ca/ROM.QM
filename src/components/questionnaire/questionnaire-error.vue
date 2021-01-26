@@ -43,7 +43,7 @@ export default {
     }
   },
   created () {
-    console.log(JSON.stringify(this.notifications))
+    // console.log(JSON.stringify(this.notifications))
   }
 }
 </script>
