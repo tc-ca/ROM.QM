@@ -608,12 +608,19 @@
                 },
                 "responseToMatch": {
                     "type": "string"
+                },
+                "violationCount": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 }
             },
             "required": [
                 "matchingType",
                 "referenceID",
-                "responseToMatch"
+                "responseToMatch",
+                "violationCount"
             ],
             "type": "object"
         }

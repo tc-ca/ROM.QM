@@ -596,7 +596,13 @@ function fixTemplate (template) {
           fixLog.push(`fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`)
         }
 
+        /**
+         * ensure the violation info property is up to date
+         */
         if (!response.ViolationInfo) {
+          /**
+           * there is no violationInfo prop on the object. Add a default value
+           */
           response.violationInfo = 
           {
             responseToMatch: "false",
@@ -607,9 +613,20 @@ function fixTemplate (template) {
           fixLog.push(`fixTemplate: added default name prop for Response ${rIndex} of Question ${question.name}`)
         } else {
           if (!response.violationInfo.referenceID) {
+            /**
+             * there is no referenceId prop on the violationInfo prop. Add a default value
+             */
             response.violationInfo.referenceID = null
+            fixLog.push(`fixTemplate: added default referenceId prop for violationInfo object for Response ${rIndex} of Question ${question.name}`)
           }
 
+          if (!response.violationInfo.violationCount) {
+            /**
+             * there is no violationCount prop on the violationInfo prop. Add a default value
+             */
+            response.violationInfo.violationCount = null
+            fixLog.push(`fixTemplate: added default violationCount prop for violationInfo object for Response ${rIndex} of Question ${question.name}`)
+          }
         }
       }
     } else {
@@ -669,10 +686,10 @@ function fixTemplate (template) {
     fixLog.push("fixTemplate: added searchableProvisions prop to Template")
   }
 
-
   downloadData(fixLog, "fixItLog.json")
   downloadData(template, "fixedTemplate.json")
-  console.log(fixLog)
+
+  return template;
 }
 
 function downloadData (data, filename){

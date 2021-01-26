@@ -12,10 +12,7 @@ import IBC from '../../public/static/templates/IBC.json'
 import ItermediateBulk from '../../public/static/templates/ItermediateBulk.json'
 import SelectionOfViolations from '../../public/static/templates/SelectionOfViolations.json'
 import Beta2Testing from '../../public/static/templates/beta2Testing.json'
-
-// const vuetify = new Vuetify()
-// const localVue = createLocalVue()
-// localVue.use(Vuex)
+import addFormats from 'ajv-formats'
 
 let ajvWarnings = []
 const ajv = new Ajv({
@@ -31,6 +28,8 @@ const ajv = new Ajv({
   },
   allowUnionTypes: true
 })
+
+addFormats(ajv)
 
 let badData = {
   name: 'badData',

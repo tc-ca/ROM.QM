@@ -170,7 +170,9 @@ export interface ViolationInfo {
     responseToMatch: string;
     matchingType: ComparisonOperator;
     referenceID: string | null;
+    violationCount: string | null;
 }
+
 export interface SamplingRecord {
     approximateTotal: string;
     sampleSize: string;
