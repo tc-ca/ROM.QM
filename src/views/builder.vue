@@ -660,7 +660,6 @@ import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
 import { generateName } from '../utils.js'
-
 export default {
   name: 'Builder',
   components: {
@@ -706,6 +705,7 @@ export default {
       questionPanels: [],
       selectedProvisions: [],
       questionProvisions: [],
+      flagTimer: null,
       reference: QUESTION_TYPE.REFERENCE
     }
   },
@@ -786,13 +786,16 @@ export default {
     }
 
     this.$store.dispatch('InitializeSearchableProvisionRef')
+    this.isDirty()
   },
   beforeDestroy () {
     this.$store.dispatch('notification/clearNotifications')
   },
   methods: {
     isDirty () {
-      return _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
+      this.$root.$children[0].isFormDirty = _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
+      this.flagTimer = setTimeout(() => this.isDirty(), 3000)
+      if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
     onGroupTextChange (selectedGroup) {
       selectedGroup.primaryKey = generateName(selectedGroup.title[LANGUAGE.ENGLISH], 'GRP', this.questionnaire.name)

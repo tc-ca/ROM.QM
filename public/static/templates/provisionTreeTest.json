@@ -1,0 +1,147 @@
+{
+    "title": {
+        "en": "Questionnaire Title EN",
+        "fr": "Questionnaire Title EN"
+    },
+    "name": "TMPLT_QSTNNRTTLN",
+    "groups": [
+        {
+            "title": {
+                "en": "New Group",
+                "fr": "Fr: New Group"
+            },
+            "primaryKey": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
+            "isRepeatable": false,
+            "isVisible": true,
+            "order": 0,
+            "questions": [
+                {
+                    "name": "QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 1,
+                    "guid": "d90fbd69-849d-46bc-af09-67cf59560216",
+                    "sortOrder": 1,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Question text",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [
+                                "3e86cb7a-c251-eb11-a812-000d3af3ac0d",
+                                "d0a6a54d-455f-eb11-a812-000d3a84fd7b",
+                                "fe852602-4fb0-4101-b42b-78c2dc2c1f38"
+                            ],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": true
+                        },
+                        {
+                            "id": 2,
+                            "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "required",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "expansionPanels": [
+                1
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }
+    ],
+    "templateid": "",
+    "searchableProvisions": [
+        {
+            "leg": "3e86cb7a-c251-eb11-a812-000d3af3ac0d",
+            "questions": [
+                "d90fbd69-849d-46bc-af09-67cf59560216"
+            ]
+        },
+        {
+            "leg": "d0a6a54d-455f-eb11-a812-000d3a84fd7b",
+            "questions": [
+                "d90fbd69-849d-46bc-af09-67cf59560216"
+            ]
+        },
+        {
+            "leg": "fe852602-4fb0-4101-b42b-78c2dc2c1f38",
+            "questions": [
+                "d90fbd69-849d-46bc-af09-67cf59560216"
+            ]
+        }
+    ],
+    "readOnly": false
+}

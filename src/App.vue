@@ -62,7 +62,7 @@
       @close-characteristic-filter-drawer="showCharacteristicFilter = false"
       @update-site-characteristic-count="updateCharacteristicCount"
     />
-    <v-content>
+    <v-main>
       <v-container
         class="px-2"
       >
@@ -78,7 +78,7 @@
           @clear-provision-search-field="setClearProvisionSearchTrue"
         />
       </v-container>
-    </v-content>
+    </v-main>
     <notification-container />
     <legislation-search-modal
       :show-modal="showLegislationSearchModal"
@@ -162,10 +162,11 @@ export default {
       readOnlyQuestionnaire: false,
       validateQuestionnaire: false,
       displayNavigationQuestionnaire: false,
-      // questionnaire related data that will be passed into the router specific component
+      // builder related data that will be passed into the router specific component
       clearBuilder: false,
       saveBuilder: false,
-      fixItBuilder: false
+      fixItBuilder: false,
+      isFormDirty: false
     }
   },
   computed: {
@@ -197,6 +198,19 @@ export default {
     settings (value, oldValue) {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
+    },
+    isFormDirty (value, oldValue) {
+      console.log('isFormDirty: ' + value)
+      let event = new CustomEvent('tdg-qstnnr-updated', {
+        detail: {
+          message: 'Is Dirty Updated',
+          isDirty: value
+        },
+        bubbles: true,
+        cancelable: true
+      })
+
+      document.body.dispatchEvent(event)
     }
   },
   created: async function () {

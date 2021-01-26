@@ -619,8 +619,10 @@ export default {
       let provisions = hydrateItems(responseOption.provisions, dictionnairyOfProvisions)
 
       // we need to get the parent nodes to have an actual tree or list will be flat
-      const parentIds = provisions.map(x => x.parentLegislationId)
-      const uniqueParentIds = [...new Set(parentIds)]
+      let parentIds = provisions.map(x => x.parentLegislationId)
+      // special case if node is top root and it has been selected because it contains no children, it therefore has no parent id, it should not be inmcluded as part of list if parent ids.
+      // note the provison will still be included in the tree but attached to made up "root" node
+      let uniqueParentIds = [...new Set(parentIds)].filter(x => x !== '')
       let parentProvisions = hydrateItems(uniqueParentIds, dictionnairyOfProvisions)
       const rootNodeId = '-1'
 
@@ -633,12 +635,13 @@ export default {
       let data = _.cloneDeep(childrenAndAsscociatedParentProvision)
 
       const ids = data.map(x => x.id)
-      const parentids = data.map(x => x.parentLegislationId)
+      parentIds = data.map(x => x.parentLegislationId)
 
       const uniqueIds = [...new Set(ids)]
+      uniqueParentIds = [...new Set(parentIds)]
 
       for (var i = 0; i < ids.length; i++) {
-        if (uniqueIds.includes(parentids[i])) {
+        if (uniqueIds.includes(uniqueParentIds[i])) {
         // parent found
           continue
         } else {
