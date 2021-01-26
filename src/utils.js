@@ -113,31 +113,33 @@ export function SetQuestionNotificationsToList (q, groupIndex, queIndex, depth, 
     } else if (!q.validationState || !q.response) {
       q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', lang);
       store.dispatch('notification/addNotification', q.notification);
-    } else {
+    } else if(q.responseOptions) {
       q.responseOptions.forEach(op => {
-        if (op.internalComment.notification) {
+        if (op.internalComment && op.internalComment.notification) {
           store.dispatch('notification/addNotification', op.internalComment.notification);
-        } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+        } else if (op.internalComment && op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
           op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
           store.dispatch('notification/addNotification', op.internalComment.notification);
         }
-        if (op.externalComment.notification) {
+        if (op.externalComment && op.externalComment.notification) {
           store.dispatch('notification/addNotification', op.externalComment.notification);
-        } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+        } else if (op.externalComment && op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
           op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
           store.dispatch('notification/addNotification', op.externalComment.notification);
         }
-        if (op.picture.notification) {
+        if (op.picture && op.picture.notification) {
           store.dispatch('notification/addNotification', op.picture.notification);
-        } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
+        } else if (op.picture && op.picture.option === 'required' && op.picture.value.trim().length === 0) {
           op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
           store.dispatch('notification/addNotification', op.picture.notification);
         }
       });
     }
-    q.childQuestions.forEach(child => {
-      SetQuestionNotificationsToList(child, groupIndex, queIndex, ++depth, store, lang);
-    });
+    if(q.childQuestion) {
+      q.childQuestions.forEach(child => {
+        SetQuestionNotificationsToList(child, groupIndex, queIndex, ++depth, store, lang);
+      });
+    }
   }
 }
 
