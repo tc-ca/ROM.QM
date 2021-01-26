@@ -595,6 +595,22 @@ function fixTemplate (template) {
           response.name = generateName(response.text[LANGUAGE.ENGLISH], 'RSPNS', question.name, false)
           fixLog.push(`fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`)
         }
+
+        if (!response.ViolationInfo) {
+          response.violationInfo = 
+          {
+            responseToMatch: "false",
+            matchingType: "equal",
+            referenceID: null,
+            violationCount: null
+          }
+          fixLog.push(`fixTemplate: added default name prop for Response ${rIndex} of Question ${question.name}`)
+        } else {
+          if (!response.violationInfo.referenceID) {
+            response.violationInfo.referenceID = null
+          }
+
+        }
       }
     } else {
       if (question.responseOptions && question.responseOptions.length > 0) {
