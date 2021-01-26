@@ -415,49 +415,11 @@ export default {
       return false
     },
     isVisible () {
+      this.setVisiblilityFromAppliedTags()
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
       return this.question.responseOptions.some(option => option.provisions.length > 0)
-    },
-    isVisibleByAppliedTags () {
-      // if there is nothing in the tag filters, then there is nothing to apply and therefore default all questions to visible.
-      if (this.provisionTagFilters.length === 0) {
-        this.setQuestionVisibility(true)
-        return true
-      }
-
-      const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
-
-      // question has no provisions its visibility always be set to true
-      if (!this.selectedQuestionHasProvisions) {
-        this.setQuestionVisibility(true)
-        return true
-      }
-
-      // question has provisions but has no dependency questions required to check to see if visibility should be set
-      // then check if the question is found in the applied provisions visible should set to true else false
-      if (!this.requireDependantQuestionToEnableVisibility) {
-        this.setQuestionVisibility(questionFoundInProvision) // todo refactor remove method add watch
-        return questionFoundInProvision
-      } else {
-        // question is dependent
-        // question provision is not found in applied provisions via tags then returns false.
-        // else question provision is found within the applied tags but we cannot assume it should be displayed as it depends on its dependencies rules beinng met
-
-        if (!questionFoundInProvision) {
-          this.setQuestionVisibility(false)
-          return false
-        }
-
-        // below code checking to see if depencies rules/conditions are statisfied in settting visibility
-        // note: if the question is not answer returns false and if the conditions do not match conditions of the rules it will return false
-        const groupMatchArray = this.runRule(this.question)
-        const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-        const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
-        this.setQuestionVisibility(answerMatch)
-        return answerMatch
-      }
     }
   },
   watch: {
@@ -928,6 +890,45 @@ export default {
         }
       }
       return groupMatchArray
+    },
+    setVisiblilityFromAppliedTags () {
+      // if there is nothing in the tag filters, then there is nothing to apply and therefore default all questions to visible.
+      // if (this.provisionTagFilters.length === 0) {
+      //   this.setQuestionVisibility(true)
+      //   return true
+      // }
+
+      const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
+
+      // question has no provisions its visibility always be set to true
+      if (!this.selectedQuestionHasProvisions) {
+        this.setQuestionVisibility(true)
+        return true
+      }
+
+      // question has provisions but has no dependency questions required to check to see if visibility should be set
+      // then check if the question is found in the applied provisions visible should set to true else false
+      if (!this.requireDependantQuestionToEnableVisibility) {
+        this.setQuestionVisibility(questionFoundInProvision) // todo refactor remove method add watch
+        return questionFoundInProvision
+      } else {
+        // question is dependent
+        // question provision is not found in applied provisions via tags then returns false.
+        // else question provision is found within the applied tags but we cannot assume it should be displayed as it depends on its dependencies rules beinng met
+
+        if (!questionFoundInProvision) {
+          this.setQuestionVisibility(false)
+          return false
+        }
+
+        // below code checking to see if depencies rules/conditions are statisfied in settting visibility
+        // note: if the question is not answer returns false and if the conditions do not match conditions of the rules it will return false
+        const groupMatchArray = this.runRule(this.question)
+        const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
+        const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+        this.setQuestionVisibility(answerMatch)
+        return answerMatch
+      }
     }
   }
 }
