@@ -7,7 +7,7 @@
     <v-btn
       @click="displayNavigation()"
     >
-      <span>Open Navigation</span>
+      <span>Navigation</span>
 
       <v-icon color="green">
         mdi-navigation
