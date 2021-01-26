@@ -122,6 +122,57 @@
             ],
             "type": "object"
         },
+        "Notification": {
+            "additionalProperties": false,
+            "properties": {
+                "color": {
+                    "enum": [
+                        "error"
+                    ],
+                    "type": "string"
+                },
+                "depth": {
+                    "type": "number"
+                },
+                "groupIndex": {
+                    "type": "number"
+                },
+                "guid": {
+                    "type": "string"
+                },
+                "header": {
+                    "type": "string"
+                },
+                "icon": {
+                    "enum": [
+                        "mdi-message-alert",
+                        "mdi-message-draw"
+                    ],
+                    "type": "string"
+                },
+                "qguid": {
+                    "type": "string"
+                },
+                "questionId": {
+                    "type": "number"
+                },
+                "showing": {
+                    "type": "boolean"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "timeout": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "color",
+                "header",
+                "text"
+            ],
+            "type": "object"
+        },
         "Option": {
             "enum": [
                 "n/a",
@@ -133,8 +184,14 @@
         "Picture": {
             "additionalProperties": false,
             "properties": {
+                "notification": {
+                    "type": "null"
+                },
                 "option": {
                     "$ref": "#/definitions/Option"
+                },
+                "validationStatus": {
+                    "type": "boolean"
                 },
                 "value": {
                     "items": {
@@ -152,10 +209,15 @@
         "PictureItems": {
             "additionalProperties": false,
             "properties": {
-                "base64Value": {
+                "base64String": {
                     "type": "string"
                 },
-                "description": {
+                "comment": {
+                    "type": "string"
+                },
+                "timeStamp": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "format": "date-time",
                     "type": "string"
                 },
                 "title": {
@@ -163,8 +225,9 @@
                 }
             },
             "required": [
-                "base64Value",
-                "description",
+                "base64String",
+                "comment",
+                "timeStamp",
                 "title"
             ],
             "type": "object"
@@ -216,8 +279,25 @@
                 "name": {
                     "type": "string"
                 },
+                "notification": {
+                    "$ref": "#/definitions/Notification"
+                },
                 "response": {
-                    "type": "null"
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string",
+                                "number"
+                            ]
+                        }
+                    ]
                 },
                 "responseOptions": {
                     "anyOf": [
@@ -260,6 +340,9 @@
                     },
                     "type": "array"
                 },
+                "validationState": {
+                    "type": "boolean"
+                },
                 "violationInfo": {
                     "$ref": "#/definitions/ViolationInfo"
                 }
@@ -279,6 +362,7 @@
                 "text",
                 "type",
                 "validationRules",
+                "validationState",
                 "violationInfo"
             ],
             "type": "object"
@@ -362,8 +446,8 @@
                 },
                 "searchProvisions": {
                     "type": [
-                        "string",
-                        "null"
+                        "null",
+                        "string"
                     ]
                 },
                 "selectedProvisions": {
@@ -478,7 +562,7 @@
                     "$ref": "#/definitions/Title"
                 },
                 "name": {
-                    "type": "string"
+                    "$ref": "#/definitions/ValidationRuleType"
                 },
                 "type": {
                     "$ref": "#/definitions/ValidationRuleType"
@@ -516,12 +600,19 @@
                 "matchingType": {
                     "$ref": "#/definitions/ComparisonOperator"
                 },
+                "referenceID": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
                 "responseToMatch": {
                     "type": "string"
                 }
             },
             "required": [
                 "matchingType",
+                "referenceID",
                 "responseToMatch"
             ],
             "type": "object"
