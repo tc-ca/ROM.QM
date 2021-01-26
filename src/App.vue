@@ -50,6 +50,10 @@
         >
           <v-icon> mdi-tune </v-icon>
         </v-badge>
+
+        <v-icon v-if="siteCharacteristicsCount === 0">
+          mdi-tune
+        </v-icon>
       </v-btn>
     </v-app-bar>
     <settings
@@ -268,8 +272,8 @@ export default {
     /**
     * Sets characteristics state
     */
-    SetCharacteristics (characteristics) {
-      this.$store.dispatch('SetCharacteristicsState', { characteristics })
+    SetCharacteristics (data) {
+      this.$store.dispatch('SetCharacteristicsState', data)
     },
     updateCharacteristicCount (count) {
       this.siteCharacteristicsCount = count
