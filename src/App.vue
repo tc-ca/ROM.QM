@@ -234,8 +234,10 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    RunValidation (questionnaire) {
+    RunValidation () {
       let grpIndex = 0
+      const questionnaire = this.$store.state.questionnaire.questionnaire
+      console.log(JSON.stringify(questionnaire))
       questionnaire.groups.forEach(group => {
         let queIndex = 0
         group.questions.forEach(question => {
@@ -244,7 +246,7 @@ export default {
         })
         grpIndex++
       })
-      return this.$store.getters['notification/hasNotifications']
+      return (this.$store.getters['notification/hasNotifications'] === false)
     },
     /**
      * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.
