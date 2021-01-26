@@ -214,6 +214,15 @@ export default {
       this.setAppLanguage(this.lang)
     },
     /**
+     * Run the validation of the Questionnaire.
+     */
+    RunValidation () {
+      this.validateQuestionnaire = true
+    },
+    VerifyValidation () {
+      
+    },
+    /**
      * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.
      */
     SetReadOnly (readOnly) {
