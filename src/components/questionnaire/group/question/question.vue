@@ -423,7 +423,7 @@ export default {
     isVisibleByAppliedTags () {
       const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
 
-      console.log(JSON.stringify(this.provisionTagFilters))
+      // console.log(JSON.stringify(this.provisionTagFilters))
       // question has no provisions its visibility always be set to true
       if (!this.selectedQuestionHasProvisions) {
         this.setQuestionVisibility(true)

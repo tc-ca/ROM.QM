@@ -120,6 +120,7 @@ import ProvisionSearch from './components/provision-search/provision-search.vue'
 import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
 import BottomNavigationQuestionnaire from './components/bottom-navigation/bottom-navigation-questionnaire.vue'
 import BottomNavigationBuilder from './components/bottom-navigation/bottom-navigation-builder.vue'
+import { SetQuestionNotificationsToList } from './utils.js'
 
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
@@ -219,7 +220,7 @@ export default {
     })
   },
   updated () {
-    console.log(JSON.stringify(this.$store.state.questionnaire.questionnaire))
+    // console.log(JSON.stringify(this.$store.state.questionnaire.questionnaire))
   },
   methods: {
     ...mapActions(['setAppLanguage', 'setSettings']),
@@ -227,14 +228,17 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    /**
-     * Run the validation of the Questionnaire.
-     */
-    RunValidation () {
-      this.validateQuestionnaire = true
-    },
-    VerifyValidation () {
-      
+    RunValidation (questionnaire) {
+      let grpIndex = 0
+      questionnaire.groups.forEach(group => {
+        let queIndex = 0
+        group.questions.forEach(question => {
+          SetQuestionNotificationsToList(question, grpIndex, queIndex, 0, this.$store, this.lang)
+          queIndex++
+        })
+        grpIndex++
+      })
+      return this.$store.getters['notification/hasNotifications']
     },
     /**
      * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.
