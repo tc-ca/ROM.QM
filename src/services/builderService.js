@@ -434,7 +434,7 @@ function fixTemplate (template) {
   /**
    * Fix Template
    */
-  if (!template.readOnly) {
+  if (template.readOnly === undefined) {
     /**
      * Add the readOnly property to the Template if it does not exist
      */
@@ -453,6 +453,11 @@ function fixTemplate (template) {
      * TODO: this should really be removed from the JSON, its only temporary data and not important to the business
      */
     g.expansionPanels = []
+
+    if (g.primaryKey === undefined || !g.primaryKey.includes('GRP') || g.primaryKey.includes("'")) {
+      g.primaryKey = generateName(g.title[LANGUAGE.ENGLISH], 'GRP', template.name)
+      fixLog.push(`fixTemplate: added/reset primaryKey prop for Group ${gIndex} to ${g.primaryKey}`)
+    }
   }
   fixLog.push("fixTemplate: reset/added expansionPanels prop to all Groups")
 
@@ -465,7 +470,7 @@ function fixTemplate (template) {
     /**
      * re-generate question name based on its english name if it's not in our new format
      */
-    if (!question.name || !question.name.includes('QTN')) {
+    if (question.name === undefined || !question.name.includes('QTN') || question.name.includes("'")) {
       question.name = generateName(question.text[LANGUAGE.ENGLISH], 'QTN', '')
       fixLog.push(`fixTemplate: added/reset name prop for Question ${qIndex} to ${question.name}`)
     }
@@ -474,7 +479,7 @@ function fixTemplate (template) {
     * Will assign a unique guid to all Questions in all items within 
     * the Array of Groups that do not already have one assigned to them 
     */
-    if (!question.guid) {
+    if (question.guid === undefined) {
       question.guid = uuidv4()
       fixLog.push(`fixTemplate: added guid (${question.guid}) prop to Question ${question.name}`)
     }
@@ -531,6 +536,45 @@ function fixTemplate (template) {
       fixLog.push(`fixTemplate: moved picture prop from Question ${question.name} to Responses`)
     }
 
+    /**
+     * there has to be a default validationState on the Question object
+     */
+    if (question.validationState === undefined) {
+      question.validationState = true
+    }
+
+    /**
+     * ensure the violation info property is up to date
+     */
+    if (question.violationInfo === undefined) {
+      /**
+       * there is no violationInfo prop on the object. Add a default value
+       */
+      question.violationInfo = 
+      {
+        responseToMatch: "false",
+        matchingType: "equal",
+        referenceID: null,
+        violationCount: null
+      }
+      fixLog.push(`fixTemplate: added default violationInfo prop to Question ${question.name}`)
+    } else {
+      if (question.violationInfo.referenceID === undefined) {
+        /**
+         * there is no referenceId prop on the violationInfo prop. Add a default value
+         */
+        question.violationInfo.referenceID = null
+        fixLog.push(`fixTemplate: added default referenceId to violationInfo object of Question ${question.name}`)
+      }
+
+      if (question.violationInfo.violationCount === undefined) {
+        /**
+         * there is no violationCount prop on the violationInfo prop. Add a default value
+         */
+        question.violationInfo.violationCount = null
+        fixLog.push(`fixTemplate: added default violationCount for violationInfo object of Question ${question.name}`)
+      }
+    }
 
     /**
      * Fix Question Responses for radio and select questions
@@ -544,7 +588,7 @@ function fixTemplate (template) {
          * Internal Comment prop should exist on Responses
          * Might not have existed on Question to copy over
          */
-        if (!response.internalComment)
+        if (response.internalComment === undefined)
         {
           response.internalComment = {
             "option": "optional",
@@ -557,7 +601,7 @@ function fixTemplate (template) {
          * External Comment prop should exist on Responses
          * Might not have existed on Question to copy over
          */
-        if (!response.externalComment)
+        if (response.externalComment === undefined)
         {
           response.externalComment = {
             "option": "optional",
@@ -569,7 +613,7 @@ function fixTemplate (template) {
         /**
          * picture prop should exist on Responses, and should be an array of strings, not a single string
          */
-        if (!response.picture || response.picture.value === '') {
+        if (response.picture === undefined || response.picture.value === '') {
           response.picture = {
             "option": "optional",
             "value": []
@@ -591,7 +635,7 @@ function fixTemplate (template) {
       /**
        * generate response names for responses that do not have them
        */
-        if (!response.name || !response.name.includes('RSPNS')){
+        if (response.name === undefined || !response.name.includes('RSPNS') || response.name.includes("'")){
           response.name = generateName(response.text[LANGUAGE.ENGLISH], 'RSPNS', question.name, false)
           fixLog.push(`fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`)
         }
@@ -610,13 +654,13 @@ function fixTemplate (template) {
    * searchableProvisions is the distinct union of all provisions for all responses in the template
    * basically, all provisions this template is related to 
    */
-  if (!template.searchableProvisions) {
+  if (template.searchableProvisions === undefined) {
 
     for (qIndex = 0; qIndex < flattenedQuestions.length; qIndex++) {
       question = flattenedQuestions[qIndex];
 
       // only radio and select have response options
-      if (!question.responseOptions && !(question.type === "radio" || question.type === "select")) continue
+      if (question.responseOptions === undefined && !(question.type === "radio" || question.type === "select")) continue
 
       for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
         response = question.responseOptions[rIndex];
@@ -653,10 +697,10 @@ function fixTemplate (template) {
     fixLog.push("fixTemplate: added searchableProvisions prop to Template")
   }
 
-
   downloadData(fixLog, "fixItLog.json")
   downloadData(template, "fixedTemplate.json")
-  console.log(fixLog)
+
+  return template;
 }
 
 function downloadData (data, filename){

@@ -54,7 +54,7 @@ export default {
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page: 'questionnaire' })
     }
     // if env= dev load the provisions else the state will be set explicility outside in app.vue
-    if (this.envDev) {
+    if (this.envDev && this.loadLocalData) {
       await this.$store.dispatch('SetFlatLegislationsStateToLocalData')
       await this.$store.dispatch('SetCharacteristicsStateToLocalData')
     }
