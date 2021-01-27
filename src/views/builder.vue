@@ -746,7 +746,7 @@ export default {
     savePropBuilder () {
       this.save()
     },
-    FixItPropBuilder () {
+    fixItPropBuilder () {
       this.fixit()
     }
   },
@@ -1003,7 +1003,8 @@ export default {
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
     },
     fixit () {
-      BuilderService.fixTemplate(this.questionnaire)
+      this.questionnaire = BuilderService.fixTemplate(this.questionnaire)
+      this.save()
     },
     addOption () {
       this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))

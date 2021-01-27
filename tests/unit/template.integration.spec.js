@@ -91,16 +91,6 @@ function flattenQuestions (groups) {
   return flattenedQuestions.sort((a, b) => (a.id > b.id) ? 1 : (b.id > a.id) ? -1 : 0)
 }
 
-// function reassignGuids (groups) {
-//   var flattenedQuestions = flattenQuestions(groups)
-//   for (let i = 0; i < flattenedQuestions.length; i++) {
-//     const q = flattenedQuestions[i]
-//     if (!q.guid) {
-//       q.guid = uuidv4()
-//     }
-//   }
-// }
-
 describe('Template Data Validation Against TypeScript Schema', () => {
   it('all group id and question ids should be different', () => {
     var groupKey = 'primaryKey'
