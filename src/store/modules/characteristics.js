@@ -12,12 +12,13 @@ export const actions = {
     commit("SET_CHARACTERISTICS", {
       data
     });
+
   },
 
   //loads data pass into vue instance
   async SetCharacteristicsState({ commit }, payload) {
     commit("SET_CHARACTERISTICS",
-      payload
+      {data: payload}
     );
   }
 };

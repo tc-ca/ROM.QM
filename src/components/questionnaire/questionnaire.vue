@@ -96,7 +96,7 @@ import _ from 'lodash'
 
 import QuestionnaireGroup from './group/group.vue'
 import QuestionnaireError from './questionnaire-error'
-import { buildNotificationObject } from '../../utils'
+import { SetQuestionNotificationsToList } from '../../utils'
 import QuestionnaireNav from '../questionnaire-nav/questionnaire-nav.vue'
 
 export default {
@@ -272,40 +272,40 @@ export default {
       this.drawer = false
       this.$store.commit('errors/updateErrorNotification', q.guid)
     },
-    addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
-      if (q.isVisible) {
-        if (q.notification) {
-          this.$store.dispatch('notification/addNotification', q.notification)
-        } else if (!q.validationState || !q.response) {
-          q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
-          this.$store.dispatch('notification/addNotification', q.notification)
-        } else {
-          q.responseOptions.forEach(op => {
-            if (op.internalComment.notification) {
-              this.$store.dispatch('notification/addNotification', op.internalComment.notification)
-            } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
-              op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-              this.$store.dispatch('notification/addNotification', op.internalComment.notification)
-            }
-            if (op.externalComment.notification) {
-              this.$store.dispatch('notification/addNotification', op.externalComment.notification)
-            } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
-              op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
-              this.$store.dispatch('notification/addNotification', op.externalComment.notification)
-            }
-            if (op.picture.notification) {
-              this.$store.dispatch('notification/addNotification', op.picture.notification)
-            } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
-              op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
-              this.$store.dispatch('notification/addNotification', op.picture.notification)
-            }
-          })
-        }
-        q.childQuestions.forEach(child => {
-          this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
-        })
-      }
-    },
+    // addQuestionNotificationsToList (q, groupIndex, queIndex, depth) {
+    //   if (q.isVisible) {
+    //     if (q.notification) {
+    //       this.$store.dispatch('notification/addNotification', q.notification)
+    //     } else if (!q.validationState || !q.response) {
+    //       q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', this.lang)
+    //       this.$store.dispatch('notification/addNotification', q.notification)
+    //     } else {
+    //       q.responseOptions.forEach(op => {
+    //         if (op.internalComment.notification) {
+    //           this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+    //         } else if (op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+    //           op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+    //           this.$store.dispatch('notification/addNotification', op.internalComment.notification)
+    //         }
+    //         if (op.externalComment.notification) {
+    //           this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+    //         } else if (op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+    //           op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', this.lang)
+    //           this.$store.dispatch('notification/addNotification', op.externalComment.notification)
+    //         }
+    //         if (op.picture.notification) {
+    //           this.$store.dispatch('notification/addNotification', op.picture.notification)
+    //         } else if (op.picture.option === 'required' && op.picture.value.trim().length === 0) {
+    //           op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[this.lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', this.lang)
+    //           this.$store.dispatch('notification/addNotification', op.picture.notification)
+    //         }
+    //       })
+    //     }
+    //     q.childQuestions.forEach(child => {
+    //       this.addQuestionNotificationsToList(child, groupIndex, queIndex, ++depth)
+    //     })
+    //   }
+    // },
     validateQ () {
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
@@ -314,19 +314,20 @@ export default {
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       } else {
-        console.log(JSON.stringify(this.group.groups))
+        // console.log(JSON.stringify(this.group.groups))
         let grpIndex = 0
 
         this.group.groups.forEach(group => {
           let queIndex = 0
           group.questions.forEach(question => {
-            this.addQuestionNotificationsToList(question, grpIndex, queIndex, 0)
+            SetQuestionNotificationsToList(question, grpIndex, queIndex, 0, this.$store, this.lang)
+            // this.addQuestionNotificationsToList(question, grpIndex, queIndex, 0)
             queIndex++
           })
           grpIndex++
         })
 
-        console.log(JSON.stringify(this.group.groups))
+        // console.log(JSON.stringify(this.group.groups))
         // this.$store.dispatch('notification/showNotifications')
         // this.$store.dispatch('notification/show', { text: `There is some responses are missing or incorrect`, color: 'error' })
       }

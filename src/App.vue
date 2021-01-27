@@ -50,6 +50,10 @@
         >
           <v-icon> mdi-tune </v-icon>
         </v-badge>
+
+        <v-icon v-if="siteCharacteristicsCount === 0">
+          mdi-tune
+        </v-icon>
       </v-btn>
     </v-app-bar>
     <settings
@@ -86,6 +90,8 @@
     />
     <div v-if="isQuestionnairePage">
       <bottom-navigation-questionnaire
+        :is-expand-panels="expandAllQuestionnaire"
+        :is-read-only="readOnlyQuestionnaire"
         @expand-panels="expandAllQuestionnaire = !expandAllQuestionnaire"
         @scroll-to-top="scrollToTop"
         @validate="validateQuestionnaire = !validateQuestionnaire"
@@ -120,6 +126,7 @@ import ProvisionSearch from './components/provision-search/provision-search.vue'
 import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
 import BottomNavigationQuestionnaire from './components/bottom-navigation/bottom-navigation-questionnaire.vue'
 import BottomNavigationBuilder from './components/bottom-navigation/bottom-navigation-builder.vue'
+import { SetQuestionNotificationsToList } from './utils.js'
 
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
@@ -219,13 +226,27 @@ export default {
     })
   },
   updated () {
-    console.log(JSON.stringify(this.$store.state.questionnaire.questionnaire))
+    // console.log(JSON.stringify(this.$store.state.questionnaire.questionnaire))
   },
   methods: {
     ...mapActions(['setAppLanguage', 'setSettings']),
     setLanguage () {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
+    },
+    RunValidation () {
+      let grpIndex = 0
+      const questionnaire = this.$store.state.questionnaire.questionnaire
+      // console.log(JSON.stringify(questionnaire))
+      questionnaire.groups.forEach(group => {
+        let queIndex = 0
+        group.questions.forEach(question => {
+          SetQuestionNotificationsToList(question, grpIndex, queIndex, 0, this.$store, this.lang)
+          queIndex++
+        })
+        grpIndex++
+      })
+      return (this.$store.getters['notification/hasNotifications'] === false)
     },
     /**
      * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.
@@ -268,8 +289,8 @@ export default {
     /**
     * Sets characteristics state
     */
-    SetCharacteristics (characteristics) {
-      this.$store.dispatch('SetCharacteristicsState', { characteristics })
+    SetCharacteristics (data) {
+      this.$store.dispatch('SetCharacteristicsState', data)
     },
     updateCharacteristicCount (count) {
       this.siteCharacteristicsCount = count
