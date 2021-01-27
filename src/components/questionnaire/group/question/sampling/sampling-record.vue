@@ -117,8 +117,8 @@ export default {
         }
       }
       if (this.question.samplingRecord.approximateTotal > 0 && this.question.samplingRecord.sampleSize > 0) {
-        if (this.question.samplingRecord.approximateTotal <= this.question.samplingRecord.sampleSize) {
-          this.errorMessagesTotal = 'Approximate Total have to be higher than Sample Size'
+        if (this.question.samplingRecord.approximateTotal < this.question.samplingRecord.sampleSize) {
+          this.errorMessagesTotal = 'Approximate Total have to be equal or higher than Sample Size'
           return false
         }
       }
@@ -148,7 +148,7 @@ export default {
       }
       if (this.question.samplingRecord.sampleSize > 0 && this.question.samplingRecord.nonCompliances > 0) {
         if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
-          this.errorMessagesSize = 'Sample Size have to be higher than Number of non-Compliance'
+          this.errorMessagesSize = 'Sample Size have to be equal or higher than Number of non-Compliance'
           return false
         }
       }
