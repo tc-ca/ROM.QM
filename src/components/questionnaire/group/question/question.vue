@@ -415,7 +415,7 @@ export default {
       return false
     },
     isVisible () {
-      this.setVisiblilityFromAppliedTags()
+      this.isVisibleByAppliedTags()
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
@@ -891,7 +891,7 @@ export default {
       }
       return groupMatchArray
     },
-    setVisiblilityFromAppliedTags () {
+    isVisibleByAppliedTags () {
       // if there is nothing in the tag filters, then there is nothing to apply and therefore default all questions to visible.
       // if (this.provisionTagFilters.length === 0) {
       //   this.setQuestionVisibility(true)

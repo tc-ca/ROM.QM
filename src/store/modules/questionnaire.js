@@ -309,6 +309,7 @@ export const mutations = {
 
     if (isFound) {
       state.tagFilter[index] = tag;
+      state.tagFilter.splice(index, 1, tag);    
     } else {
       state.tagFilter.push(tag);
     }
