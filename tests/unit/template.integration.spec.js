@@ -10,12 +10,8 @@ import DesignAndManufacture from '../../public/static/templates/DesignAndManufac
 import HighwayTanks from '../../public/static/templates/HighwayTanks.json'
 import IBC from '../../public/static/templates/IBC.json'
 import ItermediateBulk from '../../public/static/templates/ItermediateBulk.json'
-import SelectionOfViolations from '../../public/static/templates/SelectionOfViolations.json'
 import Beta2Testing from '../../public/static/templates/beta2Testing.json'
-
-// const vuetify = new Vuetify()
-// const localVue = createLocalVue()
-// localVue.use(Vuex)
+import addFormats from 'ajv-formats'
 
 let ajvWarnings = []
 const ajv = new Ajv({
@@ -31,6 +27,8 @@ const ajv = new Ajv({
   },
   allowUnionTypes: true
 })
+
+addFormats(ajv)
 
 let badData = {
   name: 'badData',
@@ -92,16 +90,6 @@ function flattenQuestions (groups) {
   return flattenedQuestions.sort((a, b) => (a.id > b.id) ? 1 : (b.id > a.id) ? -1 : 0)
 }
 
-// function reassignGuids (groups) {
-//   var flattenedQuestions = flattenQuestions(groups)
-//   for (let i = 0; i < flattenedQuestions.length; i++) {
-//     const q = flattenedQuestions[i]
-//     if (!q.guid) {
-//       q.guid = uuidv4()
-//     }
-//   }
-// }
-
 describe('Template Data Validation Against TypeScript Schema', () => {
   it('all group id and question ids should be different', () => {
     var groupKey = 'primaryKey'
@@ -114,7 +102,6 @@ describe('Template Data Validation Against TypeScript Schema', () => {
     expect(FindNonUniqueIds(HighwayTanks.groups, groupKey).length).toEqual(0)
     expect(FindNonUniqueIds(IBC.groups, groupKey).length).toEqual(0)
     expect(FindNonUniqueIds(ItermediateBulk.groups, groupKey).length).toEqual(0)
-    expect(FindNonUniqueIds(SelectionOfViolations.groups, groupKey).length).toEqual(0)
 
     // questions
     expect(FindNonUniqueIds(flattenQuestions(templateData.groups), questionKey).length).toEqual(0)
@@ -123,7 +110,6 @@ describe('Template Data Validation Against TypeScript Schema', () => {
     expect(FindNonUniqueIds(flattenQuestions(HighwayTanks.groups), questionKey).length).toEqual(0)
     expect(FindNonUniqueIds(flattenQuestions(IBC.groups), questionKey).length).toEqual(0)
     expect(FindNonUniqueIds(flattenQuestions(ItermediateBulk.groups), questionKey).length).toEqual(0)
-    expect(FindNonUniqueIds(flattenQuestions(SelectionOfViolations.groups), questionKey).length).toEqual(0)
   })
 
   it('valid data should be successfully validated against the schema', () => {
@@ -201,18 +187,6 @@ describe('Template Data Validation Against TypeScript Schema', () => {
   it('Client Template: ItermediateBulk data should be successfully validated against the schema', () => {
     if (validate(ItermediateBulk)) {
       expect(ItermediateBulk.name).toEqual('INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
-  })
-
-  it('Client Template: SelectionOfViolations data should be successfully validated against the schema', () => {
-    if (validate(SelectionOfViolations)) {
-      expect(SelectionOfViolations.name).toEqual('selection of Violations')
     }
 
     if (validate.errors > 0) {

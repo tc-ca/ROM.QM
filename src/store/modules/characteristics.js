@@ -26,8 +26,14 @@ export const actions = {
 export const mutations = {
   SET_CHARACTERISTICS(state, payload) {
     const { data } = payload;
-    state.characteristics = data.characteristics;
-    state.siteCharacteristics = data.siteCharacteristics;
+    if (!data) {
+      state.characteristics = [];
+      state.siteCharacteristics = [];
+    }
+    else {
+      state.characteristics = data.characteristics;
+      state.siteCharacteristics = data.siteCharacteristics;
+    }
   }
 };
 

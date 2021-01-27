@@ -531,6 +531,45 @@ function fixTemplate (template) {
       fixLog.push(`fixTemplate: moved picture prop from Question ${question.name} to Responses`)
     }
 
+    /**
+     * there has to be a default validationState on the Question object
+     */
+    if (!question.validationState) {
+      question.validationState = true
+    }
+
+    /**
+     * ensure the violation info property is up to date
+     */
+    if (!question.ViolationInfo) {
+      /**
+       * there is no violationInfo prop on the object. Add a default value
+       */
+      question.violationInfo = 
+      {
+        responseToMatch: "false",
+        matchingType: "equal",
+        referenceID: null,
+        violationCount: null
+      }
+      fixLog.push(`fixTemplate: added default violationInfo prop to Question ${question.name}`)
+    } else {
+      if (!question.violationInfo.referenceID) {
+        /**
+         * there is no referenceId prop on the violationInfo prop. Add a default value
+         */
+        question.violationInfo.referenceID = null
+        fixLog.push(`fixTemplate: added default referenceId to violationInfo object of Question ${question.name}`)
+      }
+
+      if (!question.violationInfo.violationCount) {
+        /**
+         * there is no violationCount prop on the violationInfo prop. Add a default value
+         */
+        question.violationInfo.violationCount = null
+        fixLog.push(`fixTemplate: added default violationCount for violationInfo object of Question ${question.name}`)
+      }
+    }
 
     /**
      * Fix Question Responses for radio and select questions
@@ -653,10 +692,10 @@ function fixTemplate (template) {
     fixLog.push("fixTemplate: added searchableProvisions prop to Template")
   }
 
-
   downloadData(fixLog, "fixItLog.json")
   downloadData(template, "fixedTemplate.json")
-  console.log(fixLog)
+
+  return template;
 }
 
 function downloadData (data, filename){
