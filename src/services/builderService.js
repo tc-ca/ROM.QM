@@ -454,9 +454,9 @@ function fixTemplate (template) {
      */
     g.expansionPanels = []
 
-    if (g.name === undefined || !g.name.includes('GRP') || g.name.includes("'")) {
-      g.name = generateName(g.title[LANGUAGE.ENGLISH], 'GRP', template.name)
-      fixLog.push(`fixTemplate: added/reset name prop for Group ${gIndex} to ${g.name}`)
+    if (g.primaryKey === undefined || !g.primaryKey.includes('GRP') || g.primaryKey.includes("'")) {
+      g.primaryKey = generateName(g.title[LANGUAGE.ENGLISH], 'GRP', template.name)
+      fixLog.push(`fixTemplate: added/reset primaryKey prop for Group ${gIndex} to ${g.primaryKey}`)
     }
   }
   fixLog.push("fixTemplate: reset/added expansionPanels prop to all Groups")
