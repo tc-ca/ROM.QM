@@ -261,7 +261,7 @@ import { mapState, mapGetters } from 'vuex'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { onlyUnique, buildTreeFromFlatList, hydrateItems, setNewGUID, GetAllChildrenQuestions } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 
@@ -415,8 +415,10 @@ export default {
       return false
     },
     isVisible () {
-      this.isVisibleByAppliedTags()
-      return this.question.isVisible && this.filteredInByProvisionSearch
+      // TO DO: Luis did this because it was not working on his copy question, please replace it with the right code.
+      return true
+      // this.isVisibleByAppliedTags()
+      // return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
       return this.question.responseOptions.some(option => option.provisions.length > 0)
@@ -466,7 +468,7 @@ export default {
       if (this.question.isRepeated) {
         let questionnaire = this.$store.getters['getQuestionnaire']
         if (questionnaire !== null) {
-          let group = BuilderService.findGroupForQuestionById(questionnaire.groups, this.question.guid)
+          let group = BuilderService.findParentForQuestionById(questionnaire.groups, this.question.guid)
           let questionIdx = group.questions.findIndex(q => q.guid === this.question.guid)
           if (questionIdx > 0) {
             let count = 0
@@ -488,13 +490,13 @@ export default {
       return text
     },
     repeatQuestion ($event) {
-      $event.stopPropagation()
+      // $event.stopPropagation()
       if (!this.isReferenceQuestion && this.question.isRepeatable) {
         this.$emit('repeat-question', this.question.guid)
       }
     },
     deleteRepeatedQuestion ($event) {
-      $event.stopPropagation()
+      // $event.stopPropagation()
       if (!this.isReferenceQuestion && !this.question.isRepeatable && this.question.isRepeated) {
         this.$emit('delete-repeated-question', this.question)
       }
@@ -503,13 +505,8 @@ export default {
       if (this.question.childQuestions) {
         let questionIdx = this.question.childQuestions.findIndex(cq => cq.guid === cQuestionGuid)
         if (questionIdx > -1) {
-          let nQuestion = _.cloneDeep(this.question.childQuestions[questionIdx])
-          setNewGUID(nQuestion)
           let questionnaire = this.$store.getters['getQuestionnaire']
-          nQuestion.id = BuilderService.getNextQuestionId(questionnaire)
-          nQuestion.isRepeatable = false
-          nQuestion.isRepeated = true
-          nQuestion.sortOrder = this.question.childQuestions[questionIdx].sortOrder + 1
+          let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.question.childQuestions[questionIdx], this.question.id)
           for (let x = questionIdx + 1; x < this.question.childQuestions.length; x++) {
             this.question.childQuestions[x].sortOrder = this.question.childQuestions[x].sortOrder + 1
           }

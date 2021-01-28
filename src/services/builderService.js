@@ -2,7 +2,7 @@ import _ from "lodash";
 import { LANGUAGE } from "../constants.js";
 import { QUESTION_TYPE } from "../data/questionTypes.js";
 import { v4 as uuidv4 } from 'uuid';
-import { generateName, isString } from '../utils'
+import { generateName, isString, setNewGUID } from '../utils'
 
 /* eslint-disable no-undef */
 
@@ -186,6 +186,18 @@ function findReferenceQuestion(group, guid = "") {
   return q;
 }
 
+function GenerateRepeatedQuestion(questionnaire, oQuestion, primaryKey) {
+  let nQuestion = _.cloneDeep(oQuestion);
+  setNewGUID(nQuestion);
+  nQuestion.id = getNextQuestionId(questionnaire)
+  nQuestion.isRepeatable = false;
+  nQuestion.isRepeated = true;
+  nQuestion.isVisible = true;
+  nQuestion.sortOrder = oQuestion.sortOrder + 1;
+  nQuestion.name = generateName('Question', 'QTN', 'RD_' + primaryKey + nQuestion.id);
+  return nQuestion;
+}
+
 function findGroupForQuestionById(groups, qGuid) {
   let group = groups.find(g => {
     const q = g.questions.findIndex(q => q.guid === qGuid);
@@ -193,6 +205,38 @@ function findGroupForQuestionById(groups, qGuid) {
     return false;
   });
   return group;
+}
+
+function findParentQuestionById(collection, qGuid) {
+  let entity = collection.find(c => {
+    const q = c.childQuestions.findIndex(q => q.guid === qGuid);
+    if (q > -1) return true;
+    return false;
+  });
+  if(!entity) {
+    for(let x = 0; x < c.childQuestions.length; x++) {
+      entity = findParentQuestionById(c.childQuestions[x],qGuid);
+      if(entity) {
+        return entity;
+      }
+    }
+  }
+  return entity;
+}
+
+function findParentForQuestionById(groups, qGuid) {
+  let entity = findGroupForQuestionById(groups, qGuid);
+  if(entity) {
+    return entity;
+  }
+  for( let i = 0; i < groups.length; i++) {
+    for(let j = 0; j < groups[i].questions.length; j++) {
+      entity = findParentQuestionById(groups[i].questions[j],qGuid);
+      if(entity) {
+        return entity;
+      } 
+    }
+  }
 }
 
 function createChildQuestion(questionnaire, question, group) {
@@ -744,5 +788,7 @@ export default {
   processBuilderForSave,
   FindNonUniqueIds,
   flattenQuestions,
-  fixTemplate
+  fixTemplate,
+  findParentForQuestionById,
+  GenerateRepeatedQuestion
 };
