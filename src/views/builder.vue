@@ -330,7 +330,7 @@
                                   :search="option.searchProvisions"
                                   :filter="option.filterProvisions"
                                   :items="provisions"
-                                  @input="updateSearchableProvisions($event)"
+                                  @input="updateSearchableProvisions()"
                                 >
                                   <template v-slot:label="{ item }">
                                     <div class="truncated">
@@ -719,6 +719,13 @@ export default {
     filterProvisions () {
       return (item, search, textKey) => item[textKey].indexOf(search) > -1
     },
+    selectedQuestionProvisions () {
+      let provisions = []
+      this.selectedQuestion.responseOptions.forEach(option => {
+        provisions = provisions.concat(option.provisions)
+      })
+      return provisions
+    },
     ...mapState({
       group: state => {
         if (!state || !state.group) {
@@ -1096,9 +1103,9 @@ export default {
     toggleProvisions (option) {
       option.isProvisionCollapsed = !option.isProvisionCollapsed
     },
-    updateSearchableProvisions (provisions) {
+    updateSearchableProvisions () {
       const questionGuid = this.selectedQuestion.guid
-      this.$store.dispatch('UpdateSearchableProvisionsState', { provisions, questionGuid })
+      this.$store.dispatch('UpdateSearchableProvisionsState', { provisions: this.selectedQuestionProvisions, questionGuid })
     }
   }
 }
