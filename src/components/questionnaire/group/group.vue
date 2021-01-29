@@ -94,6 +94,7 @@
               :data-group-id="group.htmlElementId"
               :question="question"
               :group="group"
+              :parent="group"
               :in-repeated-group="repeatedGroup"
               :expand="expand"
               :read-only="readOnly"
@@ -114,11 +115,9 @@
 
 <script>
 
-import _ from 'lodash'
 import { mapState } from 'vuex'
 import Question from './question/question.vue'
 import BuilderService from '../../../services/builderService'
-import { setNewGUID } from '../../../utils.js'
 
 export default {
   emits: ['responseChanged', 'update-group-count'],
@@ -231,18 +230,18 @@ export default {
     onRepeatQuestion (questionGuid) {
       let questionIdx = this.group.questions.findIndex(q => q.guid === questionGuid)
       if (questionIdx > -1) {
-        let nQuestion = _.cloneDeep(this.group.questions[questionIdx])
-        setNewGUID(nQuestion)
         let questionnaire = this.$store.getters['getQuestionnaire']
-        nQuestion.id = BuilderService.getNextQuestionId(questionnaire)
-        nQuestion.isRepeatable = false
-        nQuestion.isRepeated = true
-        nQuestion.sortOrder = this.group.questions[questionIdx].sortOrder + 1
-        for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
-          this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
+        let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.group.questions[questionIdx], this.group.primaryKey)
+        if (nQuestion) {
+          for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
+            this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
+          }
+          this.group.questions.splice(questionIdx + 1, 0, nQuestion)
+        } else {
+          alert('Something went wrong, check the console')
+          console.log(JSON.stringify(this.group))
+          console.log(JSON.stringify(this.question))
         }
-        this.group.questions.splice(questionIdx + 1, 0, nQuestion)
-        // this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
       } else {
         alert('Something went wrong, check the console')
         console.log(JSON.stringify(this.group))
