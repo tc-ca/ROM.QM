@@ -94,6 +94,7 @@
               :data-group-id="group.htmlElementId"
               :question="question"
               :group="group"
+              :parent="group"
               :in-repeated-group="repeatedGroup"
               :expand="expand"
               :read-only="readOnly"
@@ -231,11 +232,16 @@ export default {
       if (questionIdx > -1) {
         let questionnaire = this.$store.getters['getQuestionnaire']
         let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.group.questions[questionIdx], this.group.primaryKey)
-
-        for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
-          this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
+        if (nQuestion) {
+          for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
+            this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
+          }
+          this.group.questions.splice(questionIdx + 1, 0, nQuestion)
+        } else {
+          alert('Something went wrong, check the console')
+          console.log(JSON.stringify(this.group))
+          console.log(JSON.stringify(this.question))
         }
-        this.group.questions.splice(questionIdx + 1, 0, nQuestion)
       } else {
         alert('Something went wrong, check the console')
         console.log(JSON.stringify(this.group))
