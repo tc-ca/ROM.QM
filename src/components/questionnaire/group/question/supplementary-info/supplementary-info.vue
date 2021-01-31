@@ -26,7 +26,10 @@
       save-to-prop="internalComment"
       @error="onError"
     />
-    <div v-if="!isReferenceQuestion">
+    <div
+      v-if="!isReferenceQuestion"
+      style="width: 100%"
+    >
       <supplementary-info-image
         v-if="displayPicture"
         :picture="selresponseoption.picture"

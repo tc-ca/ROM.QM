@@ -31,134 +31,112 @@
       <v-row>
         <v-col>
           <v-file-input
-            prepend-icon="mdi-camera-plus-outline"
-            hide-input
+            ref="fileUpload"
+            prepend-icon="mdi-file-document-multiple"
+            counter
+            show-size
             :disabled="readOnly"
-            accept="image/*"
+            @click="onFileUploadClick"
             @change="onFileChange"
           />
-        </v-col>
-        <v-col>
-          <v-btn-toggle rounded>
-            <v-btn
-              v-model="speedDialOpen"
-              fab
-              :disabled="!imageNoteExist || readOnly"
-            >
-              <v-icon v-if="speedDialOpen">
-                mdi-close
-              </v-icon>
-              <v-icon v-else>
-                mdi-pencil
-              </v-icon>
-            </v-btn>
-            <!-- Delete Photo Button  -->
-
-            <v-btn
-              :disabled="!imageNoteExist || readOnly"
-              fab
-              @click.stop="removeImage(galleryIndex); updateResponseStore();"
-            >
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
-          </v-btn-toggle>
+          <div>
+            {{ progressStatus }}
+          </div>
         </v-col>
       </v-row>
       <v-row no-gutters>
         <v-col>
-          <v-card flat>
-            <v-window v-model="galleryIndex">
-              <!-- Gallery  -->
-              <v-window-item
-                v-for="(image, index) in picture.value"
-                :key="index"
-              >
-                <!-- Image -->
-                <img
-                  :src="image.base64String"
-                  class="responsive-image center-image"
-                  style="align-center"
+          <v-list
+            v-if="picture.value.length > 0"
+            dense
+          >
+            <v-subheader>Uploaded Files</v-subheader>
+            <v-list-item
+              v-for="(image, index) in picture.value"
+              :key="index"
+            >
+              <v-list-item-icon>
+                <v-icon
+                  size="30"
                 >
-              </v-window-item>
-            </v-window>
-            <!-- Bubbles -->
-            <v-card-actions
-              v-if="picture.value.length > 1 "
-              class="justify-space-between"
-            >
-              <v-spacer />
-              <v-row>
-                <v-col>
-                  <v-item-group
-                    v-model="galleryIndex"
-                    class="text-center"
-                  >
-                    <v-item
-                      v-for="(image, index) in picture.value"
-                      :key="index"
-                      v-slot="{ active, toggle }"
-                    >
-                      <v-btn
-                        x-small
-                        :input-value="active"
-                        icon
-                        :disabled="readOnly"
-                        @click="toggle"
-                      >
-                        <v-icon x-small>
-                          mdi-record
-                        </v-icon>
-                      </v-btn>
-                    </v-item>
-                  </v-item-group>
-                </v-col>
-              </v-row>
-
-              <v-spacer />
-            </v-card-actions>
-            <!-- Title and Comment -->
-
-            <v-card-title
-              v-if="imageNoteExist"
-              class="subtitle-1"
-            >
-              <div class="text-truncate">
-                {{ picture.value[galleryIndex].title }}
-              </div>
-            </v-card-title>
-            <v-card-subtitle v-if="imageNoteExist">
-              <div class="text-no-wrap text-truncate">
-                {{ picture.value[galleryIndex].comment }}
-              </div>
-            </v-card-subtitle>
-
-            <!-- Title and Comment inputs -->
-            <v-card-text ref="title">
-              <div v-if="speedDialOpen && imageNoteExist">
-                <v-textarea
-                  v-model="picture.value[galleryIndex].title"
-                  auto-grow
-                  outlined
-                  :disabled="readOnly"
-                  dense
-                  rows="1"
-                  label="Title"
-                  @change="updateResponseStore()"
-                />
-                <v-textarea
-                  v-model="picture.value[galleryIndex].comment"
-                  auto-grow
-                  outlined
-                  :disabled="readOnly"
-                  dense
-                  placeholder=" "
-                  rows="1"
-                  label="Comment"
-                  @change="updateResponseStore()"
-                />
-              </div>
-            </v-card-text>
-          </v-card>
+                  mdi-file-{{ image.fileType }}
+                </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <div v-if="!image.speedDialOpen">
+                  <v-list-item-subtitle>
+                    Title: {{ image.title }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    Comment: {{ image.comment === '' ? 'N/A' : image.comment }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    Uploaded: {{ image.timeStamp }}
+                  </v-list-item-subtitle>
+                </div>
+                <div v-if="image.speedDialOpen">
+                  <v-textarea
+                    v-model="image.title"
+                    auto-grow
+                    outlined
+                    :disabled="readOnly"
+                    dense
+                    rows="1"
+                    label="Title"
+                    style="font-size: small"
+                    @change="updateResponseStore()"
+                  />
+                  <v-textarea
+                    v-model="image.comment"
+                    auto-grow
+                    outlined
+                    :disabled="readOnly"
+                    dense
+                    placeholder=" "
+                    rows="1"
+                    label="Comment"
+                    style="font-size: small"
+                    @change="updateResponseStore()"
+                  />
+                </div>
+              </v-list-item-content>
+              <v-list-item-icon>
+                <v-btn
+                  v-model="image.speedDialOpen"
+                  icon
+                  :disabled="!imageNoteExist || readOnly"
+                  @click="image.speedDialOpen = !image.speedDialOpen"
+                >
+                  <v-icon v-if="image.speedDialOpen">
+                    mdi-close
+                  </v-icon>
+                  <v-icon v-else>
+                    mdi-pencil
+                  </v-icon>
+                </v-btn>
+              </v-list-item-icon>
+              <v-list-item-icon>
+                <v-btn
+                  :disabled="!imageNoteExist || readOnly"
+                  icon
+                  color="deep-orange"
+                  @click.stop="removeImage(image, galleryIndex); updateResponseStore();"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </v-list-item-icon>
+              <v-list-item-icon>
+                <v-btn
+                  :disabled="!imageNoteExist || readOnly"
+                  icon
+                  color="blue"
+                  @click.stop="downloadFile(image); updateResponseStore();"
+                >
+                  <v-icon>mdi-download-circle-outline</v-icon>
+                </v-btn>
+              </v-list-item-icon>
+            </v-list-item>
+          </v-list>
         </v-col>
       </v-row>
       <v-input
@@ -178,6 +156,7 @@
 import moment from 'moment'
 import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
+import AzureBlobService from '../../../../../services/azureBlobService'
 
 export default {
   mixins: [BaseMixin],
@@ -212,8 +191,9 @@ export default {
     return {
       // images: [],
       curImg: '',
+      progressStatus: '',
       galleryIndex: 0,
-      speedDialOpen: false,
+      // speedDialOpen: false,
       rules: [
         value => !this.picture.display || !this.picture.required ? true : this.picture.value.length > 0 || 'Required.'
       ],
@@ -236,6 +216,11 @@ export default {
       return this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
     }
   },
+  watch: {
+    speedDialOpen (value, oldValue) {
+      console.log('Speed dial: ' + value)
+    }
+  },
   mounted () {
     this.$watch(
       '$refs.validationInput.validations',
@@ -247,11 +232,33 @@ export default {
     )
   },
   methods: {
+    onFileUploadClick (e) {
+      // this.$refs.fileUpload.reset()
+    },
     onFileChange (e) {
       if (!e) {
         return
       }
-      this.createImage(e)
+      this.createFile(e)
+    },
+    async createFile (file) {
+      try {
+        this.progressStatus = 'Uploading...'
+        await AzureBlobService.uploadFile(file)
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.progressStatus = ''
+        let fileType = ''
+        if (file.type === 'application/pdf') fileType = 'pdf'
+        else if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type === 'application/vnd.ms-excel') fileType = 'excel'
+        else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') fileType = 'word'
+        else if (file.type.startsWith('image')) fileType = 'image'
+        else fileType = 'document-outline'
+
+        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, base64String: '', title: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), speedDialOpen: false })
+        this.$refs.fileUpload.reset()
+      }
     },
     createImage (file) {
       var reader = new FileReader()
@@ -270,7 +277,7 @@ export default {
         if (!Array.isArray(this.picture.value)) {
           this.picture.value = []
         }
-        this.picture.value.push({ base64String: this.curImg, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
+        this.picture.value.push({ isFileTypeImage: true, fileType: '', base64String: this.curImg, title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
         // this.images.push(base64)
         this.next()
       } else {
@@ -279,11 +286,27 @@ export default {
       }
     },
 
-    removeImage (index) {
-      this.picture.value.splice(index, 1)
-      // need to jump forward twice (to move forward once) as the array has been altered.
-      this.next()
-      this.next()
+    async downloadFile (file) {
+      try {
+        await AzureBlobService.downloadFile(file)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async removeImage (file, index) {
+      try {
+        // eslint-disable-next-line no-debugger
+        debugger
+        await AzureBlobService.deleteFile(file)
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.picture.value.splice(index, 1)
+        // need to jump forward twice (to move forward once) as the array has been altered.
+        this.next()
+        this.next()
+      }
     },
 
     changeImage (base64) {
