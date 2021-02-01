@@ -15,7 +15,6 @@ export function generateName (name, prefix, postfix, removeVowels = true) {
   }
 
   cn = prefix + '_' + cn.replace(/\s+/g, '').     // replace whitespaces 
-                         replace(/[^a-zA-Z]+/g, '').  // replace all non alpha characters
                          substring(0, 15).        // take first 15 characters
                          toUpperCase()            // to upper
   if (postfix) cn += '_' + postfix
