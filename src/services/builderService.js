@@ -186,7 +186,7 @@ function findReferenceQuestion(group, guid = "") {
   return q;
 }
 
-function GenerateRepeatedQuestion(questionnaire, oQuestion, primaryKey) {
+function GenerateRepeatedQuestion(questionnaire, oQuestion) {
   let nQuestion = null;
   try {
     nQuestion = _.cloneDeep(oQuestion);
@@ -196,7 +196,7 @@ function GenerateRepeatedQuestion(questionnaire, oQuestion, primaryKey) {
     nQuestion.isRepeated = true;
     nQuestion.isVisible = true;
     nQuestion.sortOrder = oQuestion.sortOrder + 1;
-    nQuestion.name = generateName('Question', 'QTN', 'RD_' + primaryKey + nQuestion.id);
+    // nQuestion.name = generateName('Question', 'QTN', 'RD_' + primaryKey);
   } catch (error) {
     // Generate Error
     nQuestion = null;
