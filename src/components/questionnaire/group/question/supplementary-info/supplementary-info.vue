@@ -26,7 +26,20 @@
       save-to-prop="internalComment"
       @error="onError"
     />
-    <div v-if="!isReferenceQuestion">
+    <div
+      v-if="!isReferenceQuestion"
+      style="width: 100%"
+    >
+      <supplementary-info-files
+        v-if="displayPicture"
+        :picture="selresponseoption.picture"
+        :label="$t('app.questionnaire.group.question.files')"
+        :group="group"
+        :question="question"
+        :read-only="readOnly"
+        save-to-prop="images"
+        @error="onError"
+      />
       <supplementary-info-image
         v-if="displayPicture"
         :picture="selresponseoption.picture"
@@ -45,12 +58,14 @@
 import { mapState } from 'vuex'
 import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
+import SupplementaryInfoFiles from './supplementary-info-files.vue'
+
 import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {
   emits: ['error'],
   name: 'SupplementaryInfo',
-  components: { SupplementaryInfoComment, SupplementaryInfoImage },
+  components: { SupplementaryInfoComment, SupplementaryInfoImage, SupplementaryInfoFiles },
 
   props: {
     question: {
