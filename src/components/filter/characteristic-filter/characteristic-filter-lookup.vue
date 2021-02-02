@@ -102,6 +102,13 @@ export default {
       return this.model.length
     }
   },
+  watch:
+  {
+    values (value) {
+      // console.log('todo implement')
+      // this.updateProvisionFilter()
+    }
+  },
   mounted () {
     this.updateProvisionFilter()
   },
