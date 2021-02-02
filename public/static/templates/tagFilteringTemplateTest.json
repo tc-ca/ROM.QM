@@ -1112,7 +1112,11 @@
                         "referenceID": null
                     },
                     "childQuestions": [],
-                    "dependants": [],
+                    "dependants": [
+                        {
+                            "guid": "eeaf97cc-565e-43d8-81a0-0f2d4b3840dd"
+                        }
+                    ],
                     "dependencyGroups": []
                 },
                 {
@@ -1460,6 +1464,218 @@
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
+        },
+        {
+            "title": {
+                "en": "grp 4 test question with child which contains diff provision",
+                "fr": "Fr: New Group"
+            },
+            "primaryKey": "GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+            "isRepeatable": false,
+            "isVisible": true,
+            "order": 3,
+            "questions": [
+                {
+                    "name": "QTN_[N]N1202,DSLFL,_RD_GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+                    "id": 15,
+                    "guid": "0bd5c2ad-67b0-4d8f-8a32-c0d622ff75b5",
+                    "sortOrder": 15,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": " [UN] UN1202, DIESEL FUEL, or UN1203, GASOLINE, Exemption",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "name": "RSPNS_YS_QTN_[N]N1202,DSLFL,_RD_GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [
+                                "f1c92f64-b1dd-4d43-aa56-e998f53ab0c4"
+                            ],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": true
+                        },
+                        {
+                            "id": 2,
+                            "name": "RSPNS_N_QTN_[N]N1202,DSLFL,_RD_GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "required",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [
+                        {
+                            "name": "QTN_QSTN_RD_GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+                            "id": 16,
+                            "guid": "cda94275-95c9-4b14-928c-842b04a1f481",
+                            "sortOrder": 1,
+                            "isVisible": true,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "[UN]- UN1044, FIRE EXTINGUISHERS, Exemption",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [
+                                        "26d1777a-49fd-4316-bfb6-516e96bd7043"
+                                    ],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": true
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": []
+                        }
+                    ],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "expansionPanels": [
+                1
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
         }
     ],
     "templateid": "",
@@ -1474,7 +1690,8 @@
             "leg": "f1c92f64-b1dd-4d43-aa56-e998f53ab0c4",
             "questions": [
                 "17f9c66b-cf36-47c0-840e-7c6487082edb",
-                "44a9a193-388a-4d25-af6f-74fa95806323"
+                "44a9a193-388a-4d25-af6f-74fa95806323",
+                "0bd5c2ad-67b0-4d8f-8a32-c0d622ff75b5"
             ]
         },
         {
@@ -1510,7 +1727,8 @@
         {
             "leg": "26d1777a-49fd-4316-bfb6-516e96bd7043",
             "questions": [
-                "eeaf97cc-565e-43d8-81a0-0f2d4b3840dd"
+                "eeaf97cc-565e-43d8-81a0-0f2d4b3840dd",
+                "cda94275-95c9-4b14-928c-842b04a1f481"
             ]
         }
     ],
