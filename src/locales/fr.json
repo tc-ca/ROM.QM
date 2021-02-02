@@ -89,6 +89,9 @@
           "ok": "FR Ok",
           "cancel": "FR Cancel",
           "continue": "FR Continue",
+          "deleteFileConf": "FR Delete File",
+          "deleteFile": "FR Are you sure you want to delete this file?",
+          "delete": "FR Delete",
           "unselectProvisions": "FR Selecting a different response will remove any selected Provisions and their associated evidence. Are you sure you want to change responses?",
           "violationCount": "FR Violation Count",
           "violationCountPlaceHolder": "FR Enter number of violations",
@@ -98,6 +101,7 @@
           "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
           "commentRequired": "FR Comment Required",
           "photos": "FR Photos",
+          "files": "FR Files",
           "repeatable": {
             "repeatQuestion": "FR Repeat this question",
             "deleteQuestion": "FR Delete this repeated question",
