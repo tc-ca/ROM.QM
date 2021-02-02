@@ -18,9 +18,19 @@ export const getters = {
     let resp = (state.questionnaire) ? state.questionnaire.readOnly : false;
     return resp;
   },
-  getFlatListOfAllQuestions(state) {
+
+  getFlatListOfAllQuestions  (state) {
+    return (groupId = false)  => {
     let questions = [];
-    const groups = state.questionnaire.groups;
+    let groups = []
+    
+    if (groupId) {
+      groups = state.questionnaire.groups.filter(
+        x => x.htmlElementId === groupId
+      );
+    } else {
+      groups = state.questionnaire.groups;
+    }
 
     groups.forEach(group => {
       group.questions.forEach(question => {
@@ -47,7 +57,8 @@ export const getters = {
     });
     // return questions.map(x => x.id); for debugging
     return questions;
-  },
+}},
+
 
   getSearchableProvisions(state, getters, rootState) {
     const questionnaire = state.questionnaire;
@@ -185,7 +196,7 @@ export const actions = {
    * @param {*} { commit, getters }
    */
   InitializeSearchableProvisionRef({ commit, getters }) {
-    const questions = getters.getFlatListOfAllQuestions;
+    const questions = getters.getFlatListOfAllQuestions();
     commit("initializeSearchableProvisionRef", { questions });
   },
 
