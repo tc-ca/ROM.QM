@@ -220,10 +220,12 @@ export default {
 
     this.$store.dispatch('updateGroupOrder', { group, index })
     this.$store.dispatch('updateGroupHtmlElementId', { group })
+
+    // important count must also be set on updated as the item in the array is shifted when group copy function is used.
+    this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
   },
   mounted () {
-    // sets the default value based on visibility of the component
-    this.questionCount = this.$el.querySelectorAll(`[data-group-id='${this.group.htmlElementId}']:not([style*='display: none'])`).length
+    this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
   },
 
   methods: {

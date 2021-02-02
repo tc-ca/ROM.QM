@@ -196,7 +196,6 @@ function GenerateRepeatedQuestion(questionnaire, oQuestion) {
     nQuestion.isRepeated = true;
     nQuestion.isVisible = true;
     nQuestion.sortOrder = oQuestion.sortOrder + 1;
-    // nQuestion.name = generateName('Question', 'QTN', 'RD_' + primaryKey);
   } catch (error) {
     // Generate Error
     nQuestion = null;

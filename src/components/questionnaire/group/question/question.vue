@@ -311,7 +311,8 @@ export default {
       isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
-      responseArgs: null
+      responseArgs: null,
+      filteredInByProvisionSearch: true
     }
   },
   computed: {
@@ -384,46 +385,24 @@ export default {
       },
       set () { }
     },
-    filteredInByProvisionSearch () {
-      if (this.provisionFilter === null) {
-        // no active search display all questions
-        return true
+    // returns the source (origin/original) question object if the question is considered a repeat
+    // i.e. the source of which this question has been copied from.
+    sourceQuestion () {
+      // if repeated group, find source group
+      if (this.inRepeatedGroup || this.question.isRepeated) {
+        // find the originial group (needed when group is repeated)
+        const groupId = `${this.group.primaryKey}#000`// #000 is always identifies the origin of specific group
+        // find question in the origin group, must get flat list all questions within group first (including children).
+        const originQuestions = this.getFlatListOfAllQuestions(groupId)
+        // find will return first occurence which statifies our search as the source will always be in the beginning of the array.
+        const originQuestion = originQuestions.find(x => x.name === this.question.name)
+
+        return originQuestion
       }
-      if (this.provisionFilter && this.provisionFilter.length > 0) {
-        // active search check to see if question should be shown or not
-        let dependants = []
-        let dependsArray = []
-
-        if (this.question.dependants) {
-          dependants = this.question.dependants.map(x => x.guid)
-        }
-
-        if (this.question.dependencyGroups) {
-          dependsArray = []
-          this.question.dependencyGroups.forEach(x => {
-            x.questionDependencies.forEach(y => {
-              dependsArray.push(y.dependsOnQuestion.guid)
-            })
-          })
-        }
-
-        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
-
-        const foundInQuestion = this.provisionFilter.some(p => p.questions.includes(this.question.guid))
-        const foundInDependants = this.provisionFilter.some(p => p.questions.some(q => dependants.includes(q)))
-        const foundInDepends = this.provisionFilter.some(p => p.questions.some(q => dependsArray.includes(q)))
-        const foundInChildren = this.provisionFilter.some(p => p.questions.some(q => childrenGuids.includes(q)))
-
-        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
-      }
-      // search resulted in no provisions found therefore hide all questions
-      return false
+      return null
     },
     isVisible () {
-      // TO DO: Luis did this because it was not working on his copy question, please replace it with the right code.
-      return true
-      // this.isVisibleByAppliedTags()
-      // return this.question.isVisible && this.filteredInByProvisionSearch
+      return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
       return this.question.responseOptions.some(option => option.provisions.length > 0)
@@ -458,6 +437,14 @@ export default {
             // running this method will initialize the selected responses
             this.onUserResponseChanged(this.responseArgs)
           }
+          break
+        case 'updateTagFilterState':
+          // to help performance only run when mutation occurs
+          this.setQuestionVisibilityBasedOnAppliedTags()
+          break
+        case 'updateProvisionFilter':
+          // to help performance only run when mutation occurs
+          this.filteredInByProvisionSearch = this.isfilteredInByProvisionSearch()
           break
         default:
           break
@@ -512,7 +499,7 @@ export default {
         let questionIdx = this.question.childQuestions.findIndex(cq => cq.guid === cQuestionGuid)
         if (questionIdx > -1) {
           let questionnaire = this.$store.getters['getQuestionnaire']
-          let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.question.childQuestions[questionIdx], this.question.id)
+          let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.question.childQuestions[questionIdx])
           if (nQuestion) {
             for (let x = questionIdx + 1; x < this.question.childQuestions.length; x++) {
               this.question.childQuestions[x].sortOrder = this.question.childQuestions[x].sortOrder + 1
@@ -702,12 +689,16 @@ export default {
       if (this.question.dependants) {
         for (let i = 0; i < this.question.dependants.length; i++) {
           let dependentGuid = this.question.dependants[i].guid
-          const question = this.getFlatListOfAllQuestions.find(x => x.guid === dependentGuid)
-          this.updateChildQuestionOnDependencies(question)
+          const question = this.getFlatListOfAllQuestions().find(x => x.guid === dependentGuid)
+          this.applyDependencyRuleOnQuestion(question)
         }
       }
     },
-    updateChildQuestionOnDependencies (question) {
+    /**
+     * Sets rule dependency for question and returns an array of matched groups
+     * todo: maybe refactor, find way split "responsibility "of method as it sets and returns values (making it more clear what the method does).
+     */
+    applyDependencyRuleOnQuestion (question) {
       if (question && question.dependencyGroups) {
         let groupMatchArray = []
         for (let i = 0; i < question.dependencyGroups.length; i++) {
@@ -717,7 +708,7 @@ export default {
           for (let j = 0; j < group.questionDependencies.length; j++) {
             let dependancy = group.questionDependencies[j]
             let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-            let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
+            let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
             if (dependancy.validationAction === 'equal') {
               if (!(dependsOnQuestion.response === dependancy.validationValue)) {
@@ -752,10 +743,11 @@ export default {
             }
           }
 
+          groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
+
           if (group.ruleType === 'visibility') {
-          // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
-          // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
-            groupMatchArray.push({ ruleType: 'visibility', groupMatch })
+            // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
+            // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
             const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
             question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
           } else if (group.ruleType === 'validation') {
@@ -767,6 +759,7 @@ export default {
             rule.value = group.questionDependencies[0].parentQuestion.response
           }
         }
+        return groupMatchArray
       }
     },
     onError (error) {
@@ -801,33 +794,39 @@ export default {
     setQuestionVisibility (visible) {
       this.question.isVisible = visible
     },
-    questionFoundInProvision (provisions) {
-    // ains abstract this out
-    // if (this.provisionFilter === null) {
-    //   // no active search display all questions
-    //   return true
-    // }
+
+    questionFoundViaProvidedProvisions (provisions) {
+      let question
+
+      // if question is repeated find the origin that it was repeated from, as the repeated question guid is not found in the searchable provision array.
+      // any logic applied the origin would also be applied to the repeated versions of the question.
+      if (!this.question.isRepeated && !this.inRepeatedGroup) {
+        question = this.question
+      } else {
+        question = this.sourceQuestion
+      }
+
       if (provisions && provisions.length > 0) {
       // active search check to see if question should be shown or not
         let dependants = []
         let dependsArray = []
 
-        if (this.question.dependants) {
-          dependants = this.question.dependants.map(x => x.guid)
+        if (question.dependants) {
+          dependants = question.dependants.map(x => x.guid)
         }
 
-        if (this.question.dependencyGroups) {
+        if (question.dependencyGroups) {
           dependsArray = []
-          this.question.dependencyGroups.forEach(x => {
+          question.dependencyGroups.forEach(x => {
             x.questionDependencies.forEach(y => {
               dependsArray.push(y.dependsOnQuestion.guid)
             })
           })
         }
 
-        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
+        let childrenGuids = GetAllChildrenQuestions(question).map(x => x.guid)
 
-        const foundInQuestion = provisions.some(p => p.questions.includes(this.question.guid))
+        const foundInQuestion = provisions.some(p => p.questions.includes(question.guid))
         const foundInDependants = provisions.some(p => p.questions.some(q => dependants.includes(q)))
         const foundInDepends = provisions.some(p => p.questions.some(q => dependsArray.includes(q)))
         const foundInChildren = provisions.some(p => p.questions.some(q => childrenGuids.includes(q)))
@@ -837,76 +836,9 @@ export default {
       // search resulted in no provisions found therefore return false
       return false
     },
-    runRule (question) {
-      let groupMatchArray = []
-      for (let i = 0; i < question.dependencyGroups.length; i++) {
-        let group = question.dependencyGroups[i]
-
-        let groupMatch = true
-        for (let j = 0; j < group.questionDependencies.length; j++) {
-          let dependancy = group.questionDependencies[j]
-          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
-
-          if (dependancy.validationAction === 'equal') {
-            if (!(dependsOnQuestion.response === dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'notEqual') {
-            if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'greaterThen') {
-            if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lessThen') {
-            if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthLessThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthGreaterThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          }
-        }
-
-        groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
-
-        if (group.ruleType === 'visibility') {
-        // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
-        // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
-          const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-          question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
-        } else if (group.ruleType === 'validation') {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-          rule.enabled = groupMatch
-        } else if (group.ruleType === 'validationValue' && groupMatch) {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-
-          rule.value = group.questionDependencies[0].parentQuestion.response
-        }
-      }
-      return groupMatchArray
-    },
-    isVisibleByAppliedTags () {
-      // if there is nothing in the tag filters, then there is nothing to apply and therefore default all questions to visible.
-      // if (this.provisionTagFilters.length === 0) {
-      //   this.setQuestionVisibility(true)
-      //   return true
-      // }
-
-      const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
+    setQuestionVisibilityBasedOnAppliedTags () {
+      console.log('running set tag rules')
+      const questionFoundInProvision = this.questionFoundViaProvidedProvisions(this.provisionTagFilters)
 
       // question has no provisions its visibility always be set to true
       if (!this.selectedQuestionHasProvisions) {
@@ -931,12 +863,21 @@ export default {
 
         // below code checking to see if depencies rules/conditions are statisfied in settting visibility
         // note: if the question is not answer returns false and if the conditions do not match conditions of the rules it will return false
-        const groupMatchArray = this.runRule(this.question)
+        // applyDependencyRuleOnQuestion will also return group match array (todo: figure out a better way to extract that method )
+        const groupMatchArray = this.applyDependencyRuleOnQuestion(this.question)
         const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
         const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
         this.setQuestionVisibility(answerMatch)
         return answerMatch
       }
+    },
+    isfilteredInByProvisionSearch () {
+      console.log('running filter provision search')
+      if (this.provisionFilter === null) {
+        // no active search display all questions
+        return true
+      }
+      return this.questionFoundViaProvidedProvisions(this.provisionFilter)
     }
   }
 }
