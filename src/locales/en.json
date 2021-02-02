@@ -111,17 +111,17 @@
           "sampling": {
             "approximateTotal": "Approximate Total",
             "sampleSize": "Sample Size",
-            "nonCompliances": "Non-compliances",
+            "nonCompliances": "Violation count",
             "approximateTotalPlaceholder": "Please enter the approximate total of items",
             "sampleSizePlaceholder": "Please enter the Size of the Sample",
-            "nonCompliancesPlaceholder": "Please enter the Number of non-compliances",
+            "nonCompliancesPlaceholder": "Please enter the Violation count",
             "samplingTooltip": "Sampling Record",
             "EM_ApproximateTotalRequired": "Approximate Total is required",
             "EM_ApproximateTotalGreaterThan1": "Approximate Total have to be greater than 1",
             "EM_SampleSizeRequired": "Sample Size is required",
             "EM_SampleSizeGreaterThan1": "Sample Size have to be greater than 1",
-            "EM_NonComplianceRequired": "Number of non-Compliance is required",
-            "EM_NonComplianceGreaterPositive": "Number of non-Compliance have to be 0 or greater than 0"
+            "EM_NonComplianceRequired": "Violation count is required",
+            "EM_NonComplianceGreaterPositive": "Violation count have to be 0 or greater than 0"
           }
         }
       },

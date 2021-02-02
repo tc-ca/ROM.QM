@@ -170,11 +170,11 @@ export default {
       if (this.question.samplingRecord.approximateTotal !== '' ||
           this.question.samplingRecord.sampleSize !== '') {
         if (this.question.samplingRecord.nonCompliances === '') {
-          this.errorMessagesCompliances = 'Number of non-Compliance is required'
+          this.errorMessagesCompliances = 'Violation count is required'
           return false
         }
         if (this.question.samplingRecord.nonCompliances < 0) {
-          this.errorMessagesCompliances = 'Number of non-Compliance have to be 0 or greater than 0'
+          this.errorMessagesCompliances = 'Violation count have to be 0 or greater than 0'
           return false
         }
       }
