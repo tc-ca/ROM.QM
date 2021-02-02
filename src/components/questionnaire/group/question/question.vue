@@ -72,7 +72,7 @@
               >
                 <v-icon
                   normal
-                  color="primary"
+                  :color="samplingButtonColor"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>
@@ -135,7 +135,7 @@
           @error="onError"
         />
       </div>
-      <div v-if="displaySamplingRecord">
+      <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
         <sampling-record
           :question="question"
           :read-only="readOnly"
@@ -154,13 +154,21 @@
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 outline
               />
-              <v-text-field
-                v-model="question.violationInfo.violationCount"
-                :disabled="readOnly"
-                :label="$t('app.questionnaire.group.question.violationCount')"
-                :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-                outline
-              />
+              <div v-if="displaySamplingRecord">
+                <sampling-record
+                  :question="question"
+                  :read-only="readOnly"
+                />
+              </div>
+              <div v-else>
+                <v-text-field
+                  v-model="question.violationInfo.violationCount"
+                  :disabled="readOnly"
+                  :label="$t('app.questionnaire.group.question.violationCount')"
+                  :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                  outline
+                />
+              </div>
             </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
@@ -427,6 +435,10 @@ export default {
     },
     selectedQuestionHasProvisions () {
       return this.question.responseOptions.some(option => option.provisions.length > 0)
+    },
+    samplingButtonColor () {
+      if (this.displaySamplingRecord) return 'black'
+      else return 'primary'
     }
   },
   watch: {
