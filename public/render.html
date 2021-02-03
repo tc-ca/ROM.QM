@@ -16,10 +16,8 @@
   <link href="qm_chunk-vendors.css" rel=stylesheet>
   <link href="qm_app.css" rel=stylesheet>
   <script src="ClientGlobalContext.js.aspx" type="text/javascript"></script>
-    <script type="text/javascript" src="qm_globalHelper.js"></script>
-
+  <script type="text/javascript" src="qm_globalHelper.js"></script>
   <script type="text/javascript" src="qm_questionnaireFunctions.js"></script>
-
 </head>
 
 <body>
@@ -34,17 +32,24 @@
   <script>
     window.onload = (event) => {
       console.log('page is fully loaded');
-        // console.log('xrm1',JSON.stringify(Xrm))
-        // console.log('xrm2',Xrm.Utility.getGlobalContext().client)
-        qtnHelper.InitializeQuestionnaireRender()
-      };
+      // console.log('xrm1',JSON.stringify(Xrm))
+      // console.log('xrm2',Xrm.Utility.getGlobalContext().client)
+      qtnHelper.InitializeQuestionnaireRender()
+    };
 
     window.addEventListener('tdg-qstnnr-save', (event) => {
-       console.log('tdg-qstnr-save event')
-       console.log('questionnaireJSON', event.detail.questionnaireJSON);
-       console.log('error', event.detail.error);
+      console.log('tdg-qstnr-save event from web resource html page')
+      // console.log('data', event.detail.questionnaireJSON);
 
-      });
+      const sessionItem = sessionStorage.getItem("serviceTaskRenderParams");
+      const dynParams = JSON.parse(sessionItem)
+      const serviceTaskId = dynParams.serviceTaskId;
+
+      var questionHelpler = qtnHelper;
+      var questionnaireResult = event.detail.questionnaireJSON;
+      var questionnaireResultString = JSON.stringify(questionnaireResult);
+      qtnHelper.SaveQuestionnaire(questionnaireResultString, serviceTaskId);
+    });
   </script>
   <script src="qm_chunk-vendors.js"></script>
   <script src="qm_app.js"></script>
