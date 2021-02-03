@@ -654,7 +654,7 @@ export default {
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
-      if (!this.isLegislationsDataAvailable) { return }
+      if (!this.isFlatLegislationsDataAvailable) { return }
       this.updateViolationInfo(args)
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
