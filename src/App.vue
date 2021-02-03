@@ -250,7 +250,6 @@ export default {
         let event = new CustomEvent('tdg-qstnnr-save', {
           detail: {
             questionnaireJSON: this.$store.state.questionnaire.questionnaire
-
           },
           bubbles: true,
           cancelable: true
