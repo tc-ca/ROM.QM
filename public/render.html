@@ -16,7 +16,10 @@
   <link href="qm_chunk-vendors.css" rel=stylesheet>
   <link href="qm_app.css" rel=stylesheet>
   <script src="ClientGlobalContext.js.aspx" type="text/javascript"></script>
+    <script type="text/javascript" src="qm_globalHelper.js"></script>
+
   <script type="text/javascript" src="qm_questionnaireFunctions.js"></script>
+
 </head>
 
 <body>
@@ -25,12 +28,16 @@
       to continue.</strong>
   </noscript>
 
-  <!-- <questionnaire-builder page="questionnaire" questionnaire-id="" lang="en" ></questionnaire-builder> -->
-
   <questionnaire-builder page="questionnaire" lang="en">
 
   </questionnaire-builder>
   <script>
+    window.onload = (event) => {
+        console.log('page is fully loaded');
+        // console.log('xrm1',JSON.stringify(Xrm))
+        // console.log('xrm2',Xrm.Utility.getGlobalContext().client)
+        qtnHelper.InitializeQuestionnaireRender()
+      };
   </script>
   <script src="qm_chunk-vendors.js"></script>
   <script src="qm_app.js"></script>
