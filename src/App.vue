@@ -25,6 +25,7 @@
           />
         </v-card>
       </v-expand-x-transition>
+
       <!-- PROVISION SEARCH FILTER -->
       <v-btn
         id=""
@@ -54,6 +55,15 @@
         <v-icon v-if="siteCharacteristicsCount === 0">
           mdi-tune
         </v-icon>
+      </v-btn>
+      <!-- SAVE -->
+      <v-btn
+        id=""
+        icon
+        color="white"
+        @click="emitSaveEvent"
+      >
+        <v-icon> mdi-content-save </v-icon>
       </v-btn>
     </v-app-bar>
     <settings
@@ -134,6 +144,7 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'App',
+  events: ['tdg-qstnnr-save'],
   components: {
     NotificationContainer,
     LegislationSearchModal,
@@ -233,6 +244,21 @@ export default {
     setLanguage () {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
+    },
+    emitSaveEvent () {
+      if (this.isQuestionnaireDataAvailable) {
+        let event = new CustomEvent('tdg-qstnnr-save', {
+          detail: {
+            questionnaireJSON: this.$store.state.questionnaire.questionnaire
+
+          },
+          bubbles: true,
+          cancelable: true
+        })
+        document.body.dispatchEvent(event)
+      } else {
+        console.log('questionnaire state is empty')
+      }
     },
     RunValidation () {
       let grpIndex = 0
