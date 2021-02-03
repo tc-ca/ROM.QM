@@ -33,11 +33,16 @@
   </questionnaire-builder>
   <script>
     window.onload = (event) => {
-        console.log('page is fully loaded');
+      console.log('page is fully loaded');
         // console.log('xrm1',JSON.stringify(Xrm))
         // console.log('xrm2',Xrm.Utility.getGlobalContext().client)
         qtnHelper.InitializeQuestionnaireRender()
       };
+
+    window.addEventListener('tdg-qstnnr-save', (event) => {
+      // console.log('tdg-qstnr-save event')
+      // console.log('data', event.detail.questionnaireJSON);
+      });
   </script>
   <script src="qm_chunk-vendors.js"></script>
   <script src="qm_app.js"></script>
