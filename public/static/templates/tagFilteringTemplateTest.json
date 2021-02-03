@@ -1010,16 +1010,16 @@
         },
         {
             "title": {
-                "en": "grp 2",
+                "en": "grp 2 dependent sibling questions, with diff provisions",
                 "fr": "Fr: New Group"
             },
-            "primaryKey": "GRP_GRP2_TMPLT_QSTNNRTTLN",
+            "primaryKey": "GRP_GRP2DPNDNTSBLNG_TMPLT_QSTNNRTTLN",
             "isRepeatable": false,
             "isVisible": true,
             "order": 1,
             "questions": [
                 {
-                    "name": "QTN_1.[N]-N1202,DSL_RD_GRP_GRP2_TMPLT_QSTNNRTTLN",
+                    "name": "QTN_1.[N]-N1202,DSL_RD_GRP_GRP2DPNDNTSBLNG_TMPLT_QSTNNRTTLN",
                     "id": 11,
                     "guid": "44a9a193-388a-4d25-af6f-74fa95806323",
                     "sortOrder": 11,
@@ -1039,7 +1039,7 @@
                     "responseOptions": [
                         {
                             "id": 1,
-                            "name": "RSPNS_YS_QTN_NNDSLFLRNGSLNXM_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_YS_QTN_NNFRXTNGSHRSXMP_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
                             "text": {
                                 "en": "Yes",
@@ -1068,7 +1068,7 @@
                         },
                         {
                             "id": 2,
-                            "name": "RSPNS_N_QTN_NNDSLFLRNGSLNXM_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_N_QTN_NNFRXTNGSHRSXMP_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
                             "text": {
                                 "en": "No",
@@ -1120,7 +1120,7 @@
                     "dependencyGroups": []
                 },
                 {
-                    "name": "QTN_NNFRXTNGSHRSXMP_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
+                    "name": "QTN_2.[N]N1044,FRXT_RD_GRP_GRP2DPNDNTSBLNG_TMPLT_QSTNNRTTLN",
                     "id": 12,
                     "guid": "eeaf97cc-565e-43d8-81a0-0f2d4b3840dd",
                     "sortOrder": 12,
@@ -1140,7 +1140,7 @@
                     "responseOptions": [
                         {
                             "id": 1,
-                            "name": "RSPNS_YS_QTN_NNDSLFLRNGSLNXM_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_YS_QTN_2.[N]N1044,FRXT_RD_GRP_GRP2DPNDNTSBLNG_TMPLT_QSTNNRTTLN",
                             "sortOrder": 1,
                             "text": {
                                 "en": "Yes",
@@ -1169,7 +1169,7 @@
                         },
                         {
                             "id": 2,
-                            "name": "RSPNS_N_QTN_NNDSLFLRNGSLNXM_RD_GRP_GRP_TMPLT_QSTNNRTTLN",
+                            "name": "RSPNS_N_QTN_2.[N]N1044,FRXT_RD_GRP_GRP2DPNDNTSBLNG_TMPLT_QSTNNRTTLN",
                             "sortOrder": 2,
                             "text": {
                                 "en": "No",
@@ -1672,7 +1672,695 @@
                 }
             ],
             "expansionPanels": [
-                1
+                1,
+                0
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        },
+        {
+            "title": {
+                "en": "New Group",
+                "fr": "Fr: New Group"
+            },
+            "primaryKey": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
+            "isRepeatable": false,
+            "isVisible": true,
+            "order": 4,
+            "questions": [
+                {
+                    "name": "QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 17,
+                    "guid": "042e5765-ef33-4cf1-b3bf-01464a3f23d6",
+                    "sortOrder": 17,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "is there a tank car on site? (4.18.2 - When UN1005, ANHYDROUS AMMONIA, is contained in a large means of containment, the large means of containment must have displayed on it)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "name": "RSPNS_YS_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "id": 2,
+                            "name": "RSPNS_N_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "required",
+                                "value": ""
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [
+                                "7aa952af-2678-4ff7-ac04-1a2fde22e783",
+                                "1d8ea605-4b38-4780-8a72-d4a52a3cb2f5",
+                                "d731b0bd-a927-4986-94f6-7c022a740aaa",
+                                "630cc818-dd3c-479c-b225-d3ed1ecf600d"
+                            ],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": true
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [
+                        {
+                            "name": "QTN_WHTKNDFTNKCRST?_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "id": 18,
+                            "guid": "89cbcbed-d09b-41ef-802a-f871ca4baa27",
+                            "sortOrder": 1,
+                            "isVisible": false,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "what kind of tank car is it?",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_YS_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": true
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_N_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [
+                                {
+                                    "ruleType": "visibility",
+                                    "childValidatorName": null,
+                                    "questionDependencies": [
+                                        {
+                                            "dependsOnQuestion": {
+                                                "guid": "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "QTN_WHTNNSDTHTNKCR?_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "id": 19,
+                            "guid": "0413e690-57cd-4d28-8c12-6fb9ace0469b",
+                            "sortOrder": 2,
+                            "isVisible": false,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "what UN inside the tank car? (UN1044, FIRE EXTINGUISHERS, Exemption)",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_YS_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [
+                                        "26d1777a-49fd-4316-bfb6-516e96bd7043"
+                                    ],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": true
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_N_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [
+                                {
+                                    "guid": "3b73caee-d990-4aae-905b-3e1a1a5661ab"
+                                },
+                                {
+                                    "guid": "3851a2e7-7d29-4b5e-8351-64a9dcb9a681"
+                                }
+                            ],
+                            "dependencyGroups": [
+                                {
+                                    "ruleType": "visibility",
+                                    "childValidatorName": null,
+                                    "questionDependencies": [
+                                        {
+                                            "dependsOnQuestion": {
+                                                "guid": "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "QTN_WLDYLKTCTVLTN?(_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "id": 20,
+                            "guid": "b90bc603-430d-4482-abf8-50f5a7688184",
+                            "sortOrder": 3,
+                            "isVisible": false,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "would you like to cite a violation? (- UN1202, DIESEL FUEL, or UN1203, GASOLINE, Exemption)",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_YS_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [
+                                        "f1c92f64-b1dd-4d43-aa56-e998f53ab0c4"
+                                    ],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": true
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_N_QTN_STHRTNKCRNST?(4_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [
+                                {
+                                    "ruleType": "visibility",
+                                    "childValidatorName": null,
+                                    "questionDependencies": [
+                                        {
+                                            "dependsOnQuestion": {
+                                                "guid": "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "id": 21,
+                            "guid": "3b73caee-d990-4aae-905b-3e1a1a5661ab",
+                            "sortOrder": 4,
+                            "isVisible": false,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "- UN1950, AEROSOLS, and UN2037, GAS CARTRIDGE",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [
+                                        "ad5f6832-1d95-4dc4-a835-4ddc899d81ce"
+                                    ],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [
+                                {
+                                    "ruleType": "visibility",
+                                    "childValidatorName": null,
+                                    "questionDependencies": [
+                                        {
+                                            "dependsOnQuestion": {
+                                                "guid": "0413e690-57cd-4d28-8c12-6fb9ace0469b"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "id": 22,
+                            "guid": "3851a2e7-7d29-4b5e-8351-64a9dcb9a681",
+                            "sortOrder": 5,
+                            "isVisible": false,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "depends on  UN1044",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": false,
+                            "samplingRecord": null,
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_RSPNSYS_QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_RSPNSN_QTN_QSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [
+                                {
+                                    "ruleType": "visibility",
+                                    "childValidatorName": null,
+                                    "questionDependencies": [
+                                        {
+                                            "dependsOnQuestion": {
+                                                "guid": "0413e690-57cd-4d28-8c12-6fb9ace0469b"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "dependants": [
+                        {
+                            "guid": "89cbcbed-d09b-41ef-802a-f871ca4baa27"
+                        },
+                        {
+                            "guid": "0413e690-57cd-4d28-8c12-6fb9ace0469b"
+                        },
+                        {
+                            "guid": "b90bc603-430d-4482-abf8-50f5a7688184"
+                        }
+                    ],
+                    "dependencyGroups": []
+                }
+            ],
+            "expansionPanels": [
+                1,
+                0
             ],
             "domSuffix": "prop value created virtually",
             "htmlElementId": "prop value created virtually"
@@ -1691,7 +2379,8 @@
             "questions": [
                 "17f9c66b-cf36-47c0-840e-7c6487082edb",
                 "44a9a193-388a-4d25-af6f-74fa95806323",
-                "0bd5c2ad-67b0-4d8f-8a32-c0d622ff75b5"
+                "0bd5c2ad-67b0-4d8f-8a32-c0d622ff75b5",
+                "b90bc603-430d-4482-abf8-50f5a7688184"
             ]
         },
         {
@@ -1728,7 +2417,38 @@
             "leg": "26d1777a-49fd-4316-bfb6-516e96bd7043",
             "questions": [
                 "eeaf97cc-565e-43d8-81a0-0f2d4b3840dd",
-                "cda94275-95c9-4b14-928c-842b04a1f481"
+                "cda94275-95c9-4b14-928c-842b04a1f481",
+                "0413e690-57cd-4d28-8c12-6fb9ace0469b"
+            ]
+        },
+        {
+            "leg": "7aa952af-2678-4ff7-ac04-1a2fde22e783",
+            "questions": [
+                "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+            ]
+        },
+        {
+            "leg": "1d8ea605-4b38-4780-8a72-d4a52a3cb2f5",
+            "questions": [
+                "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+            ]
+        },
+        {
+            "leg": "d731b0bd-a927-4986-94f6-7c022a740aaa",
+            "questions": [
+                "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+            ]
+        },
+        {
+            "leg": "630cc818-dd3c-479c-b225-d3ed1ecf600d",
+            "questions": [
+                "042e5765-ef33-4cf1-b3bf-01464a3f23d6"
+            ]
+        },
+        {
+            "leg": "ad5f6832-1d95-4dc4-a835-4ddc899d81ce",
+            "questions": [
+                "3b73caee-d990-4aae-905b-3e1a1a5661ab"
             ]
         }
     ],
