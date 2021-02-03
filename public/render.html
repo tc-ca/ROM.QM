@@ -40,8 +40,10 @@
       };
 
     window.addEventListener('tdg-qstnnr-save', (event) => {
-      // console.log('tdg-qstnr-save event')
-      // console.log('data', event.detail.questionnaireJSON);
+       console.log('tdg-qstnr-save event')
+       console.log('questionnaireJSON', event.detail.questionnaireJSON);
+       console.log('error', event.detail.error);
+
       });
   </script>
   <script src="qm_chunk-vendors.js"></script>
