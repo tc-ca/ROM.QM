@@ -267,6 +267,7 @@
 <script>
 import _ from 'lodash'
 import { mapState, mapGetters } from 'vuex'
+import BaseMixin from '../../../../mixins/base'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
@@ -278,7 +279,7 @@ export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
-
+  mixins: [BaseMixin],
   props: {
     question: {
       type: Object,
@@ -345,7 +346,7 @@ export default {
       return text
     },
     provisions () {
-      if (this.isLegislationsDataAvailable) {
+      if (this.isFlatLegislationsDataAvailable) {
         let provisions = []
         let dictionnairyOfProvisions = this.$store.state.legislations.legislations
         this.question.responseOptions.forEach(option => {
@@ -372,11 +373,6 @@ export default {
       if (this.question.isReferenceQuestion) return false
       if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
       return false
-    },
-    isLegislationsDataAvailable () {
-      if (this.$store.state.legislations.legislations === null) { return false }
-      if (this.$store.state.legislations.dataStructure !== 'flat') { return false }
-      return true
     },
     expansionPanelsValue: {
       get () {
