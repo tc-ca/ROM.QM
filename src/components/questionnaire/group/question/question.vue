@@ -670,9 +670,10 @@ export default {
       if (!this.isFlatLegislationsDataAvailable) { return }
 
       this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
-      this.selProvisions = this.selectedResponseOption.selectedProvisions
-
-      this.updateViolationInfo(this.selectedResponseOption)
+      if (this.selectedResponseOption) {
+        this.selProvisions = this.selectedResponseOption.selectedProvisions
+        this.updateViolationInfo(this.selectedResponseOption)
+      }
 
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
