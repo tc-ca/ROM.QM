@@ -60,6 +60,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  events: ['change'],
   props: {
     question: {
       type: Object,
@@ -112,7 +113,19 @@ export default {
         }
         return state.settings.settings.lang
       }
-    })
+    }),
+    previousValue () {
+      return this.selOldOption !== null ? this.selOldOption.value : this.selectedOption.value
+    },
+    currentValue () {
+      return this.selectedOption.value
+    },
+    currentId () {
+      return this.selectedOption.id
+    },
+    previousId () {
+      return this.selOldOption !== null ? this.selOldOption.id : this.selectedOption.id
+    }
   },
   created () {
     // this.question.responseOptions.sort((a, b) => a.sortOrder - b.sortOrder)
@@ -128,15 +141,18 @@ export default {
     if (this.question.response != null) {
       this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
       this.selOldOption = this.selectedOption
-      this.onChange(this.selectedOption)
+      this.onChange(this.selectedOption, true)
     }
   },
   methods: {
-    onChange (e) {
+    onChange (e, flag) {
       if (this.question.responseOptions.length > 0) {
-        let preValue = this.selOldOption == null ? null : this.selOldOption.value
-        let rs = this.question.responseOptions.find(q => q.value === preValue)
-        if (rs != null && rs.selectedProvisions.length > 0) {
+        let rs = this.question.responseOptions.find(q => q.value === this.previousValue)
+        // if user changes option
+        // and if option has provisions asscoiated to it
+        // notify the user of possible lost changes
+        // flag bool to prevent notification from pop up on load
+        if (this.previousValue !== this.currentValue && rs.selectedProvisions.length > 0 && !flag) {
           this.confirmDialogOpen = true
         } else {
           this.processEvent()
@@ -147,8 +163,10 @@ export default {
     },
     processEvent () {
       let args = {
-        value: this.selectedOption.value,
-        preValue: this.selOldOption == null ? null : this.selOldOption.value
+        optionCurrentId: this.currentId,
+        optionPreviousId: this.previousId,
+        value: this.currentValue,
+        preValue: this.previousValue
       }
       this.$emit('change', args)
       this.selOldOption = this.selectedOption
