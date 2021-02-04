@@ -463,6 +463,7 @@ export default {
         case 'setFlatLegislations':
           // in theory this only should/need  be run once when legislations is finally loaded into the store (async method, data takes few seconds)
           // now safe to run methods dependant on legislations
+
           if (this.responseArgs !== null) {
             // running this method will initialize the selected responses
             this.onUserResponseChanged(this.responseArgs)
@@ -474,7 +475,6 @@ export default {
     })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
     this.updateReferenceID()
-    this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
     calculateRepeatedNumber () {
@@ -656,8 +656,12 @@ export default {
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
       if (!this.isFlatLegislationsDataAvailable) { return }
+
       this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
+      this.selProvisions = this.selectedResponseOption.selectedProvisions
+
       this.updateViolationInfo(this.selectedResponseOption)
+
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
