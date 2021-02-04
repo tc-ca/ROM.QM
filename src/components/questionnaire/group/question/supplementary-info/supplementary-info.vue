@@ -46,8 +46,6 @@ import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
 import { questionHasSupplementaryInfo } from '../../../../../utils.js'
 
-// import { QUESTION_TYPE } from '../../../../../data/questionTypes'
-
 export default {
   emits: ['error'],
   name: 'SupplementaryInfo',
@@ -72,12 +70,6 @@ export default {
     }
   },
   computed: {
-    showSupplementaryInfo () {
-      return questionHasSupplementaryInfo(this.question)
-    },
-    // isReferenceQuestion () {
-    //   return this.question.type === QUESTION_TYPE.REFERENCE
-    // },
     displayInternalComment () {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.internalComment.option !== 'n/a'
     },
