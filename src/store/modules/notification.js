@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 export const namespaced = true
 
 export const state = {
-  notifications: []
+  notifications: [],
+  displayValidationErrors: false
 }
 
 export const getters = {
@@ -32,8 +33,18 @@ export const actions = {
 
     commit('SET_NOTIFICATIONS', notification)
   },
+    setDisplayValidationErrorsState ({ commit }, payload) {
+   
+    commit('SET_DISPLAY_VALIDATION_ERRORS', payload)
+  },
   //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
-   buildValidationList ({ dispatch, rootState }) {
+   validateQuestions ({ dispatch, rootState }, payload) {
+    const { displayValidationErrors } = payload;
+    
+    dispatch("setDisplayValidationErrorsState", displayValidationErrors);
+
+    //clear up any previous errors/notifications
+    dispatch("clearNotifications", { root: true });
 
     let grpIndex = 0;
     const questionnaire = rootState.questionnaire.questionnaire;
@@ -50,10 +61,10 @@ export const actions = {
     });
   },
   showNotifications ({commit}) {
-    commit('setNotificationsVisible')
+    commit("SET_NOTIFICATIONS_VISIBLE");
   },
   clearNotifications ({commit}) {
-    commit('clearNotifications')
+    commit("CLEAR_NOTIFICATIONS");
   }
 }
 
@@ -62,13 +73,16 @@ export const mutations = {
   SET_NOTIFICATIONS (state, notification) {
     state.notifications.push(notification)
   },
-  setNotificationsVisible (state) {
+  SET_NOTIFICATIONS_VISIBLE  (state) {
     if (state.notifications.length > 0) {
       state.notifications.forEach( n => n.showing = true )
     }
   },
-  clearNotifications (state) {
+  CLEAR_NOTIFICATIONS (state) {
     state.notifications = []
+  },
+    SET_DISPLAY_VALIDATION_ERRORS (state, payload) {
+    state.displayValidationErrors = payload;
   }
 };
 
