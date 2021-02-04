@@ -147,12 +147,12 @@ export default {
   methods: {
     onChange (e, flag) {
       if (this.question.responseOptions.length > 0) {
-        let rs = this.question.responseOptions.find(q => q.value === this.previousValue)
+        let rs = this.question.responseOptions.find(q => q.id === this.previousId)
         // if user changes option
         // and if option has provisions asscoiated to it
         // notify the user of possible lost changes
         // flag bool to prevent notification from pop up on load
-        if (this.previousValue !== this.currentValue && rs.selectedProvisions.length > 0 && !flag) {
+        if (this.previousId !== this.currentId && rs.selectedProvisions.length > 0 && !flag) {
           this.confirmDialogOpen = true
         } else {
           this.processEvent()
