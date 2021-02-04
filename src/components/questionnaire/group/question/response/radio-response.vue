@@ -128,15 +128,16 @@ export default {
     if (this.question.response != null) {
       this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
       this.selOldOption = this.selectedOption
-      this.onChange(this.selectedOption)
+      this.onChange(this.selectedOption, true)
     }
   },
   methods: {
-    onChange (e) {
+    onChange (e, flag) {
       if (this.question.responseOptions.length > 0) {
         let preValue = this.selOldOption == null ? null : this.selOldOption.value
         let rs = this.question.responseOptions.find(q => q.value === preValue)
-        if (rs != null && rs.selectedProvisions.length > 0) {
+
+        if (rs != null && rs.selectedProvisions.length > 0 && !flag) {
           this.confirmDialogOpen = true
         } else {
           this.processEvent()
