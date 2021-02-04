@@ -32,7 +32,8 @@
         <v-col>
           <v-file-input
             ref="fileUpload"
-            prepend-icon="mdi-file-document-multiple"
+            prepend-icon="mdi-camera"
+            accept="image/*"
             counter
             show-size
             :disabled="readOnly"
