@@ -38,9 +38,8 @@ export const actions = {
     commit('SET_DISPLAY_VALIDATION_ERRORS', payload)
   },
   //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
-   validateQuestions ({ dispatch, rootState }, payload) {
+  validateQuestions ({ dispatch, rootState }, payload) {
     const { displayValidationErrors } = payload;
-    
     dispatch("setDisplayValidationErrorsState", displayValidationErrors);
 
     //clear up any previous errors/notifications
@@ -63,8 +62,14 @@ export const actions = {
   showNotifications ({commit}) {
     commit("SET_NOTIFICATIONS_VISIBLE");
   },
-  clearNotifications ({commit}) {
+  clearNotifications ({commit, rootState}) {
     commit("CLEAR_NOTIFICATIONS");
+    const questionnaire = rootState.questionnaire.questionnaire;
+    questionnaire.groups.forEach(group => {
+      group.questions.forEach(question => {
+        ClearPreviousNotifications(question);
+      });
+    });
   }
 }
 
@@ -85,6 +90,31 @@ export const mutations = {
     state.displayValidationErrors = payload;
   }
 };
+
+function ClearPreviousNotifications(q)
+{
+  if (q.notification) {
+    q.notification = null;
+  }
+  if(q.responseOptions) {
+    q.responseOptions.forEach(op => {
+      if (op.internalComment && op.internalComment.notification) {
+        op.internalComment.notification = null;
+      }
+      if (op.externalComment && op.externalComment.notification) {
+        op.externalComment.notification = null;
+      }
+      if (op.picture && op.picture.notification) {
+        op.picture.notification = null;
+      }
+    });
+  }  
+  if(q.childQuestion) {
+    q.childQuestions.forEach(child => {
+      ClearPreviousNotifications(child);
+    });
+  }
+}
 
 function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch, lang)
 {
