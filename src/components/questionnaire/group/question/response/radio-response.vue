@@ -141,15 +141,15 @@ export default {
     if (this.question.response != null) {
       this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
       this.selOldOption = this.selectedOption
-      this.onChange(this.selectedOption)
+      this.onChange(this.selectedOption, true)
     }
   },
   methods: {
-    onChange (e) {
+    onChange (e, flag) {
       if (this.question.responseOptions.length > 0) {
         let rs = this.question.responseOptions.find(q => q.value === this.previousValue)
         // if change of option with previous provisions attached notified the users of possible lost changes.
-        if (this.previousValue !== this.currentValue && rs.selectedProvisions.length > 0) {
+        if (this.previousValue !== this.currentValue && rs.selectedProvisions.length > 0 && !flag) {
           this.confirmDialogOpen = true
         } else {
           this.processEvent()
