@@ -46,9 +46,16 @@
       const serviceTaskId = dynParams.serviceTaskId;
 
       var questionHelpler = qtnHelper;
+      var errorInfo = event.detail.error;
+      var isValid = errorInfo.isValid;
+      var errorCount = errorInfo.errorCount;
       var questionnaireResult = event.detail.questionnaireJSON;
       var questionnaireResultString = JSON.stringify(questionnaireResult);
       qtnHelper.SaveQuestionnaire(questionnaireResultString, serviceTaskId);
+
+      // update the parent form with the error information so it knows how to handle mark complete
+      // we can temporarily use session ah!!
+      sessionStorage.setItem("questionnaireCompletionDetails", JSON.stringify(event.detail.error));
     });
   </script>
   <script src="qm_chunk-vendors.js"></script>
