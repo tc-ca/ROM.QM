@@ -229,7 +229,7 @@
       <br>
 
       <supplementary-info
-        v-if="displaySupplementaryInfo && !isReferenceQuestion"
+        v-if="showSupplementaryInfo"
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
@@ -271,7 +271,7 @@ import BaseMixin from '../../../../mixins/base'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 
@@ -309,9 +309,9 @@ export default {
   data () {
     return {
       displayViolationInfo: false,
-      displaySupplementaryInfo: false,
+      // displaySupplementaryInfo: false,
       isValid: null,
-      selectedResponseOption: [],
+      selectedResponseOption: {},
       selResponses: [],
       treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
@@ -344,6 +344,10 @@ export default {
       }
       text += `${this.question.text[this.lang]}`
       return text
+    },
+    showSupplementaryInfo () {
+      return (!_.isEmpty(this.selectedResponseOption)) && questionHasSupplementaryInfo(this.question)
+      // return questionHasSupplementaryInfo(this.question)
     },
     provisions () {
       if (this.isFlatLegislationsDataAvailable) {
@@ -664,9 +668,12 @@ export default {
         this.$emit('reference-change')
       }
     },
+    // updateSupplementaryInfoVisibility (args) {
+    //   this.displaySupplementaryInfo = (args && args.value)
+    //   if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
+    // },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value)
-      if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
+      if (this.showSupplementaryInfo) this.updateSupplementaryInfo(args)
     },
     updateSupplementaryInfo (args) {
       if (this.question.type === QUESTION_TYPE.RADIO) {

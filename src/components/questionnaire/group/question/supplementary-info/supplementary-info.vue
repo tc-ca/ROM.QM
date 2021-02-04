@@ -30,16 +30,6 @@
       v-if="!isReferenceQuestion"
       style="width: 100%"
     >
-      <!-- <supplementary-info-files
-        v-if="displayPicture"
-        :picture="selresponseoption.picture"
-        :label="$t('app.questionnaire.group.question.files')"
-        :group="group"
-        :question="question"
-        :read-only="readOnly"
-        save-to-prop="images"
-        @error="onError"
-      /> -->
       <supplementary-info-image
         v-if="displayPicture"
         :picture="selresponseoption.picture"
@@ -90,13 +80,13 @@ export default {
       return this.question.type === QUESTION_TYPE.REFERENCE
     },
     displayInternalComment () {
-      return this.selresponseoption.internalComment.option !== 'n/a'
+      return this.selresponseoption && this.selresponseoption.internalComment && (this.selresponseoption.internalComment.option !== 'n/a')
     },
     displayExternalComment () {
-      return this.selresponseoption.externalComment.option !== 'n/a'
+      return this.selresponseoption && this.selresponseoption.externalComment && this.selresponseoption.externalComment.option !== 'n/a'
     },
     displayPicture () {
-      return this.selresponseoption.picture.option !== 'n/a'
+      return this.selresponseoption && this.selresponseoption.picture && this.selresponseoption.picture.option !== 'n/a'
     },
     ...mapState({
       lang: state => {
