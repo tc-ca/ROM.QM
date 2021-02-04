@@ -60,6 +60,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  events: ['change'],
   props: {
     question: {
       type: Object,
@@ -112,7 +113,19 @@ export default {
         }
         return state.settings.settings.lang
       }
-    })
+    }),
+    previousValue () {
+      return this.selOldOption !== null ? this.selOldOption.value : this.selectedOption.value
+    },
+    currentValue () {
+      return this.selectedOption.value
+    },
+    currentId () {
+      return this.selectedOption.id
+    },
+    previousId () {
+      return this.selOldOption !== null ? this.selOldOption.id : this.selectedOption.id
+    }
   },
   created () {
     // this.question.responseOptions.sort((a, b) => a.sortOrder - b.sortOrder)
@@ -134,9 +147,9 @@ export default {
   methods: {
     onChange (e) {
       if (this.question.responseOptions.length > 0) {
-        let preValue = this.selOldOption == null ? null : this.selOldOption.value
-        let rs = this.question.responseOptions.find(q => q.value === preValue)
-        if (rs != null && rs.selectedProvisions.length > 0) {
+        let rs = this.question.responseOptions.find(q => q.value === this.previousValue)
+        // if change of option with previous provisions attached notified the users of possible lost changes.
+        if (this.previousValue !== this.currentValue && rs.selectedProvisions.length > 0) {
           this.confirmDialogOpen = true
         } else {
           this.processEvent()
@@ -147,8 +160,10 @@ export default {
     },
     processEvent () {
       let args = {
-        value: this.selectedOption.value,
-        preValue: this.selOldOption == null ? null : this.selOldOption.value
+        optionCurrentId: this.currentId,
+        optionPreviousId: this.previousId,
+        value: this.currentValue,
+        preValue: this.previousValue
       }
       this.$emit('change', args)
       this.selOldOption = this.selectedOption

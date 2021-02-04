@@ -655,7 +655,8 @@ export default {
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
       if (!this.isFlatLegislationsDataAvailable) { return }
-      this.updateViolationInfo(args)
+      this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
+      this.updateViolationInfo(this.selectedResponseOption)
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
@@ -670,24 +671,20 @@ export default {
     },
     updateSupplementaryInfo (args) {
       if (this.question.type === QUESTION_TYPE.RADIO) {
-        let orgOption = this.question.responseOptions.find(q => q.internalComment.value !== '' ||
-          q.externalComment.value !== '' || q.picture.value !== '')
-        let selOption = this.question.responseOptions.find(q => q.value === args.value)
+        let originalOption = this.question.responseOptions.find(option => option.id === args.optionPreviousId)
+        let selectedOption = this.question.responseOptions.find(option => option.id === args.optionCurrentId)
 
-        if (orgOption) {
-          selOption.internalComment.value = orgOption.internalComment.value
-          selOption.externalComment.value = orgOption.externalComment.value
-          selOption.picture.value = orgOption.picture.value
-
-          orgOption.internalComment.value = ''
-          orgOption.externalComment.value = ''
-          orgOption.picture.value = []
+        // if user changes option
+        if (args.optionCurrentId !== args.optionPreviousId) {
+          // then pull the original values into the selected option
+          selectedOption.internalComment.value = originalOption.internalComment.value
+          selectedOption.externalComment.value = originalOption.externalComment.value
+          selectedOption.picture.value = originalOption.picture.value
         }
       }
     },
-    updateViolationInfo (args) {
+    updateViolationInfo (responseOption) {
       if (this.question.responseOptions && this.question.responseOptions.length > 0) {
-        let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
           if (responseOption.provisions == null || responseOption.provisions.length === 0) {
             this.displayViolationInfo = false
@@ -698,7 +695,6 @@ export default {
         } else {
           this.displayViolationInfo = false
         }
-        this.selectedResponseOption = responseOption
         if (responseOption && responseOption.selectedProvisions) {
           this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
         }
