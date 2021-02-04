@@ -16,6 +16,7 @@
   <link href="qm_chunk-vendors.css" rel=stylesheet>
   <link href="qm_app.css" rel=stylesheet>
   <script src="ClientGlobalContext.js.aspx" type="text/javascript"></script>
+  <script type="text/javascript" src="qm_globalHelper.js"></script>
   <script type="text/javascript" src="qm_questionnaireFunctions.js"></script>
 </head>
 
@@ -25,12 +26,71 @@
       to continue.</strong>
   </noscript>
 
-  <!-- <questionnaire-builder page="questionnaire" questionnaire-id="" lang="en" ></questionnaire-builder> -->
-
   <questionnaire-builder page="questionnaire" lang="en">
 
   </questionnaire-builder>
   <script>
+    var questionnaireWebResourceIsDirty = false;
+
+async function saveQuestionnaireFromWebResource() {
+  const sessionItem               = sessionStorage.getItem("serviceTaskRenderParams");
+  const dynParams                 = JSON.parse(sessionItem)
+  const serviceTaskId             = dynParams.serviceTaskId;
+  var   questionHelpler           = qtnHelper;
+  var   errorInfo                 = event.detail.error;
+  var   isValid                   = errorInfo.isValid;
+  var   errorCount                = errorInfo.errorCount;
+  var   questionnaireResult       = event.detail.questionnaireJSON;
+  var   questionnaireResultString = JSON.stringify(questionnaireResult);
+
+  // save the questionnaire result json to the service task
+  await qtnHelper.SaveQuestionnaire(questionnaireResultString, serviceTaskId);
+
+  // update the parent form with the error information so it knows how to handle mark complete
+  // we can temporarily use session boo!!
+  sessionStorage.setItem("questionnaireCompletionDetails", JSON.stringify(event.detail.error));
+}
+
+window.onload = (event) => {
+  console.log('page is fully loaded');
+  // console.log('xrm1',JSON.stringify(Xrm))
+  // console.log('xrm2',Xrm.Utility.getGlobalContext().client)
+  qtnHelper.InitializeQuestionnaireRender()
+};
+
+window.addEventListener('tdg-qstnnr-save', (event) => {
+  console.log('tdg-qstnr-save event from web resource html page')
+  // console.log('data', event.detail.questionnaireJSON);
+  saveQuestionnaireFromWebResource();
+});
+
+// the questionnaire will tell us when its become dirty, instead of us keep asking
+window.addEventListener('tdg-qstnnr-updated', (event) => {
+  questionnaireWebResourceIsDirty = true;
+  console.log('Is dirty has been set in Dynamics to ' + questionnaireWebResourceIsDirty);
+}, false);
+
+// unsupported in dynamics, plain js way to do this  
+// window.onbeforeunload = function () {
+//   if (questionnaireWebResourceIsDirty) {
+//     var confirmStrings = { text: "There are unsaved changes in the Questionnaire. Would you like to save them before leaving?", title: "Unsaved Changes" };
+//     var confirmOptions = { height: 200, width: 450 };
+//     Xrm.Navigation.openConfirmDialog(confirmStrings, confirmOptions).then(
+//       async function (success) {
+//         // save and continue
+//         if (success.confirmed) {
+//           saveQuestionnaireFromWebResource();
+//         }
+//         else {
+//         }
+//       },
+//       function (error) {
+//         console.log(error.message);
+//       }
+//     );
+//     return;
+//   }
+// }
   </script>
   <script src="qm_chunk-vendors.js"></script>
   <script src="qm_app.js"></script>
