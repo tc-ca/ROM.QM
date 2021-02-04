@@ -607,25 +607,37 @@ export default {
       // special case if node is top root and it has been selected because it contains no children, it therefore has no parent id, it should not be inmcluded as part of list if parent ids.
       // note the provison will still be included in the tree but attached to made up "root" node
       let uniqueParentIds = [...new Set(parentIds)].filter(x => x !== '')
-      let parentProvisions = hydrateItems(uniqueParentIds, dictionnairyOfProvisions)
+      let potentialParentProvisions = hydrateItems(uniqueParentIds, dictionnairyOfProvisions)
+
+      let additionalChildrenProvisions = []
+      for (var x = 0; x < potentialParentProvisions.length; x++) {
+        if (uniqueParentIds.includes(potentialParentProvisions[x].parentLegislationId)) {
+        // if the node is considered a parent
+        // check its parents/root id
+        // if this id exit in the list of potential parents, remove it. as its is a child of that node and cannot be considered a parent
+        // remove them from parent list and add them as children provisions list
+          additionalChildrenProvisions.push(potentialParentProvisions[x])
+          delete potentialParentProvisions[x]
+        }
+      }
       const rootNodeId = '-1'
 
+      const parentProvisions = potentialParentProvisions.filter(Boolean) // removes any holes/ undefined values as above we use the delete operator
       // set the parent parent to non existant or else we will build up further the tree
       parentProvisions.forEach(x => {
         x.parentLegislationId = rootNodeId
       })
 
-      const childrenAndAsscociatedParentProvision = provisions.concat(parentProvisions)
+      const myProvisonstest = (additionalChildrenProvisions).concat(provisions)
+      const childrenAndAsscociatedParentProvision = myProvisonstest.concat(parentProvisions)
       let data = _.cloneDeep(childrenAndAsscociatedParentProvision)
 
-      const ids = data.map(x => x.id)
       parentIds = data.map(x => x.parentLegislationId)
 
-      const uniqueIds = [...new Set(ids)]
       uniqueParentIds = [...new Set(parentIds)]
 
-      for (var i = 0; i < ids.length; i++) {
-        if (uniqueIds.includes(uniqueParentIds[i])) {
+      for (var i = 0; i < provisions.length; i++) {
+        if (uniqueParentIds.includes(provisions[i].parentLegislationId)) {
         // parent found
           continue
         } else {
