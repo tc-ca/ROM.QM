@@ -32,7 +32,8 @@
         <v-col>
           <v-file-input
             ref="fileUpload"
-            prepend-icon="mdi-file-document-multiple"
+            prepend-icon="mdi-camera"
+            accept="image/*"
             counter
             show-size
             :disabled="readOnly"
@@ -44,8 +45,46 @@
           </div>
         </v-col>
       </v-row>
-      <v-row no-gutters>
-        <v-col>
+      <v-row>
+        <v-col
+          v-for="(image, index) in picture.value"
+          :key="index"
+          class="d-flex child-flex"
+          cols="4"
+        >
+          <image-file
+            :picture="image"
+          />
+          <!-- <v-img
+            :src="getFile(image)"
+            lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
+            aspect-ratio="1"
+            class="grey lighten-2"
+          >
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                />
+              </v-row>
+            </template>
+            <v-fade-transition>
+              <v-overlay
+                v-if="hover"
+                absolute
+                color="#036358"
+              >
+                <v-btn>See more info</v-btn>
+              </v-overlay>
+            </v-fade-transition>
+          </v-img> -->
+        </v-col>
+        <!-- <v-col>
           <v-list
             v-if="picture.value.length > 0"
             dense
@@ -159,7 +198,7 @@
               <v-list-item-icon />
             </v-list-item>
           </v-list>
-        </v-col>
+        </v-col> -->
       </v-row>
       <v-input
         ref="validationInput"
@@ -206,8 +245,12 @@ import moment from 'moment'
 import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
 import AzureBlobService from '../../../../../services/azureBlobService'
+import ImageFile from '../supplementary-info/image-file'
 
 export default {
+  components: {
+    ImageFile
+  },
   mixins: [BaseMixin],
   props: {
     picture: {
@@ -241,6 +284,7 @@ export default {
       // images: [],
       curImg: '',
       progressStatus: '',
+      hover: false,
       galleryIndex: 0,
       rules: [
         value => !this.picture.display || !this.picture.required ? true : this.picture.value.length > 0 || 'Required.'
@@ -330,6 +374,24 @@ export default {
       } else {
         // TODO: add string to resource of some kind.
         this.$store.dispatch('notification/show', { text: `Only ${MAX_IMAGE_UPLOADS_PER_ANSWER} pictures can be added to an answer`, color: 'error' })
+      }
+    },
+
+    async getFile (file) {
+      try {
+        let res = await AzureBlobService.getImageFile(file)
+        console.log(res)
+        // eslint-disable-next-line no-debugger
+        debugger
+        return res
+        // console.log('9999')
+        // console.log(a)
+        // eslint-disable-next-line no-debugger
+        // debugger
+        // a = a.replace('application/octet-stream', 'image/jpeg')
+        // return a
+      } catch (e) {
+        console.log(e)
       }
     },
 
