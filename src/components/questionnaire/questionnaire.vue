@@ -31,7 +31,7 @@
           </div>
         </v-col>
         <v-col
-          v-if="hasNotifications"
+          v-if="hasNotifications && displayValidationErrors"
           cols="5"
           justify="space-around"
         >
@@ -160,6 +160,9 @@ export default {
       group: state => {
         return state.group
       },
+      displayValidationErrors: state => {
+        return state.notification.displayValidationErrors
+      },
       searchableProvisions: state => {
         if ((state.questionnaire.questionnaire === null) || (state.legislations.legislations === null)) {
           return []
@@ -278,8 +281,7 @@ export default {
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       }
-      this.$store.dispatch('notification/clearNotifications')
-      this.$store.dispatch('notification/buildValidationList')
+      this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: true })
     },
     expandPanels (expand) {
       this.panelIndex = null
