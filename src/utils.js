@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { QUESTION_TYPE } from '../src/data/questionTypes';
 
 export function pad (n, width, z) {
   z = z || '0'
@@ -113,7 +114,10 @@ export function getCollectionParent(group, guid) {
   return result;
 }
 
-
+export function questionHasSupplementaryInfo(question)
+{
+  return (question.type !== QUESTION_TYPE.REFERENCE) && (question.type !== QUESTION_TYPE.TEXT) && (question.type !== QUESTION_TYPE.NUMBER) && (question.type !== QUESTION_TYPE.IMAGE)
+}
 
 export function GetAllChildrenQuestions(question)
 {

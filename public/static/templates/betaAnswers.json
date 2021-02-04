@@ -24,7 +24,7 @@
                       "fr": "3.01 Les marchandises dangereuses sont-elles accompagnées d'un document d'expédition?"
                   },
                   "type": "radio",
-                  "response": "false",
+                  "response": null,
                   "responseOptions": [{
                           "id": 1,
                           "sortOrder": 1,

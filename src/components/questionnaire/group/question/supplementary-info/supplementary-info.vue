@@ -26,22 +26,8 @@
       save-to-prop="internalComment"
       @error="onError"
     />
-    <!-- <div
-      v-if="!isReferenceQuestion"
-      style="width: 100%"
-    > -->
-    <!-- <supplementary-info-files
-      v-if="displayPicture"
-      :picture="selresponseoption.picture"
-      :label="$t('app.questionnaire.group.question.files')"
-      :group="group"
-      :question="question"
-      :read-only="readOnly"
-      save-to-prop="images"
-      @error="onError"
-    /> -->
     <supplementary-info-image
-      v-if="!isReferenceQuestion && displayPicture"
+      v-if="displayPicture"
       :picture="selresponseoption.picture"
       :label="$t('app.questionnaire.group.question.photos')"
       :group="group"
@@ -58,9 +44,9 @@
 import { mapState } from 'vuex'
 import SupplementaryInfoComment from './supplementary-info-comment.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
-// import SupplementaryInfoFiles from './supplementary-info-files.vue'
+import { questionHasSupplementaryInfo } from '../../../../../utils.js'
 
-import { QUESTION_TYPE } from '../../../../../data/questionTypes'
+// import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {
   emits: ['error'],
@@ -86,17 +72,20 @@ export default {
     }
   },
   computed: {
-    isReferenceQuestion () {
-      return this.question.type === QUESTION_TYPE.REFERENCE
+    showSupplementaryInfo () {
+      return questionHasSupplementaryInfo(this.question)
     },
+    // isReferenceQuestion () {
+    //   return this.question.type === QUESTION_TYPE.REFERENCE
+    // },
     displayInternalComment () {
-      return this.selresponseoption.internalComment.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.internalComment.option !== 'n/a'
     },
     displayExternalComment () {
-      return this.selresponseoption.externalComment.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalComment.option !== 'n/a'
     },
     displayPicture () {
-      return this.selresponseoption.picture.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.picture.option !== 'n/a'
     },
     ...mapState({
       lang: state => {
