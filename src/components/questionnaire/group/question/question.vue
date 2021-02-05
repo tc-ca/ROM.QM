@@ -331,7 +331,10 @@ export default {
     }),
     ...mapState({
       lang: state => {
-        return 'en'
+        if (state == null || !state.settings) {
+          return 'en'
+        }
+        return state.settings.settings.lang
       },
       provisionFilter: state => {
         return state.questionnaire.provisionFilter
