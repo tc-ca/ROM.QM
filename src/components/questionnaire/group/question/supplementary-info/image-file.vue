@@ -71,7 +71,7 @@ export default {
     async getLink () {
       // let response = await AzureBlobService.getImageFile(this.picture)
       // this.link = response.data
-      let n = 'image_00' + (Math.floor(Math.random() * 5) + 1).toString()
+      let n = 'image_006' // + (Math.floor(Math.random() * 5) + 1).toString()
       this.link = `data:image/jpeg;base64,${base64Images[n]}`
     },
 

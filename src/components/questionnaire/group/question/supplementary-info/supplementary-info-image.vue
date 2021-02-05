@@ -255,6 +255,7 @@ import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
 import AzureBlobService from '../../../../../services/azureBlobService'
 import ImageFile from '../supplementary-info/image-file'
+import EXIF from 'exif-js'
 
 export default {
   components: {
