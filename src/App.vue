@@ -25,6 +25,7 @@
           />
         </v-card>
       </v-expand-x-transition>
+
       <!-- PROVISION SEARCH FILTER -->
       <v-btn
         id=""
@@ -54,6 +55,15 @@
         <v-icon v-if="siteCharacteristicsCount === 0">
           mdi-tune
         </v-icon>
+      </v-btn>
+      <!-- SAVE -->
+      <v-btn
+        id=""
+        icon
+        color="white"
+        @click="emitSaveEvent"
+      >
+        <v-icon> mdi-content-save </v-icon>
       </v-btn>
     </v-app-bar>
     <settings
@@ -126,7 +136,6 @@ import ProvisionSearch from './components/provision-search/provision-search.vue'
 import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
 import BottomNavigationQuestionnaire from './components/bottom-navigation/bottom-navigation-questionnaire.vue'
 import BottomNavigationBuilder from './components/bottom-navigation/bottom-navigation-builder.vue'
-import { SetQuestionNotificationsToList } from './utils.js'
 
 import Settings from './components/settings/settings.vue'
 import BaseMixin from './mixins/base'
@@ -134,6 +143,7 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'App',
+  events: ['tdg-qstnnr-save'],
   components: {
     NotificationContainer,
     LegislationSearchModal,
@@ -234,19 +244,26 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
-    RunValidation () {
-      let grpIndex = 0
-      const questionnaire = this.$store.state.questionnaire.questionnaire
-      // console.log(JSON.stringify(questionnaire))
-      questionnaire.groups.forEach(group => {
-        let queIndex = 0
-        group.questions.forEach(question => {
-          SetQuestionNotificationsToList(question, grpIndex, queIndex, 0, this.$store, this.lang)
-          queIndex++
+    emitSaveEvent () {
+      if (this.isQuestionnaireDataAvailable) {
+        const error = this.RunValidation()
+        let event = new CustomEvent('tdg-qstnnr-save', {
+          detail: {
+            questionnaireJSON: this.$store.state.questionnaire.questionnaire,
+            error: error
+          },
+          bubbles: true,
+          cancelable: true
         })
-        grpIndex++
-      })
-      return (this.$store.getters['notification/hasNotifications'] === false)
+        document.body.dispatchEvent(event)
+      } else {
+        console.log('questionnaire state is empty')
+      }
+    },
+    RunValidation () {
+      this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: false })
+      const errors = this.$store.state.notification.notifications
+      return { isValid: !errors.length > 0, errorCount: errors.length }
     },
     /**
      * Sets the questionnaire read only property, which is used to allow modifications to the questionnaire.

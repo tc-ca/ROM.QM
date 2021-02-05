@@ -23,15 +23,21 @@
       "clear": "Clear",
       "questionnaireName": "Questionnaire Name",
       "questionName": "Question Name",
-      "questionType": "Question Type",
       "sortOrder": "Sort Order",
       "internalComments": "Internal Comments",
       "externalComments": "External Comments",
       "picture": "Picture(s)",
-      "samplingAllowed": "Allow Sampling Record?",
       "isRepeatable": "Is Repeatable?",
       "visibleByDefault": "Visible by default",
+      "question": {
+        "questionType": "Question Type",
+        "samplingAllowed": "Allow Sampling Record?",
+        "englishText": "Question English Text",
+        "frenchText": "Question French Text"
+      },
       "responseOptions": {
+        "englishText": "Response Option English Text",
+        "frenchText": "Response Option French Text",
         "responseOptions": "Response Options",
         "sortOrder": "Sort Order",
         "value": "Value",
@@ -43,12 +49,15 @@
         "addOption": "Add Option"
       },
       "validators": {
+        "validator": "Validator",
         "validators": "Validators",
         "name": "Name",
         "enabled": "Enabled",
         "type": "Type",
         "removeValidator": "Remove Validator",
-        "addValidator": "Add Validator"
+        "addValidator": "Add Validator", 
+        "englishMessage": "English Message",
+        "frenchMessage": "French Message"
       },
       "dependsOn": {
         "dependsOn": "Depends On",
@@ -62,6 +71,8 @@
       },
 
       "group": {
+        "englishText": "Texte anglais du groupe",
+        "frenchText": "Texte francais du groupe",
         "addGroup": "Add Group",
         "removeGroup": "Remove Group",
         "groupName": "Group Name",
@@ -89,6 +100,9 @@
           "ok": "Ok",
           "cancel": "Cancel",
           "continue": "Continue",
+          "deleteFileConf": "Delete File",
+          "deleteFile": "Are you sure you want to delete this file?",
+          "delete": "Delete",
           "unselectProvisions": "Selecting a different response will remove any selected Provisions and their associated evidence. Are you sure you want to change responses?",
           "violationCount": "Violation Count",
           "violationCountPlaceHolder": "Enter number of violations",
@@ -98,6 +112,7 @@
           "internalCommentInfo": "Internal comments will only be made available to internal stakeholders",
           "commentRequired": "Comment Required",
           "photos": "Photos",
+          "files": "Files",
           "repeatable": {
             "repeatQuestion": "Repeat this question",
             "deleteQuestion": "Delete this repeated question",
@@ -107,17 +122,17 @@
           "sampling": {
             "approximateTotal": "Approximate Total",
             "sampleSize": "Sample Size",
-            "nonCompliances": "Non-compliances",
+            "nonCompliances": "Violation count",
             "approximateTotalPlaceholder": "Please enter the approximate total of items",
             "sampleSizePlaceholder": "Please enter the Size of the Sample",
-            "nonCompliancesPlaceholder": "Please enter the Number of non-compliances",
+            "nonCompliancesPlaceholder": "Please enter the Violation count",
             "samplingTooltip": "Sampling Record",
             "EM_ApproximateTotalRequired": "Approximate Total is required",
             "EM_ApproximateTotalGreaterThan1": "Approximate Total have to be greater than 1",
             "EM_SampleSizeRequired": "Sample Size is required",
             "EM_SampleSizeGreaterThan1": "Sample Size have to be greater than 1",
-            "EM_NonComplianceRequired": "Number of non-Compliance is required",
-            "EM_NonComplianceGreaterPositive": "Number of non-Compliance have to be 0 or greater than 0"
+            "EM_NonComplianceRequired": "Violation count is required",
+            "EM_NonComplianceGreaterPositive": "Violation count have to be 0 or greater than 0"
           }
         }
       },

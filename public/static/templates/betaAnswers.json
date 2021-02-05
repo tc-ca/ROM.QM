@@ -39,11 +39,11 @@
                           "isProvisionCollapsed": true,
                           "internalComment": {
                               "option": "optional",
-                              "value": ""
+                              "value": "internal comment for yes"
                           },
                           "externalComment": {
                               "option": "optional",
-                              "value": ""
+                              "value": "external comment for yes"
                           },
                           "picture": {
                               "option": "optional",
@@ -113,11 +113,11 @@
                           "isProvisionCollapsed": true,
                           "internalComment": {
                               "option": "optional",
-                              "value": ""
+                              "value": "internal comment no"
                           },
                           "externalComment": {
                               "option": "optional",
-                              "value": ""
+                              "value": "external comment no"
                           },
                           "picture": {
                               "option": "optional",
@@ -138,11 +138,11 @@
                           "isProvisionCollapsed": false,
                           "internalComment": {
                               "option": "optional",
-                              "value": ""
+                              "value": "internal comment for not inspected"
                           },
                           "externalComment": {
                               "option": "optional",
-                              "value": ""
+                              "value": "external comment for nto inspected"
                           },
                           "picture": {
                               "option": "optional",

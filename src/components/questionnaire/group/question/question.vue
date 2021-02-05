@@ -72,7 +72,7 @@
               >
                 <v-icon
                   normal
-                  color="primary"
+                  :color="samplingButtonColor"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>
@@ -135,7 +135,7 @@
           @error="onError"
         />
       </div>
-      <div v-if="displaySamplingRecord">
+      <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
         <sampling-record
           :question="question"
           :read-only="readOnly"
@@ -154,13 +154,21 @@
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 outline
               />
-              <v-text-field
-                v-model="question.violationInfo.violationCount"
-                :disabled="readOnly"
-                :label="$t('app.questionnaire.group.question.violationCount')"
-                :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-                outline
-              />
+              <div v-if="displaySamplingRecord">
+                <sampling-record
+                  :question="question"
+                  :read-only="readOnly"
+                />
+              </div>
+              <div v-else>
+                <v-text-field
+                  v-model="question.violationInfo.violationCount"
+                  :disabled="readOnly"
+                  :label="$t('app.questionnaire.group.question.violationCount')"
+                  :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                  outline
+                />
+              </div>
             </v-sheet>
             <v-sheet class="pa-4">
               <v-text-field
@@ -221,7 +229,7 @@
       <br>
 
       <supplementary-info
-        v-if="displaySupplementaryInfo && !isReferenceQuestion"
+        v-if="showSupplementaryInfo"
         :question="question"
         :selresponseoption="selectedResponseOption"
         :group="group"
@@ -259,10 +267,11 @@
 <script>
 import _ from 'lodash'
 import { mapState, mapGetters } from 'vuex'
+import BaseMixin from '../../../../mixins/base'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record'
 
@@ -270,7 +279,7 @@ export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
-
+  mixins: [BaseMixin],
   props: {
     question: {
       type: Object,
@@ -300,9 +309,9 @@ export default {
   data () {
     return {
       displayViolationInfo: false,
-      displaySupplementaryInfo: false,
+      // displaySupplementaryInfo: false,
       isValid: null,
-      selectedResponseOption: [],
+      selectedResponseOption: {},
       selResponses: [],
       treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
@@ -337,8 +346,12 @@ export default {
       text += `${this.question.text[this.lang]}`
       return text
     },
+    showSupplementaryInfo () {
+      return (!_.isEmpty(this.selectedResponseOption)) && questionHasSupplementaryInfo(this.question)
+      // return questionHasSupplementaryInfo(this.question)
+    },
     provisions () {
-      if (this.isLegislationsDataAvailable) {
+      if (this.isFlatLegislationsDataAvailable) {
         let provisions = []
         let dictionnairyOfProvisions = this.$store.state.legislations.legislations
         this.question.responseOptions.forEach(option => {
@@ -365,11 +378,6 @@ export default {
       if (this.question.isReferenceQuestion) return false
       if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
       return false
-    },
-    isLegislationsDataAvailable () {
-      if (this.$store.state.legislations.legislations === null) { return false }
-      if (this.$store.state.legislations.dataStructure !== 'flat') { return false }
-      return true
     },
     expansionPanelsValue: {
       get () {
@@ -406,6 +414,10 @@ export default {
     },
     selectedQuestionHasProvisions () {
       return this.question.responseOptions.some(option => option.provisions.length > 0)
+    },
+    samplingButtonColor () {
+      if (this.displaySamplingRecord) return 'black'
+      else return 'primary'
     }
   },
   watch: {
@@ -433,6 +445,7 @@ export default {
         case 'setFlatLegislations':
           // in theory this only should/need  be run once when legislations is finally loaded into the store (async method, data takes few seconds)
           // now safe to run methods dependant on legislations
+
           if (this.responseArgs !== null) {
             // running this method will initialize the selected responses
             this.onUserResponseChanged(this.responseArgs)
@@ -452,7 +465,6 @@ export default {
     })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
     this.updateReferenceID()
-    this.selProvisions = this.selectedResponseOption.selectedProvisions
   },
   methods: {
     calculateRepeatedNumber () {
@@ -585,25 +597,37 @@ export default {
       // special case if node is top root and it has been selected because it contains no children, it therefore has no parent id, it should not be inmcluded as part of list if parent ids.
       // note the provison will still be included in the tree but attached to made up "root" node
       let uniqueParentIds = [...new Set(parentIds)].filter(x => x !== '')
-      let parentProvisions = hydrateItems(uniqueParentIds, dictionnairyOfProvisions)
+      let potentialParentProvisions = hydrateItems(uniqueParentIds, dictionnairyOfProvisions)
+
+      let additionalChildrenProvisions = []
+      for (var x = 0; x < potentialParentProvisions.length; x++) {
+        if (uniqueParentIds.includes(potentialParentProvisions[x].parentLegislationId)) {
+        // if the node is considered a parent
+        // check its parents/root id
+        // if this id exit in the list of potential parents, remove it. as its is a child of that node and cannot be considered a parent
+        // remove them from parent list and add them as children provisions list
+          additionalChildrenProvisions.push(potentialParentProvisions[x])
+          delete potentialParentProvisions[x]
+        }
+      }
       const rootNodeId = '-1'
 
+      const parentProvisions = potentialParentProvisions.filter(Boolean) // removes any holes/ undefined values as above we use the delete operator
       // set the parent parent to non existant or else we will build up further the tree
       parentProvisions.forEach(x => {
         x.parentLegislationId = rootNodeId
       })
 
-      const childrenAndAsscociatedParentProvision = provisions.concat(parentProvisions)
+      const myProvisonstest = (additionalChildrenProvisions).concat(provisions)
+      const childrenAndAsscociatedParentProvision = myProvisonstest.concat(parentProvisions)
       let data = _.cloneDeep(childrenAndAsscociatedParentProvision)
 
-      const ids = data.map(x => x.id)
       parentIds = data.map(x => x.parentLegislationId)
 
-      const uniqueIds = [...new Set(ids)]
       uniqueParentIds = [...new Set(parentIds)]
 
-      for (var i = 0; i < ids.length; i++) {
-        if (uniqueIds.includes(uniqueParentIds[i])) {
+      for (var i = 0; i < provisions.length; i++) {
+        if (uniqueParentIds.includes(provisions[i].parentLegislationId)) {
         // parent found
           continue
         } else {
@@ -633,8 +657,14 @@ export default {
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
-      if (!this.isLegislationsDataAvailable) { return }
-      this.updateViolationInfo(args)
+      if (!this.isFlatLegislationsDataAvailable) { return }
+
+      this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
+      if (this.selectedResponseOption) {
+        this.selProvisions = this.selectedResponseOption.selectedProvisions
+        this.updateViolationInfo(this.selectedResponseOption)
+      }
+
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
       this.isValid = this.getChildQuestionValidationState()
@@ -643,30 +673,29 @@ export default {
         this.$emit('reference-change')
       }
     },
+    // updateSupplementaryInfoVisibility (args) {
+    //   this.displaySupplementaryInfo = (args && args.value)
+    //   if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
+    // },
     updateSupplementaryInfoVisibility (args) {
-      this.displaySupplementaryInfo = (args && args.value)
-      if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
+      if (this.showSupplementaryInfo) this.updateSupplementaryInfo(args)
     },
     updateSupplementaryInfo (args) {
       if (this.question.type === QUESTION_TYPE.RADIO) {
-        let orgOption = this.question.responseOptions.find(q => q.internalComment.value !== '' ||
-          q.externalComment.value !== '' || q.picture.value !== '')
-        let selOption = this.question.responseOptions.find(q => q.value === args.value)
+        let originalOption = this.question.responseOptions.find(option => option.id === args.optionPreviousId)
+        let selectedOption = this.question.responseOptions.find(option => option.id === args.optionCurrentId)
 
-        if (orgOption) {
-          selOption.internalComment.value = orgOption.internalComment.value
-          selOption.externalComment.value = orgOption.externalComment.value
-          selOption.picture.value = orgOption.picture.value
-
-          orgOption.internalComment.value = ''
-          orgOption.externalComment.value = ''
-          orgOption.picture.value = []
+        // if user changes option
+        if (args.optionCurrentId !== args.optionPreviousId) {
+          // then pull the original values into the selected option
+          selectedOption.internalComment.value = originalOption.internalComment.value
+          selectedOption.externalComment.value = originalOption.externalComment.value
+          selectedOption.picture.value = originalOption.picture.value
         }
       }
     },
-    updateViolationInfo (args) {
+    updateViolationInfo (responseOption) {
       if (this.question.responseOptions && this.question.responseOptions.length > 0) {
-        let responseOption = this.question.responseOptions.find(q => q.value === args.value)
         if (responseOption) {
           if (responseOption.provisions == null || responseOption.provisions.length === 0) {
             this.displayViolationInfo = false
@@ -677,7 +706,6 @@ export default {
         } else {
           this.displayViolationInfo = false
         }
-        this.selectedResponseOption = responseOption
         if (responseOption && responseOption.selectedProvisions) {
           this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
         }
@@ -842,7 +870,8 @@ export default {
 
       // question has no provisions its visibility always be set to true
       if (!this.selectedQuestionHasProvisions) {
-        this.setQuestionVisibility(true)
+        // this.setQuestionVisibility(true)
+        this.setQuestionVisibility(this.question.isVisible)
         return true
       }
 
