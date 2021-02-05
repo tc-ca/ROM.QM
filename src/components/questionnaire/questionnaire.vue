@@ -210,7 +210,9 @@ export default {
     this.$nextTick(function () {
       // Code that will run only after the
       // entire view has been rendered
-      this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
+      if (this.$refs.questionGroup) {
+        this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length
+      }
     })
     this.isDirty()
   },
@@ -287,8 +289,10 @@ export default {
       this.panelIndex = null
       this.expand = expand
     },
-    onUpdateGroupCount (count) {
-      this.groupCount += count
+    onUpdateGroupCount () {
+      if (this.$refs.questionGroup) {
+        this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length
+      }
     },
     clearProvisionSearchField () {
       this.$emit('clear-provision-search-field')

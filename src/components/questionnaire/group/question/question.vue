@@ -450,12 +450,8 @@ export default {
       },
       deep: true
     },
-    isVisible (value, oldValue) {
-      if (value === true) {
-        this.$emit('update-group-question-count', 1)
-      } else {
-        this.$emit('update-group-question-count', -1)
-      }
+    isVisible () {
+      this.$emit('update-group-question-count')
     }
   },
   mounted () {
