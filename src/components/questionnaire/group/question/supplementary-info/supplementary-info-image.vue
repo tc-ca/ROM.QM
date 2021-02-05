@@ -103,6 +103,9 @@
                     <v-list-item-subtitle>
                       Uploaded: {{ selImage.timeStamp }}
                     </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      Exif Data: {{ getExifData(selLink) }}
+                    </v-list-item-subtitle>
                   </div>
                   <div v-if="speedDialOpen">
                     <v-textarea
@@ -330,6 +333,14 @@ export default {
     setCurrentImage (imgLink, img) {
       this.selLink = imgLink
       this.selImage = img
+    },
+    getExifData (data) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      var image = new Image()
+      image.src = data
+      let d = EXIF.getAllTags(image)
+      return d
     },
     onFileUploadClick (e) {
       // this.$refs.fileUpload.reset()
