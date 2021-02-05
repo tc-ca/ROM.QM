@@ -23,15 +23,21 @@
       "clear": "Clear",
       "questionnaireName": "Questionnaire Name",
       "questionName": "Question Name",
-      "questionType": "Question Type",
       "sortOrder": "Sort Order",
       "internalComments": "Internal Comments",
       "externalComments": "External Comments",
       "picture": "Picture(s)",
-      "samplingAllowed": "Allow Sampling Record?",
       "isRepeatable": "Is Repeatable?",
       "visibleByDefault": "Visible by default",
+      "question": {
+        "questionType": "Question Type",
+        "samplingAllowed": "Allow Sampling Record?",
+        "englishText": "Question English Text",
+        "frenchText": "Question French Text"
+      },
       "responseOptions": {
+        "englishText": "Response Option English Text",
+        "frenchText": "Response Option French Text",
         "responseOptions": "Response Options",
         "sortOrder": "Sort Order",
         "value": "Value",
@@ -43,12 +49,15 @@
         "addOption": "Add Option"
       },
       "validators": {
+        "validator": "Validator",
         "validators": "Validators",
         "name": "Name",
         "enabled": "Enabled",
         "type": "Type",
         "removeValidator": "Remove Validator",
-        "addValidator": "Add Validator"
+        "addValidator": "Add Validator", 
+        "englishMessage": "English Message",
+        "frenchMessage": "French Message"
       },
       "dependsOn": {
         "dependsOn": "Depends On",
@@ -62,6 +71,8 @@
       },
 
       "group": {
+        "englishText": "Texte anglais du groupe",
+        "frenchText": "Texte francais du groupe",
         "addGroup": "Add Group",
         "removeGroup": "Remove Group",
         "groupName": "Group Name",

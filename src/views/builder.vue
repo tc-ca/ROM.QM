@@ -84,7 +84,7 @@
               />
             </v-col> -->
           </v-row>
-          <v-row v-if="selectedGroup">
+          <v-row v-if="selectedGroup && !selectedQuestion">
             <v-col>
               <!-- <v-text-field
                 v-model="selectedGroup.primaryKey"
@@ -92,27 +92,27 @@
               /> -->
               <v-text-field
                 v-model="selectedGroup.title[eng]"
-                label="Group text En"
+                :label="$t('app.builder.group.englishText')"
                 @change="onGroupTextChange(selectedGroup)"
               />
               <v-text-field
                 v-model="selectedGroup.title[fr]"
-                label="Group text Fr"
+                :label="$t('app.builder.group.frenchText')"
               />
               <v-text-field
                 v-model="selectedGroup.order"
                 dense
                 type="number"
-                label="Group order"
+                :label="$t('app.builder.sortOrder')"
                 @change="sortGroups(selectedGroup)"
               />
-              <v-checkbox
+              <!-- <v-checkbox
                 v-model="selectedGroup.isVisible"
-                :label="'Is Visible'"
-              />
+                :label="$t('app.builder.isVisible')"
+              /> -->
               <v-checkbox
                 v-model="selectedGroup.isRepeatable"
-                :label="'Is Repeatable'"
+                :label="$t('app.builder.isRepeatable')"
               />
             </v-col>
           </v-row>
@@ -125,19 +125,19 @@
               /> -->
               <v-text-field
                 v-model="selectedQuestion.text[eng]"
-                label="Question text En"
+                :label="$t('app.builder.question.englishText')"
                 @change="onQuestionTextChange(selectedQuestion)"
               />
               <v-text-field
                 v-model="selectedQuestion.text[fr]"
-                label="Question text Fr"
+                :label="$t('app.builder.question.frenchText')"
               />
               <v-select
                 v-model="selectedQuestion.type"
                 item-text="text"
                 item-value="value"
                 :items="questionTypes"
-                :label="$t('app.builder.questionType')"
+                :label="$t('app.builder.question.questionType')"
                 @change="changeQuestionType($event)"
               >
                 <template v-slot:selection="{ item }">
@@ -159,7 +159,7 @@
                 <v-checkbox
                   v-model="selectedQuestion.isSamplingAllowed"
                   dense
-                  :label="$t('app.builder.samplingAllowed')"
+                  :label="$t('app.builder.question.samplingAllowed')"
                   @change="setSamplingRecord()"
                 />
                 <v-checkbox
@@ -205,13 +205,13 @@
                       <v-text-field
                         v-model="option.text[eng]"
                         dense
-                        label="Option text En"
+                        :label="$t('app.builder.responseOptions.englishText')"
                         @change="onOptionTextChange(option)"
                       />
                       <v-text-field
                         v-model="option.text[fr]"
                         dense
-                        label="Option text Fr"
+                        :label="$t('app.builder.responseOptions.frenchText')"
                       />
                       <v-text-field
                         v-model.number="option.sortOrder"
@@ -412,12 +412,12 @@
                       <v-text-field
                         v-model="validationRule.errorMessage[eng]"
                         dense
-                        label="En: Error message"
+                        :label="$t('app.builder.validators.englishMessage')"
                       />
                       <v-text-field
                         v-model="validationRule.errorMessage[fr]"
                         dense
-                        label="Fr: Error message"
+                        :label="$t('app.builder.validators.frenchMessage')"
                       />
                       <div class="right">
                         <v-tooltip
@@ -496,7 +496,7 @@
                             dense
                             :items="selectedQuestion.validationRules"
                             item-text="name"
-                            label="Validator"
+                            :label="$t('app.builder.validators.validator')"
                           />
 
                           <div
@@ -847,7 +847,11 @@ export default {
     },
     onOptionTextChange (option) {
       if (option) {
-        option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
+        if (option.text[LANGUAGE.ENGLISH] && this.selectedQuestion) {
+          option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
+        } else {
+          option.name = generateName(Math.random().toString(16).slice(2), 'RSPNS')
+        }
       }
     },
     setSamplingRecord () {

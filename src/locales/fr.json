@@ -1,138 +1,148 @@
 {
   "app": {
     "bottom-navigation": {
-      "save": "FR Save "
+      "save": "Enregistrer"
     },
     "settings": {
-      "darkMode": "FR Dark mode ",
-      "language": "FR Language",
-      "settings": "FR Settings"
+      "darkMode": "mode sombre ",
+      "language": "Langue",
+      "settings": "Paramètres"
     },
     "navigations": {
-      "home": "FR Home",
-      "questionnaire": "FR Questionnaire",
-      "builder": "FR Builder",
-      "qFromDynamics": "FR Questionnaire pulling from dynamics",
-      "qFromState": "FR Questionnaire pulling from state"
+      "home": "Acceuil",
+      "questionnaire": "Questionnaire",
+      "builder": "Logiciel de construction",
+      "qFromDynamics": "Questionnaire à partir de la dynamique",
+      "qFromState": "Questionnaire à partir de l'état"
     },
     "builder": {
-      "fix": "FR fix it",
-      "noGroups": "FR Click Add Group to start creating a new Questionnaire!",
-      "loading": "FR Loading...",
-      "save": "FR Save",
-      "clear": "FR Clear",
-      "questionnaireName": "FR Questionnaire Name",
-      "questionName": "FR Question Name",
-      "questionType": "FR Question Type",
-      "sortOrder": "FR Sort Order",
-      "internalComments": "FR Internal Comments",
-      "externalComments": "FR External Comments",
-      "picture": "FR Picture(s)",
-      "samplingAllowed": "FR Allow Sampling Record?",
-      "isRepeatable": "FR Is Repeatable?",
-      "visibleByDefault": "FR Visible by default",
+      "fix": "Correcter",
+      "noGroups": "Cliquer Nouveau Group afin de créer un nouveau questionnaire!",
+      "loading": "Chargement...",
+      "save": "Enregistrer",
+      "clear": "Effacer",
+      "questionnaireName": "Nom du questionnaire",
+      "questionName": "Nom du question",
+      "sortOrder": "Ordre du triage",
+      "internalComments": "Commentaires internes",
+      "externalComments": "Commentaires externes",
+      "picture": "Photo(s)",
+      "isRepeatable": "Reproductible?",
+      "visibleByDefault": "Visible par défaut",
+      "question": {
+        "questionType": "Type de Question",
+        "samplingAllowed": "Permettre l'enregistrement de d'échantillonnage?",
+        "englishText": "Question texte anglais",
+        "frenchText": "Question texte francais"
+      },
       "responseOptions": {
-        "responseOptions": "FR Response Options",
-        "sortOrder": "FR Sort Order",
-        "value": "FR Value",
-        "removResponseoption": "FR Remove response option",
+        "englishText": "Option de réponse Texte anglais",
+        "frenchText": "Option de réponse Texte francais",
+        "responseOptions": "Options de réponse",
+        "sortOrder": "Ordre du triage",
+        "value": "Valeur",
+        "removResponseoption": "Supprimer l'option de réponse",
         "provisions": {
-          "provisions": "FR Provisions",
-          "search": "FR Search"
+          "provisions": "Provisions",
+          "search": "Recherche"
         },
-        "addOption": "FR Add Option"
+        "addOption": "Ajouter une option"
       },
       "validators": {
-        "validators": "FR Validators",
-        "name": "FR Name",
-        "enabled": "FR Enabled",
-        "type": "FR Type",
-        "removeValidator": "FR Remove Validator",
-        "addValidator": "FR Add Validator"
+        "validator": "Validateur",
+        "validators": "Validateurs",
+        "name": "Nom",
+        "enabled": "Activé",
+        "type": "Type",
+        "removeValidator": "Supprimer Validateur",
+        "addValidator": "Ajouter Validateur",
+        "englishMessage": "Message en anglais",
+        "frenchMessage": "Message en francais"
       },
       "dependsOn": {
-        "dependsOn": "FR Depends On",
-        "type": "FR Type",
-        "question": "FR Question",
-        "tobe": "FR to be",
-        "to": "FR to",
-        "addQuestion": "FR Add Question",
-        "removDependencyGroup": "FR Remove dependency group",
-        "addDependencyGroup": "FR Add Dependency Group"
+        "dependsOn": "Dépend de",
+        "type": "Type",
+        "question": "Question",
+        "tobe": "sera",
+        "to": "à",
+        "addQuestion": "Ajouter une question",
+        "removDependencyGroup": "Supprimer la dépendance de groupe",
+        "addDependencyGroup": "Ajouter un groupe de dépendances"
       },
-
       "group": {
-        "addGroup": "FR Add Group",
-        "removeGroup": "FR Remove Group",
-        "groupName": "FR Group Name",
-        "delete": "FR Delete ?",
-        "yes": "FR Yes",
-        "no": "FR No",
+        "englishText": "Texte anglais du groupe",
+        "frenchText": "Texte francais du groupe",
+        "addGroup": "Ajouter un groupe",
+        "removeGroup": "Supprimer un groupe",
+        "groupName": "Nom du groupe",
+        "delete": "Supprimer ?",
+        "yes": "Oui",
+        "no": "Non",
         "question": {
-          "addQuestion": "FR Add Question",
-          "removeQuestion": "FR Remove Question",
-          "addChildQuestion": "FR Add Child Question",
-          "delete": "FR Delete ?",
-          "yes": "FR Yes",
-          "no": "FR No"
+          "addQuestion": "Ajouter une question",
+          "removeQuestion": "Supprimer une question",
+          "addChildQuestion": "Ajouter une question secondaire",
+          "delete": "Supprimer ?",
+          "yes": "Oui",
+          "no": "Non"
         }
       }
     },
     "questionnaire": {
-      "validate": "FR Validate",
+      "validate": "Valider",
       "group": {
-        "repeatGroup": "FR Repeat Group",
-        "deleteGroup": "FR Delete Group",
+        "repeatGroup": "Répéter le Groupe",
+        "deleteGroup": "Supprimer le Groupe",
         "question": {
-          "referenceId": "FR Reference ID",
-          "referenceIdPlaceHolder": "FR Enter Reference ID",
-          "ok": "FR Ok",
-          "cancel": "FR Cancel",
-          "continue": "FR Continue",
-          "deleteFileConf": "FR Delete File",
-          "deleteFile": "FR Are you sure you want to delete this file?",
-          "delete": "FR Delete",
-          "unselectProvisions": "FR Selecting a different response will remove any selected Provisions and their associated evidence. Are you sure you want to change responses?",
-          "violationCount": "FR Violation Count",
-          "violationCountPlaceHolder": "FR Enter number of violations",
-          "externalComment": "FR External Comment",
-          "externalCommentInfo": "FR External comments will be available to the public",
-          "internalComment": "FR Internal Comment",
-          "internalCommentInfo": "FR Internal comments will only be made available to internal stakeholders",
-          "commentRequired": "FR Comment Required",
-          "photos": "FR Photos",
-          "files": "FR Files",
+          "referenceId": "ID de la Référence",
+          "referenceIdPlaceHolder": "Enterer ID de la référence",
+          "ok": "Ok",
+          "cancel": "Annuler",
+          "continue": "Continuer",
+          "deleteFileConf": "Supprimer le fichier",
+          "deleteFile": "Êtes-vous sûr de vouloir supprimer ce fichier?",
+          "delete": "Êtes-vous sûr de vouloir supprimer ce fichier?",
+          "unselectProvisions": "La sélection d'une réponse différente supprimera toutes les provisions sélectionnées et leurs preuves associées. Êtes-vous certain de vouloir changer de réponse?",
+          "violationCount": "Nombre d'infractions",
+          "violationCountPlaceHolder": "Entrer le nombre d'infractions",
+          "externalComment": "Commentaire externe",
+          "externalCommentInfo": "Les commentaires externes seront disponibles au public",
+          "internalComment": "Commentaire interne",
+          "internalCommentInfo": "Les commentaires internes seront disponibles aux intervenants à l'interne seulement",
+          "commentRequired": "Commentaire obligatoire",
+          "photos": "Photos",
+          "files": "Ficher",
           "repeatable": {
-            "repeatQuestion": "FR Repeat this question",
-            "deleteQuestion": "FR Delete this repeated question",
-            "copyNo": "FR Copy #",
-            "repeatedQuestion": "FR Repeated question"
+            "repeatQuestion": "Répéter cette question",
+            "deleteQuestion": "Supprimer cette question répétée",
+            "copyNo": "Numéro de copie ",
+            "repeatedQuestion": "Question répétée"
           },
           "sampling": {
-            "approximateTotal": "FR Approximate Total",
-            "sampleSize": "FR Sample Size",
-            "nonCompliances": "FR Violation count",
-            "approximateTotalPlaceholder": "FR Please enter the approximate total of items",
-            "sampleSizePlaceholder": "FR Please enter the Size of the Sample",
-            "nonCompliancesPlaceholder": "FR Please enter the Violation count",
-            "samplingTooltip": "FR Sampling Record",
-            "EM_ApproximateTotalRequired": "FR Approximate Total is required",
-            "EM_ApproximateTotalGreaterThan1": "FR Approximate Total have to be greater than 1",
-            "EM_SampleSizeRequired": "FR Sample Size is required",
-            "EM_SampleSizeGreaterThan1": "FR Sample Size have to be greater than 1",
-            "EM_NonComplianceRequired": "FR Violation count is required",
-            "EM_NonComplianceGreaterPositive": "FR Violation count have to be 0 or greater than 0"
+            "approximateTotal": "Total estimé",
+            "sampleSize": "Taille de l'échantillon",
+            "nonCompliances": "Non-conformités",
+            "approximateTotalPlaceholder": "SVP entrer le nombre approximatif d'items",
+            "sampleSizePlaceholder": "SVP entrer la taille de l'échantillon",
+            "nonCompliancesPlaceholder": "SVP entrer le nombre de non-conformités",
+            "samplingTooltip": "Enregistrement d'échantillon",
+            "EM_ApproximateTotalRequired": "Un total approximatif est obligatoire",
+            "EM_ApproximateTotalGreaterThan1": "Total approximatif doit être supérieur à 1",
+            "EM_SampleSizeRequired": "Une taille d'échantillon est obligatoire",
+            "EM_SampleSizeGreaterThan1": "La taille de l'échantillon doit être supérieure à 1",
+            "EM_NonComplianceRequired": "Nombre de non-conformités obligatoire",
+            "EM_NonComplianceGreaterPositive": "Nombre de non-conformités doit être supérieur ou égal à 0"
           }
         }
       },
-      "expandAll": "FR Expand All",
-      "collapseAll": "FR Collapse All"
+      "expandAll": "Tout développer",
+      "collapseAll": "Tout comprimer"
     },
     "general": {
-      "active": "FR Active",
-      "inactive": "FR Inactive",
-      "true": "FR True",
-      "false": "FR False"
+      "active": "Activé",
+      "inactive": "Inactivé",
+      "true": "Vrai",
+      "false": "Faux"
     }
   }
 }
