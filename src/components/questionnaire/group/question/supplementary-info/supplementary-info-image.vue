@@ -45,21 +45,20 @@
           </div>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row
+        v-if="selImage !== null"
+        class="mb-6"
+        no-gutters
+        style="margin-bottom: 0"
+      >
+        <v-col />
         <v-col
-          v-for="(image, index) in picture.value"
-          :key="index"
-          class="d-flex child-flex"
-          cols="4"
+          cols="10"
         >
-          <image-file
-            :picture="image"
-          />
-          <!-- <v-img
-            :src="getFile(image)"
+          <v-img
+            :src="selLink"
             lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
             aspect-ratio="1"
-            class="grey lighten-2"
           >
             <template v-slot:placeholder>
               <v-row
@@ -73,132 +72,139 @@
                 />
               </v-row>
             </template>
-            <v-fade-transition>
-              <v-overlay
-                v-if="hover"
-                absolute
-                color="#036358"
-              >
-                <v-btn>See more info</v-btn>
-              </v-overlay>
-            </v-fade-transition>
-          </v-img> -->
+          </v-img>
         </v-col>
-        <!-- <v-col>
-          <v-list
-            v-if="picture.value.length > 0"
-            dense
+        <v-col />
+      </v-row>
+      <v-row
+        v-if="selImage !== null"
+        class="mb-6"
+        no-gutters
+      >
+        <v-col />
+        <v-col
+          cols="10"
+        >
+          <div
+            class="pa-1 secondary text-no-wrap rounded-sm"
           >
-            <v-subheader>Uploaded Files</v-subheader>
-            <v-list-item
-              v-for="(image, index) in picture.value"
-              :key="index"
+            <v-list
+              dense
             >
-              <v-list-item-icon>
-                <v-icon
-                  size="30"
-                >
-                  mdi-file-{{ image.fileType }}
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <div v-if="!image.speedDialOpen">
-                  <v-list-item-subtitle>
-                    Title: {{ image.title }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    Comment: {{ image.comment === '' ? 'N/A' : image.comment }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    Uploaded: {{ image.timeStamp }}
-                  </v-list-item-subtitle>
-                </div>
-                <div v-if="image.speedDialOpen">
-                  <v-textarea
-                    v-model="image.title"
-                    auto-grow
-                    outlined
-                    :disabled="readOnly"
-                    dense
-                    rows="1"
-                    label="Title"
-                    style="font-size: small"
-                    @change="updateResponseStore()"
-                  />
-                  <v-textarea
-                    v-model="image.comment"
-                    auto-grow
-                    outlined
-                    :disabled="readOnly"
-                    dense
-                    placeholder=" "
-                    rows="1"
-                    label="Comment"
-                    style="font-size: small"
-                    @change="updateResponseStore()"
-                  />
-                </div>
-              </v-list-item-content>
-              <v-list-item-icon>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      v-model="image.speedDialOpen"
-                      icon
-                      :disabled="!imageNoteExist || readOnly"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="image.speedDialOpen = !image.speedDialOpen"
-                    >
-                      <v-icon v-if="image.speedDialOpen">
-                        mdi-close
-                      </v-icon>
-                      <v-icon v-else>
-                        mdi-pencil
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Edit Title/Comment</span>
-                </v-tooltip>
-              </v-list-item-icon>
-              <v-list-item-icon>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      :disabled="!imageNoteExist || readOnly"
-                      icon
-                      color="deep-orange"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click.stop="removeImage($event, image, galleryIndex); updateResponseStore();"
-                    >
-                      <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Delete File</span>
-                </v-tooltip>
-              </v-list-item-icon>
-              <v-list-item-icon>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      :disabled="!imageNoteExist || readOnly"
-                      icon
-                      color="blue"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click.stop="downloadFile(image); updateResponseStore();"
-                    >
-                      <v-icon>mdi-download-circle-outline</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Download File</span>
-                </v-tooltip>
-              </v-list-item-icon>
-              <v-list-item-icon />
-            </v-list-item>
-          </v-list>
-        </v-col> -->
+              <v-list-item>
+                <v-list-item-content>
+                  <div v-if="!speedDialOpen">
+                    <v-list-item-subtitle>
+                      Title: {{ selImage.title }}
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      Comment: {{ selImage.comment === '' ? 'N/A' : selImage.comment }}
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      Uploaded: {{ selImage.timeStamp }}
+                    </v-list-item-subtitle>
+                  </div>
+                  <div v-if="speedDialOpen">
+                    <v-textarea
+                      v-model="selImage.title"
+                      auto-grow
+                      outlined
+                      :disabled="readOnly"
+                      dense
+                      rows="1"
+                      label="Title"
+                      style="font-size: small"
+                      @change="updateResponseStore()"
+                    />
+                    <v-textarea
+                      v-model="selImage.comment"
+                      auto-grow
+                      outlined
+                      :disabled="readOnly"
+                      dense
+                      placeholder=" "
+                      rows="1"
+                      label="Comment"
+                      style="font-size: small"
+                      @change="updateResponseStore()"
+                    />
+                  </div>
+                </v-list-item-content>
+                <v-list-item-icon>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        v-model="speedDialOpen"
+                        icon
+                        :disabled="!imageNoteExist || readOnly"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="speedDialOpen = !speedDialOpen"
+                      >
+                        <v-icon v-if="speedDialOpen">
+                          mdi-close
+                        </v-icon>
+                        <v-icon v-else>
+                          mdi-pencil
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Edit Title/Comment</span>
+                  </v-tooltip>
+                </v-list-item-icon>
+                <v-list-item-icon>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        :disabled="!imageNoteExist || readOnly"
+                        icon
+                        color="deep-orange"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click.stop="removeImage($event, selImage, galleryIndex); updateResponseStore();"
+                      >
+                        <v-icon>mdi-delete</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Delete File</span>
+                  </v-tooltip>
+                </v-list-item-icon>
+                <v-list-item-icon>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        :disabled="!imageNoteExist || readOnly"
+                        icon
+                        color="blue"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click.stop="downloadFile(selImage); updateResponseStore();"
+                      >
+                        <v-icon>mdi-download-circle-outline</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Download File</span>
+                  </v-tooltip>
+                </v-list-item-icon>
+                <v-list-item-icon />
+              </v-list-item>
+            </v-list>
+          </div>
+        </v-col>
+        <v-col />
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="(image, index) in picture.value"
+          :key="index"
+          class="d-flex child-flex"
+          cols="2"
+        >
+          <image-file
+            :picture="image"
+            @selected:image="setCurrentImage"
+          />
+        </v-col>
       </v-row>
       <v-input
         ref="validationInput"
@@ -281,16 +287,17 @@ export default {
 
   data: function () {
     return {
-      // images: [],
+      selImage: null,
+      selLink: null,
       curImg: '',
       progressStatus: '',
-      hover: false,
       galleryIndex: 0,
       rules: [
         value => !this.picture.display || !this.picture.required ? true : this.picture.value.length > 0 || 'Required.'
       ],
       validationStatus: false,
       notification: null,
+      speedDialOpen: false,
       confirmDialogOpen: false,
       confirmCallbackArgs: null
     }
@@ -320,6 +327,10 @@ export default {
     )
   },
   methods: {
+    setCurrentImage (imgLink, img) {
+      this.selLink = imgLink
+      this.selImage = img
+    },
     onFileUploadClick (e) {
       // this.$refs.fileUpload.reset()
     },
@@ -344,7 +355,7 @@ export default {
         else if (file.type.startsWith('image')) fileType = 'image'
         else fileType = 'document-outline'
 
-        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), speedDialOpen: false })
+        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
         this.next()
         this.next()
 
@@ -377,24 +388,6 @@ export default {
       }
     },
 
-    async getFile (file) {
-      try {
-        let res = await AzureBlobService.getImageFile(file)
-        console.log(res)
-        // eslint-disable-next-line no-debugger
-        debugger
-        return res
-        // console.log('9999')
-        // console.log(a)
-        // eslint-disable-next-line no-debugger
-        // debugger
-        // a = a.replace('application/octet-stream', 'image/jpeg')
-        // return a
-      } catch (e) {
-        console.log(e)
-      }
-    },
-
     async downloadFile (file) {
       try {
         await AzureBlobService.downloadFile(file)
@@ -421,6 +414,7 @@ export default {
       } finally {
         this.picture.value.splice(index - 1, 1)
         this.prev()
+        this.selImage = this.picture.value.length === 0 ? null : this.picture.value[0]
       }
     },
 

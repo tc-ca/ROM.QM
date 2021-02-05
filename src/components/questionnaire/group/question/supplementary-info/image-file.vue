@@ -1,37 +1,48 @@
 <template>
-  <v-img
-    :src="link"
-    lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
-    aspect-ratio="1"
-    class="grey lighten-2"
+  <div
+    class="rounded-lg"
   >
-    <template v-slot:placeholder>
-      <v-row
-        class="fill-height ma-0"
-        align="center"
-        justify="center"
-      >
-        <v-progress-circular
-          indeterminate
-          color="grey lighten-5"
-        />
-      </v-row>
-    </template>
-    <v-fade-transition>
-      <v-overlay
-        v-if="hover"
-        absolute
-        color="#036358"
-      >
-        <v-btn>See more info</v-btn>
-      </v-overlay>
-    </v-fade-transition>
-  </v-img>
+    <v-img
+      :src="link"
+      lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
+      aspect-ratio="1"
+      class="grey lighten-2"
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
+    >
+      <template v-slot:placeholder>
+        <v-row
+          class="fill-height ma-0"
+          align="center"
+          justify="center"
+        >
+          <v-progress-circular
+            indeterminate
+            color="grey lighten-5"
+          />
+        </v-row>
+      </template>
+      <v-fade-transition>
+        <v-overlay
+          v-if="hover"
+          absolute
+          color="#036358"
+        >
+          <v-btn
+            @click="$emit('selected:image', link, picture)"
+          >
+            See More
+          </v-btn>
+        </v-overlay>
+      </v-fade-transition>
+    </v-img>
+  </div>
 </template>
 
 <script>
 
-import AzureBlobService from '../../../../../services/azureBlobService'
+// import AzureBlobService from '../../../../../services/azureBlobService'
+import base64Images from '../../../../../../public/static/base64-images.json'
 
 export default {
   props: {
@@ -45,9 +56,7 @@ export default {
     return {
       link: '',
       curImg: '',
-      progressStatus: '',
       hover: false,
-      galleryIndex: 0,
       validationStatus: false
     }
   },
@@ -60,11 +69,10 @@ export default {
   mounted () { },
   methods: {
     async getLink () {
-      // eslint-disable-next-line no-debugger
-      debugger
-      let response = await AzureBlobService.getImageFile(this.picture)
-      console.log(response.data)
-      this.link = response.data
+      // let response = await AzureBlobService.getImageFile(this.picture)
+      // this.link = response.data
+      let n = 'image_00' + (Math.floor(Math.random() * 5) + 1).toString()
+      this.link = `data:image/jpeg;base64,${base64Images[n]}`
     },
 
     onError (error) {
