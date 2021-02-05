@@ -283,16 +283,18 @@ export default {
       this.groupSubtitle = ''
       if (this.group && this.group.questions) {
         this.group.questions.forEach(question => {
-          question.responseOptions.forEach(responseOption => {
-            if (responseOption.selectedProvisionsTitles) {
-              responseOption.selectedProvisionsTitles.forEach(title => {
-                if (!this.groupSubtitle.includes(title)) {
-                  if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
-                  this.groupSubtitle += title
-                }
-              })
-            }
-          })
+          if (question.responseOptions) {
+            question.responseOptions.forEach(responseOption => {
+              if (responseOption.selectedProvisionsTitles) {
+                responseOption.selectedProvisionsTitles.forEach(title => {
+                  if (!this.groupSubtitle.includes(title)) {
+                    if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
+                    this.groupSubtitle += title
+                  }
+                })
+              }
+            })
+          }
         })
       }
     },
