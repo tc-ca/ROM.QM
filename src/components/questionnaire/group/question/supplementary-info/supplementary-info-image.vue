@@ -104,7 +104,16 @@
                       Uploaded: {{ selImage.timeStamp }}
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      Exif Data: {{ getExifData(selLink) }}
+                      <v-textarea
+                        v-model="selExifData"
+                        auto-grow
+                        outlined
+                        disabled
+                        dense
+                        rows="3"
+                        label="Exif  Data"
+                        style="font-size: small"
+                      />
                     </v-list-item-subtitle>
                   </div>
                   <div v-if="speedDialOpen">
@@ -293,6 +302,7 @@ export default {
     return {
       selImage: null,
       selLink: null,
+      selExifData: '33',
       curImg: '',
       progressStatus: '',
       galleryIndex: 0,
@@ -334,14 +344,18 @@ export default {
     setCurrentImage (imgLink, img) {
       this.selLink = imgLink
       this.selImage = img
+      this.getExifData(imgLink)
     },
     getExifData (data) {
-      // eslint-disable-next-line no-debugger
-      debugger
       var image = new Image()
       image.src = data
-      let d = EXIF.getAllTags(image)
-      return d
+      var dd = ''
+      EXIF.getData(image, function () {
+        dd = EXIF.pretty(this) // JSON.stringify(EXIF.getAllTags(this), null, '\t')
+        console.log(dd)
+      })
+      this.selExifData = dd
+      console.log(this.selExifData)
     },
     onFileUploadClick (e) {
       // this.$refs.fileUpload.reset()
