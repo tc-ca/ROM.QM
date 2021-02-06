@@ -1,50 +1,35 @@
 <template>
   <div>
     <div v-show="isVisible">
-      <v-row>
+      <v-row
+        no
+        no-gutters
+      >
         <v-col>
-          <div>
-            <v-form
-              ref="questionaire_form"
-              v-model="valid"
-              justify="start"
+          <v-form
+            ref="questionaire_form"
+            v-model="valid"
+            justify="start"
+          >
+            <v-expansion-panels
+              v-model="expansionPanels"
+              focusable
+              multiple
+              class="v-expansion-panel"
             >
-              <v-expansion-panels
-                v-model="expansionPanels"
-                focusable
-                multiple
-                class="v-expansion-panel"
-              >
-                <questionnaire-group
-                  v-for="(group, groupIndex) in group.groups"
-                  ref="questionGroup"
-                  :key="groupIndex"
-                  :group="group"
-                  :index="groupIndex"
-                  :expand="expand"
-                  :read-only="readOnly"
-                  data-group-id="group"
-                  @update-group-count="onUpdateGroupCount"
-                />
-              </v-expansion-panels>
-            </v-form>
-          </div>
-        </v-col>
-        <v-col
-          v-if="hasNotifications && displayValidationErrors"
-          cols="5"
-          justify="space-around"
-        >
-          <v-row>
-            <v-col>
-              <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:75%;overflow-y: auto;">
-                <questionnaire-error
-                  :notifications="notifications"
-                  @notification:click="onNotificationClick"
-                />
-              </div>
-            </v-col>
-          </v-row>
+              <questionnaire-group
+                v-for="(group, groupIndex) in group.groups"
+                ref="questionGroup"
+                :key="groupIndex"
+                :group="group"
+                :index="groupIndex"
+                :expand="expand"
+                :read-only="readOnly"
+                data-group-id="group"
+                @update-group-count="onUpdateGroupCount"
+              />
+            </v-expansion-panels>
+          </v-form>
         </v-col>
       </v-row>
       <questionnaire-nav
@@ -95,12 +80,11 @@ import { mapState } from 'vuex'
 import _ from 'lodash'
 
 import QuestionnaireGroup from './group/group.vue'
-import QuestionnaireError from './questionnaire-error'
 import QuestionnaireNav from '../questionnaire-nav/questionnaire-nav.vue'
 
 export default {
   emits: ['clear-provision-search-field'],
-  components: { QuestionnaireGroup, QuestionnaireError, QuestionnaireNav },
+  components: { QuestionnaireGroup, QuestionnaireNav },
 
   props: {
     expandAllProp: {
