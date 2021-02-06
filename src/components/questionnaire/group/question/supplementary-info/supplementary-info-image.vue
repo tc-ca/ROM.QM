@@ -45,7 +45,7 @@
           </div>
         </v-col>
       </v-row>
-      <v-row
+      <!-- <v-row
         v-if="selImage !== null"
         class="mb-6"
         no-gutters
@@ -75,7 +75,7 @@
           </v-img>
         </v-col>
         <v-col />
-      </v-row>
+      </v-row> -->
       <v-row
         v-if="selImage !== null"
         class="mb-6"
@@ -85,123 +85,125 @@
         <v-col
           cols="10"
         >
-          <div
-            class="pa-1 secondary text-no-wrap rounded-sm"
+          <v-card
+            class="mx-auto my-12"
+            max-width="474"
           >
-            <v-list
-              dense
-            >
-              <v-list-item>
-                <v-list-item-content>
-                  <div v-if="!speedDialOpen">
-                    <v-list-item-subtitle>
-                      Title: {{ selImage.title }}
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                      Comment: {{ selImage.comment === '' ? 'N/A' : selImage.comment }}
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                      Uploaded: {{ selImage.timeStamp }}
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                      <v-textarea
-                        v-model="selExifData"
-                        auto-grow
-                        outlined
-                        disabled
-                        dense
-                        rows="3"
-                        label="Exif  Data"
-                        style="font-size: small"
-                      />
-                    </v-list-item-subtitle>
-                  </div>
-                  <div v-if="speedDialOpen">
-                    <v-textarea
-                      v-model="selImage.title"
-                      auto-grow
-                      outlined
-                      :disabled="readOnly"
-                      dense
-                      rows="1"
-                      label="Title"
-                      style="font-size: small"
-                      @change="updateResponseStore()"
-                    />
-                    <v-textarea
-                      v-model="selImage.comment"
-                      auto-grow
-                      outlined
-                      :disabled="readOnly"
-                      dense
-                      placeholder=" "
-                      rows="1"
-                      label="Comment"
-                      style="font-size: small"
-                      @change="updateResponseStore()"
-                    />
-                  </div>
-                </v-list-item-content>
-                <v-list-item-icon>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        v-model="speedDialOpen"
-                        icon
-                        :disabled="!imageNoteExist || readOnly"
-                        v-bind="attrs"
-                        v-on="on"
-                        @click="speedDialOpen = !speedDialOpen"
-                      >
-                        <v-icon v-if="speedDialOpen">
-                          mdi-close
-                        </v-icon>
-                        <v-icon v-else>
-                          mdi-pencil
-                        </v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Edit Title/Comment</span>
-                  </v-tooltip>
-                </v-list-item-icon>
-                <v-list-item-icon>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        :disabled="!imageNoteExist || readOnly"
-                        icon
-                        color="deep-orange"
-                        v-bind="attrs"
-                        v-on="on"
-                        @click.stop="removeImage($event, selImage, galleryIndex); updateResponseStore();"
-                      >
-                        <v-icon>mdi-delete</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Delete File</span>
-                  </v-tooltip>
-                </v-list-item-icon>
-                <v-list-item-icon>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        :disabled="!imageNoteExist || readOnly"
-                        icon
-                        color="blue"
-                        v-bind="attrs"
-                        v-on="on"
-                        @click.stop="downloadFile(selImage); updateResponseStore();"
-                      >
-                        <v-icon>mdi-download-circle-outline</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Download File</span>
-                  </v-tooltip>
-                </v-list-item-icon>
-                <v-list-item-icon />
-              </v-list-item>
-            </v-list>
-          </div>
+            <template slot="progress">
+              <v-progress-linear
+                color="deep-purple"
+                height="10"
+                indeterminate
+              />
+            </template>
+            <v-img
+              height="350"
+              :src="selLink"
+              lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
+            />
+
+            <v-card-title>{{ selImage.title }}</v-card-title>
+            <v-card-text>
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div class="grey--text ml-4">
+                  Comment: {{ selImage.comment }}
+                </div>
+              </v-row>
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div class="grey--text ml-4">
+                  Last updated: {{ selImage.timeStamp }}
+                </div>
+              </v-row>
+
+              <div class="my-4 subtitle-1">
+                <!-- Last updated: {{ selImage.timeStamp }} -->
+              </div>
+            </v-card-text>
+            <v-divider class="mx-4" />
+            <v-card-title>EXIF Data</v-card-title>
+            <v-card-text>
+              <v-chip-group
+                v-model="selection"
+                active-class="deep-purple accent-4 white--text"
+                column
+              >
+                <div
+                  style="padding-left: 15px; height: 150px; overflow: auto"
+                >
+                  <li
+                    v-for="(value, propertyName, index) in selExifData"
+                    :key="index"
+                  >
+                    {{ propertyName }}: {{ value }}
+                  </li>
+                </div>
+              </v-chip-group>
+            </v-card-text>
+            <v-divider class="mx-4" />
+            <v-list-item-icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    v-model="speedDialOpen"
+                    icon
+                    :disabled="!imageNoteExist || readOnly"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="speedDialOpen = !speedDialOpen"
+                  >
+                    <v-icon v-if="speedDialOpen">
+                      mdi-close
+                    </v-icon>
+                    <v-icon v-else>
+                      mdi-pencil
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span>Edit Title/Comment</span>
+              </v-tooltip>
+            </v-list-item-icon>
+            <v-list-item-icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    :disabled="!imageNoteExist || readOnly"
+                    icon
+                    color="deep-orange"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click.stop="removeImage($event, selImage, galleryIndex); updateResponseStore();"
+                  >
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </template>
+                <span>Delete File</span>
+              </v-tooltip>
+            </v-list-item-icon>
+            <v-list-item-icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    :disabled="!imageNoteExist || readOnly"
+                    icon
+                    color="blue"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click.stop="downloadFile(selImage); updateResponseStore();"
+                  >
+                    <v-icon>mdi-download-circle-outline</v-icon>
+                  </v-btn>
+                </template>
+                <span>Download File</span>
+              </v-tooltip>
+            </v-list-item-icon>
+            <v-list-item-icon />
+          </v-card>
         </v-col>
         <v-col />
       </v-row>
@@ -302,7 +304,7 @@ export default {
     return {
       selImage: null,
       selLink: null,
-      selExifData: '33',
+      selExifData: '',
       curImg: '',
       progressStatus: '',
       galleryIndex: 0,
@@ -351,9 +353,11 @@ export default {
       image.src = data
       var dd = ''
       EXIF.getData(image, function () {
-        dd = EXIF.pretty(this) // JSON.stringify(EXIF.getAllTags(this), null, '\t')
+        dd = EXIF.getAllTags(this)
         console.log(dd)
       })
+      // eslint-disable-next-line no-debugger
+      debugger
       this.selExifData = dd
       console.log(this.selExifData)
     },
