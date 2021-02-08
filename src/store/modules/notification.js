@@ -25,6 +25,7 @@ export const actions = {
 
     commit('SET_NOTIFICATIONS', notification)
   },
+
   addNotification ({ commit }, notification) {
     if (!notification.guid) notification.guid = uuidv4();
     notification.showing = false
@@ -33,10 +34,11 @@ export const actions = {
 
     commit('SET_NOTIFICATIONS', notification)
   },
-    setDisplayValidationErrorsState ({ commit }, payload) {
-   
+
+  setDisplayValidationErrorsState ({ commit }, payload) {
     commit('SET_DISPLAY_VALIDATION_ERRORS', payload)
   },
+  
   //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
   validateQuestions ({ dispatch, rootState }, payload) {
     const { displayValidationErrors } = payload;
@@ -58,10 +60,13 @@ export const actions = {
       });
       grpIndex++;
     });
+
   },
+
   showNotifications ({commit}) {
     commit("SET_NOTIFICATIONS_VISIBLE");
   },
+
   clearNotifications ({commit, rootState}) {
     commit("CLEAR_NOTIFICATIONS");
     const questionnaire = rootState.questionnaire.questionnaire;
@@ -109,7 +114,7 @@ function ClearPreviousNotifications(q)
       }
     });
   }  
-  if(q.childQuestion) {
+  if(q.childQuestions) {
     q.childQuestions.forEach(child => {
       ClearPreviousNotifications(child);
     });
@@ -156,7 +161,7 @@ function validateMinValue( q, vr) {
 }
 
 function validateMinLength(q, vr) {
-  if ((vr.type === 'minLength') && (isNaN(q.response) || !vr.value || (String(q.response).length < +vr.value))) return false;
+  if ((vr.type === 'minLength') && (!vr.value || (String(q.response).length < +vr.value))) return false;
   return true;
 }
 
@@ -166,7 +171,7 @@ function validateMaxValue(q, vr) {
 }
 
 function validateMaxLength(q, vr) {
-  if ((vr.type === 'maxLength') && (isNaN(q.response) || !vr.value || (String(q.response).length > +vr.value))) return false;
+  if ((vr.type === 'maxLength') && (!vr.value || (String(q.response).length > +vr.value))) return false;
   return true;
 }
 
@@ -209,7 +214,7 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
       }
     }
 
-    if(q.childQuestion) {
+    if(q.childQuestions && q.childQuestions.length > 0) {
       q.childQuestions.forEach(child => {
         SetQuestionNotificationsToList(child, groupIndex, queIndex, ++depth, dispatch, lang);
       });
