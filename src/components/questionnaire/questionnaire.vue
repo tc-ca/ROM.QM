@@ -13,6 +13,7 @@
           >
             <v-expansion-panels
               v-model="expansionPanels"
+              accordion
               focusable
               multiple
               class="v-expansion-panel"
