@@ -91,6 +91,7 @@
     },
     "questionnaire": {
       "validate": "Validate",
+      "errors":" 0 errors found |1 error found | {count} errors found",
       "group": {
         "repeatGroup": "Repeat Group",
         "deleteGroup": "Delete Group",

@@ -5,9 +5,36 @@
       right
       fixed
       temporary
+      :width="width"
     >
       <v-list
-        three-line
+        nav
+        dense
+      >
+        <v-list-item>
+          <v-list-item-content>
+            <!-- TITLE -->
+            <v-list-item-title class="title">
+              {{ $tc('app.questionnaire.errors', notifications.length) }}
+            </v-list-item-title>
+          </v-list-item-content>
+          <!-- CLOSE DRAWER ACTION BUTTON -->
+          <v-list-item-action>
+            <v-btn
+              icon
+              @click="showDrawer = false"
+            >
+              <v-icon>
+                mdi-close
+              </v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+
+      <v-divider />
+      <v-list
+        v-if="hasNotifications"
         nav
         dense
       >
@@ -69,6 +96,9 @@ export default {
       set (value) {
         if (!value) this.$emit('close', value)
       }
+    },
+    width () {
+      return this.$vuetify.breakpoint.mobile ? '100%' : '50%'
     }
   }
 }
