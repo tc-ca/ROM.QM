@@ -12,12 +12,12 @@
         #actions
       >
         <v-icon
-          v-if="expand && isValid === false"
+          v-if="expand.value && isValid === false"
           color="red"
         >
           mdi-exclamation
         </v-icon>
-        <v-icon v-if="expand">
+        <v-icon v-if="expand.value">
           mdi-menu-down
         </v-icon>
       </template>
@@ -126,7 +126,7 @@
           </v-tooltip>
         </div>
       </v-layout>
-      <div :class="{'mt-6': expand}">
+      <div :class="{'mt-6': expand.value}">
         <response
           :question="question"
           :group="group"
@@ -297,9 +297,8 @@ export default {
       type: Boolean, required: true
     },
     expand: {
-      type: Boolean,
-      required: false,
-      default: false
+      type: Object,
+      required: true
     },
     readOnly: {
       type: Boolean,
@@ -383,7 +382,7 @@ export default {
     },
     expansionPanelsValue: {
       get () {
-        if (this.expand) {
+        if (this.expand.value) {
           let indexes = []
           for (let i = 0; i < this.question.childQuestions.length; i++) {
             indexes.push(i)
