@@ -117,7 +117,7 @@
                 class="mx-0"
               >
                 <div class="grey--text ml-4">
-                  Last updated: {{ selImage.timeStamp }}
+                  Uploaded on: {{ selImage.timeStamp }}
                 </div>
               </v-row>
 
@@ -126,14 +126,18 @@
               </div>
             </v-card-text>
             <v-divider class="mx-4" />
-            <v-card-title>EXIF Data</v-card-title>
             <v-card-text>
               <v-chip-group
-                v-model="selection"
                 active-class="deep-purple accent-4 white--text"
                 column
               >
                 <div
+                  style="padding-left: 15px; font-weight: bold;"
+                >
+                  Exif Data:
+                </div>
+                <div
+                  v-if="isExifDataAvailable"
                   style="padding-left: 15px; height: 150px; overflow: auto"
                 >
                   <li
@@ -143,66 +147,78 @@
                     {{ propertyName }}: {{ value }}
                   </li>
                 </div>
+                <div
+                  v-else
+                  style="padding-left: 5px; color: red"
+                >
+                  No Data available
+                </div>
               </v-chip-group>
             </v-card-text>
             <v-divider class="mx-4" />
-            <v-list-item-icon>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-model="speedDialOpen"
-                    icon
-                    :disabled="!imageNoteExist || readOnly"
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="speedDialOpen = !speedDialOpen"
-                  >
-                    <v-icon v-if="speedDialOpen">
-                      mdi-close
-                    </v-icon>
-                    <v-icon v-else>
-                      mdi-pencil
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Edit Title/Comment</span>
-              </v-tooltip>
-            </v-list-item-icon>
-            <v-list-item-icon>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    :disabled="!imageNoteExist || readOnly"
-                    icon
-                    color="deep-orange"
-                    v-bind="attrs"
-                    v-on="on"
-                    @click.stop="removeImage($event, selImage, galleryIndex); updateResponseStore();"
-                  >
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </template>
-                <span>Delete File</span>
-              </v-tooltip>
-            </v-list-item-icon>
-            <v-list-item-icon>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    :disabled="!imageNoteExist || readOnly"
-                    icon
-                    color="blue"
-                    v-bind="attrs"
-                    v-on="on"
-                    @click.stop="downloadFile(selImage); updateResponseStore();"
-                  >
-                    <v-icon>mdi-download-circle-outline</v-icon>
-                  </v-btn>
-                </template>
-                <span>Download File</span>
-              </v-tooltip>
-            </v-list-item-icon>
-            <v-list-item-icon />
+            <div
+              style="text-align: center"
+            >
+              <v-list-item-icon>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      v-model="speedDialOpen"
+                      icon
+                      :disabled="!imageNoteExist || readOnly"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="speedDialOpen = !speedDialOpen"
+                    >
+                      <v-icon v-if="speedDialOpen">
+                        mdi-close
+                      </v-icon>
+                      <v-icon v-else>
+                        mdi-pencil
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Edit Title/Comment</span>
+                </v-tooltip>
+              </v-list-item-icon>
+              <v-list-item-icon>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      :disabled="!imageNoteExist || readOnly"
+                      icon
+                      color="deep-orange"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click.stop="removeImage($event, selImage, galleryIndex); updateResponseStore();"
+                    >
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Delete File</span>
+                </v-tooltip>
+              </v-list-item-icon>
+              <v-list-item-icon
+                style="margin-left: 30px; margin-top: 10px; margin-bottom: 10px"
+              >
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      :disabled="!imageNoteExist || readOnly"
+                      icon
+                      color="blue"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click.stop="downloadFile(selImage); updateResponseStore();"
+                    >
+                      <v-icon>mdi-download-circle-outline</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Download File</span>
+                </v-tooltip>
+              </v-list-item-icon>
+              <v-list-item-icon />
+            </div>
           </v-card>
         </v-col>
         <v-col />
@@ -306,6 +322,7 @@ export default {
       selLink: null,
       selExifData: '',
       curImg: '',
+      isExifDataAvailable: false,
       progressStatus: '',
       galleryIndex: 0,
       rules: [
@@ -349,17 +366,14 @@ export default {
       this.getExifData(imgLink)
     },
     getExifData (data) {
-      var image = new Image()
+      let image = new Image()
       image.src = data
-      var dd = ''
+      let exifData = null
       EXIF.getData(image, function () {
-        dd = EXIF.getAllTags(this)
-        console.log(dd)
+        exifData = EXIF.getAllTags(this)
       })
-      // eslint-disable-next-line no-debugger
-      debugger
-      this.selExifData = dd
-      console.log(this.selExifData)
+      this.isExifDataAvailable = (exifData != null && Object.keys(exifData).length > 0)
+      this.selExifData = exifData
     },
     onFileUploadClick (e) {
       // this.$refs.fileUpload.reset()
