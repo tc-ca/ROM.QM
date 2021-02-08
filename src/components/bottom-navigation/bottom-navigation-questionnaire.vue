@@ -15,17 +15,17 @@
     </v-btn>
     <!-- COLLASPE ALL BUTTON -->
     <v-btn @click="expand()">
-      <span v-if="isExpandPanelsData==false">Expand All </span>
-      <span v-if="isExpandPanelsData===true">Collaspe All</span>
+      <span v-if="isExpandPanelsData.value==false">Expand All </span>
+      <span v-if="isExpandPanelsData.value===true">Collaspe All</span>
 
       <v-icon
-        v-if="isExpandPanelsData===false"
+        v-if="isExpandPanelsData.value===false"
         color="purple"
       >
         mdi-arrow-expand-vertical
       </v-icon>
       <v-icon
-        v-if="isExpandPanelsData===true"
+        v-if="isExpandPanelsData.value===true"
         color="purple"
       >
         mdi-arrow-collapse-vertical
@@ -84,7 +84,7 @@ export default {
   props: {
     isExpandPanels: {
 
-      type: Boolean,
+      type: Object,
       required: true
     },
     isReadOnly: {
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     expand () {
-      this.isExpandPanelsData = !this.isExpandPanelsData
+      this.isExpandPanelsData.value = !this.isExpandPanels.value
       this.$emit('expand-panels', !this.isExpandPanelsData)
     },
     scrollToTop () {

@@ -78,7 +78,7 @@
     />
     <v-main>
       <v-container
-        class="px-2"
+        fluid
       >
         <router-view
           ref="routerView"
@@ -94,15 +94,14 @@
       </v-container>
     </v-main>
     <notification-container />
-    <legislation-search-modal
-      :show-modal="showLegislationSearchModal"
-      @hideModal="showLegislationSearchModal = false"
-    />
-    <div v-if="isQuestionnairePage">
+
+    <div
+      v-if="isQuestionnairePage"
+    >
       <bottom-navigation-questionnaire
         :is-expand-panels="expandAllQuestionnaire"
         :is-read-only="readOnlyQuestionnaire"
-        @expand-panels="expandAllQuestionnaire = !expandAllQuestionnaire"
+        @expand-panels="expandAllQuestionnaire = expandAllQuestionnaire"
         @scroll-to-top="scrollToTop"
         @validate="validateQuestionnaire = !validateQuestionnaire"
         @set-read-only="readOnlyQuestionnaire = !readOnlyQuestionnaire"
@@ -116,22 +115,12 @@
         @fix-it="fixItBuilder = !fixItBuilder"
       />
     </div>
-
-    <!-- <div style="font-size: small; margin-left: 10px">
-      <div v-if="envDev">
-        Environment: {{ env }}
-      </div>
-      <div v-if="envDev">
-        Load local data: {{ loadLocalData }}
-      </div>
-    </div> -->
   </v-app>
 </template>
 
 <script>
 import { LANGUAGE } from './constants.js'
 import NotificationContainer from './components/notification-container/notification-container.vue'
-import LegislationSearchModal from './components/legislation-search-modal/legislation-search-modal.vue'
 import ProvisionSearch from './components/provision-search/provision-search.vue'
 import CharacteristicFilter from './components/filter/characteristic-filter/characteristic-filter.vue'
 import BottomNavigationQuestionnaire from './components/bottom-navigation/bottom-navigation-questionnaire.vue'
@@ -146,7 +135,6 @@ export default {
   events: ['tdg-qstnnr-save'],
   components: {
     NotificationContainer,
-    LegislationSearchModal,
     Settings,
     ProvisionSearch,
     CharacteristicFilter,
@@ -175,7 +163,7 @@ export default {
       showCharacteristicFilter: false,
       siteCharacteristicsCount: 0,
       // questionnaire related data that will be passed into the router specific component
-      expandAllQuestionnaire: true,
+      expandAllQuestionnaire: { value: true },
       readOnlyQuestionnaire: false,
       validateQuestionnaire: false,
       displayNavigationQuestionnaire: false,
@@ -189,7 +177,6 @@ export default {
   computed: {
     ...mapState({
       language: (state) => {
-        console.log('App.vue: language computed ' + state + ')')
         if (state == null || !state.settings) {
           return LANGUAGE.ENGLISH
         }
