@@ -133,8 +133,8 @@ export default {
       required: true
     },
     expand: {
-      type: Boolean,
-      default: true
+      type: Object,
+      required: true
     },
     readOnly: {
       type: Boolean,
@@ -173,7 +173,7 @@ export default {
     }),
     expansionPanelsValue: {
       get () {
-        if (this.expand) {
+        if (this.expand.value) {
           let indexes = []
           for (let i = 0; i < this.group.questions.length; i++) {
             indexes.push(i)

@@ -3,9 +3,8 @@
     <v-navigation-drawer
       v-model="isVisible"
       :width="300"
-      absolute
       temporary
-      app
+      fixed
     >
       <v-list-item>
         <v-list-item-content>

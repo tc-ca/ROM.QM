@@ -5,7 +5,6 @@
       right
       fixed
       temporary
-      app
     >
       <v-list
         three-line

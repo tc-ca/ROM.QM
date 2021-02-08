@@ -101,7 +101,7 @@
       <bottom-navigation-questionnaire
         :is-expand-panels="expandAllQuestionnaire"
         :is-read-only="readOnlyQuestionnaire"
-        @expand-panels="expandAllQuestionnaire = !expandAllQuestionnaire"
+        @expand-panels="expandAllQuestionnaire = expandAllQuestionnaire"
         @scroll-to-top="scrollToTop"
         @validate="validateQuestionnaire = !validateQuestionnaire"
         @set-read-only="readOnlyQuestionnaire = !readOnlyQuestionnaire"
@@ -163,7 +163,7 @@ export default {
       showCharacteristicFilter: false,
       siteCharacteristicsCount: 0,
       // questionnaire related data that will be passed into the router specific component
-      expandAllQuestionnaire: true,
+      expandAllQuestionnaire: { value: true },
       readOnlyQuestionnaire: false,
       validateQuestionnaire: false,
       displayNavigationQuestionnaire: false,

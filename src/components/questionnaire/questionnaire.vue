@@ -32,12 +32,6 @@
           </v-form>
         </v-col>
       </v-row>
-      <questionnaire-nav
-        :display="drawer"
-        :navitems="navItems"
-        @question:click="onQuestionClick"
-        @navigation-close="drawer = $event"
-      />
     </div>
     <div v-show="!isVisible">
       <v-card
@@ -80,16 +74,15 @@ import { mapState } from 'vuex'
 import _ from 'lodash'
 
 import QuestionnaireGroup from './group/group.vue'
-import QuestionnaireNav from '../questionnaire-nav/questionnaire-nav.vue'
 
 export default {
   emits: ['clear-provision-search-field'],
-  components: { QuestionnaireGroup, QuestionnaireNav },
+  components: { QuestionnaireGroup },
 
   props: {
     expandAllProp: {
-      type: Boolean,
-      default: true
+      type: Object,
+      required: true
     },
     validateProp: {
       type: Boolean,
@@ -111,8 +104,6 @@ export default {
       panelIndex: Number,
       groupCount: 0,
       readOnly: this.readOnlyProp,
-      drawer: false,
-      navItems: [],
       flagTimer: null
     }
   },
@@ -120,7 +111,7 @@ export default {
     expansionPanels: {
       get () {
         let indexes = []
-        if (this.expand) {
+        if (this.expand.value) {
           for (let i = 0; i < this.group.groups.length; i++) {
             indexes.push(i)
           }
@@ -146,47 +137,22 @@ export default {
       },
       displayValidationErrors: state => {
         return state.notification.displayValidationErrors
-      },
-      searchableProvisions: state => {
-        if ((state.questionnaire.questionnaire === null) || (state.legislations.legislations === null)) {
-          return []
-        }
-        const searchableProvisions = state.questionnaire.questionnaire.searchableProvisions
-        let dictionnairyOfProvisions = state.legislations.legislations
-        let provisions = []
-
-        searchableProvisions.forEach(x => {
-          const hydratedItem = dictionnairyOfProvisions[x.leg]
-          const newProvision = { ...x, ...hydratedItem }
-          provisions.push(newProvision)
-        })
-
-        return provisions
       }
     }),
-    hasNotifications () {
-      return this.$store.getters['notification/hasNotifications']
-    },
-    notifications () {
-      const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
-      return notices
-    },
     isVisible () {
       return this.groupCount > 0
     }
   },
   watch: {
-    expandAllProp (value) {
-      this.expandPanels(value)
-    },
+    // expandAllProp (value) {
+    //   alert('expand')
+    //   this.expandPanels(value)
+    // },
     readOnlyProp () {
       this.setReadOnly()
     },
     validateProp () {
       this.validateQ()
-    },
-    displayNavigationProp () {
-      this.displayNavigationDrawer()
     }
   },
   mounted () {
@@ -208,27 +174,6 @@ export default {
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
-    displayNavigationDrawer () {
-      let a = JSON.stringify(this.group.groups)
-      let b = a.replaceAll('primaryKey', 'id')
-        .replaceAll('"questions":', '"children":')
-        .replaceAll('"childQuestions":', '"children":')
-        .replaceAll('"name":', '"name_o":')
-        .replaceAll('"text":', '"name":')
-        .replaceAll('"title":', '"name":')
-      const regex = /("name":{"en":([^}]+)"fr":([^}]+)})/ig
-      const regex1 = /("name":{"en":([^}]+)"fr":([^}]+)})/i
-
-      let r = b.match(regex)
-      r.forEach(i => {
-        let en = '"name":' + i.match(/"en":"([^"]+)"/ig)[0].replaceAll('"en":', '')
-        let fr = '"name":' + i.match(/"fr":"([^"]+)"/ig)[0].replaceAll('"fr":', '')
-        b = b.replace(regex1, this.lang === 'en' ? en : fr)
-      })
-      this.$vuetify.goTo(0)
-      this.navItems = JSON.parse(b)
-      this.drawer = true
-    },
     setReadOnly () {
       this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
       this.readOnly = !this.readOnly
@@ -250,16 +195,6 @@ export default {
       this.flagTimer = setTimeout(() => this.isDirty(), 3000)
       if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
-    onNotificationClick (n) {
-      this.expand = true
-      this.$store.commit('errors/updateErrorNotification', n.qguid)
-    },
-    onQuestionClick (q) {
-      if (q.guid === undefined) return
-      this.expand = true
-      this.drawer = false
-      this.$store.commit('errors/updateErrorNotification', q.guid)
-    },
     validateQ () {
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
@@ -269,10 +204,10 @@ export default {
       }
       this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: true })
     },
-    expandPanels (expand) {
-      this.panelIndex = null
-      this.expand = expand
-    },
+    // expandPanels (expand) {
+    //   this.panelIndex = null
+    //   this.expand = expand
+    // },
     onUpdateGroupCount () {
       if (this.$refs.questionGroup) {
         this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length
