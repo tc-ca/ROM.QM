@@ -145,7 +145,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
       }
       if (op.picture && op.picture.notification) {
         dispatch('notification/addNotification', op.picture.notification,{root:true});
-      } else if (op.picture && op.picture.option === 'required' && op.picture.value.trim().length === 0) {
+      } else if (op.picture && op.picture.option === 'required' && op.picture.value.length === 0) {
         op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
         dispatch('notification/addNotification', op.picture.notification, {root:true});
       }
