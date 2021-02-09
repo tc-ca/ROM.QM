@@ -45,37 +45,6 @@
           </div>
         </v-col>
       </v-row>
-      <!-- <v-row
-        v-if="selImage !== null"
-        class="mb-6"
-        no-gutters
-        style="margin-bottom: 0"
-      >
-        <v-col />
-        <v-col
-          cols="10"
-        >
-          <v-img
-            :src="selLink"
-            lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
-            aspect-ratio="1"
-          >
-            <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                />
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-        <v-col />
-      </v-row> -->
       <v-row
         v-if="selImage !== null"
         class="mb-6"
@@ -97,18 +66,32 @@
               />
             </template>
             <v-img
-              height="350"
+              height="450"
+              width="450"
+              style="text-align: center"
               :src="selLink"
               lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
             />
 
-            <v-card-title>{{ selImage.title }}</v-card-title>
-            <v-card-text>
+            <v-card-text
+              v-if="!speedDialOpen"
+              style="padding-top: 20px"
+            >
               <v-row
                 align="center"
                 class="mx-0"
               >
-                <div class="grey--text ml-4">
+                <div
+                  style="font-size: 20px; font-weight: bold"
+                >
+                  {{ selImage.title }}
+                </div>
+              </v-row>
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div class="grey--text">
                   Comment: {{ selImage.comment }}
                 </div>
               </v-row>
@@ -116,7 +99,7 @@
                 align="center"
                 class="mx-0"
               >
-                <div class="grey--text ml-4">
+                <div class="grey--text">
                   Uploaded on: {{ selImage.timeStamp }}
                 </div>
               </v-row>
@@ -125,6 +108,32 @@
                 <!-- Last updated: {{ selImage.timeStamp }} -->
               </div>
             </v-card-text>
+            <div
+              v-if="speedDialOpen"
+              style="padding: 20px"
+            >
+              <v-textarea
+                v-model="selImage.title"
+                auto-grow
+                :disabled="readOnly"
+                dense
+                rows="1"
+                label="Title"
+                style="font-size: small"
+                @change="updateResponseStore()"
+              />
+              <v-textarea
+                v-model="selImage.comment"
+                auto-grow
+                :disabled="readOnly"
+                dense
+                placeholder=" "
+                rows="1"
+                label="Comment"
+                style="font-size: small"
+                @change="updateResponseStore()"
+              />
+            </div>
             <v-divider class="mx-4" />
             <v-card-text>
               <v-chip-group
@@ -132,13 +141,13 @@
                 column
               >
                 <div
-                  style="padding-left: 15px; font-weight: bold;"
+                  style="padding-left: 1px; font-weight: bold;"
                 >
                   Exif Data:
                 </div>
                 <div
                   v-if="isExifDataAvailable"
-                  style="padding-left: 15px; height: 150px; overflow: auto"
+                  style="padding-left: 1px; height: 150px; overflow: auto"
                 >
                   <li
                     v-for="(value, propertyName, index) in selExifData"
