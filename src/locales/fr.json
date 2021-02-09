@@ -1,7 +1,13 @@
 {
   "app": {
     "bottom-navigation": {
-      "save": "Enregistrer"
+      "navigation": "Navigation",
+      "collaspe":"Tout réduire",
+      "expand":"Développer tout",
+      "scrollUp": "Monter",
+      "validate": "Valider",
+      "lockData":"Fermer",
+      "unlockData":"Ouvert"
     },
     "settings": {
       "darkMode": "mode sombre ",

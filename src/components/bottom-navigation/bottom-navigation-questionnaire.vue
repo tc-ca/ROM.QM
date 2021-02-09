@@ -7,7 +7,7 @@
     <v-btn
       @click="displayNavigation()"
     >
-      <span>Navigation</span>
+      <span>  {{ $t('app.bottom-navigation.navigation') }}</span>
 
       <v-icon color="green">
         mdi-navigation
@@ -15,8 +15,8 @@
     </v-btn>
     <!-- COLLASPE ALL BUTTON -->
     <v-btn @click="expand()">
-      <span v-if="isExpandPanelsData.value==false">Expand All </span>
-      <span v-if="isExpandPanelsData.value===true">Collaspe All</span>
+      <span v-if="isExpandPanelsData.value==false">{{ $t('app.bottom-navigation.expand') }} </span>
+      <span v-if="isExpandPanelsData.value===true">{{ $t('app.bottom-navigation.collaspe') }}</span>
 
       <v-icon
         v-if="isExpandPanelsData.value===false"
@@ -36,7 +36,7 @@
       class="btnTop"
       @click="scrollToTop"
     >
-      <span>Scroll Up</span>
+      <span>{{ $t('app.bottom-navigation.scrollUp') }}</span>
       <v-icon color="purple">
         mdi-arrow-up
       </v-icon>
@@ -46,7 +46,7 @@
       v-if="envDev"
       @click="validate"
     >
-      <span>Validate</span>
+      <span>{{ $t('app.bottom-navigation.validate') }}</span>
       <v-badge
         v-if="notifications.length > 0"
         :content="notifications.length"
@@ -71,8 +71,8 @@
       v-if="envDev"
       @click="setReadOnly"
     >
-      <span v-if="!isReadOnlyData">Lock data</span>
-      <span v-if="isReadOnlyData">Unlock data</span>
+      <span v-if="!isReadOnlyData">{{ $t('app.bottom-navigation.lockData') }}</span>
+      <span v-if="isReadOnlyData">{{ $t('app.bottom-navigation.unlockData') }}</span>
 
       <v-icon
         v-if="isReadOnlyData"
