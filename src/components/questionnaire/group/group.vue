@@ -1,6 +1,6 @@
 <template>
   <v-expansion-panel v-show="isVisible">
-    <v-expansion-panel-header>
+    <v-expansion-panel-header disable-icon-rotate>
       <template #actions>
         <v-icon
           v-if="!valid"

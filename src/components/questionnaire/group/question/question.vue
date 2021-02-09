@@ -6,6 +6,7 @@
     :class="getClassName"
   >
     <v-expansion-panel-header
+      disable-icon-rotate
       ripple
     >
       <template
