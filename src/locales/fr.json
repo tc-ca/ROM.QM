@@ -1,7 +1,13 @@
 {
   "app": {
     "bottom-navigation": {
-      "save": "Enregistrer"
+      "navigation": "Navigation",
+      "collaspe":"Tout réduire",
+      "expand":"Développer tout",
+      "scrollUp": "Monter",
+      "validate": "Valider",
+      "lockData":"Fermer",
+      "unlockData":"Ouvert"
     },
     "settings": {
       "darkMode": "mode sombre ",
@@ -99,6 +105,7 @@
         "clearSearch": "Effacer la recherche"
       },
       "validate": "Valider",
+      "errors":" 0 erreurs trouvées |1 erreur trouvée | {count} erreurs trouvées",
       "group": {
         "repeatGroup": "Répéter le Groupe",
         "deleteGroup": "Supprimer le Groupe",
