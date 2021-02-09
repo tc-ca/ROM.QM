@@ -47,7 +47,22 @@
       @click="validate"
     >
       <span>Validate</span>
-      <v-icon color="purple">
+      <v-badge
+        v-if="notifications.length > 0"
+        :content="notifications.length"
+        :value="true"
+        color="red"
+        overlap
+        inline
+      >
+        <v-icon color="purple">
+          mdi-check-all
+        </v-icon>
+      </v-badge>
+      <v-icon
+        v-if="notifications.length=== 0"
+        color="purple"
+      >
         mdi-check-all
       </v-icon>
     </v-btn>
@@ -77,6 +92,7 @@
 
 <script>
 import BaseMixin from '../../mixins/base'
+import { mapState } from 'vuex'
 
 export default {
   emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only', 'display-navigation'],
@@ -98,6 +114,20 @@ export default {
       isReadOnlyData: this.isReadOnly
     }
   },
+  computed: {
+    ...mapState({
+      notifications: state => {
+        return state.notification.notifications
+      },
+      displayValidationErrors: state => {
+        return state.notification.displayValidationErrors
+      }
+
+    }),
+    hasNotifications () {
+      return this.notifications.length > 0
+    }
+  },
   methods: {
     expand () {
       this.isExpandPanelsData.value = !this.isExpandPanels.value
@@ -117,6 +147,7 @@ export default {
       this.$emit('display-navigation')
     }
   }
+
 }
 </script>
 
