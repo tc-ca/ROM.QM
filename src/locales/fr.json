@@ -90,6 +90,7 @@
     },
     "questionnaire": {
       "validate": "Valider",
+      "errors":" 0 erreurs trouvées |1 erreur trouvée | {count} erreurs trouvées",
       "group": {
         "repeatGroup": "Répéter le Groupe",
         "deleteGroup": "Supprimer le Groupe",
