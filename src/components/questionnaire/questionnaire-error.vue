@@ -22,7 +22,7 @@
           <v-list-item-action>
             <v-btn
               icon
-              @click="showDrawer = false"
+              @click="drawer = false"
             >
               <v-icon>
                 mdi-close
