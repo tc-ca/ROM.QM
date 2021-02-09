@@ -39,30 +39,30 @@
         elevation="2"
       >
         <v-card-title>
-          Sorry, no questions matching the provision search criteria.
+          {{ $t('app.questionnaire.noSearchResults.noMatchedQuestions') }}
         </v-card-title>
         <v-card-text>
-          <p>Search Suggestions</p>
+          <p>{{ $t('app.questionnaire.noSearchResults.searchSuggestions') }}</p>
           <div class="text--primary">
             <ul>
               <li>
-                Check your spelling
+                {{ $t('app.questionnaire.noSearchResults.checkSpelling') }}
               </li>
               <li>
-                Try more general words
+                {{ $t('app.questionnaire.noSearchResults.moreGeneralWords') }}
               </li>
               <li>
-                Search by provision label (Example: "3.5 (1) (c)")
+                {{ $t('app.questionnaire.noSearchResults.searchByProvisionLabel') }}
               </li>
               <li>
-                Select a provision from the list of suggestions
+                {{ $t('app.questionnaire.noSearchResults.selectSuggestion') }}
               </li>
             </ul>
           </div>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="clearProvisionSearchField">
-            Clear Search
+            {{ $t('app.questionnaire.noSearchResults.clearSearch') }}
           </v-btn>
         </v-card-actions>
       </v-card>

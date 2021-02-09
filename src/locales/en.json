@@ -90,6 +90,15 @@
       }
     },
     "questionnaire": {
+      "noSearchResults": {
+        "noMatchedQuestions": "Sorry, no questions matching the provision search criteria.",
+        "searchSuggestions": "Search Suggestions",
+        "checkSpelling": "Check your spelling",
+        "moreGeneralWords": "Try more general words",
+        "searchByProvisionLabel": "Search by provision label (Example: \"3.5 (1) (c)\")",
+        "selectSuggestion": "Select a provision from the list of suggestions",
+        "clearSearch": "Clear Search"
+      },
       "validate": "Validate",
       "errors":" 0 errors found |1 error found | {count} errors found",
       "group": {
