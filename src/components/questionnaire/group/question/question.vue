@@ -661,6 +661,8 @@ export default {
       if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
     },
     updateSupplementaryInfo (args) {
+      // eslint-disable-next-line no-debugger
+      debugger
       if (this.question.type === QUESTION_TYPE.RADIO) {
         let orgOption = this.question.responseOptions.find(q => q.internalComment.value !== '' ||
           q.externalComment.value !== '' || q.picture.value !== '')

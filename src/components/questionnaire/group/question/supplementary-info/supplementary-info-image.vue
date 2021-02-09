@@ -350,6 +350,9 @@ export default {
       return this.picture.value[this.galleryIndex] !== undefined
     },
     displayPicture () {
+      // eslint-disable-next-line no-debugger
+      debugger
+      console.log(this.question)
       return !this.picture.display
     },
     isPictureRequired () {
