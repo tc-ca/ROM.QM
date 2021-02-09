@@ -4,6 +4,7 @@
     fixed
     color="primary"
   >
+    <!-- NAVIGATION BUTTON -->
     <v-btn
       @click="displayNavigation()"
     >
@@ -41,9 +42,8 @@
         mdi-arrow-up
       </v-icon>
     </v-btn>
-    <!-- VALIDATE -->
+    <!-- VALIDATE BUTTON -->
     <v-btn
-      v-if="envDev"
       @click="validate"
     >
       <span>{{ $t('app.bottom-navigation.validate') }}</span>
@@ -66,7 +66,7 @@
         mdi-check-all
       </v-icon>
     </v-btn>
-    <!-- READ ONLY -->
+    <!-- READ ONLY BUTTON -->
     <v-btn
       v-if="envDev"
       @click="setReadOnly"
