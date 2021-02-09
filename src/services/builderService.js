@@ -367,9 +367,13 @@ async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeatur
         console.log(error);
       });
 
-    console.log(response);
-
-    return response.data;
+    if (response) {
+      console.log(response);
+      return response.data;
+    } else {
+      console.log('Error on response: Response is NULL');
+      return null;
+    }
   }
 }
 
