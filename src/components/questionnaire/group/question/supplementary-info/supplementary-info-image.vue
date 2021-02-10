@@ -251,8 +251,6 @@
       </v-row>
       <v-row>
         <v-col
-          v-for="(image, index) in picture.value"
-          :key="index"
           class="d-flex child-flex"
           cols="12"
         >
