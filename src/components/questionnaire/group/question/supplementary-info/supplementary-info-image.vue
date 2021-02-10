@@ -66,8 +66,6 @@
               />
             </template>
             <v-img
-              height="450"
-              width="450"
               style="text-align: center"
               :src="selLink"
               lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
@@ -75,14 +73,14 @@
 
             <v-card-text
               v-if="!speedDialOpen"
-              style="padding-top: 20px"
+              style="padding: 30px"
             >
               <v-row
                 align="center"
                 class="mx-0"
               >
                 <div
-                  style="font-size: 20px; font-weight: bold"
+                  style="font-size: 20px; font-weight: bold; padding-top: 20px; padding-left: 10px"
                 >
                   {{ selImage.title }}
                 </div>
@@ -91,7 +89,10 @@
                 align="center"
                 class="mx-0"
               >
-                <div class="grey--text">
+                <div
+                  class="grey--text"
+                  style="padding-left: 10px"
+                >
                   Comment: {{ selImage.comment }}
                 </div>
               </v-row>
@@ -99,7 +100,10 @@
                 align="center"
                 class="mx-0"
               >
-                <div class="grey--text">
+                <div
+                  class="grey--text"
+                  style="padding-left: 10px"
+                >
                   Uploaded on: {{ selImage.timeStamp }}
                 </div>
               </v-row>
@@ -141,7 +145,7 @@
                 column
               >
                 <div
-                  style="padding-left: 1px; font-weight: bold;"
+                  style="padding-left: 10px; font-weight: bold;"
                 >
                   Exif Data:
                 </div>
@@ -350,8 +354,6 @@ export default {
       return this.picture.value[this.galleryIndex] !== undefined
     },
     displayPicture () {
-      // eslint-disable-next-line no-debugger
-      debugger
       console.log(this.question)
       return !this.picture.display
     },

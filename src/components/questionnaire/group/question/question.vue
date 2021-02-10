@@ -642,7 +642,7 @@ export default {
     // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
-    // store the response in data property for reference use
+      // store the response in data property for reference use
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)
@@ -661,11 +661,9 @@ export default {
       if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
     },
     updateSupplementaryInfo (args) {
-      // eslint-disable-next-line no-debugger
-      debugger
       if (this.question.type === QUESTION_TYPE.RADIO) {
-        let orgOption = this.question.responseOptions.find(q => q.internalComment.value !== '' ||
-          q.externalComment.value !== '' || q.picture.value !== '')
+        let orgOption = this.question.responseOptions.find(r => r.value === this.question.response) // this.question.responseOptions.find(q => q.internalComment.value !== '' ||
+        // q.externalComment.value !== '' || q.picture.value.length > 0)
         let selOption = this.question.responseOptions.find(q => q.value === args.value)
 
         if (orgOption) {
