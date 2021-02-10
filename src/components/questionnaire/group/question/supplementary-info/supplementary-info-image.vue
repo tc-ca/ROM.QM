@@ -249,6 +249,20 @@
           />
         </v-col>
       </v-row>
+      <v-row>
+        <v-col
+          v-for="(image, index) in picture.value"
+          :key="index"
+          class="d-flex child-flex"
+          cols="12"
+        >
+          <v-pagination
+            v-model="page"
+            :length="4"
+            circle
+          />
+        </v-col>
+      </v-row>
       <v-input
         ref="validationInput"
         v-model="picture.value.length"
@@ -331,6 +345,7 @@ export default {
 
   data: function () {
     return {
+      page: 1,
       selImage: null,
       selLink: null,
       selExifData: '',
