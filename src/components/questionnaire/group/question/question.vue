@@ -662,7 +662,7 @@ export default {
     // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
-    // store the response in data property for reference use
+      // store the response in data property for reference use
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)

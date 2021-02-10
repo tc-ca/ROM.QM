@@ -361,6 +361,7 @@ async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeatur
     const axios = await import('axios')
 
     // let response = await axios.get('/static/betaAnswers.json')
+    console.log('Template: ' + templateToLoad)
     let response = await axios.get(`/static/templates/${templateToLoad}.json`)
       .catch(function (error) {
         // handle error

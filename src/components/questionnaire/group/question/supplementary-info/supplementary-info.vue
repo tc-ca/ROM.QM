@@ -26,6 +26,16 @@
       save-to-prop="internalComment"
       @error="onError"
     />
+    <supplementary-info-files
+      v-if="displayPicture"
+      :picture="selresponseoption.picture"
+      :label="$t('app.questionnaire.group.question.files')"
+      :group="group"
+      :question="question"
+      :read-only="readOnly"
+      save-to-prop="images"
+      @error="onError"
+    />
     <supplementary-info-image
       v-if="displayPicture"
       :picture="selresponseoption.picture"
@@ -36,7 +46,6 @@
       save-to-prop="images"
       @error="onError"
     />
-    <!-- </div> -->
   </v-expansion-panels>
 </template>
 
