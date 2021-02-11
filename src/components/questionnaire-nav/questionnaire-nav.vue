@@ -1,47 +1,45 @@
 <template>
-  <div>
-    <v-navigation-drawer
-      v-model="isVisible"
-      :width="300"
-      temporary
-      fixed
-    >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            Questionnaire Navigation
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+  <v-navigation-drawer
+    v-model="isVisible"
+    :width="width"
+    temporary
+    fixed
+  >
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="title">
+          Questionnaire Navigation
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
 
-      <v-divider />
-      <v-treeview
-        dense
-        open-all
-        :items="navitems"
+    <v-divider />
+    <v-treeview
+      dense
+      open-all
+      :items="navitems"
+    >
+      <template
+        slot="label"
+        slot-scope="props"
       >
-        <template
-          slot="label"
-          slot-scope="props"
+        <div
+          class="truncated"
+          @click="$emit('question:click', props.item)"
         >
-          <div
-            class="truncated"
-            @click="$emit('question:click', props.item)"
-          >
-            <div>
-              <v-icon
-                small
-                color="primary"
-              >
-                mdi-flash-circle
-              </v-icon>
-              {{ props.item.name }}
-            </div>
+          <div>
+            <v-icon
+              small
+              color="primary"
+            >
+              mdi-flash-circle
+            </v-icon>
+            {{ props.item.name }}
           </div>
-        </template>
-      </v-treeview>
-    </v-navigation-drawer>
-  </div>
+        </div>
+      </template>
+    </v-treeview>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -69,6 +67,9 @@ export default {
       set (value) {
         if (!value) this.$emit('navigation-close', value)
       }
+    },
+    width () {
+      return this.$vuetify.breakpoint.mobile ? '100%' : '40%'
     }
   }
 }

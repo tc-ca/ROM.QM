@@ -4,6 +4,7 @@
     app
     right
     temporary
+    :width="width"
   >
     <v-list
       dense
@@ -102,6 +103,9 @@ export default {
           this.$emit('close-characteristic-filter-drawer')
         }
       }
+    },
+    width () {
+      return this.$vuetify.breakpoint.mobile ? '100%' : '40%'
     }
   },
   watch: {
