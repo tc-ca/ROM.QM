@@ -1,10 +1,10 @@
 <template>
-  <v-expansion-panel v-show="displayPicture">
+  <v-expansion-panel v-show="displayFile">
     <v-expansion-panel-header class="subtitle-2">
       <span>
         {{ label }}
         <v-icon
-          v-if="isPictureRequired"
+          v-if="isFileRequired"
           color="red"
           small
         >
@@ -20,7 +20,7 @@
       </span>
       <v-spacer />
       <v-icon
-        v-if="errorInPicture"
+        v-if="errorInFile"
         color="red"
         small
       >
@@ -36,7 +36,6 @@
             counter
             show-size
             :disabled="readOnly"
-            @click="onFileUploadClick"
             @change="onFileChange"
           />
           <div>
@@ -47,36 +46,36 @@
       <v-row no-gutters>
         <v-col>
           <v-list
-            v-if="picture.value.length > 0"
+            v-if="file.value.length > 0"
             dense
           >
             <v-subheader>Uploaded Files</v-subheader>
             <v-list-item
-              v-for="(image, index) in picture.value"
+              v-for="(f, index) in file.value"
               :key="index"
             >
               <v-list-item-icon>
                 <v-icon
                   size="30"
                 >
-                  mdi-file-{{ image.fileType }}
+                  mdi-file-{{ f.fileType }}
                 </v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <div v-if="!image.speedDialOpen">
+                <div v-if="!f.speedDialOpen">
                   <v-list-item-subtitle>
-                    Title: {{ image.title }}
+                    Title: {{ f.title }}
                   </v-list-item-subtitle>
                   <v-list-item-subtitle>
-                    Comment: {{ image.comment === '' ? 'N/A' : image.comment }}
+                    Comment: {{ f.comment === '' ? 'N/A' : f.comment }}
                   </v-list-item-subtitle>
                   <v-list-item-subtitle>
-                    Uploaded: {{ image.timeStamp }}
+                    Uploaded: {{ f.timeStamp }}
                   </v-list-item-subtitle>
                 </div>
-                <div v-if="image.speedDialOpen">
+                <div v-if="f.speedDialOpen">
                   <v-textarea
-                    v-model="image.title"
+                    v-model="f.title"
                     auto-grow
                     outlined
                     :disabled="readOnly"
@@ -87,7 +86,7 @@
                     @change="updateResponseStore()"
                   />
                   <v-textarea
-                    v-model="image.comment"
+                    v-model="f.comment"
                     auto-grow
                     outlined
                     :disabled="readOnly"
@@ -104,14 +103,14 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      v-model="image.speedDialOpen"
+                      v-model="f.speedDialOpen"
                       icon
-                      :disabled="!imageNoteExist || readOnly"
+                      :disabled="!fileNoteExist || readOnly"
                       v-bind="attrs"
                       v-on="on"
-                      @click="image.speedDialOpen = !image.speedDialOpen"
+                      @click="f.speedDialOpen = !f.speedDialOpen"
                     >
-                      <v-icon v-if="image.speedDialOpen">
+                      <v-icon v-if="f.speedDialOpen">
                         mdi-close
                       </v-icon>
                       <v-icon v-else>
@@ -126,12 +125,12 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      :disabled="!imageNoteExist || readOnly"
+                      :disabled="!fileNoteExist || readOnly"
                       icon
                       color="deep-orange"
                       v-bind="attrs"
                       v-on="on"
-                      @click.stop="removeImage($event, image, galleryIndex); updateResponseStore();"
+                      @click.stop="removeFile($event, f, galleryIndex); updateResponseStore();"
                     >
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
@@ -143,12 +142,12 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      :disabled="!imageNoteExist || readOnly"
+                      :disabled="!fileNoteExist || readOnly"
                       icon
                       color="blue"
                       v-bind="attrs"
                       v-on="on"
-                      @click.stop="downloadFile(image); updateResponseStore();"
+                      @click.stop="downloadFile(f); updateResponseStore();"
                     >
                       <v-icon>mdi-download-circle-outline</v-icon>
                     </v-btn>
@@ -163,7 +162,7 @@
       </v-row>
       <v-input
         ref="validationInput"
-        v-model="picture.value.length"
+        v-model="file.value.length"
         :disabled="readOnly"
         :rules="rules"
         @update:error="onError"
@@ -203,14 +202,14 @@
 
 /* eslint-disable no-undef */
 import moment from 'moment'
-import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
 import AzureBlobService from '../../../../../services/azureBlobService'
 
 export default {
+  name: 'SupplementaryInfoFiles',
   mixins: [BaseMixin],
   props: {
-    picture: {
+    file: {
       type: Object,
       required: true
     },
@@ -238,12 +237,11 @@ export default {
 
   data: function () {
     return {
-      // images: [],
       curImg: '',
       progressStatus: '',
       galleryIndex: 0,
       rules: [
-        value => !this.picture.display || !this.picture.required ? true : this.picture.value.length > 0 || 'Required.'
+        value => !this.file.display || !this.file.required ? true : this.file.value.length > 0 || 'Required.'
       ],
       validationStatus: false,
       notification: null,
@@ -253,39 +251,33 @@ export default {
   },
 
   computed: {
-    imageNoteExist () {
-      return this.picture.value[this.galleryIndex] !== undefined
+    fileNoteExist () {
+      return this.file.value[this.galleryIndex] !== undefined
     },
-    displayPicture () {
-      return !this.picture.display
+    displayFile () {
+      return !this.file.display
     },
-    isPictureRequired () {
-      return this.picture.option === 'required'
+    isFileRequired () {
+      return this.file.option === 'required'
     },
-    errorInPicture () {
-      return this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
+    errorInFile () {
+      return this.displayFile && this.isFileRequired && !this.file.value.length > 0
     }
   },
   mounted () {
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
-        let error = this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
+        let error = this.displayFile && this.isFileRequired && !this.file.value.length > 0
         this.onError(error)
       }
     )
   },
   methods: {
-    onFileUploadClick (e) {
-      // this.$refs.fileUpload.reset()
-    },
-    onFileChange (e) {
-      if (!e) {
+    async onFileChange (file) {
+      if (!file) {
         return
       }
-      this.createFile(e)
-    },
-    async createFile (file) {
       try {
         this.progressStatus = 'Uploading...'
         await AzureBlobService.uploadFile(file)
@@ -294,42 +286,18 @@ export default {
       } finally {
         this.progressStatus = ''
         let fileType = ''
+
         if (file.type === 'application/pdf') fileType = 'pdf'
         else if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type === 'application/vnd.ms-excel') fileType = 'excel'
         else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') fileType = 'word'
-        else if (file.type.startsWith('image')) fileType = 'image'
         else fileType = 'document-outline'
 
-        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), speedDialOpen: false })
+        this.file.value.push({ fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), speedDialOpen: false })
+
         this.next()
         this.next()
 
         this.$refs.fileUpload.reset()
-      }
-    },
-    createImage (file) {
-      var reader = new FileReader()
-      var vm = this
-
-      reader.onload = (e) => {
-        vm.curImg = e.target.result
-        this.addImageToArray()
-      }
-      reader.readAsDataURL(file)
-    },
-
-    addImageToArray () {
-      if (this.picture.value.length < MAX_IMAGE_UPLOADS_PER_ANSWER) {
-        // This is temporary, until all the questions will come with the right data structure
-        if (!Array.isArray(this.picture.value)) {
-          this.picture.value = []
-        }
-        this.picture.value.push({ isFileTypeImage: true, fileType: 'image', title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), fileName: file.name, comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
-        // this.images.push(base64)
-        this.next()
-      } else {
-        // TODO: add string to resource of some kind.
-        this.$store.dispatch('notification/show', { text: `Only ${MAX_IMAGE_UPLOADS_PER_ANSWER} pictures can be added to an answer`, color: 'error' })
       }
     },
 
@@ -341,7 +309,7 @@ export default {
       }
     },
 
-    async removeImage ($event, file, index) {
+    async removeFile ($event, file, index) {
       this.confirmDialogOpen = true
       this.confirmCallbackArgs = [$event, file, index]
     },
@@ -357,7 +325,7 @@ export default {
       } catch (e) {
         console.log(e)
       } finally {
-        this.picture.value.splice(index - 1, 1)
+        this.file.value.splice(index - 1, 1)
         this.prev()
       }
     },
@@ -368,29 +336,20 @@ export default {
       e.stopPropagation()
     },
 
-    changeImage (base64) {
-      if (this.envProd) {
-        this.picture.value[this.galleryIndex].base64String = base64
-      } else {
-        // this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
-        // this.picture.value[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
-      }
-    },
-
     setGalleryIndex () {
-      this.galleryIndex = this.picture.value.length === 0
+      this.galleryIndex = this.file.value.length === 0
         ? 0
-        : this.picture.value.length - 1
+        : this.file.value.length - 1
     },
     next () {
-      this.galleryIndex = this.galleryIndex + 1 === this.picture.value.length
+      this.galleryIndex = this.galleryIndex + 1 === this.file.value.length
         ? 0
         : this.galleryIndex + 1
     },
 
     prev () {
       this.galleryIndex = this.galleryIndex - 1 < 0
-        ? this.picture.value.length - 1
+        ? this.file.value.length - 1
         : this.galleryIndex - 1
     },
 
@@ -399,15 +358,15 @@ export default {
       // const question = this.question
       // const group = this.group
       // const saveToProp = this.saveToProp
-      // const response = this.images
+      // const response = this.files
       // this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
     },
     onError (error) {
-      this.picture.validationStatus = !error
-      if (!this.picture.validationStatus) {
-        this.picture.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `Picture is required on this question, please upload at least one.`, color: 'error' }
+      this.file.validationStatus = !error
+      if (!this.file.validationStatus) {
+        this.file.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `File is required on this question, please upload at least one.`, color: 'error' }
       } else {
-        this.picture.notification = null
+        this.file.notification = null
       }
       this.$emit('error', error)
     }

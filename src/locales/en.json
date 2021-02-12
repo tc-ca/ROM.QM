@@ -32,6 +32,7 @@
       "sortOrder": "Sort Order",
       "internalComments": "Internal Comments",
       "externalComments": "External Comments",
+      "file": "File(s)",
       "picture": "Picture(s)",
       "isRepeatable": "Is Repeatable?",
       "visibleByDefault": "Visible by default",

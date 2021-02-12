@@ -276,6 +276,20 @@
                           </template>
                         </v-select>
                         <v-select
+                          v-model="option.file.option"
+                          item-text="text"
+                          item-value="value"
+                          :items="optionTypes"
+                          :label="$t('app.builder.file')"
+                        >
+                          <template v-slot:selection="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                          <template v-slot:item="{ item }">
+                            <span>{{ item.text[lang] }}</span>
+                          </template>
+                        </v-select>
+                        <v-select
                           v-model="option.picture.option"
                           item-text="text"
                           item-value="value"

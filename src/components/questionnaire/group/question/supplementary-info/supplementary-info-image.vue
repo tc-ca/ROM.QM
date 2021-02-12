@@ -37,7 +37,6 @@
             counter
             show-size
             :disabled="readOnly"
-            @click="onFileUploadClick"
             @change="onFileChange"
           />
           <div>
@@ -238,7 +237,7 @@
       </v-row>
       <v-row>
         <v-col
-          v-for="(image, index) in picture.value"
+          v-for="(image, index) in curPageImages"
           :key="index"
           class="d-flex child-flex"
           cols="2"
@@ -249,15 +248,17 @@
           />
         </v-col>
       </v-row>
-      <v-row>
+      <v-row v-if="picture.value.length > 0">
         <v-col
           class="d-flex child-flex"
           cols="12"
         >
           <v-pagination
             v-model="page"
-            :length="4"
+            :length="calculateTotalPages(picture.value.length)"
+            :total-visible="5"
             circle
+            @input="onNextPageMove($event)"
           />
         </v-col>
       </v-row>
@@ -348,6 +349,7 @@ export default {
       selLink: null,
       selExifData: '',
       curImg: '',
+      curPageImages: [],
       isExifDataAvailable: false,
       progressStatus: '',
       galleryIndex: 0,
@@ -385,8 +387,20 @@ export default {
         this.onError(error)
       }
     )
+    this.onNextPageMove(1)
   },
   methods: {
+    calculateTotalPages (n) {
+      let x = n % IMAGES_PER_PAGE === 0 ? Math.floor(n / IMAGES_PER_PAGE) : Math.floor(n / IMAGES_PER_PAGE) + 1
+      return x
+    },
+    onNextPageMove (i) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      let start = i === 1 ? 0 : ((i - 1) * IMAGES_PER_PAGE)
+      let end = (i * IMAGES_PER_PAGE)
+      this.curPageImages = this.picture.value.slice(start, end)
+    },
     setCurrentImage (imgLink, img) {
       this.selLink = imgLink
       this.selImage = img
@@ -401,9 +415,6 @@ export default {
       })
       this.isExifDataAvailable = (exifData != null && Object.keys(exifData).length > 0)
       this.selExifData = exifData
-    },
-    onFileUploadClick (e) {
-      // this.$refs.fileUpload.reset()
     },
     onFileChange (e) {
       if (!e) {
@@ -541,6 +552,8 @@ export default {
   }
 
 }
+
+const IMAGES_PER_PAGE = 12
 
 </script>
 

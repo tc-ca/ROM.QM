@@ -85,6 +85,10 @@ function createQuestion(questionnaire, group) {
           option: "optional",
           value: ""
         },
+        file: {
+          option: "optional",
+          value: []
+        },
         picture: {
           option: "optional",
           value: []
@@ -112,6 +116,10 @@ function createQuestion(questionnaire, group) {
         externalComment: {
           option: "required",
           value: ""
+        },
+        file: {
+          option: "optional",
+          value: []
         },
         picture: {
           option: "optional",
@@ -269,9 +277,13 @@ function createResponseOption(question) {
       option: "optional",
       value: ""
     },
+    file: {
+      option: "optional",
+      value: []
+    },
     picture: {
       option: "optional",
-      value: ""
+      value: []
     }
   };
 }

@@ -32,6 +32,7 @@
       "sortOrder": "Ordre du triage",
       "internalComments": "Commentaires internes",
       "externalComments": "Commentaires externes",
+      "file": "FR File(s)",
       "picture": "Photo(s)",
       "isRepeatable": "Reproductible?",
       "visibleByDefault": "Visible par défaut",
