@@ -13,13 +13,10 @@
         #actions
       >
         <v-icon
-          v-if="expand.value && isValid === false"
+          v-if="isValid === false"
           color="red"
         >
           mdi-exclamation
-        </v-icon>
-        <v-icon v-if="expand.value">
-          mdi-menu-down
         </v-icon>
       </template>
 

@@ -163,7 +163,7 @@ export default {
       showCharacteristicFilter: false,
       siteCharacteristicsCount: 0,
       // questionnaire related data that will be passed into the router specific component
-      expandAllQuestionnaire: { value: true },
+      expandAllQuestionnaire: { value: false },
       readOnlyQuestionnaire: false,
       validateQuestionnaire: false,
       displayNavigationQuestionnaire: false,
