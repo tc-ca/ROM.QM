@@ -124,7 +124,7 @@ function ClearPreviousNotifications(q)
 function isValidationRequired(q)
 {
   let result = -1;
-  if (q.validationRule) result = q.validationRule.findIndex( v => v.enabled);
+  if (q.validationRules) result = q.validationRules.findIndex( v => v.enabled);
   return result > -1;
 }
 
