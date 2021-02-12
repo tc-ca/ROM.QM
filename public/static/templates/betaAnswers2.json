@@ -45,6 +45,10 @@
                               "option": "optional",
                               "value": "external comment for yes"
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -70,6 +74,10 @@
                               "option": "optional",
                               "value": "external comment no"
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -94,6 +102,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": "external comment for nto inspected"
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -159,6 +171,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -184,6 +200,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -208,6 +228,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -263,6 +287,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -287,6 +315,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -344,6 +376,10 @@
                                       "option": "optional",
                                       "value": ""
                                   },
+                                  "file": {
+                                    "option": "optional",
+                                    "value": []
+                                  },
                                   "picture": {
                                       "option": "optional",
                                       "value": []
@@ -369,6 +405,10 @@
                                       "option": "optional",
                                       "value": ""
                                   },
+                                  "file": {
+                                    "option": "optional",
+                                    "value": []
+                                  },
                                   "picture": {
                                       "option": "optional",
                                       "value": []
@@ -393,6 +433,10 @@
                                   "externalComment": {
                                       "option": "optional",
                                       "value": ""
+                                  },
+                                  "file": {
+                                    "option": "optional",
+                                    "value": []
                                   },
                                   "picture": {
                                       "option": "optional",
@@ -520,6 +564,10 @@
                                               "option": "optional",
                                               "value": ""
                                           },
+                                          "file": {
+                                            "option": "optional",
+                                            "value": []
+                                          },
                                           "picture": {
                                               "option": "optional",
                                               "value": []
@@ -544,6 +592,10 @@
                                           "externalComment": {
                                               "option": "optional",
                                               "value": ""
+                                          },
+                                          "file": {
+                                            "option": "optional",
+                                            "value": []
                                           },
                                           "picture": {
                                               "option": "optional",
@@ -794,6 +846,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -819,6 +875,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -843,6 +903,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -908,6 +972,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -933,6 +1001,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -957,6 +1029,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1022,6 +1098,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1047,6 +1127,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1071,6 +1155,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1147,6 +1235,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1171,6 +1263,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1197,6 +1293,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1221,6 +1321,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1283,6 +1387,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1308,6 +1416,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1332,6 +1444,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1394,6 +1510,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1419,6 +1539,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1443,6 +1567,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1505,6 +1633,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1529,6 +1661,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
@@ -1555,6 +1691,10 @@
                               "option": "optional",
                               "value": ""
                           },
+                          "file": {
+                            "option": "optional",
+                            "value": []
+                          },
                           "picture": {
                               "option": "optional",
                               "value": []
@@ -1579,6 +1719,10 @@
                           "externalComment": {
                               "option": "optional",
                               "value": ""
+                          },
+                          "file": {
+                            "option": "optional",
+                            "value": []
                           },
                           "picture": {
                               "option": "optional",
