@@ -39,11 +39,11 @@
                           "isProvisionCollapsed": true,
                           "internalComment": {
                               "option": "optional",
-                              "value": "internal comment for yes"
+                              "value": ""
                           },
                           "externalComment": {
                               "option": "optional",
-                              "value": "external comment for yes"
+                              "value": ""
                           },
                           "file": {
                             "option": "optional",
@@ -68,11 +68,11 @@
                           "isProvisionCollapsed": true,
                           "internalComment": {
                               "option": "optional",
-                              "value": "internal comment no"
+                              "value": ""
                           },
                           "externalComment": {
-                              "option": "optional",
-                              "value": "external comment no"
+                              "option": "required",
+                              "value": ""
                           },
                           "file": {
                             "option": "optional",
@@ -97,11 +97,11 @@
                           "isProvisionCollapsed": false,
                           "internalComment": {
                               "option": "optional",
-                              "value": "internal comment for not inspected"
+                              "value": ""
                           },
                           "externalComment": {
                               "option": "optional",
-                              "value": "external comment for nto inspected"
+                              "value": ""
                           },
                           "file": {
                             "option": "optional",
@@ -197,7 +197,7 @@
                               "value": ""
                           },
                           "externalComment": {
-                              "option": "optional",
+                              "option": "require",
                               "value": ""
                           },
                           "file": {
