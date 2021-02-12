@@ -395,8 +395,6 @@ export default {
       return x
     },
     onNextPageMove (i) {
-      // eslint-disable-next-line no-debugger
-      debugger
       let start = i === 1 ? 0 : ((i - 1) * IMAGES_PER_PAGE)
       let end = (i * IMAGES_PER_PAGE)
       this.curPageImages = this.picture.value.slice(start, end)
