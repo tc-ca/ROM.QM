@@ -7,7 +7,7 @@
     "groups": [
         {
             "title": {
-                "en": "grp 1",
+                "en": "grp 1 (mixture of test scenarios)",
                 "fr": "Fr: New Group"
             },
             "primaryKey": "GRP_GRP1_TMPLT_QSTNNRTTLN",
@@ -47,6 +47,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -75,6 +79,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -144,6 +152,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -170,6 +182,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -215,7 +231,7 @@
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en": " 3. [UN] Not a UN1202, DIESEL FUEL, or UN1203, GASOLINE, Exemption?",
+                        "en": " 3. [UN] UN1202, DIESEL FUEL, or UN1203, GASOLINE, Exemption?",
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
@@ -238,6 +254,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "optional",
@@ -267,6 +287,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -312,7 +336,7 @@
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en": "4. [SIZE OF MEANS ]Does not - Labels on a Small Means of Containment (has children questions)",
+                        "en": "4. [SIZE OF MEANS ] Labels on a Small Means of Containment (has children questions, with no provisions or dependencies)",
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
@@ -335,6 +359,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "optional",
@@ -364,6 +392,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -430,6 +462,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -457,8 +493,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -525,6 +565,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -552,8 +596,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -600,7 +648,7 @@
                     "isVisible": true,
                     "isMultiple": true,
                     "text": {
-                        "en": "5. [MOC FACILITY TYPE]is the business not a consignor? (- Consignor Responsibilities) - test second question should show",
+                        "en": "5. [MOC FACILITY TYPE]is the business not a consignor? (- Consignor Responsibilities) (has dependants which is a sibling question)",
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
@@ -623,6 +671,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "optional",
@@ -650,6 +702,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -725,6 +781,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -751,6 +811,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -836,6 +900,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -864,6 +932,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -933,6 +1005,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -961,6 +1037,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1010,7 +1090,7 @@
         },
         {
             "title": {
-                "en": "grp 2 dependent sibling questions, with diff provisions",
+                "en": "grp 2 (dependent sibling questions, with different provisions)",
                 "fr": "Fr: New Group"
             },
             "primaryKey": "GRP_GRP2DPNDNTSBLNG_TMPLT_QSTNNRTTLN",
@@ -1050,6 +1130,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -1078,6 +1162,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1151,6 +1239,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -1179,6 +1271,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1240,7 +1336,7 @@
         },
         {
             "title": {
-                "en": "grp 3",
+                "en": "grp 3 (sibling questions, with no provisions, no dependencies)",
                 "fr": "Fr: New Group"
             },
             "primaryKey": "GRP_GRP3_TMPLT_QSTNNRTTLN",
@@ -1280,6 +1376,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -1306,6 +1406,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1379,6 +1483,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -1405,6 +1513,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1467,7 +1579,7 @@
         },
         {
             "title": {
-                "en": "grp 4 test question with child which contains diff provision",
+                "en": "grp 4 (question with children)",
                 "fr": "Fr: New Group"
             },
             "primaryKey": "GRP_GRP4TSTQSTNWTHC_TMPLT_QSTNNRTTLN",
@@ -1507,6 +1619,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -1535,6 +1651,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1601,6 +1721,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -1630,8 +1754,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -1680,7 +1808,7 @@
         },
         {
             "title": {
-                "en": "New Group",
+                "en": "grp 5 (questions with children that are dependent)",
                 "fr": "Fr: New Group"
             },
             "primaryKey": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
@@ -1720,6 +1848,10 @@
                                 "option": "optional",
                                 "value": ""
                             },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
                             "externalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -1746,6 +1878,10 @@
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
                             },
                             "externalComment": {
                                 "option": "required",
@@ -1817,6 +1953,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -1844,8 +1984,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -1926,6 +2070,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -1955,8 +2103,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -2044,6 +2196,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -2073,8 +2229,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -2155,6 +2315,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -2184,8 +2348,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
@@ -2266,6 +2434,10 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
                                         "option": "optional",
                                         "value": ""
@@ -2293,8 +2465,12 @@
                                         "option": "optional",
                                         "value": ""
                                     },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
                                     "externalComment": {
-                                        "option": "required",
+                                        "option": "optional",
                                         "value": ""
                                     },
                                     "picture": {
