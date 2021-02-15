@@ -85,6 +85,10 @@ function createQuestion(questionnaire, group) {
           option: "optional",
           value: ""
         },
+        file: {
+          option: "optional",
+          value: []
+        },
         picture: {
           option: "optional",
           value: []
@@ -112,6 +116,10 @@ function createQuestion(questionnaire, group) {
         externalComment: {
           option: "required",
           value: ""
+        },
+        file: {
+          option: "optional",
+          value: []
         },
         picture: {
           option: "optional",
@@ -268,9 +276,13 @@ function createResponseOption(question) {
       option: "optional",
       value: ""
     },
+    file: {
+      option: "optional",
+      value: []
+    },
     picture: {
       option: "optional",
-      value: ""
+      value: []
     }
   };
 }
@@ -360,15 +372,20 @@ async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeatur
     const axios = await import('axios')
 
     // let response = await axios.get('/static/betaAnswers.json')
+    console.log('Template: ' + templateToLoad)
     let response = await axios.get(`/static/templates/${templateToLoad}.json`)
       .catch(function (error) {
         // handle error
         console.log(error);
       });
 
-    console.log(response);
-
-    return response.data;
+    if (response) {
+      console.log(response);
+      return response.data;
+    } else {
+      console.log('Error on response: Response is NULL');
+      return null;
+    }
   }
 }
 

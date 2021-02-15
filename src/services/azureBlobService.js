@@ -22,9 +22,21 @@ async function listFiles() {
   }
 }
 
+async function getImageFile(file) {
+  try {
+    const blobServiceClient = new BlobServiceClient(blobSasUrl);
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+    const blockBlobClient = containerClient.getBlockBlobClient(file.fileName);
+
+    const downloadBlockBlobResponse = await blockBlobClient.download(0);
+    return blobToImageFile(await downloadBlockBlobResponse.blobBody);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function downloadFile(file) {
   try {
-    debugger
     const blobServiceClient = new BlobServiceClient(blobSasUrl);
     const containerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient = containerClient.getBlockBlobClient(file.fileName);
@@ -34,6 +46,21 @@ async function downloadFile(file) {
   } catch (error) {
     console.log(error.message);
   }
+}
+
+// [Browsers only] A helper method used to convert a browser Blob into string.
+async function blobToImageFile(blob) {
+  const fileReader = new FileReader();
+  // eslint-disable-next-line no-undef
+  return new Promise((resolve, reject) => {
+    console.log(resolve)
+    console.log(reject)
+
+    fileReader.readAsDataURL(blob);
+    fileReader.onload = function(e) {
+      return e.target.result;
+    };
+  });
 }
 
 // [Browsers only] A helper method used to convert a browser Blob into string.
@@ -101,7 +128,9 @@ async function deleteFile(file) {
 
 export default {
   listFiles,
+  getImageFile,
   downloadFile,
+  blobToImageFile,
   blobToFile,
   uploadFile,
   deleteFile

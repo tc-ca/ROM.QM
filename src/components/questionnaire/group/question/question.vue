@@ -6,19 +6,17 @@
     :class="getClassName"
   >
     <v-expansion-panel-header
+      disable-icon-rotate
       ripple
     >
       <template
         #actions
       >
         <v-icon
-          v-if="expand && isValid === false"
+          v-if="isValid === false"
           color="red"
         >
           mdi-exclamation
-        </v-icon>
-        <v-icon v-if="expand">
-          mdi-menu-down
         </v-icon>
       </template>
 
@@ -126,7 +124,7 @@
           </v-tooltip>
         </div>
       </v-layout>
-      <div :class="{'mt-6': expand}">
+      <div :class="{'mt-6': expand.value}">
         <response
           :question="question"
           :group="group"
@@ -297,9 +295,8 @@ export default {
       type: Boolean, required: true
     },
     expand: {
-      type: Boolean,
-      required: false,
-      default: false
+      type: Object,
+      required: true
     },
     readOnly: {
       type: Boolean,
@@ -332,7 +329,10 @@ export default {
     }),
     ...mapState({
       lang: state => {
-        return 'en'
+        if (state == null || !state.settings) {
+          return 'en'
+        }
+        return state.settings.settings.lang
       },
       provisionFilter: state => {
         return state.questionnaire.provisionFilter
@@ -381,7 +381,7 @@ export default {
     },
     expansionPanelsValue: {
       get () {
-        if (this.expand) {
+        if (this.expand.value) {
           let indexes = []
           for (let i = 0; i < this.question.childQuestions.length; i++) {
             indexes.push(i)
@@ -429,12 +429,8 @@ export default {
       },
       deep: true
     },
-    isVisible (value, oldValue) {
-      if (value === true) {
-        this.$emit('update-group-question-count', 1)
-      } else {
-        this.$emit('update-group-question-count', -1)
-      }
+    isVisible () {
+      this.$emit('update-group-question-count')
     }
   },
   mounted () {
@@ -653,7 +649,7 @@ export default {
     // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
-    // store the response in data property for reference use
+      // store the response in data property for reference use
       this.responseArgs = args
       // the below code is dependant legislatons data loaded (retrieval time may delay
       // the process and therefore be empty when this method is executing)

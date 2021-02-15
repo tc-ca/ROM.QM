@@ -147,10 +147,10 @@ export default {
   computed: {
     ...mapGetters({ settings: 'settings' }),
     lang: state => {
-      if (!state || !state.settings) {
+      if (!state || !state.settings || !state.settings.settings) {
         return 'en'
       }
-      return state.settings.lang
+      return state.settings.settings.lang
     },
     showDrawer: {
       get () {

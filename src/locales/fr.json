@@ -1,7 +1,13 @@
 {
   "app": {
     "bottom-navigation": {
-      "save": "Enregistrer"
+      "navigation": "Navigation",
+      "collaspe":"Tout réduire",
+      "expand":"Développer tout",
+      "scrollUp": "Monter",
+      "validate": "Valider",
+      "lockData":"Fermer",
+      "unlockData":"Ouvert"
     },
     "settings": {
       "darkMode": "mode sombre ",
@@ -26,6 +32,7 @@
       "sortOrder": "Ordre du triage",
       "internalComments": "Commentaires internes",
       "externalComments": "Commentaires externes",
+      "file": "FR File(s)",
       "picture": "Photo(s)",
       "isRepeatable": "Reproductible?",
       "visibleByDefault": "Visible par défaut",
@@ -89,7 +96,17 @@
       }
     },
     "questionnaire": {
+      "noSearchResults": {
+        "noMatchedQuestions": "Désolé, aucune question ne correspond aux critères de recherche de disposition.",
+        "searchSuggestions": "Suggestions de recherche",
+        "checkSpelling": "Vérifie ton orthographe",
+        "moreGeneralWords": "Essayez des mots plus généraux",
+        "searchByProvisionLabel": "Recherche par provision (Exemple: \"3.5 (1) (c)\")",
+        "selectSuggestion": "Sélectionnez une disposition dans la liste des suggestions",
+        "clearSearch": "Effacer la recherche"
+      },
       "validate": "Valider",
+      "errors":" 0 erreurs trouvées |1 erreur trouvée | {count} erreurs trouvées",
       "group": {
         "repeatGroup": "Répéter le Groupe",
         "deleteGroup": "Supprimer le Groupe",

@@ -24,6 +24,7 @@
     "core-js": "^3.4.4",
     "cross-env": "^7.0.2",
     "document-register-element": "^1.14.3",
+    "exif-js": "^2.3.0",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",

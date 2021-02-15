@@ -1,17 +1,77 @@
 <template>
-  <v-expansion-panel v-show="isVisible">
-    <v-expansion-panel-header>
+  <v-expansion-panel
+    v-show="isVisible"
+  >
+    <v-expansion-panel-header disable-icon-rotate>
       <template #actions>
-        <v-icon
-          v-if="!valid"
-          color="red"
+        <v-btn-toggle
+          dense
+          active-class="btn-toggle-active"
         >
-          mdi-exclamation
-        </v-icon>
+          <v-tooltip
+            v-if="group.isRepeatable"
+            left
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                small
+                depressed
+                fab
+                v-bind="attrs"
+                :disabled="readOnly"
+                v-on="on"
+                @click.native.stop="repeatGroup"
+              >
+                <v-icon
+                  data-testid="repeatGroup"
+                  color="blue"
+                >
+                  mdi-plus
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.repeatGroup') }}</span>
+          </v-tooltip>
+
+          <v-tooltip
+            v-if="group.isRepeatable && repeatedGroup"
+            right
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                small
+                depressed
+                fab
+                v-bind="attrs"
+                :disabled="readOnly"
+                v-on="on"
+                @click.native.stop="removeGroup"
+              >
+                <v-icon
+                  data-testid="removeGroup"
+                  color="blue"
+                >
+                  mdi-minus
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
+          </v-tooltip>
+        </v-btn-toggle>
       </template>
       <v-row>
         <v-col
-          cols="9"
+          v-if="!valid"
+
+          cols="auto"
+        >
+          <v-icon
+            color="red"
+          >
+            mdi-exclamation
+          </v-icon>
+        </v-col>
+        <v-col
           class="pl-1"
         >
           <h2 class="subtitle-1">
@@ -35,58 +95,6 @@
             focusable
             hover
           >
-            <v-layout
-              v-if="group.isRepeatable"
-              class="pt-2"
-              justify-end
-            >
-              <v-spacer />
-              <div v-if="group.isRepeatable">
-                <v-tooltip left>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      rounded
-                      v-bind="attrs"
-                      :disabled="readOnly"
-                      v-on="on"
-                      @click.native.stop="repeatGroup"
-                    >
-                      <v-icon
-                        data-testid="repeatGroup"
-                        normal
-                        color="primary"
-                      >
-                        mdi-book-plus-multiple-outline
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>{{ $t('app.questionnaire.group.repeatGroup') }}</span>
-                </v-tooltip>
-              </div>
-              <div v-if="group.isRepeatable && repeatedGroup">
-                <v-tooltip right>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      class="ml-2"
-                      rounded
-                      v-bind="attrs"
-                      :disabled="readOnly"
-                      v-on="on"
-                      @click.native.stop="removeGroup"
-                    >
-                      <v-icon
-                        data-testid="removeGroup"
-                        normal
-                        color="primary"
-                      >
-                        mdi-book-minus-multiple-outline
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
-                </v-tooltip>
-              </div>
-            </v-layout>
             <question
               v-for="question in group.questions"
               ref="groupQuestion"
@@ -133,8 +141,8 @@ export default {
       required: true
     },
     expand: {
-      type: Boolean,
-      default: true
+      type: Object,
+      required: true
     },
     readOnly: {
       type: Boolean,
@@ -173,7 +181,7 @@ export default {
     }),
     expansionPanelsValue: {
       get () {
-        if (this.expand) {
+        if (this.expand.value) {
           let indexes = []
           for (let i = 0; i < this.group.questions.length; i++) {
             indexes.push(i)
@@ -190,12 +198,8 @@ export default {
     }
   },
   watch: {
-    isVisible (value, oldValue) {
-      if (value === true) {
-        this.$emit('update-group-count', 1)
-      } else {
-        this.$emit('update-group-count', -1)
-      }
+    isVisible () {
+      this.$emit('update-group-count')
     }
   },
   created () {
@@ -220,12 +224,16 @@ export default {
 
     this.$store.dispatch('updateGroupOrder', { group, index })
     this.$store.dispatch('updateGroupHtmlElementId', { group })
-
     // important count must also be set on updated as the item in the array is shifted when group copy function is used.
-    this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
+    if (this.$refs.groupQuestion) {
+      this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
+    }
   },
   mounted () {
-    this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
+    // sets the default value based on visibility of the component
+    if (this.$refs.groupQuestion) {
+      this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
+    }
   },
 
   methods: {
@@ -285,16 +293,18 @@ export default {
       this.groupSubtitle = ''
       if (this.group && this.group.questions) {
         this.group.questions.forEach(question => {
-          question.responseOptions.forEach(responseOption => {
-            if (responseOption.selectedProvisionsTitles) {
-              responseOption.selectedProvisionsTitles.forEach(title => {
-                if (!this.groupSubtitle.includes(title)) {
-                  if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
-                  this.groupSubtitle += title
-                }
-              })
+          if (question.responseOptions) {
+            for (let x = 0; x < question.responseOptions.length; x++) {
+              if (question.responseOptions[x].selectedProvisionsTitles && question.response === question.responseOptions[x].value) {
+                question.responseOptions[x].selectedProvisionsTitles.forEach(title => {
+                  if (!this.groupSubtitle.includes(title)) {
+                    if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
+                    this.groupSubtitle += title
+                  }
+                })
+              }
             }
-          })
+          }
         })
       }
     },
@@ -328,12 +338,18 @@ export default {
       }
       return true
     },
-    onUpdateGroupQuestionCount (count) {
-      this.questionCount += count
+    onUpdateGroupQuestionCount () {
+      if (this.$refs.groupQuestion) {
+        this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+/* makes acitve class same color as non active, else the button will looked like its pressed at all times */
+.btn-toggle-active{
+  color:#f5f5f5 !important;
+}
 </style>

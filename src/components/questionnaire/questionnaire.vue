@@ -1,88 +1,68 @@
 <template>
   <div>
     <div v-show="isVisible">
-      <v-row>
+      <v-row
+        no
+        no-gutters
+      >
         <v-col>
-          <div>
-            <v-form
-              ref="questionaire_form"
-              v-model="valid"
-              justify="start"
+          <v-form
+            ref="questionaire_form"
+            v-model="valid"
+            justify="start"
+          >
+            <v-expansion-panels
+              v-model="expansionPanels"
+              accordion
+              focusable
+              multiple
+              class="v-expansion-panel"
             >
-              <v-expansion-panels
-                v-model="expansionPanels"
-                focusable
-                multiple
-                class="v-expansion-panel"
-              >
-                <questionnaire-group
-                  v-for="(group, groupIndex) in group.groups"
-                  ref="questionGroup"
-                  :key="groupIndex"
-                  :group="group"
-                  :index="groupIndex"
-                  :expand="expand"
-                  :read-only="readOnly"
-                  data-group-id="group"
-                  @update-group-count="onUpdateGroupCount"
-                />
-              </v-expansion-panels>
-            </v-form>
-          </div>
-        </v-col>
-        <v-col
-          v-if="hasNotifications && displayValidationErrors"
-          cols="5"
-          justify="space-around"
-        >
-          <v-row>
-            <v-col>
-              <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:75%;overflow-y: auto;">
-                <questionnaire-error
-                  :notifications="notifications"
-                  @notification:click="onNotificationClick"
-                />
-              </div>
-            </v-col>
-          </v-row>
+              <questionnaire-group
+                v-for="(group, groupIndex) in group.groups"
+                ref="questionGroup"
+                :key="groupIndex"
+                :group="group"
+                :index="groupIndex"
+                :expand="expand"
+                :read-only="readOnly"
+                data-group-id="group"
+                @update-group-count="onUpdateGroupCount"
+              />
+            </v-expansion-panels>
+          </v-form>
         </v-col>
       </v-row>
-      <questionnaire-nav
-        :display="drawer"
-        :navitems="navItems"
-        @question:click="onQuestionClick"
-        @navigation-close="drawer = $event"
-      />
     </div>
     <div v-show="!isVisible">
       <v-card
         elevation="2"
       >
         <v-card-title>
-          Sorry, no questions matching the provision search criteria.
+          {{ $t('app.questionnaire.noSearchResults.noMatchedQuestions') }}
         </v-card-title>
         <v-card-text>
-          <p>Search Suggestions</p>
+          <p>{{ $t('app.questionnaire.noSearchResults.searchSuggestions') }}</p>
           <div class="text--primary">
             <ul>
               <li>
-                Check your spelling
+                {{ $t('app.questionnaire.noSearchResults.checkSpelling') }}
               </li>
               <li>
-                Try more general words
+                {{ $t('app.questionnaire.noSearchResults.moreGeneralWords') }}
               </li>
               <li>
-                Search by provision label (Example: "3.5 (1) (c)")
+                {{ $t('app.questionnaire.noSearchResults.searchByProvisionLabel') }}
               </li>
               <li>
-                Select a provision from the list of suggestions
+                {{ $t('app.questionnaire.noSearchResults.selectSuggestion') }}
               </li>
             </ul>
           </div>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="clearProvisionSearchField">
-            Clear Search
+            {{ $t('app.questionnaire.noSearchResults.clearSearch') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -95,17 +75,15 @@ import { mapState } from 'vuex'
 import _ from 'lodash'
 
 import QuestionnaireGroup from './group/group.vue'
-import QuestionnaireError from './questionnaire-error'
-import QuestionnaireNav from '../questionnaire-nav/questionnaire-nav.vue'
 
 export default {
   emits: ['clear-provision-search-field'],
-  components: { QuestionnaireGroup, QuestionnaireError, QuestionnaireNav },
+  components: { QuestionnaireGroup },
 
   props: {
     expandAllProp: {
-      type: Boolean,
-      default: true
+      type: Object,
+      required: true
     },
     validateProp: {
       type: Boolean,
@@ -127,8 +105,6 @@ export default {
       panelIndex: Number,
       groupCount: 0,
       readOnly: this.readOnlyProp,
-      drawer: false,
-      navItems: [],
       flagTimer: null
     }
   },
@@ -136,7 +112,7 @@ export default {
     expansionPanels: {
       get () {
         let indexes = []
-        if (this.expand) {
+        if (this.expand.value) {
           for (let i = 0; i < this.group.groups.length; i++) {
             indexes.push(i)
           }
@@ -162,47 +138,22 @@ export default {
       },
       displayValidationErrors: state => {
         return state.notification.displayValidationErrors
-      },
-      searchableProvisions: state => {
-        if ((state.questionnaire.questionnaire === null) || (state.legislations.legislations === null)) {
-          return []
-        }
-        const searchableProvisions = state.questionnaire.questionnaire.searchableProvisions
-        let dictionnairyOfProvisions = state.legislations.legislations
-        let provisions = []
-
-        searchableProvisions.forEach(x => {
-          const hydratedItem = dictionnairyOfProvisions[x.leg]
-          const newProvision = { ...x, ...hydratedItem }
-          provisions.push(newProvision)
-        })
-
-        return provisions
       }
     }),
-    hasNotifications () {
-      return this.$store.getters['notification/hasNotifications']
-    },
-    notifications () {
-      const notices = (this.hasNotifications) ? this.$store.getters['notification/getNotifications'] : []
-      return notices
-    },
     isVisible () {
       return this.groupCount > 0
     }
   },
   watch: {
-    expandAllProp (value) {
-      this.expandPanels(value)
-    },
+    // expandAllProp (value) {
+    //   alert('expand')
+    //   this.expandPanels(value)
+    // },
     readOnlyProp () {
       this.setReadOnly()
     },
     validateProp () {
       this.validateQ()
-    },
-    displayNavigationProp () {
-      this.displayNavigationDrawer()
     }
   },
   mounted () {
@@ -210,7 +161,9 @@ export default {
     this.$nextTick(function () {
       // Code that will run only after the
       // entire view has been rendered
-      this.groupCount = this.$el.querySelectorAll(`[data-group-id='group']:not([style*='display: none'])`).length
+      if (this.$refs.questionGroup) {
+        this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length
+      }
     })
     this.isDirty()
   },
@@ -222,27 +175,6 @@ export default {
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
-    displayNavigationDrawer () {
-      let a = JSON.stringify(this.group.groups)
-      let b = a.replaceAll('primaryKey', 'id')
-        .replaceAll('"questions":', '"children":')
-        .replaceAll('"childQuestions":', '"children":')
-        .replaceAll('"name":', '"name_o":')
-        .replaceAll('"text":', '"name":')
-        .replaceAll('"title":', '"name":')
-      const regex = /("name":{"en":([^}]+)"fr":([^}]+)})/ig
-      const regex1 = /("name":{"en":([^}]+)"fr":([^}]+)})/i
-
-      let r = b.match(regex)
-      r.forEach(i => {
-        let en = '"name":' + i.match(/"en":"([^"]+)"/ig)[0].replaceAll('"en":', '')
-        let fr = '"name":' + i.match(/"fr":"([^"]+)"/ig)[0].replaceAll('"fr":', '')
-        b = b.replace(regex1, this.lang === 'en' ? en : fr)
-      })
-      this.$vuetify.goTo(0)
-      this.navItems = JSON.parse(b)
-      this.drawer = true
-    },
     setReadOnly () {
       this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
       this.readOnly = !this.readOnly
@@ -264,16 +196,6 @@ export default {
       this.flagTimer = setTimeout(() => this.isDirty(), 3000)
       if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
-    onNotificationClick (n) {
-      this.expand = true
-      this.$store.commit('errors/updateErrorNotification', n.qguid)
-    },
-    onQuestionClick (q) {
-      if (q.guid === undefined) return
-      this.expand = true
-      this.drawer = false
-      this.$store.commit('errors/updateErrorNotification', q.guid)
-    },
     validateQ () {
       this.$refs.questionGroup.forEach(group => {
         group.resetError()
@@ -283,12 +205,14 @@ export default {
       }
       this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: true })
     },
-    expandPanels (expand) {
-      this.panelIndex = null
-      this.expand = expand
-    },
-    onUpdateGroupCount (count) {
-      this.groupCount += count
+    // expandPanels (expand) {
+    //   this.panelIndex = null
+    //   this.expand = expand
+    // },
+    onUpdateGroupCount () {
+      if (this.$refs.questionGroup) {
+        this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length
+      }
     },
     clearProvisionSearchField () {
       this.$emit('clear-provision-search-field')

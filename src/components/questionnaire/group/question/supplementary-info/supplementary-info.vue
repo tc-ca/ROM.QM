@@ -26,6 +26,16 @@
       save-to-prop="internalComment"
       @error="onError"
     />
+    <supplementary-info-files
+      v-if="displayFile"
+      :file="selresponseoption.file"
+      :label="$t('app.questionnaire.group.question.files')"
+      :group="group"
+      :question="question"
+      :read-only="readOnly"
+      save-to-prop="images"
+      @error="onError"
+    />
     <supplementary-info-image
       v-if="displayPicture"
       :picture="selresponseoption.picture"
@@ -36,20 +46,20 @@
       save-to-prop="images"
       @error="onError"
     />
-    <!-- </div> -->
   </v-expansion-panels>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import SupplementaryInfoComment from './supplementary-info-comment.vue'
+import SupplementaryInfoFiles from './supplementary-info-files.vue'
 import SupplementaryInfoImage from './supplementary-info-image.vue'
 import { questionHasSupplementaryInfo } from '../../../../../utils.js'
 
 export default {
   emits: ['error'],
   name: 'SupplementaryInfo',
-  components: { SupplementaryInfoComment, SupplementaryInfoImage },
+  components: { SupplementaryInfoComment, SupplementaryInfoFiles, SupplementaryInfoImage },
 
   props: {
     question: {
@@ -75,6 +85,9 @@ export default {
     },
     displayExternalComment () {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalComment.option !== 'n/a'
+    },
+    displayFile () {
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.file.option !== 'n/a'
     },
     displayPicture () {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.picture.option !== 'n/a'

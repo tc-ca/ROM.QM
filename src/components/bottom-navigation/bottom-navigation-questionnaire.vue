@@ -4,10 +4,11 @@
     fixed
     color="primary"
   >
+    <!-- NAVIGATION BUTTON -->
     <v-btn
       @click="displayNavigation()"
     >
-      <span>Navigation</span>
+      <span>  {{ $t('app.bottom-navigation.navigation') }}</span>
 
       <v-icon color="green">
         mdi-navigation
@@ -15,17 +16,17 @@
     </v-btn>
     <!-- COLLASPE ALL BUTTON -->
     <v-btn @click="expand()">
-      <span v-if="isExpandPanelsData==false">Expand All </span>
-      <span v-if="isExpandPanelsData===true">Collaspe All</span>
+      <span v-if="isExpandPanelsData.value==false">{{ $t('app.bottom-navigation.expand') }} </span>
+      <span v-if="isExpandPanelsData.value===true">{{ $t('app.bottom-navigation.collaspe') }}</span>
 
       <v-icon
-        v-if="isExpandPanelsData===false"
+        v-if="isExpandPanelsData.value===false"
         color="purple"
       >
         mdi-arrow-expand-vertical
       </v-icon>
       <v-icon
-        v-if="isExpandPanelsData===true"
+        v-if="isExpandPanelsData.value===true"
         color="purple"
       >
         mdi-arrow-collapse-vertical
@@ -36,28 +37,42 @@
       class="btnTop"
       @click="scrollToTop"
     >
-      <span>Scroll Up</span>
+      <span>{{ $t('app.bottom-navigation.scrollUp') }}</span>
       <v-icon color="purple">
         mdi-arrow-up
       </v-icon>
     </v-btn>
-    <!-- VALIDATE -->
+    <!-- VALIDATE BUTTON -->
     <v-btn
-      v-if="envDev"
       @click="validate"
     >
-      <span>Validate</span>
-      <v-icon color="purple">
+      <span>{{ $t('app.bottom-navigation.validate') }}</span>
+      <v-badge
+        v-if="notifications.length > 0"
+        :content="notifications.length"
+        :value="true"
+        color="red"
+        overlap
+        inline
+      >
+        <v-icon color="purple">
+          mdi-check-all
+        </v-icon>
+      </v-badge>
+      <v-icon
+        v-if="notifications.length=== 0"
+        color="purple"
+      >
         mdi-check-all
       </v-icon>
     </v-btn>
-    <!-- READ ONLY -->
+    <!-- READ ONLY BUTTON -->
     <v-btn
       v-if="envDev"
       @click="setReadOnly"
     >
-      <span v-if="!isReadOnlyData">Lock data</span>
-      <span v-if="isReadOnlyData">Unlock data</span>
+      <span v-if="!isReadOnlyData">{{ $t('app.bottom-navigation.lockData') }}</span>
+      <span v-if="isReadOnlyData">{{ $t('app.bottom-navigation.unlockData') }}</span>
 
       <v-icon
         v-if="isReadOnlyData"
@@ -77,6 +92,7 @@
 
 <script>
 import BaseMixin from '../../mixins/base'
+import { mapState } from 'vuex'
 
 export default {
   emits: ['expand-panels', 'scroll-to-top', 'validate', 'set-read-only', 'display-navigation'],
@@ -84,7 +100,7 @@ export default {
   props: {
     isExpandPanels: {
 
-      type: Boolean,
+      type: Object,
       required: true
     },
     isReadOnly: {
@@ -98,9 +114,23 @@ export default {
       isReadOnlyData: this.isReadOnly
     }
   },
+  computed: {
+    ...mapState({
+      notifications: state => {
+        return state.notification.notifications
+      },
+      displayValidationErrors: state => {
+        return state.notification.displayValidationErrors
+      }
+
+    }),
+    hasNotifications () {
+      return this.notifications.length > 0
+    }
+  },
   methods: {
     expand () {
-      this.isExpandPanelsData = !this.isExpandPanelsData
+      this.isExpandPanelsData.value = !this.isExpandPanels.value
       this.$emit('expand-panels', !this.isExpandPanelsData)
     },
     scrollToTop () {
@@ -117,6 +147,7 @@ export default {
       this.$emit('display-navigation')
     }
   }
+
 }
 </script>
 

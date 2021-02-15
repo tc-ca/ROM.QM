@@ -37,7 +37,6 @@
             counter
             show-size
             :disabled="readOnly"
-            @click="onFileUploadClick"
             @change="onFileChange"
           />
           <div>
@@ -45,74 +44,145 @@
           </div>
         </v-col>
       </v-row>
-      <v-row no-gutters>
-        <v-col>
-          <v-list
-            v-if="picture.value.length > 0"
-            dense
+      <v-row
+        v-if="selImage !== null"
+        class="mb-6"
+        no-gutters
+      >
+        <v-col />
+        <v-col
+          cols="10"
+        >
+          <v-card
+            class="mx-auto my-12"
+            max-width="474"
           >
-            <v-subheader>Uploaded Files</v-subheader>
-            <v-list-item
-              v-for="(image, index) in picture.value"
-              :key="index"
+            <template slot="progress">
+              <v-progress-linear
+                color="deep-purple"
+                height="10"
+                indeterminate
+              />
+            </template>
+            <v-img
+              style="text-align: center"
+              :src="selLink"
+              lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
+            />
+
+            <v-card-text
+              v-if="!speedDialOpen"
+              style="padding: 30px"
             >
-              <v-list-item-icon>
-                <v-icon
-                  size="30"
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div
+                  style="font-size: 20px; font-weight: bold; padding-top: 20px; padding-left: 10px"
                 >
-                  mdi-file-{{ image.fileType }}
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <div v-if="!image.speedDialOpen">
-                  <v-list-item-subtitle>
-                    Title: {{ image.title }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    Comment: {{ image.comment === '' ? 'N/A' : image.comment }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    Uploaded: {{ image.timeStamp }}
-                  </v-list-item-subtitle>
+                  {{ selImage.title }}
                 </div>
-                <div v-if="image.speedDialOpen">
-                  <v-textarea
-                    v-model="image.title"
-                    auto-grow
-                    outlined
-                    :disabled="readOnly"
-                    dense
-                    rows="1"
-                    label="Title"
-                    style="font-size: small"
-                    @change="updateResponseStore()"
-                  />
-                  <v-textarea
-                    v-model="image.comment"
-                    auto-grow
-                    outlined
-                    :disabled="readOnly"
-                    dense
-                    placeholder=" "
-                    rows="1"
-                    label="Comment"
-                    style="font-size: small"
-                    @change="updateResponseStore()"
-                  />
+              </v-row>
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div
+                  class="grey--text"
+                  style="padding-left: 10px"
+                >
+                  Comment: {{ selImage.comment }}
                 </div>
-              </v-list-item-content>
+              </v-row>
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div
+                  class="grey--text"
+                  style="padding-left: 10px"
+                >
+                  Uploaded on: {{ selImage.timeStamp }}
+                </div>
+              </v-row>
+
+              <div class="my-4 subtitle-1">
+                <!-- Last updated: {{ selImage.timeStamp }} -->
+              </div>
+            </v-card-text>
+            <div
+              v-if="speedDialOpen"
+              style="padding: 20px"
+            >
+              <v-textarea
+                v-model="selImage.title"
+                auto-grow
+                :disabled="readOnly"
+                dense
+                rows="1"
+                label="Title"
+                style="font-size: small"
+                @change="updateResponseStore()"
+              />
+              <v-textarea
+                v-model="selImage.comment"
+                auto-grow
+                :disabled="readOnly"
+                dense
+                placeholder=" "
+                rows="1"
+                label="Comment"
+                style="font-size: small"
+                @change="updateResponseStore()"
+              />
+            </div>
+            <v-divider class="mx-4" />
+            <v-card-text>
+              <v-chip-group
+                active-class="deep-purple accent-4 white--text"
+                column
+              >
+                <div
+                  style="padding-left: 10px; font-weight: bold;"
+                >
+                  Exif Data:
+                </div>
+                <div
+                  v-if="isExifDataAvailable"
+                  style="padding-left: 1px; height: 150px; overflow: auto"
+                >
+                  <li
+                    v-for="(value, propertyName, index) in selExifData"
+                    :key="index"
+                  >
+                    {{ propertyName }}: {{ value }}
+                  </li>
+                </div>
+                <div
+                  v-else
+                  style="padding-left: 5px; color: red"
+                >
+                  No Data available
+                </div>
+              </v-chip-group>
+            </v-card-text>
+            <v-divider class="mx-4" />
+            <div
+              style="text-align: center"
+            >
               <v-list-item-icon>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      v-model="image.speedDialOpen"
+                      v-model="speedDialOpen"
                       icon
                       :disabled="!imageNoteExist || readOnly"
                       v-bind="attrs"
                       v-on="on"
-                      @click="image.speedDialOpen = !image.speedDialOpen"
+                      @click="speedDialOpen = !speedDialOpen"
                     >
-                      <v-icon v-if="image.speedDialOpen">
+                      <v-icon v-if="speedDialOpen">
                         mdi-close
                       </v-icon>
                       <v-icon v-else>
@@ -132,7 +202,7 @@
                       color="deep-orange"
                       v-bind="attrs"
                       v-on="on"
-                      @click.stop="removeImage($event, image, galleryIndex); updateResponseStore();"
+                      @click.stop="removeImage($event, selImage, galleryIndex); updateResponseStore();"
                     >
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
@@ -140,7 +210,9 @@
                   <span>Delete File</span>
                 </v-tooltip>
               </v-list-item-icon>
-              <v-list-item-icon>
+              <v-list-item-icon
+                style="margin-left: 30px; margin-top: 10px; margin-bottom: 10px"
+              >
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
@@ -149,7 +221,7 @@
                       color="blue"
                       v-bind="attrs"
                       v-on="on"
-                      @click.stop="downloadFile(image); updateResponseStore();"
+                      @click.stop="downloadFile(selImage); updateResponseStore();"
                     >
                       <v-icon>mdi-download-circle-outline</v-icon>
                     </v-btn>
@@ -158,8 +230,36 @@
                 </v-tooltip>
               </v-list-item-icon>
               <v-list-item-icon />
-            </v-list-item>
-          </v-list>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col />
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="(image, index) in curPageImages"
+          :key="index"
+          class="d-flex child-flex"
+          cols="2"
+        >
+          <image-file
+            :picture="image"
+            @selected:image="setCurrentImage"
+          />
+        </v-col>
+      </v-row>
+      <v-row v-if="picture.value.length > 0">
+        <v-col
+          class="d-flex child-flex"
+          cols="12"
+        >
+          <v-pagination
+            v-model="page"
+            :length="calculateTotalPages(picture.value.length)"
+            :total-visible="5"
+            circle
+            @input="onNextPageMove($event)"
+          />
         </v-col>
       </v-row>
       <v-input
@@ -207,8 +307,13 @@ import moment from 'moment'
 import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
 import AzureBlobService from '../../../../../services/azureBlobService'
+import ImageFile from '../supplementary-info/image-file'
+import EXIF from 'exif-js'
 
 export default {
+  components: {
+    ImageFile
+  },
   mixins: [BaseMixin],
   props: {
     picture: {
@@ -239,8 +344,13 @@ export default {
 
   data: function () {
     return {
-      // images: [],
+      page: 1,
+      selImage: null,
+      selLink: null,
+      selExifData: '',
       curImg: '',
+      curPageImages: [],
+      isExifDataAvailable: false,
       progressStatus: '',
       galleryIndex: 0,
       rules: [
@@ -248,6 +358,7 @@ export default {
       ],
       validationStatus: false,
       notification: null,
+      speedDialOpen: false,
       confirmDialogOpen: false,
       confirmCallbackArgs: null
     }
@@ -258,6 +369,7 @@ export default {
       return this.picture.value[this.galleryIndex] !== undefined
     },
     displayPicture () {
+      console.log(this.question)
       return !this.picture.display
     },
     isPictureRequired () {
@@ -275,10 +387,32 @@ export default {
         this.onError(error)
       }
     )
+    this.onNextPageMove(1)
   },
   methods: {
-    onFileUploadClick (e) {
-      // this.$refs.fileUpload.reset()
+    calculateTotalPages (n) {
+      let x = n % IMAGES_PER_PAGE === 0 ? Math.floor(n / IMAGES_PER_PAGE) : Math.floor(n / IMAGES_PER_PAGE) + 1
+      return x
+    },
+    onNextPageMove (i) {
+      let start = i === 1 ? 0 : ((i - 1) * IMAGES_PER_PAGE)
+      let end = (i * IMAGES_PER_PAGE)
+      this.curPageImages = this.picture.value.slice(start, end)
+    },
+    setCurrentImage (imgLink, img) {
+      this.selLink = imgLink
+      this.selImage = img
+      this.getExifData(imgLink)
+    },
+    getExifData (data) {
+      let image = new Image()
+      image.src = data
+      let exifData = null
+      EXIF.getData(image, function () {
+        exifData = EXIF.getAllTags(this)
+      })
+      this.isExifDataAvailable = (exifData != null && Object.keys(exifData).length > 0)
+      this.selExifData = exifData
     },
     onFileChange (e) {
       if (!e) {
@@ -301,7 +435,7 @@ export default {
         else if (file.type.startsWith('image')) fileType = 'image'
         else fileType = 'document-outline'
 
-        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), speedDialOpen: false })
+        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
         this.next()
         this.next()
 
@@ -360,6 +494,7 @@ export default {
       } finally {
         this.picture.value.splice(index - 1, 1)
         this.prev()
+        this.selImage = this.picture.value.length === 0 ? null : this.picture.value[0]
       }
     },
 
@@ -415,6 +550,8 @@ export default {
   }
 
 }
+
+const IMAGES_PER_PAGE = 12
 
 </script>
 
