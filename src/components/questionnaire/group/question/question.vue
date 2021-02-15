@@ -208,6 +208,7 @@
                 :selectable="!readOnly"
                 :disabled="readOnly"
                 item-key="id"
+                :item-text="'title.' + lang"
                 selection-type="leaf"
                 :search="selectedResponseOption.searchProvisions"
                 :filter="selectedResponseOption.filterProvisions"
