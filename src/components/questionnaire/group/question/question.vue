@@ -249,6 +249,7 @@
             :question="childQuestion"
             :group="group"
             :parent="question"
+            :is-child-question="true"
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
             :read-only="readOnly"
@@ -286,6 +287,10 @@ export default {
     parent: {
       type: Object,
       required: true
+    },
+    isChildQuestion: {
+      type: Boolean,
+      default: false
     },
     group: {
       type: Object,
@@ -410,6 +415,8 @@ export default {
       return null
     },
     isVisible () {
+      this.setQuestionVisibilityBasedOnAppliedTags()
+
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
@@ -446,10 +453,6 @@ export default {
             // running this method will initialize the selected responses
             this.onUserResponseChanged(this.responseArgs)
           }
-          break
-        case 'updateTagFilterState':
-          // to help performance only run when mutation occurs
-          this.setQuestionVisibilityBasedOnAppliedTags()
           break
         case 'updateProvisionFilter':
           // to help performance only run when mutation occurs
@@ -855,44 +858,64 @@ export default {
         const foundInDepends = provisions.some(p => p.questions.some(q => dependsArray.includes(q)))
         const foundInChildren = provisions.some(p => p.questions.some(q => childrenGuids.includes(q)))
 
-        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
+        const provisionFound = foundInQuestion || foundInDependants || foundInDepends || foundInChildren
+        return { found: provisionFound,
+          inQuestion: foundInQuestion,
+          inDependants: foundInDependants,
+          inDepends: foundInDepends,
+          inChildren: foundInChildren }
       }
       // search resulted in no provisions found therefore return false
-      return false
+      return { found: false, inQuestion: false, inDependants: false, inDepends: false, inChildren: false }
     },
+    /**
+   *
+   *Function will modify the question prop. and set the isVisible value to true or false based on tag/filtering logic
+   *Note: The logic is built to keep structural integrity of the template intact regardless of filtering. Where it makes sense.
+   *For example: provision only found in a child will display the question (although the question does not have any assoicated provisions).
+   *
+   */
     setQuestionVisibilityBasedOnAppliedTags () {
-      console.log('running set tag rules')
-      const questionFoundInProvision = this.questionFoundViaProvidedProvisions(this.provisionTagFilters)
+      const provisionFound = this.questionFoundViaProvidedProvisions(this.provisionTagFilters)
 
-      // question has no provisions its visibility always be set to true
+      // **** SCENARIO 1: QUESTION WITH NO PROVISIONS****
+      // question has no provisions its visibility always be set to true unless it default is set to false, therefore pass in set value from json
       if (!this.selectedQuestionHasProvisions) {
-        // this.setQuestionVisibility(true)
         this.setQuestionVisibility(this.question.isVisible)
         return true
       }
 
-      // question has provisions but has no dependency questions required to check to see if visibility should be set
-      // then check if the question is found in the applied provisions visible should set to true else false
+      // **** SCENARIO 2: QUESTION WITH NO DEPENDANCIES****
+      // question has provisions but has no dependency questions required to check to see if visibility should be set based on another question.
+      // THEN==> check if the question is found in the applied provisions, visibility should be set to true else false
       if (!this.requireDependantQuestionToEnableVisibility) {
-        this.setQuestionVisibility(questionFoundInProvision) // todo refactor remove method add watch
-        return questionFoundInProvision
+        // note 1: do not need to evaluate provisionFound.depends its irrelevant if the provision if found within the depends because the dependency logic must be evaluated.
+        // note 2: in practise a question that does not require depenencies. provisionFound.depends will evaluate to false always, therefore irrelevant to evaluate
+
+        const found = (provisionFound.inQuestion || provisionFound.inDependants || provisionFound.inChildren)
+        this.setQuestionVisibility(found)
+        return found
       } else {
+        // **** SCENARIO 3a: QUESTION WITH DEPENDANCIES, NO PROVISION MATCHING****
         // question is dependent
         // question provision is not found in applied provisions via tags then returns false.
         // else question provision is found within the applied tags but we cannot assume it should be displayed as it depends on its dependencies rules beinng met
 
-        if (!questionFoundInProvision) {
+        if (!provisionFound.inQuestion && !provisionFound.inDependants && !provisionFound.inChildren) {
           this.setQuestionVisibility(false)
           return false
         }
 
+        // **** SCENARIO 3b: QUESTION WITH DEPENDANCIES, WITH PROVISION MATCHING****
+
         // below code checking to see if depencies rules/conditions are statisfied in settting visibility
-        // note: if the question is not answer returns false and if the conditions do not match conditions of the rules it will return false
-        // applyDependencyRuleOnQuestion will also return group match array (todo: figure out a better way to extract that method )
+        // note: if the question is not answer, the groupMatchArray returns false and if the conditions do not match conditions of the rules it will return false
+
         const groupMatchArray = this.applyDependencyRuleOnQuestion(this.question)
         const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
         const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
         this.setQuestionVisibility(answerMatch)
+
         return answerMatch
       }
     },
