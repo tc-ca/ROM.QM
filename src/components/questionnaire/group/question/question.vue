@@ -925,7 +925,8 @@ export default {
         // no active search display all questions
         return true
       }
-      return this.questionFoundViaProvidedProvisions(this.provisionFilter)
+      const provisionSearch = this.questionFoundViaProvidedProvisions(this.provisionFilter)
+      return provisionSearch.found
     }
   }
 }
