@@ -54,8 +54,8 @@ export const actions = {
     questionnaire.groups.forEach(group => {
       let qIndex = 0;
       group.questions.forEach(question => {
-       SetQuestionNotificationsToList(question,grpIndex,qIndex,0,dispatch,lang);
-           
+        console.log(question.text["en"]);
+        SetQuestionNotificationsToList(question,grpIndex,qIndex,0,dispatch,lang);
         qIndex++;
       });
       grpIndex++;
@@ -121,35 +121,39 @@ function ClearPreviousNotifications(q)
   }
 }
 
-function isValidationRequired(validationRule)
+function isValidationRequired(q)
 {
   let result = -1;
-  if(validationRule) result = validationRule.findIndex( v => v.enabled);
+  if (q.validationRules) result = q.validationRules.findIndex( v => v.enabled);
   return result > -1;
 }
 
 function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang) {
   if(q.responseOptions) {
-    q.responseOptions.forEach(op => {
-      if (op.internalComment && op.internalComment.notification) {
-        dispatch('notification/addNotification', op.internalComment.notification,{root:true});
-      } else if (op.internalComment && op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
-        op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
-        dispatch('notification/addNotification', op.internalComment.notification,{root:true});
+    for( let x = 0; x < q.responseOptions.length; x++) {
+      const op = q.responseOptions[x];
+      if (q.response === op.value) {
+        // This is the response selected
+        if (op.internalComment && op.internalComment.notification) {
+          dispatch('notification/addNotification', op.internalComment.notification,{root:true});
+        } else if (op.internalComment && op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+          op.internalComment.notification = buildNotificationObject(q, `Internal Comment for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
+          dispatch('notification/addNotification', op.internalComment.notification,{root:true});
+        }
+        if (op.externalComment && op.externalComment.notification) {
+          dispatch('notification/addNotification', op.externalComment.notification,{root:true});
+        } else if (op.externalComment && op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+          op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
+          dispatch('notification/addNotification', op.externalComment.notification,{root:true});
+        }
+        if (op.picture && op.picture.notification) {
+          dispatch('notification/addNotification', op.picture.notification,{root:true});
+        } else if (op.picture && op.picture.option === 'required' && op.picture.value.length === 0) {
+          op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
+          dispatch('notification/addNotification', op.picture.notification, {root:true});
+        }
       }
-      if (op.externalComment && op.externalComment.notification) {
-        dispatch('notification/addNotification', op.externalComment.notification,{root:true});
-      } else if (op.externalComment && op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
-        op.externalComment.notification = buildNotificationObject(q, `External Comment for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
-        dispatch('notification/addNotification', op.externalComment.notification,{root:true});
-      }
-      if (op.picture && op.picture.notification) {
-        dispatch('notification/addNotification', op.picture.notification,{root:true});
-      } else if (op.picture && op.picture.option === 'required' && op.picture.value.length === 0) {
-        op.picture.notification = buildNotificationObject(q, `A picture for the response type ${op.text[lang]} is required.`, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
-        dispatch('notification/addNotification', op.picture.notification, {root:true});
-      }
-    });
+    }
     return true; 
   }
   return false;
@@ -200,7 +204,7 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
    if (q.isVisible) {
     if (q.notification) {
       dispatch("notification/addNotification", q.notification, { root: true });
-    } else if (isValidationRequired(q.validationRules)) {
+    } else if (isValidationRequired(q)) {
       if (!q.validationState || !q.response) {
         q.notification = buildNotificationObject(q, 'A valid response for the question is required.', groupIndex, queIndex, depth, 'mdi-message-draw', lang);
         dispatch("notification/addNotification", q.notification, { root: true });
