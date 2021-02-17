@@ -106,6 +106,10 @@
         "selectSuggestion": "Select a provision from the list of suggestions",
         "clearSearch": "Clear Search"
       },
+      "provisionSearchFilter": {
+        "placeholder": "Quickly find questions based on related provision",
+        "exampleText": "For example search by provision label or text (Example: \"3.5 (1) (c)\")"
+      },
       "validate": "Validate",
       "errors":" 0 errors found |1 error found | {count} errors found",
       "group": {

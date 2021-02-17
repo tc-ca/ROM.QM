@@ -10,15 +10,17 @@
     :search-input.sync="searchInput"
     :item-text="'title.' + lang"
     item-key="id"
-    hint="Find a question through provision"
+    :placeholder="$t('app.questionnaire.provisionSearchFilter.placeholder')"
+    prepend-inner-icon="mdi-magnify"
     @keydown.enter="isMenuActive(false)"
-    @input="updateProvisionFilter"
-    @blur="shrinkProvisionSearchField"
+    @keyup="debouncedUpdateProvisionFilter($event.target.value)"
+    @blur="shrinkProvisionSearchField($event.target.value)"
   />
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import _ from 'lodash'
 
 export default {
   name: 'QuestionnaireSearch',
@@ -34,7 +36,9 @@ export default {
     return {
       searchInput: null,
       model: null,
-      provisions: []
+      provisions: [],
+      debouncedUpdateProvisionFilter: _.throttle(this.updateProvisionFilter, 800)
+
     }
   },
   computed: {
@@ -61,34 +65,46 @@ export default {
 
         return provisions
       }
-    })
+    }),
+    exampleText () {
+      if (this.lang === 'en') {
+        return 'For example search by provision label or text (Example: "3.5 (1) (c)")'
+      }
+      return 'Par exemple, recherchez par libellé ou texte de disposition (Exemple: "3.5 (1) (c)")'
+    }
   },
   watch: {
     searchInput (value) {
       if (value) {
-        this.provisions = this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase()))
+        const exampleHeader = [{ header: this.$t('app.questionnaire.provisionSearchFilter.exampleText'), questions: [] }]
+        this.provisions = exampleHeader.concat(this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase())))
       }
     },
     clearProvisionSearchText (value, oldValue) {
       if (value) {
-        this.searchInput = null
+        this.searchInput = ''
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
+        this.shrinkProvisionSearchField('')
         this.$emit('set-clear-provision-search-false')
       }
     }
+  },
+  mounted () {
+    this.provisions = [{ header: this.$t('app.questionnaire.provisionSearchFilter.exampleText') }]
   },
   methods: {
     isMenuActive (value) {
       this.$refs.provisionSearch.isMenuActive = value
     },
     // note: combobox input always returns object if item is selected from list or string if something is inputted.
-    updateProvisionFilter (value) {
+    updateProvisionFilter  (value) {
       if (typeof value === 'object' && value !== null) {
         // item was selected from combobox list
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: [value] })
       } else if (value === null) {
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
       } else if (typeof value === 'string') {
-        if (value && !value.trim()) {
+        if (_.isEmpty(value.trim())) {
           // blank input
         // as the user has not really inputted anything i.e blank search so we wont filter and to do that we must set provision filter to null
           this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
@@ -99,17 +115,10 @@ export default {
         }
       }
     },
-    shrinkProvisionSearchField () {
-      if (this.provisions.length > 0) {
+    shrinkProvisionSearchField (value) {
+      // if empty string hide
+      if (_.isEmpty(value.trim())) {
         this.$emit('shrink-provision-search-field')
-      }
-      if (this.model === null) {
-        this.$emit('shrink-provision-search-field')
-      }
-      if (typeof this.model === 'string') {
-        if (this.model && !this.model.trim()) {
-          this.$emit('shrink-provision-search-field')
-        }
       }
     }
 
