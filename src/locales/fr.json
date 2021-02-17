@@ -105,6 +105,10 @@
         "selectSuggestion": "Sélectionnez une disposition dans la liste des suggestions",
         "clearSearch": "Effacer la recherche"
       },
+    "provisionSearchFilter": {
+      "placeholder": "Trouvez rapidement des questions basées sur la disposition associée",
+      "exampleText": "Par exemple, recherchez par libellé ou texte de disposition (Exemple: \"3.5 (1) (c)\")"
+      },
       "validate": "Valider",
       "errors":" 0 erreurs trouvées |1 erreur trouvée | {count} erreurs trouvées",
       "group": {
