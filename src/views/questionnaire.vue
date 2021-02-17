@@ -137,8 +137,6 @@ export default {
   },
 
   async mounted () {
-    // eslint-disable-next-line no-debugger
-    debugger
     // if env= dev and loadLocalData then set the questionnaire state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData && !this.$store.getters.getModifiedinBuilder) {
       var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD

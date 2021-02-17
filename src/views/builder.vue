@@ -790,8 +790,6 @@ export default {
     })
 
     let template = null
-    // eslint-disable-next-line no-debugger
-    debugger
     // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
       if (!this.$store.getters.getModifiedinBuilder) {
@@ -1030,8 +1028,6 @@ export default {
       const page = 'builder'
       console.log('Save...')
       // console.log(JSON.stringify(this.questionnaire))
-      // eslint-disable-next-line no-debugger
-      debugger
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       this.$store.dispatch('SetModifiedInBuilder', true)

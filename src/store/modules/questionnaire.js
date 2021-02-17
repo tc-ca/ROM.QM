@@ -15,7 +15,6 @@ export const getters = {
     return state.questionnaire;
   },
   getModifiedinBuilder(state) {
-    debugger;
     let ret = state.modifiedInBuilder
       ? state.modifiedInBuilder
       : false;
@@ -97,7 +96,6 @@ export const actions = {
   },
 
   SetModifiedInBuilder({commit}, payload) {
-    debugger;
     commit("setModifiedInBuilder", payload);
   },
 
@@ -244,7 +242,6 @@ export const mutations = {
   },
 
   setModifiedInBuilder(state, payload) {
-    debugger;
     state.modifiedInBuilder = payload;
   },
 
