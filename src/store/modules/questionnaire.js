@@ -1,21 +1,28 @@
 import _ from "lodash";
 import builderService from "../../services/builderService";
-import { onlyUniqueObj } from '../../utils'
+import { onlyUniqueObj } from "../../utils";
 
 export const state = {
   questionnaire: null,
   searchableProvisionRef: {},
   provisionFilter: null,
-  tagFilter: []
+  tagFilter: [],
+  modifiedInBuilder: false
 };
 
 export const getters = {
   getQuestionnaire(state) {
     return state.questionnaire;
   },
+  getModifiedinBuilder(state) {
+    let ret = state.modifiedInBuilder
+      ? state.modifiedInBuilder
+      : false;
+    return ret;
+  },
   getQuestionnaireReadOnlyStatus(state) {
     // Just to debug
-    let resp = (state.questionnaire) ? state.questionnaire.readOnly : false;
+    let resp = state.questionnaire ? state.questionnaire.readOnly : false;
     return resp;
   },
 
@@ -62,11 +69,9 @@ export const getters = {
 
   getSearchableProvisions(state, getters, rootState) {
     const questionnaire = state.questionnaire;
-    const legislations = rootState.legislations.legislations
+    const legislations = rootState.legislations.legislations;
 
-    if (
-      questionnaire === null || legislations === null
-    ) {
+    if (questionnaire === null || legislations === null) {
       return [];
     }
     const searchableProvisions = questionnaire.searchableProvisions;
@@ -82,11 +87,11 @@ export const getters = {
   },
 
   getAllAppliedTagProvisions(state) {
-    let provisions = []
-     state.tagFilter.forEach(tag => {
-     provisions = provisions.concat(tag.provisions)
+    let provisions = [];
+    state.tagFilter.forEach(tag => {
+      provisions = provisions.concat(tag.provisions);
     });
-    return provisions
+    return provisions;
   }
 };
 
@@ -99,6 +104,10 @@ export const actions = {
     const data = await SetMockQuestionnaireResponseImportModule();
     commit("setQuestionnaire", data);
     dispatch("setQuestionnaireGroups", data.groups);
+  },
+
+  SetModifiedInBuilder({commit}, payload) {
+    commit("setModifiedInBuilder", payload);
   },
 
   SetQuestionnaireState({ commit, dispatch }, payload) {
@@ -201,12 +210,9 @@ export const actions = {
   },
 
   UpdateTagFilterState({ commit, state, getters }, payload) {
-    const {
-      characteristicProvisions,
-      characteristicCategory,
-    } = payload;
+    const { characteristicProvisions, characteristicCategory } = payload;
 
-    const searchableProvisions = getters.getSearchableProvisions
+    const searchableProvisions = getters.getSearchableProvisions;
 
     //extract provisions from searchableProvisions
     let hydratedCharacteristicProvisions = [];
@@ -219,7 +225,10 @@ export const actions = {
 
     // the same provision could be associated to multiple characteristics
     // ensure a unique result set
-    hydratedCharacteristicProvisions = onlyUniqueObj(hydratedCharacteristicProvisions, "id");
+    hydratedCharacteristicProvisions = onlyUniqueObj(
+      hydratedCharacteristicProvisions,
+      "id"
+    );
 
     const index = state.tagFilter.findIndex(
       x => x.name === characteristicCategory
@@ -230,7 +239,10 @@ export const actions = {
       isFound,
       index,
       characteristicProvisions: hydratedCharacteristicProvisions,
-      tag: { name: characteristicCategory, provisions: hydratedCharacteristicProvisions }
+      tag: {
+        name: characteristicCategory,
+        provisions: hydratedCharacteristicProvisions
+      }
     });
   }
 };
@@ -238,6 +250,10 @@ export const actions = {
 export const mutations = {
   setQuestionnaire(state, payload) {
     state.questionnaire = payload;
+  },
+
+  setModifiedInBuilder(state, payload) {
+    state.modifiedInBuilder = payload;
   },
 
   setQuestionnaireReadOnlyStatus(state, payload) {
@@ -301,7 +317,7 @@ export const mutations = {
     let provisions = [];
     questions.forEach(q => {
       state.searchableProvisionRef[q.guid] = { legs: [] };
-      if(q.responseOptions) {
+      if (q.responseOptions) {
         q.responseOptions.forEach(r => {
           provisions = provisions.concat(r.provisions);
         });
@@ -320,7 +336,7 @@ export const mutations = {
 
     if (isFound) {
       state.tagFilter[index] = tag;
-      state.tagFilter.splice(index, 1, tag);    
+      state.tagFilter.splice(index, 1, tag);
     } else {
       state.tagFilter.push(tag);
     }

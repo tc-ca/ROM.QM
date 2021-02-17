@@ -26,7 +26,7 @@
             min-height="70vh"
             rounded="lg"
           >
-            <questionnaire
+            <questionnaire-answers
               ref="questionnaire"
               :expand-all-prop="expandPanels"
               :read-only-prop="readOnlyPropQuestionnaire"
@@ -67,7 +67,7 @@
 
 <script>
 import BuilderService from '../services/builderService'
-import Questionnaire from '../components/questionnaire/questionnaire.vue'
+import QuestionnaireAnswers from '../components/questionnaire/questionnaire-answers.vue'
 import QuestionnaireError from '../components/questionnaire/questionnaire-error.vue'
 import QuestionnaireNav from '../components/questionnaire-nav/questionnaire-nav.vue'
 
@@ -77,7 +77,7 @@ import { mapState } from 'vuex'
 export default {
   emits: ['clear-provision-search-field'],
   components: {
-    Questionnaire,
+    QuestionnaireAnswers,
     QuestionnaireError,
     QuestionnaireNav
   },
@@ -138,7 +138,7 @@ export default {
 
   async mounted () {
     // if env= dev and loadLocalData then set the questionnaire state to local copy else the state will be set explicility outside in app.vue
-    if (this.envDev && this.loadLocalData) {
+    if (this.envDev && this.loadLocalData && !this.$store.getters.getModifiedinBuilder) {
       var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
       const questionnaire = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page: 'questionnaire' })
