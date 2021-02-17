@@ -73,21 +73,15 @@ export default {
         return this.myValues.filter(value => itemIds.includes(value.id))
       },
       set (val) {
-        // this.myValues = val
         // get the orginal values minus the ones we just took out
         // and the add the new model to it
         // return a unique list
+        let list = _.differenceBy(this.values, this.model, 'id')
+        list = list.concat(val)
+        list = onlyUniqueObj(list, 'id')
+        this.myValues = list
 
-        let test = _.differenceBy(
-          this.values,
-          this.model, 'id')
-        test = test.concat(val)
-        test = onlyUniqueObj(test, 'id')
-        console.log('sab', test)
-        //
-        this.myValues = test
-
-        this.$emit('update-displayed-tags', test)
+        this.$emit('update-displayed-tags', list)
       }
     },
     myItems () {
@@ -105,8 +99,8 @@ export default {
   watch:
   {
     values (value) {
-      // console.log('todo implement')
-      // this.updateProvisionFilter()
+      // todo performance update, include conditional to run if value matches parent
+      this.updateProvisionFilter()
     }
   },
   mounted () {
