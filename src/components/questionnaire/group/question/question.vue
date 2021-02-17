@@ -370,11 +370,6 @@ export default {
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
-    isQuestionToolbarVisible () {
-      if (this.question.isReferenceQuestion) return false
-      if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
-      return false
-    },
     expansionPanelsValue: {
       get () {
         if (this.expand.value) {
