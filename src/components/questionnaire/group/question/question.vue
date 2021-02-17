@@ -13,8 +13,6 @@
         #actions
       >
         <v-btn-toggle
-          tile
-          dense
           active-class="btn-toggle-active"
         >
           <v-tooltip
