@@ -12,65 +12,27 @@
       <template
         #actions
       >
-        <v-icon
-          v-if="isValid === false"
-          color="red"
+        <v-btn-toggle
+          tile
+          dense
+          active-class="btn-toggle-active"
         >
-          mdi-exclamation
-        </v-icon>
-      </template>
-
-      <div
-        :style="{fontSize:'16px !important'}"
-      >
-        <span class="text-break">{{ questionText }}</span>
-      </div>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content
-      eager
-    >
-      <v-layout
-        v-if="isQuestionToolbarVisible"
-        class="pt-2"
-        justify-end
-      >
-        <!-- Please do NOT delete this, we are keeping it just in casse the users wants it back
-        <div v-if="question.isRepeated">
-          <v-tooltip left>
+          <v-tooltip
+            v-if="question.isSamplingAllowed"
+            left
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                rounded
+                small
+                depressed
+                fab
                 v-bind="attrs"
                 :disabled="readOnly"
                 v-on="on"
+                @click.native.stop="clickSampling"
               >
                 <v-icon
-                  normal
-                  color="primary"
-                >
-                  mdi-arrange-send-backward
-                </v-icon>
-                <span>{{ $t('app.questionnaire.group.question.repeatable.copyNo') + ' ' + calculateRepeatedNumber() }}</span>
-              </v-btn>
-            </template>
-            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatedQuestion') }}</span>
-          </v-tooltip>
-        </div>
-        -->
-        <v-spacer />
-        <div v-if="question.isSamplingAllowed">
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                rounded
-                v-bind="attrs"
-                :disabled="readOnly"
-                v-on="on"
-                @click="clickSampling"
-              >
-                <v-icon
-                  normal
-                  :color="samplingButtonColor"
+                  color="blue"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>
@@ -78,52 +40,79 @@
             </template>
             <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
           </v-tooltip>
-        </div>
-        <div v-if="question.isRepeatable">
-          <v-tooltip right>
+
+          <v-tooltip
+            v-if="question.isRepeatable"
+            right
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                class="ml-2"
-                rounded
+                small
+                depressed
+                fab
                 v-bind="attrs"
                 :disabled="readOnly"
                 v-on="on"
-                @click="repeatQuestion"
+                @click.native.stop="repeatQuestion"
               >
                 <v-icon
-                  normal
-                  color="primary"
+                  color="blue"
                 >
-                  mdi-plus-thick
+                  mdi-plus
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatQuestion') }}</span>
+            <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
           </v-tooltip>
-        </div>
-        <div v-if="question.isRepeated">
-          <v-tooltip right>
+          <v-tooltip
+            v-if="question.isRepeated"
+            right
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                class="ml-2"
-                rounded
+                small
+                depressed
+                fab
                 v-bind="attrs"
                 :disabled="readOnly"
                 v-on="on"
-                @click="deleteRepeatedQuestion"
+                @click.native.stop="deleteRepeatedQuestion"
               >
                 <v-icon
-                  normal
-                  color="primary"
+                  color="blue"
                 >
-                  mdi-minus-thick
+                  mdi-minus
                 </v-icon>
               </v-btn>
             </template>
             <span>{{ $t('app.questionnaire.group.question.repeatable.deleteQuestion') }}</span>
           </v-tooltip>
-        </div>
-      </v-layout>
+        </v-btn-toggle>
+      </template>
+
+      <v-row>
+        <v-col
+          v-if="isValid === false"
+          cols="auto"
+        >
+          <v-icon
+            color="red"
+          >
+            mdi-exclamation
+          </v-icon>
+        </v-col>
+        <v-col>
+          <div
+            :style="{fontSize:'16px !important'}"
+          >
+            <span class="text-break">{{ questionText }}</span>
+          </div>
+        </v-col>
+      </v-row>
+    </v-expansion-panel-header>
+    <v-expansion-panel-content
+      eager
+    >
       <div :class="{'mt-6': expand.value}">
         <response
           :question="question"
@@ -982,5 +971,9 @@ export default {
     position: absolute;
     z-index:-1; /* stack below truncated text */
   }
+  /* makes acitve class same color as non active, else the button will looked like its pressed at all times */
+.btn-toggle-active{
+  color:#f5f5f5 !important;
+}
 
 </style>
