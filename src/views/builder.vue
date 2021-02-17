@@ -778,7 +778,7 @@ export default {
       switch (mutation.type) {
         case 'setQuestionnaire':
           this.questionnaire = state.questionnaire.questionnaire
-          this.questions = this.getFlatListOfAllQuestions
+          this.questions = this.getFlatListOfAllQuestions()
           this.$store.dispatch('objectstate/UpdateQuestionnaireState', _.cloneDeep(this.questionnaire))
           break
         case 'setTreeLegislations':
