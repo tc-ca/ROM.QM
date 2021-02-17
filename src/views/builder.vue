@@ -790,17 +790,23 @@ export default {
     })
 
     let template = null
+    // eslint-disable-next-line no-debugger
+    debugger
     // if env= dev and loadLocalData then set the questionnaire/template state to local copy else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
-      var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
-      template = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
+      if (!this.$store.getters.getModifiedinBuilder) {
+        var templateToLoad = process.env.VUE_APP_TEMPLATE_TO_LOAD
+        template = await BuilderService.GetMockQuestionnaireFromImportModule(templateToLoad)
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
+      } else {
+        template = this.$store.getters.getQuestionnaire
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
+      }
     } else {
       // default to empty template
       template = BuilderService.createQuestionnaire()
+      this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
     }
-
-    this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
-
     // if env= dev load the provisions else the state will be set explicility outside in app.vue
     if (this.envDev && this.loadLocalData) {
       this.$store.dispatch('SetTreeLegislationsStateToLocalData')
@@ -1024,8 +1030,11 @@ export default {
       const page = 'builder'
       console.log('Save...')
       // console.log(JSON.stringify(this.questionnaire))
+      // eslint-disable-next-line no-debugger
+      debugger
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+      this.$store.dispatch('SetModifiedInBuilder', true)
     },
     fixit () {
       this.questionnaire = BuilderService.fixTemplate(this.questionnaire)
