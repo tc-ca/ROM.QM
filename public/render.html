@@ -48,7 +48,16 @@
 
       // update the parent form with the error information so it knows how to handle mark complete
       // we can temporarily use session boo!!
-      sessionStorage.setItem("questionnaireCompletionDetails", JSON.stringify(event));
+
+      var errorDetails = {
+        detail: {
+          isValid: isValid,
+          errorCount: errorCount,
+        },
+        questionnaireResult: questionnaireResult
+      }
+
+      sessionStorage.setItem("questionnaireCompletionDetails", JSON.stringify(errorDetails));
     }
 
     window.onload = (event) => {
