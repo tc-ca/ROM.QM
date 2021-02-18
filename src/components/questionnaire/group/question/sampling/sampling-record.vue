@@ -4,7 +4,7 @@
       <span
         class="my-4 mx-auto font-weight-black"
       >
-        Sampling Record
+        {{ $t('app.questionnaire.group.question.sampling.title') }}
       </span>
     </v-row>
     <v-row
