@@ -1,24 +1,27 @@
 <template>
-  <v-container>
-    <v-row>
-      <span
-        class="my-4 mx-auto font-weight-black"
-      >
-        Sampling Record
-      </span>
+  <v-sheet>
+    <v-row
+      no-gutters
+    >
+      <v-col>
+        <span style="color:#757575">
+          Sampling Record
+        </span>
+      </v-col>
     </v-row>
     <v-row
       no-gutters
       dense
-      justify="center"
     >
       <v-col cols="4">
         <v-text-field
           ref="question.samplingRecord.approximateTotal"
           v-model.number="question.samplingRecord.approximateTotal"
+          filled
+          outlined
           :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
           :hint="$t('app.questionnaire.group.question.sampling.approximateTotalPlaceholder')"
-          prepend-icon="mdi-file-table-box-multiple-outline"
+          prepend-inner-icon="mdi-file-table-box-multiple-outline"
           type="number"
           min="1"
           :disabled="readOnly"
@@ -30,9 +33,11 @@
         <v-text-field
           ref="question.samplingRecord.sampleSize"
           v-model.number="question.samplingRecord.sampleSize"
+          filled
+          outlined
           :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
           :hint="$t('app.questionnaire.group.question.sampling.sampleSizePlaceholder')"
-          prepend-icon="mdi-file-table-box-outline"
+          prepend-inner-icon="mdi-file-table-box-outline"
           type="number"
           min="1"
           :disabled="readOnly"
@@ -45,9 +50,11 @@
         <v-text-field
           ref="question.samplingRecord.nonCompliances"
           v-model.number="question.samplingRecord.nonCompliances"
+          filled
+          outlined
           :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
           :hint="$t('app.questionnaire.group.question.sampling.nonCompliancesPlaceholder')"
-          prepend-icon="mdi-file-table-outline"
+          prepend-inner-icon="mdi-file-table-outline"
           type="number"
           min="0"
           :disabled="readOnly"
@@ -57,7 +64,7 @@
         />
       </v-col>
     </v-row>
-  </v-container>
+  </v-sheet>
 </template>
 
 <script>

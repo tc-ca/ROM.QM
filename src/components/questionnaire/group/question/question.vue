@@ -63,7 +63,7 @@
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ $t('app.questionnaire.group.deleteGroup') }}</span>
+            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatQuestion') }}</span>
           </v-tooltip>
           <v-tooltip
             v-if="question.isRepeated"
@@ -114,7 +114,7 @@
     <v-expansion-panel-content
       eager
     >
-      <div :class="{'mt-6': expand.value}">
+      <v-sheet class="px-3">
         <response
           :question="question"
           :group="group"
@@ -122,109 +122,144 @@
           @change="onUserResponseChanged"
           @error="onError"
         />
-      </div>
-      <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
-        <sampling-record
-          :question="question"
-          :read-only="readOnly"
-        />
-      </div>
-      <div v-if="displayViolationInfo && !isReferenceQuestion">
-        <div>
-          <v-card
-            class="mx-auto"
+      </v-sheet>
+      <v-sheet class="px-3">
+        <v-tabs
+          v-if="tabVisibility"
+          v-model="tab"
+          show-arrows
+        >
+          <!-- <v-tabs-slider color="black" /> -->
+
+          <v-tab
+            v-show="displayViolationInfo"
+            class="mb-2"
           >
-            <v-sheet class="pa-4">
-              <v-text-field
-                v-model="question.violationInfo.referenceID"
-                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
-                :label="$t('app.questionnaire.group.question.referenceId')"
-                :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
-                outline
-              />
-              <div v-if="displaySamplingRecord">
+            Violation Details
+          </v-tab>
+          <v-tab
+            v-show="showSupplementaryInfo"
+            class="mb-2"
+          >
+            Additional Information
+          </v-tab>
+          <v-tab-item>
+            <v-sheet>
+              <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
                 <sampling-record
                   :question="question"
                   :read-only="readOnly"
                 />
               </div>
-              <div v-else>
-                <v-text-field
-                  v-model="question.violationInfo.violationCount"
-                  :disabled="readOnly"
-                  :label="$t('app.questionnaire.group.question.violationCount')"
-                  :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-                  outline
-                />
-              </div>
-            </v-sheet>
-            <v-sheet class="pa-4">
-              <v-text-field
-                v-model="selectedResponseOption.searchProvisions"
-                label="Search"
-                :disabled="readOnly"
-                outlined
-                hide-details
-                clearable
-                clear-icon="mdi-close-circle-outline"
-              />
-            </v-sheet>
-            <v-sheet class="pa-4">
-              <div class="text-left">
-                <v-btn
-                  v-for="item in selProvisions"
-                  :key="item.key"
-                  :disabled="readOnly"
-                  small
-                  style="margin-right: 5px; margin-bottom: 5px"
-                  rounded
-                  color="primary"
-                  dark
-                  @click="onSelectedProvisionClick(item)"
-                >
-                  <v-icon
-                    small
-                    left
-                    dark
-                  >
-                    mdi-close
-                  </v-icon>{{ getSelectedProvisionText(item) }}
-                </v-btn>
-              </div>
-            </v-sheet>
-            <v-card-text>
-              <v-treeview
-                v-model="selProvisions"
-                :selectable="!readOnly"
-                :disabled="readOnly"
-                item-key="id"
-                :item-text="'title.' + lang"
-                selection-type="leaf"
-                :search="selectedResponseOption.searchProvisions"
-                :filter="selectedResponseOption.filterProvisions"
-                :items="treeDataProvisions"
-              >
-                <template v-slot:label="{ item }">
-                  <div class="truncated">
-                    <div>{{ item.title[lang] }}</div>
+              <div v-if="displayViolationInfo && !isReferenceQuestion">
+                <div>
+                  <v-text-field
+                    v-model="question.violationInfo.referenceID"
+                    :disabled="isViolationInfoReferenceIdDisabled || readOnly"
+                    :label="$t('app.questionnaire.group.question.referenceId')"
+                    :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+                    filled
+                  />
+                  <div v-if="displaySamplingRecord">
+                    <sampling-record
+                      :question="question"
+                      :read-only="readOnly"
+                    />
                   </div>
-                </template>
-              </v-treeview>
-            </v-card-text>
-          </v-card>
-        </div>
-      </div>
+                  <div v-else>
+                    <v-text-field
+                      v-model="question.violationInfo.violationCount"
+                      :disabled="readOnly"
+                      :label="$t('app.questionnaire.group.question.violationCount')"
+                      :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                      filled
+                    />
+                  </div>
+                  <v-sheet
+                    style="background-color:#f5f5f5; color:#757575"
+                  >
+                    <div
+                      :class=" `${violationHeaderFontSize} ml-3`"
+                    >
+                      Cite Violation(s)
+                    </div>
+                    <v-chip
+                      v-for="item in selProvisions"
+                      :key="item.key"
+                      small
+                      class=" mr-2"
+                      :disabled="readOnly"
+                      dark
+                      close
+                      color="grey"
+
+                      @click:close="onSelectedProvisionClick(item)"
+                    >
+                      {{ getSelectedProvisionText(item) }}
+                    </v-chip>
+                  </v-sheet>
+
+                  <v-sheet
+                    style="background-color:#f5f5f5;"
+                    class="mt-2"
+                  >
+                    <v-text-field
+                      v-model="selectedResponseOption.searchProvisions"
+                      :disabled="readOnly"
+                      dense
+                      outlined
+                      single-line
+                      hide-details
+                      clearable
+                      clear-icon="mdi-close-circle-outline"
+                      prepend-inner-icon="mdi-magnify"
+                    />
+
+                    <v-treeview
+                      v-model="selProvisions"
+                      class="mt-2"
+                      dense
+                      selected-color="black"
+                      :selectable="!readOnly"
+                      :disabled="readOnly"
+                      item-key="id"
+                      :item-text="'title.' + lang"
+                      selection-type="leaf"
+                      :search="selectedResponseOption.searchProvisions"
+                      :filter="selectedResponseOption.filterProvisions"
+                      :items="treeDataProvisions"
+                    >
+                      <template v-slot:label="{ item }">
+                        <div class="truncated">
+                          <div>{{ item.title[lang] }}</div>
+                        </div>
+                      </template>
+                    </v-treeview>
+                  </v-sheet>
+                </div>
+              </div>
+            </v-sheet>
+          </v-tab-item>
+          <v-tab-item>
+            <div v-if="displaySamplingRecord && !displayViolationInfo ">
+              <sampling-record
+                :question="question"
+                :read-only="readOnly"
+              />
+            </div>
+            <supplementary-info
+              v-if="showSupplementaryInfo"
+              :question="question"
+              :selresponseoption="selectedResponseOption"
+              :group="group"
+              :read-only="readOnly"
+              @error="onError"
+            />
+          </v-tab-item>
+        </v-tabs>
+      </v-sheet>
 
       <br>
-
-      <supplementary-info
-        v-if="showSupplementaryInfo"
-        :question="question"
-        :selresponseoption="selectedResponseOption"
-        :group="group"
-        :read-only="readOnly"
-        @error="onError"
-      />
 
       <div v-if="!isReferenceQuestion">
         <v-expansion-panels
@@ -263,7 +298,7 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
-import SamplingRecord from './sampling/sampling-record'
+import SamplingRecord from './sampling/sampling-record.vue'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
@@ -314,7 +349,8 @@ export default {
       displaySamplingRecord: false,
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
       responseArgs: null,
-      filteredInByProvisionSearch: true
+      filteredInByProvisionSearch: true,
+      tab: null
     }
   },
   computed: {
@@ -367,6 +403,9 @@ export default {
       if (selClass === 'selected' && this.$refs.qPanel) this.$refs.qPanel.$el.scrollIntoView(true)
       return selClass
     },
+    violationHeaderFontSize () {
+      return this.selProvisions.length > 0 ? 'caption' : 'subtitle-1'
+    },
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
     },
@@ -411,6 +450,18 @@ export default {
     samplingButtonColor () {
       if (this.displaySamplingRecord) return 'black'
       else return 'primary'
+    },
+    tabVisibility () {
+      if (this.displayViolationInfo) {
+        this.setTab(0)
+        return true
+      } else if (this.showSupplementaryInfo) {
+        this.setTab(1)
+        return true
+      } else {
+        this.setTab(null)
+        return false
+      }
     }
   },
   watch: {
@@ -452,6 +503,9 @@ export default {
     this.updateReferenceID()
   },
   methods: {
+    setTab (value) {
+      this.tab = value
+    },
     calculateRepeatedNumber () {
       let text = ''
       if (this.question.isRepeated) {
