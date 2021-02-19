@@ -306,7 +306,7 @@ export interface SearchableProvision {
 
 export enum QuestionResponseType {
     Reference = "reference",
-    Image = "image",
+    // Image = "image",
     Number = "number",
     Select = "select",
     Radio = "radio",

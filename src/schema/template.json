@@ -488,7 +488,6 @@
         },
         "QuestionResponseType": {
             "enum": [
-                "image",
                 "number",
                 "radio",
                 "reference",
