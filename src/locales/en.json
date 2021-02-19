@@ -141,6 +141,7 @@
             "repeatedQuestion": "Repeated question"
           },
           "sampling": {
+            "title": "Sampling Record",
             "approximateTotal": "Approximate Total",
             "sampleSize": "Sample Size",
             "nonCompliances": "Violation count",
