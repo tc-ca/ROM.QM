@@ -72,6 +72,65 @@
             ],
             "type": "object"
         },
+        "File": {
+            "additionalProperties": false,
+            "properties": {
+                "notification": {
+                    "type": "null"
+                },
+                "option": {
+                    "$ref": "#/definitions/Option"
+                },
+                "validationStatus": {
+                    "type": "boolean"
+                },
+                "value": {
+                    "items": {
+                        "$ref": "#/definitions/FileItems"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "option",
+                "value"
+            ],
+            "type": "object"
+        },
+        "FileItems": {
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "guid": {
+                    "type": "string"
+                },
+                "timeStamp": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uploadedBy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "comment",
+                "fileName",
+                "guid",
+                "timeStamp",
+                "title",
+                "uploadedBy"
+            ],
+            "type": "object"
+        },
         "Group": {
             "additionalProperties": false,
             "properties": {
@@ -209,10 +268,13 @@
         "PictureItems": {
             "additionalProperties": false,
             "properties": {
-                "base64String": {
+                "comment": {
                     "type": "string"
                 },
-                "comment": {
+                "fileName": {
+                    "type": "string"
+                },
+                "guid": {
                     "type": "string"
                 },
                 "timeStamp": {
@@ -222,13 +284,18 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "uploadedBy": {
+                    "type": "string"
                 }
             },
             "required": [
-                "base64String",
                 "comment",
+                "fileName",
+                "guid",
                 "timeStamp",
-                "title"
+                "title",
+                "uploadedBy"
             ],
             "type": "object"
         },
@@ -423,6 +490,9 @@
                 "externalComment": {
                     "$ref": "#/definitions/Comment"
                 },
+                "file": {
+                    "$ref": "#/definitions/File"
+                },
                 "id": {
                     "type": "number"
                 },
@@ -472,6 +542,7 @@
             },
             "required": [
                 "externalComment",
+                "file",
                 "id",
                 "internalComment",
                 "isProvisionCollapsed",
