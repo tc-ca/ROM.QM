@@ -48,11 +48,11 @@
 
 <script>
 
-import TextResponse from './text-response'
-import RadioResponse from './radio-response'
-import SelectResponse from './select-response'
-import ImageResponse from './image-response'
-import NumberResponse from './number-response'
+import TextResponse from './text-response.vue'
+import RadioResponse from './radio-response.vue'
+import SelectResponse from './select-response.vue'
+import ImageResponse from './image-response.vue'
+import NumberResponse from './number-response.vue'
 import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {

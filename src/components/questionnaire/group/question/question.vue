@@ -12,65 +12,28 @@
       <template
         #actions
       >
-        <v-icon
-          v-if="isValid === false"
-          color="red"
+        <v-btn-toggle
+          tile
+          group
+          dense
+          active-class="btn-toggle-active"
         >
-          mdi-exclamation
-        </v-icon>
-      </template>
-
-      <div
-        :style="{fontSize:'16px !important'}"
-      >
-        <span class="text-break">{{ questionText }}</span>
-      </div>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content
-      eager
-    >
-      <v-layout
-        v-if="isQuestionToolbarVisible"
-        class="pt-2"
-        justify-end
-      >
-        <!-- Please do NOT delete this, we are keeping it just in casse the users wants it back
-        <div v-if="question.isRepeated">
-          <v-tooltip left>
+          <v-tooltip
+            v-if="question.isSamplingAllowed"
+            left
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                rounded
+                small
+                depressed
+                fab
                 v-bind="attrs"
                 :disabled="readOnly"
                 v-on="on"
+                @click.native.stop="clickSampling"
               >
                 <v-icon
-                  normal
-                  color="primary"
-                >
-                  mdi-arrange-send-backward
-                </v-icon>
-                <span>{{ $t('app.questionnaire.group.question.repeatable.copyNo') + ' ' + calculateRepeatedNumber() }}</span>
-              </v-btn>
-            </template>
-            <span>{{ $t('app.questionnaire.group.question.repeatable.repeatedQuestion') }}</span>
-          </v-tooltip>
-        </div>
-        -->
-        <v-spacer />
-        <div v-if="question.isSamplingAllowed">
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                rounded
-                v-bind="attrs"
-                :disabled="readOnly"
-                v-on="on"
-                @click="clickSampling"
-              >
-                <v-icon
-                  normal
-                  :color="samplingButtonColor"
+                  color="blue"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>
@@ -78,53 +41,80 @@
             </template>
             <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
           </v-tooltip>
-        </div>
-        <div v-if="question.isRepeatable">
-          <v-tooltip right>
+
+          <v-tooltip
+            v-if="question.isRepeatable"
+            right
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                class="ml-2"
-                rounded
+                small
+                depressed
+                fab
                 v-bind="attrs"
                 :disabled="readOnly"
                 v-on="on"
-                @click="repeatQuestion"
+                @click.native.stop="repeatQuestion"
               >
                 <v-icon
-                  normal
-                  color="primary"
+                  color="blue"
                 >
-                  mdi-plus-thick
+                  mdi-plus
                 </v-icon>
               </v-btn>
             </template>
             <span>{{ $t('app.questionnaire.group.question.repeatable.repeatQuestion') }}</span>
           </v-tooltip>
-        </div>
-        <div v-if="question.isRepeated">
-          <v-tooltip right>
+          <v-tooltip
+            v-if="question.isRepeated"
+            right
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                class="ml-2"
-                rounded
+                small
+                depressed
+                fab
                 v-bind="attrs"
                 :disabled="readOnly"
                 v-on="on"
-                @click="deleteRepeatedQuestion"
+                @click.native.stop="deleteRepeatedQuestion"
               >
                 <v-icon
-                  normal
-                  color="primary"
+                  color="blue"
                 >
-                  mdi-minus-thick
+                  mdi-minus
                 </v-icon>
               </v-btn>
             </template>
             <span>{{ $t('app.questionnaire.group.question.repeatable.deleteQuestion') }}</span>
           </v-tooltip>
-        </div>
-      </v-layout>
-      <div :class="{'mt-6': expand.value}">
+        </v-btn-toggle>
+      </template>
+
+      <v-row>
+        <v-col
+          v-if="isValid === false"
+          cols="auto"
+        >
+          <v-icon
+            color="red"
+          >
+            mdi-exclamation
+          </v-icon>
+        </v-col>
+        <v-col>
+          <div
+            :style="{fontSize:'16px !important'}"
+          >
+            <span class="text-break">{{ questionText }}</span>
+          </div>
+        </v-col>
+      </v-row>
+    </v-expansion-panel-header>
+    <v-expansion-panel-content
+      eager
+    >
+      <v-sheet class="px-3">
         <response
           :question="question"
           :group="group"
@@ -132,109 +122,144 @@
           @change="onUserResponseChanged"
           @error="onError"
         />
-      </div>
-      <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
-        <sampling-record
-          :question="question"
-          :read-only="readOnly"
-        />
-      </div>
-      <div v-if="displayViolationInfo && !isReferenceQuestion">
-        <div>
-          <v-card
-            class="mx-auto"
+      </v-sheet>
+      <v-sheet class="px-3">
+        <v-tabs
+          v-if="tabVisibility"
+          v-model="tab"
+          show-arrows
+        >
+          <!-- <v-tabs-slider color="black" /> -->
+
+          <v-tab
+            v-show="displayViolationInfo"
+            class="mb-2"
           >
-            <v-sheet class="pa-4">
-              <v-text-field
-                v-model="question.violationInfo.referenceID"
-                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
-                :label="$t('app.questionnaire.group.question.referenceId')"
-                :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
-                outline
-              />
-              <div v-if="displaySamplingRecord">
+            Violation Details
+          </v-tab>
+          <v-tab
+            v-show="showSupplementaryInfo"
+            class="mb-2"
+          >
+            Additional Information
+          </v-tab>
+          <v-tab-item>
+            <v-sheet>
+              <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
                 <sampling-record
                   :question="question"
                   :read-only="readOnly"
                 />
               </div>
-              <div v-else>
-                <v-text-field
-                  v-model="question.violationInfo.violationCount"
-                  :disabled="readOnly"
-                  :label="$t('app.questionnaire.group.question.violationCount')"
-                  :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
-                  outline
-                />
-              </div>
-            </v-sheet>
-            <v-sheet class="pa-4">
-              <v-text-field
-                v-model="selectedResponseOption.searchProvisions"
-                label="Search"
-                :disabled="readOnly"
-                outlined
-                hide-details
-                clearable
-                clear-icon="mdi-close-circle-outline"
-              />
-            </v-sheet>
-            <v-sheet class="pa-4">
-              <div class="text-left">
-                <v-btn
-                  v-for="item in selProvisions"
-                  :key="item.key"
-                  :disabled="readOnly"
-                  small
-                  style="margin-right: 5px; margin-bottom: 5px"
-                  rounded
-                  color="primary"
-                  dark
-                  @click="onSelectedProvisionClick(item)"
-                >
-                  <v-icon
-                    small
-                    left
-                    dark
-                  >
-                    mdi-close
-                  </v-icon>{{ getSelectedProvisionText(item) }}
-                </v-btn>
-              </div>
-            </v-sheet>
-            <v-card-text>
-              <v-treeview
-                v-model="selProvisions"
-                :selectable="!readOnly"
-                :disabled="readOnly"
-                item-key="id"
-                :item-text="'title.' + lang"
-                selection-type="leaf"
-                :search="selectedResponseOption.searchProvisions"
-                :filter="selectedResponseOption.filterProvisions"
-                :items="treeDataProvisions"
-              >
-                <template v-slot:label="{ item }">
-                  <div class="truncated">
-                    <div>{{ item.title[lang] }}</div>
+              <div v-if="displayViolationInfo && !isReferenceQuestion">
+                <div>
+                  <v-text-field
+                    v-model="question.violationInfo.referenceID"
+                    :disabled="isViolationInfoReferenceIdDisabled || readOnly"
+                    :label="$t('app.questionnaire.group.question.referenceId')"
+                    :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+                    filled
+                  />
+                  <div v-if="displaySamplingRecord">
+                    <sampling-record
+                      :question="question"
+                      :read-only="readOnly"
+                    />
                   </div>
-                </template>
-              </v-treeview>
-            </v-card-text>
-          </v-card>
-        </div>
-      </div>
+                  <div v-else>
+                    <v-text-field
+                      v-model="question.violationInfo.violationCount"
+                      :disabled="readOnly"
+                      :label="$t('app.questionnaire.group.question.violationCount')"
+                      :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                      filled
+                    />
+                  </div>
+                  <v-sheet
+                    style="background-color:#f5f5f5; color:#757575"
+                  >
+                    <div
+                      :class=" `${violationHeaderFontSize} ml-3`"
+                    >
+                      Cite Violation(s)
+                    </div>
+                    <v-chip
+                      v-for="item in selProvisions"
+                      :key="item.key"
+                      small
+                      class=" mr-2"
+                      :disabled="readOnly"
+                      dark
+                      close
+                      color="grey"
+
+                      @click:close="onSelectedProvisionClick(item)"
+                    >
+                      {{ getSelectedProvisionText(item) }}
+                    </v-chip>
+                  </v-sheet>
+
+                  <v-sheet
+                    style="background-color:#f5f5f5;"
+                    class="mt-2"
+                  >
+                    <v-text-field
+                      v-model="selectedResponseOption.searchProvisions"
+                      :disabled="readOnly"
+                      dense
+                      outlined
+                      single-line
+                      hide-details
+                      clearable
+                      clear-icon="mdi-close-circle-outline"
+                      prepend-inner-icon="mdi-magnify"
+                    />
+
+                    <v-treeview
+                      v-model="selProvisions"
+                      class="mt-2"
+                      dense
+                      selected-color="black"
+                      :selectable="!readOnly"
+                      :disabled="readOnly"
+                      item-key="id"
+                      :item-text="'title.' + lang"
+                      selection-type="leaf"
+                      :search="selectedResponseOption.searchProvisions"
+                      :filter="selectedResponseOption.filterProvisions"
+                      :items="treeDataProvisions"
+                    >
+                      <template v-slot:label="{ item }">
+                        <div class="truncated">
+                          <div>{{ item.title[lang] }}</div>
+                        </div>
+                      </template>
+                    </v-treeview>
+                  </v-sheet>
+                </div>
+              </div>
+            </v-sheet>
+          </v-tab-item>
+          <v-tab-item>
+            <div v-if="displaySamplingRecord && !displayViolationInfo ">
+              <sampling-record
+                :question="question"
+                :read-only="readOnly"
+              />
+            </div>
+            <supplementary-info
+              v-if="showSupplementaryInfo"
+              :question="question"
+              :selresponseoption="selectedResponseOption"
+              :group="group"
+              :read-only="readOnly"
+              @error="onError"
+            />
+          </v-tab-item>
+        </v-tabs>
+      </v-sheet>
 
       <br>
-
-      <supplementary-info
-        v-if="showSupplementaryInfo"
-        :question="question"
-        :selresponseoption="selectedResponseOption"
-        :group="group"
-        :read-only="readOnly"
-        @error="onError"
-      />
 
       <div v-if="!isReferenceQuestion">
         <v-expansion-panels
@@ -250,6 +275,7 @@
             :question="childQuestion"
             :group="group"
             :parent="question"
+            :is-child-question="true"
             :in-repeated-group="inRepeatedGroup"
             :expand="expand"
             :read-only="readOnly"
@@ -272,7 +298,7 @@ import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
 import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
-import SamplingRecord from './sampling/sampling-record'
+import SamplingRecord from './sampling/sampling-record.vue'
 
 export default {
   emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
@@ -287,6 +313,10 @@ export default {
     parent: {
       type: Object,
       required: true
+    },
+    isChildQuestion: {
+      type: Boolean,
+      default: false
     },
     group: {
       type: Object,
@@ -318,7 +348,9 @@ export default {
       isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
-      responseArgs: null
+      responseArgs: null,
+      filteredInByProvisionSearch: true,
+      tab: null
     }
   },
   computed: {
@@ -371,13 +403,11 @@ export default {
       if (selClass === 'selected' && this.$refs.qPanel) this.$refs.qPanel.$el.scrollIntoView(true)
       return selClass
     },
+    violationHeaderFontSize () {
+      return this.selProvisions.length > 0 ? 'caption' : 'subtitle-1'
+    },
     isPanelActive () {
       return this.$store.state.errors.errorNotification.qid === this.question.guid
-    },
-    isQuestionToolbarVisible () {
-      if (this.question.isReferenceQuestion) return false
-      if (this.question.isSamplingAllowed || this.question.isRepeatable || this.question.isRepeated) return true
-      return false
     },
     expansionPanelsValue: {
       get () {
@@ -393,42 +423,25 @@ export default {
       },
       set () { }
     },
-    filteredInByProvisionSearch () {
-      if (this.provisionFilter === null) {
-        // no active search display all questions
-        return true
+    // returns the source (origin/original) question object if the question is considered a repeat
+    // i.e. the source of which this question has been copied from.
+    sourceQuestion () {
+      // if repeated group, find source group
+      if (this.inRepeatedGroup || this.question.isRepeated) {
+        // find the originial group (needed when group is repeated)
+        const groupId = `${this.group.primaryKey}#000`// #000 is always identifies the origin of specific group
+        // find question in the origin group, must get flat list all questions within group first (including children).
+        const originQuestions = this.getFlatListOfAllQuestions(groupId)
+        // find will return first occurence which statifies our search as the source will always be in the beginning of the array.
+        const originQuestion = originQuestions.find(x => x.name === this.question.name)
+
+        return originQuestion
       }
-      if (this.provisionFilter && this.provisionFilter.length > 0) {
-        // active search check to see if question should be shown or not
-        let dependants = []
-        let dependsArray = []
-
-        if (this.question.dependants) {
-          dependants = this.question.dependants.map(x => x.guid)
-        }
-
-        if (this.question.dependencyGroups) {
-          dependsArray = []
-          this.question.dependencyGroups.forEach(x => {
-            x.questionDependencies.forEach(y => {
-              dependsArray.push(y.dependsOnQuestion.guid)
-            })
-          })
-        }
-
-        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
-
-        const foundInQuestion = this.provisionFilter.some(p => p.questions.includes(this.question.guid))
-        const foundInDependants = this.provisionFilter.some(p => p.questions.some(q => dependants.includes(q)))
-        const foundInDepends = this.provisionFilter.some(p => p.questions.some(q => dependsArray.includes(q)))
-        const foundInChildren = this.provisionFilter.some(p => p.questions.some(q => childrenGuids.includes(q)))
-
-        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
-      }
-      // search resulted in no provisions found therefore hide all questions
-      return false
+      return null
     },
     isVisible () {
+      this.setQuestionVisibilityBasedOnAppliedTags()
+
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
@@ -437,6 +450,18 @@ export default {
     samplingButtonColor () {
       if (this.displaySamplingRecord) return 'black'
       else return 'primary'
+    },
+    tabVisibility () {
+      if (this.displayViolationInfo) {
+        this.setTab(0)
+        return true
+      } else if (this.showSupplementaryInfo) {
+        this.setTab(1)
+        return true
+      } else {
+        this.setTab(null)
+        return false
+      }
     }
   },
   watch: {
@@ -466,6 +491,10 @@ export default {
             this.onUserResponseChanged(this.responseArgs)
           }
           break
+        case 'updateProvisionFilter':
+          // to help performance only run when mutation occurs
+          this.filteredInByProvisionSearch = this.isfilteredInByProvisionSearch()
+          break
         default:
           break
       }
@@ -474,6 +503,9 @@ export default {
     this.updateReferenceID()
   },
   methods: {
+    setTab (value) {
+      this.tab = value
+    },
     calculateRepeatedNumber () {
       let text = ''
       if (this.question.isRepeated) {
@@ -518,7 +550,7 @@ export default {
         let questionIdx = this.question.childQuestions.findIndex(cq => cq.guid === cQuestionGuid)
         if (questionIdx > -1) {
           let questionnaire = this.$store.getters['getQuestionnaire']
-          let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.question.childQuestions[questionIdx], this.question.id)
+          let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.question.childQuestions[questionIdx])
           if (nQuestion) {
             for (let x = questionIdx + 1; x < this.question.childQuestions.length; x++) {
               this.question.childQuestions[x].sortOrder = this.question.childQuestions[x].sortOrder + 1
@@ -724,12 +756,16 @@ export default {
       if (this.question.dependants) {
         for (let i = 0; i < this.question.dependants.length; i++) {
           let dependentGuid = this.question.dependants[i].guid
-          const question = this.getFlatListOfAllQuestions.find(x => x.guid === dependentGuid)
-          this.updateChildQuestionOnDependencies(question)
+          const question = this.getFlatListOfAllQuestions().find(x => x.guid === dependentGuid)
+          this.applyDependencyRuleOnQuestion(question)
         }
       }
     },
-    updateChildQuestionOnDependencies (question) {
+    /**
+     * Sets rule dependency for question and returns an array of matched groups
+     * todo: maybe refactor, find way split "responsibility "of method as it sets and returns values (making it more clear what the method does).
+     */
+    applyDependencyRuleOnQuestion (question) {
       if (question && question.dependencyGroups) {
         let groupMatchArray = []
         for (let i = 0; i < question.dependencyGroups.length; i++) {
@@ -739,7 +775,7 @@ export default {
           for (let j = 0; j < group.questionDependencies.length; j++) {
             let dependancy = group.questionDependencies[j]
             let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-            let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
+            let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
             if (dependancy.validationAction === 'equal') {
               if (!(dependsOnQuestion.response === dependancy.validationValue)) {
@@ -774,10 +810,11 @@ export default {
             }
           }
 
+          groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
+
           if (group.ruleType === 'visibility') {
-          // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
-          // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
-            groupMatchArray.push({ ruleType: 'visibility', groupMatch })
+            // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
+            // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
             const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
             question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
           } else if (group.ruleType === 'validation') {
@@ -789,6 +826,7 @@ export default {
             rule.value = group.questionDependencies[0].parentQuestion.response
           }
         }
+        return groupMatchArray
       }
     },
     onError (error) {
@@ -823,144 +861,112 @@ export default {
     setQuestionVisibility (visible) {
       this.question.isVisible = visible
     },
-    questionFoundInProvision (provisions) {
-    // ains abstract this out
-    // if (this.provisionFilter === null) {
-    //   // no active search display all questions
-    //   return true
-    // }
+
+    questionFoundViaProvidedProvisions (provisions) {
+      let question
+
+      // if question is repeated find the origin that it was repeated from, as the repeated question guid is not found in the searchable provision array.
+      // any logic applied the origin would also be applied to the repeated versions of the question.
+      if (!this.question.isRepeated && !this.inRepeatedGroup) {
+        question = this.question
+      } else {
+        question = this.sourceQuestion
+      }
+
       if (provisions && provisions.length > 0) {
       // active search check to see if question should be shown or not
         let dependants = []
         let dependsArray = []
 
-        if (this.question.dependants) {
-          dependants = this.question.dependants.map(x => x.guid)
+        if (question.dependants) {
+          dependants = question.dependants.map(x => x.guid)
         }
 
-        if (this.question.dependencyGroups) {
+        if (question.dependencyGroups) {
           dependsArray = []
-          this.question.dependencyGroups.forEach(x => {
+          question.dependencyGroups.forEach(x => {
             x.questionDependencies.forEach(y => {
               dependsArray.push(y.dependsOnQuestion.guid)
             })
           })
         }
 
-        let childrenGuids = GetAllChildrenQuestions(this.question).map(x => x.guid)
+        let childrenGuids = GetAllChildrenQuestions(question).map(x => x.guid)
 
-        const foundInQuestion = provisions.some(p => p.questions.includes(this.question.guid))
+        const foundInQuestion = provisions.some(p => p.questions.includes(question.guid))
         const foundInDependants = provisions.some(p => p.questions.some(q => dependants.includes(q)))
         const foundInDepends = provisions.some(p => p.questions.some(q => dependsArray.includes(q)))
         const foundInChildren = provisions.some(p => p.questions.some(q => childrenGuids.includes(q)))
 
-        return foundInQuestion || foundInDependants || foundInDepends || foundInChildren
+        const provisionFound = foundInQuestion || foundInDependants || foundInDepends || foundInChildren
+        return { found: provisionFound,
+          inQuestion: foundInQuestion,
+          inDependants: foundInDependants,
+          inDepends: foundInDepends,
+          inChildren: foundInChildren }
       }
       // search resulted in no provisions found therefore return false
-      return false
+      return { found: false, inQuestion: false, inDependants: false, inDepends: false, inChildren: false }
     },
-    runRule (question) {
-      let groupMatchArray = []
-      for (let i = 0; i < question.dependencyGroups.length; i++) {
-        let group = question.dependencyGroups[i]
+    /**
+   *
+   *Function will modify the question prop. and set the isVisible value to true or false based on tag/filtering logic
+   *Note: The logic is built to keep structural integrity of the template intact regardless of filtering. Where it makes sense.
+   *For example: provision only found in a child will display the question (although the question does not have any assoicated provisions).
+   *
+   */
+    setQuestionVisibilityBasedOnAppliedTags () {
+      const provisionFound = this.questionFoundViaProvidedProvisions(this.provisionTagFilters)
 
-        let groupMatch = true
-        for (let j = 0; j < group.questionDependencies.length; j++) {
-          let dependancy = group.questionDependencies[j]
-          let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-          let dependsOnQuestion = this.getFlatListOfAllQuestions.find(x => x.guid === dependsOnQuestionGuid)
-
-          if (dependancy.validationAction === 'equal') {
-            if (!(dependsOnQuestion.response === dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'notEqual') {
-            if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'greaterThen') {
-            if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lessThen') {
-            if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthLessThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          } else if (dependancy.validationAction === 'lengthGreaterThen') {
-            if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
-              groupMatch = false
-              break
-            }
-          }
-        }
-
-        groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
-
-        if (group.ruleType === 'visibility') {
-        // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
-        // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
-          const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-          question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
-        } else if (group.ruleType === 'validation') {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-          rule.enabled = groupMatch
-        } else if (group.ruleType === 'validationValue' && groupMatch) {
-          let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-
-          rule.value = group.questionDependencies[0].parentQuestion.response
-        }
+      // **** SCENARIO 1: QUESTION WITH NO PROVISIONS****
+      // question has no provisions its visibility always be set to true unless it default is set to false, therefore pass in set value from json
+      if (!this.selectedQuestionHasProvisions) {
+        this.setQuestionVisibility(this.question.isVisible)
+        return true
       }
-      return groupMatchArray
+
+      // **** SCENARIO 2: QUESTION WITH NO DEPENDANCIES****
+      // question has provisions but has no dependency questions required to check to see if visibility should be set based on another question.
+      // THEN==> check if the question is found in the applied provisions, visibility should be set to true else false
+      if (!this.requireDependantQuestionToEnableVisibility) {
+        // note 1: do not need to evaluate provisionFound.depends its irrelevant if the provision if found within the depends because the dependency logic must be evaluated.
+        // note 2: in practise a question that does not require depenencies. provisionFound.depends will evaluate to false always, therefore irrelevant to evaluate
+
+        const found = (provisionFound.inQuestion || provisionFound.inDependants || provisionFound.inChildren)
+        this.setQuestionVisibility(found)
+        return found
+      } else {
+        // **** SCENARIO 3a: QUESTION WITH DEPENDANCIES, NO PROVISION MATCHING****
+        // question is dependent
+        // question provision is not found in applied provisions via tags then returns false.
+        // else question provision is found within the applied tags but we cannot assume it should be displayed as it depends on its dependencies rules beinng met
+
+        if (!provisionFound.inQuestion && !provisionFound.inDependants && !provisionFound.inChildren) {
+          this.setQuestionVisibility(false)
+          return false
+        }
+
+        // **** SCENARIO 3b: QUESTION WITH DEPENDANCIES, WITH PROVISION MATCHING****
+
+        // below code checking to see if depencies rules/conditions are statisfied in settting visibility
+        // note: if the question is not answer, the groupMatchArray returns false and if the conditions do not match conditions of the rules it will return false
+
+        const groupMatchArray = this.applyDependencyRuleOnQuestion(this.question)
+        const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
+        const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+        this.setQuestionVisibility(answerMatch)
+
+        return answerMatch
+      }
     },
-    isVisibleByAppliedTags () {
-      return false
-      // console.log('ggggggggggg')
-      // // if there is nothing in the tag filters, then there is nothing to apply and therefore default all questions to visible.
-      // // if (this.provisionTagFilters.length === 0) {
-      // //   this.setQuestionVisibility(true)
-      // //   return true
-      // // }
-
-      // const questionFoundInProvision = this.questionFoundInProvision(this.provisionTagFilters)
-
-      // // question has no provisions its visibility always be set to true
-      // if (!this.selectedQuestionHasProvisions) {
-      //   this.setQuestionVisibility(true)
-      //   return true
-      // }
-
-      // // question has provisions but has no dependency questions required to check to see if visibility should be set
-      // // then check if the question is found in the applied provisions visible should set to true else false
-      // if (!this.requireDependantQuestionToEnableVisibility) {
-      //   this.setQuestionVisibility(questionFoundInProvision) // todo refactor remove method add watch
-      //   return questionFoundInProvision
-      // } else {
-      //   // question is dependent
-      //   // question provision is not found in applied provisions via tags then returns false.
-      //   // else question provision is found within the applied tags but we cannot assume it should be displayed as it depends on its dependencies rules beinng met
-
-      //   if (!questionFoundInProvision) {
-      //     this.setQuestionVisibility(false)
-      //     return false
-      //   }
-
-      //   // below code checking to see if depencies rules/conditions are statisfied in settting visibility
-      //   // note: if the question is not answer returns false and if the conditions do not match conditions of the rules it will return false
-      //   const groupMatchArray = this.runRule(this.question)
-      //   const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-      //   const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
-      //   this.setQuestionVisibility(answerMatch)
-      //   return answerMatch
-      // }
+    isfilteredInByProvisionSearch () {
+      console.log('running filter provision search')
+      if (this.provisionFilter === null) {
+        // no active search display all questions
+        return true
+      }
+      const provisionSearch = this.questionFoundViaProvidedProvisions(this.provisionFilter)
+      return provisionSearch.found
     }
   }
 }
@@ -1015,5 +1021,9 @@ export default {
     position: absolute;
     z-index:-1; /* stack below truncated text */
   }
+  /* makes acitve class same color as non active, else the button will looked like its pressed at all times */
+.btn-toggle-active{
+  color:#f5f5f5 !important;
+}
 
 </style>

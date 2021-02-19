@@ -91,6 +91,7 @@
         <v-col cols="12">
           <v-expansion-panels
             v-model="expansionPanelsValue"
+            class="mt-3"
             multiple
             focusable
             hover
