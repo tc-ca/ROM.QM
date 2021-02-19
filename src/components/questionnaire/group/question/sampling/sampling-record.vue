@@ -5,7 +5,7 @@
     >
       <v-col>
         <span style="color:#757575">
-          Sampling Record
+          {{ $t('app.questionnaire.group.question.sampling.title') }}
         </span>
       </v-col>
     </v-row>
