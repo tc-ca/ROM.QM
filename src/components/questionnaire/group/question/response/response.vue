@@ -78,7 +78,7 @@ export default {
       text: QUESTION_TYPE.TEXT,
       radio: QUESTION_TYPE.RADIO,
       select: QUESTION_TYPE.SELECT,
-      image: QUESTION_TYPE.IMAGE,
+      // image: QUESTION_TYPE.IMAGE,
       number: QUESTION_TYPE.NUMBER,
       reference: QUESTION_TYPE.REFERENCE
     }

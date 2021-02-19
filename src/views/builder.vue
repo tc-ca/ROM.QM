@@ -838,8 +838,8 @@ export default {
           break
         case QUESTION_TYPE.SELECT: questiontext = 'SLCT'
           break
-        case QUESTION_TYPE.IMAGE: questiontext = 'IMG'
-          break
+        // case QUESTION_TYPE.IMAGE: questiontext = 'IMG'
+        //   break
         case QUESTION_TYPE.NUMBER: questiontext = 'NBR'
           break
         case QUESTION_TYPE.REFERENCE: questiontext = 'REF'
