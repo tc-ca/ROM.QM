@@ -6,7 +6,7 @@
   },
   "groups": [
       {
-          "primaryKey": "Group 1",
+          "primaryKey": "GRP_GRP1_Full Featured Template",
           "title": {
               "en": "Group 1",
               "fr": "Fr: New Group"
@@ -94,7 +94,11 @@
                           "selectedProvisions": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": true,
-                          "name": "RSPNS_YS_QTN_RDQSTNWTHPRVSNS_RD_Group 1"
+                          "name": "RSPNS_YS_QTN_RDQSTNWTHPRVSNS_RD_Group 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -144,7 +148,11 @@
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": true,
-                          "name": "RSPNS_N_QTN_RDQSTNWTHPRVSNS_RD_Group 1"
+                          "name": "RSPNS_N_QTN_RDQSTNWTHPRVSNS_RD_Group 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -220,7 +228,11 @@
                           "selectedProvisions": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
-                          "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                          "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -247,7 +259,11 @@
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
-                          "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                          "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -311,7 +327,11 @@
                                   "selectedProvisions": [],
                                   "searchProvisions": null,
                                   "isProvisionCollapsed": false,
-                                  "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                                  "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                                  "file": {
+                                      "option": "optional",
+                                      "value": []
+                                  }
                               },
                               {
                                   "id": 2,
@@ -338,7 +358,11 @@
                                   "selectedProvisionsTitles": [],
                                   "searchProvisions": null,
                                   "isProvisionCollapsed": false,
-                                  "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                                  "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                                  "file": {
+                                      "option": "optional",
+                                      "value": []
+                                  }
                               }
                           ],
                           "validationRules": [
@@ -402,7 +426,11 @@
                                           "selectedProvisions": [],
                                           "searchProvisions": null,
                                           "isProvisionCollapsed": false,
-                                          "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                                          "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 2,
@@ -429,7 +457,11 @@
                                           "selectedProvisionsTitles": [],
                                           "searchProvisions": null,
                                           "isProvisionCollapsed": false,
-                                          "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                                          "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       }
                                   ],
                                   "validationRules": [
@@ -511,7 +543,11 @@
                                           "selectedProvisions": [],
                                           "searchProvisions": null,
                                           "isProvisionCollapsed": false,
-                                          "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                                          "name": "RSPNS_YS_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 2,
@@ -538,7 +574,11 @@
                                           "selectedProvisionsTitles": [],
                                           "searchProvisions": null,
                                           "isProvisionCollapsed": false,
-                                          "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1"
+                                          "name": "RSPNS_N_QTN_RDWTHDPNDNTCHLD_RD_Group 1",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       }
                                   ],
                                   "validationRules": [
@@ -692,7 +732,11 @@
                           "provisions": [],
                           "selectedProvisions": [],
                           "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -719,7 +763,11 @@
                           "selectedProvisions": [],
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -828,7 +876,11 @@
                           "provisions": [],
                           "selectedProvisions": [],
                           "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -855,7 +907,11 @@
                           "selectedProvisions": [],
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -927,7 +983,11 @@
                           "provisions": [],
                           "selectedProvisions": [],
                           "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -954,7 +1014,11 @@
                           "selectedProvisions": [],
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1051,7 +1115,11 @@
                           "selectedProvisions": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
-                          "name": "RSPNS_YS_QTN_RPTBLGRPQSTN1_RD_GRP_RPTBLGRP_Questionnaire 1"
+                          "name": "RSPNS_YS_QTN_RPTBLGRPQSTN1_RD_GRP_RPTBLGRP_Questionnaire 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1078,7 +1146,11 @@
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
-                          "name": "RSPNS_N_QTN_RPTBLGRPQSTN1_RD_GRP_RPTBLGRP_Questionnaire 1"
+                          "name": "RSPNS_N_QTN_RPTBLGRPQSTN1_RD_GRP_RPTBLGRP_Questionnaire 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1146,7 +1218,11 @@
                           "selectedProvisions": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
-                          "name": "RSPNS_YS_QTN_RPTBLGRPQSTN2_RD_GRP_RPTBLGRP_Questionnaire 1"
+                          "name": "RSPNS_YS_QTN_RPTBLGRPQSTN2_RD_GRP_RPTBLGRP_Questionnaire 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1173,7 +1249,11 @@
                           "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
-                          "name": "RSPNS_N_QTN_RPTBLGRPQSTN2_RD_GRP_RPTBLGRP_Questionnaire 1"
+                          "name": "RSPNS_N_QTN_RPTBLGRPQSTN2_RD_GRP_RPTBLGRP_Questionnaire 1",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [

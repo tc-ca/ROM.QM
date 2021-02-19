@@ -673,6 +673,19 @@ function fixTemplate (template) {
           response.name = generateName(response.text[LANGUAGE.ENGLISH], 'RSPNS', question.name, false)
           fixLog.push(`fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`)
         }
+
+        /**
+         * add file prop if not exists 
+         */
+
+        if (response.file === undefined || response.file.value === '') {
+          response.file = {
+            "option": "optional",
+            "value": []
+          }
+          fixLog.push(`fixTemplate: added default file prop for Response ${rIndex} of Question ${question.name}`)
+        }
+
       }
     } else {
       if (question.responseOptions && question.responseOptions.length > 0) {
