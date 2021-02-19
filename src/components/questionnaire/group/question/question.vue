@@ -129,21 +129,22 @@
           v-model="tab"
           show-arrows
         >
-          <!-- <v-tabs-slider color="black" /> -->
-
+          <v-tabs-slider
+            :color="displayViolationInfo && showSupplementaryInfo? 'black': 'transparent' "
+          />
           <v-tab
-            v-show="displayViolationInfo"
+            v-if="displayViolationInfo"
             class="mb-2"
           >
             Violation Details
           </v-tab>
           <v-tab
-            v-show="showSupplementaryInfo"
+            v-if="showSupplementaryInfo"
             class="mb-2"
           >
             Additional Information
           </v-tab>
-          <v-tab-item>
+          <v-tab-item v-if="displayViolationInfo">
             <v-sheet>
               <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
                 <sampling-record
@@ -240,7 +241,7 @@
               </div>
             </v-sheet>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item v-if="showSupplementaryInfo">
             <div v-if="displaySamplingRecord && !displayViolationInfo ">
               <sampling-record
                 :question="question"
