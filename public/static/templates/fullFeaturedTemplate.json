@@ -787,47 +787,6 @@
                   "validationState": true
               },
               {
-                  "name": "QTN_MGQSTN_IMG_Group 1",
-                  "id": 12,
-                  "guid": "1b4b0c3f-892c-4db3-a33b-3b0327a244a0",
-                  "sortOrder": 7,
-                  "isVisible": true,
-                  "isMultiple": true,
-                  "text": {
-                      "en": "Image Question",
-                      "fr": "FR: Question text"
-                  },
-                  "type": "image",
-                  "response": null,
-                  "isSamplingAllowed": false,
-                  "samplingRecord": null,
-                  "isRepeatable": false,
-                  "isRepeated": false,
-                  "responseOptions": [],
-                  "validationRules": [
-                      {
-                          "name": "require",
-                          "enabled": true,
-                          "type": "require",
-                          "value": null,
-                          "errorMessage": {
-                              "en": "Required",
-                              "fr": "FR: Required"
-                          }
-                      }
-                  ],
-                  "violationInfo": {
-                      "responseToMatch": "false",
-                      "matchingType": "equal",
-                      "referenceID": null,
-                      "violationCount": null
-                  },
-                  "childQuestions": [],
-                  "dependants": [],
-                  "dependencyGroups": [],
-                  "validationState": true
-              },
-              {
                   "name": "QTN_SBLNGQSTNWTHDPN_RD_Group 1",
                   "id": 13,
                   "guid": "07ab380a-6067-415d-aabe-cbb532ccd8ca",
