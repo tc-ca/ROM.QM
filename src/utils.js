@@ -116,7 +116,7 @@ export function getCollectionParent(group, guid) {
 
 export function questionHasSupplementaryInfo(question)
 {
-  return (question.type !== QUESTION_TYPE.REFERENCE) && (question.type !== QUESTION_TYPE.TEXT) && (question.type !== QUESTION_TYPE.NUMBER) && (question.type !== QUESTION_TYPE.IMAGE)
+  return (question.type !== QUESTION_TYPE.REFERENCE) && (question.type !== QUESTION_TYPE.TEXT) && (question.type !== QUESTION_TYPE.NUMBER) // && (question.type !== QUESTION_TYPE.IMAGE)
 }
 
 export function GetAllChildrenQuestions(question)

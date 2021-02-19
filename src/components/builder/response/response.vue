@@ -17,11 +17,11 @@
       :question="question"
     />
 
-    <image-response
+    <!-- <image-response
       v-if="question.type === image"
       :group="group"
       :question="question"
-    />
+    /> -->
 
     <number-response
       v-if="question.type === number"
@@ -36,12 +36,12 @@
 import TextResponse from './text-response'
 import RadioResponse from './radio-response'
 import SelectResponse from './select-response'
-import ImageResponse from './image-response'
+// import ImageResponse from './image-response'
 import NumberResponse from './number-response'
 import { QUESTION_TYPE } from '../../../data/questionTypes'
 
 export default {
-  components: { TextResponse, RadioResponse, SelectResponse, ImageResponse, NumberResponse },
+  components: { TextResponse, RadioResponse, SelectResponse, NumberResponse },
   props: {
     question: {
       type: Object,
@@ -57,7 +57,7 @@ export default {
       text: QUESTION_TYPE.TEXT,
       radio: QUESTION_TYPE.RADIO,
       select: QUESTION_TYPE.SELECT,
-      image: QUESTION_TYPE.IMAGE,
+      // image: QUESTION_TYPE.IMAGE,
       number: QUESTION_TYPE.NUMBER,
       reference: QUESTION_TYPE.REFERENCE
     }

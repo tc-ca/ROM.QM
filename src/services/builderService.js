@@ -59,7 +59,7 @@ function createQuestion(questionnaire, group) {
       [LANGUAGE.ENGLISH]: "Question text",
       [LANGUAGE.FRENCH]: "FR: Question text"
     },
-    type: "radio", // text, number, select, radio, boolean, image...
+    type: "radio", // text, number, select, radio, boolean...
     response: null,
     isSamplingAllowed: false,
     samplingRecord: null,

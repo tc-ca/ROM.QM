@@ -140,6 +140,7 @@
             "repeatedQuestion": "Question répétée"
           },
           "sampling": {
+            "title": "Enregistrement d'échantillonnage",
             "approximateTotal": "Total estimé",
             "sampleSize": "Taille de l'échantillon",
             "nonCompliances": "Non-conformités",

@@ -26,14 +26,14 @@
       @error="onError"
     />
 
-    <image-response
+    <!-- <image-response
       v-if="question.type === image"
       :group="group"
       :question="question"
       :read-only="readOnly"
       @change="onChange"
       @error="onError"
-    />
+    /> -->
 
     <number-response
       v-if="question.type === number"
@@ -48,16 +48,16 @@
 
 <script>
 
-import TextResponse from './text-response'
-import RadioResponse from './radio-response'
-import SelectResponse from './select-response'
-import ImageResponse from './image-response'
-import NumberResponse from './number-response'
+import TextResponse from './text-response.vue'
+import RadioResponse from './radio-response.vue'
+import SelectResponse from './select-response.vue'
+// import ImageResponse from './image-response.vue'
+import NumberResponse from './number-response.vue'
 import { QUESTION_TYPE } from '../../../../../data/questionTypes'
 
 export default {
   emits: ['change', 'error'],
-  components: { TextResponse, RadioResponse, SelectResponse, ImageResponse, NumberResponse },
+  components: { TextResponse, RadioResponse, SelectResponse, NumberResponse },
   props: {
     question: {
       type: Object,
@@ -78,7 +78,7 @@ export default {
       text: QUESTION_TYPE.TEXT,
       radio: QUESTION_TYPE.RADIO,
       select: QUESTION_TYPE.SELECT,
-      image: QUESTION_TYPE.IMAGE,
+      // image: QUESTION_TYPE.IMAGE,
       number: QUESTION_TYPE.NUMBER,
       reference: QUESTION_TYPE.REFERENCE
     }

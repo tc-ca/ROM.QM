@@ -2,7 +2,7 @@
     TEXT: 'text',
     RADIO: 'radio',
     SELECT: "select",
-    IMAGE: "image",
+    // IMAGE: "image",
     NUMBER: "number",
     REFERENCE: "reference"
   }

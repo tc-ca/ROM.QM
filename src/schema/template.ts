@@ -124,6 +124,7 @@ export interface QuestionResponseOption {
     value: string;
     internalComment: Comment;
     externalComment: Comment;
+    file: File;
     picture: Picture;
     provisions: string[];
     selectedProvisions: any[];
@@ -135,6 +136,12 @@ export interface QuestionResponseOption {
     selectedProvisionsTitles?: any[];
 }
 
+export interface File {
+    option: Option;
+    value: FileItems[];
+    validationStatus?: boolean;
+    notification?: null;
+}
 export interface Picture {
     option: Option;
     value: PictureItems[];
@@ -142,10 +149,20 @@ export interface Picture {
     notification?: null;
 }
 
-export interface PictureItems {
-    base64String: string;
+export interface FileItems {
     title: string;
+    fileName: string;
+    guid: string;
     comment: string;
+    uploadedBy: string;
+    timeStamp: Date;
+}
+export interface PictureItems {
+    title: string;
+    fileName: string;
+    guid: string;
+    comment: string;
+    uploadedBy: string;
     timeStamp: Date;
 }
 
@@ -186,7 +203,6 @@ export interface SearchableProvision {
 
 export enum QuestionResponseType {
     Reference = "reference",
-    Image = "image",
     Number = "number",
     Select = "select",
     Radio = "radio",
