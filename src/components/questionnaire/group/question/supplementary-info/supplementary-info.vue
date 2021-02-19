@@ -1,8 +1,12 @@
 <template>
-  <v-expansion-panels
+  <!-- <v-expansion-panels
     multiple
     flat
     :value="[]"
+  > -->
+  <v-list
+    dense
+    nav
   >
     <supplementary-info-comment
       v-if="displayExternalComment"
@@ -46,7 +50,9 @@
       save-to-prop="images"
       @error="onError"
     />
-  </v-expansion-panels>
+  </v-list>
+
+  <!-- </v-expansion-panels> -->
 </template>
 
 <script>
