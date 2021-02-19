@@ -64,6 +64,7 @@
       console.log('page is fully loaded');
       // console.log('xrm1',JSON.stringify(Xrm))
       // console.log('xrm2',Xrm.Utility.getGlobalContext().client)
+      
       qtnHelper.InitializeQuestionnaireRender()
     };
 
@@ -77,6 +78,27 @@
     window.addEventListener('tdg-qstnnr-updated', (event) => {
       questionnaireWebResourceIsDirty = true;
       console.log('Is dirty has been set in Dynamics to ' + questionnaireWebResourceIsDirty);
+    }, false);
+
+
+
+
+    // Image & File upload, download
+    window.addEventListener('tdg-qstnnr-downloadBlobImage', (event) => {
+      qtnHelper.downloadBlobImage(event.detail.nameGuid, event.detail.fileName);
+    }, false);
+
+    window.addEventListener('tdg-qstnnr-uploadBlobImage', (event) => {
+      alert('i am in render');
+      qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.nameGuid, event.detail.fileName);
+    }, false);
+
+    window.addEventListener('tdg-qstnnr-getBlobResults', (event) => {
+      qtnHelper.getBlobResults(event.detail.nameGuid);
+    }, false);
+
+    window.addEventListener('tdg-qstnnr-postBlobResults', (event) => {
+      qtnHelper.postBlobResults(event.detail.json, event.detail.nameGuid);
     }, false);
 
 // unsupported in dynamics, plain js way to do this  

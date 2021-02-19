@@ -304,11 +304,12 @@
 
 /* eslint-disable no-undef */
 import moment from 'moment'
-import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
+// import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
 import AzureBlobService from '../../../../../services/azureBlobService'
 import ImageFile from '../supplementary-info/image-file'
 import EXIF from 'exif-js'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   components: {
@@ -379,6 +380,7 @@ export default {
       return this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
     }
   },
+
   mounted () {
     this.$watch(
       '$refs.validationInput.validations',
@@ -394,16 +396,19 @@ export default {
       let x = n % IMAGES_PER_PAGE === 0 ? Math.floor(n / IMAGES_PER_PAGE) : Math.floor(n / IMAGES_PER_PAGE) + 1
       return x
     },
+
     onNextPageMove (i) {
       let start = i === 1 ? 0 : ((i - 1) * IMAGES_PER_PAGE)
       let end = (i * IMAGES_PER_PAGE)
       this.curPageImages = this.picture.value.slice(start, end)
     },
+
     setCurrentImage (imgLink, img) {
       this.selLink = imgLink
       this.selImage = img
       this.getExifData(imgLink)
     },
+
     getExifData (data) {
       let image = new Image()
       image.src = data
@@ -414,63 +419,65 @@ export default {
       this.isExifDataAvailable = (exifData != null && Object.keys(exifData).length > 0)
       this.selExifData = exifData
     },
+
     onFileChange (e) {
       if (!e) {
         return
       }
-      this.createFile(e)
+      var reader = new FileReader()
+      reader.onload = (e) => {
+        this.createFile(e.target.result)
+      }
+      reader.readAsDataURL(file)
     },
+
     async createFile (file) {
+      this.progressStatus = 'Uploading...'
+      let guid = uuidv4()
+
       try {
-        this.progressStatus = 'Uploading...'
-        await AzureBlobService.uploadFile(file)
+        let event = new CustomEvent('tdg-qstnnr-uploadBlobImage', {
+          detail: {
+            base64String: file,
+            nameGuid: guid,
+            fileName: file.name
+          },
+          bubbles: true,
+          cancelable: true
+        })
+        document.body.dispatchEvent(event)
       } catch (e) {
         console.log(e)
       } finally {
         this.progressStatus = ''
-        let fileType = ''
-        if (file.type === 'application/pdf') fileType = 'pdf'
-        else if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type === 'application/vnd.ms-excel') fileType = 'excel'
-        else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') fileType = 'word'
-        else if (file.type.startsWith('image')) fileType = 'image'
-        else fileType = 'document-outline'
-
-        this.picture.value.push({ isFileTypeImage: false, fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
+        this.picture.value.push({
+          isFileTypeImage: false,
+          fileType: 'image',
+          title: file.name,
+          fileName: file.name,
+          comment: 'N/A',
+          guid: guid,
+          timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
+        })
         this.next()
         this.next()
 
         this.$refs.fileUpload.reset()
       }
     },
-    createImage (file) {
-      var reader = new FileReader()
-      var vm = this
-
-      reader.onload = (e) => {
-        vm.curImg = e.target.result
-        this.addImageToArray()
-      }
-      reader.readAsDataURL(file)
-    },
-
-    addImageToArray () {
-      if (this.picture.value.length < MAX_IMAGE_UPLOADS_PER_ANSWER) {
-        // This is temporary, until all the questions will come with the right data structure
-        if (!Array.isArray(this.picture.value)) {
-          this.picture.value = []
-        }
-        this.picture.value.push({ isFileTypeImage: true, fileType: 'image', title: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), fileName: file.name, comment: '', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS) })
-        // this.images.push(base64)
-        this.next()
-      } else {
-        // TODO: add string to resource of some kind.
-        this.$store.dispatch('notification/show', { text: `Only ${MAX_IMAGE_UPLOADS_PER_ANSWER} pictures can be added to an answer`, color: 'error' })
-      }
-    },
 
     async downloadFile (file) {
       try {
-        await AzureBlobService.downloadFile(file)
+        let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
+          detail: {
+            nameGuid: file.guid,
+            fileName: file.name
+          },
+          bubbles: true,
+          cancelable: true
+        })
+
+        document.body.dispatchEvent(event)
       } catch (e) {
         console.log(e)
       }
@@ -504,20 +511,12 @@ export default {
       e.stopPropagation()
     },
 
-    changeImage (base64) {
-      if (this.envProd) {
-        this.picture.value[this.galleryIndex].base64String = base64
-      } else {
-        // this.images[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
-        // this.picture.value[this.galleryIndex].base64String = `data:image/jpeg;base64,${base64Images.image_002}`
-      }
-    },
-
     setGalleryIndex () {
       this.galleryIndex = this.picture.value.length === 0
         ? 0
         : this.picture.value.length - 1
     },
+
     next () {
       this.galleryIndex = this.galleryIndex + 1 === this.picture.value.length
         ? 0
