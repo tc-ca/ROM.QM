@@ -34,7 +34,7 @@ import { mapState } from 'vuex'
 
 export default {
   mixins: [BaseMixin],
-  events: ['update-displayed-tags'],
+  events: ['update-displayed-tags', 'mounted'],
   props: {
     item: {
       type: Object,
@@ -50,6 +50,10 @@ export default {
     },
     label: {
       type: String,
+      required: true
+    },
+    updateFilter: {
+      type: Boolean,
       required: true
     }
   },
@@ -101,24 +105,15 @@ export default {
     values (value) {
       // todo performance update, include conditional to run if value matches parent
       this.updateProvisionFilter()
+    },
+    updateFilter (value, oldValue) {
+      if (value) {
+        this.updateProvisionFilter()
+      }
     }
   },
   mounted () {
-    // locally characteristics data is available
-    if (this.envDev) {
-      this.updateProvisionFilter()
-    }
-
-    this.$store.subscribe((mutation, state) => {
-      switch (mutation.type) {
-        case 'SET_CHARACTERISTICS':
-          this.updateProvisionFilter()
-          console.log('SET_CHARACTERISTICS')
-          break
-        default:
-          break
-      }
-    })
+    this.$emit('mounted', true)
   },
   methods: {
     updateProvisionFilter () {
