@@ -770,7 +770,6 @@ export default {
     applyDependencyRuleOnQuestion (question) {
       if (question && question.dependencyGroups) {
         let groupMatchArray = []
-        const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < question.dependencyGroups.length; i++) {
           let group = question.dependencyGroups[i]
 
@@ -778,38 +777,48 @@ export default {
           for (let j = 0; j < group.questionDependencies.length; j++) {
             let dependancy = group.questionDependencies[j]
             let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-            let dependsOnQuestion = flatListQuestions.find(x => x.guid === dependsOnQuestionGuid)
-            if (dependsOnQuestion) {
-              if (dependancy.validationAction === 'equal') {
-                if (!(dependsOnQuestion.response === dependancy.validationValue)) {
-                  groupMatch = false
-                  break
-                }
-              } else if (dependancy.validationAction === 'notEqual') {
-                if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
-                  groupMatch = false
-                  break
-                }
-              } else if (dependancy.validationAction === 'greaterThen') {
-                if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
-                  groupMatch = false
-                  break
-                }
-              } else if (dependancy.validationAction === 'lessThen') {
-                if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
-                  groupMatch = false
-                  break
-                }
-              } else if (dependancy.validationAction === 'lengthLessThen') {
-                if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
-                  groupMatch = false
-                  break
-                }
-              } else if (dependancy.validationAction === 'lengthGreaterThen') {
-                if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
-                  groupMatch = false
-                  break
-                }
+            let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
+
+            // if response is string make into array to be handle multiple selections
+            let response = dependsOnQuestion.response
+            if (typeof response === 'string') {
+              response = [response]
+            }
+
+            if (response === null) {
+              groupMatch = false
+              break
+            }
+
+            if (dependancy.validationAction === 'equal') {
+              if (!(response.some(value => value === dependancy.validationValue))) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'notEqual') {
+              if (!(response.some(value => value !== dependancy.validationValue))) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'greaterThen') {
+              if (!(response.some(value => +value > +dependancy.validationValue))) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lessThen') {
+              if (!(response.some(value => +value < +dependancy.validationValue))) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lengthLessThen') {
+              if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
+                groupMatch = false
+                break
+              }
+            } else if (dependancy.validationAction === 'lengthGreaterThen') {
+              if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
+                groupMatch = false
+                break
               }
             }
           }
