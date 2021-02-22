@@ -104,7 +104,21 @@ export default {
     }
   },
   mounted () {
-    this.updateProvisionFilter()
+    // locally characteristics data is available
+    if (this.envDev) {
+      this.updateProvisionFilter()
+    }
+
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case 'SET_CHARACTERISTICS':
+          this.updateProvisionFilter()
+          console.log('SET_CHARACTERISTICS')
+          break
+        default:
+          break
+      }
+    })
   },
   methods: {
     updateProvisionFilter () {
