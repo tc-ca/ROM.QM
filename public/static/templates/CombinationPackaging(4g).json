@@ -1,0 +1,1818 @@
+{
+  "title": {
+      "en": "Questionnaire Title EN",
+      "fr": "Questionnaire Title EN"
+  },
+  "name": "Rod Test 2",
+  "groups": [
+      {
+          "title": {
+              "en": "1.0 COMPANY DETAILS ",
+              "fr": "1.0 DÉTAILS DE LA COMPAGNIE"
+          },
+          "primaryKey": "GRP_1.0CMPNYDTLS_Rod Test 2",
+          "isRepeatable": false,
+          "isVisible": true,
+          "order": 0,
+          "questions": [
+              {
+                  "name": "QTN_1.01PHYSCLDDRSS_RD_GRP_1.0CMPNYDTLS_Rod Test 2",
+                  "id": 1,
+                  "guid": "52a3ce52-27aa-4544-8a82-d33f68f66093",
+                  "sortOrder": 1,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "1.01 Physical address matches address on Certificate of Registration?",
+                      "fr": " 1.01 L'adresse physique correspond au Certificat d'inscription? "
+                  },
+                  "type": "radio",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [
+                      {
+                          "id": 1,
+                          "name": "RSPNS_YS_QTN_1.01PHYSCLDDRSS_RD_GRP_1.0CMPNYDTLS_Rod Test 2",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 2,
+                          "name": "RSPNS_N_QTN_1.01PHYSCLDDRSS_RD_GRP_1.0CMPNYDTLS_Rod Test 2",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "required",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 3,
+                          "name": "RSPNS_NTNSPCTD_QTN_1.01PHYSCLDDRSS_RD_GRP_1.0CMPNYDTLS_Rod Test 2",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }
+          ],
+          "expansionPanels": [],
+          "domSuffix": "prop value created virtually",
+          "htmlElementId": "prop value created virtually"
+      },
+      {
+          "title": {
+              "en": "2.0 CERTIFICATE(S) OF REGISTRATION ",
+              "fr": "2.0 CERTIFICAT(S) D'INSCRIPTION"
+          },
+          "primaryKey": "GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+          "isRepeatable": false,
+          "isVisible": true,
+          "order": 1,
+          "questions": [
+              {
+                  "name": "QTN_2.01THCRTFCTFRG_RD_GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+                  "id": 2,
+                  "guid": "d7ba3d7c-d115-4f3a-9156-48013c3bb5f0",
+                  "sortOrder": 2,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "2.01 The Certificate of Registration is valid and available upon request. ",
+                      "fr": "2.01 Le certificat d'inscription est valide et peut être fourni sur demande."
+                  },
+                  "type": "radio",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "responseOptions": [
+                      {
+                          "id": 1,
+                          "name": "RSPNS_YS_QTN_2.01THCRTFCTFRG_RD_GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 2,
+                          "name": "RSPNS_N_QTN_2.01THCRTFCTFRG_RD_GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "required",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 3,
+                          "name": "RSPNS_NTNSPCTD_QTN_2.01THCRTFCTFRG_RD_GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [
+                      {
+                          "name": "QTN_QSTN_RD_GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+                          "id": 3,
+                          "guid": "44e3539a-5583-4ad9-9b3e-542a28f2991b",
+                          "sortOrder": 1,
+                          "isVisible": true,
+                          "isMultiple": true,
+                          "text": {
+                              "en": "2.01a Certificate number ",
+                              "fr": "2.01a Numéro du Certificat"
+                          },
+                          "type": "text",
+                          "response": null,
+                          "isSamplingAllowed": false,
+                          "samplingRecord": null,
+                          "validationState": true,
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "name": "require",
+                                  "enabled": true,
+                                  "type": "require",
+                                  "value": null,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  }
+                              }
+                          ],
+                          "violationInfo": {
+                              "responseToMatch": "false",
+                              "matchingType": "equal",
+                              "referenceID": null,
+                              "violationCount": null
+                          },
+                          "childQuestions": [
+                              {
+                                  "name": "QTN_QSTN_RD_GRP_2.0CRTFCT(S)FRG_Rod Test 2",
+                                  "id": 4,
+                                  "guid": "d9f1fcbd-47ee-4a00-b603-e2f306735bcb",
+                                  "sortOrder": 1,
+                                  "isVisible": true,
+                                  "isMultiple": true,
+                                  "text": {
+                                      "en": "2.01a1 Expiry Date ",
+                                      "fr": "2.01a1 Date d'échéance"
+                                  },
+                                  "type": "text",
+                                  "response": null,
+                                  "isSamplingAllowed": false,
+                                  "samplingRecord": null,
+                                  "validationState": true,
+                                  "isRepeatable": false,
+                                  "isRepeated": false,
+                                  "responseOptions": [],
+                                  "validationRules": [
+                                      {
+                                          "name": "require",
+                                          "enabled": true,
+                                          "type": "require",
+                                          "value": null,
+                                          "errorMessage": {
+                                              "en": "Required",
+                                              "fr": "FR: Required"
+                                          }
+                                      }
+                                  ],
+                                  "violationInfo": {
+                                      "responseToMatch": "false",
+                                      "matchingType": "equal",
+                                      "referenceID": null,
+                                      "violationCount": null
+                                  },
+                                  "childQuestions": [],
+                                  "dependants": [],
+                                  "dependencyGroups": []
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": []
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }
+          ],
+          "expansionPanels": [],
+          "domSuffix": "prop value created virtually",
+          "htmlElementId": "prop value created virtually"
+      },
+      {
+          "title": {
+              "en": "3.0 OTHER DOCUMENTATION ",
+              "fr": "3.0 DOCUMENTATION ADDITIONNELLE"
+          },
+          "primaryKey": "GRP_3.0THRDCMNTTN_Rod Test 2",
+          "isRepeatable": false,
+          "isVisible": true,
+          "order": 2,
+          "questions": [
+              {
+                  "name": "QTN_3.01CRRNTVRSNFT_RD_GRP_3.0THRDCMNTTN_Rod Test 2",
+                  "id": 5,
+                  "guid": "e7d5c85b-a346-4343-b5fa-3a2a696b8132",
+                  "sortOrder": 5,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "3.01 Current version of TP14850 ",
+                      "fr": "3.01 Version actuelle de la norme TP14850"
+                  },
+                  "type": "radio",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [
+                      {
+                          "id": 1,
+                          "name": "RSPNS_YS_QTN_3.01CRRNTVRSNFT_RD_GRP_3.0THRDCMNTTN_Rod Test 2",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 2,
+                          "name": "RSPNS_N_QTN_3.01CRRNTVRSNFT_RD_GRP_3.0THRDCMNTTN_Rod Test 2",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "required",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 3,
+                          "name": "RSPNS_NTNSPCTD_QTN_3.01CRRNTVRSNFT_RD_GRP_3.0THRDCMNTTN_Rod Test 2",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }
+          ],
+          "expansionPanels": [],
+          "domSuffix": "prop value created virtually",
+          "htmlElementId": "prop value created virtually"
+      },
+      {
+          "title": {
+              "en": "4.0 COMPLIANCE MARKING-See General Information, Section 5.2 of the Inspection Standard for Combination Packagings (4G)",
+              "fr": "4.0 INDICATION DE CONFORMITÉ-Voir Information générale, Section 5.2 de la norme d'inspection pour les emballages combinés (4G)"
+          },
+          "primaryKey": "GRP_4.0CMPLNCMRKNG-_Rod Test 2",
+          "isRepeatable": false,
+          "isVisible": true,
+          "order": 3,
+          "questions": [
+              {
+                  "name": "QTN_4.01CMPLNCMRKNG_RD_GRP_4.0CMPLNCMRKNG-_Rod Test 2",
+                  "id": 6,
+                  "guid": "46ef27f5-9a4e-4cf4-bee3-4115d55f592f",
+                  "sortOrder": 6,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "4.01 Compliance markings match those listed in Appendix A of Certificate ",
+                      "fr": "4.01 Les indications de conformités concordent avec celles listée à l'annexe A du certificat"
+                  },
+                  "type": "radio",
+                  "response": null,
+                  "isSamplingAllowed": true,
+                  "samplingRecord": {
+                      "approximateTotal": "",
+                      "sampleSize": "",
+                      "nonCompliances": ""
+                  },
+                  "validationState": true,
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "responseOptions": [
+                      {
+                          "id": 1,
+                          "name": "RSPNS_YS_QTN_4.01CMPLNCMRKNG_RD_GRP_4.0CMPLNCMRKNG-_Rod Test 2",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 2,
+                          "name": "RSPNS_N_QTN_4.01CMPLNCMRKNG_RD_GRP_4.0CMPLNCMRKNG-_Rod Test 2",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "required",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 3,
+                          "name": "RSPNS_NTNSPCTD_QTN_4.01CMPLNCMRKNG_RD_GRP_4.0CMPLNCMRKNG-_Rod Test 2",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_4.02CPYFCMPLNCM_IMG_GRP_4.0CMPLNCMRKNG-_Rod Test 2",
+                  "id": 7,
+                  "guid": "cc82fe35-17ab-41c1-87ba-1decb45cee79",
+                  "sortOrder": 7,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "4.02 Copy of compliance markings attached to this report (handwritten or photo) ",
+                      "fr": "4.02 Copie des indications de conformité jointes au présent document (copie manuscrite ou photo)"
+                  },
+                  "type": "image",
+                  "response": null,
+                  "isSamplingAllowed": true,
+                  "samplingRecord": {
+                      "approximateTotal": "",
+                      "sampleSize": "",
+                      "nonCompliances": ""
+                  },
+                  "validationState": true,
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }
+          ],
+          "expansionPanels": [],
+          "domSuffix": "prop value created virtually",
+          "htmlElementId": "prop value created virtually"
+      },
+      {
+          "title": {
+              "en": "5.0 PACKAGING SPECIFICATIONS (DESIGN)-Inspectors must contact Engineering Services prior to conducting the inspection, when possible, to obtain the specifications of each design. See General Information, Section 5.4 of the Inspection Standard for Combination Packaging (4G)",
+              "fr": "5.0 SPÉCIFICATIONS D'EMBALLAGES (CONCEPTION)-Si possible, contactez les services d'ingénierie avant de procéder à l'inspection pour obtenir les spécifications de chaque conception. Voir la section 5.4, renseignements généraux, de la norme d'inspection pour les emballages combinés (4G) pour plus d'information."
+          },
+          "primaryKey": "GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+          "isRepeatable": true,
+          "isVisible": true,
+          "order": 4,
+          "questions": [
+              {
+                  "name": "QTN_5.01DSGNNMBR_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 8,
+                  "guid": "085dc1a7-661e-4888-a314-ec49585f8a3f",
+                  "sortOrder": 8,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.01 Design number ",
+                      "fr": "5.01 Numéro de conception"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.02NMRKNG_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 9,
+                  "guid": "54fcad79-2abc-472a-969b-f743e118363d",
+                  "sortOrder": 9,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.02 UN Marking",
+                      "fr": "5.02 Marquage UN"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.03TRPCKGNG–BX_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 10,
+                  "guid": "9af84196-ae1b-4e87-acd1-6365285e4309",
+                  "sortOrder": 10,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.03 Outer Packaging – Box – ECT ",
+                      "fr": "5.03 Emballage extérieur  – Caisse  – Mullen"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.04TRPCKGNG–BX_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 11,
+                  "guid": "c4a191c7-1a2c-4162-81c9-ecbb9b7a1dd0",
+                  "sortOrder": 11,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.04 Outer Packaging – Box – Flute ",
+                      "fr": "5.04 Emballage extérieur  – Caisse  – Cannelure"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.05TRPCKGNG–BX_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 12,
+                  "guid": "2e0cc1c7-70d9-4f2d-9c51-e6fdd22961af",
+                  "sortOrder": 12,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.05 Outer Packaging – Box – Grammage ",
+                      "fr": "5.05 Emballage extérieur  – Caisse  – Grammage"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.06TRPCKGNG–BX_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 13,
+                  "guid": "3aa010f3-ae73-4eaa-956a-9396917f079a",
+                  "sortOrder": 13,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.06 Outer Packaging – Box – Supplier ",
+                      "fr": "5.06 Emballage extérieur  – Caisse  – Fournisseur"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.07TRPCKGNG–CL_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 14,
+                  "guid": "3df97378-44d1-4243-9bdf-09dca0131388",
+                  "sortOrder": 14,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.07 Outer Packaging – Closure – Tape ",
+                      "fr": "5.07 Emballage extérieur  – Fermeture  – Ruban"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.08TRPCKGNG–CL_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 15,
+                  "guid": "d78df2a1-8818-4cbd-a32e-9ab26a63b587",
+                  "sortOrder": 15,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.08 Outer Packaging – Closure – Glue ",
+                      "fr": "5.08 Emballage extérieur  – Fermeture  – Colle"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.09TRPCKGNG–CL_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 16,
+                  "guid": "7cb8832f-e57a-413e-8ca9-aee14414c85a",
+                  "sortOrder": 16,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.09 Outer Packaging – Closure – Staples ",
+                      "fr": "5.09 Emballage extérieur  – Fermeture  – Agrafes"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.10NNRPCKGNG–T_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 17,
+                  "guid": "39dbc7a6-0e64-4659-a437-f12ef050c289",
+                  "sortOrder": 17,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.10 Inner Packaging – Type ",
+                      "fr": "5.10 Emballages intérieurs – Type"
+                  },
+                  "type": "radio",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [
+                      {
+                          "id": 1,
+                          "name": "RSPNS_PLSTCBTTLS_QTN_5.10NNRPCKGNG–T_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Plastic Bottles ",
+                              "fr": "Bouteilles en plastique"
+                          },
+                          "value": "true",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 2,
+                          "name": "RSPNS_PLS_QTN_5.10NNRPCKGNG–T_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "Pails ",
+                              "fr": "Seaux"
+                          },
+                          "value": "false",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 3,
+                          "name": "RSPNS_THR_QTN_5.10NNRPCKGNG–T_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Other ",
+                              "fr": "Autre"
+                          },
+                          "value": "other",
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [
+                      {
+                          "name": "QTN_QSTN_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                          "id": 18,
+                          "guid": "d4ad9860-f2c4-451e-8f90-69df8e7d8e49",
+                          "sortOrder": 1,
+                          "isVisible": false,
+                          "isMultiple": true,
+                          "text": {
+                              "en": "5.10a Bottle type",
+                              "fr": "5.10a Type de bouteille"
+                          },
+                          "type": "radio",
+                          "response": null,
+                          "isSamplingAllowed": false,
+                          "samplingRecord": null,
+                          "validationState": true,
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "responseOptions": [
+                              {
+                                  "id": 1,
+                                  "name": "RSPNS_F-STYL_QTN_QSTN_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "F-Style",
+                                      "fr": "F-Style"
+                                  },
+                                  "value": "1",
+                                  "internalComment": {
+                                      "option": "optional",
+                                      "value": ""
+                                  },
+                                  "externalComment": {
+                                      "option": "optional",
+                                      "value": ""
+                                  },
+                                  "picture": {
+                                      "option": "optional",
+                                      "value": []
+                                  },
+                                  "provisions": [],
+                                  "selectedProvisions": [],
+                                  "selectedProvisionsTitles": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false,
+                                  "file": {
+                                      "option": "optional",
+                                      "value": []
+                                  }
+                              },
+                              {
+                                  "id": 2,
+                                  "name": "RSPNS_BR_QTN_QSTN_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "BR",
+                                      "fr": "BR"
+                                  },
+                                  "value": "2",
+                                  "internalComment": {
+                                      "option": "optional",
+                                      "value": ""
+                                  },
+                                  "externalComment": {
+                                      "option": "required",
+                                      "value": ""
+                                  },
+                                  "picture": {
+                                      "option": "optional",
+                                      "value": []
+                                  },
+                                  "provisions": [],
+                                  "selectedProvisions": [],
+                                  "selectedProvisionsTitles": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false,
+                                  "file": {
+                                      "option": "optional",
+                                      "value": []
+                                  }
+                              },
+                              {
+                                  "id": 3,
+                                  "name": "RSPNS_RS_QTN_QSTN_RD_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                                  "sortOrder": 3,
+                                  "text": {
+                                      "en": "RS",
+                                      "fr": "RS"
+                                  },
+                                  "value": "3",
+                                  "provisions": [],
+                                  "selectedProvisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false,
+                                  "internalComment": {
+                                      "option": "optional",
+                                      "value": ""
+                                  },
+                                  "externalComment": {
+                                      "option": "optional",
+                                      "value": ""
+                                  },
+                                  "picture": {
+                                      "option": "optional",
+                                      "value": []
+                                  },
+                                  "file": {
+                                      "option": "optional",
+                                      "value": []
+                                  }
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "name": "require",
+                                  "enabled": true,
+                                  "type": "require",
+                                  "value": null,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  }
+                              }
+                          ],
+                          "violationInfo": {
+                              "responseToMatch": "false",
+                              "matchingType": "equal",
+                              "referenceID": null,
+                              "violationCount": null
+                          },
+                          "childQuestions": [],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "dependsOnQuestion": {
+                                              "guid": "39dbc7a6-0e64-4659-a437-f12ef050c289"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "name": "QTN_5.10BTHR_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                          "id": 19,
+                          "guid": "cee9c183-7b04-4546-be10-d77bf0384812",
+                          "sortOrder": 2,
+                          "isVisible": false,
+                          "isMultiple": true,
+                          "text": {
+                              "en": "5.10b Other ",
+                              "fr": "5.10b Autre"
+                          },
+                          "type": "text",
+                          "response": null,
+                          "isSamplingAllowed": false,
+                          "samplingRecord": null,
+                          "validationState": true,
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "name": "require",
+                                  "enabled": true,
+                                  "type": "require",
+                                  "value": null,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  }
+                              }
+                          ],
+                          "violationInfo": {
+                              "responseToMatch": "false",
+                              "matchingType": "equal",
+                              "referenceID": null,
+                              "violationCount": null
+                          },
+                          "childQuestions": [],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "dependsOnQuestion": {
+                                              "guid": "39dbc7a6-0e64-4659-a437-f12ef050c289"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "other"
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "d4ad9860-f2c4-451e-8f90-69df8e7d8e49"
+                      },
+                      {
+                          "guid": "cee9c183-7b04-4546-be10-d77bf0384812"
+                      },
+                      {
+                          "guid": "cee9c183-7b04-4546-be10-d77bf0384812"
+                      }
+                  ],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.11NNRPCKGNG–N_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 20,
+                  "guid": "7b248537-a0a4-4f67-ad7f-9104034af495",
+                  "sortOrder": 18,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.11 Inner Packaging – Number and Capacity ",
+                      "fr": "5.11 Emballages intérieurs – Nombre et capacité"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.12NNRPCKGNG–M_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 21,
+                  "guid": "f1d76ab2-114f-46d9-9929-b3f79f6581bc",
+                  "sortOrder": 19,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.12 Inner Packaging – Material ",
+                      "fr": "5.12 Emballages intérieurs – Matériau"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.13NNRPCKGNG–S_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 22,
+                  "guid": "e2642dc9-90c2-41c3-b472-5b58a1946f5e",
+                  "sortOrder": 20,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.13 Inner Packaging – Supplier ",
+                      "fr": "5.13 Emballages intérieurs – Fournisseur"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.14NNRPCKGNG–C_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 23,
+                  "guid": "46c2f652-a95a-47ca-a913-c909bcfc3b5c",
+                  "sortOrder": 21,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.14 Inner Packaging – Caps – Size ",
+                      "fr": "5.14 Emballages intérieurs – Bouchons – Taille"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.15NNRPCKGNG–C_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 24,
+                  "guid": "3633f16d-f502-43ad-a75f-205783114f65",
+                  "sortOrder": 22,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.15 Inner Packaging – Caps – Style ",
+                      "fr": "5.15 Emballages intérieurs – Bouchons – Style"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.16NNRPCKGNG–C_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 25,
+                  "guid": "d0b4e79c-ed2c-4e72-a497-9dfa3e0b6a25",
+                  "sortOrder": 23,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.16 Inner Packaging – Caps – Supplier ",
+                      "fr": "5.16 Emballages intérieurs – Bouchons – Fournisseur"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              },
+              {
+                  "name": "QTN_5.17NSRTS/CSHNN_TXT_GRP_5.0PCKGNGSPCFCT_Rod Test 2",
+                  "id": 26,
+                  "guid": "9ffb1c2a-2aaa-443e-baa6-b49d9ad2a3aa",
+                  "sortOrder": 24,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "5.17 Inserts/Cushioning/Other",
+                      "fr": "5.17 Rembourrage/amortissant/autre"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }
+          ],
+          "expansionPanels": [],
+          "domSuffix": "prop value created virtually",
+          "htmlElementId": "prop value created virtually"
+      },
+      {
+          "title": {
+              "en": "6.0 ADDITIONAL NON-COMPLIANCES",
+              "fr": "6.0 AUTRES NON-CONFORMITÉS"
+          },
+          "primaryKey": "GRP_6.0DDTNLNN-CMPL_Rod Test 2",
+          "isRepeatable": false,
+          "isVisible": true,
+          "order": 5,
+          "questions": [
+              {
+                  "name": "QTN_6.01DDTNLNN-CMP_TXT_GRP_6.0DDTNLNN-CMPL_Rod Test 2",
+                  "id": 27,
+                  "guid": "d23a68a6-1ea2-418c-ad2c-71f6fa3deef7",
+                  "sortOrder": 27,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "6.01 Additional non-compliances ",
+                      "fr": "6.01 Autres non-conformités"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": true,
+                  "samplingRecord": {
+                      "approximateTotal": "",
+                      "sampleSize": "",
+                      "nonCompliances": ""
+                  },
+                  "validationState": true,
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }
+          ],
+          "expansionPanels": [],
+          "domSuffix": "prop value created virtually",
+          "htmlElementId": "prop value created virtually"
+      }
+  ],
+  "templateid": "",
+  "searchableProvisions": [],
+  "readOnly": false
+}

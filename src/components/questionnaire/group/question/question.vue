@@ -446,7 +446,7 @@ export default {
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
-      return this.question.responseOptions.some(option => option.provisions.length > 0)
+      return (this.question.responseOptions) ? this.question.responseOptions.some(option => option.provisions.length > 0) : false
     },
     samplingButtonColor () {
       if (this.displaySamplingRecord) return 'black'
@@ -755,10 +755,11 @@ export default {
     updateDependants (args) {
       this.question.response = args.value
       if (this.question.dependants) {
+        const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
           let dependentGuid = this.question.dependants[i].guid
-          const question = this.getFlatListOfAllQuestions().find(x => x.guid === dependentGuid)
-          this.applyDependencyRuleOnQuestion(question)
+          const question = flatListQuestions.find(x => x.guid === dependentGuid)
+          if (question) this.applyDependencyRuleOnQuestion(question)
         }
       }
     },
@@ -828,14 +829,17 @@ export default {
             // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
             // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
             const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-            question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+            if (groupByRuleTypeVisibility) question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
           } else if (group.ruleType === 'validation') {
-            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-            rule.enabled = groupMatch
+            if (question.validationRules) {
+              let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+              rule.enabled = groupMatch
+            }
           } else if (group.ruleType === 'validationValue' && groupMatch) {
-            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-
-            rule.value = group.questionDependencies[0].parentQuestion.response
+            if (question.validationRules) {
+              let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+              rule.value = group.questionDependencies[0].parentQuestion.response
+            }
           }
         }
         return groupMatchArray
