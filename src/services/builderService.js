@@ -509,6 +509,15 @@ function fixTemplate (template) {
       fixLog.push(`fixTemplate: added/reset name prop for Question ${qIndex} to ${question.name}`)
     }
 
+    let repeatedNames = flattenedQuestions.filter( q => q.name === question.name && q.guid !== question.guid);
+    repeatedNames.forEach(rn => {
+      const qIndx = flattenedQuestions.findIndex(fq => fq.guid === rn.guid);
+      if(qIndx) {
+        flattenQuestions[qIndx].name = flattenQuestions[qIndx].name + ` v${qIndx}`;
+        fixLog.push(`fixTemplate: fixing repeated name prop for Question ${qIndx} to ${flattenQuestions[qIndx].name}`)
+      }
+    })
+
     /**
     * Will assign a unique guid to all Questions in all items within 
     * the Array of Groups that do not already have one assigned to them 
@@ -525,6 +534,10 @@ function fixTemplate (template) {
 
       if (question.type === "radio" || question.type === "select")
       {
+        if (question.responseOptions === undefined || question.responseOptions === null) { 
+          question.responseOptions = [];
+          fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+        }
         for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
           response = question.responseOptions[rIndex];
           response.internalComment = question.internalComment
@@ -542,6 +555,10 @@ function fixTemplate (template) {
     if (question.externalComment) {
       if (question.type === "radio" || question.type === "select")
       {
+        if (question.responseOptions === undefined || question.responseOptions === null) { 
+          question.responseOptions = [];
+          fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+        }
         for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
           response = question.responseOptions[rIndex];
           response.externalComment = question.externalComment
@@ -559,6 +576,10 @@ function fixTemplate (template) {
     if (question.picture) {
       if (question.type === "radio" || question.type === "select")
       {
+        if (question.responseOptions === undefined || question.responseOptions === null) { 
+          question.responseOptions = [];
+          fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+        }
         for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
           response = question.responseOptions[rIndex];
           response.picture = question.picture
@@ -615,6 +636,10 @@ function fixTemplate (template) {
      */
     if (question.type === "radio" || question.type === "select")
     {
+      if (question.responseOptions === undefined || question.responseOptions === null) { 
+        question.responseOptions = [];
+        fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+      }
       for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
         response = question.responseOptions[rIndex];
 
@@ -688,7 +713,10 @@ function fixTemplate (template) {
 
       }
     } else {
-      if (question.responseOptions && question.responseOptions.length > 0) {
+      if (question.responseOptions === undefined || question.responseOptions === null) { 
+        question.responseOptions = [];
+        fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+      } else if (question.responseOptions && question.responseOptions.length > 0) {
         // shouldnt have any response options...TODO: or should they?
         question.responseOptions = []
         fixLog.push(`fixTemplate: removed response options from ${question.type} Question ${question.name}`)
@@ -708,6 +736,11 @@ function fixTemplate (template) {
 
       // only radio and select have response options
       if (question.responseOptions === undefined && !(question.type === "radio" || question.type === "select")) continue
+
+      if (question.responseOptions === undefined || question.responseOptions === null) { 
+        question.responseOptions = [];
+        fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+      }
 
       for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
         response = question.responseOptions[rIndex];
