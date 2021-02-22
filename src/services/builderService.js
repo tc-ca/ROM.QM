@@ -513,8 +513,8 @@ function fixTemplate (template) {
     repeatedNames.forEach(rn => {
       const qIndx = flattenedQuestions.findIndex(fq => fq.guid === rn.guid);
       if(qIndx) {
-        flattenQuestions[qIndx].name = flattenQuestions[qIndx].name + ` v${qIndx}`;
-        fixLog.push(`fixTemplate: fixing repeated name prop for Question ${qIndx} to ${flattenQuestions[qIndx].name}`)
+        flattenedQuestions[qIndx].name = flattenedQuestions[qIndx].name + ` v${qIndx}`;
+        fixLog.push(`fixTemplate: fixing repeated name prop for Question ${qIndx} to ${flattenedQuestions[qIndx].name}`)
       }
     })
 
