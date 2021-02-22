@@ -778,33 +778,44 @@ export default {
             let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
             let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
+            // if response is string make into array to be handle multiple selections
+            let response = dependsOnQuestion.response
+            if (typeof response === 'string') {
+              response = [response]
+            }
+
+            if (response === null) {
+              groupMatch = false
+              break
+            }
+
             if (dependancy.validationAction === 'equal') {
-              if (!(dependsOnQuestion.response === dependancy.validationValue)) {
+              if (!(response.some(value => value === dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'notEqual') {
-              if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
+              if (!(response.some(value => value !== dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'greaterThen') {
-              if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
+              if (!(response.some(value => +value > +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'lessThen') {
-              if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
+              if (!(response.some(value => +value < +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'lengthLessThen') {
-              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
+              if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'lengthGreaterThen') {
-              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
+              if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
