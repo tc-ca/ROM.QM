@@ -509,11 +509,15 @@ function fixTemplate (template) {
       fixLog.push(`fixTemplate: added/reset name prop for Question ${qIndex} to ${question.name}`)
     }
 
-    const repeatedNameQuestion = flattenedQuestions.findIndex( q => q.name === question.name && q.guid !== question.guid);
-    if (repeatedNameQuestion > -1) {
-      question.name = question.name + ` v${qIndex}`;
-      fixLog.push(`fixTemplate: fixing repeated name prop for Question ${qIndex} to ${question.name}`)
-    }
+    let repeatedNames = flattenedQuestions.filter( q => q.name === question.name && q.guid !== question.guid);
+    repeatedNames.forEach(rn => {
+      const qIndx = flattenedQuestions.findIndex(fq => fq.guid === rn.guid);
+      if(qIndx) {
+        flattenQuestions[qIndx].name = flattenQuestions[qIndx].name + ` v${qIndx}`;
+        fixLog.push(`fixTemplate: fixing repeated name prop for Question ${qIndx} to ${flattenQuestions[qIndx].name}`)
+      }
+    })
+
     /**
     * Will assign a unique guid to all Questions in all items within 
     * the Array of Groups that do not already have one assigned to them 
