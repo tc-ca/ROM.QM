@@ -298,7 +298,7 @@
                 <div
                   :class=" `${violationHeaderFontSize} ml-3`"
                 >
-                  Cite Violation(s)
+                  {{ $t('app.questionnaire.group.question.CiteViolations') }}
                 </div>
                 <v-chip
                   v-for="item in selProvisions"

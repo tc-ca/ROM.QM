@@ -6,9 +6,8 @@
       <v-icon
         v-if="errorInComment"
         color="red"
-        small
       >
-        mdi-message-alert
+        mdi-exclamation
       </v-icon>
     </template>
     <template v-slot:activator>

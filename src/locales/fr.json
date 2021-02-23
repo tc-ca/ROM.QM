@@ -135,6 +135,7 @@
           "files": "Ficher",
           "supplementaryInformation": "Informations supplémentaires",
           "violationDetails": "Détails de la violation",
+          "CiteViolations":"Citer les violations",
           "repeatable": {
             "repeatQuestion": "Répéter cette question",
             "deleteQuestion": "Supprimer cette question répétée",

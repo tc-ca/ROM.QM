@@ -136,6 +136,7 @@
           "files": "Files",
           "supplementaryInformation": "Supplementary  Information",
           "violationDetails": "Violation Details",
+          "CiteViolations":"Cite Violations",
           "repeatable": {
             "repeatQuestion": "Repeat this question",
             "deleteQuestion": "Delete this repeated question",

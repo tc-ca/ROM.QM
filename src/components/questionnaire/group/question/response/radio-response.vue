@@ -3,7 +3,7 @@
     <div
       v-for="(option, indexControl) in question.responseOptions"
       :key="indexControl"
-      :class="['qtn-radio-button', option.isProblem ? 'qtn-radio-button-non-compliant':'qtn-radio-button-compliant']"
+      :class="['qtn-radio-button', isViolation ? 'qtn-radio-button-non-compliant':'qtn-radio-button-compliant']"
     >
       <input
         :id="`${group.domSuffix}-${question.id}-${indexControl}`"
@@ -125,6 +125,12 @@ export default {
     },
     previousId () {
       return this.selOldOption !== null ? this.selOldOption.id : this.selectedOption.id
+    },
+    isViolation () {
+      if (!this.selectedOption) {
+        return false
+      }
+      return this.selectedOption.provisions.length > 0
     }
   },
   created () {
