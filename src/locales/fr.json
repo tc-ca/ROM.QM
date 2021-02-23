@@ -133,7 +133,7 @@
           "commentRequired": "Commentaire obligatoire",
           "photos": "Photos",
           "files": "Ficher",
-          "additionalInformation": "Informations supplémentaires",
+          "supplementaryInformation": "Informations supplémentaires",
           "violationDetails": "Détails de la violation",
           "repeatable": {
             "repeatQuestion": "Répéter cette question",

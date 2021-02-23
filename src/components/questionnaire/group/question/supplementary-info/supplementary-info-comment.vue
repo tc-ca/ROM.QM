@@ -1,24 +1,8 @@
 <template>
-  <v-expansion-panel v-show="displayComment">
-    <v-expansion-panel-header class="subtitle-2">
-      <span>
-        {{ label }}
-        <v-icon
-          v-if="isCommentRequired"
-          color="red"
-          small
-        >
-          mdi-alpha-r-box-outline
-        </v-icon>
-        <v-icon
-          v-else
-          color="primary"
-          small
-        >
-          mdi-alpha-o-box-outline
-        </v-icon>
-      </span>
-      <v-spacer />
+  <v-list-group
+    v-show="displayComment"
+  >
+    <template v-slot:appendIcon>
       <v-icon
         v-if="errorInComment"
         color="red"
@@ -26,36 +10,63 @@
       >
         mdi-message-alert
       </v-icon>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content eager>
-      <br>
-      <v-textarea
-        ref="textArea"
-        v-model="comment.value"
-        prepend-icon="mdi-message-text-outline"
-        auto-grow
-        dense
-        outlined
-        clearable
-        :disabled="readOnly"
-        clear-icon="mdi-close-circle"
-        :placeholder="placeholderText"
-        rows="1"
-        :hint="hint"
-        :rules="rules"
-        @update:error="onError"
+    </template>
+    <template v-slot:activator>
+      <v-list-item-title
+        class="subtitle-1"
+        style="color:#757575"
       >
-        <v-icon
-          v-if="comment.required"
-          slot="append"
-          small
-          color="red"
+        <v-row>
+          <v-col>
+            {{ label }}
+            <v-icon
+              v-if="isCommentRequired"
+              color="red"
+              small
+            >
+              mdi-alpha-r-box-outline
+            </v-icon>
+            <v-icon
+              v-else
+              color="primary"
+              small
+            >
+              mdi-alpha-o-box-outline
+            </v-icon>
+          </v-col>
+        </v-row>
+      </v-list-item-title>
+    </template>
+    <v-list-item>
+      <v-list-item-content>
+        <v-textarea
+          ref="textArea"
+          v-model="comment.value"
+          prepend-inner-icon="mdi-message-text-outline"
+          auto-grow
+          outlined
+          filled
+          clearable
+          :disabled="readOnly"
+          clear-icon="mdi-close-circle"
+          :placeholder="placeholderText"
+          rows="1"
+          :hint="hint"
+          :rules="rules"
+          @update:error="onError"
         >
-          mdi-exclamation
-        </v-icon>
-      </v-textarea>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+          <v-icon
+            v-if="comment.required"
+            slot="append"
+            small
+            color="red"
+          >
+            mdi-exclamation
+          </v-icon>
+        </v-textarea>
+      </v-list-item-content>
+    </v-list-item>
+  </v-list-group>
 </template>
 
 <script>
@@ -106,7 +117,7 @@ export default {
   },
   computed: {
     placeholderText () {
-      return this.isCommentRequired ? 'comment required' : ''
+      return this.isCommentRequired ? 'comment required' : 'comment optional'
     },
     isCommentRequired () {
       return this.comment.option === 'required'

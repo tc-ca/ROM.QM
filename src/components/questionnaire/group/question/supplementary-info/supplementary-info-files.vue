@@ -1,24 +1,6 @@
 <template>
-  <v-expansion-panel v-show="displayFile">
-    <v-expansion-panel-header class="subtitle-2">
-      <span>
-        {{ label }}
-        <v-icon
-          v-if="isFileRequired"
-          color="red"
-          small
-        >
-          mdi-alpha-r-box-outline
-        </v-icon>
-        <v-icon
-          v-else
-          color="primary"
-          small
-        >
-          mdi-alpha-o-box-outline
-        </v-icon>
-      </span>
-      <v-spacer />
+  <v-list-group v-show="displayFile">
+    <template v-slot:appendIcon>
       <v-icon
         v-if="errorInFile"
         color="red"
@@ -26,176 +8,230 @@
       >
         mdi-message-alert
       </v-icon>
-    </v-expansion-panel-header>
-    <v-expansion-panel-content eager>
-      <v-row>
-        <v-col>
-          <v-file-input
-            ref="fileUpload"
-            prepend-icon="mdi-file-document-multiple"
-            counter
-            show-size
-            :disabled="readOnly"
-            @change="onFileChange"
-          />
-          <div>
-            {{ progressStatus }}
-          </div>
-        </v-col>
-      </v-row>
-      <v-row no-gutters>
-        <v-col>
-          <v-list
-            v-if="file.value.length > 0"
-            dense
-          >
-            <v-subheader>Uploaded Files</v-subheader>
-            <v-list-item
-              v-for="(f, index) in file.value"
-              :key="index"
-            >
-              <v-list-item-icon>
-                <v-icon
-                  size="30"
-                >
-                  mdi-file-{{ f.fileType }}
-                </v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <div v-if="!f.speedDialOpen">
-                  <v-list-item-subtitle>
-                    Title: {{ f.title }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    Comment: {{ f.comment === '' ? 'N/A' : f.comment }}
-                  </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    Uploaded: {{ f.timeStamp }}
-                  </v-list-item-subtitle>
-                </div>
-                <div v-if="f.speedDialOpen">
-                  <v-textarea
-                    v-model="f.title"
-                    auto-grow
-                    outlined
-                    :disabled="readOnly"
-                    dense
-                    rows="1"
-                    label="Title"
-                    style="font-size: small"
-                    @change="updateResponseStore()"
-                  />
-                  <v-textarea
-                    v-model="f.comment"
-                    auto-grow
-                    outlined
-                    :disabled="readOnly"
-                    dense
-                    placeholder=" "
-                    rows="1"
-                    label="Comment"
-                    style="font-size: small"
-                    @change="updateResponseStore()"
-                  />
-                </div>
-              </v-list-item-content>
-              <v-list-item-icon>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      v-model="f.speedDialOpen"
-                      icon
-                      :disabled="!fileNoteExist || readOnly"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="f.speedDialOpen = !f.speedDialOpen"
-                    >
-                      <v-icon v-if="f.speedDialOpen">
-                        mdi-close
-                      </v-icon>
-                      <v-icon v-else>
-                        mdi-pencil
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Edit Title/Comment</span>
-                </v-tooltip>
-              </v-list-item-icon>
-              <v-list-item-icon>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      :disabled="!fileNoteExist || readOnly"
-                      icon
-                      color="deep-orange"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click.stop="removeFile($event, f, galleryIndex); updateResponseStore();"
-                    >
-                      <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Delete File</span>
-                </v-tooltip>
-              </v-list-item-icon>
-              <v-list-item-icon>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      :disabled="!fileNoteExist || readOnly"
-                      icon
-                      color="blue"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click.stop="downloadFile(f); updateResponseStore();"
-                    >
-                      <v-icon>mdi-download-circle-outline</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Download File</span>
-                </v-tooltip>
-              </v-list-item-icon>
-              <v-list-item-icon />
-            </v-list-item>
-          </v-list>
-        </v-col>
-      </v-row>
-      <v-input
-        ref="validationInput"
-        v-model="file.value.length"
-        :disabled="readOnly"
-        :rules="rules"
-        @update:error="onError"
-      />
-      <v-dialog
-        v-model="confirmDialogOpen"
-        max-width="290"
+    </template>
+    <template v-slot:activator>
+      <v-list-item-title
+        class="subtitle-1"
+        style="color:#757575"
       >
-        <v-card>
-          <v-card-title class="headline">
-            {{ $t('app.questionnaire.group.question.deleteFileConf') }}
-          </v-card-title>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              color="error"
-              text
-              @click="confirmed()"
+        <v-row>
+          <v-col>
+            {{ label }}
+            <v-icon
+              v-if="isFileRequired"
+              color="red"
+              small
             >
-              {{ $t('app.questionnaire.group.question.delete') }}
-            </v-btn>
+              mdi-alpha-r-box-outline
+            </v-icon>
+            <v-icon
+              v-else
+              color="primary"
+              small
+            >
+              mdi-alpha-o-box-outline
+            </v-icon>
+          </v-col>
+        </v-row>
+      </v-list-item-title>
+    </template>
+    <v-list-item>
+      <v-list-item-content>
+        <v-sheet color="#f5f5f5">
+          <v-row
+            no-gutters
+          >
+            <v-col
+              cols="12"
+            >
+              <v-file-input
+                ref="fileUpload"
+                style="padding-bottom:none"
+                filled
+                outlined
+                :placeholder="placeholderText"
+                prepend-inner-icon="mdi-paperclip"
+                prepend-icon=""
+                :disabled="readOnly"
+                @change="onFileChange"
+              />
+            </v-col>
+            <v-col
+              class=""
+              cols="12"
+            >
+              <v-list
+                v-if="file.value.length > 0"
+                color="#f5f5f5"
+                dense
+              >
+                <v-list-item-title
+                  class="caption"
+                  style="color:#757575"
+                >
+                  Uploaded Files
+                </v-list-item-title>
 
-            <v-btn
-              text
-              @click="cancel()"
+                <v-list-item
+                  v-for="(f, index) in file.value"
+                  :key="index"
+                >
+                  <v-list-item-icon>
+                    <v-icon
+                      size="30"
+                    >
+                      mdi-file-{{ f.fileType }}
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-sheet
+                      v-if="!f.speedDialOpen"
+                      color="#f5f5f5"
+                    >
+                      <v-list-item-subtitle>
+                        <span>Title:</span> <span>{{ f.title }}</span>
+                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>
+                        <span>Comment:</span><span> {{ f.comment === '' ? 'N/A' : f.comment }}</span>
+                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>
+                        <span>Uploaded:</span> <span>{{ f.timeStamp }}</span>
+                      </v-list-item-subtitle>
+                    </v-sheet>
+
+                    <div v-if="f.speedDialOpen">
+                      <v-textarea
+                        v-model="f.title"
+                        auto-grow
+                        outlined
+                        :disabled="readOnly"
+                        dense
+                        rows="1"
+                        label="Title"
+                        style="font-size: small"
+                        @change="updateResponseStore()"
+                      />
+                      <v-textarea
+                        v-model="f.comment"
+                        auto-grow
+                        outlined
+                        :disabled="readOnly"
+                        dense
+                        placeholder=" "
+                        rows="1"
+                        label="Comment"
+                        style="font-size: small"
+                        @change="updateResponseStore()"
+                      />
+                    </div>
+                  </v-list-item-content>
+                  <v-list-item-icon>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-model="f.speedDialOpen"
+                          icon
+                          :disabled="!fileNoteExist || readOnly"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click="f.speedDialOpen = !f.speedDialOpen"
+                        >
+                          <v-icon v-if="f.speedDialOpen">
+                            mdi-close
+                          </v-icon>
+                          <v-icon v-else>
+                            mdi-pencil
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Edit Title/Comment</span>
+                    </v-tooltip>
+                  </v-list-item-icon>
+                  <v-list-item-icon>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          :disabled="!fileNoteExist || readOnly"
+                          icon
+                          color="deep-orange"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click.stop="removeFile($event, f, galleryIndex); updateResponseStore();"
+                        >
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Delete File</span>
+                    </v-tooltip>
+                  </v-list-item-icon>
+                  <v-list-item-icon>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          :disabled="!fileNoteExist || readOnly"
+                          icon
+                          color="blue"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click.stop="downloadFile(f); updateResponseStore();"
+                        >
+                          <v-icon>mdi-download-circle-outline</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Download File</span>
+                    </v-tooltip>
+                  </v-list-item-icon>
+                  <v-list-item-icon />
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+          <v-row
+            no-gutters
+            class="purple"
+          />
+        </v-sheet>
+        <v-row>
+          <v-col cols="12">
+            <v-input
+              ref="validationInput"
+              v-model="file.value.length"
+              :disabled="readOnly"
+              :rules="rules"
+              @update:error="onError"
+            />
+            <v-dialog
+              v-model="confirmDialogOpen"
+              max-width="290"
             >
-              {{ $t('app.questionnaire.group.question.cancel') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+              <v-card>
+                <v-card-title class="headline">
+                  {{ $t('app.questionnaire.group.question.deleteFileConf') }}
+                </v-card-title>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn
+                    color="error"
+                    text
+                    @click="confirmed()"
+                  >
+                    {{ $t('app.questionnaire.group.question.delete') }}
+                  </v-btn>
+
+                  <v-btn
+                    text
+                    @click="cancel()"
+                  >
+                    {{ $t('app.questionnaire.group.question.cancel') }}
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+      </v-list-item-content>
+    </v-list-item>
+  </v-list-group>
 </template>
 
 <script>
@@ -262,6 +298,9 @@ export default {
     },
     errorInFile () {
       return this.displayFile && this.isFileRequired && !this.file.value.length > 0
+    },
+    placeholderText () {
+      return this.isFileRequired ? 'file required' : 'file optional'
     }
   },
   mounted () {

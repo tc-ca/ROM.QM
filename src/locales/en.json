@@ -134,7 +134,7 @@
           "commentRequired": "Comment Required",
           "photos": "Photos",
           "files": "Files",
-          "additionalInformation": "Additional Information",
+          "supplementaryInformation": "Supplementary  Information",
           "violationDetails": "Violation Details",
           "repeatable": {
             "repeatQuestion": "Repeat this question",
