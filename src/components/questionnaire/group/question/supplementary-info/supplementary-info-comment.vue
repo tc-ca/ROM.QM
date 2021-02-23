@@ -1,5 +1,8 @@
 <template>
-  <v-list-group>
+  <v-list-group
+    v-show="displayComment"
+    color="purple"
+  >
     <template v-slot:appendIcon>
       <v-icon
         v-if="errorInComment"
@@ -10,32 +13,30 @@
       </v-icon>
     </template>
     <template v-slot:activator>
-      <v-list-item-content>
-        <v-list-item-title
-          class="subtitle-1"
-          style="color:#757575"
-        >
-          <v-row>
-            <v-col>
-              {{ label }}
-              <v-icon
-                v-if="isCommentRequired"
-                color="red"
-                small
-              >
-                mdi-alpha-r-circle-outline
-              </v-icon>
-              <v-icon
-                v-else
-                color="primary"
-                small
-              >
-                mdi-alpha-o-circle-outline
-              </v-icon>
-            </v-col>
-          </v-row>
-        </v-list-item-title>
-      </v-list-item-content>
+      <v-list-item-title
+        class="subtitle-1"
+        style="color:#757575"
+      >
+        <v-row>
+          <v-col>
+            {{ label }}
+            <v-icon
+              v-if="isCommentRequired"
+              color="red"
+              small
+            >
+              mdi-alpha-r-box-outline
+            </v-icon>
+            <v-icon
+              v-else
+              color="primary"
+              small
+            >
+              mdi-alpha-o-box-outline
+            </v-icon>
+          </v-col>
+        </v-row>
+      </v-list-item-title>
     </template>
     <v-list-item>
       <v-list-item-content>
@@ -44,7 +45,6 @@
           v-model="comment.value"
           prepend-inner-icon="mdi-message-text-outline"
           auto-grow
-          dense
           outlined
           filled
           clearable

@@ -124,7 +124,7 @@
         />
       </v-sheet>
       <v-sheet class="px-3">
-        <v-tabs
+        <!-- <v-tabs
           v-if="tabVisibility"
           v-model="tab"
           show-arrows
@@ -257,7 +257,117 @@
               @error="onError"
             />
           </v-tab-item>
-        </v-tabs>
+        </v-tabs> -->
+
+        <v-sheet>
+          <span v-if="displayViolationInfo">Violation Details</span>
+
+          <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
+            <sampling-record
+              :question="question"
+              :read-only="readOnly"
+            />
+          </div>
+          <div v-if="displayViolationInfo && !isReferenceQuestion">
+            <div>
+              <v-text-field
+                v-model="question.violationInfo.referenceID"
+                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
+                :label="$t('app.questionnaire.group.question.referenceId')"
+                :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
+                filled
+              />
+              <div v-if="displaySamplingRecord">
+                <sampling-record
+                  :question="question"
+                  :read-only="readOnly"
+                />
+              </div>
+              <div v-else>
+                <v-text-field
+                  v-model="question.violationInfo.violationCount"
+                  :disabled="readOnly"
+                  :label="$t('app.questionnaire.group.question.violationCount')"
+                  :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                  filled
+                />
+              </div>
+              <v-sheet
+                style="background-color:#f5f5f5; color:#757575"
+              >
+                <div
+                  :class=" `${violationHeaderFontSize} ml-3`"
+                >
+                  Cite Violation(s)
+                </div>
+                <v-chip
+                  v-for="item in selProvisions"
+                  :key="item.key"
+                  small
+                  class=" mr-2"
+                  :disabled="readOnly"
+                  dark
+                  close
+                  color="grey"
+
+                  @click:close="onSelectedProvisionClick(item)"
+                >
+                  {{ getSelectedProvisionText(item) }}
+                </v-chip>
+              </v-sheet>
+
+              <v-sheet
+                style="background-color:#f5f5f5;"
+                class="mt-2"
+              >
+                <v-text-field
+                  v-model="selectedResponseOption.searchProvisions"
+                  :disabled="readOnly"
+                  dense
+                  outlined
+                  single-line
+                  hide-details
+                  clearable
+                  clear-icon="mdi-close-circle-outline"
+                  prepend-inner-icon="mdi-magnify"
+                />
+
+                <v-treeview
+                  v-model="selProvisions"
+                  class="mt-2"
+                  dense
+                  selected-color="black"
+                  :selectable="!readOnly"
+                  :disabled="readOnly"
+                  item-key="id"
+                  :item-text="'title.' + lang"
+                  selection-type="leaf"
+                  :search="selectedResponseOption.searchProvisions"
+                  :filter="selectedResponseOption.filterProvisions"
+                  :items="treeDataProvisions"
+                >
+                  <template v-slot:label="{ item }">
+                    <div class="truncated">
+                      <div>{{ item.title[lang] }}</div>
+                    </div>
+                  </template>
+                </v-treeview>
+              </v-sheet>
+            </div>
+          </div>
+        </v-sheet>
+        <v-sheet class="mt-7">
+          <span v-if="showSupplementaryInfo">Additional Details</span>
+
+          <supplementary-info
+            v-if="showSupplementaryInfo"
+            :question="question"
+            :selresponseoption="selectedResponseOption"
+            :group="group"
+            :read-only="readOnly"
+            @error="onError"
+          />
+        </v-sheet>
       </v-sheet>
 
       <br>
@@ -778,33 +888,39 @@ export default {
             let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
             let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
+            // if response is string make into array to be handle multiple selections
+            let response = dependsOnQuestion.response
+            if (typeof response === 'string') {
+              response = [response]
+            }
+
             if (dependancy.validationAction === 'equal') {
-              if (!(dependsOnQuestion.response === dependancy.validationValue)) {
+              if (!(response.some(value => value === dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'notEqual') {
-              if (!(dependsOnQuestion.response !== dependancy.validationValue)) {
+              if (!(response.some(value => value !== dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'greaterThen') {
-              if (!(+dependsOnQuestion.response > +dependancy.validationValue)) {
+              if (!(response.some(value => +value > +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'lessThen') {
-              if (!(+dependsOnQuestion.response < +dependancy.validationValue)) {
+              if (!(response.some(value => +value < +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'lengthLessThen') {
-              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length < +dependancy.validationValue)) {
+              if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
             } else if (dependancy.validationAction === 'lengthGreaterThen') {
-              if (!dependsOnQuestion.response || !(dependsOnQuestion.response.length > +dependancy.validationValue)) {
+              if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }

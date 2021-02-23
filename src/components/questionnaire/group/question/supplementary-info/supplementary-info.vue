@@ -1,12 +1,8 @@
 <template>
-  <!-- <v-expansion-panels
-    multiple
-    flat
-    :value="[]"
-  > -->
   <v-list
     dense
     nav
+    color="#f5f5f5"
   >
     <supplementary-info-comment
       v-if="displayExternalComment"
@@ -51,8 +47,6 @@
       @error="onError"
     />
   </v-list>
-
-  <!-- </v-expansion-panels> -->
 </template>
 
 <script>
