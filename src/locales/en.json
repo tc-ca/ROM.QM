@@ -138,6 +138,7 @@
           "internalComment": "Internal Comment",
           "internalCommentInfo": "Internal comments will only be made available to internal stakeholders",
           "commentRequired": "Comment Required",
+          "commentOptional": "Comment Optional",
           "photos": "Photos",
           "files": "Files",
           "supplementaryInformation": "Supplementary  Information",

@@ -116,7 +116,7 @@ export default {
   },
   computed: {
     placeholderText () {
-      return this.isCommentRequired ? 'comment required' : 'comment optional'
+      return this.isCommentRequired ? this.$t('app.questionnaire.group.question.commentRequired') : this.$t('app.questionnaire.group.question.commentOptional')
     },
     isCommentRequired () {
       return this.comment.option === 'required'

@@ -137,6 +137,7 @@
           "internalComment": "Commentaire interne",
           "internalCommentInfo": "Les commentaires internes seront disponibles aux intervenants à l'interne seulement",
           "commentRequired": "Commentaire obligatoire",
+          "commentOptional": "commentaire facultatif",
           "photos": "Photos",
           "files": "Ficher",
           "supplementaryInformation": "Informations supplémentaires",
