@@ -24,7 +24,7 @@
         color="red"
         small
       >
-        mdi-message-alert
+        mdi-exclamation
       </v-icon>
     </v-expansion-panel-header>
     <v-expansion-panel-content eager>
