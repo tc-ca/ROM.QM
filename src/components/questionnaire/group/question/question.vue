@@ -136,13 +136,13 @@
             v-if="displayViolationInfo"
             class="mb-2"
           >
-            Violation Details
+            {{ $t('app.questionnaire.group.question.violationDetails') }}
           </v-tab>
           <v-tab
             v-if="showSupplementaryInfo"
             class="mb-2"
           >
-            Additional Information
+            {{ $t('app.questionnaire.group.question.additionalInformation') }}
           </v-tab>
           <v-tab-item v-if="displayViolationInfo">
             <v-sheet>
