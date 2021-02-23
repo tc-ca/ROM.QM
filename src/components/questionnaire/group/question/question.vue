@@ -356,8 +356,9 @@
             </div>
           </div>
         </v-sheet>
-        <v-sheet class="mt-7">
-          <span v-if="showSupplementaryInfo">            {{ $t('app.questionnaire.group.question.additionalInformation') }}
+        <v-sheet :class="displayViolationInfo ? 'mt-7':''">
+          <span v-if="showSupplementaryInfo">
+            {{ $t('app.questionnaire.group.question.supplementaryInformation') }}
           </span>
 
           <supplementary-info

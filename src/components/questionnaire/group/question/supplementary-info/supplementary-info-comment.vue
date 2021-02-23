@@ -1,7 +1,6 @@
 <template>
   <v-list-group
     v-show="displayComment"
-    color="purple"
   >
     <template v-slot:appendIcon>
       <v-icon
