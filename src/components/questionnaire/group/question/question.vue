@@ -893,7 +893,7 @@ export default {
 
             // if response is string make into array to be handle multiple selections
             let response = dependsOnQuestion.response
-            if (typeof response === 'string') {
+            if (typeof response === 'string' || typeof response === 'number') {
               response = [response]
             }
 
