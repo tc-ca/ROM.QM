@@ -29,7 +29,7 @@
     <supplementary-info-files
       v-if="displayFile"
       :file="selresponseoption.file"
-      :label="$t('app.questionnaire.group.question.files')"
+      :label="$t('app.questionnaire.group.question.supplementaryFile.label')"
       :group="group"
       :question="question"
       :read-only="readOnly"

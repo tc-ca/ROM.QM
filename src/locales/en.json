@@ -140,8 +140,21 @@
           "commentRequired": "Comment Required",
           "commentOptional": "Comment Optional",
           "photos": "Photos",
-          "files": "Files",
-          "supplementaryInformation": "Supplementary  Information",
+          "supplementaryFile":{
+          "label": "Files",
+          "fileRequired": "File Required",
+          "fileOptional": "File Optional",
+          "uploadedFiles":"Uploaded Files",
+          "fileTitle":"Title:",
+          "fileComment": "Comment:",
+          "fileUploaded": "Uploaded:",
+          "editFile": "Edit Title/Comment",
+          "deleteFile": "Delete File",
+          "downloadFile": "Download File",
+           "uploading": "Uploading..."
+          },
+     
+          "supplementaryInformation": "Supplementary Information",
           "violationDetails": "Violation Details",
           "CiteViolations":"Cite Violations",
           "repeatable": {

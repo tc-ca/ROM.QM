@@ -68,7 +68,7 @@
                   class="caption"
                   style="color:#757575"
                 >
-                  Uploaded Files
+                  {{ $t('app.questionnaire.group.question.supplementaryFile.uploadedFiles') }}
                 </v-list-item-title>
 
                 <v-list-item
@@ -88,13 +88,16 @@
                       color="#f5f5f5"
                     >
                       <v-list-item-subtitle>
-                        <span>Title:</span> <span>{{ f.title }}</span>
+                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileTitle') }}
+                        </span> <span>{{ f.title }}</span>
                       </v-list-item-subtitle>
                       <v-list-item-subtitle>
-                        <span>Comment:</span><span> {{ f.comment === '' ? 'N/A' : f.comment }}</span>
+                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileComment') }}
+                        </span><span> {{ f.comment === '' ? 'N/A' : f.comment }}</span>
                       </v-list-item-subtitle>
                       <v-list-item-subtitle>
-                        <span>Uploaded:</span> <span>{{ f.timeStamp }}</span>
+                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileUploaded') }}
+                        </span> <span>{{ f.timeStamp }}</span>
                       </v-list-item-subtitle>
                     </v-sheet>
 
@@ -143,7 +146,7 @@
                           </v-icon>
                         </v-btn>
                       </template>
-                      <span>Edit Title/Comment</span>
+                      <span>  {{ $t('app.questionnaire.group.question.supplementaryFile.editFile') }}</span>
                     </v-tooltip>
                   </v-list-item-icon>
                   <v-list-item-icon>
@@ -160,7 +163,7 @@
                           <v-icon>mdi-delete</v-icon>
                         </v-btn>
                       </template>
-                      <span>Delete File</span>
+                      <span>{{ $t('app.questionnaire.group.question.supplementaryFile.deleteFile') }}</span>
                     </v-tooltip>
                   </v-list-item-icon>
                   <v-list-item-icon>
@@ -177,7 +180,7 @@
                           <v-icon>mdi-download-circle-outline</v-icon>
                         </v-btn>
                       </template>
-                      <span>Download File</span>
+                      <span>{{ $t('app.questionnaire.group.question.supplementaryFile.downloadFile') }}</span>
                     </v-tooltip>
                   </v-list-item-icon>
                   <v-list-item-icon />
@@ -299,7 +302,7 @@ export default {
       return this.displayFile && this.isFileRequired && !this.file.value.length > 0
     },
     placeholderText () {
-      return this.isFileRequired ? 'file required' : 'file optional'
+      return this.isFileRequired ? this.$t('app.questionnaire.group.question.supplementaryFile.fileRequired') : this.$t('app.questionnaire.group.question.supplementaryFile.fileOptional')
     }
   },
   mounted () {
