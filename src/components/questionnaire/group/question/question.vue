@@ -136,13 +136,13 @@
             v-if="displayViolationInfo"
             class="mb-2"
           >
-            Violation Details
+            {{ $t('app.questionnaire.group.question.violationDetails') }}
           </v-tab>
           <v-tab
             v-if="showSupplementaryInfo"
             class="mb-2"
           >
-            Additional Information
+            {{ $t('app.questionnaire.group.question.additionalInformation') }}
           </v-tab>
           <v-tab-item v-if="displayViolationInfo">
             <v-sheet>
@@ -260,7 +260,7 @@
         </v-tabs> -->
 
         <v-sheet>
-          <span v-if="displayViolationInfo">Violation Details</span>
+          <span v-if="displayViolationInfo">  {{ $t('app.questionnaire.group.question.violationDetails') }}</span>
 
           <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
             <sampling-record
@@ -357,7 +357,8 @@
           </div>
         </v-sheet>
         <v-sheet class="mt-7">
-          <span v-if="showSupplementaryInfo">Additional Details</span>
+          <span v-if="showSupplementaryInfo">            {{ $t('app.questionnaire.group.question.additionalInformation') }}
+          </span>
 
           <supplementary-info
             v-if="showSupplementaryInfo"
@@ -556,7 +557,7 @@ export default {
       return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
-      return this.question.responseOptions.some(option => option.provisions.length > 0)
+      return (this.question.responseOptions) ? this.question.responseOptions.some(option => option.provisions.length > 0) : false
     },
     samplingButtonColor () {
       if (this.displaySamplingRecord) return 'black'
@@ -865,10 +866,11 @@ export default {
     updateDependants (args) {
       this.question.response = args.value
       if (this.question.dependants) {
+        const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
           let dependentGuid = this.question.dependants[i].guid
-          const question = this.getFlatListOfAllQuestions().find(x => x.guid === dependentGuid)
-          this.applyDependencyRuleOnQuestion(question)
+          const question = flatListQuestions.find(x => x.guid === dependentGuid)
+          if (question) this.applyDependencyRuleOnQuestion(question)
         }
       }
     },
@@ -892,6 +894,11 @@ export default {
             let response = dependsOnQuestion.response
             if (typeof response === 'string') {
               response = [response]
+            }
+
+            if (response === null) {
+              groupMatch = false
+              break
             }
 
             if (dependancy.validationAction === 'equal') {
@@ -920,7 +927,7 @@ export default {
                 break
               }
             } else if (dependancy.validationAction === 'lengthGreaterThen') {
-              if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
+              if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
                 groupMatch = false
                 break
               }
@@ -933,14 +940,17 @@ export default {
             // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
             // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
             const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-            question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+            if (groupByRuleTypeVisibility) question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
           } else if (group.ruleType === 'validation') {
-            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-            rule.enabled = groupMatch
+            if (question.validationRules) {
+              let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+              rule.enabled = groupMatch
+            }
           } else if (group.ruleType === 'validationValue' && groupMatch) {
-            let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-
-            rule.value = group.questionDependencies[0].parentQuestion.response
+            if (question.validationRules) {
+              let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+              rule.value = group.questionDependencies[0].parentQuestion.response
+            }
           }
         }
         return groupMatchArray

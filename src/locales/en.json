@@ -78,8 +78,8 @@
       },
 
       "group": {
-        "englishText": "Texte anglais du groupe",
-        "frenchText": "Texte francais du groupe",
+        "englishText": "Group English Text",
+        "frenchText": "Group French Text",
         "addGroup": "Add Group",
         "removeGroup": "Remove Group",
         "groupName": "Group Name",
@@ -134,6 +134,8 @@
           "commentRequired": "Comment Required",
           "photos": "Photos",
           "files": "Files",
+          "additionalInformation": "Additional Information",
+          "violationDetails": "Violation Details",
           "repeatable": {
             "repeatQuestion": "Repeat this question",
             "deleteQuestion": "Delete this repeated question",

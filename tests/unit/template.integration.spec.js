@@ -5,12 +5,6 @@
 import Ajv from 'ajv'
 import templateSchema from '../../src/schema/template.json'
 import templateData from '../../public/static/templates/fullFeaturedTemplate.json'
-import CombinationPackagingData from '../../public/static/templates/CombinationPackaging.json'
-import DesignAndManufacture from '../../public/static/templates/DesignAndManufacture.json'
-import HighwayTanks from '../../public/static/templates/HighwayTanks.json'
-import IBC from '../../public/static/templates/IBC.json'
-import ItermediateBulk from '../../public/static/templates/ItermediateBulk.json'
-import Beta2Testing from '../../public/static/templates/beta2Testing.json'
 import addFormats from 'ajv-formats'
 
 let ajvWarnings = []
@@ -97,19 +91,9 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
     // groups
     expect(FindNonUniqueIds(templateData.groups, groupKey).length).toEqual(0)
-    expect(FindNonUniqueIds(CombinationPackagingData.groups, groupKey).length).toEqual(0)
-    expect(FindNonUniqueIds(DesignAndManufacture.groups, groupKey).length).toEqual(0)
-    expect(FindNonUniqueIds(HighwayTanks.groups, groupKey).length).toEqual(0)
-    expect(FindNonUniqueIds(IBC.groups, groupKey).length).toEqual(0)
-    expect(FindNonUniqueIds(ItermediateBulk.groups, groupKey).length).toEqual(0)
 
     // questions
     expect(FindNonUniqueIds(flattenQuestions(templateData.groups), questionKey).length).toEqual(0)
-    expect(FindNonUniqueIds(flattenQuestions(CombinationPackagingData.groups), questionKey).length).toEqual(0)
-    expect(FindNonUniqueIds(flattenQuestions(DesignAndManufacture.groups), questionKey).length).toEqual(0)
-    expect(FindNonUniqueIds(flattenQuestions(HighwayTanks.groups), questionKey).length).toEqual(0)
-    expect(FindNonUniqueIds(flattenQuestions(IBC.groups), questionKey).length).toEqual(0)
-    expect(FindNonUniqueIds(flattenQuestions(ItermediateBulk.groups), questionKey).length).toEqual(0)
   })
 
   it('valid data should be successfully validated against the schema', () => {
@@ -134,78 +118,6 @@ describe('Template Data Validation Against TypeScript Schema', () => {
     }
 
     expect(ajv.errors).toEqual(null)
-  })
-
-  it('Client Template: Combination Packaging data should be successfully validated against the schema', () => {
-    if (validate(CombinationPackagingData)) {
-      expect(CombinationPackagingData.name).toEqual('Combination packaging (4g) Design and Manufacture for the Transportation of Dangerous Goods pursuant to Part 1 of tp14850')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
-  })
-
-  it('Client Template: DesignAndManufacture data should be successfully validated against the schema', () => {
-    if (validate(DesignAndManufacture)) {
-      expect(DesignAndManufacture.name).toEqual('Design and Manufacture of Small Containers for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
-  })
-
-  it('Client Template: Highway Tanks data should be successfully validated against the schema', () => {
-    if (validate(HighwayTanks)) {
-      expect(HighwayTanks.name).toEqual('Highway Tanks - TC 406 and TC 406 Crude')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
-  })
-
-  it('Client Template: IBC data should be successfully validated against the schema', () => {
-    if (validate(IBC)) {
-      expect(IBC.name).toEqual('IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
-  })
-
-  it('Client Template: ItermediateBulk data should be successfully validated against the schema', () => {
-    if (validate(ItermediateBulk)) {
-      expect(ItermediateBulk.name).toEqual('INTERMEDIATE BULK CONTAINERS DESIGN AND MANUFACTURE FOR THE TRANSPORTATION OF DANGEROUS GOODS PURSUANT TO PART 1 OF CGSB-43.146-2002')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
-  })
-
-  it('Client Template: Beta2Testing data should be successfully validated against the schema', () => {
-    if (validate(Beta2Testing)) {
-      expect(Beta2Testing.name).toEqual('certificate (equivalency, temporary or emergency).')
-    }
-
-    if (validate.errors > 0) {
-      console.log(validate.errors)
-    }
-
-    expect(validate.errors).toEqual(null)
   })
 
   it('invalid data should not be successfully validated against the schema', () => {

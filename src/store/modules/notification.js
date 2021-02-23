@@ -70,11 +70,15 @@ export const actions = {
   clearNotifications ({commit, rootState}) {
     commit("CLEAR_NOTIFICATIONS");
     const questionnaire = rootState.questionnaire.questionnaire;
-    questionnaire.groups.forEach(group => {
-      group.questions.forEach(question => {
-        ClearPreviousNotifications(question);
+    if (questionnaire && questionnaire.groups) {
+      questionnaire.groups.forEach(group => {
+        if (group.questions) {
+          group.questions.forEach(question => {
+            ClearPreviousNotifications(question);
+          });
+        }
       });
-    });
+    }
   }
 }
 

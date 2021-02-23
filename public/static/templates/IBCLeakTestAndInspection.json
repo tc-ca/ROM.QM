@@ -12,7 +12,7 @@
               "fr": "Detail d l'inspection"
           },
           "isRepeatable": true,
-          "isVisible": false,
+          "isVisible": true,
           "order": 0,
           "questions": [
               {
@@ -52,7 +52,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_INITIAL_QTN_TYPFNSPCTN_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146"
+                          "name": "RSPNS_INITIAL_QTN_TYPFNSPCTN_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -78,7 +82,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_VERIFICATION_QTN_TYPFNSPCTN_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146"
+                          "name": "RSPNS_VERIFICATION_QTN_TYPFNSPCTN_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -142,7 +150,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_PHYSCLDDRSSMTCH"
+                          "name": "RSPNS_YES_QTN_PHYSCLDDRSSMTCH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -168,7 +180,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_PHYSCLDDRSSMTCH"
+                          "name": "RSPNS_NO_QTN_PHYSCLDDRSSMTCH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -269,6 +285,211 @@
                   "dependencyGroups": [],
                   "guid": "d6dcd90a-c8a2-490f-ab9d-f048751ccb68",
                   "validationState": true
+              },
+              {
+                  "name": "QTN_DSTHCMPNYSQVLNC_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                  "id": 59,
+                  "guid": "5391a814-7b3f-4fce-9606-56c2f5b4a905",
+                  "sortOrder": 4,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "Does the company use a Equivalency/temporary Certificate ?",
+                      "fr": "Est-ce que la compagnie utilise un certificat d'équivalence/temporaire?"
+                  },
+                  "type": "radio",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [
+                      {
+                          "id": 1,
+                          "name": "RSPNS_YS_QTN_DSTHCMPNYSQVLNC_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      },
+                      {
+                          "id": 2,
+                          "name": "RSPNS_N_QTN_DSTHCMPNYSQVLNC_RD_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalComment": {
+                              "option": "optional",
+                              "value": ""
+                          },
+                          "externalComment": {
+                              "option": "required",
+                              "value": ""
+                          },
+                          "picture": {
+                              "option": "optional",
+                              "value": []
+                          },
+                          "provisions": [],
+                          "selectedProvisions": [],
+                          "selectedProvisionsTitles": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false,
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null,
+                      "violationCount": null
+                  },
+                  "childQuestions": [
+                      {
+                          "name": "QTN_QVLNCYCRTFCTNMB_NBR_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                          "id": 60,
+                          "guid": "3c182866-755b-4cd9-ba08-7e58c3e10bde",
+                          "sortOrder": 1,
+                          "isVisible": true,
+                          "isMultiple": true,
+                          "text": {
+                              "en": "Equivalency Certificate Number and type",
+                              "fr": "Numéro(s) de certificat d'équivalence et type"
+                          },
+                          "type": "number",
+                          "response": null,
+                          "isSamplingAllowed": false,
+                          "samplingRecord": null,
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "name": "require",
+                                  "enabled": true,
+                                  "type": "require",
+                                  "value": null,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  }
+                              }
+                          ],
+                          "violationInfo": {
+                              "responseToMatch": "false",
+                              "matchingType": "equal",
+                              "referenceID": null,
+                              "violationCount": null
+                          },
+                          "childQuestions": [
+                              {
+                                  "name": "QTN_FNNCMPLNTWHTSTH_NBR_GRP_DÉTLFNSPCTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
+                                  "id": 61,
+                                  "guid": "b26ea049-7721-4cdb-8faf-84fbd475aeb0",
+                                  "sortOrder": 1,
+                                  "isVisible": true,
+                                  "isMultiple": true,
+                                  "text": {
+                                      "en": "If non compliant what is the relevant section(s) in the certificate that is related to the non-compliance.",
+                                      "fr": "Si non-conforme, quelles sont les sections pertinentes du certificat liées à la non-conformité"
+                                  },
+                                  "type": "number",
+                                  "response": null,
+                                  "isSamplingAllowed": false,
+                                  "samplingRecord": null,
+                                  "isRepeatable": true,
+                                  "isRepeated": false,
+                                  "responseOptions": [],
+                                  "validationRules": [
+                                      {
+                                          "name": "require",
+                                          "enabled": true,
+                                          "type": "require",
+                                          "value": null,
+                                          "errorMessage": {
+                                              "en": "Required",
+                                              "fr": "FR: Required"
+                                          }
+                                      }
+                                  ],
+                                  "violationInfo": {
+                                      "responseToMatch": "false",
+                                      "matchingType": "equal",
+                                      "referenceID": null,
+                                      "violationCount": null
+                                  },
+                                  "childQuestions": [],
+                                  "dependants": [],
+                                  "dependencyGroups": [],
+                                  "validationState": true
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "dependsOnQuestion": {
+                                              "guid": "5391a814-7b3f-4fce-9606-56c2f5b4a905"
+                                          },
+                                          "validationAction": "notEqual",
+                                          "validationValue": "No"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "validationState": true
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "3c182866-755b-4cd9-ba08-7e58c3e10bde"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "validationState": true
               }
           ],
           "domSuffix": "prop value created virtually",
@@ -276,7 +497,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Certificate of Registration - Certificat d'inscription",
+          "primaryKey": "GRP_CRTFCTFRGSTRTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "Certificate of Registration",
               "fr": " Certificat d'inscription"
@@ -322,7 +543,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_CRTFCTFRGSTRTN"
+                          "name": "RSPNS_YES_QTN_CRTFCTFRGSTRTN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -348,7 +573,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_CRTFCTFRGSTRTN"
+                          "name": "RSPNS_NO_QTN_CRTFCTFRGSTRTN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -374,7 +603,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_CRTFCTFRGSTRTN"
+                          "name": "RSPNS_NA_QTN_CRTFCTFRGSTRTN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -502,7 +735,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_YES_QTN_STHCRTFCTVLD"
+                                          "name": "RSPNS_YES_QTN_STHCRTFCTVLD",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 2,
@@ -528,7 +765,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_NO_QTN_STHCRTFCTVLD"
+                                          "name": "RSPNS_NO_QTN_STHCRTFCTVLD",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 3,
@@ -554,7 +795,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_NA_QTN_STHCRTFCTVLD"
+                                          "name": "RSPNS_NA_QTN_STHCRTFCTVLD",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       }
                                   ],
                                   "validationRules": [
@@ -618,7 +863,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_YES_QTN_CRTFCTPSTDRVLBL"
+                                          "name": "RSPNS_YES_QTN_CRTFCTPSTDRVLBL",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 2,
@@ -644,7 +893,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_NO_QTN_CRTFCTPSTDRVLBL"
+                                          "name": "RSPNS_NO_QTN_CRTFCTPSTDRVLBL",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 3,
@@ -670,7 +923,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_NA_QTN_CRTFCTPSTDRVLBL"
+                                          "name": "RSPNS_NA_QTN_CRTFCTPSTDRVLBL",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       }
                                   ],
                                   "validationRules": [
@@ -734,7 +991,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_YES_QTN_FNCTNSPRFRMDGRW"
+                                          "name": "RSPNS_YES_QTN_FNCTNSPRFRMDGRW",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 2,
@@ -760,7 +1021,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_NO_QTN_FNCTNSPRFRMDGRW"
+                                          "name": "RSPNS_NO_QTN_FNCTNSPRFRMDGRW",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       },
                                       {
                                           "id": 3,
@@ -786,7 +1051,11 @@
                                               "option": "optional",
                                               "value": []
                                           },
-                                          "name": "RSPNS_NA_QTN_FNCTNSPRFRMDGRW"
+                                          "name": "RSPNS_NA_QTN_FNCTNSPRFRMDGRW",
+                                          "file": {
+                                              "option": "optional",
+                                              "value": []
+                                          }
                                       }
                                   ],
                                   "validationRules": [
@@ -815,104 +1084,32 @@
                               }
                           ],
                           "dependants": [],
-                          "dependencyGroups": [],
+                          "dependencyGroups": [
+                              {
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "dependsOnQuestion": {
+                                              "guid": "aab80ccd-6e3b-4bc3-a3eb-b114dca25309"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "Yes"
+                                      }
+                                  ]
+                              }
+                          ],
                           "guid": "40cb89c6-c40a-4f39-9a42-06fac271547d",
                           "validationState": true
                       }
                   ],
-                  "dependants": [],
+                  "dependants": [
+                      {
+                          "guid": "40cb89c6-c40a-4f39-9a42-06fac271547d"
+                      }
+                  ],
                   "dependencyGroups": [],
                   "guid": "aab80ccd-6e3b-4bc3-a3eb-b114dca25309",
-                  "validationState": true
-              },
-              {
-                  "name": "QTN_DGRVTDCTRNSMSSL",
-                  "id": 17,
-                  "sortOrder": 6,
-                  "isVisible": true,
-                  "isMultiple": true,
-                  "text": {
-                      "en": "de GRV et de citernes mises à l'essai et inspectés à l'installation :",
-                      "fr": "FR: Question text"
-                  },
-                  "type": "radio",
-                  "response": null,
-                  "responseOptions": [
-                      {
-                          "id": 1,
-                          "sortOrder": 1,
-                          "text": {
-                              "en": "Yes",
-                              "fr": "FR: Yes"
-                          },
-                          "value": "true",
-                          "provisions": [],
-                          "selectedProvisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false,
-                          "internalComment": {
-                              "option": "optional",
-                              "value": ""
-                          },
-                          "externalComment": {
-                              "option": "optional",
-                              "value": ""
-                          },
-                          "picture": {
-                              "option": "optional",
-                              "value": []
-                          },
-                          "name": "RSPNS_YES_QTN_DGRVTDCTRNSMSSL"
-                      },
-                      {
-                          "id": 2,
-                          "sortOrder": 2,
-                          "text": {
-                              "en": "No",
-                              "fr": "FR: No"
-                          },
-                          "value": "false",
-                          "provisions": [],
-                          "selectedProvisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false,
-                          "internalComment": {
-                              "option": "optional",
-                              "value": ""
-                          },
-                          "externalComment": {
-                              "option": "optional",
-                              "value": ""
-                          },
-                          "picture": {
-                              "option": "optional",
-                              "value": []
-                          },
-                          "name": "RSPNS_NO_QTN_DGRVTDCTRNSMSSL"
-                      }
-                  ],
-                  "validationRules": [
-                      {
-                          "name": "require",
-                          "enabled": true,
-                          "type": "require",
-                          "value": null,
-                          "errorMessage": {
-                              "en": "Required",
-                              "fr": "FR: Required"
-                          }
-                      }
-                  ],
-                  "violationInfo": {
-                      "responseToMatch": "false",
-                      "matchingType": "equal",
-                      "referenceID": null,
-                      "violationCount": null
-                  },
-                  "childQuestions": [],
-                  "dependants": [],
-                  "dependencyGroups": [],
-                  "guid": "504b6ca5-e3f7-4814-a9b8-5837e7f9935c",
                   "validationState": true
               }
           ],
@@ -921,7 +1118,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 3",
+          "primaryKey": "GRP_DCMNTTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "DOCUMENTATION",
               "fr": "DOCUMENTATION"
@@ -967,7 +1164,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_WRTTNPRCDRSNDRC"
+                          "name": "RSPNS_YES_QTN_WRTTNPRCDRSNDRC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -993,7 +1194,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_WRTTNPRCDRSNDRC"
+                          "name": "RSPNS_NO_QTN_WRTTNPRCDRSNDRC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1019,7 +1224,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_WRTTNPRCDRSNDRC"
+                          "name": "RSPNS_NA_QTN_WRTTNPRCDRSNDRC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1083,7 +1292,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_WRTTNPRCDRSNDRC"
+                          "name": "RSPNS_YES_QTN_WRTTNPRCDRSNDRC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1109,7 +1322,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_WRTTNPRCDRSNDRC"
+                          "name": "RSPNS_NO_QTN_WRTTNPRCDRSNDRC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1135,7 +1352,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_WRTTNPRCDRSNDRC"
+                          "name": "RSPNS_NA_QTN_WRTTNPRCDRSNDRC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1199,7 +1420,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_FCLTYHSCPYFCRRN"
+                          "name": "RSPNS_YES_QTN_FCLTYHSCPYFCRRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1225,7 +1450,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_FCLTYHSCPYFCRRN"
+                          "name": "RSPNS_NO_QTN_FCLTYHSCPYFCRRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1251,7 +1480,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_FCLTYHSCPYFCRRN"
+                          "name": "RSPNS_NA_QTN_FCLTYHSCPYFCRRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1315,7 +1548,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_FCLTYHSNSTRMNTC"
+                          "name": "RSPNS_YES_QTN_FCLTYHSNSTRMNTC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1341,7 +1578,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_FCLTYHSNSTRMNTC"
+                          "name": "RSPNS_NO_QTN_FCLTYHSNSTRMNTC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1367,7 +1608,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_FCLTYHSNSTRMNTC"
+                          "name": "RSPNS_NA_QTN_FCLTYHSNSTRMNTC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1431,7 +1676,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MTLBCLKTSTNDNSP"
+                          "name": "RSPNS_YES_QTN_MTLBCLKTSTNDNSP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1457,7 +1706,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MTLBCLKTSTNDNSP"
+                          "name": "RSPNS_NO_QTN_MTLBCLKTSTNDNSP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1483,7 +1736,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MTLBCLKTSTNDNSP"
+                          "name": "RSPNS_NA_QTN_MTLBCLKTSTNDNSP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1547,7 +1804,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_FCLTYKPSMPLYTRN"
+                          "name": "RSPNS_YES_QTN_FCLTYKPSMPLYTRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1573,7 +1834,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_FCLTYKPSMPLYTRN"
+                          "name": "RSPNS_NO_QTN_FCLTYKPSMPLYTRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1599,7 +1864,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_FCLTYKPSMPLYTRN"
+                          "name": "RSPNS_NA_QTN_FCLTYKPSMPLYTRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1632,7 +1901,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 4",
+          "primaryKey": "GRP_GNRLFCLTYNFRMTN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "GENERAL FACILITY INFORMATION ",
               "fr": " INFORMATION GÉNÉRALE DE L'INSTALATION"
@@ -1678,7 +1947,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_METALIBCSIBCCOD_QTN_TYPFBCSNDTNKSLK"
+                          "name": "RSPNS_METALIBCSIBCCOD_QTN_TYPFBCSNDTNKSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1704,7 +1977,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_RIGIDPLASTICIBC_QTN_TYPFBCSNDTNKSLK"
+                          "name": "RSPNS_RIGIDPLASTICIBC_QTN_TYPFBCSNDTNKSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1730,13 +2007,17 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_COMPOSITEIBCSHZ_QTN_TYPFBCSNDTNKSLK"
+                          "name": "RSPNS_COMPOSITEIBCSHZ_QTN_TYPFBCSNDTNKSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 4,
                           "sortOrder": 4,
                           "text": {
-                              "en": "Lightweight composite IBCs 31HZ1)",
+                              "en": "Lightweight composite IBCs (31HZ1)",
                               "fr": "GRV composite légers (31HZ1)"
                           },
                           "value": "4",
@@ -1756,7 +2037,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_LIGHTWEIGHTCOMP_QTN_TYPFBCSNDTNKSLK"
+                          "name": "RSPNS_LGHTWGHTCMPSTBC_QTN_TYPFBCSNDTNKSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1820,7 +2105,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK"
+                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -1846,7 +2135,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK"
+                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -1872,7 +2165,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK"
+                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 4,
@@ -1898,7 +2195,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK"
+                          "name": "RSPNS__QTN_STMTDNMBRFBCSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 5,
@@ -1924,7 +2225,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_PERMONTH_QTN_STMTDNMBRFBCSLK"
+                          "name": "RSPNS_PERMONTH_QTN_STMTDNMBRFBCSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 6,
@@ -1950,7 +2255,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_PERYEAR_QTN_STMTDNMBRFBCSLK"
+                          "name": "RSPNS_PERYEAR_QTN_STMTDNMBRFBCSLK",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -1983,7 +2292,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "METAL IBC – LEAK TEST AND INSPECTION RECORDS (Clause C8 of Annex C)",
+          "primaryKey": "GRP_MTLBC–LKTSTNDNS_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "METAL IBC – LEAK TEST AND INSPECTION RECORDS (Clause C8 of Annex C)",
               "fr": "GRV EN MÉTAL – REGISTRE DES ESSAIS D'ÉTANCHÉITÉ ET DES INSPECTIONS (clause C8 de l'annexe C)"
@@ -2029,7 +2338,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_CPYFTHRCRDSGVNB"
+                          "name": "RSPNS_YES_QTN_CPYFTHRCRDSGVNB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2055,7 +2368,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_CPYFTHRCRDSGVNB"
+                          "name": "RSPNS_NO_QTN_CPYFTHRCRDSGVNB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -2081,7 +2398,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_CPYFTHRCRDSGVNB"
+                          "name": "RSPNS_NA_QTN_CPYFTHRCRDSGVNB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -2145,7 +2466,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_YES_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2171,7 +2496,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_NO_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -2197,7 +2526,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_NA_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -2261,7 +2594,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_YES_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2287,7 +2624,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_NO_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -2313,7 +2654,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_NA_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -2377,7 +2722,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MBLBCCPYFTHRCRD"
+                          "name": "RSPNS_YES_QTN_MBLBCCPYFTHRCRD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2403,7 +2752,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MBLBCCPYFTHRCRD"
+                          "name": "RSPNS_NO_QTN_MBLBCCPYFTHRCRD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -2429,7 +2782,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MBLBCCPYFTHRCRD"
+                          "name": "RSPNS_NA_QTN_MBLBCCPYFTHRCRD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -2462,7 +2819,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 6",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION: A) IBC DATA",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION: A) DONNÉES SUR LE GRV "
@@ -2696,7 +3053,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_FCLTYVRFSCMPLNC"
+                          "name": "RSPNS_YES_QTN_FCLTYVRFSCMPLNC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2722,7 +3083,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_FCLTYVRFSCMPLNC"
+                          "name": "RSPNS_NO_QTN_FCLTYVRFSCMPLNC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -2786,7 +3151,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_LIGHTWEIGHTCOMP_QTN_FCLTYDMNSTRTSKN"
+                          "name": "RSPNS_LIGHTWEIGHTCOMP_QTN_FCLTYDMNSTRTSKN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2812,7 +3181,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_MOBILEIBCSMONTH_QTN_FCLTYDMNSTRTSKN"
+                          "name": "RSPNS_MOBILEIBCSMONTH_QTN_FCLTYDMNSTRTSKN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -2838,7 +3211,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_OTHERTHANMOBILE_QTN_FCLTYDMNSTRTSKN"
+                          "name": "RSPNS_OTHERTHANMOBILE_QTN_FCLTYDMNSTRTSKN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -2871,7 +3248,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "WITNESSING A LEAK TEST AND INSPECTION:  B) PREPARATION (Clause C2 of Annex C)",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION:  B) PREPARATION (Clause C2 of Annex C)",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION a) PRÉPARATION (clause C2 de l'annexe C))"
@@ -2917,7 +3294,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_THBCSTHRGHLYDRN"
+                          "name": "RSPNS_YES_QTN_THBCSTHRGHLYDRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -2943,7 +3324,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_THBCSTHRGHLYDRN"
+                          "name": "RSPNS_NO_QTN_THBCSTHRGHLYDRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -2969,7 +3354,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_THBCSTHRGHLYDRN"
+                          "name": "RSPNS_NA_QTN_THBCSTHRGHLYDRN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3033,7 +3422,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_THNTRRFTHBCSWSH"
+                          "name": "RSPNS_YES_QTN_THNTRRFTHBCSWSH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3059,7 +3452,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_THNTRRFTHBCSWSH"
+                          "name": "RSPNS_NO_QTN_THNTRRFTHBCSWSH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3085,7 +3482,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_THNTRRFTHBCSWSH"
+                          "name": "RSPNS_NA_QTN_THNTRRFTHBCSWSH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3149,7 +3550,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_THXTRRFTHBCSWSH"
+                          "name": "RSPNS_YES_QTN_THXTRRFTHBCSWSH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3175,7 +3580,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_THXTRRFTHBCSWSH"
+                          "name": "RSPNS_NO_QTN_THXTRRFTHBCSWSH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3201,7 +3610,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_THXTRRFTHBCSWSH"
+                          "name": "RSPNS_NA_QTN_THXTRRFTHBCSWSH",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3265,7 +3678,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MBLBCTHBCSRMVDF"
+                          "name": "RSPNS_YES_QTN_MBLBCTHBCSRMVDF",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3291,7 +3708,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MBLBCTHBCSRMVDF"
+                          "name": "RSPNS_NO_QTN_MBLBCTHBCSRMVDF",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3317,7 +3738,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MBLBCTHBCSRMVDF"
+                          "name": "RSPNS_NA_QTN_MBLBCTHBCSRMVDF",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3381,7 +3806,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_RGDPLSTCBCNDPLS"
+                          "name": "RSPNS_YES_QTN_RGDPLSTCBCNDPLS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3407,7 +3836,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_RGDPLSTCBCNDPLS"
+                          "name": "RSPNS_NO_QTN_RGDPLSTCBCNDPLS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3433,7 +3866,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_RGDPLSTCBCNDPLS"
+                          "name": "RSPNS_NA_QTN_RGDPLSTCBCNDPLS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3466,7 +3903,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 8",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION  c) INTERNAL INSPECTION (Clause C3 of Annex C)",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION  c)INSPECTION INTERNE (clause C3 de l'annexe C)"
@@ -3512,7 +3949,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_YES_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3538,7 +3979,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_NO_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3564,7 +4009,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MTLBCTHRTHNMBLB"
+                          "name": "RSPNS_NA_QTN_MTLBCTHRTHNMBLB",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3628,7 +4077,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_PLSTCBCNDPLSTCN"
+                          "name": "RSPNS_YES_QTN_PLSTCBCNDPLSTCN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3654,7 +4107,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_PLSTCBCNDPLSTCN"
+                          "name": "RSPNS_NO_QTN_PLSTCBCNDPLSTCN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3680,7 +4137,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_PLSTCBCNDPLSTCN"
+                          "name": "RSPNS_NA_QTN_PLSTCBCNDPLSTCN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3713,7 +4174,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 9",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION : D) LEAK TEST (Clause C4 of Annex C) Note: This section does not apply to facilities that only re-bottle IBCs.",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION : D)ESSAI D'ÉTANCHÉITÉ (clause C4 de l'annexe C)  Remarque : Cette section ne s'applique pas aux installations de GRV qui ré-embouteille seulement. "
@@ -3759,7 +4220,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_THBCSPRSSRZDTKP"
+                          "name": "RSPNS_YES_QTN_THBCSPRSSRZDTKP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3785,7 +4250,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_THBCSPRSSRZDTKP"
+                          "name": "RSPNS_NO_QTN_THBCSPRSSRZDTKP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3811,7 +4280,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_THBCSPRSSRZDTKP"
+                          "name": "RSPNS_NA_QTN_THBCSPRSSRZDTKP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -3875,7 +4348,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_COATINGTHESEAMS_QTN_MTHDFLKDTCTNCC"
+                          "name": "RSPNS_COATINGTHESEAMS_QTN_MTHDFLKDTCTNCC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -3901,7 +4378,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_SUBMERSINGTHEIB_QTN_MTHDFLKDTCTNCC"
+                          "name": "RSPNS_SUBMERSINGTHEIB_QTN_MTHDFLKDTCTNCC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -3927,7 +4408,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_MEASURINGADROPI_QTN_MTHDFLKDTCTNCC"
+                          "name": "RSPNS_MEASURINGADROPI_QTN_MTHDFLKDTCTNCC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 4,
@@ -3953,7 +4438,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_OTHERSEECOMMENT_QTN_MTHDFLKDTCTNCC"
+                          "name": "RSPNS_OTHERSEECOMMENT_QTN_MTHDFLKDTCTNCC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4017,7 +4506,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_AIR_QTN_TSTMDMC"
+                          "name": "RSPNS_AIR_QTN_TSTMDMC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4043,7 +4536,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_OTHERSEECOMMENT_QTN_TSTMDMC"
+                          "name": "RSPNS_OTHERSEECOMMENT_QTN_TSTMDMC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4076,7 +4573,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 10",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION: E) EXTERNAL INSPECTION (Clause C5 of Annex C)",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION: E) INSPECTION EXTERNE (clause C5 de l'annexe C)"
@@ -4122,7 +4619,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_THXTRNLNSPCTNSC"
+                          "name": "RSPNS_YES_QTN_THXTRNLNSPCTNSC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4148,7 +4649,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_THXTRNLNSPCTNSC"
+                          "name": "RSPNS_NO_QTN_THXTRNLNSPCTNSC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4174,7 +4679,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_THXTRNLNSPCTNSC"
+                          "name": "RSPNS_NA_QTN_THXTRNLNSPCTNSC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4238,7 +4747,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MTLBCNDMTLTRCSN"
+                          "name": "RSPNS_YES_QTN_MTLBCNDMTLTRCSN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4264,7 +4777,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MTLBCNDMTLTRCSN"
+                          "name": "RSPNS_NO_QTN_MTLBCNDMTLTRCSN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4290,7 +4807,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MTLBCNDMTLTRCSN"
+                          "name": "RSPNS_NA_QTN_MTLBCNDMTLTRCSN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4354,7 +4875,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_PLSTCBCCMPSTBCP"
+                          "name": "RSPNS_YES_QTN_PLSTCBCCMPSTBCP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4380,7 +4905,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_PLSTCBCCMPSTBCP"
+                          "name": "RSPNS_NO_QTN_PLSTCBCCMPSTBCP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4406,7 +4935,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_PLSTCBCCMPSTBCP"
+                          "name": "RSPNS_NA_QTN_PLSTCBCCMPSTBCP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4470,7 +5003,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_MTLBCVRYRCLSNGP"
+                          "name": "RSPNS_YES_QTN_MTLBCVRYRCLSNGP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4496,7 +5033,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_MTLBCVRYRCLSNGP"
+                          "name": "RSPNS_NO_QTN_MTLBCVRYRCLSNGP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4522,7 +5063,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_MTLBCVRYRCLSNGP"
+                          "name": "RSPNS_NA_QTN_MTLBCVRYRCLSNGP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4555,7 +5100,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 11",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION: F) IBCS FAILING THE LEAK TEST AND/OR INSPECTION",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION: F) GRV ÉCHOUANT L'ESSAI D'ÉTANCHÉITÉ ET/OU L'INSPECTION "
@@ -4601,7 +5146,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_FRPRDNBCTHTSRPR"
+                          "name": "RSPNS_YES_QTN_FRPRDNBCTHTSRPR",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4627,7 +5176,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_FRPRDNBCTHTSRPR"
+                          "name": "RSPNS_NO_QTN_FRPRDNBCTHTSRPR",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4653,7 +5206,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_FRPRDNBCTHTSRPR"
+                          "name": "RSPNS_NA_QTN_FRPRDNBCTHTSRPR",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4717,7 +5274,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_FNTRPRDBCSFLNGT"
+                          "name": "RSPNS_YES_QTN_FNTRPRDBCSFLNGT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4743,7 +5304,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_FNTRPRDBCSFLNGT"
+                          "name": "RSPNS_NO_QTN_FNTRPRDBCSFLNGT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4769,7 +5334,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_FNTRPRDBCSFLNGT"
+                          "name": "RSPNS_NA_QTN_FNTRPRDBCSFLNGT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4802,7 +5371,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 12",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION G) REFURBISHING (Clause C6 of Annex C)",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION: G) REMISE À NEUF (clause C6 de l'annexe C) "
@@ -4848,7 +5417,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_RPRSNDRPLCMNTPR"
+                          "name": "RSPNS_YES_QTN_RPRSNDRPLCMNTPR",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4874,7 +5447,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_RPRSNDRPLCMNTPR"
+                          "name": "RSPNS_NO_QTN_RPRSNDRPLCMNTPR",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -4900,7 +5477,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_RPRSNDRPLCMNTPR"
+                          "name": "RSPNS_NA_QTN_RPRSNDRPLCMNTPR",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -4964,7 +5545,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_DMGDDFFCLTTRDRM"
+                          "name": "RSPNS_YES_QTN_DMGDDFFCLTTRDRM",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -4990,7 +5575,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_DMGDDFFCLTTRDRM"
+                          "name": "RSPNS_NO_QTN_DMGDDFFCLTTRDRM",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5016,7 +5605,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_DMGDDFFCLTTRDRM"
+                          "name": "RSPNS_NA_QTN_DMGDDFFCLTTRDRM",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5080,7 +5673,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_CMPSTBCRPLCMNTN"
+                          "name": "RSPNS_YES_QTN_CMPSTBCRPLCMNTN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5106,7 +5703,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_CMPSTBCRPLCMNTN"
+                          "name": "RSPNS_NO_QTN_CMPSTBCRPLCMNTN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5132,7 +5733,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_CMPSTBCRPLCMNTN"
+                          "name": "RSPNS_NA_QTN_CMPSTBCRPLCMNTN",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5165,7 +5770,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 13",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION: H) IBC LEAK TEST AND INSPECTION MARKING (Clause C7 of Annex C)",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION: H) MARQUAGE DE L'ESSAI D'ÉTANCHÉITÉ ET DE L'INSPECTION DE GRV (clause C7 de l'annexe C)"
@@ -5211,7 +5816,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_THMRKNGRMMYYXXS"
+                          "name": "RSPNS_YES_QTN_THMRKNGRMMYYXXS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5237,7 +5846,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_THMRKNGRMMYYXXS"
+                          "name": "RSPNS_NO_QTN_THMRKNGRMMYYXXS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5263,7 +5876,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_THMRKNGRMMYYXXS"
+                          "name": "RSPNS_NA_QTN_THMRKNGRMMYYXXS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5327,7 +5944,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_PUNCH_QTN_MTHDSD"
+                          "name": "RSPNS_PUNCH_QTN_MTHDSD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5353,7 +5974,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_ETCHINGTOOL_QTN_MTHDSD"
+                          "name": "RSPNS_ETCHINGTOOL_QTN_MTHDSD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5379,7 +6004,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_HOTBRANDINGIRON_QTN_MTHDSD"
+                          "name": "RSPNS_HOTBRANDINGIRON_QTN_MTHDSD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 4,
@@ -5405,7 +6034,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_PAINT_QTN_MTHDSD"
+                          "name": "RSPNS_PAINT_QTN_MTHDSD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 5,
@@ -5431,7 +6064,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_LABEL_QTN_MTHDSD"
+                          "name": "RSPNS_LABEL_QTN_MTHDSD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 6,
@@ -5457,7 +6094,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_OTHERSEECOMMENT_QTN_MTHDSD"
+                          "name": "RSPNS_OTHERSEECOMMENT_QTN_MTHDSD",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5521,7 +6162,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_CPYFTHLKTSTNDNS"
+                          "name": "RSPNS_YES_QTN_CPYFTHLKTSTNDNS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5547,7 +6192,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_CPYFTHLKTSTNDNS"
+                          "name": "RSPNS_NO_QTN_CPYFTHLKTSTNDNS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5580,7 +6229,7 @@
           "expansionPanels": []
       },
       {
-          "primaryKey": "Group 14",
+          "primaryKey": "GRP_WTNSSNGLKTSTNDN_IBC Leak test and inspection facility for the Transportation of DG CAN/CGSB-43.146",
           "title": {
               "en": "WITNESSING A LEAK TEST AND INSPECTION: METAL IBC ONLY – VERIFICATION OF INFORMATION COLLECTED ON THE RECORD (C8.1)",
               "fr": "OBSERVATION D'UN ESSAI D'ÉTANCHÉITÉ ET D'UNE INSPECTION: GRV EN MÉTAL SEULEMENT – VÉRIFICATION DES RENSEIGNEMENTS DANS LE REGISTRE (procès-verbal) (C8.1)"
@@ -5626,7 +6275,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_NMDDRSSNDCRTFCT"
+                          "name": "RSPNS_YES_QTN_NMDDRSSNDCRTFCT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5652,7 +6305,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_NMDDRSSNDCRTFCT"
+                          "name": "RSPNS_NO_QTN_NMDDRSSNDCRTFCT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5678,7 +6335,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_NMDDRSSNDCRTFCT"
+                          "name": "RSPNS_NA_QTN_NMDDRSSNDCRTFCT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5742,7 +6403,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_BCTYP"
+                          "name": "RSPNS_YES_QTN_BCTYP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5768,7 +6433,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_BCTYP"
+                          "name": "RSPNS_NO_QTN_BCTYP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5794,7 +6463,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_BCTYP"
+                          "name": "RSPNS_NA_QTN_BCTYP",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5858,7 +6531,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_SRLNMBRFBC"
+                          "name": "RSPNS_YES_QTN_SRLNMBRFBC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -5884,7 +6561,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_SRLNMBRFBC"
+                          "name": "RSPNS_NO_QTN_SRLNMBRFBC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -5910,7 +6591,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_SRLNMBRFBC"
+                          "name": "RSPNS_NA_QTN_SRLNMBRFBC",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -5974,7 +6659,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_BCWNRSNMNDDDRSS"
+                          "name": "RSPNS_YES_QTN_BCWNRSNMNDDDRSS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -6000,7 +6689,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_BCWNRSNMNDDDRSS"
+                          "name": "RSPNS_NO_QTN_BCWNRSNMNDDDRSS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -6026,7 +6719,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_BCWNRSNMNDDDRSS"
+                          "name": "RSPNS_NA_QTN_BCWNRSNMNDDDRSS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -6090,7 +6787,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_DTFLKTSTNDNSPCT"
+                          "name": "RSPNS_YES_QTN_DTFLKTSTNDNSPCT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -6116,7 +6817,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_DTFLKTSTNDNSPCT"
+                          "name": "RSPNS_NO_QTN_DTFLKTSTNDNSPCT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -6142,7 +6847,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_DTFLKTSTNDNSPCT"
+                          "name": "RSPNS_NA_QTN_DTFLKTSTNDNSPCT",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
@@ -6206,7 +6915,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_YES_QTN_RSLTSFLKTSTNDNS"
+                          "name": "RSPNS_YES_QTN_RSLTSFLKTSTNDNS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 2,
@@ -6232,7 +6945,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NO_QTN_RSLTSFLKTSTNDNS"
+                          "name": "RSPNS_NO_QTN_RSLTSFLKTSTNDNS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       },
                       {
                           "id": 3,
@@ -6258,7 +6975,11 @@
                               "option": "optional",
                               "value": []
                           },
-                          "name": "RSPNS_NA_QTN_RSLTSFLKTSTNDNS"
+                          "name": "RSPNS_NA_QTN_RSLTSFLKTSTNDNS",
+                          "file": {
+                              "option": "optional",
+                              "value": []
+                          }
                       }
                   ],
                   "validationRules": [
