@@ -14,7 +14,7 @@
         <v-list-item-content>
           <!-- TITLE -->
           <v-list-item-title class="title">
-            Site Filter
+            {{ $t('app.questionnaire.siteFilter.title') }}
           </v-list-item-title>
         </v-list-item-content>
         <!-- CLOSE DRAWER ACTION BUTTON -->

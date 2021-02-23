@@ -109,6 +109,9 @@
       "placeholder": "Trouvez rapidement des questions basées sur la disposition associée",
       "exampleText": "Par exemple, recherchez par libellé ou texte de disposition (Exemple: \"3.5 (1) (c)\")"
       },
+    "siteFilter": {
+      "title": "Filtre de site"
+      },
       "validate": "Valider",
       "errors":" 0 erreurs trouvées |1 erreur trouvée | {count} erreurs trouvées",
       "group": {

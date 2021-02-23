@@ -110,6 +110,9 @@
         "placeholder": "Quickly find questions based on related provision",
         "exampleText": "For example search by provision label or text (Example: \"3.5 (1) (c)\")"
       },
+      "siteFilter": {
+        "title": "Site Filter"
+      },
       "validate": "Validate",
       "errors":" 0 errors found |1 error found | {count} errors found",
       "group": {
