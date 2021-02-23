@@ -176,6 +176,14 @@
       "inactive": "Inactive",
       "true": "True",
       "false": "False"
+    },
+    "notifications": {
+      "question": "A valid response for the question is required.",
+      "isRequired": " is required.",
+      "internalComment": "Internal Comment for the response type ",
+      "externalComment": "External Comment for the response type ",
+      "file": "A File for the response type ",
+      "picture": "A Picture for the response type "
     }
   }
 }

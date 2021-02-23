@@ -175,6 +175,14 @@
       "inactive": "Inactivé",
       "true": "Vrai",
       "false": "Faux"
+    },
+    "notifications": {
+      "question": "Une réponse valide à la question est requise.",
+      "isRequired": " est requis.",
+      "internalComment": "Commentaire interne pour le type de réponse ",
+      "externalComment": "Commentaire externe pour le type de réponse ",
+      "file": "Un fichier pour le type de réponse ",
+      "picture": "Une image pour le type de réponse "
     }
-  }
+ }
 }
