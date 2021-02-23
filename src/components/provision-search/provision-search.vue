@@ -77,10 +77,16 @@ export default {
   watch: {
     searchInput (value) {
       if (value) {
-        // const exampleHeader = [{ header: this.$t('app.questionnaire.provisionSearchFilter.exampleText'), questions: [] }]
-        // this.provisions = exampleHeader.concat(this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase())))
-        console.log('testssss', JSON.stringify(this.searchableProvisions))
-        this.provisions = this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase()))
+        this.provisions = this.searchableProvisions.filter(item => {
+          if (item.title) {
+            return item.title[this.lang].toLowerCase().includes(value.toLowerCase())
+          }
+          return false
+        })
+
+        // for debugging, if does not have a title means its not found in the the legislation dictionary
+        // eslint-disable-next-line no-prototype-builtins
+        // this.searchableProvisions.forEach(x => { if (!x.hasOwnProperty('title')) { console.log('b', x) } })
       }
     },
     clearProvisionSearchText (value, oldValue) {
