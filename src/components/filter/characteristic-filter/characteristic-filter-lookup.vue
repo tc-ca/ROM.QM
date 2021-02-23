@@ -73,7 +73,7 @@ export default {
     }),
     model: {
       get () {
-        const itemIds = this.items.map(x => x.id)
+        const itemIds = this.myItems.map(x => x.id)
         return this.myValues.filter(value => itemIds.includes(value.id))
       },
       set (val) {
