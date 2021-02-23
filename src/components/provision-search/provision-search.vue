@@ -15,6 +15,7 @@
     @keydown.enter="isMenuActive(false)"
     @keyup="debouncedUpdateProvisionFilter($event.target.value)"
     @blur="shrinkProvisionSearchField($event.target.value)"
+    @click:clear="clear(true)"
   />
 </template>
 
@@ -76,17 +77,14 @@ export default {
   watch: {
     searchInput (value) {
       if (value) {
-        const exampleHeader = [{ header: this.$t('app.questionnaire.provisionSearchFilter.exampleText'), questions: [] }]
-        this.provisions = exampleHeader.concat(this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase())))
+        // const exampleHeader = [{ header: this.$t('app.questionnaire.provisionSearchFilter.exampleText'), questions: [] }]
+        // this.provisions = exampleHeader.concat(this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase())))
+        console.log('testssss', JSON.stringify(this.searchableProvisions))
+        this.provisions = this.searchableProvisions.filter(item => item.title[this.lang].toLowerCase().includes(value.toLowerCase()))
       }
     },
     clearProvisionSearchText (value, oldValue) {
-      if (value) {
-        this.searchInput = ''
-        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
-        this.shrinkProvisionSearchField('')
-        this.$emit('set-clear-provision-search-false')
-      }
+      this.clear(value)
     }
   },
   mounted () {
@@ -119,6 +117,14 @@ export default {
       // if empty string hide
       if (_.isEmpty(value.trim())) {
         this.$emit('shrink-provision-search-field')
+      }
+    },
+    clear (value) {
+      if (value) {
+        this.searchInput = ''
+        this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
+        this.shrinkProvisionSearchField('')
+        this.$emit('set-clear-provision-search-false')
       }
     }
 
