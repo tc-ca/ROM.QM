@@ -45,7 +45,7 @@
                               "value": ""
                           },
                           "externalComment": {
-                              "option": "optional",
+                              "option": "required",
                               "value": ""
                           },
                           "file": {
@@ -71,7 +71,7 @@
                           },
                           "value": "false",
                           "internalComment": {
-                              "option": "optional",
+                              "option": "required",
                               "value": ""
                           },
                           "externalComment": {
@@ -105,7 +105,7 @@
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
                           "internalComment": {
-                              "option": "optional",
+                              "option": "required",
                               "value": ""
                           },
                           "externalComment": {
@@ -134,7 +134,7 @@
                           "searchProvisions": null,
                           "isProvisionCollapsed": false,
                           "internalComment": {
-                              "option": "optional",
+                              "option": "required",
                               "value": ""
                           },
                           "externalComment": {
@@ -306,7 +306,7 @@
                                   },
                                   "value": "true",
                                   "internalComment": {
-                                      "option": "optional",
+                                      "option": "required",
                                       "value": ""
                                   },
                                   "externalComment": {
@@ -398,9 +398,85 @@
                       }
                   ],
                   "dependencyGroups": []
+              }, {
+                  "name": "QTN_TXTQSTN_TXT_GRP_PRNTGRP_TMPLT_QSTNNRTTLN",
+                  "id": 4,
+                  "guid": "351ad322-1562-4dac-93eb-cbf876753a6d",
+                  "sortOrder": 2,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "Text Question",
+                      "fr": "FR: Text Question"
+                  },
+                  "type": "text",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [{
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
+              }, {
+                  "name": "QTN_NMBRQSTN_NBR_GRP_PRNTGRP_TMPLT_QSTNNRTTLN",
+                  "id": 5,
+                  "guid": "23690b31-e3eb-4559-b7b2-23b002694615",
+                  "sortOrder": 3,
+                  "isVisible": true,
+                  "isMultiple": true,
+                  "text": {
+                      "en": "Number Question",
+                      "fr": "FR: Number Question"
+                  },
+                  "type": "number",
+                  "response": null,
+                  "isSamplingAllowed": false,
+                  "samplingRecord": null,
+                  "validationState": true,
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "responseOptions": [],
+                  "validationRules": [{
+                          "name": "require",
+                          "enabled": true,
+                          "type": "require",
+                          "value": null,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          }
+                      }
+                  ],
+                  "violationInfo": {
+                      "responseToMatch": "false",
+                      "matchingType": "equal",
+                      "referenceID": null
+                  },
+                  "childQuestions": [],
+                  "dependants": [],
+                  "dependencyGroups": []
               }
           ],
-          "expansionPanels": [1, 0],
+          "expansionPanels": [2, 3],
           "domSuffix": "prop value created virtually",
           "htmlElementId": "prop value created virtually"
       }
