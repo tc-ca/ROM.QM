@@ -40,8 +40,10 @@
             :item="characteristic"
             :items="characteristic.children"
             :values="siteCharacteristics"
+            :update-filter="updateProvisionFilter"
             :label="characteristic.text[lang]"
             @update-displayed-tags="onUpdateDisplayedTags"
+            @mounted="onMountedFilterLookup()"
           />
 
           <v-divider />
@@ -82,7 +84,9 @@ export default {
   data () {
     return {
       characteristics: [],
-      siteCharacteristics: []
+      siteCharacteristics: [],
+      isCharactericticDataSet: false,
+      updateProvisionFilter: false
     }
   },
   computed: {
@@ -130,6 +134,8 @@ export default {
             this.siteCharacteristics.push(hydratedCharacteristic)
           }
 
+          this.isCharactericticDataSet = true
+
           break
         }
         default:
@@ -162,6 +168,11 @@ export default {
     },
     onUpdateDisplayedTags (values) {
       this.siteCharacteristics = values
+    },
+    onMountedFilterLookup () {
+      if (this.isCharactericticDataSet) {
+        this.updateProvisionFilter = true
+      }
     }
   }
 }
