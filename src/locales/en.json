@@ -113,6 +113,9 @@
       "siteFilter": {
         "title": "Site Filter"
       },
+      "navigation": {
+        "title": "Questionnaire Navigation"
+      },
       "validate": "Validate",
       "errors":" 0 errors found |1 error found | {count} errors found",
       "group": {

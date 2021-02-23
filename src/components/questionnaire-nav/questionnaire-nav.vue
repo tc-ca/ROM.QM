@@ -8,7 +8,7 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">
-          Questionnaire Navigation
+          {{ $t('app.questionnaire.navigation.title') }}
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
