@@ -2,14 +2,6 @@
   <v-list-group
     v-show="displayComment"
   >
-    <template v-slot:appendIcon>
-      <v-icon
-        v-if="errorInComment"
-        color="red"
-      >
-        mdi-exclamation
-      </v-icon>
-    </template>
     <template v-slot:activator>
       <v-list-item-title
         class="subtitle-1"
@@ -35,6 +27,14 @@
           </v-col>
         </v-row>
       </v-list-item-title>
+      <v-list-item-action>
+        <v-icon
+          v-if="errorInComment"
+          color="red"
+        >
+          mdi-exclamation
+        </v-icon>
+      </v-list-item-action>
     </template>
     <v-list-item>
       <v-list-item-content>
