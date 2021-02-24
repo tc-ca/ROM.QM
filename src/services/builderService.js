@@ -309,6 +309,7 @@ function createDependencyGroup() {
 }
 
 function processBuilderForSave(questionnaire) {
+  //Done by LM on Feb 14 to avoid console error on Dynamic Builder
   if (!questionnaire) return; 
   let groups = _.cloneDeep(questionnaire.groups);
 
