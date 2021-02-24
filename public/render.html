@@ -62,6 +62,8 @@
       sessionStorage.setItem("questionnaireCompletionDetails", JSON.stringify(errorDetails));
     }
 
+    
+
     window.onload = (event) => {
       console.log('page is fully loaded');
       // console.log('xrm1',JSON.stringify(Xrm))
@@ -84,16 +86,33 @@
 
 
 
-
     // Image & File upload, download
     window.addEventListener('tdg-qstnnr-downloadBlobImage', (event) => {
-      qtnHelper.downloadBlobImage(event.detail.nameGuid, event.detail.fileName);
+      downloadBlobImage(event);
     }, false);
 
+    async function downloadBlobImage(event) {
+      var questionHelpler = qtnHelper;
+      await qtnHelper.downloadBlobImage(event.detail.nameGuid, event.detail.fileName);
+    }
+
     window.addEventListener('tdg-qstnnr-uploadBlobImage', (event) => {
-      alert('i am in render');
-      qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.nameGuid, event.detail.fileName);
+      uploadBlobImage(event);
     }, false);
+
+    async function uploadBlobImage(event) {
+      var questionHelpler = qtnHelper;
+      await qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.nameGuid, event.detail.fileName);
+    }
+
+    window.addEventListener('tdg-qstnnr-deleteBlobImage', (event) => {
+      deleteBlobImage(event);
+    }, false);
+
+    async function deleteBlobImage(event) {
+      var questionHelpler = qtnHelper;
+      await qtnHelper.deleteBlobImage(event.detail.nameGuid, event.detail.fileName);
+    }
 
     window.addEventListener('tdg-qstnnr-getBlobResults', (event) => {
       qtnHelper.getBlobResults(event.detail.nameGuid);

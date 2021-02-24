@@ -27,7 +27,9 @@
         mdi-exclamation
       </v-icon>
     </v-expansion-panel-header>
-    <v-expansion-panel-content eager>
+    <v-expansion-panel-content
+      eager
+    >
       <v-row>
         <v-col>
           <v-file-input
@@ -35,6 +37,7 @@
             prepend-icon="mdi-camera"
             accept="image/*"
             counter
+            multiple
             show-size
             :disabled="readOnly"
             @change="onFileChange"
@@ -306,7 +309,6 @@
 import moment from 'moment'
 // import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
-import AzureBlobService from '../../../../../services/azureBlobService'
 import ImageFile from '../supplementary-info/image-file'
 import EXIF from 'exif-js'
 import { v4 as uuidv4 } from 'uuid'
@@ -350,6 +352,7 @@ export default {
       selLink: null,
       selExifData: '',
       curImg: '',
+      curPage: 0,
       curPageImages: [],
       isExifDataAvailable: false,
       progressStatus: '',
@@ -370,7 +373,6 @@ export default {
       return this.picture.value[this.galleryIndex] !== undefined
     },
     displayPicture () {
-      console.log(this.question)
       return !this.picture.display
     },
     isPictureRequired () {
@@ -382,6 +384,26 @@ export default {
   },
 
   mounted () {
+    this.$store.watch(
+      state => state.imagefile.imageFileNotification.imageResults,
+      (value) => {
+        if (value) {
+          // eslint-disable-next-line no-debugger
+          debugger
+          this.onUploadImage()
+        }
+      }
+    )
+    this.$store.watch(
+      state => state.imagefile.deletedImageData.imageDetails,
+      (value) => {
+        if (value) {
+          // eslint-disable-next-line no-debugger
+          debugger
+          this.onDeleteImage()
+        }
+      }
+    )
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
@@ -392,6 +414,42 @@ export default {
     this.onNextPageMove(1)
   },
   methods: {
+    onUploadImage () {
+      let el = this.$store.state.imagefile.imageFileNotification.imageResults
+      if (el !== null) {
+        // storeObj.forEach((el, index) => {
+        if (!this.picture.value.some(p => p.guid === el.guid)) {
+          this.picture.value.push({
+            title: el.result,
+            fileName: el.result,
+            comment: 'N/A',
+            guid: el.guid,
+            timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
+          })
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.progressStatus = ''
+          this.onNextPageMove(this.curPage)
+          this.next()
+          this.next()
+        }
+        // })
+      }
+    },
+
+    onDeleteImage () {
+      let el = this.$store.state.imagefile.deletedImageData.imageDetails
+      if (el !== null) {
+        // storeDelObj.forEach((el, index) => {
+        if (this.picture.value.some(p => p.guid === el.guid)) {
+          this.picture.value.splice(this.picture.value.findIndex(p => p.guid === el.guid), 1)
+          this.prev()
+          this.prev()
+          this.selImage = null
+          this.onNextPageMove(this.curPage)
+        }
+        // })
+      }
+    },
     calculateTotalPages (n) {
       let x = n % IMAGES_PER_PAGE === 0 ? Math.floor(n / IMAGES_PER_PAGE) : Math.floor(n / IMAGES_PER_PAGE) + 1
       return x
@@ -400,6 +458,8 @@ export default {
     onNextPageMove (i) {
       let start = i === 1 ? 0 : ((i - 1) * IMAGES_PER_PAGE)
       let end = (i * IMAGES_PER_PAGE)
+      this.curPage = i
+      this.curPageImages = null
       this.curPageImages = this.picture.value.slice(start, end)
     },
 
@@ -424,23 +484,28 @@ export default {
       if (!e) {
         return
       }
-      var reader = new FileReader()
-      reader.onload = (e) => {
-        this.createFile(e.target.result)
-      }
-      reader.readAsDataURL(file)
+
+      e.forEach(f => {
+        var reader = new FileReader()
+        reader.onload = (r) => {
+          this.createFile(f.name, r.target.result.split(',')[1])
+        }
+        reader.readAsDataURL(f)
+      })
     },
 
-    async createFile (file) {
+    async createFile (fileName, file) {
       this.progressStatus = 'Uploading...'
       let guid = uuidv4()
+      let fName = fileName
+      let str = file
 
       try {
         let event = new CustomEvent('tdg-qstnnr-uploadBlobImage', {
           detail: {
-            base64String: file,
+            base64String: str,
             nameGuid: guid,
-            fileName: file.name
+            fileName: fName
           },
           bubbles: true,
           cancelable: true
@@ -449,38 +514,21 @@ export default {
       } catch (e) {
         console.log(e)
       } finally {
-        this.progressStatus = ''
-        this.picture.value.push({
-          isFileTypeImage: false,
-          fileType: 'image',
-          title: file.name,
-          fileName: file.name,
-          comment: 'N/A',
-          guid: guid,
-          timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
-        })
-        this.next()
-        this.next()
-
         this.$refs.fileUpload.reset()
       }
     },
 
     async downloadFile (file) {
-      try {
-        let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
-          detail: {
-            nameGuid: file.guid,
-            fileName: file.name
-          },
-          bubbles: true,
-          cancelable: true
-        })
-
-        document.body.dispatchEvent(event)
-      } catch (e) {
-        console.log(e)
-      }
+      var link = document.createElement('a')
+      link.href = this.selLink
+      link.download = file.fileName
+      document.body.appendChild(link)
+      link.click()
+      setTimeout(function () {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(e.target.result)
+      }, 100)
     },
 
     async removeImage ($event, file, index) {
@@ -490,18 +538,21 @@ export default {
 
     async confirmed () {
       this.confirmDialogOpen = false
-
       let file = this.confirmCallbackArgs[1]
-      let index = this.confirmCallbackArgs[2]
 
       try {
-        await AzureBlobService.deleteFile(file)
+        let event = new CustomEvent('tdg-qstnnr-deleteBlobImage', {
+          detail: {
+            nameGuid: file.guid,
+            fileName: file.fileName
+          },
+          bubbles: true,
+          cancelable: true
+        })
+
+        document.body.dispatchEvent(event)
       } catch (e) {
         console.log(e)
-      } finally {
-        this.picture.value.splice(index - 1, 1)
-        this.prev()
-        this.selImage = this.picture.value.length === 0 ? null : this.picture.value[0]
       }
     },
 

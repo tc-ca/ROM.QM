@@ -41,9 +41,7 @@
 
 <script>
 
-// import AzureBlobService from '../../../../../services/azureBlobService'
-import base64Images from '../../../../../../public/static/base64-images.json'
-
+import mime from 'mime-types'
 export default {
   props: {
     picture: {
@@ -66,13 +64,44 @@ export default {
   created () {
     this.getLink()
   },
-  mounted () { },
+  mounted () {
+    this.$store.watch(
+      state => state.imagefile.imageData.imageDetails,
+      (value) => {
+        if (value) {
+          this.getImageData()
+        }
+      }
+    )
+    this.$store.watch(
+      state => state.imagefile.deletedImageData.imageDetails,
+      (value) => {
+        if (value) {
+          this.getImageData()
+        }
+      }
+    )
+  },
   methods: {
+    getImageData () {
+      let storeObj = this.$store.state.imagefile.imageData.imageDetails
+      if (storeObj !== null) {
+        // let element = stroeObj.find(s => s.guid === this.picture.guid)
+        if (storeObj.guid === this.picture.guid) {
+          this.link = `data:${mime.lookup(this.picture.fileName)};base64,${storeObj.result}`
+        }
+      }
+    },
     async getLink () {
-      // let response = await AzureBlobService.getImageFile(this.picture)
-      // this.link = response.data
-      let n = 'image_00' + (Math.floor(Math.random() * 5) + 1).toString()
-      this.link = `data:image/jpeg;base64,${base64Images[n]}`
+      let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
+        detail: {
+          nameGuid: this.picture.guid,
+          fileName: this.picture.fileName
+        },
+        bubbles: true,
+        cancelable: true
+      })
+      document.body.dispatchEvent(event)
     },
 
     onError (error) {
