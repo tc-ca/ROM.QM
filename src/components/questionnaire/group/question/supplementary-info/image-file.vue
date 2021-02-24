@@ -3,7 +3,6 @@
     class="rounded-lg"
   >
     <v-img
-      v-if="getImageBase64String"
       :src="link"
       lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
       aspect-ratio="1"
@@ -60,28 +59,39 @@ export default {
     }
   },
 
-  computed: {
-    getImageBase64String () {
-      let stroeObj = this.$store.state.imagefile.imageData.imageDetails
-      if (stroeObj !== null && stroeObj.length > 0) {
-        stroeObj.forEach((element, index) => {
-          if (element.guid === this.picture.guid) {
-            // eslint-disable-next-line no-debugger
-            debugger
-            this.link = `data:${mime.lookup(this.picture.fileName)};base64,${element.result}`
-          }
-        })
-      }
-
-      return true
-    }
-  },
+  computed: { },
 
   created () {
     this.getLink()
   },
-  mounted () { },
+  mounted () {
+    this.$store.watch(
+      state => state.imagefile.imageData.imageDetails,
+      (value) => {
+        if (value) {
+          this.getImageData()
+        }
+      }
+    )
+    this.$store.watch(
+      state => state.imagefile.deletedImageData.imageDetails,
+      (value) => {
+        if (value) {
+          this.getImageData()
+        }
+      }
+    )
+  },
   methods: {
+    getImageData () {
+      let storeObj = this.$store.state.imagefile.imageData.imageDetails
+      if (storeObj !== null) {
+        // let element = stroeObj.find(s => s.guid === this.picture.guid)
+        if (storeObj.guid === this.picture.guid) {
+          this.link = `data:${mime.lookup(this.picture.fileName)};base64,${storeObj.result}`
+        }
+      }
+    },
     async getLink () {
       let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
         detail: {

@@ -2,20 +2,18 @@ export const namespaced = true
 
 export const state = {
     imageFileNotification: {
-        qid: []
+        imageResults: Object
     },
     imageData: {
-        imageDetails: []
+        imageDetails: Object
     },
     deletedImageData: {
-        imageDetails: []
+        imageDetails: Object
     }
 }
 
 export const getters = {
-    imageFileId: state => {
-        return state.imageFileNotification.qid
-    }
+    
 }
 
 export const actions = {
@@ -24,13 +22,13 @@ export const actions = {
 
 export const mutations = {
     updateImageResult (state, payload) {
-        state.imageFileNotification.qid.push(payload)
+        state.imageFileNotification.imageResults = payload
     },
     updateImageBase64String (state, payload) {
-        state.imageData.imageDetails.push(payload)
+        state.imageData.imageDetails = payload
     },
     deleteImageResult (state, payload) {
-        state.deletedImageData.imageDetails.push(payload)
+        state.deletedImageData.imageDetails = payload
     }
 }
 

@@ -28,7 +28,6 @@
       </v-icon>
     </v-expansion-panel-header>
     <v-expansion-panel-content
-      v-show="showStatus"
       eager
     >
       <v-row>
@@ -38,6 +37,7 @@
             prepend-icon="mdi-camera"
             accept="image/*"
             counter
+            multiple
             show-size
             :disabled="readOnly"
             @change="onFileChange"
@@ -375,45 +375,6 @@ export default {
     displayPicture () {
       return !this.picture.display
     },
-    showStatus () {
-      let storeObj = this.$store.state.imagefile.imageFileNotification.qid
-      let storeDelObj = this.$store.state.imagefile.deletedImageData.imageDetails
-
-      if (storeObj !== null && storeObj.length > 0) {
-        storeObj.forEach((el, index) => {
-          if (!this.picture.value.some(p => p.guid === el.guid)) {
-            this.picture.value.push({
-              title: el.result,
-              fileName: el.result,
-              comment: 'N/A',
-              guid: el.guid,
-              timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
-            })
-            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-            this.progressStatus = ''
-            this.onNextPageMove(this.curPage)
-            this.next()
-            this.next()
-          }
-        })
-      }
-
-      if (storeDelObj !== null && storeDelObj.length > 0) {
-        storeDelObj.forEach((el, index) => {
-          if (this.picture.value.some(p => p.guid === el.guid)) {
-            this.picture.value.splice(this.picture.value.findIndex(p => p.guid === el.guid), 1)
-            this.prev()
-
-            this.selImage = null // this.picture.value.length === 0 ? null : this.picture.value[0]
-            // this.setCurrentImage(this.selImage.fileName, this.selImage)
-
-            this.onNextPageMove(this.curPage)
-          }
-        })
-      }
-
-      return true
-    },
     isPictureRequired () {
       return this.picture.option === 'required'
     },
@@ -423,6 +384,26 @@ export default {
   },
 
   mounted () {
+    this.$store.watch(
+      state => state.imagefile.imageFileNotification.imageResults,
+      (value) => {
+        if (value) {
+          // eslint-disable-next-line no-debugger
+          debugger
+          this.onUploadImage()
+        }
+      }
+    )
+    this.$store.watch(
+      state => state.imagefile.deletedImageData.imageDetails,
+      (value) => {
+        if (value) {
+          // eslint-disable-next-line no-debugger
+          debugger
+          this.onDeleteImage()
+        }
+      }
+    )
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
@@ -433,6 +414,42 @@ export default {
     this.onNextPageMove(1)
   },
   methods: {
+    onUploadImage () {
+      let el = this.$store.state.imagefile.imageFileNotification.imageResults
+      if (el !== null) {
+        // storeObj.forEach((el, index) => {
+        if (!this.picture.value.some(p => p.guid === el.guid)) {
+          this.picture.value.push({
+            title: el.result,
+            fileName: el.result,
+            comment: 'N/A',
+            guid: el.guid,
+            timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
+          })
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.progressStatus = ''
+          this.onNextPageMove(this.curPage)
+          this.next()
+          this.next()
+        }
+        // })
+      }
+    },
+
+    onDeleteImage () {
+      let el = this.$store.state.imagefile.deletedImageData.imageDetails
+      if (el !== null) {
+        // storeDelObj.forEach((el, index) => {
+        if (this.picture.value.some(p => p.guid === el.guid)) {
+          this.picture.value.splice(this.picture.value.findIndex(p => p.guid === el.guid), 1)
+          this.prev()
+          this.prev()
+          this.selImage = null
+          this.onNextPageMove(this.curPage)
+        }
+        // })
+      }
+    },
     calculateTotalPages (n) {
       let x = n % IMAGES_PER_PAGE === 0 ? Math.floor(n / IMAGES_PER_PAGE) : Math.floor(n / IMAGES_PER_PAGE) + 1
       return x
@@ -442,6 +459,7 @@ export default {
       let start = i === 1 ? 0 : ((i - 1) * IMAGES_PER_PAGE)
       let end = (i * IMAGES_PER_PAGE)
       this.curPage = i
+      this.curPageImages = null
       this.curPageImages = this.picture.value.slice(start, end)
     },
 
@@ -466,11 +484,14 @@ export default {
       if (!e) {
         return
       }
-      var reader = new FileReader()
-      reader.onload = (r) => {
-        this.createFile(e.name, r.target.result.split(',')[1])
-      }
-      reader.readAsDataURL(e)
+
+      e.forEach(f => {
+        var reader = new FileReader()
+        reader.onload = (r) => {
+          this.createFile(f.name, r.target.result.split(',')[1])
+        }
+        reader.readAsDataURL(f)
+      })
     },
 
     async createFile (fileName, file) {
