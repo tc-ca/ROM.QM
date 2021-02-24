@@ -31,12 +31,14 @@ export const getters = {
     let questions = [];
     let groups = []
     
-    if (groupId) {
-      groups = state.questionnaire.groups.filter(
-        x => x.htmlElementId === groupId
-      );
-    } else {
-      groups = state.questionnaire.groups;
+    if (state.questionnaire) {
+      if (groupId) {
+        groups = state.questionnaire.groups.filter(
+          x => x.htmlElementId === groupId
+        );
+      } else {
+        groups = state.questionnaire.groups;
+      }
     }
 
     groups.forEach(group => {
@@ -112,6 +114,7 @@ export const actions = {
 
   SetQuestionnaireState({ commit, dispatch }, payload) {
     const { questionnaire, page } = payload;
+    if (!questionnaire) return;
     switch (page) {
       case "builder":
         {
@@ -138,6 +141,7 @@ export const actions = {
   },
 
   RemoveBuilderCircularDependencies({ commit, state, dispatch }) {
+    if (!state.questionnaire) return; 
     const questionnaire = state.questionnaire;
 
     const {
