@@ -46,7 +46,7 @@
       // save the questionnaire result json to the service task
       await qtnHelper.SaveQuestionnaireCompletionStatus(questionnaireResultString, serviceTaskId, isValid);
 
-      await qtnHelper.SaveQuestionnaireToBlob(questionnaireResultString, serviceTaskId);
+      // await qtnHelper.SaveQuestionnaireToBlob(questionnaireResultString, serviceTaskId);
 
       // update the parent form with the error information so it knows how to handle mark complete
       // we can temporarily use session boo!!
