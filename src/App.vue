@@ -12,7 +12,8 @@
         @click="showSettings = !showSettings"
       />
       <v-spacer />
-      <v-expand-x-transition>
+      <!-- PROVISION SEARCH FIELD -->
+      <v-expand-x-transition v-if="isQuestionnairePage">
         <v-card
           v-show="expandProvisionSearchField"
           width="80%"
@@ -26,8 +27,9 @@
         </v-card>
       </v-expand-x-transition>
 
-      <!-- PROVISION SEARCH FILTER -->
+      <!-- PROVISION SEARCH FILTER BUTTON -->
       <v-btn
+        v-if="isQuestionnairePage"
         id=""
         icon
         color="white"
@@ -35,8 +37,9 @@
       >
         <v-icon> mdi-magnify </v-icon>
       </v-btn>
-      <!-- CHRACTERISTIC FILTER -->
+      <!-- CHRACTERISTIC FILTER BUTTON -->
       <v-btn
+        v-if="isQuestionnairePage"
         id=""
         icon
         color="white"
@@ -56,8 +59,9 @@
           mdi-tune
         </v-icon>
       </v-btn>
-      <!-- SAVE -->
+      <!-- SAVE BUTTON -->
       <v-btn
+        v-if="isQuestionnairePage"
         id=""
         icon
         color="white"
