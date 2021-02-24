@@ -231,6 +231,15 @@ export default {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)
     },
+    setImageState (data) {
+      this.$store.commit('imagefile/updateImageResult', data)
+    },
+    setImageBase64String (data) {
+      this.$store.commit('imagefile/updateImageBase64String', data)
+    },
+    setDeletedImageState (data) {
+      this.$store.commit('imagefile/deleteImageResult', data)
+    },
     emitSaveEvent () {
       if (this.isQuestionnaireDataAvailable) {
         const error = this.RunValidation()

@@ -3,6 +3,7 @@
     class="rounded-lg"
   >
     <v-img
+      v-if="getImageBase64String"
       :src="link"
       lazy-src="https://miro.medium.com/max/875/1*m3XbxCsKakzXLv9Qmk2b_A.png"
       aspect-ratio="1"
@@ -41,9 +42,7 @@
 
 <script>
 
-// import AzureBlobService from '../../../../../services/azureBlobService'
-import base64Images from '../../../../../../public/static/base64-images.json'
-
+import mime from 'mime-types'
 export default {
   props: {
     picture: {
@@ -61,7 +60,22 @@ export default {
     }
   },
 
-  computed: { },
+  computed: {
+    getImageBase64String () {
+      let stroeObj = this.$store.state.imagefile.imageData.imageDetails
+      if (stroeObj !== null && stroeObj.length > 0) {
+        stroeObj.forEach((element, index) => {
+          if (element.guid === this.picture.guid) {
+            // eslint-disable-next-line no-debugger
+            debugger
+            this.link = `data:${mime.lookup(this.picture.fileName)};base64,${element.result}`
+          }
+        })
+      }
+
+      return true
+    }
+  },
 
   created () {
     this.getLink()
@@ -69,10 +83,15 @@ export default {
   mounted () { },
   methods: {
     async getLink () {
-      // let response = await AzureBlobService.getImageFile(this.picture)
-      // this.link = response.data
-      let n = 'image_00' + (Math.floor(Math.random() * 5) + 1).toString()
-      this.link = `data:image/jpeg;base64,${base64Images[n]}`
+      let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
+        detail: {
+          nameGuid: this.picture.guid,
+          fileName: this.picture.fileName
+        },
+        bubbles: true,
+        cancelable: true
+      })
+      document.body.dispatchEvent(event)
     },
 
     onError (error) {
