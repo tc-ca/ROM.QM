@@ -309,6 +309,7 @@ function createDependencyGroup() {
 }
 
 function processBuilderForSave(questionnaire) {
+  if (!questionnaire) return; 
   let groups = _.cloneDeep(questionnaire.groups);
 
   let populateDependantsOnDependency = q => {
