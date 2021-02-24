@@ -257,7 +257,9 @@ export const mutations = {
   },
 
   setQuestionnaireReadOnlyStatus(state, payload) {
-    state.questionnaire.readOnly = payload;
+    if (state.questionnaire) {
+      state.questionnaire.readOnly = payload;
+    }
   },
 
   addSearchableProvision(state, payload) {
