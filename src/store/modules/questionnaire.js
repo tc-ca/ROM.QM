@@ -21,7 +21,7 @@ export const getters = {
     return ret;
   },
   getQuestionnaireReadOnlyStatus(state) {
-    // Just to debug
+    //  Done by LM on Feb 14 to avoid console error on Dynamic Builder
     let resp = state.questionnaire ? state.questionnaire.readOnly : false;
     return resp;
   },
@@ -31,6 +31,7 @@ export const getters = {
     let questions = [];
     let groups = []
     
+    //Done by LM on Feb 14 to avoid console error on Dynamic Builder
     if (state.questionnaire) {
       if (groupId) {
         groups = state.questionnaire.groups.filter(
@@ -114,6 +115,8 @@ export const actions = {
 
   SetQuestionnaireState({ commit, dispatch }, payload) {
     const { questionnaire, page } = payload;
+
+    //Done by LM on Feb 14 to avoid console error on Dynamic Builder
     if (!questionnaire) return;
     switch (page) {
       case "builder":
@@ -141,7 +144,9 @@ export const actions = {
   },
 
   RemoveBuilderCircularDependencies({ commit, state, dispatch }) {
+    //Done by LM on Feb 14 to avoid console error on Dynamic Builder
     if (!state.questionnaire) return; 
+
     const questionnaire = state.questionnaire;
 
     const {
@@ -261,6 +266,7 @@ export const mutations = {
   },
 
   setQuestionnaireReadOnlyStatus(state, payload) {
+    //Done by LM on Feb 14 to avoid console error on Dynamic Builder
     if (state.questionnaire) {
       state.questionnaire.readOnly = payload;
     }
