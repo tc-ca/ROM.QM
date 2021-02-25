@@ -108,7 +108,8 @@ export default {
     },
     updateFilter (value, oldValue) {
       if (value) {
-        this.updateProvisionFilter()
+        // on intial load set orginal state without any charactertics being set
+        this.updateProvisionFilter({ setOrginalTagFilterState: true })
       }
     }
   },
@@ -116,7 +117,7 @@ export default {
     this.$emit('mounted', true)
   },
   methods: {
-    updateProvisionFilter () {
+    updateProvisionFilter ({ setOrginalTagFilterState } = {}) {
       let characteristicProvisions = []
 
       if (this.model.length > 0) {
@@ -125,7 +126,7 @@ export default {
         characteristicProvisions = this.unSelectedValues
       }
       // todo: remove this.label should be set to something else from the incoming data
-      this.$store.dispatch('UpdateTagFilterState', { characteristicProvisions, characteristicCategory: this.label })
+      this.$store.dispatch('UpdateTagFilterState', { setOriginal: setOrginalTagFilterState, characteristicProvisions, characteristicCategory: this.label })
     }
   }
 }
