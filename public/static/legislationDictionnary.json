@@ -1,4 +1,411 @@
 {
+    "3c7d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(a)",
+        "id": "3c7d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(a) - one piece of valid photo identification issued by a government authority in Canada that shows the passenger’s surname, first name and any middle names and their date of birth, except any document, however described and regardless of format, issued by a government authority for the purposes of fishing, hunting or boating;",
+            "fr": "(a) - soit d’une pièce d’identité valide avec photo qui est délivrée par une autorité gouvernementale au Canada et qui indique les nom et prénoms et date de naissance du passager, sauf un document délivré par une autorité gouvernementale pour la pêche, la chasse ou la navigation, quelle que soit son appellation et quel que soit le support sur lequel il est présenté;"
+        },
+        "parentLegislationId": "e9b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "3d7d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(b)",
+        "id": "3d7d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(b) - one of the following pieces of photo identification issued by a government authority that shows the passenger’s surname, first name and any middle names and their date of birth and that is valid:",
+            "fr": "(b) - soit de l’une des pièces d’identité avec photo ci-après qui est délivrée par une autorité gouvernementale, qui indique les nom et prénoms et date de naissance du passager et qui est valide :"
+        },
+        "parentLegislationId": "e9b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "3e7d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(c)",
+        "id": "3e7d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(c) - two pieces of valid identification that are issued by a government authority in Canada — at least one of which shows the passenger’s surname, first name and any middle names and their date of birth — except any document, however described and regardless of format, issued by a government authority for the purposes of fishing, hunting or boating; or",
+            "fr": "(c) - soit de deux pièces d’identité valides délivrées par une autorité gouvernementale au Canada — dont au moins une indique les nom et prénoms et date de naissance du passager —, sauf tout document délivré par une autorité gouvernementale pour la pêche, la chasse ou la navigation, quelle que soit son appellation et quel que soit le support sur lequel il est présenté;"
+        },
+        "parentLegislationId": "e9b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "3f7d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(d)",
+        "id": "3f7d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(d) - a valid restricted area identity card, as defined in section 3 of the Canadian Aviation Security Regulations, 2012.",
+            "fr": "(d) - soit d’une carte d’identité de zone réglementée au sens de l’article 3 du Règlement canadien de 2012 sur la sûreté aérienne qui est valide."
+        },
+        "parentLegislationId": "e9b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "407d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(a)",
+        "id": "407d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(a) - comparing the surname, first name and any middle names on the passenger’s boarding pass with their identification; and",
+            "fr": "(a) - en comparant les nom et prénoms qui figurent sur la carte d’embarquement du passager avec ceux figurant sur ses pièces d’identité;"
+        },
+        "parentLegislationId": "edb33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "417d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(b)",
+        "id": "417d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(b) - if the passenger presents a piece of photo identification, comparing the passenger’s entire face with the face displayed in the photograph.",
+            "fr": "(b) - si le passager présente une pièce d’identité avec photo, en comparant son visage en entier avec le visage paraissant sur la photo."
+        },
+        "parentLegislationId": "edb33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "427d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(a)",
+        "id": "427d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(a) - compare the names on the identification with the names of listed persons; and",
+            "fr": "(a) - compare les nom et prénoms figurant sur la pièce d’identité avec ceux des personnes inscrites;"
+        },
+        "parentLegislationId": "efb33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "437d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(b)",
+        "id": "437d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(b) - if the names on the identification are similar to those of a listed person, immediately inform the Minister of Transport.",
+            "fr": "(b) - si les nom et prénoms figurant sur la pièce d’identité sont semblables à ceux d’une personne inscrite, informe immédiatement le ministre des Transports."
+        },
+        "parentLegislationId": "efb33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "447d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(a)",
+        "id": "447d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(a) - the air carrier must not allow the person to obtain a boarding pass at a kiosk or from the Internet; and",
+            "fr": "(a) - ne peut lui permettre d’obtenir une carte d’embarquement à partir d’une borne d’enregistrement libre-service ou d’Internet;"
+        },
+        "parentLegislationId": "f2b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "457d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(b)",
+        "id": "457d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(b) - the air carrier must compare the name, date of birth and gender on the person’s identification to those of the listed person.",
+            "fr": "(b) - est tenu de comparer les nom, date de naissance et sexe figurant sur les pièces d’identité présentées avec ceux de la personne inscrite."
+        },
+        "parentLegislationId": "f2b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "467d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(a)",
+        "id": "467d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(a) - the passenger presents a piece of photo identification and does not resemble the photograph; or",
+            "fr": "(a) - il présente une pièce d’identité avec photo et ne ressemble pas à la photo;"
+        },
+        "parentLegislationId": "f7b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "497d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(d)",
+        "id": "497d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(d) - the passenger presents more than one form of identification and there is a significant discrepancy between those forms of identification.",
+            "fr": "(d) - il présente plus d’un moyen d’identification comportant une divergence importante entre eux."
+        },
+        "parentLegislationId": "f7b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "4a7d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(a)",
+        "id": "4a7d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(a) - the passenger’s appearance changed for medical reasons after the photograph was taken and the passenger presents the air carrier with a document signed by a health care professional that attests to that fact; or",
+            "fr": "(a) - l’apparence du passager a changé pour des raisons médicales après la prise de la photo et celui-ci présente au transporteur aérien un document signé par un professionnel de la santé et attestant ce fait;"
+        },
+        "parentLegislationId": "f8b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "4b7d6241-386a-eb11-a812-000d3a84129e": {
+        "label": "(b)",
+        "id": "4b7d6241-386a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(b) - the passenger’s face is bandaged for medical reasons and the passenger presents the air carrier with a document signed by a health care professional that attests to that fact.",
+            "fr": "(b) - le passager a des bandages sur son visage pour des raisons médicales et présente au transporteur aérien un document signé par un professionnel de la santé et attestant ce fait."
+        },
+        "parentLegislationId": "f8b33557-376a-eb11-a812-000d3a841b3b",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "848628a1-796a-eb11-a812-000d3a84129e": {
+        "label": "(i)",
+        "id": "848628a1-796a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(i) - under Subpart 1 of Part VII of the Canadian Aviation Regulations using aircraft that have a maximum certificated take-off weight of more than 8 618 kg (19,000 pounds) or have a seating configuration, excluding crew seats, of 20 or more, or",
+            "fr": "(i) - de la sous-partie 1 de la partie VII du Règlement de l’aviation canadien au moyen d’aéronefs ayant une masse maximale homologuée au décollage de plus de 8 618 kg (19 000 livres) ou dont la configuration prévoit vingt sièges ou plus, sans compter les sièges de l’équipage,"
+        },
+        "parentLegislationId": "ee0fd143-0c67-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "858628a1-796a-eb11-a812-000d3a84129e": {
+        "label": "(ii)",
+        "id": "858628a1-796a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(ii) - under Subpart 5 of Part VII of the Canadian Aviation Regulations.",
+            "fr": "(ii) - de la sous-partie 5 de la partie VII du Règlement de l’aviation canadien."
+        },
+        "parentLegislationId": "ee0fd143-0c67-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "868628a1-796a-eb11-a812-000d3a84129e": {
+        "label": "(i)",
+        "id": "868628a1-796a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(i) - a passport issued by the country of which the passenger is a citizen or a national,",
+            "fr": "(i) - un passeport délivré au passager par le pays dont il est citoyen ou ressortissant,"
+        },
+        "parentLegislationId": "ef0fd143-0c67-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "878628a1-796a-eb11-a812-000d3a84129e": {
+        "label": "(ii)",
+        "id": "878628a1-796a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(ii) - a NEXUS card,",
+            "fr": "(ii) - une carte NEXUS,"
+        },
+        "parentLegislationId": "ef0fd143-0c67-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "888628a1-796a-eb11-a812-000d3a84129e": {
+        "label": "(iii)",
+        "id": "888628a1-796a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": "(iii) - any document referred to in subsection 50(1) or 52(1) of the Immigration and Refugee Protection Regulations; or",
+            "fr": "(iii) - un document visé au paragraphe 50(1) ou 52(1) du Règlement sur l’immigration et la protection des réfugiés;"
+        },
+        "parentLegislationId": "ef0fd143-0c67-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "e47e0e50-7e6a-eb11-a812-000d3a84129e": {
+        "label": null,
+        "id": "e47e0e50-7e6a-eb11-a812-000d3a84129e",
+        "title": {
+            "en": " - AMENDMENTS NOT IN FORCE",
+            "fr": " - "
+        },
+        "parentLegislationId": "",
+        "orderNumber": 0,
+        "typeName": "Schedule"
+    },
+    "e9b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(1)",
+        "id": "e9b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(1) - Subject to subsection (2), an air carrier must, at the boarding gate for a domestic flight, verify the identity of each passenger who appears to be 18 years of age or older using",
+            "fr": "(1) - Sous réserve du paragraphe (2), tout transporteur aérien vérifie, à la porte d’embarquement pour un vol intérieur, l’identité de chaque passager qui semble âgé de 18 ans ou plus au moyen :"
+        },
+        "parentLegislationId": "f6830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "ecb33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(2)",
+        "id": "ecb33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(2) - In the event that a passenger’s identity cannot be verified in accordance with subsection (1) because of the loss or theft of one or more pieces of their identification, the air carrier may verify their identity using alternative forms of valid identification such as their employee identity card, public transit pass or baptismal certificate if the passenger presents the identification in conjunction with documentation issued by a government authority or a police service that attests to the loss or theft.",
+            "fr": "(2) - Dans le cas où l’identité d’un passager ne peut être vérifiée conformément au paragraphe (1) en raison de la perte ou du vol d’une ou de plusieurs de ses pièces d’identité, le transporteur aérien peut vérifier l’identité du passager au moyen d’autres pièces d’identité valides — notamment la carte d’identité d’employé, le laissez-passer de transport en commun ou le certificat de baptême — si le passager présente la pièce accompagnée d’un document qui est délivré par une autorité gouvernementale ou un service de police et qui atteste la perte ou le vol."
+        },
+        "parentLegislationId": "f6830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "edb33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(1)",
+        "id": "edb33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(1) - The air carrier must carry out each verification referred to in section 3 or 4 by",
+            "fr": "(1) - Le transporteur aérien effectue la vérification visée à l’article 3 ou 4 de la manière suivante :"
+        },
+        "parentLegislationId": "f8830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "efb33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(2)",
+        "id": "efb33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(2) - If there is a significant discrepancy between the surname, first name or any middle names on the identification presented by the passenger and the surname, first name or any middle names on their boarding pass, the air carrier must",
+            "fr": "(2) - En cas de divergence importante entre les nom et prénoms figurant sur une pièce d’identité présentée par le passager et ceux figurant sur sa carte d’embarquement, le transporteur aérien :"
+        },
+        "parentLegislationId": "f8830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "f1b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(1)",
+        "id": "f1b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(1) - An air carrier must, before issuing a boarding pass to any person who appears to be 18 years of age or older, verify the identity of the person by comparing their name with the names of listed persons.",
+            "fr": "(1) - Le transporteur aérien vérifie l’identité de toute personne qui semble être âgée de 18 ans ou plus en comparant son nom avec ceux des personnes inscrites avant de lui remettre une carte d’embarquement."
+        },
+        "parentLegislationId": "01840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "f2b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(2)",
+        "id": "f2b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(2) - If the name of the person is the same as that of a listed person,",
+            "fr": "(2) - Si le nom de la personne correspond à celui d’une personne inscrite, le transporteur aérien :"
+        },
+        "parentLegislationId": "01840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "f5b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(3)",
+        "id": "f5b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(3) - If the name, date of birth and gender on the identification are the same as those of a listed person, the air carrier must immediately inform the Minister of Transport.",
+            "fr": "(3) - Si les nom, date de naissance et sexe figurant sur la pièce d’identité correspondent à ceux d’une personne inscrite, le transporteur aérien en informe immédiatement le ministre des Transports."
+        },
+        "parentLegislationId": "01840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "f6b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(4)",
+        "id": "f6b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(4) - After informing the Minister of Transport, the air carrier must not issue a boarding pass to the person unless the Minister of Transport has informed the air carrier that a direction referred to in paragraph 9(1)(a) of the Act will not be made in respect of that person.",
+            "fr": "(4) - Le transporteur aérien qui a informé le ministre des Transports en application du paragraphe (3) ne peut remettre de carte d’embarquement à la personne en cause que si le ministre des Transports l’avise qu’aucune directive la visant ne sera donnée en vertu de l’alinéa 9(1)a) de la Loi."
+        },
+        "parentLegislationId": "01840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "f7b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(1)",
+        "id": "f7b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(1) - It is prohibited for an air carrier to transport a passenger if",
+            "fr": "(1) - Il est interdit au transporteur aérien de transporter un passager dans les cas suivants :"
+        },
+        "parentLegislationId": "03840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "f8b33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(2)",
+        "id": "f8b33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(2) - Despite paragraph (1)(a), an air carrier may transport a passenger who presents a piece of photo identification but does not resemble the photograph if",
+            "fr": "(2) - Malgré l’alinéa (1)a), le transporteur aérien peut transporter un passager qui présente une pièce d’identité avec photo et qui ne ressemble pas à la photo dans les cas suivants :"
+        },
+        "parentLegislationId": "03840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "fbb33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(1)",
+        "id": "fbb33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(1) - An air carrier must keep an up-to-date record of all employees, representatives or contractors of the air carrier who have access to the list established under subsection 8(1) of the Act.",
+            "fr": "(1) - Le transporteur aérien tient à jour un registre de tous ses employés, ses représentants et les entrepreneurs avec lesquels il fait affaire qui ont accès à la liste."
+        },
+        "parentLegislationId": "11840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "fcb33557-376a-eb11-a812-000d3a841b3b": {
+        "label": "(2)",
+        "id": "fcb33557-376a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(2) - The air carrier must provide the up-to-date record to the Minister of Transport on reasonable notice given by that Minister.",
+            "fr": "(2) - Il fournit le registre au ministre des Transports sur préavis raisonnable de celui-ci."
+        },
+        "parentLegislationId": "11840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Subsection"
+    },
+    "c1cc99ce-7b6a-eb11-a812-000d3a841b3b": {
+        "label": "(i)",
+        "id": "c1cc99ce-7b6a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(i) - a passport issued by the country of which the passenger is a citizen or a national,",
+            "fr": "(i) - un passeport délivré au passager par le pays dont il est citoyen ou ressortissant,"
+        },
+        "parentLegislationId": "3d7d6241-386a-eb11-a812-000d3a84129e",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "c2cc99ce-7b6a-eb11-a812-000d3a841b3b": {
+        "label": "(ii)",
+        "id": "c2cc99ce-7b6a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(ii) - a NEXUS card,",
+            "fr": "(ii) - une carte NEXUS,"
+        },
+        "parentLegislationId": "3d7d6241-386a-eb11-a812-000d3a84129e",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "c4cc99ce-7b6a-eb11-a812-000d3a841b3b": {
+        "label": "(iii)",
+        "id": "c4cc99ce-7b6a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(iii) - a permanent resident card issued by the United States,",
+            "fr": "(iii) - une carte de résident permanent délivrée par les États-Unis,"
+        },
+        "parentLegislationId": "3d7d6241-386a-eb11-a812-000d3a84129e",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "c5cc99ce-7b6a-eb11-a812-000d3a841b3b": {
+        "label": "(iv)",
+        "id": "c5cc99ce-7b6a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(iv) - an enhanced driver’s license issued in the United States,",
+            "fr": "(iv) - un permis de conduire Plus délivré aux États-Unis,"
+        },
+        "parentLegislationId": "3d7d6241-386a-eb11-a812-000d3a84129e",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
+    "c7cc99ce-7b6a-eb11-a812-000d3a841b3b": {
+        "label": "(v)",
+        "id": "c7cc99ce-7b6a-eb11-a812-000d3a841b3b",
+        "title": {
+            "en": "(v) - any document referred to in subsection 50(1) or 52(1) of the Immigration and Refugee Protection Regulations;",
+            "fr": "(v) - un document visé au paragraphe 50(1) ou 52(1) du Règlement sur l’immigration et la protection des réfugiés;"
+        },
+        "parentLegislationId": "3d7d6241-386a-eb11-a812-000d3a84129e",
+        "orderNumber": 0,
+        "typeName": "Subparagraph"
+    },
     "d0a6a54d-455f-eb11-a812-000d3a84fd7b": {
         "label": "test",
         "id": "d0a6a54d-455f-eb11-a812-000d3a84fd7b",
@@ -7,6 +414,138 @@
             "fr": "test - test add"
         },
         "parentLegislationId": "4a341cdf-013b-eb11-a813-000d3af3fc19",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "8045b928-4462-eb11-a812-000d3ae94651": {
+        "label": "ACT",
+        "id": "8045b928-4462-eb11-a812-000d3ae94651",
+        "title": {
+            "en": "ACT - ",
+            "fr": "ACT - "
+        },
+        "parentLegislationId": "",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "73f514c4-3362-eb11-a812-000d3ae9471c": {
+        "label": "5",
+        "id": "73f514c4-3362-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "5 - No person shall import, offer for transport, handle or transport any dangerous goods unless",
+            "fr": "5 - Il est interdit à toute personne de se livrer à l’importation, à la présentation au transport, à la manutention ou au transport de marchandises dangereuses sauf si, à la fois :"
+        },
+        "parentLegislationId": "8045b928-4462-eb11-a812-000d3ae94651",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "f9719d1c-3462-eb11-a812-000d3ae9471c": {
+        "label": "(a)",
+        "id": "f9719d1c-3462-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "(a) - the person complies with all safety requirements and security requirements that apply under the regulations",
+            "fr": "(a) - elle observe les règles de sécurité et de sûreté prévues par règlement"
+        },
+        "parentLegislationId": "542daf1f-b460-eb11-a812-000d3ae949b6",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "e693c175-3462-eb11-a812-000d3ae9471c": {
+        "label": "(b)",
+        "id": "e693c175-3462-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "(b) - The goods are accompanied by all documents that are required under the regulations;",
+            "fr": "(b) - les documents réglementaires accompagnent les marchandises dangereuses;"
+        },
+        "parentLegislationId": "542daf1f-b460-eb11-a812-000d3ae949b6",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "1b6da0d4-3462-eb11-a812-000d3ae9471c": {
+        "label": "(c)",
+        "id": "1b6da0d4-3462-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "(c) - a means of containment is used for the goods that is required or permitted under the regulations",
+            "fr": "(c) - un contenant réglementaire est utilisé pour chacune des marchandises;"
+        },
+        "parentLegislationId": "542daf1f-b460-eb11-a812-000d3ae949b6",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "573a5f52-3562-eb11-a812-000d3ae9471c": {
+        "label": "(d)",
+        "id": "573a5f52-3562-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "(d) - the means of containment and means of transport comply with all safety standards that apply under the regulations and display all applicable safety marks in accordance with the regulations.",
+            "fr": "(d) - les contenants et les moyens de transport sont conformes aux normes de sécurité réglementaires et portent les indications de sécurité réglementaires."
+        },
+        "parentLegislationId": "542daf1f-b460-eb11-a812-000d3ae949b6",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "3592efcf-3562-eb11-a812-000d3ae9471c": {
+        "label": "5.1",
+        "id": "3592efcf-3562-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "5.1 - No person shall design, manufacture, repair, test or equip a means of containment used or intended to be used in importing, offering for transport, handling or transporting dangerous goods unless the person complies with all safety requirements that apply under the regulations.",
+            "fr": "5.1 - Il est interdit à quiconque de se livrer à la conception, à la fabrication, à la réparation, à la mise à l’essai ou à l’équipement de contenants qui sont utilisés pour l’importation, la présentation au transport, la manutention ou le transport de marchandises dangereuses — ou qui sont prévus à ces fins —, à moins de respecter les règles de sécurité réglementaires"
+        },
+        "parentLegislationId": "8045b928-4462-eb11-a812-000d3ae94651",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "83b0560e-3662-eb11-a812-000d3ae9471c": {
+        "label": "6",
+        "id": "83b0560e-3662-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "6 - No person shall affix or display on a means of containment a compliance mark that is required or permitted under the regulations — or another mark that is likely to be mistaken for such a mark — in respect of the manufacture, repair or testing of the means of containment, unless the manufacture, repair or testing was done in compliance with all safety requirements and safety standards applicable to that compliance mark",
+            "fr": "6 - Il est interdit à quiconque d’apposer ou d’afficher sur un contenant une indication de conformité exigée ou autorisée par les règlements concernant la fabrication, la réparation ou la mise à l’essai de ce contenant, ou une autre indication susceptible d’être confondue avec une telle indication, sauf si le contenant a été fabriqué, réparé ou mis à l’essai, selon le cas, conformément aux règles de sécurité et normes de sécurité applicables à l’indication de conformité."
+        },
+        "parentLegislationId": "8045b928-4462-eb11-a812-000d3ae94651",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "97c25984-3662-eb11-a812-000d3ae9471c": {
+        "label": "6.1",
+        "id": "97c25984-3662-eb11-a812-000d3ae9471c",
+        "title": {
+            "en": "6.1 - No person shall affix or display on dangerous goods, a means of containment or a means of transport a dangerous goods mark that is required or permitted under the regulations — or another mark that is likely to be mistaken for such a mark — if the mark is misleading as to the presence of danger or the nature of any danger.",
+            "fr": "6.1 - Il est interdit à quiconque d’apposer ou d’afficher sur des marchandises dangereuses, sur un contenant ou sur un moyen de transport une indication de marchandises dangereuses exigée ou autorisée par les règlements ou une autre indication susceptible d’être confondue avec une telle indication de marchandises dangereuses, qui est trompeuse quant à la présence ou à la nature d’un danger."
+        },
+        "parentLegislationId": "8045b928-4462-eb11-a812-000d3ae94651",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "279b61aa-b160-eb11-a812-000d3ae949b6": {
+        "label": "CR-12345",
+        "id": "279b61aa-b160-eb11-a812-000d3ae949b6",
+        "title": {
+            "en": "CR-12345 - All computers must peripherals",
+            "fr": "CR-12345 - FR All computers must peripherals"
+        },
+        "parentLegislationId": "",
+        "orderNumber": 0,
+        "typeName": "Computer Regulation Section"
+    },
+    "57489336-b260-eb11-a812-000d3ae949b6": {
+        "label": "(a)",
+        "id": "57489336-b260-eb11-a812-000d3ae949b6",
+        "title": {
+            "en": "(a) - Must have a keyboard",
+            "fr": "(a) - Must have a keyboard"
+        },
+        "parentLegislationId": "279b61aa-b160-eb11-a812-000d3ae949b6",
+        "orderNumber": 0,
+        "typeName": "Computer Regulation Section"
+    },
+    "542daf1f-b460-eb11-a812-000d3ae949b6": {
+        "label": "Act 5",
+        "id": "542daf1f-b460-eb11-a812-000d3ae949b6",
+        "title": {
+            "en": "Act 5 - English",
+            "fr": "Act 5 - French Text"
+        },
+        "parentLegislationId": "",
         "orderNumber": 0,
         "typeName": "Heading"
     },
@@ -43,12 +582,397 @@
         "orderNumber": 0,
         "typeName": "Paragraph"
     },
-    "c06c1ae9-dc64-4d95-9151-2546c5a93abf": {
+    "3ad9b866-a064-eb11-a812-000d3aff04b5": {
+        "label": "Deztest",
+        "id": "3ad9b866-a064-eb11-a812-000d3aff04b5",
+        "title": {
+            "en": "Deztest - Deztest",
+            "fr": "Deztest - Deztest"
+        },
+        "parentLegislationId": "3592efcf-3562-eb11-a812-000d3ae9471c",
+        "orderNumber": 0,
+        "typeName": null
+    },
+    "e36af8a8-0067-eb11-a812-000d3aff0dda": {
         "label": null,
-        "id": "c06c1ae9-dc64-4d95-9151-2546c5a93abf",
+        "id": "e36af8a8-0067-eb11-a812-000d3aff0dda",
         "title": {
             "en": " - ",
-            "fr": " - FR_"
+            "fr": " - "
+        },
+        "parentLegislationId": "",
+        "orderNumber": 0,
+        "typeName": "Body"
+    },
+    "ed0fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(a)",
+        "id": "ed0fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(a) - domestic flights that depart from Canadian aerodromes and that are conducted by air carriers under Subpart 5 of Part VII of the Canadian Aviation Regulations ; and",
+            "fr": "(a) - les vols intérieurs qui partent d’aérodromes canadiens et qui sont effectués par des transporteurs aériens sous le régime de la sous-partie 5 de la partie VII du Règlement de l’aviation canadien;"
+        },
+        "parentLegislationId": "f3830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "ee0fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(b)",
+        "id": "ee0fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(b) - international flights that depart from or will arrive at Canadian aerodromes and that are conducted by air carriers",
+            "fr": "(b) - les vols internationaux qui partent d’aérodromes canadiens ou y arriveront et qui sont effectués par des transporteurs aériens sous le régime, selon le cas :"
+        },
+        "parentLegislationId": "f3830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "ef0fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(a)",
+        "id": "ef0fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(a) - one of the following pieces of photo identification issued by a government authority that shows the passenger’s surname, first name and any middle names, their date of birth and gender and that is valid:",
+            "fr": "(a) - soit de l’une des pièces d’identité avec photo ci-après qui est délivrée par une autorité gouvernementale, qui indique les nom et prénoms, date de naissance et genre du passager et qui est valide :"
+        },
+        "parentLegislationId": "f7830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "f00fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(b)",
+        "id": "f00fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(b) - a valid restricted area identity card, as defined in section 3 of the Canadian Aviation Security Regulations, 2012.",
+            "fr": "(b) - soit d’une carte d’identité de zone réglementée au sens de l’article 3 du Règlement canadien de 2012 sur la sûreté aérienne qui est valide."
+        },
+        "parentLegislationId": "f7830122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "f10fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(a)",
+        "id": "f10fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(a) - about whom the Minister of Transport has been informed under paragraph 4.1(2)(b), unless the Minister of Transport has informed the air carrier that a direction will not be made in respect of that person under subsection 9(1) of the Act;",
+            "fr": "(a) - au sujet de laquelle il a informé le ministre des Transports aux termes de l’alinéa 4.1(2)b), à moins que celui-ci l’avise qu’aucune directive visant la personne ne sera donnée en vertu du paragraphe 9(1) de la Loi;"
+        },
+        "parentLegislationId": "07840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "f30fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(b)",
+        "id": "f30fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(b) - about whom a direction has been made, unless the air carrier has complied with the direction.",
+            "fr": "(b) - à l’égard de laquelle des directives ont été données, à moins que le transporteur aérien ne s’y soit conformé."
+        },
+        "parentLegislationId": "07840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "f40fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(a)",
+        "id": "f40fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(a) - access to information respecting listed persons is restricted to air carrier employees, representatives or contractors who require the access to carry out their duties under the Act or these Regulations; and",
+            "fr": "(a) - l’accès aux renseignements sur les personnes inscrites soit restreint à ses employés ou ses représentants ou les entrepreneurs avec lesquels il fait affaire qui ont besoin d’y avoir accès pour s’acquitter de leurs fonctions conformément à la Loi ou au présent règlement;"
+        },
+        "parentLegislationId": "0f840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "f50fd143-0c67-eb11-a812-000d3aff0dda": {
+        "label": "(b)",
+        "id": "f50fd143-0c67-eb11-a812-000d3aff0dda",
+        "title": {
+            "en": "(b) - access by those employees, representatives or contractors is limited to the extent necessary to carry out those duties.",
+            "fr": "(b) - l’accès par ces employés, représentants ou entrepreneurs soit limité dans la mesure nécessaire pour s’acquitter de leurs fonctions."
+        },
+        "parentLegislationId": "0f840122-0667-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Paragraph"
+    },
+    "be341cad-0067-eb11-a812-000d3aff148f": {
+        "label": null,
+        "id": "be341cad-0067-eb11-a812-000d3aff148f",
+        "title": {
+            "en": " - Interpretation",
+            "fr": " - Définitions"
+        },
+        "parentLegislationId": "e36af8a8-0067-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "bf341cad-0067-eb11-a812-000d3aff148f": {
+        "label": null,
+        "id": "bf341cad-0067-eb11-a812-000d3aff148f",
+        "title": {
+            "en": " - Prescribed Person",
+            "fr": " - Personne visée"
+        },
+        "parentLegislationId": "e36af8a8-0067-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "c0341cad-0067-eb11-a812-000d3aff148f": {
+        "label": null,
+        "id": "c0341cad-0067-eb11-a812-000d3aff148f",
+        "title": {
+            "en": " - Application",
+            "fr": " - Application"
+        },
+        "parentLegislationId": "e36af8a8-0067-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "c1341cad-0067-eb11-a812-000d3aff148f": {
+        "label": null,
+        "id": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "title": {
+            "en": " - Verification of Identity",
+            "fr": " - Vérification de l’identité"
+        },
+        "parentLegislationId": "e36af8a8-0067-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "c2341cad-0067-eb11-a812-000d3aff148f": {
+        "label": null,
+        "id": "c2341cad-0067-eb11-a812-000d3aff148f",
+        "title": {
+            "en": " - Information",
+            "fr": " - Renseignements"
+        },
+        "parentLegislationId": "e36af8a8-0067-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "c3341cad-0067-eb11-a812-000d3aff148f": {
+        "label": null,
+        "id": "c3341cad-0067-eb11-a812-000d3aff148f",
+        "title": {
+            "en": " - Coming into Force",
+            "fr": " - Entrée en vigueur"
+        },
+        "parentLegislationId": "e36af8a8-0067-eb11-a812-000d3aff0dda",
+        "orderNumber": 0,
+        "typeName": "Heading"
+    },
+    "ef830122-0667-eb11-a812-000d3aff148f": {
+        "label": "1",
+        "id": "ef830122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "1 - The following definitions apply in these Regulations.",
+            "fr": "1 - Les définitions qui suivent s’appliquent au présent règlement."
+        },
+        "parentLegislationId": "be341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "f1830122-0667-eb11-a812-000d3aff148f": {
+        "label": "1.1",
+        "id": "f1830122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "1.1 - For the purposes of paragraph 10(f) of the Act, the Minister of Foreign Affairs is a prescribed person.",
+            "fr": "1.1 - Pour l’application de l’alinéa 10f) de la Loi, le ministre des Affaires étrangères est une personne visée."
+        },
+        "parentLegislationId": "bf341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "f3830122-0667-eb11-a812-000d3aff148f": {
+        "label": "2",
+        "id": "f3830122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "2 - Sections 3 to 15 apply in respect of the following passenger-carrying flights — or in respect of air carriers conducting such flights — if the passengers, the property in the possession or control of the passengers and the belongings or baggage that the passengers give to the air carrier for transport are subject to screening that is carried out — in Canada under the Aeronautics Act or in another country by the person or entity responsible for the screening of such persons, property and belongings or baggage — before boarding:",
+            "fr": "2 - Les articles 3 à 15 s’appliquent à l’égard des vols ci-après — ou à l’égard des transporteurs aériens exploitant de tels vols — dont les passagers, les biens en leur possession ou sous leur garde ou les effets personnels ou les bagages qu’ils confient au transporteur aérien en vue de leur transport font l’objet, avant l’embarquement, d’un contrôle effectué, au Canada, sous le régime de la Loi sur l’aéronautique ou, dans un autre pays, par la personne ou l’organisme qui est responsable du contrôle de ces personnes et de ces biens et effets personnels ou bagages :"
+        },
+        "parentLegislationId": "c0341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "f6830122-0667-eb11-a812-000d3aff148f": {
+        "label": "3",
+        "id": "f6830122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "3 - ",
+            "fr": "3 - "
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "f7830122-0667-eb11-a812-000d3aff148f": {
+        "label": "4",
+        "id": "f7830122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "4 - An air carrier must, at the boarding gate for an international flight, verify the identity of each passenger who appears to be 18 years of age or older using",
+            "fr": "4 - Tout transporteur aérien vérifie, à la porte d’embarquement pour un vol international, l’identité de chaque passager qui semble âgé de 18 ans ou plus au moyen :"
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "f8830122-0667-eb11-a812-000d3aff148f": {
+        "label": "4.1",
+        "id": "f8830122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "4.1 - ",
+            "fr": "4.1 - "
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "01840122-0667-eb11-a812-000d3aff148f": {
+        "label": "5",
+        "id": "01840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "5 - ",
+            "fr": "5 - "
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "02840122-0667-eb11-a812-000d3aff148f": {
+        "label": "6",
+        "id": "02840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "6 - ",
+            "fr": "6 - "
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "03840122-0667-eb11-a812-000d3aff148f": {
+        "label": "7",
+        "id": "03840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "7 - ",
+            "fr": "7 - "
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "05840122-0667-eb11-a812-000d3aff148f": {
+        "label": "8",
+        "id": "05840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "8 - ",
+            "fr": "8 - "
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "07840122-0667-eb11-a812-000d3aff148f": {
+        "label": "9",
+        "id": "07840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "9 - It is prohibited for an air carrier to transport a person",
+            "fr": "9 - Il est interdit au transporteur aérien de transporter toute personne :"
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "0a840122-0667-eb11-a812-000d3aff148f": {
+        "label": "10",
+        "id": "0a840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "10 - If a direction is made under paragraph 9(1)(a) of the Act in respect of a listed person, the Minister of Transport must provide the air carrier with contact information for the administrative recourse office of the Department of Public Safety and Emergency Preparedness and the air carrier must make that contact information available to the person.",
+            "fr": "10 - Si des directives sont données à un transporteur aérien en vertu de l’alinéa 9(1)a) de la Loi à l’égard d’une personne inscrite, le ministre des Transports fournit les coordonnées du bureau des recours administratifs du ministère de la Sécurité publique et de la Protection civile au transporteur aérien et celui-ci les met à la disposition de la personne."
+        },
+        "parentLegislationId": "c1341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "0c840122-0667-eb11-a812-000d3aff148f": {
+        "label": "11",
+        "id": "0c840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "11 - An air carrier must ensure that any system it uses to comply with paragraph 4.1(2)(a) or section 5 uses only the most up-to-date information provided to the air carrier by the Minister of Transport respecting listed persons.",
+            "fr": "11 - Le transporteur aérien veille à ce que tout système qu’il utilise pour se conformer à l’alinéa 4.1(2)a) ou à l’article 5 n’utilise que les renseignements les plus récents qui lui sont fournis par le ministre des Transports sur les personnes inscrites."
+        },
+        "parentLegislationId": "c2341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "0e840122-0667-eb11-a812-000d3aff148f": {
+        "label": "12",
+        "id": "0e840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "12 - If the Minister of Transport informs an air carrier that a person is no longer a listed person, the air carrier must immediately remove all information respecting that person from any system it uses to comply with paragraph 4.1(2)(a) or section 5.",
+            "fr": "12 - Lorsque le ministre des Transports avise le transporteur aérien qu’une personne n’est plus inscrite, ce dernier supprime immédiatement tout renseignement sur cette personne de tout système qu’il utilise pour se conformer à l’alinéa 4.1(2)a) ou à l’article 5."
+        },
+        "parentLegislationId": "c2341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "0f840122-0667-eb11-a812-000d3aff148f": {
+        "label": "13",
+        "id": "0f840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "13 - An air carrier must ensure that",
+            "fr": "13 - Le transporteur aérien veille à ce que :"
+        },
+        "parentLegislationId": "c2341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "10840122-0667-eb11-a812-000d3aff148f": {
+        "label": "14",
+        "id": "10840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "14 - It is prohibited for air carrier employees, representatives or contractors to use any information respecting a listed person except to the extent necessary to carry out their duties under the Act or these Regulations.",
+            "fr": "14 - Il est interdit aux employés et aux représentants du transporteur aérien ou aux entrepreneurs avec lesquels il fait affaire d’utiliser des renseignements concernant une personne inscrite, sauf dans la mesure nécessaire à l’exercice de leurs fonctions pour l’application de la Loi ou du présent règlement."
+        },
+        "parentLegislationId": "c2341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "11840122-0667-eb11-a812-000d3aff148f": {
+        "label": "15",
+        "id": "11840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "15 - ",
+            "fr": "15 - "
+        },
+        "parentLegislationId": "c2341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "12840122-0667-eb11-a812-000d3aff148f": {
+        "label": "16",
+        "id": "12840122-0667-eb11-a812-000d3aff148f",
+        "title": {
+            "en": "16 - These Regulations come into force on August 1, 2015.",
+            "fr": "16 - Le présent règlement entre en vigueur le 1 er août 2015."
+        },
+        "parentLegislationId": "c3341cad-0067-eb11-a812-000d3aff148f",
+        "orderNumber": 0,
+        "typeName": "Section"
+    },
+    "1477409f-b360-eb11-89f5-000d3af36af4": {
+        "label": "3000",
+        "id": "1477409f-b360-eb11-89f5-000d3af36af4",
+        "title": {
+            "en": "3000 - Something to do with the year 3000",
+            "fr": "3000 - "
+        },
+        "parentLegislationId": "",
+        "orderNumber": 1,
+        "typeName": "Paragraph"
+    },
+    "c06c1ae9-dc64-4d95-9151-2546c5a93abf": {
+        "label": "TDG Regulations",
+        "id": "c06c1ae9-dc64-4d95-9151-2546c5a93abf",
+        "title": {
+            "en": "TDG Regulations - ",
+            "fr": "TDG Regulations - FR_"
         },
         "parentLegislationId": "",
         "orderNumber": 1,
