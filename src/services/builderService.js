@@ -808,6 +808,12 @@ function downloadData (data, filename){
   a.dispatchEvent(e)
 }
 
+function isParentAGroup (group, qGuid) {
+  const indx = group.questions.findIndex( q => q.guid === qGuid);
+  return (indx > -1);
+}
+
+
 export default {
   createGroup,
   createQuestionnaire,
@@ -827,5 +833,6 @@ export default {
   FindNonUniqueIds,
   flattenQuestions,
   fixTemplate,
-  GenerateRepeatedQuestion
+  GenerateRepeatedQuestion,
+  isParentAGroup
 };
