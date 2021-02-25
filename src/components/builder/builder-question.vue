@@ -55,16 +55,18 @@
             align="center"
             class="ma-2"
           >
-            <v-col
-              class="col-auto"
-            >
-              <v-btn
-                :disabled="question.type === reference"
-                @click="addQuestion($event)"
+            <div v-if="isAddChildQuestionAllowed">
+              <v-col
+                class="col-auto"
               >
-                {{ $t('app.builder.group.question.addChildQuestion') }}
-              </v-btn>
-            </v-col>
+                <v-btn
+                  :disabled="question.type === reference"
+                  @click="addQuestion($event)"
+                >
+                  {{ $t('app.builder.group.question.addChildQuestion') }}
+                </v-btn>
+              </v-col>
+            </div>
             <v-col
               class="col-auto"
             >
@@ -169,6 +171,9 @@ export default {
     }
   },
   computed: {
+    isAddChildQuestionAllowed () {
+      return BuilderService.isParentAGroup(this.group, this.question.guid)
+    },
     questionText () {
       // return `${this.index + 1}. ${this.question.text[this.lang]}`
       return `${this.question.text[this.lang]}`
