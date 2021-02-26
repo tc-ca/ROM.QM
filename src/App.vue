@@ -155,6 +155,10 @@ export default {
     lang: {
       type: String,
       default: LANGUAGE.ENGLISH
+    },
+    userName: {
+      type: String,
+      default: ''
     }
   },
   data: function () {
@@ -203,6 +207,9 @@ export default {
       console.log('App.vue: lang watch ' + value + ')')
       this.setLanguage()
     },
+    userName (value, oldValue) {
+      this.setUserName(value)
+    },
     settings (value, oldValue) {
       console.log('App.vue: settings watch ' + value)
       this.settings = JSON.parse(value)
@@ -230,7 +237,7 @@ export default {
     // console.log(JSON.stringify(this.$store.state.questionnaire.questionnaire))
   },
   methods: {
-    ...mapActions(['setAppLanguage', 'setSettings']),
+    ...mapActions(['setAppLanguage', 'setUserName', 'setSettings']),
     setLanguage () {
       this.$i18n.locale = this.lang
       this.setAppLanguage(this.lang)

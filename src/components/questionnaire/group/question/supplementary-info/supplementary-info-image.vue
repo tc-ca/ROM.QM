@@ -106,6 +106,17 @@
                   class="grey--text"
                   style="padding-left: 10px"
                 >
+                  Uploaded by: {{ selImage.userName }}
+                </div>
+              </v-row>
+              <v-row
+                align="center"
+                class="mx-0"
+              >
+                <div
+                  class="grey--text"
+                  style="padding-left: 10px"
+                >
                   Uploaded on: {{ selImage.timeStamp }}
                 </div>
               </v-row>
@@ -307,6 +318,7 @@
 
 /* eslint-disable no-undef */
 import moment from 'moment'
+import { mapState } from 'vuex'
 // import { MAX_IMAGE_UPLOADS_PER_ANSWER } from '../../../../../config.js'
 import BaseMixin from '../../../../../mixins/base'
 import ImageFile from '../supplementary-info/image-file'
@@ -380,7 +392,15 @@ export default {
     },
     errorInPicture () {
       return this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
-    }
+    },
+    ...mapState({
+      userName: state => {
+        if (!state || !state.settings) {
+          return 'N/A'
+        }
+        return state.settings.settings.userName
+      }
+    })
   },
 
   mounted () {
@@ -420,6 +440,7 @@ export default {
             fileName: el.result,
             comment: 'N/A',
             guid: el.guid,
+            userName: this.userName,
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
           })
           this.progressStatus = ''

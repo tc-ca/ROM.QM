@@ -1,6 +1,7 @@
 export const state = {
   settings: {
     lang: 'en',
+    userName: '',
     darkMode: false
   }
 }
@@ -19,6 +20,11 @@ export const actions = {
     saveSettingToLocalStore(state.app)
   },
 
+  setUserName ({ commit }, val) {
+    commit('SET_USERNAME', val)
+    saveSettingToLocalStore(state.app)
+  },
+
   setSettings ({ commit }, val) {
     commit('SET_SETTINGS', val)
     saveSettingToLocalStore(state.app)
@@ -30,9 +36,11 @@ export const mutations = {
   SET_DARKMODE (state, val) {
     state.settings.darkMode = val
   },
-
   SET_LANGUAGE (state, val) {
     state.settings.lang = val
+  },
+  SET_USERNAME (state, val) {
+    state.settings.userName = val
   },
   SET_SETTINGS (state, val) {
     state.settings = val
