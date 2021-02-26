@@ -134,7 +134,6 @@ function isValidationRequired(q)
 
 function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang) {
   if(q.responseOptions) {
-    debugger;
     for( let x = 0; x < q.responseOptions.length; x++) {
       const op = q.responseOptions[x];
       if (q.response === op.value) {
