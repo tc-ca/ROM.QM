@@ -2,7 +2,7 @@
   <v-expansion-panel v-show="displayPicture">
     <v-expansion-panel-header class="subtitle-2">
       <span>
-        {{ label }}
+        {{ question.text['en'] }}
         <v-icon
           v-if="isPictureRequired"
           color="red"
@@ -32,6 +32,13 @@
     >
       <v-row>
         <v-col>
+          <v-btn
+            icon
+            color="blue"
+            @click.stop="updateStore();"
+          >
+            <v-icon>mdi-download-circle-outline</v-icon>
+          </v-btn>
           <v-file-input
             ref="fileUpload"
             prepend-icon="mdi-camera"
@@ -350,6 +357,7 @@ export default {
       page: 1,
       selImage: null,
       selLink: null,
+      selGuid: null,
       selExifData: '',
       curImg: '',
       curPage: 0,
@@ -388,8 +396,6 @@ export default {
       state => state.imagefile.imageFileNotification.imageResults,
       (value) => {
         if (value) {
-          // eslint-disable-next-line no-debugger
-          debugger
           this.onUploadImage()
         }
       }
@@ -398,8 +404,6 @@ export default {
       state => state.imagefile.deletedImageData.imageDetails,
       (value) => {
         if (value) {
-          // eslint-disable-next-line no-debugger
-          debugger
           this.onDeleteImage()
         }
       }
@@ -418,7 +422,9 @@ export default {
       let el = this.$store.state.imagefile.imageFileNotification.imageResults
       if (el !== null) {
         // storeObj.forEach((el, index) => {
-        if (!this.picture.value.some(p => p.guid === el.guid)) {
+        // eslint-disable-next-line no-debugger
+        debugger
+        if (this.question.guid === el.qguid && !this.picture.value.some(p => p.guid === el.guid)) {
           this.picture.value.push({
             title: el.result,
             fileName: el.result,
@@ -436,6 +442,14 @@ export default {
       }
     },
 
+    updateStore () {
+      let obj = {}
+      obj.guid = this.selGuid
+      obj.isSucess = true
+      obj.result = 'iVBORw0KGgoAAAANSUhEUgAAAGIAAACSCAYAAAC+Nx8XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAARlSURBVHhe7ZpPK21/HIVJpMwpylwopaQMZGZkIANFSoqRN6EUykARGSuKDGTqBTDzAmSslIGZ4vv77XN3t3vd5azzZy/3093rqWfC2d/TWc/gnM4+LcmEwCGC4BBBcIggOEQQHCIIDhEEhwiCQwTBIYLgEEFwiCA4RBAcIggOEQSHCIJDBOGfDrG8vJy6urpSZ2dn6ujoSG1tbam1tTW1tLT89Pr6On/03+WfDXF7e/vb4F/pEGKmp6fh8J91CCGXl5dwdKRDiHh7e0tDQ0NwdKRDiFhZWYGDf6VDCDg+PoZjV9MhCub+/r7y8RSNXU2HKJCnp6c0ODgIh2Y6REG8v7+nyclJOHItOkRBzM7OwoFr1SEKYHV1FY5bjw7RJNn3SGjYenWIJlhYWICjNqJDNMjc3BwctFEdok4eHx/T1NQUHLMZHaIOsrG6u7vhkM3qEDWys7MDByxKhyA8Pz8X+qb8lQ5RhYuLi9TX1weHK1qHAHx8fKT19XU4mEqH+EQ2yPDwMBxLqUPkZB9LFxcX4UjfoUP8z9bWVmpvb4cDfZelDnF2dpZGRkbgMI06Pz8P/84sZYgswOjoKBykGQ8PDyvno/8xSxXi5OSk4TtozJubm/xZHKIqR0dHcIBmHR8fTw8PD/mz/AA9jukQTbi0tFS5RfoZ9FimQzRgb29vOj09zU/+E3QN0yHqNPvh2MvLS34qBl3HdIga7e/vT+fn5/lp1UHXMx2iBtfW1tLr62t+EgedwXSIKs7MzKS7u7v8hNpBZzEdAjg2Npaurq7yK+sHncksTYiDgwM4wK9m7wPZD4ibBZ3NLE2Ivb09OEBmT09P2tjYqNyHKAL0HMzShNjd3f3jxQ8MDKT9/f38EcXx+XlqsTQhtre3f77oiYkJ6Qv/deBaLU2Izc3NylcS2Q0gNWhoZmlCfCdoaKZDCEBDMx1CABqa6RAC0NBMhxCAhmY6hAA0NNMhBKChmQ4hAA3NdAgBaGimQwhAQzMdQgAamukQAtDQTIcQgIZmOoQANDTTIQSgoZkOIQANzXQIAWhopkMIQEMzHUIAGprpEALQ0EyHEICGZjqEADQ00yEEoKGZDiEADc10CAFoaKZDCEBDMx1CABqa6RAC0NBMhxCAhmY6hAA0NNMhBKChmQ4hAA3NdAgBaGimQwhAQzMdQgAamukQAtDQTIcQgIZmOoQANDTTIQSgoZkOIQANzXQIAWhopkMIQEMzHUIAGprpEALQ0EyHEICGZjqEADQ00yEEoKGZDiEADc10CAFoaKZDCEBDMx1CABqa6RAC0NBMhxCAhmY6hAA0NNMhBKChmQ4hAA3NdAgBaGimQwhAQzMdQgAamukQAtDQTIcQgIZmOoQANDTTIQSgoZkOIQANzXQIAWhopkMIQEMzHUIAGprpEALQ0EyHML/hEEFwiCA4RBAcIggOEQSHCIJDBMEhguAQQXCIIDhEEBwiCA4RBIcIgkMEwSGC4BBBcIggOEQQHCIEKf0HTdPKw8uV5Y4AAAAASUVORK5CYII='
+
+      this.$store.commit('imagefile/updateImageBase64String', obj)
+    },
     onDeleteImage () {
       let el = this.$store.state.imagefile.deletedImageData.imageDetails
       if (el !== null) {
@@ -504,6 +518,7 @@ export default {
         let event = new CustomEvent('tdg-qstnnr-uploadBlobImage', {
           detail: {
             base64String: str,
+            qguid: this.question.guid,
             nameGuid: guid,
             fileName: fName
           },
@@ -511,6 +526,14 @@ export default {
           cancelable: true
         })
         document.body.dispatchEvent(event)
+
+        let obj = {}
+        obj.guid = guid
+        obj.qguid = this.question.guid
+        obj.isSucess = true
+        obj.result = fileName
+        this.$store.commit('imagefile/updateImageResult', obj)
+        this.selGuid = guid
       } catch (e) {
         console.log(e)
       } finally {
@@ -551,6 +574,11 @@ export default {
         })
 
         document.body.dispatchEvent(event)
+        let obj = {}
+        obj.guid = guid
+        obj.isSucess = true
+        obj.result = true
+        this.$store.commit('imagefile/deleteImageResult', obj)
       } catch (e) {
         console.log(e)
       }
