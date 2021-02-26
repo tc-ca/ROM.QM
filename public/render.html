@@ -102,7 +102,7 @@
 
     async function uploadBlobImage(event) {
       var questionHelpler = qtnHelper;
-      await qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.nameGuid, event.detail.fileName);
+      await qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.qguid, event.detail.nameGuid, event.detail.fileName);
     }
 
     window.addEventListener('tdg-qstnnr-deleteBlobImage', (event) => {

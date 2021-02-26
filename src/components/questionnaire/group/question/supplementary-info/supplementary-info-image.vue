@@ -388,8 +388,6 @@ export default {
       state => state.imagefile.imageFileNotification.imageResults,
       (value) => {
         if (value) {
-          // eslint-disable-next-line no-debugger
-          debugger
           this.onUploadImage()
         }
       }
@@ -398,8 +396,6 @@ export default {
       state => state.imagefile.deletedImageData.imageDetails,
       (value) => {
         if (value) {
-          // eslint-disable-next-line no-debugger
-          debugger
           this.onDeleteImage()
         }
       }
@@ -418,7 +414,7 @@ export default {
       let el = this.$store.state.imagefile.imageFileNotification.imageResults
       if (el !== null) {
         // storeObj.forEach((el, index) => {
-        if (!this.picture.value.some(p => p.guid === el.guid)) {
+        if (this.question.guid === el.qguid && !this.picture.value.some(p => p.guid === el.guid)) {
           this.picture.value.push({
             title: el.result,
             fileName: el.result,
@@ -426,7 +422,6 @@ export default {
             guid: el.guid,
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
           })
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.progressStatus = ''
           this.onNextPageMove(this.curPage)
           this.next()
@@ -504,6 +499,7 @@ export default {
         let event = new CustomEvent('tdg-qstnnr-uploadBlobImage', {
           detail: {
             base64String: str,
+            qguid: this.question.guid,
             nameGuid: guid,
             fileName: fName
           },
