@@ -86,6 +86,7 @@ export default {
       characteristics: [],
       siteCharacteristics: [],
       isCharactericticDataSet: false,
+      isSiteCharacterticDataSet: false,
       updateProvisionFilter: false
     }
   },
@@ -125,16 +126,33 @@ export default {
         case 'SET_CHARACTERISTICS':
         {
           this.characteristics = this.$store.state.characteristics.characteristics
-          const nonHydratedSiteCharacterictics = this.$store.state.characteristics.siteCharacteristics
 
-          // hydrates the site characteristics which are just list of ids, we need full objects with provisions etc...
-          for (let i = 0; i < nonHydratedSiteCharacterictics.length; i++) {
-            const dryCharacteristic = nonHydratedSiteCharacterictics[i]
-            const hydratedCharacteristic = this.findItemInCollection(this.characteristics, dryCharacteristic)
-            this.siteCharacteristics.push(hydratedCharacteristic)
-          }
+          // const nonHydratedSiteCharacterictics = this.$store.state.characteristics.siteCharacteristics
+          // // hydrates the site characteristics which are just list of ids, we need full objects with provisions etc...
+          // for (let i = 0; i < nonHydratedSiteCharacterictics.length; i++) {
+          //   const dryCharacteristic = nonHydratedSiteCharacterictics[i]
+          //   const hydratedCharacteristic = this.findItemInCollection(this.characteristics, dryCharacteristic)
+          //   this.siteCharacteristics.push(hydratedCharacteristic)
+          // }
 
           this.isCharactericticDataSet = true
+
+          break
+        }
+        case 'UPDATE_ORIGINAL_TAG_FILTER_STATE':
+        {
+          // sets any default/inital active site characteristics
+          // should only be run once
+          if (!this.isSiteCharacterticDataSet) {
+            const nonHydratedSiteCharacterictics = this.$store.state.characteristics.siteCharacteristics
+            // hydrates the site characteristics which are just list of ids, we need full objects with provisions etc...
+            for (let i = 0; i < nonHydratedSiteCharacterictics.length; i++) {
+              const dryCharacteristic = nonHydratedSiteCharacterictics[i]
+              const hydratedCharacteristic = this.findItemInCollection(this.characteristics, dryCharacteristic)
+              this.siteCharacteristics.push(hydratedCharacteristic)
+            }
+            this.isSiteCharacterticDataSet = true
+          }
 
           break
         }

@@ -91,7 +91,7 @@
         </v-btn-toggle>
       </template>
 
-      <v-row>
+      <v-row no-gutters>
         <v-col
           v-if="isValid === false"
           cols="auto"
@@ -102,13 +102,24 @@
             mdi-exclamation
           </v-icon>
         </v-col>
-        <v-col>
+        <v-col cols="12">
           <div
             :style="{fontSize:'16px !important'}"
           >
             <span class="text-break">{{ questionText }}</span>
           </div>
         </v-col>
+        <!-- <v-col mt-0>
+          <v-chip
+            v-for="(tag, index) in tags"
+
+            :key="index"
+            class="mr-2 mt-1"
+            small
+          >
+            {{ tag }}
+          </v-chip>
+        </v-col> -->
       </v-row>
     </v-expansion-panel-header>
     <v-expansion-panel-content
@@ -463,14 +474,16 @@ export default {
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
       responseArgs: null,
       filteredInByProvisionSearch: true,
-      tab: null
+      tab: null,
+      tags: []
     }
   },
   computed: {
     // mix the getters into computed with object spread operator
     ...mapGetters({
       getFlatListOfAllQuestions: 'getFlatListOfAllQuestions',
-      provisionTagFilters: 'getAllAppliedTagProvisions'
+      provisionTagFilters: 'getAllAppliedTagProvisions',
+      getAllOriginalTagProvisions: 'getAllOriginalTagProvisions'
     }),
     ...mapState({
       lang: state => {
@@ -1001,6 +1014,19 @@ export default {
         question = this.sourceQuestion
       }
 
+      // check to see if question is tagable
+      let isTagable = false
+      if (this.getAllOriginalTagProvisions) {
+        isTagable = this.getAllOriginalTagProvisions.some(p => p.questions.includes(question.guid))
+        // let tags = this.getAllOriginalTagProvisions.filter(p => p.questions.includes(question.guid))
+        // if (tags && tags.length > 0) {
+        //   isTagable = true
+        //   tags = tags.map(x => x.characteristicText[this.lang])
+        //   tags = [...new Set(tags)] // make unique
+        //   this.tags = tags
+        // }
+      }
+
       if (provisions && provisions.length > 0) {
       // active search check to see if question should be shown or not
         let dependants = []
@@ -1031,10 +1057,11 @@ export default {
           inQuestion: foundInQuestion,
           inDependants: foundInDependants,
           inDepends: foundInDepends,
-          inChildren: foundInChildren }
+          inChildren: foundInChildren,
+          isTagable }
       }
       // search resulted in no provisions found therefore return false
-      return { found: false, inQuestion: false, inDependants: false, inDepends: false, inChildren: false }
+      return { found: false, inQuestion: false, inDependants: false, inDepends: false, inChildren: false, isTagable: isTagable }
     },
     /**
    *
@@ -1045,12 +1072,20 @@ export default {
    */
     setQuestionVisibilityBasedOnAppliedTags () {
       const provisionFound = this.questionFoundViaProvidedProvisions(this.provisionTagFilters)
-
-      // **** SCENARIO 1: QUESTION WITH NO PROVISIONS****
+      // **** SCENARIO 1a: QUESTION WITH NO PROVISIONS****
       // question has no provisions its visibility always be set to true unless it default is set to false, therefore pass in set value from json
       if (!this.selectedQuestionHasProvisions) {
         this.setQuestionVisibility(this.question.isVisible)
-        return true
+        return this.question.isVisible
+      }
+
+      // console.log(this.question.id)
+      // console.log(JSON.stringify(provisionFound))
+      // **** SCENARIO 1b: QUESTION HAS PROVISIONS BUT NOT TAGABLE****
+      // question may have provisions but those have not been asscoiated to a tag/characteristic, i.e. not tagable
+      if (!provisionFound.isTagable) {
+        this.setQuestionVisibility(this.question.isVisible)
+        return this.question.isVisible
       }
 
       // **** SCENARIO 2: QUESTION WITH NO DEPENDANCIES****

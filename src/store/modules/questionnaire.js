@@ -6,6 +6,7 @@ export const state = {
   questionnaire: null,
   searchableProvisionRef: {},
   provisionFilter: null,
+  originalTagFilter: [],
   tagFilter: [],
   modifiedInBuilder: false
 };
@@ -15,9 +16,7 @@ export const getters = {
     return state.questionnaire;
   },
   getModifiedinBuilder(state) {
-    let ret = state.modifiedInBuilder
-      ? state.modifiedInBuilder
-      : false;
+    let ret = state.modifiedInBuilder ? state.modifiedInBuilder : false;
     return ret;
   },
   getQuestionnaireReadOnlyStatus(state) {
@@ -26,49 +25,49 @@ export const getters = {
     return resp;
   },
 
-  getFlatListOfAllQuestions  (state) {
-    return (groupId = false)  => {
-    let questions = [];
-    let groups = []
-    
-    //Done by LM on Feb 14 to avoid console error on Dynamic Builder
-    if (state.questionnaire) {
-      if (groupId) {
-        groups = state.questionnaire.groups.filter(
-          x => x.htmlElementId === groupId
-        );
-      } else {
-        groups = state.questionnaire.groups;
-      }
-    }
+  getFlatListOfAllQuestions(state) {
+    return (groupId = false) => {
+      let questions = [];
+      let groups = [];
 
-    groups.forEach(group => {
-      group.questions.forEach(question => {
-        // for each group add question to array
-        questions.push(question);
-        //check to see if question has children questions
-        let childrenQuestions = GetChildrenQuestion(question);
-        let childrenCount = childrenQuestions.length;
-
-        while (childrenCount > 0) {
-          for (let index = 0; index < childrenQuestions.length; index++) {
-            let childQuestion = childrenQuestions[index];
-            //add child question to array
-            questions.push(childQuestion);
-            //check to see if child has children
-            const children = GetChildrenQuestion(childQuestion);
-            //
-            childrenCount = children.length;
-            //wtv children questions that have been found will add it to the loop/queue for processing
-            childrenQuestions = childrenQuestions.concat(children);
-          }
+      //Done by LM on Feb 14 to avoid console error on Dynamic Builder
+      if (state.questionnaire) {
+        if (groupId) {
+          groups = state.questionnaire.groups.filter(
+            x => x.htmlElementId === groupId
+          );
+        } else {
+          groups = state.questionnaire.groups;
         }
-      });
-    });
-    // return questions.map(x => x.id); for debugging
-    return questions;
-}},
+      }
 
+      groups.forEach(group => {
+        group.questions.forEach(question => {
+          // for each group add question to array
+          questions.push(question);
+          //check to see if question has children questions
+          let childrenQuestions = GetChildrenQuestion(question);
+          let childrenCount = childrenQuestions.length;
+
+          while (childrenCount > 0) {
+            for (let index = 0; index < childrenQuestions.length; index++) {
+              let childQuestion = childrenQuestions[index];
+              //add child question to array
+              questions.push(childQuestion);
+              //check to see if child has children
+              const children = GetChildrenQuestion(childQuestion);
+              //
+              childrenCount = children.length;
+              //wtv children questions that have been found will add it to the loop/queue for processing
+              childrenQuestions = childrenQuestions.concat(children);
+            }
+          }
+        });
+      });
+      // return questions.map(x => x.id); for debugging
+      return questions;
+    };
+  },
 
   getSearchableProvisions(state, getters, rootState) {
     const questionnaire = state.questionnaire;
@@ -95,6 +94,17 @@ export const getters = {
       provisions = provisions.concat(tag.provisions);
     });
     return provisions;
+  },
+    getAllOriginalTagProvisions(state) {
+    let provisions = [];
+    state.originalTagFilter.forEach(tag => {
+      // tag.provisions.forEach(provision => {
+      //   provision.characteristicCategoryText = tag.name
+      //   provisions.push( {...provision})
+      // });
+      provisions = provisions.concat(tag.provisions);
+    });
+    return provisions;
   }
 };
 
@@ -109,7 +119,7 @@ export const actions = {
     dispatch("setQuestionnaireGroups", data.groups);
   },
 
-  SetModifiedInBuilder({commit}, payload) {
+  SetModifiedInBuilder({ commit }, payload) {
     commit("setModifiedInBuilder", payload);
   },
 
@@ -145,7 +155,7 @@ export const actions = {
 
   RemoveBuilderCircularDependencies({ commit, state, dispatch }) {
     //Done by LM on Feb 14 to avoid console error on Dynamic Builder
-    if (!state.questionnaire) return; 
+    if (!state.questionnaire) return;
 
     const questionnaire = state.questionnaire;
 
@@ -219,7 +229,11 @@ export const actions = {
   },
 
   UpdateTagFilterState({ commit, state, getters }, payload) {
-    const { characteristicProvisions, characteristicCategory } = payload;
+    const {
+      setOriginal,
+      characteristicProvisions,
+      characteristicCategory
+    } = payload;
 
     const searchableProvisions = getters.getSearchableProvisions;
 
@@ -230,6 +244,33 @@ export const actions = {
       hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(
         searchableProvisions.filter(x => obj.provisions.includes(x.id))
       );
+
+            // hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(
+            //   searchableProvisions.filter(x => obj.provisions.includes(x.id))
+            // );
+
+            //get characteristics found in searchable provision with have the associated questions
+            // const test = searchableProvisions.filter(x =>
+            //   obj.provisions.includes(x.id)
+            // );
+
+            //add characteristic text for usage later
+            // test.forEach(x => {
+            //   x.characteristicText = obj.text
+            // });
+            //             hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(
+            //               test
+            //             );
+
+
+            //     let newArray= []
+            // test.forEach(x => {
+            //   x.characteristicText = obj.text
+            //       newArray.push({ ...x });
+            // });
+
+            // hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(newArray)
+
     });
 
     // the same provision could be associated to multiple characteristics
@@ -244,6 +285,18 @@ export const actions = {
     );
     const isFound = index === -1 ? false : true;
 
+    if (setOriginal) {
+      commit("UPDATE_ORIGINAL_TAG_FILTER_STATE", {
+        isFound,
+        index,
+        characteristicProvisions: hydratedCharacteristicProvisions,
+        tag: {
+          name: characteristicCategory,
+          provisions: hydratedCharacteristicProvisions
+        }
+      });
+    }
+
     commit("updateTagFilterState", {
       isFound,
       index,
@@ -251,8 +304,9 @@ export const actions = {
       tag: {
         name: characteristicCategory,
         provisions: hydratedCharacteristicProvisions
-      }
+      },
     });
+
   }
 };
 
@@ -351,6 +405,16 @@ export const mutations = {
       state.tagFilter.splice(index, 1, tag);
     } else {
       state.tagFilter.push(tag);
+    }
+  },
+    UPDATE_ORIGINAL_TAG_FILTER_STATE(state, payload) {
+    const { isFound, index, tag } = payload;
+
+    if (isFound) {
+        state.originalTagFilter[index] = tag;
+        state.originalTagFilter.splice(index, 1, tag);
+    } else {
+        state.originalTagFilter.push(tag);
     }
   }
 };
