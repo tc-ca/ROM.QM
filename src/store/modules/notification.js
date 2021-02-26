@@ -165,7 +165,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
             en: `A File for the response type ${op.text[lang]} is required.`,
             fr: `Un fichier pour le type de réponse ${op.text[lang]} est requis.`
           }
-          op.file.notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
+          op.file.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-image-plus', lang);
           dispatch('notification/addNotification', op.file.notification, {root:true});
         }
         if (op.picture && op.picture.notification) {
@@ -175,7 +175,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
             en: `A Picture for the response type ${op.text[lang]} is required.`,
             fr: `Une image pour le type de réponse ${op.text[lang]} est requis.`
           }
-          op.picture.notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
+          op.picture.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-image-plus', lang);
           dispatch('notification/addNotification', op.picture.notification, {root:true});
         }
       }
