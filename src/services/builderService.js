@@ -521,6 +521,20 @@ function fixTemplate (template) {
     })
 
     /**
+     * Fix repeated ids in questions
+     */
+    const repeatedIds = flattenedQuestions.findIndex(fq => fq.id === question.id && fq.guid !== question.guid);
+    if (repeatedIds > -1) {
+      const oldId = question.id;
+      let newId = question.id + flattenedQuestions.length + qIndex;
+      while (flattenedQuestions.findIndex(fq => fq.id === newId) > -1) {
+        newId += 1;
+      }
+      question.id = newId;
+      fixLog.push(`fixTemplate: fixing repeated id prop for Question ${flattenedQuestions[qIndex].name} from ${oldId} to ${question.id}`);
+    }
+
+    /**
     * Will assign a unique guid to all Questions in all items within 
     * the Array of Groups that do not already have one assigned to them 
     */
