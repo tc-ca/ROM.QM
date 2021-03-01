@@ -777,14 +777,17 @@ export default {
       }
       const rootNodeId = '-1'
 
-      const parentProvisions = potentialParentProvisions.filter(Boolean) // removes any holes/ undefined values as above we use the delete operator
+      let parentProvisions = potentialParentProvisions.filter(Boolean) // removes any holes/ undefined values as above we use the delete operator
       // set the parent parent to non existant or else we will build up further the tree
       parentProvisions.forEach(x => {
         x.parentLegislationId = rootNodeId
       })
 
-      const myProvisonstest = (additionalChildrenProvisions).concat(provisions)
-      const childrenAndAsscociatedParentProvision = myProvisonstest.concat(parentProvisions)
+      let myProvisons = additionalChildrenProvisions.concat(provisions)
+      myProvisons = _.orderBy(myProvisons, ['orderNumber'], ['asc'])
+      parentProvisions = _.orderBy(parentProvisions, ['orderNumber'], ['asc'])
+
+      const childrenAndAsscociatedParentProvision = myProvisons.concat(parentProvisions)
       let data = _.cloneDeep(childrenAndAsscociatedParentProvision)
 
       parentIds = data.map(x => x.parentLegislationId)
