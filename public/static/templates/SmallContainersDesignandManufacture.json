@@ -429,7 +429,7 @@
               },
               {
                   "name": "QTN_1.02-DSTHCMPNYS_RD_GRP_1.0-CMPNYDTLS_Small Containers Design and Manufacture for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
-                  "id": 15,
+                  "id": 40,
                   "guid": "890e6170-f726-45e3-bbc6-fdaf191d5937",
                   "sortOrder": 13,
                   "isVisible": true,
@@ -530,7 +530,7 @@
                   "childQuestions": [
                       {
                           "name": "QTN_1.02-QVLNCYCRTF_TXT_GRP_1.0-CMPNYDTLS_Small Containers Design and Manufacture for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
-                          "id": 16,
+                          "id": 43,
                           "guid": "dbe42763-bfe0-4c5a-beeb-71115e010926",
                           "sortOrder": 1,
                           "isVisible": true,
