@@ -11,7 +11,7 @@
         :value="option"
         type="radio"
       >
-      <label :for="`${group.domSuffix}-${question.id}-${indexControl}`">{{ option.text[lang] }}</label>
+      <label :for="`${group.domSuffix}-${question.guid}-${indexControl}`">{{ option.text[lang] }}</label>
     </div>
   </div>
 </template>
