@@ -36,6 +36,6 @@
   color: white;
 }
 .qtn-radio-button-non-compliant input[type="radio"]:checked + label {
-  background-color: #C60022;
+  background-color: #13855f;
   color: white;
 }
