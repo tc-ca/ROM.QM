@@ -828,6 +828,43 @@ function isParentAGroup (group, qGuid) {
   return (indx > -1);
 }
 
+function cloneVisibleQuestionsOnly(questionnaire) {
+  let clonedGroups = _.cloneDeep(questionnaire.groups)
+  clonedGroups.forEach( g => {
+    g.questions = g.questions.filter( q => q.isVisible === true );
+    g.questions.forEach( gc => {
+      gc.childQuestions = gc.childQuestions.filter( cq => cq.isVisible === true );
+    });
+  });
+  return clonedGroups;
+}
+
+function fixQuestionSpecialCharacters(question) {
+  question.name = question.name.replaceAll('"','');
+  question.text.en = question.text.en.replaceAll('"','');
+  question.text.fr = question.text.fr.replaceAll('"','');
+  if (question.responseOptions) {
+    question.responseOptions.forEach( ro => {
+      ro.name = ro.name.replaceAll('"','');
+    });
+  }
+  return question;
+}
+
+function fixTexttoShowInDrawer(groups) {
+  groups.forEach( g => {
+    g.title.en = g.title.en.replaceAll('"','');
+    g.title.fr = g.title.fr.replaceAll('"','');
+    g.questions.forEach( gc => {
+      gc = fixQuestionSpecialCharacters(gc);
+      // eslint-disable-next-line no-unused-vars
+      gc.childQuestions.forEach( cq => {
+        cq = fixQuestionSpecialCharacters(cq);
+      });
+    });
+  });
+  return groups;
+}
 
 export default {
   createGroup,
@@ -849,5 +886,7 @@ export default {
   flattenQuestions,
   fixTemplate,
   GenerateRepeatedQuestion,
-  isParentAGroup
+  isParentAGroup,
+  cloneVisibleQuestionsOnly,
+  fixTexttoShowInDrawer
 };
