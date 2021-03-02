@@ -905,7 +905,7 @@ export default {
           // techinically this should never occur, as how could question be triggered but not visisble
           if (triggeringQuestion && !triggeringQuestion.isVisible) {
             question.isVisible = false
-            console.error('triggering question is not visible')
+            console.log('triggering question is not visible')
           } else {
             let groupMatch = true
             for (let j = 0; j < group.questionDependencies.length; j++) {
@@ -913,7 +913,7 @@ export default {
               let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
               let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
-              // if the depends on question is not visible, then dependant question should not be shown
+              // if the depends on question is not visible, then dependant question should not be shown or any logic rules should not computed.
               if (!dependsOnQuestion.isVisible) {
                 groupMatch = false
                 break
