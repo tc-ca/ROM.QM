@@ -197,13 +197,15 @@ function findReferenceQuestion(group, guid = "") {
 function GenerateRepeatedQuestion(questionnaire, oQuestion) {
   let nQuestion = null;
   try {
+    let lastId = getNextQuestionId(questionnaire);
     nQuestion = _.cloneDeep(oQuestion);
     setNewGUID(nQuestion);
-    nQuestion.id = getNextQuestionId(questionnaire)
+    nQuestion.id = lastId++;
     nQuestion.isRepeatable = false;
     nQuestion.isRepeated = true;
     nQuestion.isVisible = true;
     nQuestion.sortOrder = oQuestion.sortOrder + 1;
+    nQuestion.childQuestions.forEach(cq => cq.id = lastId++);
   } catch (error) {
     // Generate Error
     nQuestion = null;
