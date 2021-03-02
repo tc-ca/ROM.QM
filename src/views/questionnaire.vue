@@ -169,7 +169,7 @@ export default {
 
       // let a = JSON.stringify(this.$store.state.questionnaire.questionnaire.groups).replace(/\\"/g, '"')
       // console.log('tttt', a)
-      clonedGroups = BuilderService.fixTexttoShowInDrawer(clonedGroups)
+      clonedGroups = BuilderService.fixTextToShowInDrawer(clonedGroups)
       let b = JSON.stringify(clonedGroups).replaceAll('primaryKey', 'id')
         .replaceAll('"questions":', '"children":')
         .replaceAll('"childQuestions":', '"children":')

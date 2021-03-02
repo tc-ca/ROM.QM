@@ -851,7 +851,7 @@ function fixQuestionSpecialCharacters(question) {
   return question;
 }
 
-function fixTexttoShowInDrawer(groups) {
+function fixTextToShowInDrawer(groups) {
   groups.forEach( g => {
     g.title.en = g.title.en.replaceAll('"','');
     g.title.fr = g.title.fr.replaceAll('"','');
@@ -888,5 +888,5 @@ export default {
   GenerateRepeatedQuestion,
   isParentAGroup,
   cloneVisibleQuestionsOnly,
-  fixTexttoShowInDrawer
+  fixTextToShowInDrawer
 };
