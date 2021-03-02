@@ -886,8 +886,8 @@ export default {
         const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
           let dependentGuid = this.question.dependants[i].guid
-          const question = flatListQuestions.find(x => x.guid === dependentGuid)
-          if (question) this.applyDependencyRuleOnQuestion(question)
+          const dependentQuestion = flatListQuestions.find(x => x.guid === dependentGuid)
+          if (dependentQuestion) this.applyDependencyRuleOnQuestion({ triggeringQuestion: this.question, question: dependentQuestion })
         }
       }
     },
@@ -895,78 +895,90 @@ export default {
      * Sets rule dependency for question and returns an array of matched groups
      * todo: maybe refactor, find way split "responsibility "of method as it sets and returns values (making it more clear what the method does).
      */
-    applyDependencyRuleOnQuestion (question) {
+    applyDependencyRuleOnQuestion ({ triggeringQuestion, question } = {}) {
       if (question && question.dependencyGroups) {
         let groupMatchArray = []
         for (let i = 0; i < question.dependencyGroups.length; i++) {
           let group = question.dependencyGroups[i]
 
-          let groupMatch = true
-          for (let j = 0; j < group.questionDependencies.length; j++) {
-            let dependancy = group.questionDependencies[j]
-            let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
-            let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
+          // if triggering question is provided check to see if its visible if not all dependent questions visiblity should be set to false
+          // techinically this should never occur, as how could question be triggered but not visisble
+          if (triggeringQuestion && !triggeringQuestion.isVisible) {
+            question.isVisible = false
+            console.error('triggering question is not visible')
+          } else {
+            let groupMatch = true
+            for (let j = 0; j < group.questionDependencies.length; j++) {
+              let dependancy = group.questionDependencies[j]
+              let dependsOnQuestionGuid = dependancy.dependsOnQuestion.guid
+              let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
-            // if response is string make into array to be handle multiple selections
-            let response = dependsOnQuestion.response
-            if (typeof response === 'string' || typeof response === 'number') {
-              response = [response]
+              // if the depends on question is not visible, then dependant question should not be shown
+              if (!dependsOnQuestion.isVisible) {
+                groupMatch = false
+                break
+              }
+              // if response is string or number make into array to be handle multiple selections
+              let response = dependsOnQuestion.response
+              if (typeof response === 'string' || typeof response === 'number') {
+                response = [response]
+              }
+
+              if (response === null) {
+                groupMatch = false
+                break
+              }
+
+              if (dependancy.validationAction === 'equal') {
+                if (!(response.some(value => value === dependancy.validationValue))) {
+                  groupMatch = false
+                  break
+                }
+              } else if (dependancy.validationAction === 'notEqual') {
+                if (!(response.some(value => value !== dependancy.validationValue))) {
+                  groupMatch = false
+                  break
+                }
+              } else if (dependancy.validationAction === 'greaterThen') {
+                if (!(response.some(value => +value > +dependancy.validationValue))) {
+                  groupMatch = false
+                  break
+                }
+              } else if (dependancy.validationAction === 'lessThen') {
+                if (!(response.some(value => +value < +dependancy.validationValue))) {
+                  groupMatch = false
+                  break
+                }
+              } else if (dependancy.validationAction === 'lengthLessThen') {
+                if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
+                  groupMatch = false
+                  break
+                }
+              } else if (dependancy.validationAction === 'lengthGreaterThen') {
+                if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
+                  groupMatch = false
+                  break
+                }
+              }
             }
 
-            if (response === null) {
-              groupMatch = false
-              break
-            }
+            groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
 
-            if (dependancy.validationAction === 'equal') {
-              if (!(response.some(value => value === dependancy.validationValue))) {
-                groupMatch = false
-                break
-              }
-            } else if (dependancy.validationAction === 'notEqual') {
-              if (!(response.some(value => value !== dependancy.validationValue))) {
-                groupMatch = false
-                break
-              }
-            } else if (dependancy.validationAction === 'greaterThen') {
-              if (!(response.some(value => +value > +dependancy.validationValue))) {
-                groupMatch = false
-                break
-              }
-            } else if (dependancy.validationAction === 'lessThen') {
-              if (!(response.some(value => +value < +dependancy.validationValue))) {
-                groupMatch = false
-                break
-              }
-            } else if (dependancy.validationAction === 'lengthLessThen') {
-              if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
-                groupMatch = false
-                break
-              }
-            } else if (dependancy.validationAction === 'lengthGreaterThen') {
-              if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
-                groupMatch = false
-                break
-              }
-            }
-          }
-
-          groupMatchArray.push({ ruleType: group.ruleType, groupMatch })
-
-          if (group.ruleType === 'visibility') {
+            if (group.ruleType === 'visibility') {
             // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
             // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
-            const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-            if (groupByRuleTypeVisibility) question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
-          } else if (group.ruleType === 'validation') {
-            if (question.validationRules) {
-              let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-              rule.enabled = groupMatch
-            }
-          } else if (group.ruleType === 'validationValue' && groupMatch) {
-            if (question.validationRules) {
-              let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-              rule.value = group.questionDependencies[0].parentQuestion.response
+              const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
+              if (groupByRuleTypeVisibility) question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+            } else if (group.ruleType === 'validation') {
+              if (question.validationRules) {
+                let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+                rule.enabled = groupMatch
+              }
+            } else if (group.ruleType === 'validationValue' && groupMatch) {
+              if (question.validationRules) {
+                let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
+                rule.value = group.questionDependencies[0].parentQuestion.response
+              }
             }
           }
         }
@@ -1117,7 +1129,7 @@ export default {
         // below code checking to see if depencies rules/conditions are statisfied in settting visibility
         // note: if the question is not answer, the groupMatchArray returns false and if the conditions do not match conditions of the rules it will return false
 
-        const groupMatchArray = this.applyDependencyRuleOnQuestion(this.question)
+        const groupMatchArray = this.applyDependencyRuleOnQuestion({ question: this.question })
         const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
         const answerMatch = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
         this.setQuestionVisibility(answerMatch)
