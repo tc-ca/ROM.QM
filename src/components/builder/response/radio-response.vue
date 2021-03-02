@@ -6,7 +6,7 @@
       :class="['qtn-radio-button', option.isProblem ? 'qtn-radio-button-non-compliant':'qtn-radio-button-compliant']"
     >
       <input
-        :id="`${group.domSuffix}-${question.id}-${indexControl}`"
+        :id="`${group.domSuffix}-${question.guid}-${indexControl}`"
         v-model="selectedOption"
         :value="option"
         type="radio"

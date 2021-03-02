@@ -6,14 +6,14 @@
       :class="['qtn-radio-button', isViolation ? 'qtn-radio-button-non-compliant':'qtn-radio-button-compliant']"
     >
       <input
-        :id="`${group.domSuffix}-${question.id}-${indexControl}`"
+        :id="`${group.domSuffix}-${question.guid}-${indexControl}`"
         v-model="selectedOption"
         :disabled="readOnly"
         :value="option"
         type="radio"
         @change="onChange"
       >
-      <label :for="`${group.domSuffix}-${question.id}-${indexControl}`">{{ option.text[lang] }}</label>
+      <label :for="`${group.domSuffix}-${question.guid}-${indexControl}`">{{ option.text[lang] }}</label>
     </div>
     <v-input
       ref="validationControl"

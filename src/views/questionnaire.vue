@@ -184,6 +184,7 @@ export default {
         b = b.replace(regex1, this.lang === 'en' ? en : fr)
       })
       this.$vuetify.goTo(0)
+      console.log(b)
       this.navItems = JSON.parse(b)
       this.drawer = true
     }
