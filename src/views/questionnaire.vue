@@ -165,10 +165,9 @@ export default {
       this.$store.commit('errors/updateErrorNotification', q.guid)
     },
     displayNavigationDrawer () {
-      let a = JSON.stringify(this.$store.state.questionnaire.questionnaire.groups).replace(/\\"/g, '"')
-
-      console.log('tttt', a)
-      let b = a.replaceAll('primaryKey', 'id')
+      let clonedGroups = BuilderService.cloneVisibleQuestionsOnly(this.$store.state.questionnaire.questionnaire)
+      clonedGroups = BuilderService.fixTextToShowInDrawer(clonedGroups)
+      let b = JSON.stringify(clonedGroups).replaceAll('primaryKey', 'id')
         .replaceAll('"questions":', '"children":')
         .replaceAll('"childQuestions":', '"children":')
         .replaceAll('"name":', '"name_o":')
