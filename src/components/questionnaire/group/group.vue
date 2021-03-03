@@ -242,7 +242,7 @@ export default {
       let questionIdx = this.group.questions.findIndex(q => q.guid === questionGuid)
       if (questionIdx > -1) {
         let questionnaire = this.$store.getters['getQuestionnaire']
-        let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.group.questions[questionIdx], this.group.primaryKey)
+        let nQuestion = BuilderService.GenerateRepeatedQuestion(questionnaire, this.group.questions[questionIdx])
         if (nQuestion) {
           for (let x = questionIdx + 1; x < this.group.questions.length; x++) {
             this.group.questions[x].sortOrder = this.group.questions[x].sortOrder + 1
