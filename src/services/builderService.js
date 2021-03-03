@@ -223,6 +223,11 @@ function GenerateRepeatedQuestion(questionnaire, oQuestion) {
         dp.questionDependencies.forEach(qd => {
           if (qd.dependsOnQuestion.guid === oQuestion.guid) {
             qd.dependsOnQuestion.guid = nQuestion.guid;
+          } else {
+            const idx = oQuestion.childQuestions.findIndex( ocq => ocq.guid === qd.dependsOnQuestion.guid);
+            if( idx > -1) {
+              qd.dependsOnQuestion.guid = nQuestion.childQuestions[idx].guid;
+            }
           }
         });
       });

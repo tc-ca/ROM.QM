@@ -4641,7 +4641,7 @@
               "fr": "(4.0) INDICATIONS DE DANGER"
           },
           "primaryKey": "GRP_(4.0)SFTYMRKS_ACTIVEGeneral Compliance Questionnaire",
-          "isRepeatable": false,
+          "isRepeatable": true,
           "isVisible": true,
           "order": 3,
           "questions": [
