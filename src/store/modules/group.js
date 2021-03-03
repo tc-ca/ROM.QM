@@ -1,7 +1,8 @@
 // TODO: optimize later, pull down only method required.
-import _ from 'lodash'
-import { pad } from '../../utils.js'
-import { v4 as uuidv4 } from 'uuid';
+import _ from 'lodash';
+import { pad } from '../../utils.js';
+//import { v4 as uuidv4 } from 'uuid';
+import BuilderService from '../../services/builderService';
 
 export const state = {
   groups: [],
@@ -23,7 +24,7 @@ export const actions = {
     commit('copyGroups', { groupsCopy })
   },
 
-  repeatGroup ({ commit, state, getters }, group) {
+  repeatGroup ({ commit, state, rootState, getters }, group) {
     // get all similar groups
     // const targetedRepeatedGroups = state.questionnaire.groups.filter(x => x.primaryKey === group.primaryKey) // TODO: remove
     const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
@@ -41,8 +42,26 @@ export const actions = {
 
     const copiedGroup = _.cloneDeep(targetedGroupToCopy)
 
+    //Just to reuse the old code, we are doing the cloneDeep, now we have to fix the questions
+    //for this reaason, we deleted the questions on the cloned group, and one by one, repeating
+    //every question on the old one to the new one: this way we warranty that the question have 
+    //the real order and dependencies
+    copiedGroup.questions = [];
+    const questionnaire = rootState.questionnaire.questionnaire;
+    targetedGroupToCopy.questions.forEach( oq => {
+      let nq = BuilderService.GenerateRepeatedQuestion(questionnaire, oq);
+
+      nq.isRepeatable = oq.isRepeatable;
+      nq.isRepeated = oq.isRepeated;
+      nq.isVisible = oq.isVisible;
+      nq.sortOrder = oq.sortOrder;
+
+      copiedGroup.questions.push(nq);
+    });
+
+
     // Regenerate a new GUID for every question
-    copiedGroup.questions.forEach( q => { q.guid = uuidv4(); })
+    // copiedGroup.questions.forEach( q => { q.guid = uuidv4(); })
 
     // update new group order
     copiedGroup.order = insertAtEndOfTargetedRepeatedGroups
