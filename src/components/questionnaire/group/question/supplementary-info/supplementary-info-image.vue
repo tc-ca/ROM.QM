@@ -251,8 +251,8 @@
       </v-row>
       <v-row>
         <v-col
-          v-for="(image, index) in curPageImages"
-          :key="index"
+          v-for="image in curPageImages"
+          :key="image.guid"
           class="d-flex child-flex"
           cols="2"
         >
@@ -444,6 +444,7 @@ export default {
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
           })
           this.progressStatus = ''
+          this.curPage = this.calculateTotalPages(this.picture.value.length)
           this.onNextPageMove(this.curPage)
           this.next()
           this.next()
