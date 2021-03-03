@@ -81,6 +81,13 @@ describe('Test Group component Vuex Actions', () => {
       getters: { getTargetedRepeatedGroups: () => filteredSimilarGroups }, // get all similar groups with similar identifying attribute in this case based on the primaryKey
       state: {
         groupsCopy: theOriginalListOfGroups
+      },
+      rootState: {
+        questionnaire: {
+          questionnaire: {
+            groups: []
+          }
+        }
       }
     }
 
