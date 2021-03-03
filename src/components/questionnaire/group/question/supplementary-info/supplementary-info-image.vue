@@ -522,7 +522,8 @@ export default {
             base64String: str,
             qguid: this.question.guid,
             nameGuid: guid,
-            fileName: fName
+            fileName: fName,
+            isFileTypeImage: true
           },
           bubbles: true,
           cancelable: true
@@ -561,7 +562,8 @@ export default {
         let event = new CustomEvent('tdg-qstnnr-deleteBlobImage', {
           detail: {
             nameGuid: file.guid,
-            fileName: file.fileName
+            fileName: file.fileName,
+            isFileTypeImage: true
           },
           bubbles: true,
           cancelable: true

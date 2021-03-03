@@ -147,6 +147,7 @@
           "fileTitle":"Titre:",
           "fileComment": "Commenter:",
           "fileUploaded": "Téléchargé:",
+          "fileUploadedBy": "FR Uploaded by:",
           "editFile": "Modifier le titre / commentaire",
           "deleteFile": "Supprimer le fichier",
           "downloadFile": "Télécharger un fichier",

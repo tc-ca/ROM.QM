@@ -96,7 +96,8 @@ export default {
       let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
         detail: {
           nameGuid: this.picture.guid,
-          fileName: this.picture.fileName
+          fileName: this.picture.fileName,
+          isFileTypeImage: true
         },
         bubbles: true,
         cancelable: true

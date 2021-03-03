@@ -2,13 +2,16 @@ export const namespaced = true
 
 export const state = {
     imageFileNotification: {
-        imageResults: Object
+        imageResults: Object,
+        fileResults: Object
     },
     imageData: {
-        imageDetails: Object
+        imageDetails: Object,
+        fileDetails: Object
     },
     deletedImageData: {
-        imageDetails: Object
+        imageDetails: Object,
+        fileDetails: Object
     }
 }
 
@@ -29,6 +32,16 @@ export const mutations = {
     },
     deleteImageResult (state, payload) {
         state.deletedImageData.imageDetails = payload
-    }
+    },
+
+    updateFileResult (state, payload) {
+        state.imageFileNotification.fileResults = payload
+    },
+    updateFileBase64String (state, payload) {
+        state.imageData.fileDetails = payload
+    },
+    deleteFileResult (state, payload) {
+        state.deletedImageData.fileDetails = payload
+    },
 }
 

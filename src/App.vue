@@ -251,6 +251,15 @@ export default {
     setDeletedImageState (data) {
       this.$store.commit('imagefile/deleteImageResult', data)
     },
+    setFileState (data) {
+      this.$store.commit('imagefile/updateFileResult', data)
+    },
+    setFileBase64String (data) {
+      this.$store.commit('imagefile/updateFileBase64String', data)
+    },
+    setDeletedFileState (data) {
+      this.$store.commit('imagefile/deleteFileResult', data)
+    },
     emitSaveEvent () {
       if (this.isQuestionnaireDataAvailable) {
         const error = this.RunValidation()
