@@ -23,6 +23,7 @@
       <template v-slot:item="{ item }">
         <div>
           <div>
+            <!-- eslint-disable vue/no-v-html -->
             <span
               class=""
               v-html="genFilteredText(item.title[lang])"

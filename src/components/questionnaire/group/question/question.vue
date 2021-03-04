@@ -109,7 +109,7 @@
             <span class="text-break">{{ questionText }}</span>
           </div>
         </v-col>
-       <!-- <v-col mt-0>
+        <!-- <v-col mt-0>
           <v-chip
             v-for="(tag, index) in tags"
 
