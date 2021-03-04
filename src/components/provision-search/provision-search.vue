@@ -1,27 +1,81 @@
 <template>
-  <v-combobox
-    ref="provisionSearch"
-    v-model="model"
-    hide-details
-    clearable
-    dense
-    filled
-    :items="provisions"
-    :search-input.sync="searchInput"
-    :item-text="'title.' + lang"
-    item-key="id"
-    :placeholder="$t('app.questionnaire.provisionSearchFilter.placeholder')"
-    prepend-inner-icon="mdi-magnify"
-    @keydown.enter="isMenuActive(false)"
-    @keyup="debouncedUpdateProvisionFilter($event.target.value)"
-    @blur="shrinkProvisionSearchField($event.target.value)"
-    @click:clear="clear(true)"
-  />
+  <div>
+    <v-combobox
+      ref="provisionSearch"
+      v-model="model"
+      hide-details
+      clearable
+      dense
+      filled
+      :loading="loading"
+      :items="provisions"
+      :search-input.sync="searchInput"
+      :item-text="'title.' + lang"
+      item-key="id"
+      :placeholder="$t('app.questionnaire.provisionSearchFilter.placeholder')"
+      prepend-inner-icon="mdi-magnify"
+      :filter="filters"
+      @keydown.enter="isMenuActive(false)"
+      @keyup="debouncedUpdateProvisionFilter($event.target.value)"
+      @blur="shrinkProvisionSearchField($event.target.value)"
+      @click:clear="clear(true)"
+    >
+      <template v-slot:item="{ item }">
+        <div>
+          <div>
+            <span
+              class=""
+              v-html="genFilteredText(item.title[lang])"
+            />
+          </div>
+        </div>
+      </template>
+      <template v-slot:no-data>
+        <v-card
+          elevation="2"
+        >
+          <v-card-title>
+            {{ $t('app.questionnaire.noSearchResults.noMatchedQuestions') }}
+          </v-card-title>
+          <v-card-text>
+            <p>{{ $t('app.questionnaire.noSearchResults.searchSuggestions') }}</p>
+            <div class="text--primary">
+              <ul>
+                <li>
+                  {{ $t('app.questionnaire.noSearchResults.checkSpelling') }}
+                </li>
+                <li>
+                  {{ $t('app.questionnaire.noSearchResults.moreGeneralWords') }}
+                </li>
+                <li>
+                  {{ $t('app.questionnaire.noSearchResults.searchByProvisionLabel') }}
+                </li>
+                <li>
+                  {{ $t('app.questionnaire.noSearchResults.selectSuggestion') }}
+                </li>
+              </ul>
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn @click="clear">
+              {{ $t('app.questionnaire.noSearchResults.clearSearch') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </template>
+    </v-combobox>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import _ from 'lodash'
+import { escapeHTML } from '../../utils.js'
+
+// eslint-disable-next-line no-extend-native
+String.prototype.splice = function (idx, rem, str) {
+  return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem))
+}
 
 export default {
   name: 'QuestionnaireSearch',
@@ -38,8 +92,9 @@ export default {
       searchInput: null,
       model: null,
       provisions: [],
-      debouncedUpdateProvisionFilter: _.throttle(this.updateProvisionFilter, 800)
-
+      debouncedUpdateProvisionFilter: _.debounce(this.updateProvisionFilter, 800, { 'leading': false,
+        'trailing': true }),
+      loading: false
     }
   },
   computed: {
@@ -78,15 +133,10 @@ export default {
     searchInput (value) {
       if (value) {
         this.provisions = this.searchableProvisions.filter(item => {
-          if (item.title) {
-            return item.title[this.lang].toLowerCase().includes(value.toLowerCase())
-          }
-          return false
+          const text = this.regexReplaceFaultyEmptySpaces(item.title[this.lang])
+          const match = text.toLowerCase().match(this.regexSearchPattern(value))
+          return match
         })
-
-        // for debugging, if does not have a title means its not found in the the legislation dictionary
-        // eslint-disable-next-line no-prototype-builtins
-        // this.searchableProvisions.forEach(x => { if (!x.hasOwnProperty('title')) { console.log('b', x) } })
       }
     },
     clearProvisionSearchText (value, oldValue) {
@@ -131,7 +181,46 @@ export default {
         this.$store.dispatch('UpdateProvisionFilterState', { provisionFilter: null })
         this.shrinkProvisionSearchField('')
         this.$emit('set-clear-provision-search-false')
+        this.$refs.provisionSearch.isMenuActive = false
       }
+    },
+    filters (item, queryText) {
+      const text = this.regexReplaceFaultyEmptySpaces(item.title[this.lang])
+      const itemsFound = text.toLowerCase().match(this.regexSearchPattern(queryText)
+      )
+      return Boolean(itemsFound)
+    },
+    genFilteredText (text) {
+      text = text || ''
+
+      if (!this.searchInput) return escapeHTML(text)
+
+      return this.getMaskedCharacters(text)
+    },
+    genHighlight (text) {
+      return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
+    },
+    getMaskedCharacters (text) {
+      text = this.regexReplaceFaultyEmptySpaces(text)
+      const queryText = (this.searchInput || '').toString()
+
+      // var t = 0
+      text = text.replace(this.regexSearchPattern(queryText), (match) => {
+        // t++
+        return this.genHighlight(match)
+      })
+      return text
+    },
+    // regex search pattern use to search
+    regexSearchPattern (query) {
+      const queryText = (query || '').toString()
+      const regexSearchPattern = '(' + queryText + ')'
+      return new RegExp(regexSearchPattern, 'gi')
+    },
+    // fix up any white space issues, some of the data have space but visually but not recongized something to do with char number??
+    regexReplaceFaultyEmptySpaces (text) {
+      const regexWhiteSpace = /\s/g
+      return text.replace(regexWhiteSpace, ' ')
     }
 
   }
