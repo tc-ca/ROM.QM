@@ -20,6 +20,7 @@
       @blur="shrinkProvisionSearchField($event.target.value)"
       @click:clear="clear(true)"
     >
+      <!-- eslint-disable vue/no-v-html -->
       <template v-slot:item="{ item }">
         <div>
           <div>
