@@ -41,25 +41,6 @@
         <v-card-title>
           {{ $t('app.questionnaire.noSearchResults.noMatchedQuestions') }}
         </v-card-title>
-        <v-card-text>
-          <p>{{ $t('app.questionnaire.noSearchResults.searchSuggestions') }}</p>
-          <div class="text--primary">
-            <ul>
-              <li>
-                {{ $t('app.questionnaire.noSearchResults.checkSpelling') }}
-              </li>
-              <li>
-                {{ $t('app.questionnaire.noSearchResults.moreGeneralWords') }}
-              </li>
-              <li>
-                {{ $t('app.questionnaire.noSearchResults.searchByProvisionLabel') }}
-              </li>
-              <li>
-                {{ $t('app.questionnaire.noSearchResults.selectSuggestion') }}
-              </li>
-            </ul>
-          </div>
-        </v-card-text>
         <v-card-actions>
           <v-btn @click="clearProvisionSearchField">
             {{ $t('app.questionnaire.noSearchResults.clearSearch') }}

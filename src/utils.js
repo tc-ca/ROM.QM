@@ -1,6 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
 import { QUESTION_TYPE } from '../src/data/questionTypes';
 
+const tagsToReplace = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;"
+};
+ 
+export function escapeHTML (str) {
+      return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
+}
+  
 export function pad (n, width, z) {
   z = z || '0'
   n = n + ''
