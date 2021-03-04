@@ -366,7 +366,7 @@ export default {
       } catch (e) {
         console.log(e)
       } finally {
-        this.file.value.splice(index - 1, 1)
+        this.file.value.splice(index, 1)
         this.prev()
       }
     },
