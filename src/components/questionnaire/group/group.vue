@@ -129,7 +129,7 @@ import Question from './question/question.vue'
 import BuilderService from '../../../services/builderService'
 
 export default {
-  emits: ['responseChanged', 'update-group-count'],
+  emits: ['update-group-count'],
   components: { Question },
 
   props: {
@@ -320,7 +320,7 @@ export default {
     },
     onResponseChanged () {
       this.valid = this.areAllQuestionsValid(this.group.questions)
-      this.$emit('responseChanged')
+      // this.$emit('responseChanged')
     },
     resetError () {
       this.onError()
