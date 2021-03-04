@@ -7,7 +7,6 @@
       clearable
       dense
       filled
-      :loading="loading"
       :items="provisions"
       :search-input.sync="searchInput"
       :item-text="'title.' + lang"
@@ -89,8 +88,7 @@ export default {
       model: null,
       provisions: [],
       debouncedUpdateProvisionFilter: _.debounce(this.updateProvisionFilter, 800, { 'leading': false,
-        'trailing': true }),
-      loading: false
+        'trailing': true })
     }
   },
   computed: {

@@ -108,7 +108,7 @@ export default {
     },
     updateFilter (value, oldValue) {
       if (value) {
-        // on intial load set orginal state without any charactertics being set
+        // on intial load set orginal state without any specific charactertics/tags being set/applied (we need this "bucket of tags" to refer to it in the future i.e. check if question is taggable or not)
         this.updateProvisionFilter({ setOrginalTagFilterState: true })
       }
     }
@@ -126,7 +126,7 @@ export default {
         characteristicProvisions = this.unSelectedValues
       }
       // todo: remove this.label should be set to something else from the incoming data
-      this.$store.dispatch('UpdateTagFilterState', { setOriginal: setOrginalTagFilterState, characteristicProvisions, characteristicCategory: this.label })
+      this.$store.dispatch('UpdateTagFilterState', { allTags: { setItems: setOrginalTagFilterState, items: this.items }, characteristicProvisions, characteristicCategory: this.label })
     }
   }
 }

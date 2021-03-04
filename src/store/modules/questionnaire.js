@@ -230,7 +230,7 @@ export const actions = {
 
   UpdateTagFilterState({ commit, state, getters }, payload) {
     const {
-      setOriginal,
+      allTags,
       characteristicProvisions,
       characteristicCategory
     } = payload;
@@ -245,22 +245,12 @@ export const actions = {
         searchableProvisions.filter(x => obj.provisions.includes(x.id))
       );
 
-            // hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(
-            //   searchableProvisions.filter(x => obj.provisions.includes(x.id))
-            // );
 
-            //get characteristics found in searchable provision with have the associated questions
+
+            // //get characteristics found in searchable provision with have the associated questions
             // const test = searchableProvisions.filter(x =>
             //   obj.provisions.includes(x.id)
             // );
-
-            //add characteristic text for usage later
-            // test.forEach(x => {
-            //   x.characteristicText = obj.text
-            // });
-            //             hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(
-            //               test
-            //             );
 
 
             //     let newArray= []
@@ -269,7 +259,7 @@ export const actions = {
             //       newArray.push({ ...x });
             // });
 
-            // hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(newArray)
+            //  hydratedCharacteristicProvisions = hydratedCharacteristicProvisions.concat(newArray)
 
     });
 
@@ -285,14 +275,28 @@ export const actions = {
     );
     const isFound = index === -1 ? false : true;
 
-    if (setOriginal) {
+    if (allTags.setItems) {
+    //todo: make this whole thing better later
+    //extract provisions from searchableProvisions
+    let hydratedAllTags = [];
+
+    allTags.items.forEach(obj => {
+      hydratedAllTags = hydratedAllTags.concat(
+        searchableProvisions.filter(x => obj.provisions.includes(x.id))
+      );
+
+    });
+
+    // the same provision could be associated to multiple characteristics
+    // ensure a unique result set
+    hydratedAllTags = onlyUniqueObj(hydratedAllTags, "id");
       commit("UPDATE_ORIGINAL_TAG_FILTER_STATE", {
         isFound,
         index,
-        characteristicProvisions: hydratedCharacteristicProvisions,
+        characteristicProvisions: hydratedAllTags,
         tag: {
           name: characteristicCategory,
-          provisions: hydratedCharacteristicProvisions
+          provisions: hydratedAllTags
         }
       });
     }
