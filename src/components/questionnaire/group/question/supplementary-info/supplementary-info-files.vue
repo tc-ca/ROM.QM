@@ -80,7 +80,7 @@
                     <v-icon
                       size="30"
                     >
-                      mdi-file-{{ f.fileType }}
+                      mdi-file-{{ getFileType(f.fileName) }}
                     </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
@@ -392,17 +392,20 @@ export default {
         this.$refs.fileUpload.reset()
       }
     },
+    getFileType (fileName) {
+      let fileType
+      let ext = fileName.substr(fileName.lastIndexOf('.') + 1)
+      if (ext === 'pdf') fileType = 'pdf'
+      else if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') fileType = 'excel'
+      else if (ext === 'doc' || ext === 'docx') fileType = 'word'
+      else fileType = 'document-outline'
+
+      return fileType
+    },
     onUploadFile () {
       let el = this.$store.state.imagefile.imageFileNotification.fileResults
       if (el !== null) {
         if (this.question.guid === el.qguid && !this.file.value.some(f => f.guid === el.guid)) {
-          let fileType
-          let ext = el.result.substr(el.result.lastIndexOf('.') + 1)
-          if (ext === 'pdf') fileType = 'pdf'
-          else if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') fileType = 'excel'
-          else if (ext === 'doc' || ext === 'docx') fileType = 'word'
-          else fileType = 'document-outline'
-
           this.file.value.push({
             title: el.result,
             fileName: el.result,
@@ -410,7 +413,6 @@ export default {
             guid: el.guid,
             userName: this.userName,
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS),
-            fileType: fileType,
             speedDialOpen: false
           })
           this.progressStatus = ''
