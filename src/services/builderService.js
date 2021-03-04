@@ -233,6 +233,20 @@ function GenerateRepeatedQuestion(questionnaire, oQuestion) {
       });
     });
 
+    //Fixing dependants for every child question
+    nQuestion.childQuestions.forEach( cq => {
+      cq.dependants.forEach( d => {
+        if (d.guid === oQuestion.guid) {
+          d.guid = nQuestion.guid;
+        } else {
+          const idx = oQuestion.childQuestions.findIndex (ocq => ocq.guid === d.guid);
+          if (idx > -1) {
+            d.guid = nQuestion.childQuestions[idx].guid;
+          }
+        }
+      });
+    });
+
   } catch (error) {
     // Generate Error
     nQuestion = null;
