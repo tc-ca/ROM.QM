@@ -109,7 +109,7 @@
             <span class="text-break">{{ questionText }}</span>
           </div>
         </v-col>
-        <!-- <v-col mt-0>
+       <!-- <v-col mt-0>
           <v-chip
             v-for="(tag, index) in tags"
 
@@ -551,9 +551,10 @@ export default {
     },
     // returns the source (origin/original) question object if the question is considered a repeat
     // i.e. the source of which this question has been copied from.
+    // special condition, children of repeated questions are not marked as "isRepeated:true", therefore must check if the parent is repeated or not.
     sourceQuestion () {
       // if repeated group, find source group
-      if (this.inRepeatedGroup || this.question.isRepeated) {
+      if (this.inRepeatedGroup || this.question.isRepeated || (this.isChildQuestion && this.parent.isRepeated)) {
         // find the originial group (needed when group is repeated)
         const groupId = `${this.group.primaryKey}#000`// #000 is always identifies the origin of specific group
         // find question in the origin group, must get flat list all questions within group first (including children).
@@ -1019,15 +1020,10 @@ export default {
     },
 
     questionFoundViaProvidedProvisions (provisions) {
-      let question
-
       // if question is repeated find the origin that it was repeated from, as the repeated question guid is not found in the searchable provision array.
       // any logic applied the origin would also be applied to the repeated versions of the question.
-      if (!this.question.isRepeated && !this.inRepeatedGroup) {
-        question = this.question
-      } else {
-        question = this.sourceQuestion
-      }
+      // if sourceQuestion is not null means it is a repeated question
+      let question = this.sourceQuestion ? this.sourceQuestion : this.question
 
       // check to see if question is tagable
       let isTagable = false
