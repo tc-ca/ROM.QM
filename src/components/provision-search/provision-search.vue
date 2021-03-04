@@ -73,11 +73,6 @@ import { mapState } from 'vuex'
 import _ from 'lodash'
 import { escapeHTML } from '../../utils.js'
 
-// eslint-disable-next-line no-extend-native
-String.prototype.splice = function (idx, rem, str) {
-  return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem))
-}
-
 export default {
   name: 'QuestionnaireSearch',
   emits: ['set-clear-provision-search-false', 'shrink-provision-search-field'],
