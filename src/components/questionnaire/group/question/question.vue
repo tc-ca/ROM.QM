@@ -300,6 +300,7 @@
                   :disabled="readOnly"
                   :label="$t('app.questionnaire.group.question.violationCount')"
                   :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
+                  type="number"
                   filled
                 />
               </div>
