@@ -187,7 +187,7 @@ export default {
       if (event.code === 'Enter') {
         this.updateProvisionFilter(this.model)
         this.isMenuActive(false)
-      } else if (event.code !== 'ArrowDown' && event.code !== 'ArrowUp') { // do need to execute query when moving up and down drop down menu list of items
+      } else if (event.code !== 'ArrowDown' && event.code !== 'ArrowUp') { // do not need to execute query when moving up and down drop down menu list of items
         this.debouncedUpdateProvisionFilter(event.target.value)
       }
     }
