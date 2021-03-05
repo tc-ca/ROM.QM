@@ -89,7 +89,8 @@ export default {
       }
     },
     myItems () {
-      return this.items.length > 0 ? this.items : [this.item]
+      const orderedItems = _.orderBy(this.items, [`text[${this.lang}]`], ['asc'])
+      return this.items.length > 0 ? orderedItems : [this.item]
     },
     unSelectedValues () {
       return _.difference(
