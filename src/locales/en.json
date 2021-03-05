@@ -148,6 +148,7 @@
           "fileTitle":"Title:",
           "fileComment": "Comment:",
           "fileUploaded": "Uploaded:",
+          "fileUploadedBy": "Uploaded by:",
           "editFile": "Edit Title/Comment",
           "deleteFile": "Delete File",
           "downloadFile": "Download File",

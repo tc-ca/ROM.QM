@@ -91,7 +91,7 @@
 
     async function downloadBlobImage(event) {
       var questionHelpler = qtnHelper;
-      await qtnHelper.downloadBlobImage(event.detail.nameGuid, event.detail.fileName);
+      await qtnHelper.downloadBlobImage(event.detail.nameGuid, event.detail.fileName, event.detail.isFileTypeImage);
     }
 
     window.addEventListener('tdg-qstnnr-uploadBlobImage', (event) => {
@@ -100,7 +100,7 @@
 
     async function uploadBlobImage(event) {
       var questionHelpler = qtnHelper;
-      await qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.qguid, event.detail.nameGuid, event.detail.fileName);
+      await qtnHelper.uploadBlobImage(event.detail.base64String, event.detail.qguid, event.detail.nameGuid, event.detail.fileName, event.detail.isFileTypeImage);
     }
 
     window.addEventListener('tdg-qstnnr-deleteBlobImage', (event) => {
@@ -109,7 +109,7 @@
 
     async function deleteBlobImage(event) {
       var questionHelpler = qtnHelper;
-      await qtnHelper.deleteBlobImage(event.detail.nameGuid, event.detail.fileName);
+      await qtnHelper.deleteBlobImage(event.detail.nameGuid, event.detail.fileName, event.detail.isFileTypeImage);
     }
 
     window.addEventListener('tdg-qstnnr-getBlobResults', (event) => {

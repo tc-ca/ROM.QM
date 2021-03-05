@@ -48,6 +48,7 @@
                 style="padding-bottom:none"
                 filled
                 outlined
+                multiple
                 :placeholder="placeholderText"
                 prepend-inner-icon="mdi-paperclip"
                 prepend-icon=""
@@ -75,115 +76,14 @@
                   v-for="(f, index) in file.value"
                   :key="index"
                 >
-                  <v-list-item-icon>
-                    <v-icon
-                      size="30"
-                    >
-                      mdi-file-{{ f.fileType }}
-                    </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-sheet
-                      v-if="!f.speedDialOpen"
-                      color="#f5f5f5"
-                    >
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileTitle') }}
-                        </span> <span>{{ f.title }}</span>
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileComment') }}
-                        </span><span> {{ f.comment === '' ? 'N/A' : f.comment }}</span>
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileUploaded') }}
-                        </span> <span>{{ f.timeStamp }}</span>
-                      </v-list-item-subtitle>
-                    </v-sheet>
-
-                    <div v-if="f.speedDialOpen">
-                      <v-textarea
-                        v-model="f.title"
-                        auto-grow
-                        outlined
-                        :disabled="readOnly"
-                        dense
-                        rows="1"
-                        label="Title"
-                        style="font-size: small"
-                        @change="updateResponseStore()"
-                      />
-                      <v-textarea
-                        v-model="f.comment"
-                        auto-grow
-                        outlined
-                        :disabled="readOnly"
-                        dense
-                        placeholder=" "
-                        rows="1"
-                        label="Comment"
-                        style="font-size: small"
-                        @change="updateResponseStore()"
-                      />
-                    </div>
-                  </v-list-item-content>
-                  <v-list-item-icon>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          v-model="f.speedDialOpen"
-                          icon
-                          :disabled="!fileNoteExist || readOnly"
-                          v-bind="attrs"
-                          v-on="on"
-                          @click="f.speedDialOpen = !f.speedDialOpen"
-                        >
-                          <v-icon v-if="f.speedDialOpen">
-                            mdi-close
-                          </v-icon>
-                          <v-icon v-else>
-                            mdi-pencil
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>  {{ $t('app.questionnaire.group.question.supplementaryFile.editFile') }}</span>
-                    </v-tooltip>
-                  </v-list-item-icon>
-                  <v-list-item-icon>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          :disabled="!fileNoteExist || readOnly"
-                          icon
-                          color="deep-orange"
-                          v-bind="attrs"
-                          v-on="on"
-                          @click.stop="removeFile($event, f, galleryIndex); updateResponseStore();"
-                        >
-                          <v-icon>mdi-delete</v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.questionnaire.group.question.supplementaryFile.deleteFile') }}</span>
-                    </v-tooltip>
-                  </v-list-item-icon>
-                  <v-list-item-icon>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          :disabled="!fileNoteExist || readOnly"
-                          icon
-                          color="blue"
-                          v-bind="attrs"
-                          v-on="on"
-                          @click.stop="downloadFile(f); updateResponseStore();"
-                        >
-                          <v-icon>mdi-download-circle-outline</v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.questionnaire.group.question.supplementaryFile.downloadFile') }}</span>
-                    </v-tooltip>
-                  </v-list-item-icon>
-                  <v-list-item-icon />
+                  <document-file
+                    :file="f"
+                    :readonly="readOnly"
+                    :index="galleryIndex"
+                    :filenoteexist="fileNoteExist"
+                    @remove:file="removeFile"
+                    @download:file="downloadFile"
+                  />
                 </v-list-item>
               </v-list>
             </v-col>
@@ -241,10 +141,16 @@
 /* eslint-disable no-undef */
 import moment from 'moment'
 import BaseMixin from '../../../../../mixins/base'
-import AzureBlobService from '../../../../../services/azureBlobService'
+import { v4 as uuidv4 } from 'uuid'
+import mime from 'mime-types'
+import { mapState } from 'vuex'
+import documentFile from '../supplementary-info/document-file'
 
 export default {
   name: 'SupplementaryInfoFiles',
+  components: {
+    documentFile
+  },
   mixins: [BaseMixin],
   props: {
     file: {
@@ -303,9 +209,41 @@ export default {
     },
     placeholderText () {
       return this.isFileRequired ? this.$t('app.questionnaire.group.question.supplementaryFile.fileRequired') : this.$t('app.questionnaire.group.question.supplementaryFile.fileOptional')
-    }
+    },
+    ...mapState({
+      userName: state => {
+        if (!state || !state.settings) {
+          return 'N/A'
+        }
+        return state.settings.settings.userName
+      }
+    })
   },
   mounted () {
+    this.$store.watch(
+      state => state.imagefile.imageFileNotification.fileResults,
+      (value) => {
+        if (value) {
+          this.onUploadFile()
+        }
+      }
+    )
+    this.$store.watch(
+      state => state.imagefile.imageData.fileDetails,
+      (value) => {
+        if (value) {
+          this.onDownloadFile()
+        }
+      }
+    )
+    this.$store.watch(
+      state => state.imagefile.deletedImageData.fileDetails,
+      (value) => {
+        if (value) {
+          this.onDeleteFile()
+        }
+      }
+    )
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
@@ -315,38 +253,90 @@ export default {
     )
   },
   methods: {
-    async onFileChange (file) {
-      if (!file) {
+    onFileChange (e) {
+      if (!e) {
         return
       }
+
+      e.forEach(f => {
+        var reader = new FileReader()
+        reader.onload = (r) => {
+          this.createFile(f.name, r.target.result.split(',')[1])
+        }
+        reader.readAsDataURL(f)
+      })
+    },
+    async createFile (fileName, file) {
+      this.progressStatus = 'Uploading...'
+      let guid = uuidv4()
+      let fName = fileName
+      let str = file
+
       try {
-        this.progressStatus = 'Uploading...'
-        await AzureBlobService.uploadFile(file)
+        let event = new CustomEvent('tdg-qstnnr-uploadBlobImage', {
+          detail: {
+            base64String: str,
+            qguid: this.question.guid,
+            nameGuid: guid,
+            fileName: fName,
+            isFileTypeImage: false
+          },
+          bubbles: true,
+          cancelable: true
+        })
+        document.body.dispatchEvent(event)
       } catch (e) {
         console.log(e)
       } finally {
-        this.progressStatus = ''
-        let fileType = ''
-
-        if (file.type === 'application/pdf') fileType = 'pdf'
-        else if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type === 'application/vnd.ms-excel') fileType = 'excel'
-        else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') fileType = 'word'
-        else fileType = 'document-outline'
-
-        this.file.value.push({ fileType: fileType, title: file.name, fileName: file.name, comment: 'N/A', timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS), speedDialOpen: false })
-
-        this.next()
-        this.next()
-
         this.$refs.fileUpload.reset()
+      }
+    },
+    onUploadFile () {
+      let el = this.$store.state.imagefile.imageFileNotification.fileResults
+      if (el !== null) {
+        if (this.question.guid === el.qguid && !this.file.value.some(f => f.guid === el.guid)) {
+          this.file.value.push({
+            title: el.result,
+            fileName: el.result,
+            comment: 'N/A',
+            guid: el.guid,
+            userName: this.userName,
+            timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS),
+            speedDialOpen: false
+          })
+          this.progressStatus = ''
+          this.next()
+          this.next()
+        }
       }
     },
 
     async downloadFile (file) {
-      try {
-        await AzureBlobService.downloadFile(file)
-      } catch (e) {
-        console.log(e)
+      let event = new CustomEvent('tdg-qstnnr-downloadBlobImage', {
+        detail: {
+          nameGuid: file.guid,
+          fileName: file.fileName,
+          isFileTypeImage: false
+        },
+        bubbles: true,
+        cancelable: true
+      })
+      document.body.dispatchEvent(event)
+    },
+
+    onDownloadFile () {
+      let storeObj = this.$store.state.imagefile.imageData.fileDetails
+      if (storeObj !== null) {
+        var link = document.createElement('a')
+        link.href = `data:${mime.lookup(storeObj.fileName)};base64,${storeObj.result}`
+        link.download = storeObj.fileName
+        document.body.appendChild(link)
+        link.click()
+        setTimeout(function () {
+          // For Firefox it is necessary to delay revoking the ObjectURL
+          document.body.removeChild(link)
+          window.URL.revokeObjectURL(e.target.result)
+        }, 100)
       }
     },
 
@@ -357,17 +347,33 @@ export default {
 
     async confirmed () {
       this.confirmDialogOpen = false
-
       let file = this.confirmCallbackArgs[1]
-      let index = this.confirmCallbackArgs[2]
 
       try {
-        await AzureBlobService.deleteFile(file)
+        let event = new CustomEvent('tdg-qstnnr-deleteBlobImage', {
+          detail: {
+            nameGuid: file.guid,
+            fileName: file.fileName,
+            isFileTypeImage: false
+          },
+          bubbles: true,
+          cancelable: true
+        })
+
+        document.body.dispatchEvent(event)
       } catch (e) {
         console.log(e)
-      } finally {
-        this.file.value.splice(index, 1)
-        this.prev()
+      }
+    },
+
+    onDeleteFile () {
+      let el = this.$store.state.imagefile.deletedImageData.fileDetails
+      if (el !== null) {
+        if (this.file.value.some(f => f.guid === el.guid)) {
+          this.file.value.splice(this.file.value.findIndex(f => f.guid === el.guid), 1)
+          this.prev()
+          this.prev()
+        }
       }
     },
 
