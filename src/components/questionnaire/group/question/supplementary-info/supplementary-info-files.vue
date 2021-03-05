@@ -76,119 +76,14 @@
                   v-for="(f, index) in file.value"
                   :key="index"
                 >
-                  <v-list-item-icon>
-                    <v-icon
-                      size="30"
-                    >
-                      mdi-file-{{ getFileType(f.fileName) }}
-                    </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-sheet
-                      v-if="!f.speedDialOpen"
-                      color="#f5f5f5"
-                    >
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileTitle') }}
-                        </span> <span>{{ f.title }}</span>
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileComment') }}
-                        </span><span> {{ f.comment === '' ? 'N/A' : f.comment }}</span>
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileUploadedBy') }}
-                        </span> <span>{{ f.userName }}</span>
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        <span>                  {{ $t('app.questionnaire.group.question.supplementaryFile.fileUploaded') }}
-                        </span> <span>{{ f.timeStamp }}</span>
-                      </v-list-item-subtitle>
-                    </v-sheet>
-
-                    <div v-if="f.speedDialOpen">
-                      <v-textarea
-                        v-model="f.title"
-                        auto-grow
-                        outlined
-                        :disabled="readOnly"
-                        dense
-                        rows="1"
-                        label="Title"
-                        style="font-size: small"
-                        @change="updateResponseStore()"
-                      />
-                      <v-textarea
-                        v-model="f.comment"
-                        auto-grow
-                        outlined
-                        :disabled="readOnly"
-                        dense
-                        placeholder=" "
-                        rows="1"
-                        label="Comment"
-                        style="font-size: small"
-                        @change="updateResponseStore()"
-                      />
-                    </div>
-                  </v-list-item-content>
-                  <v-list-item-icon>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          v-model="f.speedDialOpen"
-                          icon
-                          :disabled="!fileNoteExist || readOnly"
-                          v-bind="attrs"
-                          v-on="on"
-                          @click="f.speedDialOpen = !f.speedDialOpen"
-                        >
-                          <v-icon v-if="f.speedDialOpen">
-                            mdi-close
-                          </v-icon>
-                          <v-icon v-else>
-                            mdi-pencil
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>  {{ $t('app.questionnaire.group.question.supplementaryFile.editFile') }}</span>
-                    </v-tooltip>
-                  </v-list-item-icon>
-                  <v-list-item-icon>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          :disabled="!fileNoteExist || readOnly"
-                          icon
-                          color="deep-orange"
-                          v-bind="attrs"
-                          v-on="on"
-                          @click.stop="removeFile($event, f, galleryIndex); updateResponseStore();"
-                        >
-                          <v-icon>mdi-delete</v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.questionnaire.group.question.supplementaryFile.deleteFile') }}</span>
-                    </v-tooltip>
-                  </v-list-item-icon>
-                  <v-list-item-icon>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          :disabled="!fileNoteExist || readOnly"
-                          icon
-                          color="blue"
-                          v-bind="attrs"
-                          v-on="on"
-                          @click.stop="downloadFile(f); updateResponseStore();"
-                        >
-                          <v-icon>mdi-download-circle-outline</v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{ $t('app.questionnaire.group.question.supplementaryFile.downloadFile') }}</span>
-                    </v-tooltip>
-                  </v-list-item-icon>
-                  <v-list-item-icon />
+                  <document-file
+                    :file="f"
+                    :readonly="readOnly"
+                    :index="galleryIndex"
+                    :filenoteexist="fileNoteExist"
+                    @remove:file="removeFile"
+                    @download:file="downloadFile"
+                  />
                 </v-list-item>
               </v-list>
             </v-col>
@@ -249,9 +144,13 @@ import BaseMixin from '../../../../../mixins/base'
 import { v4 as uuidv4 } from 'uuid'
 import mime from 'mime-types'
 import { mapState } from 'vuex'
+import documentFile from '../supplementary-info/document-file'
 
 export default {
   name: 'SupplementaryInfoFiles',
+  components: {
+    documentFile
+  },
   mixins: [BaseMixin],
   props: {
     file: {
@@ -391,16 +290,6 @@ export default {
       } finally {
         this.$refs.fileUpload.reset()
       }
-    },
-    getFileType (fileName) {
-      let fileType
-      let ext = fileName.substr(fileName.lastIndexOf('.') + 1)
-      if (ext === 'pdf') fileType = 'pdf'
-      else if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') fileType = 'excel'
-      else if (ext === 'doc' || ext === 'docx') fileType = 'word'
-      else fileType = 'document-outline'
-
-      return fileType
     },
     onUploadFile () {
       let el = this.$store.state.imagefile.imageFileNotification.fileResults
