@@ -499,7 +499,6 @@ function flattenQuestions (groups) {
 function fixTemplate (template) {
 
   var groups = template.groups
-  var flattenedQuestions = flattenQuestions(groups)
   var qIndex;
   var rIndex;
   var gIndex;
@@ -509,6 +508,21 @@ function fixTemplate (template) {
   var provision;
   var searchableProvisions = [];
   var fixLog = []
+
+  //First, fix the isRepeatable on false for every child question, later build the flattenedQuestions with this fix
+  groups.forEach( g => {
+    g.questions.forEach( q => {
+      q.childQuestions.forEach( cq => {
+        if (cq.isRepeatable) {
+          cq.isRepeatable = false
+          fixLog.push(`fixTemplate: fixing isRepeatable prop for Child Question ${cq.text.en} with guid ${cq.guid}`)
+        }
+      });
+    });
+  });
+
+
+  var flattenedQuestions = flattenQuestions(groups)
 
   /**
    * Fix Template
@@ -567,16 +581,6 @@ function fixTemplate (template) {
      * Fix repeated ids in questions
      */
     question.id = qIndex + 1;
-    // const repeatedIds = flattenedQuestions.findIndex(fq => fq.id === question.id && fq.guid !== question.guid);
-    // if (repeatedIds > -1) {
-    //   const oldId = question.id;
-    //   let newId = question.id + flattenedQuestions.length + qIndex;
-    //   while (flattenedQuestions.findIndex(fq => fq.id === newId) > -1) {
-    //     newId += 1;
-    //   }
-    //   question.id = newId;
-    //   fixLog.push(`fixTemplate: fixing repeated id prop for Question ${flattenedQuestions[qIndex].name} from ${oldId} to ${question.id}`);
-    // }
 
     /**
     * Will assign a unique guid to all Questions in all items within 
