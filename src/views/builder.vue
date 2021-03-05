@@ -162,11 +162,13 @@
                   :label="$t('app.builder.question.samplingAllowed')"
                   @change="setSamplingRecord()"
                 />
-                <v-checkbox
-                  v-model="selectedQuestion.isRepeatable"
-                  dense
-                  :label="$t('app.builder.isRepeatable')"
-                />
+                <div v-if="isRepeatableVisible">
+                  <v-checkbox
+                    v-model="selectedQuestion.isRepeatable"
+                    dense
+                    :label="$t('app.builder.isRepeatable')"
+                  />
+                </div>
                 <v-checkbox
                   v-model="selectedQuestion.isVisible"
                   dense
@@ -725,6 +727,9 @@ export default {
     }
   },
   computed: {
+    isRepeatableVisible () {
+      return BuilderService.isParentAGroup(this.selectedGroup, this.selectedQuestion.guid)
+    },
     displayTextLang () {
       return (this.lang === 'eng') ? 'DisplayEnglishText' : 'DisplayFrenchText'
     },
