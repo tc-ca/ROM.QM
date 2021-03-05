@@ -30,39 +30,6 @@
           </div>
         </div>
       </template>
-      <template v-slot:no-data>
-        <v-card
-          elevation="2"
-        >
-          <v-card-title>
-            {{ $t('app.questionnaire.noSearchResults.noMatchedQuestions') }}
-          </v-card-title>
-          <v-card-text>
-            <p>{{ $t('app.questionnaire.noSearchResults.searchSuggestions') }}</p>
-            <div class="text--primary">
-              <ul>
-                <li>
-                  {{ $t('app.questionnaire.noSearchResults.checkSpelling') }}
-                </li>
-                <li>
-                  {{ $t('app.questionnaire.noSearchResults.moreGeneralWords') }}
-                </li>
-                <li>
-                  {{ $t('app.questionnaire.noSearchResults.searchByProvisionLabel') }}
-                </li>
-                <li>
-                  {{ $t('app.questionnaire.noSearchResults.selectSuggestion') }}
-                </li>
-              </ul>
-            </div>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn @click="clear">
-              {{ $t('app.questionnaire.noSearchResults.clearSearch') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </template>
     </v-combobox>
   </div>
 </template>
