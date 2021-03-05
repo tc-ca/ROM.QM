@@ -14,12 +14,11 @@
       :placeholder="$t('app.questionnaire.provisionSearchFilter.placeholder')"
       prepend-inner-icon="mdi-magnify"
       :filter="filters"
-      @keydown.enter="isMenuActive(false)"
-      @keyup="debouncedUpdateProvisionFilter($event.target.value)"
+      @keyup="runUpdateProvisionFilter($event)"
       @blur="shrinkProvisionSearchField($event.target.value)"
       @click:clear="clear(true)"
+      @input="updateProvisionFilter(model)"
     >
-      <!-- eslint-disable vue/no-v-html -->
       <template v-slot:item="{ item }">
         <div>
           <div>
@@ -216,8 +215,15 @@ export default {
     regexReplaceFaultyEmptySpaces (text) {
       const regexWhiteSpace = /\s/g
       return text.replace(regexWhiteSpace, ' ')
+    },
+    runUpdateProvisionFilter (event) {
+      if (event.code === 'Enter') {
+        this.updateProvisionFilter(this.model)
+        this.isMenuActive(false)
+      } else if (event.code !== 'ArrowDown' && event.code !== 'ArrowUp') { // do need to execute query when moving up and down drop down menu list of items
+        this.debouncedUpdateProvisionFilter(event.target.value)
+      }
     }
-
   }
 
 }
