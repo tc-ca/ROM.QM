@@ -300,7 +300,7 @@ export default {
             fileName: el.result,
             comment: 'N/A',
             guid: el.guid,
-            userName: this.userName,
+            uploadedBy: this.userName,
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS),
             speedDialOpen: false
           })
