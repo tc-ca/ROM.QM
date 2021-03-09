@@ -28,7 +28,7 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 0
+    sortOrder: 0
   }
 
   let group1 = {
@@ -40,7 +40,7 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 1
+    sortOrder: 1
   }
 
   let group2 = {
@@ -52,7 +52,7 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 2
+    sortOrder: 2
   }
 
   let group3 = {
@@ -64,7 +64,7 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 3
+    sortOrder: 3
   }
 
   test('repeated group should be placed into the correct position', async () => {
@@ -93,7 +93,7 @@ describe('Test Group component Vuex Actions', () => {
 
     // tests copying group from index 0
     let expected = _.cloneDeep(theOriginalListOfGroups[0])
-    expected.order = 2
+    expected.sortOrder = 2
 
     actions.repeatGroup(context, theOriginalListOfGroups[0])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
@@ -103,7 +103,7 @@ describe('Test Group component Vuex Actions', () => {
 
     // tests copying group from index 1
     let expected1 = _.cloneDeep(theOriginalListOfGroups[0])
-    expected1.order = 2
+    expected1.sortOrder = 2
 
     actions.repeatGroup(context, theOriginalListOfGroups[1])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
@@ -116,7 +116,7 @@ describe('Test Group component Vuex Actions', () => {
 
     // tests copying group from index 2
     let expected2 = _.cloneDeep(theOriginalListOfGroups[2])
-    expected2.order = 3
+    expected2.sortOrder = 3
 
     actions.repeatGroup(context, theOriginalListOfGroups[2])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
@@ -130,7 +130,7 @@ describe('Test Group component Vuex Actions', () => {
 
     // tests copying group from index 2
     let expected3 = _.cloneDeep(theOriginalListOfGroups[3])
-    expected3.order = 4
+    expected3.sortOrder = 4
 
     // tests copying group from index 3
     actions.repeatGroup(context, theOriginalListOfGroups[3])
@@ -171,12 +171,12 @@ describe('Test Group component Vuex Actions', () => {
     let filteredSimilarGroups = [
       {
         name: 'Group1',
-        order: 0
+        sortOrder: 0
 
       },
       {
         name: 'Group1',
-        order: 1
+        sortOrder: 1
       }
     ]
     const context = {

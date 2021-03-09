@@ -25,10 +25,10 @@ describe('Test Group component Vuex Mutations', () => {
 
   it('UpdateGroupOrder', () => {
     const order = 5
-    const group = { order: 0 }
+    const group = { sortOrder: 0 }
 
     mutations.UpdateGroupOrder(state, { group, order: order })
-    expect(group.order).toEqual(order)
+    expect(group.sortOrder).toEqual(order)
   })
 
   test('updateGroupHtmlElementId', () => {
@@ -62,7 +62,7 @@ describe('Test Group component Vuex Mutations', () => {
           isVisible: false,
           showKey: '',
           hideKey: '',
-          order: 0,
+          sortOrder: 0,
           domSuffix: '#000',
           htmlElementId: 'Group1#000',
           questions: []
@@ -79,7 +79,7 @@ describe('Test Group component Vuex Mutations', () => {
       isVisible: false,
       showKey: '',
       hideKey: '',
-      order: 0,
+      sortOrder: 0,
       domSuffix: '#001',
       htmlElementId: 'Group1#001',
       questions: []
@@ -101,7 +101,7 @@ describe('Test Group component Vuex Mutations', () => {
           isVisible: false,
           showKey: '',
           hideKey: '',
-          order: 0,
+          sortOrder: 0,
           domSuffix: '#000',
           htmlElementId: 'Group1#000',
           questions: []
@@ -113,7 +113,7 @@ describe('Test Group component Vuex Mutations', () => {
           isVisible: false,
           showKey: '',
           hideKey: '',
-          order: 1,
+          sortOrder: 1,
           domSuffix: '#000',
           htmlElementId: 'Group2#000',
           questions: []
@@ -129,7 +129,7 @@ describe('Test Group component Vuex Mutations', () => {
       isVisible: false,
       showKey: '',
       hideKey: '',
-      order: 1,
+      sortOrder: 1,
       domSuffix: '#000',
       htmlElementId: 'Group2#000',
       questions: []

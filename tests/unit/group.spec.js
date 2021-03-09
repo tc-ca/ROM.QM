@@ -20,7 +20,7 @@ describe('Group.vue', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 0
+    sortOrder: 0
   }
 
   // mock
@@ -41,7 +41,7 @@ describe('Group.vue', () => {
 
   //   // mounts the component and gives usus access to functions that will help us to test function
   //   const wrapper = mount(Group, {
-  //     propsData: { group, index: group.order },
+  //     propsData: { group, index: group.sortOrder },
   //     computed: {
   //       repeatGroupTextDifferentiator: () => ''
   //     },
@@ -64,7 +64,7 @@ describe('Group.vue', () => {
     const wrapper = mount(Group, {
       propsData: {
         group,
-        index: group.order,
+        index: group.sortOrder,
         readOnly: false,
         expand: { value: true }
       },
@@ -88,7 +88,7 @@ describe('Group.vue', () => {
     const wrapper = mount(Group, {
       propsData: {
         group,
-        index: group.order,
+        index: group.sortOrder,
         readOnly: false,
         expand: { value: true }
       },
@@ -110,7 +110,7 @@ describe('Group.vue', () => {
     const wrapper = mount(Group, {
       propsData: {
         group,
-        index: group.order,
+        index: group.sortOrder,
         readOnly: false,
         expand: { value: true }
       },
@@ -135,7 +135,7 @@ describe('Group.vue', () => {
     const wrapper = mount(Group, {
       propsData: {
         group,
-        index: group.order,
+        index: group.sortOrder,
         readOnly: false,
         expand: { value: true }
       },
@@ -158,7 +158,7 @@ describe('Group.vue', () => {
     group.isRepeatable = false
 
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order, readOnly: false, expand: { value: true } },
+      propsData: { group, index: group.sortOrder, readOnly: false, expand: { value: true } },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -179,7 +179,7 @@ describe('Group.vue', () => {
     group.domSuffix = '#000'
 
     const wrapper = mount(Group, {
-      propsData: { group, index: group.order, readOnly: false, expand: { value: true } },
+      propsData: { group, index: group.sortOrder, readOnly: false, expand: { value: true } },
       computed: {
         repeatGroupTextDifferentiator: () => ''
       },
@@ -200,7 +200,7 @@ describe('Group.vue', () => {
   //   group.domSuffix = '#000'
 
   //   const wrapper = mount(Group, {
-  //     propsData: { group, index: group.order },
+  //     propsData: { group, index: group.sortOrder },
   //     computed: {
   //       repeatGroupTextDifferentiator: () => ''
   //     },

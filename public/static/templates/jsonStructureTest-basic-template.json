@@ -12,7 +12,7 @@
             },
             "isRepeatable": true,
             "isVisible": true,
-            "order": 0,
+            "sortOrder": 0,
             "questions": [
                 {
                     "name": "QTN_TYPRFRNC_REF_GRP_GRP1_TMPLT_QSTNNRTTLN",
@@ -539,7 +539,7 @@
             },
             "isRepeatable": true,
             "isVisible": true,
-            "order": 1,
+            "sortOrder": 1,
             "questions": [
                 {
                     "name": "QTN_DFLTQSTN1_RD_GRP_GRP2_TMPLT_QSTNNRTTLN",
@@ -658,7 +658,7 @@
             },
             "isRepeatable": true,
             "isVisible": true,
-            "order": 2,
+            "sortOrder": 2,
             "questions": [
                 {
                     "name": "QTN_DFLTQSTN2_RD_GRP_GRP3_TMPLT_QSTNNRTTLN",
