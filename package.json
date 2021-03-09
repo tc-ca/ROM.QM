@@ -14,7 +14,9 @@
     "storybook": "start-storybook -p 6006 -s public",
     "translation-check": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
     "generate-template-schema": "typescript-json-schema src/schema/template.ts Template --out src/schema/template.json --noExtraProps --required --strictNullChecks",
-    "schema-generate-c#-classes": "quicktype src/schema/template.ts -o src/schema/template.cs --namespace TC.PowerApps.Plugins.Models --array-type list"
+    "generate-new-template-schema": "typescript-json-schema src/schema/newTemplateStructure.ts Template --out src/schema/newTemplateStructure.json --noExtraProps --required --strictNullChecks",
+    "schema-generate-c#-classes": "quicktype src/schema/template.ts -o src/schema/template.cs --namespace TC.PowerApps.Plugins.Models --array-type list",
+    "schema-generate-new-c#-classes": "quicktype src/schema/template.ts -o src/schema/template.cs --namespace TC.PowerApps.Plugins.Models --array-type list"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.4.0",
