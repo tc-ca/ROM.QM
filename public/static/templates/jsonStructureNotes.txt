@@ -1,49 +1,58 @@
 
+Todo checklist.
 
 Template=======
-id replaced by guid
-keep name property
-no sortOrder on template
-added "lastEditedGroup" property
+rename-->".templateid"  by ".guid"
 
  
-
 Group ======
-primaryKey changed to name
-change order on groups to sortOrder
-keep domSuffix
-change htmlElementId to domId
 
+rename-->".primaryKey" changed to ".name"
+rename-->".order" to ".sortOrder"
+rename-->".htmlElementId" to "domId"
+rename--> ".isVisible" to "isVisibleByDefault"
  
 
-//This is currently bound to Vue and will have breaking changes needing to be fixed
-***removed expansionPanels Prop
+remove--> ."expansionPanels"
 
- 
 
-change isVisible to isVisibleByDefault
-
- 
 
 Question ======
-Added Guid to schema; JSON already had
-keep name property
-remove id prop
-change isVisible to isVisibleByDefault
+
+rename--> ".isVisible" to ".isVisibleByDefault"
+
+remove--> ".id" 
+remove--> "isMultiSelect"  (done)
+remove--> ".response"
+
+move--> .samplingRecord to .result object
+
+--responseOptions
+rename--> ".id" to ".guid"
+move--> ".selectedProvisions" to .result object
+remove--> ".searchProvisions" move to component data member
+remove--> ".isProvisionCollapsed" move to component data member
+refactor--> ".internalComment" to String and rename to ".internalCommentRequirement"
+refactor--> ".externalComment" to String and rename to ".externalCommentRequirement"
+refactor--> ".picture" to String and rename to ".pictureRequirement"
+refactor--> ".file" to String and rename to ".fileRequirement"
+
+---- REFACTOR violationInfo
+move--> violationInfo object to result
+remove--> ".responseToMatch'
+remove--> ".matchingType"
+
+condition: if not null should have properties of ."referenceID" and ".violationCount"
+
+
+----ADD result object
+add--> external comment type string
+add--> internal comment type string
+add-- files type object check typescript
+add--> pictures type object check typescript
+add--> sampling record type object check typescript
+add--> violation info type object check typescript
+add--> responses array of objects type object check typescript
 
  
 
-//breaking change for select-response.vue
-//all question types of select are multi-select
-***remove "isMultiSelect" prop, 
-change "childQuestions" to "questions" to stay consistent with Group Naming convention of Question Array
-
- 
-
-//requires refactor in supplimentary info
-***remove notification prop
-
- 
-
-//requires refactor in builder.vue to use data member instead
-***remove isProvisionCollapsed
