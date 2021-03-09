@@ -1,0 +1,648 @@
+{
+    "title": {
+        "en": "Questionnaire Title EN",
+        "fr": "Questionnaire Title EN"
+    },
+    "name": "TMPLT_QSTNNRTTLN",
+    "groups": [
+        {
+            "title": {
+                "en": "New Group",
+                "fr": "Fr: New Group"
+            },
+            "primaryKey": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
+            "isRepeatable": false,
+            "isVisible": true,
+            "order": 0,
+            "questions": [
+                {
+                    "name": "QTN_TYPRFRNC_REF_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 0,
+                    "guid": "55bcb79f-635b-4422-81e1-277d5a8a0a4d",
+                    "sortOrder": 1,
+                    "isVisible": true,
+                    "isMultiple": false,
+                    "text": {
+                        "en": "type reference",
+                        "fr": "FR: Reference ID"
+                    },
+                    "type": "reference",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "name": "RSPNS_PTN1_QTN_TYPRFRNC_REF_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Option 1",
+                                "fr": "FR: Option 1"
+                            },
+                            "value": 1,
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false,
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            }
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                },
+                {
+                    "name": "QTN_QSTN1_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 1,
+                    "guid": "18ce837b-5434-43be-8636-dcbef4acf2bc",
+                    "sortOrder": 2,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "Question 1",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "response": null,
+                    "isSamplingAllowed": true,
+                    "samplingRecord": {
+                        "approximateTotal": "",
+                        "sampleSize": "",
+                        "nonCompliances": ""
+                    },
+                    "validationState": true,
+                    "isRepeatable": true,
+                    "isRepeated": false,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "name": "RSPNS_YS_QTN_QSTN1_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "id": 2,
+                            "name": "RSPNS_N_QTN_QSTN1_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "required",
+                                "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [
+                        {
+                            "name": "QTN_CHLDQSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "id": 2,
+                            "guid": "cd178620-7b9e-4410-8510-990689ae3550",
+                            "sortOrder": 1,
+                            "isVisible": false,
+                            "isMultiple": true,
+                            "text": {
+                                "en": "child question ",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "response": null,
+                            "isSamplingAllowed": true,
+                            "samplingRecord": {
+                                "approximateTotal": "",
+                                "sampleSize": "",
+                                "nonCompliances": ""
+                            },
+                            "validationState": true,
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "responseOptions": [
+                                {
+                                    "id": 1,
+                                    "name": "RSPNS_YS_QTN_CHLDQSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "FR: Yes"
+                                    },
+                                    "value": "true",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "RSPNS_N_QTN_CHLDQSTN_RD_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "FR: No"
+                                    },
+                                    "value": "false",
+                                    "internalComment": {
+                                        "option": "optional",
+                                        "value": ""
+                                    },
+                                    "externalComment": {
+                                        "option": "required",
+                                        "value": ""
+                                    },
+                                    "file": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "picture": {
+                                        "option": "optional",
+                                        "value": []
+                                    },
+                                    "provisions": [
+                                        "9241a2ae-1c61-4753-805a-be0707f41622",
+                                        "77758039-206f-476d-84d9-549c571f269e",
+                                        "7b298d1f-da3e-408c-a705-2558886a9b9d",
+                                        "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+                                        "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+                                        "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+                                        "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+                                        "792fda3c-0696-4e90-9655-a0bb810f7b33",
+                                        "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+                                        "e311574a-8bac-4b5b-b092-a31182accab5",
+                                        "bec23597-02d7-4422-a3db-f41e7c57d47f",
+                                        "6473a679-7c58-412d-b0c2-b1678faa53e2",
+                                        "b11288f8-e99e-4071-b829-8684947f3421",
+                                        "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+                                        "8b9e1c85-7365-4306-9c70-269bf841484b",
+                                        "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+                                        "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+                                        "488db8ca-3022-456e-9df9-f21d2ba63791"
+                                    ],
+                                    "selectedProvisions": [],
+                                    "selectedProvisionsTitles": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": true
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "name": "require",
+                                    "enabled": true,
+                                    "type": "require",
+                                    "value": null,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR: Required"
+                                    }
+                                }
+                            ],
+                            "violationInfo": {
+                                "responseToMatch": "false",
+                                "matchingType": "equal",
+                                "referenceID": null
+                            },
+                            "childQuestions": [],
+                            "dependants": [],
+                            "dependencyGroups": [
+                                {
+                                    "ruleType": "visibility",
+                                    "childValidatorName": null,
+                                    "questionDependencies": [
+                                        {
+                                            "dependsOnQuestion": {
+                                                "guid": "18ce837b-5434-43be-8636-dcbef4acf2bc"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "dependants": [
+                        {
+                            "guid": "cd178620-7b9e-4410-8510-990689ae3550"
+                        }
+                    ],
+                    "dependencyGroups": []
+                },
+                {
+                    "name": "QTN_TYPTXT_TXT_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 3,
+                    "guid": "25ed03ef-31ba-424a-9859-638ce0e29b1d",
+                    "sortOrder": 3,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "type text",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                },
+                {
+                    "name": "QTN_TYPSLCT_SLCT_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 4,
+                    "guid": "db5def87-7859-4637-95ad-52636ce141b2",
+                    "sortOrder": 4,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "type select",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "select",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [
+                        {
+                            "id": 1,
+                            "name": "RSPNS_YS_QTN_TYPSLCT_SLCT_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "FR: Yes"
+                            },
+                            "value": "true",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "id": 2,
+                            "name": "RSPNS_N_QTN_TYPSLCT_SLCT_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "FR: No"
+                            },
+                            "value": "false",
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "required",
+                                "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "provisions": [],
+                            "selectedProvisions": [],
+                            "selectedProvisionsTitles": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                },
+                {
+                    "name": "QTN_TYPNMBR_NBR_GRP_NWGRP_TMPLT_QSTNNRTTLN",
+                    "id": 5,
+                    "guid": "2a15cee7-fb5b-43c4-8b4d-958412036fb2",
+                    "sortOrder": 5,
+                    "isVisible": true,
+                    "isMultiple": true,
+                    "text": {
+                        "en": "type number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "number",
+                    "response": null,
+                    "isSamplingAllowed": false,
+                    "samplingRecord": null,
+                    "validationState": true,
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "responseOptions": [],
+                    "validationRules": [
+                        {
+                            "name": "require",
+                            "enabled": true,
+                            "type": "require",
+                            "value": null,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR: Required"
+                            }
+                        }
+                    ],
+                    "violationInfo": {
+                        "responseToMatch": "false",
+                        "matchingType": "equal",
+                        "referenceID": null
+                    },
+                    "childQuestions": [],
+                    "dependants": [],
+                    "dependencyGroups": []
+                }
+            ],
+            "expansionPanels": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "domSuffix": "prop value created virtually",
+            "htmlElementId": "prop value created virtually"
+        }
+    ],
+    "templateid": "",
+    "searchableProvisions": [
+        {
+            "leg": "9241a2ae-1c61-4753-805a-be0707f41622",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "77758039-206f-476d-84d9-549c571f269e",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "7b298d1f-da3e-408c-a705-2558886a9b9d",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "792fda3c-0696-4e90-9655-a0bb810f7b33",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "e311574a-8bac-4b5b-b092-a31182accab5",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "bec23597-02d7-4422-a3db-f41e7c57d47f",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "6473a679-7c58-412d-b0c2-b1678faa53e2",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "b11288f8-e99e-4071-b829-8684947f3421",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "8b9e1c85-7365-4306-9c70-269bf841484b",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        },
+        {
+            "leg": "488db8ca-3022-456e-9df9-f21d2ba63791",
+            "questions": [
+                "cd178620-7b9e-4410-8510-990689ae3550"
+            ]
+        }
+    ],
+    "readOnly": false
+}

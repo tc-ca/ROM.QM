@@ -22,7 +22,7 @@
         </v-list-item-subtitle>
         <v-list-item-subtitle>
           <span>{{ $t('app.questionnaire.group.question.supplementaryFile.fileUploadedBy') }}</span>
-          <span>{{ file.userName }}</span>
+          <span>{{ file.uploadedBy }}</span>
         </v-list-item-subtitle>
         <v-list-item-subtitle>
           <span>{{ $t('app.questionnaire.group.question.supplementaryFile.fileUploaded') }}</span>
