@@ -12,7 +12,7 @@ describe('Group.vue', () => {
   let store
 
   let group = {
-    primaryKey: 'Group 1',
+    name: 'Group 1',
     title: {
       'en': 'New Group',
       'fr': 'Fr: New Group'

@@ -10,7 +10,6 @@
                 "en": "Group1",
                 "fr": "Fr: New Group"
             },
-            "name": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
             "isRepeatable": true,
             "isVisible": true,
             "order": 0,
@@ -531,14 +530,13 @@
             ],
             "domSuffix": "#000",
             "htmlElementId": "GRP_NWGRP_TMPLT_QSTNNRTTLN#000",
-            "primaryKey": "GRP_GRP1_TMPLT_QSTNNRTTLN"
+            "name": "GRP_GRP1_TMPLT_QSTNNRTTLN"
         },
         {
             "title": {
                 "en": "Group2",
                 "fr": "Fr: New Group"
             },
-            "name": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
             "isRepeatable": true,
             "isVisible": true,
             "order": 1,
@@ -651,14 +649,13 @@
             ],
             "domSuffix": "#000",
             "htmlElementId": "GRP_GRP2_TMPLT_QSTNNRTTLN#000",
-            "primaryKey": "GRP_GRP2_TMPLT_QSTNNRTTLN"
+            "name": "GRP_GRP2_TMPLT_QSTNNRTTLN"
         },
         {
             "title": {
                 "en": "Group3",
                 "fr": "Fr: New Group"
             },
-            "name": "GRP_NWGRP_TMPLT_QSTNNRTTLN",
             "isRepeatable": true,
             "isVisible": true,
             "order": 2,
@@ -771,7 +768,7 @@
             ],
             "domSuffix": "#001",
             "htmlElementId": "GRP_GRP3_TMPLT_QSTNNRTTLN#001",
-            "primaryKey": "GRP_GRP3_TMPLT_QSTNNRTTLN"
+            "name": "GRP_GRP3_TMPLT_QSTNNRTTLN"
         }
     ],
     "templateid": "",

@@ -557,7 +557,7 @@ export default {
       // if repeated group, find source group
       if (this.inRepeatedGroup || this.question.isRepeated || (this.isChildQuestion && this.parent.isRepeated)) {
         // find the originial group (needed when group is repeated)
-        const groupId = `${this.group.primaryKey}#000`// #000 is always identifies the origin of specific group
+        const groupId = `${this.group.name}#000`// #000 is always identifies the origin of specific group
         // find question in the origin group, must get flat list all questions within group first (including children).
         const originQuestions = this.getFlatListOfAllQuestions(groupId)
         // find will return first occurence which statifies our search as the source will always be in the beginning of the array.

@@ -33,7 +33,7 @@ describe('Test Group component Vuex Mutations', () => {
 
   test('updateGroupHtmlElementId', () => {
     const group = {
-      primaryKey: 'Group1',
+      name: 'Group1',
       title: { 'en': 'Group', 'fr': 'Group FR' },
       domSuffix: '',
       htmlElementId: '',
@@ -42,7 +42,7 @@ describe('Test Group component Vuex Mutations', () => {
     const domSuffix = '#001'
 
     mutations.updateGroupHtmlElementId(state, { group, domSuffix })
-    expect(group.htmlElementId).toEqual(`${group.primaryKey}${domSuffix}`)
+    expect(group.htmlElementId).toEqual(`${group.name}${domSuffix}`)
   })
 
   test('repeatGroup', () => {
@@ -56,7 +56,7 @@ describe('Test Group component Vuex Mutations', () => {
     state = {
       groups: [
         {
-          primaryKey: 'Group1',
+          name: 'Group1',
           title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
@@ -73,7 +73,7 @@ describe('Test Group component Vuex Mutations', () => {
 
     // simulate copying of group 1
     const copyOfGroup1 = {
-      primaryKey: 'Group1',
+      name: 'Group1',
       title: { 'en': 'Group', 'fr': 'Group FR' },
       isRepeatable: false,
       isVisible: false,
@@ -95,7 +95,7 @@ describe('Test Group component Vuex Mutations', () => {
     state = {
       groups: [
         {
-          primaryKey: 'Group1',
+          name: 'Group1',
           title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
@@ -107,7 +107,7 @@ describe('Test Group component Vuex Mutations', () => {
           questions: []
         },
         {
-          primaryKey: 'Group2',
+          name: 'Group2',
           title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
@@ -123,7 +123,7 @@ describe('Test Group component Vuex Mutations', () => {
     }
 
     const groupToBeRemoved = {
-      primaryKey: 'Group2',
+      name: 'Group2',
       title: { 'en': 'Group', 'fr': 'Group FR' },
       isRepeatable: false,
       isVisible: false,

@@ -167,7 +167,7 @@ export default {
     displayNavigationDrawer () {
       let clonedGroups = BuilderService.cloneVisibleQuestionsOnly(this.$store.state.questionnaire.questionnaire)
       clonedGroups = BuilderService.fixTextToShowInDrawer(clonedGroups)
-      let b = JSON.stringify(clonedGroups).replaceAll('primaryKey', 'id')
+      let b = JSON.stringify(clonedGroups).replaceAll('name', 'id')
         .replaceAll('"questions":', '"children":')
         .replaceAll('"childQuestions":', '"children":')
         .replaceAll('"name":', '"name_o":')

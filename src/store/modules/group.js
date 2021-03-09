@@ -11,8 +11,8 @@ export const state = {
 
 export const getters = {
   getTargetedRepeatedGroups (state) {
-    return (primaryKey) => {
-      return state.groups.filter(x => x.primaryKey === primaryKey)
+    return (name) => {
+      return state.groups.filter(x => x.name === name)
     }
   }
 }
@@ -26,8 +26,7 @@ export const actions = {
 
   repeatGroup ({ commit, state, rootState, getters }, group) {
     // get all similar groups
-    // const targetedRepeatedGroups = state.questionnaire.groups.filter(x => x.primaryKey === group.primaryKey) // TODO: remove
-    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
+    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.name)
     // get starting reference for group in the collection of group array i.e. starting point/index 4
     const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.order)
     const startReference = Math.min(...repeatedGroupsOrders)
@@ -38,7 +37,7 @@ export const actions = {
     // insert copied group at end of similar repeated groups
     const insertAtEndOfTargetedRepeatedGroups = startReference + repeatGroupCount
     // find group in copied array
-    const targetedGroupToCopy = state.groupsCopy.find(copy => copy.primaryKey === group.primaryKey)
+    const targetedGroupToCopy = state.groupsCopy.find(copy => copy.name === group.name)
 
     const copiedGroup = _.cloneDeep(targetedGroupToCopy)
 
@@ -79,7 +78,7 @@ export const actions = {
   },
   updateGroupHtmlElementId ({ commit, getters }, payload) {
     const { group } = payload
-    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
+    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.name)
     const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.order)
     const suffix = repeatedGroupsOrders.findIndex(order => order === group.order)
     const domSuffix = `#${pad(suffix, 3)}`
@@ -105,7 +104,7 @@ export const mutations = {
 
   updateGroupHtmlElementId (state, payload) {
     const { group, domSuffix } = payload
-    group.htmlElementId = `${group.primaryKey}${domSuffix}`
+    group.htmlElementId = `${group.name}${domSuffix}`
     group.domSuffix = domSuffix
   },
 
