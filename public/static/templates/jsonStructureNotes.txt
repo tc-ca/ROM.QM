@@ -2,15 +2,15 @@
 Todo checklist.
 
 Template=======
-rename-->".templateid"  by ".guid"
+rename-->".templateid"  by ".guid" --todo ainsley
 
  
 Group ======
 
-rename-->".primaryKey" changed to ".name"
-rename-->".order" to ".sortOrder"
-rename-->".htmlElementId" to "domId"
-rename--> ".isVisible" to "isVisibleByDefault"
+rename-->".primaryKey" changed to ".name" --todo ainsley
+rename-->".order" to ".sortOrder" --todo ainsley
+rename-->".htmlElementId" to "domId" --todo ainsley
+rename--> ".isVisible" to "isVisibleByDefault" --todo ainsley
  
 
 remove--> ."expansionPanels"
@@ -19,11 +19,11 @@ remove--> ."expansionPanels"
 
 Question ======
 
-rename--> ".isVisible" to ".isVisibleByDefault"
+rename--> ".isVisible" to ".isVisibleByDefault" --todo santosh
 
-remove--> ".id" 
-remove--> "isMultiSelect"  (done)
-remove--> ".response"
+remove--> ".id" --todo santosh
+remove--> "isMultiSelect"  (done) 
+remove--> ".response" --todo santosh
 
 move--> .samplingRecord to .result object
 
