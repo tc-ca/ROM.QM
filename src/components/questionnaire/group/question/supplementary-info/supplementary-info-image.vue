@@ -106,7 +106,7 @@
                   class="grey--text"
                   style="padding-left: 10px"
                 >
-                  Uploaded by: {{ selImage.userName }}
+                  Uploaded by: {{ selImage.uploadedBy }}
                 </div>
               </v-row>
               <v-row
@@ -440,7 +440,7 @@ export default {
             fileName: el.result,
             comment: 'N/A',
             guid: el.guid,
-            userName: this.userName,
+            uploadedBy: this.userName,
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
           })
           this.progressStatus = ''
