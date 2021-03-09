@@ -54,7 +54,6 @@ function createQuestion(questionnaire, group) {
     guid: guid,
     sortOrder: id,
     isVisible: true,
-    isMultiple: true,
     text: {
       [LANGUAGE.ENGLISH]: "Question text",
       [LANGUAGE.FRENCH]: "FR: Question text"
@@ -163,7 +162,6 @@ function convertToReferenceQuestion(rQuestion) {
   rQuestion.name = "Reference ID";
   rQuestion.id = 0;
   rQuestion.sortOrder = 1;
-  rQuestion.isMultiple = false;
   rQuestion.text = {
     [LANGUAGE.ENGLISH]: "Reference ID",
     [LANGUAGE.FRENCH]: "FR: Reference ID"
@@ -177,7 +175,6 @@ function createReferenceQuestion(questionnaire, group) {
   rQuestion.name = "Reference ID";
   rQuestion.id = 0;
   rQuestion.sortOrder = 1;
-  rQuestion.isMultiple = false;
   rQuestion.text = {
     [LANGUAGE.ENGLISH]: "Reference ID",
     [LANGUAGE.FRENCH]: "FR: Reference ID"
