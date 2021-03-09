@@ -1,0 +1,49 @@
+
+
+Template=======
+id replaced by guid
+keep name property
+no sortOrder on template
+added "lastEditedGroup" property
+
+ 
+
+Group ======
+primaryKey changed to name
+change order on groups to sortOrder
+keep domSuffix
+change htmlElementId to domId
+
+ 
+
+//This is currently bound to Vue and will have breaking changes needing to be fixed
+***removed expansionPanels Prop
+
+ 
+
+change isVisible to isVisibleByDefault
+
+ 
+
+Question ======
+Added Guid to schema; JSON already had
+keep name property
+remove id prop
+change isVisible to isVisibleByDefault
+
+ 
+
+//breaking change for select-response.vue
+//all question types of select are multi-select
+***remove "isMultiSelect" prop, 
+change "childQuestions" to "questions" to stay consistent with Group Naming convention of Question Array
+
+ 
+
+//requires refactor in supplimentary info
+***remove notification prop
+
+ 
+
+//requires refactor in builder.vue to use data member instead
+***remove isProvisionCollapsed
