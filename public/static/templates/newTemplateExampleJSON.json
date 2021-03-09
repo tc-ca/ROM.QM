@@ -1,0 +1,257 @@
+{
+  "groups": [{
+    "domId": "",
+    "domSuffix": "",
+    "guid": "1f3b2c46-a253-4fe2-a0fc-855216571c36",
+    "isRepeatable": true,
+    "isVisibleByDefault": true,
+    "name": "1f3b2c46-a253-4fe2-a0fc-855216571c36",
+    "questions": [{
+      "dependants": [{
+        "guid": "58f503ac-4642-42f0-8248-1658638c5050"
+      }],
+      "dependencyGroups": [],
+      "guid": "8a629301-851b-445c-a31f-92890b83fb27",
+      "isRepeatable": false,
+      "isRepeated": false,
+      "isSamplingAllowed": false,
+      "isVisibleByDefault": true,
+      "name": "8a629301-851b-445c-a31f-92890b83fb27",
+      "childQuestions": [{
+        "dependants": [],
+        "dependencyGroups": [{
+          "childValidatorName": "",
+          "questionDependencies": [{
+            "dependsOnQuestion": {
+              "guid": "8a629301-851b-445c-a31f-92890b83fb27"
+            },
+            "validationAction": "equal",
+            "validationValue": "false"
+          }],
+          "ruleType": "visibility"
+        }],
+        "guid": "58f503ac-4642-42f0-8248-1658638c5050",
+        "isRepeatable": false,
+        "isRepeated": false,
+        "isSamplingAllowed": true,
+        "isVisibleByDefault": false,
+        "name": "58f503ac-4642-42f0-8248-1658638c5050",
+        "childQuestions": [],
+        "responseOptions": [{
+          "guid": "11a18515-916a-4216-bb82-17a97453a726",
+          "name": "11a18515-916a-4216-bb82-17a97453a726",
+          "sortOrder": 1,
+          "text": {
+            "en": "Yes",
+            "fr": "Oui"
+          },
+          "value": "true",
+          "internalCommentRequirement": "optional",
+          "externalCommentRequirement": "optional",
+          "pictureRequirement": "optional",
+          "fileRequirement": "optional",
+          "provisions": []
+        }, {
+          "guid": "02b79283-3194-4a98-b010-a14ef3e39ee8",
+          "name": "02b79283-3194-4a98-b010-a14ef3e39ee8",
+          "sortOrder": 2,
+          "text": {
+            "en": "No",
+            "fr": "Non"
+          },
+          "value": "false",
+          "internalCommentRequirement": "optional",
+          "externalCommentRequirement": "required",
+          "pictureRequirement": "optional",
+          "fileRequirement": "optional",
+          "provisions": ["3e7d6241-386a-eb11-a812-000d3a84129e"]
+        }],
+        "result": {
+          "externalComment": "deserunt in amet cupidatat",
+          "internalComment": "amet aliquip",
+          "files": {
+            "items": [{
+              "comment": "minim nostrud ea labore",
+              "fileName": "123 Fake St_2021-02-19 (1) (1).pdf",
+              "guid": "f00cfa99-c9da-4b1d-8041-6697882a9816",
+              "timeStamp": "2002-04-01T04:43:46.224Z",
+              "title": "file title",
+              "uploadedBy": "nisi elit enim anim"
+            }, {
+              "comment": "cupidatat dolore",
+              "fileName": "222_2021-02-23.pdf",
+              "guid": "4b9e7735-5bd7-4e9e-8e05-3a550300d9a0",
+              "timeStamp": "2008-11-15T15:41:35.066Z",
+              "title": "quis",
+              "uploadedBy": "qui aute eu"
+            }],
+            "notification": null,
+            "validationStatus": true
+          },
+          "pictures": {
+            "items": [{
+              "comment": "laborum aliquip in minim",
+              "fileName": "2.PNG",
+              "guid": "4ffe22ad-298b-4029-aa01-a560634ce9ea",
+              "timeStamp": "2014-10-05T21:13:04.937Z",
+              "title": "qui proident minim",
+              "uploadedBy": "anim est proident ea"
+            }],
+            "validationStatus": true,
+            "notification": null
+          },
+          "samplingRecord": {
+            "approximateTotal": "1000",
+            "sampleSize": "100"
+          },
+          "responses": [{
+            "guid": "02b79283-3194-4a98-b010-a14ef3e39ee8",
+            "value": "false"
+          }],
+          "violationInfo": {
+            "referenceID": "Tank #1",
+            "violationCount": "10"
+          }
+        },
+        "sortOrder": 1,
+        "text": {
+          "en": "Question 1",
+          "fr": "FR Question 1"
+        },
+        "type": "radio",
+        "validationRules": [{
+          "enabled": true,
+          "name": "require",
+          "type": "require",
+          "value": null,
+          "errorMessage": {
+            "en": "required",
+            "fr": "FR Required"
+          }
+        }],
+        "validationState": true
+      }],
+      "responseOptions": [{
+        "guid": "aca44aa5-e375-4560-a2dd-4bf5e9d53d0b",
+        "name": "aca44aa5-e375-4560-a2dd-4bf5e9d53d0b",
+        "sortOrder": 1,
+        "text": {
+          "en": "Yes",
+          "fr": "Oui"
+        },
+        "value": "true",
+        "internalCommentRequirement": "optional",
+        "externalCommentRequirement": "optional",
+        "pictureRequirement": "optional",
+        "fileRequirement": "optional",
+        "provisions": []
+      }, {
+        "guid": "a3e408fc-fd2c-40a1-8bd1-52f7449c62c4",
+        "name": "a3e408fc-fd2c-40a1-8bd1-52f7449c62c4",
+        "sortOrder": 2,
+        "text": {
+          "en": "No",
+          "fr": "Non"
+        },
+        "value": "false",
+        "internalCommentRequirement": "optional",
+        "externalCommentRequirement": "optional",
+        "pictureRequirement": "optional",
+        "fileRequirement": "optional",
+        "provisions": []
+      }],
+      "result": {
+        "externalComment": "aute cillum velit dolore",
+        "internalComment": "cillum ea",
+        "files": null,
+        "pictures": null,
+        "samplingRecord": null,
+        "responses": [{
+          "guid": "aca44aa5-e375-4560-a2dd-4bf5e9d53d0b",
+          "value": "true"
+        }],
+        "violationInfo": null
+      },
+      "sortOrder": 2,
+      "text": {
+        "en": "elit est tempor in quis",
+        "fr": "commodo elit"
+      },
+      "type": "radio",
+      "validationRules": [{
+        "enabled": true,
+        "errorMessage": {
+          "en": "required",
+          "fr": "fr required"
+        },
+        "name": "require",
+        "type": "require",
+        "value": null
+      }],
+      "validationState": true
+    }, {
+      "dependants": [],
+      "dependencyGroups": [],
+      "guid": "d1555ab0-0262-457d-85da-d8de8593ac45",
+      "isRepeatable": false,
+      "isRepeated": false,
+      "isSamplingAllowed": true,
+      "isVisibleByDefault": true,
+      "name": "d1555ab0-0262-457d-85da-d8de8593ac45",
+      "childQuestions": [],
+      "type": "text",
+      "responseOptions": [{
+        "guid": "a1c37801-ed54-4588-85e9-41bbcfc27519",
+        "name": "a1c37801-ed54-4588-85e9-41bbcfc27519",
+        "sortOrder": 1,
+        "text": null,
+        "value": "",
+        "internalCommentRequirement": "optional",
+        "externalCommentRequirement": "optional",
+        "pictureRequirement": "optional",
+        "fileRequirement": "optional",
+        "provisions": []
+      }],
+      "result": {
+        "externalComment": "eiusmod minim consectetur Lorem in",
+        "internalComment": "magna dolore cillum minim",
+        "files": null,
+        "pictures": null,
+        "samplingRecord": {
+          "approximateTotal": "1000",
+          "sampleSize": "100"
+        },
+        "responses": [{
+          "guid": "a1c37801-ed54-4588-85e9-41bbcfc27519",
+          "value": "the value of the textbox"
+        }],
+        "violationInfo": null
+      },
+      "sortOrder": 3,
+      "text": {
+        "en": "cupidatat consequat adipisicing officia",
+        "fr": "minim deserunt"
+      },
+      "validationRules": [],
+      "validationState": true
+    }],
+    "sortOrder": 4,
+    "title": {
+      "en": "Excepteur",
+      "fr": "proident officia consequat voluptate laborum"
+    }
+  }],
+  "guid": "6212c08c-ddd3-4a55-872f-3472b9146ce1",
+  "name": "6212c08c-ddd3-4a55-872f-3472b9146ce1",
+  "readOnly": false,
+  "searchableProvisions": [{
+    "leg": "3e7d6241-386a-eb11-a812-000d3a84129e",
+    "questions": [
+      "58f503ac-4642-42f0-8248-1658638c5050"
+    ]
+  }],
+  "title": {
+    "en": "Template Name EN",
+    "fr": "Template Name FR"
+  }
+}
