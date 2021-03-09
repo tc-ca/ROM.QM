@@ -31,12 +31,6 @@ export interface Template {
     searchableProvisions: SearchableProvision[];
 
     /**
-     * GUID ID OF GROUP LAST EDITED
-     * @nullable
-     */
-    lastEditedGroup: string;
-
-    /**
      * list of objects representing groupings of questions in this Template
      * @TJS-type Group
      */
@@ -51,7 +45,8 @@ export interface Group {
     guid: string;
 
     /**
-     * Static name; think radio button groups
+     * Static name; think radio button groups. 
+     * Also for copy purpose to know its a clone or identify original
      */
     name: string;
 
@@ -239,12 +234,11 @@ export interface ResponseOption {
     sortOrder: number;
     text: Title;
     value: string;
-    internalCommentRequirement: string;
-    externalCommentRequirement: string;
-    fileRequirement: string;
-    pictureRequirement: string;
+    internalCommentRequirement: Option;
+    externalCommentRequirement: Option;
+    fileRequirement: Option;
+    pictureRequirement: Option;
     provisions: string[];
-    //selectedProvisions: any[];
 }
 
 export interface Picture {
@@ -342,10 +336,11 @@ export enum DependencyGroupType {
 }
 
 export interface Result {
-    value: string;
-    selectedResponse: number;
+    selectedResponse: string[]; // guid
     externalComment: string;
     internalComment: string;
+    pictures: PictureItem[];
+    files: FileItem[];
     violationInfo: ViolationInfo;
     samplingRecord: SamplingRecord;
 }
