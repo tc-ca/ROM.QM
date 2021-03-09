@@ -7,7 +7,7 @@ rename-->".templateid"  by ".guid" --todo ainsley
  
 Group ======
 
-rename-->".primaryKey" changed to ".name" --todo ainsley
+rename-->".primaryKey" changed to ".name" --done
 rename-->".order" to ".sortOrder" --todo ainsley
 rename-->".htmlElementId" to "domId" --todo ainsley
 rename--> ".isVisible" to "isVisibleByDefault" --todo ainsley
