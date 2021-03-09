@@ -6,44 +6,42 @@ import { generateName, isString, setNewGUID } from '../utils'
 
 /* eslint-disable no-undef */
 
-function createGroup(questionnaire) {
-  let group = {};
-  const id = getNextGroupId(questionnaire);
-  group.title = {
-    [LANGUAGE.ENGLISH]: "New Group",
-    [LANGUAGE.FRENCH]: "Fr: New Group"
-  };
-  group.primaryKey = generateName(
-    group.title[LANGUAGE.ENGLISH],
-    "GRP",
-    questionnaire.name
-  );
-  group.isRepeatable = false;
-  group.isVisible = true;
-  group.order = id;
-  group.questions = [];
-  group.expansionPanels = [];
-  group.domSuffix = "prop value created virtually";
-  group.htmlElementId = "prop value created virtually";
-
-  return group;
-}
-
 function createQuestionnaire() {
-  return {
+  let guid = uuidv4();
+  let questionnaire = {
+    guid: guid,
+    name: guid,
+    readOnly: false,
+    searchableProvisions: [],
     title: {
       [LANGUAGE.ENGLISH]: "Questionnaire Title EN",
       [LANGUAGE.FRENCH]: "Questionnaire Title EN"
     },
-    name: generateName("Questionnaire Title EN", "TMPLT", ""),
-    groups: [],
-    templateid: "",
-    searchableProvisions: [],
-    readOnly: false
+    groups: []
   };
+  return questionnaire;
 }
 
-function createQuestion(questionnaire, group) {
+function createGroup(questionnaire) {
+  let guid = uuidv4();
+  let group = {
+    domId: "",
+    domSuffix: "",
+    guid: guid,
+    name: guid,
+    sortOrder: getNextGroupId(questionnaire),
+    title: {
+      [LANGUAGE.ENGLISH]: "New Group",
+      [LANGUAGE.FRENCH]: "Fr: New Group"
+    },
+    isRepeatable: false,
+    isVisibleByDefault: true,
+    questions: []
+  };
+  return group;
+}
+
+function createQuestion(questionnaire, group, type = QUESTION_TYPE.RADIO) {
   let id = getNextQuestionId(questionnaire);
   let guid = uuidv4();
   let questionName = generateName("Question", "QTN", "RD_" + group.primaryKey);
@@ -58,7 +56,7 @@ function createQuestion(questionnaire, group) {
       [LANGUAGE.ENGLISH]: "Question text",
       [LANGUAGE.FRENCH]: "FR: Question text"
     },
-    type: "radio", // text, number, select, radio, boolean...
+    type: type,
     response: null,
     isSamplingAllowed: false,
     samplingRecord: null,
@@ -156,6 +154,40 @@ function createQuestion(questionnaire, group) {
   // question.name = 'Question ' + id
 
   return question;
+}
+
+function createResponseOption(question) {
+  let id = question.responseOptions.length + 1;
+  return {
+    id: id,
+    name: generateName(`Option ${id}`, "RSPNS", question.Name),
+    sortOrder: id,
+    text: {
+      [LANGUAGE.ENGLISH]: `Option ${id}`,
+      [LANGUAGE.FRENCH]: `FR: Option ${id}`
+    },
+    value: id,
+    provisions: [], //createProvisions(),
+    selectedProvisions: [],
+    searchProvisions: null,
+    isProvisionCollapsed: false,
+    internalComment: {
+      option: "optional",
+      value: ""
+    },
+    externalComment: {
+      option: "optional",
+      value: ""
+    },
+    file: {
+      option: "optional",
+      value: []
+    },
+    picture: {
+      option: "optional",
+      value: []
+    }
+  };
 }
 
 function convertToReferenceQuestion(rQuestion) {
@@ -291,40 +323,6 @@ function getTotalQuestionsNumber(questions) {
 
 function createProvisions() {
   return this.$store.state.legislations;
-}
-
-function createResponseOption(question) {
-  let id = question.responseOptions.length + 1;
-  return {
-    id: id,
-    name: generateName(`Option ${id}`, "RSPNS", question.Name),
-    sortOrder: id,
-    text: {
-      [LANGUAGE.ENGLISH]: `Option ${id}`,
-      [LANGUAGE.FRENCH]: `FR: Option ${id}`
-    },
-    value: id,
-    provisions: [], //createProvisions(),
-    selectedProvisions: [],
-    searchProvisions: null,
-    isProvisionCollapsed: false,
-    internalComment: {
-      option: "optional",
-      value: ""
-    },
-    externalComment: {
-      option: "optional",
-      value: ""
-    },
-    file: {
-      option: "optional",
-      value: []
-    },
-    picture: {
-      option: "optional",
-      value: []
-    }
-  };
 }
 
 function createValidator() {
@@ -868,8 +866,11 @@ function downloadData (data, filename){
 }
 
 function isParentAGroup (group, qGuid) {
-  const indx = group.questions.findIndex( q => q.guid === qGuid);
-  return (indx > -1);
+  let idx = -1;
+  if (group) {
+    idx = group.questions.findIndex( q => q.guid === qGuid);
+  }
+  return (idx > -1);
 }
 
 function cloneVisibleQuestionsOnly(questionnaire) {

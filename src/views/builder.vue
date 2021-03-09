@@ -728,7 +728,10 @@ export default {
   },
   computed: {
     isRepeatableVisible () {
-      return BuilderService.isParentAGroup(this.selectedGroup, this.selectedQuestion.guid)
+      if (this.selectedGroup && this.selectedQuestion) {
+        return BuilderService.isParentAGroup(this.selectedGroup, this.selectedQuestion.guid)
+      }
+      return false
     },
     displayTextLang () {
       return (this.lang === 'eng') ? 'DisplayEnglishText' : 'DisplayFrenchText'
