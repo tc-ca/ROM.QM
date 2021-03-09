@@ -22,7 +22,7 @@ Question ======
 rename--> ".isVisible" to ".isVisibleByDefault" --todo santosh
 
 remove--> ".id" --todo santosh
-remove--> "isMultiSelect"  (done) 
+remove--> ".isMultiple"  (done) 
 remove--> ".response" --todo santosh
 
 move--> .samplingRecord to .result object
