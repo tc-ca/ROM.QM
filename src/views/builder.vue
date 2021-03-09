@@ -1036,7 +1036,6 @@ export default {
     save () {
       const page = 'builder'
       console.log('Save...')
-      console.log(JSON.stringify(this.questionnaire))
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       this.$store.dispatch('SetModifiedInBuilder', true)
