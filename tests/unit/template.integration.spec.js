@@ -3,8 +3,8 @@
 // import { mount, createLocalVue } from '@vue/test-utils'
 // import Group from '../../src/components/questionnaire/group/group.vue'
 import Ajv from 'ajv'
-import templateSchema from '../../src/schema/template.json'
-import templateData from '../../public/static/templates/fullFeaturedTemplate.json'
+import templateSchema from '../../src/schema/newTemplateStructure.json'
+import templateData from '../../public/static/templates/newTemplateExampleJSON.json'
 import addFormats from 'ajv-formats'
 
 let ajvWarnings = []
@@ -19,7 +19,8 @@ const ajv = new Ajv({
       throw new Error('AJV error: ' + message)
     }
   },
-  allowUnionTypes: true
+  allowUnionTypes: true,
+  useDefaults: true
 })
 
 addFormats(ajv)
@@ -86,8 +87,8 @@ function flattenQuestions (groups) {
 
 describe('Template Data Validation Against TypeScript Schema', () => {
   it('all group id and question ids should be different', () => {
-    var groupKey = 'primaryKey'
-    var questionKey = 'id'
+    var groupKey = 'name'
+    var questionKey = 'name'
 
     // groups
     expect(FindNonUniqueIds(templateData.groups, groupKey).length).toEqual(0)
@@ -99,7 +100,7 @@ describe('Template Data Validation Against TypeScript Schema', () => {
   it('valid data should be successfully validated against the schema', () => {
     // as precompiled schema
     if (validate(templateData)) {
-      expect(templateData.name).toEqual('Full Featured Template')
+      expect(templateData.name).toBeTruthy()
     }
 
     if (validate.errors > 0) {
@@ -110,7 +111,7 @@ describe('Template Data Validation Against TypeScript Schema', () => {
 
     // as typeguard
     if (ajv.validate(templateSchema, templateData)) {
-      expect(templateData.name).toEqual('Full Featured Template')
+      expect(templateData.name).toBeTruthy()
     }
 
     if (validate.errors > 0) {

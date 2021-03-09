@@ -815,7 +815,7 @@ export default {
       this.$store.dispatch('SetQuestionnaireState', { questionnaire: template, page: 'builder' })
     }
     // if env= dev load the provisions else the state will be set explicility outside in app.vue
-    if (this.envDev && this.loadLocalData) {
+    if (this.envDev) {
       this.$store.dispatch('SetTreeLegislationsStateToLocalData')
     }
 
@@ -1036,7 +1036,6 @@ export default {
     save () {
       const page = 'builder'
       console.log('Save...')
-      console.log(JSON.stringify(this.questionnaire))
       const questionnaire = this.questionnaire
       this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
       this.$store.dispatch('SetModifiedInBuilder', true)
