@@ -1,0 +1,690 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": false,
+    "definitions": {
+        "ComparisonOperator": {
+            "enum": [
+                "equal",
+                "greaterThen",
+                "lengthGreaterThen",
+                "lengthLessThen",
+                "lessThen",
+                "notEqual"
+            ],
+            "type": "string"
+        },
+        "Dependant": {
+            "additionalProperties": false,
+            "properties": {
+                "guid": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "guid"
+            ],
+            "type": "object"
+        },
+        "DependencyGroup": {
+            "additionalProperties": false,
+            "properties": {
+                "childValidatorName": {
+                    "default": "",
+                    "type": "string"
+                },
+                "questionDependencies": {
+                    "default": [
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/DependencyGroupItem"
+                    },
+                    "type": "array"
+                },
+                "ruleType": {
+                    "$ref": "#/definitions/DependencyGroupType"
+                }
+            },
+            "required": [
+                "childValidatorName",
+                "questionDependencies",
+                "ruleType"
+            ],
+            "type": "object"
+        },
+        "DependencyGroupItem": {
+            "additionalProperties": false,
+            "properties": {
+                "dependsOnQuestion": {
+                    "$ref": "#/definitions/Dependant"
+                },
+                "validationAction": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ComparisonOperator"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "validationValue": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dependsOnQuestion",
+                "validationAction",
+                "validationValue"
+            ],
+            "type": "object"
+        },
+        "DependencyGroupType": {
+            "enum": [
+                "validation",
+                "validationValue",
+                "visibility"
+            ],
+            "type": "string"
+        },
+        "File": {
+            "additionalProperties": false,
+            "properties": {
+                "items": {
+                    "default": [
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/FileItem"
+                    },
+                    "type": "array"
+                },
+                "notification": {
+                    "type": "null"
+                },
+                "validationStatus": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "type": "object"
+        },
+        "FileItem": {
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "guid": {
+                    "type": "string"
+                },
+                "timeStamp": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uploadedBy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "comment",
+                "fileName",
+                "guid",
+                "timeStamp",
+                "title",
+                "uploadedBy"
+            ],
+            "type": "object"
+        },
+        "Group": {
+            "additionalProperties": false,
+            "properties": {
+                "domId": {
+                    "description": "unique ID for html element id",
+                    "type": "string"
+                },
+                "domSuffix": {
+                    "description": "suffix used to create unique html element ids\nwhen repeating groups",
+                    "type": "string"
+                },
+                "guid": {
+                    "description": "unique id (GUID) of the template",
+                    "type": "string"
+                },
+                "isRepeatable": {
+                    "description": "represents if this group can be repeated by user",
+                    "type": "boolean"
+                },
+                "isVisibleByDefault": {
+                    "description": "if this group is visible by default \n\nhaving a value of false would assume that this group has been included\nin a DependencyGroup of a Question which decribes the logic\nused to hide or show this group",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Static name; think radio button groups. \nAlso for copy purpose to know its a clone or identify original",
+                    "type": "string"
+                },
+                "questions": {
+                    "default": [
+                    ],
+                    "description": "the set of Questions that belong to this group",
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    },
+                    "type": "array"
+                },
+                "sortOrder": {
+                    "description": "order in which this group appears in a set of groups of a template",
+                    "type": "number"
+                },
+                "title": {
+                    "$ref": "#/definitions/Title",
+                    "description": "title of the element in a multi-lang array"
+                }
+            },
+            "required": [
+                "domId",
+                "domSuffix",
+                "guid",
+                "isRepeatable",
+                "isVisibleByDefault",
+                "name",
+                "questions",
+                "sortOrder",
+                "title"
+            ],
+            "type": "object"
+        },
+        "Option": {
+            "enum": [
+                "n/a",
+                "optional",
+                "required"
+            ],
+            "type": "string"
+        },
+        "Picture": {
+            "additionalProperties": false,
+            "properties": {
+                "items": {
+                    "default": [
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/PictureItem"
+                    },
+                    "type": "array"
+                },
+                "notification": {
+                    "type": "null"
+                },
+                "validationStatus": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "type": "object"
+        },
+        "PictureItem": {
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "guid": {
+                    "type": "string"
+                },
+                "timeStamp": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uploadedBy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "comment",
+                "fileName",
+                "guid",
+                "timeStamp",
+                "title",
+                "uploadedBy"
+            ],
+            "type": "object"
+        },
+        "Question": {
+            "additionalProperties": false,
+            "properties": {
+                "childQuestions": {
+                    "default": [
+                    ],
+                    "description": "child or sub-questions",
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    },
+                    "type": "array"
+                },
+                "dependants": {
+                    "default": [
+                    ],
+                    "description": "the result of this question can affect the\n-question requirement, \n-enabling of a ValidationRule, or \n-setting the value of what a validationRule should validate against\nfor other questions\n\nhaving a dependant also means that this question is included inside \na dependencyGroup of that question",
+                    "items": {
+                        "$ref": "#/definitions/Dependant"
+                    },
+                    "type": "array"
+                },
+                "dependencyGroups": {
+                    "default": [
+                    ],
+                    "description": "the\n-question requirement, \n-enabling of a ValidationRule, or \n-setting the value of what a validationRule should validate against\nfor this question can be dependent on other questions as described in \nthe DependencyGroups of this array",
+                    "items": {
+                        "$ref": "#/definitions/DependencyGroup"
+                    },
+                    "type": "array"
+                },
+                "guid": {
+                    "description": "unique id (GUID) of the template",
+                    "type": "string"
+                },
+                "isRepeatable": {
+                    "description": "represents if this element CAN be repeated by user",
+                    "type": "boolean"
+                },
+                "isRepeated": {
+                    "description": "represents if this element HAS been repeated by user",
+                    "type": "boolean"
+                },
+                "isSamplingAllowed": {
+                    "type": "boolean"
+                },
+                "isVisibleByDefault": {
+                    "description": "if this question is visible by default \n\nhaving a value of false would assume that this question has been included\nin a DependencyGroup of another Question to decribes the logic\nused to hide or show this question",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Static name; think radio button groups",
+                    "type": "string"
+                },
+                "responseOptions": {
+                    "default": [
+                    ],
+                    "description": "only radio and select have resonse options...currently - \nTODO: every type of Question should have them",
+                    "items": {
+                        "$ref": "#/definitions/ResponseOption"
+                    },
+                    "type": "array"
+                },
+                "result": {
+                    "$ref": "#/definitions/Result"
+                },
+                "sortOrder": {
+                    "description": "order in which this group appears in a set of groups of a template",
+                    "type": "number"
+                },
+                "text": {
+                    "$ref": "#/definitions/Title",
+                    "description": "text of the question in a multi-lang array"
+                },
+                "type": {
+                    "$ref": "#/definitions/QuestionResponseType",
+                    "description": "what type of question is this"
+                },
+                "validationRules": {
+                    "default": [
+                    ],
+                    "description": "array of rules describing what is required for the response \nof this question to be valid",
+                    "items": {
+                        "$ref": "#/definitions/ValidationRule"
+                    },
+                    "type": "array"
+                },
+                "validationState": {
+                    "description": "represents the state of validation for a question\nmaybe long could make computed, but working",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "childQuestions",
+                "dependants",
+                "dependencyGroups",
+                "guid",
+                "isRepeatable",
+                "isRepeated",
+                "isSamplingAllowed",
+                "isVisibleByDefault",
+                "name",
+                "responseOptions",
+                "result",
+                "sortOrder",
+                "text",
+                "type",
+                "validationRules",
+                "validationState"
+            ],
+            "type": "object"
+        },
+        "QuestionResponseType": {
+            "enum": [
+                "number",
+                "radio",
+                "reference",
+                "select",
+                "text"
+            ],
+            "type": "string"
+        },
+        "Response": {
+            "additionalProperties": false,
+            "properties": {
+                "guid": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "guid",
+                "value"
+            ],
+            "type": "object"
+        },
+        "ResponseOption": {
+            "additionalProperties": false,
+            "properties": {
+                "externalCommentRequirement": {
+                    "$ref": "#/definitions/Option"
+                },
+                "fileRequirement": {
+                    "$ref": "#/definitions/Option"
+                },
+                "guid": {
+                    "type": "string"
+                },
+                "internalCommentRequirement": {
+                    "$ref": "#/definitions/Option"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "pictureRequirement": {
+                    "$ref": "#/definitions/Option"
+                },
+                "provisions": {
+                    "default": [
+                    ],
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "sortOrder": {
+                    "type": "number"
+                },
+                "text": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Title"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "value": {
+                    "default": "",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "externalCommentRequirement",
+                "fileRequirement",
+                "guid",
+                "internalCommentRequirement",
+                "name",
+                "pictureRequirement",
+                "provisions",
+                "sortOrder",
+                "text",
+                "value"
+            ],
+            "type": "object"
+        },
+        "Result": {
+            "additionalProperties": false,
+            "properties": {
+                "externalComment": {
+                    "type": "string"
+                },
+                "files": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/File"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "internalComment": {
+                    "type": "string"
+                },
+                "pictures": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Picture"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "responses": {
+                    "items": {
+                        "$ref": "#/definitions/Response"
+                    },
+                    "type": "array"
+                },
+                "samplingRecord": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/SamplingRecord"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "violationInfo": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ViolationInfo"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "externalComment",
+                "files",
+                "internalComment",
+                "pictures",
+                "responses",
+                "samplingRecord",
+                "violationInfo"
+            ],
+            "type": "object"
+        },
+        "SamplingRecord": {
+            "additionalProperties": false,
+            "properties": {
+                "approximateTotal": {
+                    "type": "string"
+                },
+                "sampleSize": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "approximateTotal",
+                "sampleSize"
+            ],
+            "type": "object"
+        },
+        "SearchableProvision": {
+            "additionalProperties": false,
+            "properties": {
+                "leg": {
+                    "type": "string"
+                },
+                "questions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "leg",
+                "questions"
+            ],
+            "type": "object"
+        },
+        "Title": {
+            "additionalProperties": false,
+            "properties": {
+                "en": {
+                    "type": "string"
+                },
+                "fr": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "en",
+                "fr"
+            ],
+            "type": "object"
+        },
+        "ValidationRule": {
+            "additionalProperties": false,
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "errorMessage": {
+                    "$ref": "#/definitions/Title"
+                },
+                "name": {
+                    "$ref": "#/definitions/ValidationRuleType"
+                },
+                "type": {
+                    "$ref": "#/definitions/ValidationRuleType"
+                },
+                "value": {
+                    "type": [
+                        "null",
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "required": [
+                "enabled",
+                "errorMessage",
+                "name",
+                "type",
+                "value"
+            ],
+            "type": "object"
+        },
+        "ValidationRuleType": {
+            "enum": [
+                "max",
+                "maxLength",
+                "min",
+                "minLength",
+                "require"
+            ],
+            "type": "string"
+        },
+        "ViolationInfo": {
+            "additionalProperties": false,
+            "properties": {
+                "referenceID": {
+                    "type": "string"
+                },
+                "violationCount": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "referenceID",
+                "violationCount"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "groups": {
+            "default": [
+            ],
+            "description": "list of objects representing groupings of questions in this Template",
+            "items": {
+                "$ref": "#/definitions/Group"
+            },
+            "type": "array"
+        },
+        "guid": {
+            "description": "unique id (GUID) of the template",
+            "type": "string"
+        },
+        "name": {
+            "description": "Static name; think radio button groups",
+            "type": "string"
+        },
+        "readOnly": {
+            "description": "if the questionnaire\\template is read-only due to the state of the object in dyanmics",
+            "type": "boolean"
+        },
+        "searchableProvisions": {
+            "default": [
+            ],
+            "description": "list of objects representing all the associated provisions of this template\nand the questions those provisions are linked to",
+            "items": {
+                "$ref": "#/definitions/SearchableProvision"
+            },
+            "type": "array"
+        },
+        "title": {
+            "$ref": "#/definitions/Title",
+            "description": "title of the element in a multi-lang array"
+        }
+    },
+    "required": [
+        "groups",
+        "guid",
+        "name",
+        "readOnly",
+        "searchableProvisions",
+        "title"
+    ],
+    "type": "object"
+}
+

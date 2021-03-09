@@ -25,14 +25,13 @@ export interface Template {
     /**
      * list of objects representing all the associated provisions of this template
      * and the questions those provisions are linked to 
-     * @TJS-type SearchableProvision
-     * @nullable
+     * @default []
      */
     searchableProvisions: SearchableProvision[];
 
     /**
      * list of objects representing groupings of questions in this Template
-     * @TJS-type Group
+     * @default []
      */
     groups: Group[];
 }
@@ -88,6 +87,7 @@ export interface Group {
 
     /**
      * the set of Questions that belong to this group
+     * @default []
      */
     questions: Question[];
 }
@@ -130,14 +130,8 @@ export interface Question {
      */
     type: QuestionResponseType;
 
-    //===========================================================
-    /** @nullable */
-    response: string[] | number | null | string;
 
     isSamplingAllowed: boolean;
-
-    /** @nullable */
-    samplingRecord?: SamplingRecord;
 
     /**
      * represents if this element CAN be repeated by user
@@ -152,22 +146,22 @@ export interface Question {
     /**
      * only radio and select have resonse options...currently - 
      * TODO: every type of Question should have them
-     * @nullable 
+     * @default []
      */
     responseOptions: ResponseOption[];
 
     /**
      * array of rules describing what is required for the response 
      * of this question to be valid
+     * @default []
      */
     validationRules: ValidationRule[];
 
-    violationInfo: ViolationInfo;
-
     /**
      * child or sub-questions
+     * @default []
      */
-    questions: Question[];
+    childQuestions: Question[];
 
     /**
      * the result of this question can affect the
@@ -189,6 +183,7 @@ export interface Question {
      * -setting the value of what a validationRule should validate against
      * for this question can be dependent on other questions as described in 
      * the DependencyGroups of this array
+     * @default []
      * */
     dependencyGroups: DependencyGroup[];
 
@@ -197,9 +192,6 @@ export interface Question {
      */
     validationState: boolean;
 
-    /**
-     * ============================================================
-     */
     result: Result;
 }
 
@@ -210,8 +202,10 @@ export interface Dependant {
 export interface DependencyGroup {
     ruleType: DependencyGroupType;
 
-    /** @nullable */
+    /** @default "" */
     childValidatorName: string;
+
+    /** @default [] */
     questionDependencies: DependencyGroupItem[]
 }
 
@@ -232,38 +226,51 @@ export interface ResponseOption {
     guid: string;
     name: string;
     sortOrder: number;
+
+    /** @nullable */
     text: Title;
+
+    /** @default "" */
     value: string;
+
     internalCommentRequirement: Option;
     externalCommentRequirement: Option;
     fileRequirement: Option;
     pictureRequirement: Option;
+
+    /** @default [] */
     provisions: string[];
 }
 
-export interface Picture {
-    option: Option;
-    value: PictureItem[];
+export interface File {
+    /** @default [] */
+    items: FileItem[];
     validationStatus?: boolean;
     notification?: null;
 }
 
-export interface PictureItem {
-    base64String: string;
-    title: string;
-    comment: string;
-    timeStamp: Date;
-}
-
-export interface File {
-    option: Option;
-    value: any[];
+export interface Picture {
+    /** @default [] */
+    items: PictureItem[];
+    validationStatus?: boolean;
+    notification?: null;
 }
 
 export interface FileItem {
-    base64String: string;
     title: string;
+    fileName: string;
+    guid: string;
     comment: string;
+    uploadedBy: string;
+    timeStamp: Date;
+}
+
+export interface PictureItem {
+    title: string;
+    fileName: string;
+    guid: string;
+    comment: string;
+    uploadedBy: string;
     timeStamp: Date;
 }
 
@@ -283,14 +290,13 @@ export interface ValidationRule {
 }
 
 export interface ViolationInfo {
-    referenceID: null;
-    violationCount: null;
+    referenceID: string;
+    violationCount: string;
 }
 
 export interface SamplingRecord {
     approximateTotal: string;
     sampleSize: string;
-    nonCompliances: string;
 }
 
 export interface SearchableProvision {
@@ -336,11 +342,25 @@ export enum DependencyGroupType {
 }
 
 export interface Result {
-    selectedResponse: string[]; // guid
+    responses: Response[];
     externalComment: string;
     internalComment: string;
-    pictures: PictureItem[];
-    files: FileItem[];
+
+    /** @nullable */
+    pictures: Picture;
+
+    /** @nullable */
+    files: File;
+
+    /** @nullable */
     violationInfo: ViolationInfo;
+
+    /** @nullable */
     samplingRecord: SamplingRecord;
 }
+
+export interface Response {
+    guid: string,
+    value: string;
+}
+
