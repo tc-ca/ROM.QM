@@ -503,13 +503,6 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
             "domSuffix": "prop value created virtually",
             "domId": "prop value created virtually",
             "name": "GROUP1",
@@ -624,9 +617,6 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [
-                1
-            ],
             "domSuffix": "prop value created virtually",
             "domId": "prop value created virtually",
             "name": "GROUP2",
@@ -740,9 +730,6 @@
                     "dependants": [],
                     "dependencyGroups": []
                 }
-            ],
-            "expansionPanels": [
-                1
             ],
             "domSuffix": "prop value created virtually",
             "domId": "prop value created virtually",
