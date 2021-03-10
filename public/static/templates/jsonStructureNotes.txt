@@ -19,16 +19,16 @@ remove--> ."expansionPanels"
 
 Question ======
 
-rename--> ".isVisible" to ".isVisibleByDefault" --todo santosh
+rename--> ".isVisible" to ".isVisibleByDefault" --todo santosh (Not required)
 
 remove--> ".id" --todo santosh
-remove--> ".isMultiple"  (done) 
+remove--> ".isMultiple" --todo santosh (done) 
 remove--> ".response" --todo santosh
 
 move--> .samplingRecord to .result object
 
 --responseOptions
-rename--> ".id" to ".guid"
+rename--> ".id" to ".guid" --todo santosh
 move--> ".selectedProvisions" to .result object
 remove--> ".searchProvisions" move to component data member
 remove--> ".isProvisionCollapsed" move to component data member
