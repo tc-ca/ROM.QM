@@ -100,7 +100,7 @@
               v-for="question in group.questions"
               ref="groupQuestion"
               :key="question.guid"
-              :data-group-id="group.htmlElementId"
+              :data-group-id="group.domId"
               :question="question"
               :group="group"
               :parent="group"
@@ -127,6 +127,7 @@
 import { mapState } from 'vuex'
 import Question from './question/question.vue'
 import BuilderService from '../../../services/builderService'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   emits: ['update-group-count'],
@@ -204,27 +205,14 @@ export default {
     }
   },
   created () {
-    // on repeat the last item in the array gets created hence the need for this method to update the group.sortOrder
-    // uncomment console.log to obersve behavior
-    // console.log(this.group.title + ' created index: ' + this.index)
-    const index = this.index
+    // initlize dom id
     const group = this.group
-    this.$store.dispatch('updateGroupOrder', { group, index })
-    this.$store.dispatch('updateGroupHtmlElementId', { group })
+    this.$store.dispatch('updateGroupDomId', { group })
     this.repeatedGroup = group.domSuffix !== '#000'
 
     this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   updated () {
-    // on update group.sortOrder is updated with shifted position/index in the array
-    // uncomment console.log to obersve behavior
-    // console.log(this.group.title + ' updated index: ' + this.index)
-    const index = this.index
-    const group = this.group
-    this.repeatedGroup = group.domSuffix !== '#000'
-
-    this.$store.dispatch('updateGroupOrder', { group, index })
-    this.$store.dispatch('updateGroupHtmlElementId', { group })
     // important count must also be set on updated as the item in the array is shifted when group copy function is used.
     if (this.$refs.groupQuestion) {
       this.questionCount = this.$refs.groupQuestion.filter(x => x.isVisible === true).length
@@ -310,7 +298,7 @@ export default {
       }
     },
     repeatGroup () {
-      this.$store.dispatch('repeatGroup', this.group)
+      this.$store.dispatch('repeatGroup', { group: this.group, guid: uuidv4() })
     },
     removeGroup () {
       // need to the update-group-count event in the removal as the events in the isVisibility watch are not emitted

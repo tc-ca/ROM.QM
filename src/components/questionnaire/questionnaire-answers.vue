@@ -21,7 +21,7 @@
               <questionnaire-group
                 v-for="(group, groupIndex) in group.groups"
                 ref="questionGroup"
-                :key="groupIndex"
+                :key="group.guid"
                 :group="group"
                 :index="groupIndex"
                 :expand="expand"

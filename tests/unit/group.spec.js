@@ -26,8 +26,7 @@ describe('Group.vue', () => {
   // mock
   beforeEach(() => {
     actions = {
-      updateGroupOrder: jest.fn(),
-      updateGroupHtmlElementId: jest.fn()
+      updateGroupDomId: jest.fn()
     }
 
     store = new Vuex.Store({

@@ -503,9 +503,17 @@
                     "dependencyGroups": []
                 }
             ],
-            "domSuffix": "#000",
-            "htmlElementId": "GRP_NWGRP_TMPLT_QSTNNRTTLN#000",
-            "name": "GRP_GRP1_TMPLT_QSTNNRTTLN"
+            "expansionPanels": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "domSuffix": "prop value created virtually",
+            "domId": "prop value created virtually",
+            "name": "GROUP1",
+            "guid": "dfcb0454-2b8e-4d90-b1ae-fc92001fedf8"
         },
         {
             "title": {
@@ -619,9 +627,10 @@
             "expansionPanels": [
                 1
             ],
-            "domSuffix": "#000",
-            "htmlElementId": "GRP_GRP2_TMPLT_QSTNNRTTLN#000",
-            "name": "GRP_GRP2_TMPLT_QSTNNRTTLN"
+            "domSuffix": "prop value created virtually",
+            "domId": "prop value created virtually",
+            "name": "GROUP2",
+            "guid": "c34c6ad4-2a6b-4013-b2ac-763e83c94ca0"
         },
         {
             "title": {
@@ -735,9 +744,11 @@
             "expansionPanels": [
                 1
             ],
-            "domSuffix": "#001",
-            "htmlElementId": "GRP_GRP3_TMPLT_QSTNNRTTLN#001",
-            "name": "GRP_GRP3_TMPLT_QSTNNRTTLN"
+            "domSuffix": "prop value created virtually",
+            "domId": "prop value created virtually",
+            "name": "GROUP3",
+             "guid": "eed25c7a-eb68-47b4-a224-aacc9330da63"
+
         }
     ],
     "templateid": "",
