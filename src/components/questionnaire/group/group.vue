@@ -204,7 +204,7 @@ export default {
     }
   },
   created () {
-    // on repeat the last item in the array gets created hence the need for this method to update the group.order
+    // on repeat the last item in the array gets created hence the need for this method to update the group.sortOrder
     // uncomment console.log to obersve behavior
     // console.log(this.group.title + ' created index: ' + this.index)
     const index = this.index
@@ -216,7 +216,7 @@ export default {
     this.group.questions.sort((a, b) => a.sortOrder - b.sortOrder)
   },
   updated () {
-    // on update group.order is updated with shifted position/index in the array
+    // on update group.sortOrder is updated with shifted position/index in the array
     // uncomment console.log to obersve behavior
     // console.log(this.group.title + ' updated index: ' + this.index)
     const index = this.index

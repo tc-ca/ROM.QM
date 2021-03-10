@@ -11,8 +11,8 @@ export const state = {
 
 export const getters = {
   getTargetedRepeatedGroups (state) {
-    return (primaryKey) => {
-      return state.groups.filter(x => x.primaryKey === primaryKey)
+    return (name) => {
+      return state.groups.filter(x => x.name === name)
     }
   }
 }
@@ -26,10 +26,9 @@ export const actions = {
 
   repeatGroup ({ commit, state, rootState, getters }, group) {
     // get all similar groups
-    // const targetedRepeatedGroups = state.questionnaire.groups.filter(x => x.primaryKey === group.primaryKey) // TODO: remove
-    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
+    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.name)
     // get starting reference for group in the collection of group array i.e. starting point/index 4
-    const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.order)
+    const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.sortOrder)
     const startReference = Math.min(...repeatedGroupsOrders)
 
     // get last position of the targeted repeated group
@@ -38,7 +37,7 @@ export const actions = {
     // insert copied group at end of similar repeated groups
     const insertAtEndOfTargetedRepeatedGroups = startReference + repeatGroupCount
     // find group in copied array
-    const targetedGroupToCopy = state.groupsCopy.find(copy => copy.primaryKey === group.primaryKey)
+    const targetedGroupToCopy = state.groupsCopy.find(copy => copy.name === group.name)
 
     const copiedGroup = _.cloneDeep(targetedGroupToCopy)
 
@@ -64,7 +63,7 @@ export const actions = {
     // copiedGroup.questions.forEach( q => { q.guid = uuidv4(); })
 
     // update new group order
-    copiedGroup.order = insertAtEndOfTargetedRepeatedGroups
+    copiedGroup.sortOrder = insertAtEndOfTargetedRepeatedGroups
 
     commit('repeatGroup', { copiedGroup, insertAt: insertAtEndOfTargetedRepeatedGroups })
   },
@@ -79,9 +78,9 @@ export const actions = {
   },
   updateGroupHtmlElementId ({ commit, getters }, payload) {
     const { group } = payload
-    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.primaryKey)
-    const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.order)
-    const suffix = repeatedGroupsOrders.findIndex(order => order === group.order)
+    const targetedRepeatedGroups = getters.getTargetedRepeatedGroups(group.name)
+    const repeatedGroupsOrders = targetedRepeatedGroups.map(group => group.sortOrder)
+    const suffix = repeatedGroupsOrders.findIndex(order => order === group.sortOrder)
     const domSuffix = `#${pad(suffix, 3)}`
 
     commit('updateGroupHtmlElementId', { group, domSuffix: domSuffix })
@@ -100,12 +99,12 @@ export const mutations = {
   // TODO: lowercase function name
   UpdateGroupOrder (state, payload) {
     const { group, order } = payload
-    group.order = order
+    group.sortOrder = order
   },
 
   updateGroupHtmlElementId (state, payload) {
     const { group, domSuffix } = payload
-    group.htmlElementId = `${group.primaryKey}${domSuffix}`
+    group.htmlElementId = `${group.name}${domSuffix}`
     group.domSuffix = domSuffix
   },
 
@@ -118,7 +117,7 @@ export const mutations = {
   removeGroup (state, payload) {
     const { group } = payload
     for (let index = state.groups.length; index--;) {
-      if (state.groups[index].order === group.order) {
+      if (state.groups[index].sortOrder === group.sortOrder) {
         state.groups.splice(index, 1)
       }
     }

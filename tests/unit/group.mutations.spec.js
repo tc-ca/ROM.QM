@@ -25,15 +25,15 @@ describe('Test Group component Vuex Mutations', () => {
 
   it('UpdateGroupOrder', () => {
     const order = 5
-    const group = { order: 0 }
+    const group = { sortOrder: 0 }
 
     mutations.UpdateGroupOrder(state, { group, order: order })
-    expect(group.order).toEqual(order)
+    expect(group.sortOrder).toEqual(order)
   })
 
   test('updateGroupHtmlElementId', () => {
     const group = {
-      primaryKey: 'Group1',
+      name: 'Group1',
       title: { 'en': 'Group', 'fr': 'Group FR' },
       domSuffix: '',
       htmlElementId: '',
@@ -42,7 +42,7 @@ describe('Test Group component Vuex Mutations', () => {
     const domSuffix = '#001'
 
     mutations.updateGroupHtmlElementId(state, { group, domSuffix })
-    expect(group.htmlElementId).toEqual(`${group.primaryKey}${domSuffix}`)
+    expect(group.htmlElementId).toEqual(`${group.name}${domSuffix}`)
   })
 
   test('repeatGroup', () => {
@@ -56,13 +56,13 @@ describe('Test Group component Vuex Mutations', () => {
     state = {
       groups: [
         {
-          primaryKey: 'Group1',
+          name: 'Group1',
           title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
           showKey: '',
           hideKey: '',
-          order: 0,
+          sortOrder: 0,
           domSuffix: '#000',
           htmlElementId: 'Group1#000',
           questions: []
@@ -73,13 +73,13 @@ describe('Test Group component Vuex Mutations', () => {
 
     // simulate copying of group 1
     const copyOfGroup1 = {
-      primaryKey: 'Group1',
+      name: 'Group1',
       title: { 'en': 'Group', 'fr': 'Group FR' },
       isRepeatable: false,
       isVisible: false,
       showKey: '',
       hideKey: '',
-      order: 0,
+      sortOrder: 0,
       domSuffix: '#001',
       htmlElementId: 'Group1#001',
       questions: []
@@ -95,25 +95,25 @@ describe('Test Group component Vuex Mutations', () => {
     state = {
       groups: [
         {
-          primaryKey: 'Group1',
+          name: 'Group1',
           title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
           showKey: '',
           hideKey: '',
-          order: 0,
+          sortOrder: 0,
           domSuffix: '#000',
           htmlElementId: 'Group1#000',
           questions: []
         },
         {
-          primaryKey: 'Group2',
+          name: 'Group2',
           title: { 'en': 'Group', 'fr': 'Group FR' },
           isRepeatable: false,
           isVisible: false,
           showKey: '',
           hideKey: '',
-          order: 1,
+          sortOrder: 1,
           domSuffix: '#000',
           htmlElementId: 'Group2#000',
           questions: []
@@ -123,13 +123,13 @@ describe('Test Group component Vuex Mutations', () => {
     }
 
     const groupToBeRemoved = {
-      primaryKey: 'Group2',
+      name: 'Group2',
       title: { 'en': 'Group', 'fr': 'Group FR' },
       isRepeatable: false,
       isVisible: false,
       showKey: '',
       hideKey: '',
-      order: 1,
+      sortOrder: 1,
       domSuffix: '#000',
       htmlElementId: 'Group2#000',
       questions: []

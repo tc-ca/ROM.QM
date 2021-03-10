@@ -20,7 +20,7 @@ describe('Test Group component Vuex Actions', () => {
   })
 
   let group0 = {
-    primaryKey: 'Group 1',
+    name: 'Group 1',
     title: {
       'en': 'New Group',
       'fr': 'Fr: New Group'
@@ -28,11 +28,11 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 0
+    sortOrder: 0
   }
 
   let group1 = {
-    primaryKey: 'Group 1',
+    name: 'Group 1',
     title: {
       'en': 'New Group',
       'fr': 'Fr: New Group'
@@ -40,11 +40,11 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 1
+    sortOrder: 1
   }
 
   let group2 = {
-    primaryKey: 'Group 2',
+    name: 'Group 2',
     title: {
       'en': 'New Group',
       'fr': 'Fr: New Group'
@@ -52,11 +52,11 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 2
+    sortOrder: 2
   }
 
   let group3 = {
-    primaryKey: 'Group 3',
+    name: 'Group 3',
     title: {
       'en': 'New Group',
       'fr': 'Fr: New Group'
@@ -64,7 +64,7 @@ describe('Test Group component Vuex Actions', () => {
     isRepeatable: true,
     isVisible: true,
     questions: [],
-    order: 3
+    sortOrder: 3
   }
 
   test('repeated group should be placed into the correct position', async () => {
@@ -74,11 +74,11 @@ describe('Test Group component Vuex Actions', () => {
     theOriginalListOfGroups.push(group2)
     theOriginalListOfGroups.push(group3)
 
-    let filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.primaryKey !== 'Group 2' && e.primaryKey !== 'Group 3'))
+    let filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.name !== 'Group 2' && e.name !== 'Group 3'))
 
     const context = {
       commit: jest.fn(),
-      getters: { getTargetedRepeatedGroups: () => filteredSimilarGroups }, // get all similar groups with similar identifying attribute in this case based on the primaryKey
+      getters: { getTargetedRepeatedGroups: () => filteredSimilarGroups }, // get all similar groups with similar identifying attribute in this case based on the name
       state: {
         groupsCopy: theOriginalListOfGroups
       },
@@ -93,7 +93,7 @@ describe('Test Group component Vuex Actions', () => {
 
     // tests copying group from index 0
     let expected = _.cloneDeep(theOriginalListOfGroups[0])
-    expected.order = 2
+    expected.sortOrder = 2
 
     actions.repeatGroup(context, theOriginalListOfGroups[0])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
@@ -103,7 +103,7 @@ describe('Test Group component Vuex Actions', () => {
 
     // tests copying group from index 1
     let expected1 = _.cloneDeep(theOriginalListOfGroups[0])
-    expected1.order = 2
+    expected1.sortOrder = 2
 
     actions.repeatGroup(context, theOriginalListOfGroups[1])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
@@ -112,11 +112,11 @@ describe('Test Group component Vuex Actions', () => {
     })
 
     // reset filtered groups to correct set
-    filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.primaryKey === 'Group 2'))
+    filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.name === 'Group 2'))
 
     // tests copying group from index 2
     let expected2 = _.cloneDeep(theOriginalListOfGroups[2])
-    expected2.order = 3
+    expected2.sortOrder = 3
 
     actions.repeatGroup(context, theOriginalListOfGroups[2])
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
@@ -126,11 +126,11 @@ describe('Test Group component Vuex Actions', () => {
 
     // reset filtered groups to correct set
     // reset filtered groups to correct set
-    filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.primaryKey === 'Group 3'))
+    filteredSimilarGroups = _.cloneDeep(theOriginalListOfGroups.filter(e => e.name === 'Group 3'))
 
     // tests copying group from index 2
     let expected3 = _.cloneDeep(theOriginalListOfGroups[3])
-    expected3.order = 4
+    expected3.sortOrder = 4
 
     // tests copying group from index 3
     actions.repeatGroup(context, theOriginalListOfGroups[3])
@@ -170,18 +170,18 @@ describe('Test Group component Vuex Actions', () => {
   test('updateGroupHtmlElementId', async () => {
     let filteredSimilarGroups = [
       {
-        primaryKey: 'Group1',
-        order: 0
+        name: 'Group1',
+        sortOrder: 0
 
       },
       {
-        primaryKey: 'Group1',
-        order: 1
+        name: 'Group1',
+        sortOrder: 1
       }
     ]
     const context = {
       commit: jest.fn(),
-      getters: { getTargetedRepeatedGroups: () => filteredSimilarGroups } // get all similar groups with similar identifying attribute in this case based on the primaryKey
+      getters: { getTargetedRepeatedGroups: () => filteredSimilarGroups } // get all similar groups with similar identifying attribute in this case based on the name
     }
 
     // test first item in the group array
