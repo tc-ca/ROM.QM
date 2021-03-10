@@ -16,7 +16,6 @@
             "questions": [
                 {
                     "name": "QTN_TYPRFRNC_REF_GRP_GRP1_TMPLT_QSTNNRTTLN",
-                    "id": 0,
                     "guid": "55bcb79f-635b-4422-81e1-277d5a8a0a4d",
                     "sortOrder": 1,
                     "isVisible": true,
@@ -87,7 +86,6 @@
                 },
                 {
                     "name": "QTN_QSTN1_RD_GRP_GRP1_TMPLT_QSTNNRTTLN",
-                    "id": 1,
                     "guid": "18ce837b-5434-43be-8636-dcbef4acf2bc",
                     "sortOrder": 2,
                     "isVisible": true,
@@ -191,7 +189,6 @@
                     "childQuestions": [
                         {
                             "name": "QTN_CHLDQSTN_RD_GRP_GRP1_TMPLT_QSTNNRTTLN",
-                            "id": 2,
                             "guid": "cd178620-7b9e-4410-8510-990689ae3550",
                             "sortOrder": 1,
                             "isVisible": false,
@@ -339,7 +336,6 @@
                 },
                 {
                     "name": "QTN_TYPTXT_TXT_GRP_GRP1_TMPLT_QSTNNRTTLN",
-                    "id": 3,
                     "guid": "25ed03ef-31ba-424a-9859-638ce0e29b1d",
                     "sortOrder": 3,
                     "isVisible": true,
@@ -379,7 +375,6 @@
                 },
                 {
                     "name": "QTN_TYPSLCT_SLCT_GRP_GRP1_TMPLT_QSTNNRTTLN",
-                    "id": 4,
                     "guid": "db5def87-7859-4637-95ad-52636ce141b2",
                     "sortOrder": 4,
                     "isVisible": true,
@@ -482,7 +477,6 @@
                 },
                 {
                     "name": "QTN_TYPNMBR_NBR_GRP_GRP1_TMPLT_QSTNNRTTLN",
-                    "id": 5,
                     "guid": "2a15cee7-fb5b-43c4-8b4d-958412036fb2",
                     "sortOrder": 5,
                     "isVisible": true,
@@ -543,7 +537,6 @@
             "questions": [
                 {
                     "name": "QTN_DFLTQSTN1_RD_GRP_GRP2_TMPLT_QSTNNRTTLN",
-                    "id": 7,
                     "guid": "85bdfda0-22cc-4699-b5a5-5d9e56195607",
                     "sortOrder": 7,
                     "isVisible": true,
@@ -662,7 +655,6 @@
             "questions": [
                 {
                     "name": "QTN_DFLTQSTN2_RD_GRP_GRP3_TMPLT_QSTNNRTTLN",
-                    "id": 8,
                     "guid": "ec0f5fe9-5742-4b1a-816d-747a32c462ad",
                     "sortOrder": 8,
                     "isVisible": true,
