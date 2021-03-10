@@ -7,27 +7,27 @@ rename-->".templateid"  by ".guid" --todo/is to be set in the builderService (wi
  
 Group ======
 
-rename-->".primaryKey" changed to ".name" (done)
-rename-->".order" to ".sortOrder" (done)
-rename-->".htmlElementId" to "domId" --todo ainsley
-rename--> ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
+rename: ".primaryKey" to ".name" (done) ainsley
+rename:".order" to ".sortOrder" (done) ainsley
+rename:".htmlElementId" to "domId" (done) ainsley
+rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
-remove--> ."expansionPanels" --todo santosh (done)
+remove: ."expansionPanels" (done) santosh
 
 
 
 Question ======
 
-rename--> ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
-remove--> ".id" --todo santosh (done)
-remove--> ".isMultiple" --todo santosh (done) 
-remove--> ".response" --todo santosh
+rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
+remove: ".id" (done)
+remove: ".isMultiple" (done) santosh 
+remove: ".response" --todo santosh
 
 move--> .samplingRecord to .result object
 
 --responseOptions
-rename--> ".id" to ".guid" --todo santosh (done)
+rename: ".id" to ".guid" (done) santosh
 move--> ".selectedProvisions" to .result object
 remove--> ".searchProvisions" move to component data member
 remove--> ".isProvisionCollapsed" move to component data member
@@ -37,9 +37,9 @@ refactor--> ".picture" to String and rename to ".pictureRequirement"
 refactor--> ".file" to String and rename to ".fileRequirement"
 
 ---- REFACTOR violationInfo
-move--> violationInfo object to result
-remove--> ".responseToMatch' --todo santosh (done)
-remove--> ".matchingType" --todo santosh (done)
+move--> violationInfo object to result todo
+remove: ".responseToMatch' (done) santosh
+remove: ".matchingType" (done) santosh
 
 condition: if not null should have properties of ."referenceID" and ".violationCount"
 
