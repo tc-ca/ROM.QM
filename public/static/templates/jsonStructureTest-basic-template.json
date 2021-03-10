@@ -515,13 +515,6 @@
                     "dependencyGroups": []
                 }
             ],
-            "expansionPanels": [
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
             "domSuffix": "#000",
             "htmlElementId": "GRP_NWGRP_TMPLT_QSTNNRTTLN#000",
             "name": "GRP_GRP1_TMPLT_QSTNNRTTLN"

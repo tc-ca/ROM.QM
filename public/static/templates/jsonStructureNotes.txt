@@ -13,7 +13,7 @@ rename-->".htmlElementId" to "domId" --todo ainsley
 rename--> ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
-remove--> ."expansionPanels"
+remove--> ."expansionPanels" --todo santosh (done)
 
 
 
