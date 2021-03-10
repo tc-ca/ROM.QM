@@ -74,22 +74,8 @@
       </v-col>
       <v-col cols="5">
         <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:85%;overflow-y: auto;overflow-x: hidden">
-          <v-row>
-            <!-- <v-col>
-              <v-text-field
-                v-if="questionnaire"
-                v-model="questionnaire.name"
-                disabled
-                :label="$t('app.builder.questionnaireName')"
-              />
-            </v-col> -->
-          </v-row>
           <v-row v-if="selectedGroup && !selectedQuestion">
             <v-col>
-              <!-- <v-text-field
-                v-model="selectedGroup.primaryKey"
-                :label="$t('app.builder.group.groupName')"
-              /> -->
               <v-text-field
                 v-model="selectedGroup.title[eng]"
                 :label="$t('app.builder.group.englishText')"
@@ -100,16 +86,12 @@
                 :label="$t('app.builder.group.frenchText')"
               />
               <v-text-field
-                v-model="selectedGroup.order"
+                v-model="selectedGroup.sortOrder"
                 dense
                 type="number"
                 :label="$t('app.builder.sortOrder')"
                 @change="sortGroups(selectedGroup)"
               />
-              <!-- <v-checkbox
-                v-model="selectedGroup.isVisible"
-                :label="$t('app.builder.isVisible')"
-              /> -->
               <v-checkbox
                 v-model="selectedGroup.isRepeatable"
                 :label="$t('app.builder.isRepeatable')"
@@ -118,11 +100,6 @@
           </v-row>
           <v-row v-if="selectedQuestion">
             <v-col>
-              <!-- <v-text-field
-                v-model="selectedQuestion.name"
-                :disabled="selectedQuestion.type === reference"
-                :label="$t('app.builder.questionName')"
-              /> -->
               <v-text-field
                 v-model="selectedQuestion.text[eng]"
                 :label="$t('app.builder.question.englishText')"
@@ -195,33 +172,28 @@
                   </div>
                   <div v-show="!optionsCollapsed">
                     <div
-                      v-for="(option, index) in selectedQuestion.responseOptions"
+                      v-for="(responseOption, index) in selectedQuestion.responseOptions"
                       :key="index"
                       class="bordered ml-2 pa-2 my-2"
                     >
-                      <!-- <v-text-field
-                        v-model="option.name"
-                        dense
-                        label="Option Name"
-                      /> -->
                       <v-text-field
-                        v-model="option.text[eng]"
+                        v-model="responseOption.text[eng]"
                         dense
                         :label="$t('app.builder.responseOptions.englishText')"
-                        @change="onOptionTextChange(option)"
+                        @change="onOptionTextChange(responseOption)"
                       />
                       <v-text-field
-                        v-model="option.text[fr]"
+                        v-model="responseOption.text[fr]"
                         dense
                         :label="$t('app.builder.responseOptions.frenchText')"
                       />
                       <v-text-field
-                        v-model.number="option.sortOrder"
+                        v-model.number="responseOption.sortOrder"
                         dense
                         :label="$t('app.builder.responseOptions.sortOrder')"
                       />
                       <v-text-field
-                        v-model="option.value"
+                        v-model="responseOption.value"
                         dense
                         :label="$t('app.builder.responseOptions.value')"
                       />
@@ -234,7 +206,7 @@
                             <v-btn
                               small
                               icon
-                              @click="removeResponseOption(option)"
+                              @click="removeResponseOption(responseOption)"
                             >
                               <v-icon
                                 small
@@ -250,7 +222,7 @@
                       </div>
                       <div>
                         <v-select
-                          v-model="option.internalComment.option"
+                          v-model="responseOption.internalCommentRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -264,7 +236,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="option.externalComment.option"
+                          v-model="responseOption.externalCommentRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -278,7 +250,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="option.file.option"
+                          v-model="responseOption.fileRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -292,7 +264,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="option.picture.option"
+                          v-model="responseOption.pictureRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -311,25 +283,25 @@
                           <v-btn
                             small
                             icon
-                            @click="toggleProvisions(option)"
+                            @click="toggleProvisions(responseOption)"
                           >
-                            <v-icon v-if="!option.isProvisionCollapsed">
+                            <v-icon v-if="!responseOption.isProvisionCollapsed">
                               mdi-menu-right
                             </v-icon>
-                            <v-icon v-if="option.isProvisionCollapsed">
+                            <v-icon v-if="responseOption.isProvisionCollapsed">
                               mdi-menu-down
                             </v-icon>
                           </v-btn>
                           {{ $t('app.builder.responseOptions.provisions.provisions') }}
                         </div>
-                        <div v-show="option.isProvisionCollapsed">
+                        <div v-show="responseOption.isProvisionCollapsed">
                           <div>
                             <v-card
                               class="mx-auto"
                             >
                               <v-sheet class="pa-4">
                                 <v-text-field
-                                  v-model="option.searchProvisions"
+                                  v-model="responseOption.searchProvisions"
                                   :label="$t('app.builder.responseOptions.provisions.search')"
                                   outlined
                                   hide-details
@@ -339,13 +311,13 @@
                               </v-sheet>
                               <v-card-text>
                                 <v-treeview
-                                  v-model="option.provisions"
+                                  v-model="responseOption.provisions"
                                   selectable
                                   item-key="id"
                                   :item-text="displayTextLang"
                                   selection-type="leaf"
-                                  :search="option.searchProvisions"
-                                  :filter="option.filterProvisions"
+                                  :search="searchProvisions"
+                                  :filter="filterProvisions"
                                   :items="provisions"
                                   @input="updateSearchableProvisions()"
                                 >
@@ -1062,7 +1034,7 @@ export default {
       }
     },
     addValidator () {
-      this.selectedQuestion.validationRules.push(BuilderService.createValidator())
+      this.selectedQuestion.validationRules.push(BuilderService.createGenericValidationRule())
     },
     removeValidator (validationRule) {
       for (let i = 0; i < this.selectedQuestion.validationRules.length; i++) {
