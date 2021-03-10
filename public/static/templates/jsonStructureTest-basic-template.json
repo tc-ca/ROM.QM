@@ -76,8 +76,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [],
@@ -182,8 +180,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [
@@ -304,8 +300,6 @@
                                 }
                             ],
                             "violationInfo": {
-                                "responseToMatch": "false",
-                                "matchingType": "equal",
                                 "referenceID": null
                             },
                             "childQuestions": [],
@@ -365,8 +359,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [],
@@ -467,8 +459,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [],
@@ -506,8 +496,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [],
@@ -621,8 +609,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [],
@@ -739,8 +725,6 @@
                         }
                     ],
                     "violationInfo": {
-                        "responseToMatch": "false",
-                        "matchingType": "equal",
                         "referenceID": null
                     },
                     "childQuestions": [],

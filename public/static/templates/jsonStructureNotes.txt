@@ -38,8 +38,8 @@ refactor--> ".file" to String and rename to ".fileRequirement"
 
 ---- REFACTOR violationInfo
 move--> violationInfo object to result
-remove--> ".responseToMatch'
-remove--> ".matchingType"
+remove--> ".responseToMatch' --todo santosh (done)
+remove--> ".matchingType" --todo santosh (done)
 
 condition: if not null should have properties of ."referenceID" and ".violationCount"
 
