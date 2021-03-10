@@ -51,7 +51,7 @@ describe('Group.vue', () => {
   //   })
   //   // must await until the dom has our element
   //   await wrapper.vm.$nextTick
-  //   expect(wrapper.findComponent('[data-testid="repeatGroup"]').isVisible()).toBe(
+  //   expect(wrapper.findComponent('[data-testid="repeatGroup"]').isVisibleByDefault()).toBe(
   //     true
   //   )
   // })

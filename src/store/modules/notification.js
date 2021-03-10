@@ -227,7 +227,7 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
 
 function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch, lang)
 {
-   if (q.isVisible) {
+   if (q.isVisibleByDefault) {
     if (q.notification) {
       dispatch("notification/addNotification", q.notification, { root: true });
     } else if (isValidationRequired(q)) {

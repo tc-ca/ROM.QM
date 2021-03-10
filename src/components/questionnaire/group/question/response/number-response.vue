@@ -35,7 +35,7 @@ export default {
       value: '',
       validationRulesFuncs: [
         value => {
-          if (this.question.isVisible) {
+          if (this.question.isVisibleByDefault) {
             for (let i = 0; i < this.question.validationRules.length; i++) {
               let ruleDefinition = this.question.validationRules[i]
               if (!ruleDefinition.enabled) {
