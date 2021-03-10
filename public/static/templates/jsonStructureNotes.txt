@@ -1,8 +1,8 @@
 
-Todo checklist.
+Todo checklist of task to be done in the questionnaire side of things.
 
 Template=======
-rename-->".templateid"  by ".guid" --todo ainsley
+rename-->".templateid"  by ".guid" --todo/is to be set in the builderService (will not update, will let Luis do it)
 
  
 Group ======
@@ -10,7 +10,7 @@ Group ======
 rename-->".primaryKey" changed to ".name" (done)
 rename-->".order" to ".sortOrder" (done)
 rename-->".htmlElementId" to "domId" --todo ainsley
-rename--> ".isVisible" to "isVisibleByDefault" --todo ainsley
+rename--> ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
 remove--> ."expansionPanels"
@@ -19,8 +19,7 @@ remove--> ."expansionPanels"
 
 Question ======
 
-rename--> ".isVisible" to ".isVisibleByDefault" --todo santosh (Not required)
-
+rename--> ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
 remove--> ".id" --todo santosh
 remove--> ".isMultiple" --todo santosh (done) 
 remove--> ".response" --todo santosh
