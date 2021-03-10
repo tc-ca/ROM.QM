@@ -570,7 +570,7 @@ export default {
     isVisible () {
       this.setQuestionVisibilityBasedOnAppliedTags()
 
-      return this.question.isVisibleByDefault && this.filteredInByProvisionSearch
+      return this.question.isVisible && this.filteredInByProvisionSearch
     },
     selectedQuestionHasProvisions () {
       return (this.question.responseOptions) ? this.question.responseOptions.some(option => option.provisions.length > 0) : false
@@ -905,8 +905,8 @@ export default {
 
           // if triggering question is provided check to see if its visible if not all dependent questions visiblity should be set to false
           // techinically this should never occur, as how could question be triggered but not visisble
-          if (triggeringQuestion && !triggeringQuestion.isVisibleByDefault) {
-            question.isVisibleByDefault = false
+          if (triggeringQuestion && !triggeringQuestion.isVisible) {
+            question.isVisible = false
             console.log('triggering question is not visible')
           } else {
             let groupMatch = true
@@ -916,7 +916,7 @@ export default {
               let dependsOnQuestion = this.getFlatListOfAllQuestions().find(x => x.guid === dependsOnQuestionGuid)
 
               // if the depends on question is not visible, then dependant question should not be shown or any logic rules should not computed.
-              if (!dependsOnQuestion.isVisibleByDefault) {
+              if (!dependsOnQuestion.isVisible) {
                 groupMatch = false
                 break
               }
@@ -970,7 +970,7 @@ export default {
             // when evaluating multiple groups of the same type each group will be examined as "or" conditionally
             // i.e only one group of rules must be valid for it to be enabled, in this case visibility set to true.
               const groupByRuleTypeVisibility = groupMatchArray.filter(x => x.ruleType === 'visibility')
-              if (groupByRuleTypeVisibility) question.isVisibleByDefault = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
+              if (groupByRuleTypeVisibility) question.isVisible = groupByRuleTypeVisibility.some(x => x.groupMatch === true)
             } else if (group.ruleType === 'validation') {
               if (question.validationRules) {
                 let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
@@ -999,12 +999,12 @@ export default {
     getChildQuestionValidationState () {
       for (let i = 0; i < this.question.childQuestions.length; i++) {
         let childQuestion = this.question.childQuestions[i]
-        if (childQuestion.isVisibleByDefault && this.getQuestionValidationState(this.question.childQuestions[i]) === false) { return false }
+        if (childQuestion.isVisible && this.getQuestionValidationState(this.question.childQuestions[i]) === false) { return false }
       }
       return true
     },
     getQuestionValidationState (question) {
-      if (question.isVisibleByDefault) {
+      if (question.isVisible) {
         if (question.validationState === false) {
           return false
         }
@@ -1017,7 +1017,7 @@ export default {
       return true
     },
     setQuestionVisibility (visible) {
-      this.question.isVisibleByDefault = visible
+      this.question.isVisible = visible
     },
 
     questionFoundViaProvidedProvisions (provisions) {
@@ -1087,8 +1087,8 @@ export default {
       // **** SCENARIO 1a: QUESTION WITH NO PROVISIONS****
       // question has no provisions its visibility always be set to true unless it default is set to false, therefore pass in set value from json
       if (!this.selectedQuestionHasProvisions) {
-        this.setQuestionVisibility(this.question.isVisibleByDefault)
-        return this.question.isVisibleByDefault
+        this.setQuestionVisibility(this.question.isVisible)
+        return this.question.isVisible
       }
 
       // console.log(this.question.id)
@@ -1096,8 +1096,8 @@ export default {
       // **** SCENARIO 1b: QUESTION HAS PROVISIONS BUT NOT TAGABLE****
       // question may have provisions but those have not been asscoiated to a tag/characteristic, i.e. not tagable
       if (!provisionFound.isTagable) {
-        this.setQuestionVisibility(this.question.isVisibleByDefault)
-        return this.question.isVisibleByDefault
+        this.setQuestionVisibility(this.question.isVisible)
+        return this.question.isVisible
       }
 
       // **** SCENARIO 2: QUESTION WITH NO DEPENDANCIES****

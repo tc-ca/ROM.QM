@@ -200,7 +200,7 @@ function GenerateRepeatedQuestion(questionnaire, oQuestion) {
     nQuestion.id = lastId++;
     nQuestion.isRepeatable = false;
     nQuestion.isRepeated = true;
-    nQuestion.isVisibleByDefault = true;
+    nQuestion.isVisible = true;
     nQuestion.sortOrder = oQuestion.sortOrder + 1;
 
     //Fixing the id
@@ -875,9 +875,9 @@ function isParentAGroup (group, qGuid) {
 function cloneVisibleQuestionsOnly(questionnaire) {
   let clonedGroups = _.cloneDeep(questionnaire.groups)
   clonedGroups.forEach( g => {
-    g.questions = g.questions.filter( q => q.isVisibleByDefault === true );
+    g.questions = g.questions.filter( q => q.isVisible === true );
     g.questions.forEach( gc => {
-      gc.childQuestions = gc.childQuestions.filter( cq => cq.isVisibleByDefault === true );
+      gc.childQuestions = gc.childQuestions.filter( cq => cq.isVisible === true );
     });
   });
   return clonedGroups;

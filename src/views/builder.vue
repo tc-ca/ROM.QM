@@ -170,7 +170,7 @@
                   />
                 </div>
                 <v-checkbox
-                  v-model="selectedQuestion.isVisibleByDefault"
+                  v-model="selectedQuestion.isVisible"
                   dense
                   :label="$t('app.builder.visibleByDefault')"
                 />

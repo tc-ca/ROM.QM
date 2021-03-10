@@ -52,7 +52,7 @@ export const actions = {
 
       nq.isRepeatable = oq.isRepeatable;
       nq.isRepeated = oq.isRepeated;
-      // nq.isVisibleByDefault = oq.isVisibleByDefault;
+      // nq.isVisible = oq.isVisible;
       nq.sortOrder = oq.sortOrder;
 
       copiedGroup.questions.push(nq);

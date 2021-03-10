@@ -331,7 +331,7 @@ export default {
     areAllQuestionsValid (questions) {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i]
-        if (question.isVisibleByDefault) {
+        if (question.isVisible) {
           if (question.validationState === false || !this.areAllQuestionsValid(question.childQuestions)) {
             return false
           }
