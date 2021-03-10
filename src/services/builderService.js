@@ -22,14 +22,14 @@ function createQuestionnaire() {
   return questionnaire;
 }
 
-function createGroup(questionnaire) {
+function createGroup(index) {
   let guid = uuidv4();
   let group = {
     domId: "",
     domSuffix: "",
     guid: guid,
     name: guid,
-    sortOrder: questionnaire.groups.length + 1,
+    sortOrder: (index) ? index + 1 : 1,
     title: {
       [LANGUAGE.ENGLISH]: "New Group",
       [LANGUAGE.FRENCH]: "Fr: New Group"
@@ -107,8 +107,8 @@ function convertToReferenceQuestion(rQuestion) {
   return rQuestion;
 }
 
-function createReferenceQuestion(questionnaire) {
-  let rQuestion = createQuestion(questionnaire);
+function createReferenceQuestion(group) {
+  let rQuestion = createQuestion(group, QUESTION_TYPE.REFERENCE);
   return convertToReferenceQuestion(rQuestion);
 }
 

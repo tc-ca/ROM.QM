@@ -804,7 +804,7 @@ export default {
     },
     // TODO - I'm here
     addGroup () {
-      this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
+      this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire.groups.length))
     },
     confirmed () {
       this.confirmDialogOpen = false
@@ -831,19 +831,16 @@ export default {
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
-            let qRf = BuilderService.createReferenceQuestion(this.questionnaire, group)
+            let qRf = BuilderService.createReferenceQuestion(group)
             if (group.questions.length > 0) {
               // Move every question one number up on the sort order
               group.questions.forEach((q) => { q.sortOrder += 1 })
             }
-            qRf.sortOrder = 1
             group.questions.unshift(qRf)
             // Move question from the end to the start of the list
             const index = group.questions.findIndex(q => q.guid === this.selectedQuestion.guid)
             if (index > -1) {
               group.questions.splice(index, 1)
-              // Rebuidl the question Panels
-              // this.questionPanels = []
               group.expansionPanels = []
               group.questions.forEach(q => { group.expansionPanels.push(q.sortOrder) })
               this.selectedQuestion = qRf
@@ -851,11 +848,11 @@ export default {
           } else {
             // Alert and return back to the text type, the closest type to Reference Question
             this.$store.dispatch('notification/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
-            this.selectedQuestion.type = 'text'
+            this.selectedQuestion.type = QUESTION_TYPE.TEXT
           }
         } else {
           this.$store.dispatch('notification/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
-          this.selectedQuestion.type = 'text'
+          this.selectedQuestion.type = QUESTION_TYPE.TEXT
         }
       }
       if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
