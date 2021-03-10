@@ -20,6 +20,7 @@ describe('Test Group component Vuex Actions', () => {
   })
 
   let group0 = {
+    guid: '47847837438408302948923489',
     name: 'Group 1',
     title: {
       'en': 'New Group',
@@ -32,10 +33,11 @@ describe('Test Group component Vuex Actions', () => {
   }
 
   let group1 = {
+    guid: '11147847837438408302948923489',
     name: 'Group 1',
     title: {
-      'en': 'New Group',
-      'fr': 'Fr: New Group'
+      en: 'New Group',
+      fr: 'Fr: New Group'
     },
     isRepeatable: true,
     isVisible: true,
@@ -44,10 +46,12 @@ describe('Test Group component Vuex Actions', () => {
   }
 
   let group2 = {
+    guid: '22247847837438408302948923489',
+
     name: 'Group 2',
     title: {
-      'en': 'New Group',
-      'fr': 'Fr: New Group'
+      en: 'New Group',
+      fr: 'Fr: New Group'
     },
     isRepeatable: true,
     isVisible: true,
@@ -56,10 +60,12 @@ describe('Test Group component Vuex Actions', () => {
   }
 
   let group3 = {
+    guid: '33347847837438408302948923489',
+
     name: 'Group 3',
     title: {
-      'en': 'New Group',
-      'fr': 'Fr: New Group'
+      en: 'New Group',
+      fr: 'Fr: New Group'
     },
     isRepeatable: true,
     isVisible: true,
@@ -94,8 +100,12 @@ describe('Test Group component Vuex Actions', () => {
     // tests copying group from index 0
     let expected = _.cloneDeep(theOriginalListOfGroups[0])
     expected.sortOrder = 2
-
-    actions.repeatGroup(context, theOriginalListOfGroups[0])
+    let guid = '47847837438408302948923489'
+    actions.repeatGroup(context, {
+      group: theOriginalListOfGroups[0],
+      guid: theOriginalListOfGroups[0].guid,
+      groups: theOriginalListOfGroups
+    })
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
       copiedGroup: expected,
       insertAt: 2
@@ -105,7 +115,11 @@ describe('Test Group component Vuex Actions', () => {
     let expected1 = _.cloneDeep(theOriginalListOfGroups[0])
     expected1.sortOrder = 2
 
-    actions.repeatGroup(context, theOriginalListOfGroups[1])
+    actions.repeatGroup(context, {
+      group: theOriginalListOfGroups[1],
+      guid: theOriginalListOfGroups[1].guid,
+      groups: theOriginalListOfGroups
+    })
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
       copiedGroup: expected1,
       insertAt: 2
@@ -118,7 +132,11 @@ describe('Test Group component Vuex Actions', () => {
     let expected2 = _.cloneDeep(theOriginalListOfGroups[2])
     expected2.sortOrder = 3
 
-    actions.repeatGroup(context, theOriginalListOfGroups[2])
+    actions.repeatGroup(context, {
+      group: theOriginalListOfGroups[2],
+      guid: theOriginalListOfGroups[2].guid,
+      groups: theOriginalListOfGroups
+    })
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
       copiedGroup: expected2,
       insertAt: 3
@@ -133,7 +151,11 @@ describe('Test Group component Vuex Actions', () => {
     expected3.sortOrder = 4
 
     // tests copying group from index 3
-    actions.repeatGroup(context, theOriginalListOfGroups[3])
+    actions.repeatGroup(context, {
+      group: theOriginalListOfGroups[3],
+      guid: theOriginalListOfGroups[3].guid,
+      groups: theOriginalListOfGroups
+    })
     expect(context.commit).toHaveBeenCalledWith('repeatGroup', {
       copiedGroup: expected3,
       insertAt: 4
@@ -147,27 +169,16 @@ describe('Test Group component Vuex Actions', () => {
 
     // test payload
     const group = {}
+    const groups = []
 
     actions.removeGroup(context, group)
     expect(context.commit).toHaveBeenCalledWith('removeGroup', {
-      group: {}
+      group: {},
+      groups
     })
   })
 
-  test('updateGroupOrder', async () => {
-    const context = {
-      commit: jest.fn()
-    }
-
-    const targetedGroup = { group: {}, order: 0 }
-
-    actions.updateGroupOrder(context, targetedGroup)
-    expect(context.commit).toHaveBeenCalledWith('UpdateGroupOrder', {
-      group: {}
-    })
-  })
-
-  test('updateGroupHtmlElementId', async () => {
+  test('updateGroupDomId', async () => {
     let filteredSimilarGroups = [
       {
         name: 'Group1',
@@ -187,16 +198,17 @@ describe('Test Group component Vuex Actions', () => {
     // test first item in the group array
     let group = { group: filteredSimilarGroups[0] }
 
-    actions.updateGroupHtmlElementId(context, group)
-    expect(context.commit).toHaveBeenCalledWith('updateGroupHtmlElementId', {
-      group: filteredSimilarGroups[0], domSuffix: '#000'
+    actions.updateGroupDomId(context, group)
+    expect(context.commit).toHaveBeenCalledWith('UPDATE_GROUP_DOM_ID', {
+      group: filteredSimilarGroups[0],
+      domSuffix: '#000'
     })
 
     // test second item in the group array
     group = { group: filteredSimilarGroups[1] }
 
-    actions.updateGroupHtmlElementId(context, group)
-    expect(context.commit).toHaveBeenCalledWith('updateGroupHtmlElementId', {
+    actions.updateGroupDomId(context, group)
+    expect(context.commit).toHaveBeenCalledWith('UPDATE_GROUP_DOM_ID', {
       group: filteredSimilarGroups[1],
       domSuffix: '#001'
     })
