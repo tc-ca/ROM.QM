@@ -852,8 +852,8 @@ export default {
     },
     updateSupplementaryInfo (args) {
       if (this.question.type === QUESTION_TYPE.RADIO) {
-        let originalOption = this.question.responseOptions.find(option => option.id === args.optionPreviousId)
-        let selectedOption = this.question.responseOptions.find(option => option.id === args.optionCurrentId)
+        let originalOption = this.question.responseOptions.find(option => option.guid === args.optionPreviousId)
+        let selectedOption = this.question.responseOptions.find(option => option.guid === args.optionCurrentId)
 
         // if user changes option
         if (args.optionCurrentId !== args.optionPreviousId) {

@@ -121,10 +121,10 @@ export default {
       return this.selectedOption.value
     },
     currentId () {
-      return this.selectedOption.id
+      return this.selectedOption.guid
     },
     previousId () {
-      return this.selOldOption !== null ? this.selOldOption.id : this.selectedOption.id
+      return this.selOldOption !== null ? this.selOldOption.guid : this.selectedOption.guid
     },
     isViolation () {
       if (!this.selectedOption) {
@@ -153,7 +153,7 @@ export default {
   methods: {
     onChange (e, flag) {
       if (this.question.responseOptions.length > 0) {
-        let rs = this.question.responseOptions.find(q => q.id === this.previousId)
+        let rs = this.question.responseOptions.find(q => q.guid === this.previousId)
         // if user changes option
         // and if option has provisions asscoiated to it
         // notify the user of possible lost changes
