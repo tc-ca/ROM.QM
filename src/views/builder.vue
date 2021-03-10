@@ -79,7 +79,6 @@
               <v-text-field
                 v-model="selectedGroup.title[eng]"
                 :label="$t('app.builder.group.englishText')"
-                @change="onGroupTextChange(selectedGroup)"
               />
               <v-text-field
                 v-model="selectedGroup.title[fr]"
@@ -103,7 +102,6 @@
               <v-text-field
                 v-model="selectedQuestion.text[eng]"
                 :label="$t('app.builder.question.englishText')"
-                @change="onQuestionTextChange(selectedQuestion)"
               />
               <v-text-field
                 v-model="selectedQuestion.text[fr]"
@@ -137,7 +135,6 @@
                   v-model="selectedQuestion.isSamplingAllowed"
                   dense
                   :label="$t('app.builder.question.samplingAllowed')"
-                  @change="setSamplingRecord()"
                 />
                 <div v-if="isRepeatableVisible">
                   <v-checkbox
@@ -180,7 +177,6 @@
                         v-model="responseOption.text[eng]"
                         dense
                         :label="$t('app.builder.responseOptions.englishText')"
-                        @change="onOptionTextChange(responseOption)"
                       />
                       <v-text-field
                         v-model="responseOption.text[fr]"
@@ -301,7 +297,7 @@
                             >
                               <v-sheet class="pa-4">
                                 <v-text-field
-                                  v-model="responseOption.searchProvisions"
+                                  v-model="responseOption.provisions"
                                   :label="$t('app.builder.responseOptions.provisions.search')"
                                   outlined
                                   hide-details
@@ -648,7 +644,7 @@ import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
-import { generateName } from '../utils.js'
+
 export default {
   name: 'Builder',
   components: {
@@ -806,69 +802,7 @@ export default {
       this.flagTimer = setTimeout(() => this.isDirty(), 3000)
       if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
-    onGroupTextChange (selectedGroup) {
-      selectedGroup.primaryKey = generateName(selectedGroup.title[LANGUAGE.ENGLISH], 'GRP', this.questionnaire.name)
-      selectedGroup.questions.forEach(q => {
-        this.onQuestionTextChange(q)
-      })
-    },
-    onQuestionTextChange (question) {
-      let questiontext = question.text[LANGUAGE.ENGLISH]
-
-      switch (question.type) {
-        case QUESTION_TYPE.TEXT: questiontext = 'TXT'
-          break
-        case QUESTION_TYPE.RADIO: questiontext = 'RD'
-          break
-        case QUESTION_TYPE.SELECT: questiontext = 'SLCT'
-          break
-        // case QUESTION_TYPE.IMAGE: questiontext = 'IMG'
-        //   break
-        case QUESTION_TYPE.NUMBER: questiontext = 'NBR'
-          break
-        case QUESTION_TYPE.REFERENCE: questiontext = 'REF'
-          break
-      }
-
-      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'QTN', questiontext + '_' + this.selectedGroup.primaryKey)
-      if (question.childQuestions) {
-        question.childQuestions.forEach(q => {
-          this.onQuestionTextChange(q)
-          if (q.responseOptions) {
-            q.responseOptions.forEach(o => {
-              this.onOptionTextChange(o)
-            })
-          }
-        })
-        if (question.responseOptions) {
-          question.responseOptions.forEach(o => {
-            this.onOptionTextChange(o)
-          })
-        }
-      }
-    },
-    onOptionTextChange (option) {
-      if (option) {
-        if (option.text[LANGUAGE.ENGLISH] && this.selectedQuestion) {
-          option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
-        } else {
-          option.name = generateName(Math.random().toString(16).slice(2), 'RSPNS')
-        }
-      }
-    },
-    setSamplingRecord () {
-      if (this.selectedQuestion) {
-        if (this.selectedQuestion.isSamplingAllowed) {
-          this.selectedQuestion.samplingRecord = {
-            approximateTotal: '',
-            sampleSize: '',
-            nonCompliances: ''
-          }
-        } else {
-          this.selectedQuestion.samplingRecord = null
-        }
-      }
-    },
+    // TODO - I'm here
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
     },
@@ -928,7 +862,6 @@ export default {
           this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
           this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
         this.selectedQuestion.responseOptions.length = 0
-        this.onQuestionTextChange(this.selectedQuestion)
       } else {
         if (this.selectedQuestion.responseOptions == null || this.selectedQuestion.responseOptions.length === 0) {
           this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
