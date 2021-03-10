@@ -29,7 +29,7 @@ function createGroup(questionnaire) {
     domSuffix: "",
     guid: guid,
     name: guid,
-    sortOrder: getNextGroupId(questionnaire),
+    sortOrder: questionnaire.groups.length + 1,
     title: {
       [LANGUAGE.ENGLISH]: "New Group",
       [LANGUAGE.FRENCH]: "Fr: New Group"
@@ -41,179 +41,115 @@ function createGroup(questionnaire) {
   return group;
 }
 
-function createQuestion(questionnaire, group, type = QUESTION_TYPE.RADIO) {
-  let id = getNextQuestionId(questionnaire);
+function createQuestion(group, type = QUESTION_TYPE.RADIO) {
   let guid = uuidv4();
-  let questionName = generateName("Question", "QTN", "RD_" + group.primaryKey);
+  let sortOrder = group.questions.length + 1;
+  
+  let responseOptions = [];
+  if (type === QUESTION_TYPE.RADIO) {
+    responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Yes",[LANGUAGE.FRENCH]: "Oui"},"true"));
+    responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "No",[LANGUAGE.FRENCH]: "Non"},"false"));
+  } else if (type === QUESTION_TYPE.SELECT) {
+    responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Yes",[LANGUAGE.FRENCH]: "Oui"},"true"));
+    responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "No",[LANGUAGE.FRENCH]: "Non"},"false"));
+  } else {
+    responseOptions.push(createResponseOption(1,null,""));
+  }
+
+  let validationRules = [];
+  validationRules.push(createGenericValidationRule());
 
   let question = {
-    name: questionName,
-    id: id,
     guid: guid,
-    sortOrder: id,
-    isVisible: true,
+    name: guid,
+    sortOrder: sortOrder,
     text: {
       [LANGUAGE.ENGLISH]: "Question text",
       [LANGUAGE.FRENCH]: "FR: Question text"
     },
     type: type,
-    response: null,
-    isSamplingAllowed: false,
-    samplingRecord: null,
-    validationState: true, //not too sure what this should be set to by default
     isRepeatable: false,
     isRepeated: false,
-
-    responseOptions: [
-      {
-        id: 1,
-        name: generateName("Response Yes", "RSPNS", questionName),
-        sortOrder: 1,
-        text: {
-          [LANGUAGE.ENGLISH]: "Yes",
-          [LANGUAGE.FRENCH]: "FR: Yes"
-        },
-        value: "true",
-        internalComment: {
-          option: "optional",
-          value: ""
-        },
-        externalComment: {
-          option: "optional",
-          value: ""
-        },
-        file: {
-          option: "optional",
-          value: []
-        },
-        picture: {
-          option: "optional",
-          value: []
-        },
-        provisions: [],
-        selectedProvisions: [],
-        selectedProvisionsTitles: [],
-        searchProvisions: null,
-        isProvisionCollapsed: false
-        // ...
-      },
-      {
-        id: 2,
-        name: generateName("Response No", "RSPNS", questionName),
-        sortOrder: 2,
-        text: {
-          [LANGUAGE.ENGLISH]: "No",
-          [LANGUAGE.FRENCH]: "FR: No"
-        },
-        value: "false",
-        internalComment: {
-          option: "optional",
-          value: ""
-        },
-        externalComment: {
-          option: "required",
-          value: ""
-        },
-        file: {
-          option: "optional",
-          value: []
-        },
-        picture: {
-          option: "optional",
-          value: []
-        },
-        provisions: [],
-        selectedProvisions: [],
-        selectedProvisionsTitles: [],
-        searchProvisions: null,
-        isProvisionCollapsed: false
-      }
-    ],
-    validationRules: [
-      {
-        name: "require", // use it as a reference for parent question to enable/disable validator
-        enabled: true,
-        type: "require", // min, max....
-        value: null,
-        errorMessage: {
-          [LANGUAGE.ENGLISH]: "Required",
-          [LANGUAGE.FRENCH]: "FR: Required"
-        }
-      }
-    ],
-    violationInfo: {
-      responseToMatch: "false", // value to compare to question.response. If matches then supplementaryInfo rule is applied
-      matchingType: "equal", // notEqual, greaterThen, lessThen...
-      referenceID: null
-    },
-    childQuestions: [],
+    isSamplingAllowed: false,
+    isVisible: true,
+    responseOptions: responseOptions,
+    validationRules: validationRules,
+    validationState: true,
     dependants: [],
-    dependencyGroups: []
+    dependencyGroups: [],
+    childQuestions: [],
+    result: null
   };
-
-  // question.name = 'Question ' + id
-
   return question;
 }
 
-function createResponseOption(question) {
-  let id = question.responseOptions.length + 1;
+function convertToReferenceQuestion(rQuestion) {
+  rQuestion.sortOrder = 1;
+  rQuestion.text = {
+    [LANGUAGE.ENGLISH]: "Reference ID",
+    [LANGUAGE.FRENCH]: "FR: Reference ID"
+  };
+  rQuestion.type = QUESTION_TYPE.REFERENCE;
+  rQuestion.childQuestions = [];
+  rQuestion.responseOptions = [];
+  rQuestion.responseOptions.push(createResponseOption(1,null,""));
+  rQuestion.validationRules = [];
+  rQuestion.validationRules.push(createGenericValidationRule());
+
+  rQuestion.isRepeatable = false;
+  rQuestion.isRepeated = false;
+  rQuestion.isSamplingAllowed = false;
+  rQuestion.isVisible = true;
+  rQuestion.dependants = [];
+  rQuestion.dependencyGroups = [];
+  rQuestion.result = null;
+
+  return rQuestion;
+}
+
+function createReferenceQuestion(questionnaire) {
+  let rQuestion = createQuestion(questionnaire);
+  return convertToReferenceQuestion(rQuestion);
+}
+
+function createGenericValidationRule() {
   return {
-    id: id,
-    name: generateName(`Option ${id}`, "RSPNS", question.Name),
-    sortOrder: id,
+    enabled: true,
+    errorMessage: {
+      [LANGUAGE.ENGLISH]: "Required",
+      [LANGUAGE.FRENCH]: "FR Required"
+    },
+    name: "require",
+    type: "require",
+    value: null
+  }
+}
+
+function createGenericResponseOption() {
+  let guid = uuidv4();
+  return {
+    guid: guid,
+    name: guid,
+    sortOrder: -1,
     text: {
       [LANGUAGE.ENGLISH]: `Option ${id}`,
       [LANGUAGE.FRENCH]: `FR: Option ${id}`
     },
-    value: id,
-    provisions: [], //createProvisions(),
-    selectedProvisions: [],
-    searchProvisions: null,
-    isProvisionCollapsed: false,
-    internalComment: {
-      option: "optional",
-      value: ""
-    },
-    externalComment: {
-      option: "optional",
-      value: ""
-    },
-    file: {
-      option: "optional",
-      value: []
-    },
-    picture: {
-      option: "optional",
-      value: []
-    }
+    value: "1",
+    internalCommentRequirement: "optional",
+    externalCommentRequirement: "optional",
+    pictureRequirement: "optional",
+    fileRequirement: "optional",
+    provisions: []
   };
 }
 
-function convertToReferenceQuestion(rQuestion) {
-  rQuestion.name = "Reference ID";
-  rQuestion.id = 0;
-  rQuestion.sortOrder = 1;
-  rQuestion.text = {
-    [LANGUAGE.ENGLISH]: "Reference ID",
-    [LANGUAGE.FRENCH]: "FR: Reference ID"
-  };
-  rQuestion.type = QUESTION_TYPE.REFERENCE;
-  return rQuestion;
-}
-
-function createReferenceQuestion(questionnaire, group) {
-  let rQuestion = createQuestion(questionnaire, group);
-  rQuestion.name = "Reference ID";
-  rQuestion.id = 0;
-  rQuestion.sortOrder = 1;
-  rQuestion.text = {
-    [LANGUAGE.ENGLISH]: "Reference ID",
-    [LANGUAGE.FRENCH]: "FR: Reference ID"
-  };
-  rQuestion.type = QUESTION_TYPE.REFERENCE;
-  rQuestion.responseOptions = [];
-  return rQuestion;
+function createResponseOption(sortOrder,text, value) {
+  let ro = createGenericResponseOption();
+  ro.sortOrder = sortOrder;
+  ro.text = text;
+  ro.value = value;
+  return ro;
 }
 
 function findReferenceQuestion(group, guid = "") {
@@ -223,20 +159,15 @@ function findReferenceQuestion(group, guid = "") {
   return q;
 }
 
-function GenerateRepeatedQuestion(questionnaire, oQuestion) {
+function GenerateRepeatedQuestion(oQuestion) {
   let nQuestion = null;
   try {
-    let lastId = getNextQuestionId(questionnaire);
     nQuestion = _.cloneDeep(oQuestion);
     setNewGUID(nQuestion);
-    nQuestion.id = lastId++;
     nQuestion.isRepeatable = false;
     nQuestion.isRepeated = true;
     nQuestion.isVisible = true;
     nQuestion.sortOrder = oQuestion.sortOrder + 1;
-
-    //Fixing the id
-    nQuestion.childQuestions.forEach(cq => cq.id = lastId++);
 
     //Fixing dependants on new Question
     nQuestion.dependants.forEach(d => {
@@ -292,57 +223,23 @@ function findGroupForQuestionById(groups, qGuid) {
   return group;
 }
 
-function createChildQuestion(questionnaire, question, group) {
-  let q = createQuestion(questionnaire, group);
-  q.sortOrder = question.childQuestions.length + 1;
-  return q;
-}
-
-function getNextGroupId(questionnaire) {
-  return questionnaire.groups.length;
-}
-
-function getNextQuestionId(questionnaire) {
-  let length = 0;
-  questionnaire.groups.forEach(group => {
-    length += getTotalQuestionsNumber(group.questions);
-  });
-
-  return length + 1;
-}
-
-function getTotalQuestionsNumber(questions) {
-  let length = 0;
-  length += questions.length;
-
-  questions.forEach(q => {
-    length += getTotalQuestionsNumber(q.childQuestions);
-  });
-  return length;
-}
-
 function createProvisions() {
   return this.$store.state.legislations;
-}
-
-function createValidator() {
-  return {
-    name: "require", // use it as a reference for parent question to enable/disable validator
-    enabled: true,
-    type: "require",
-    value: null,
-    errorMessage: {
-      [LANGUAGE.ENGLISH]: "Required",
-      [LANGUAGE.FRENCH]: "Fr: Required"
-    }
-  };
 }
 
 function createDependencyGroup() {
   return {
     ruleType: "visibility", // or validation or validationValue (questionDependencies should be only one item)
-    childValidatorName: null,
+    childValidatorName: "",
     questionDependencies: []
+  };
+}
+
+function createQuestionDependency(dependsOnGuid, validationAction = "equal", validationValue = "false") {
+  return {
+    dependsOnQuestion: { guid: dependsOnGuid},
+    validationAction: validationAction,
+    validationValue: validationValue
   };
 }
 
@@ -918,13 +815,11 @@ export default {
   createReferenceQuestion,
   convertToReferenceQuestion,
   createProvisions,
-  createChildQuestion,
+  createGenericResponseOption,
   createResponseOption,
-  createValidator,
   createDependencyGroup,
   findReferenceQuestion,
   findGroupForQuestionById,
-  getNextQuestionId,
   GetMockQuestionnaireFromImportModule,
   processBuilderForSave,
   FindNonUniqueIds,
@@ -933,5 +828,7 @@ export default {
   GenerateRepeatedQuestion,
   isParentAGroup,
   cloneVisibleQuestionsOnly,
-  fixTextToShowInDrawer
+  fixTextToShowInDrawer,
+  createGenericValidationRule,
+  createQuestionDependency
 };

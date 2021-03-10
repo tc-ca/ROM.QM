@@ -192,7 +192,7 @@ export default {
     addQuestion ($event) {
       $event.stopPropagation()
 
-      const childQuestion = BuilderService.createChildQuestion(this.questionnaire, this.question, this.group)
+      const childQuestion = BuilderService.createQuestion(this.questionnaire, this.question, this.group)
 
       this.question.childQuestions.push(childQuestion)
 
