@@ -166,8 +166,8 @@
               <div v-if="displayViolationInfo && !isReferenceQuestion">
                 <div>
                   <v-text-field
-                    v-model="referenceId"
-                    :disabled="readOnly"
+                    v-model="questionResult.violationInfo.referenceId"
+                    :disabled="isViolationInfoReferenceIdDisabled || readOnly"
                     :label="$t('app.questionnaire.group.question.referenceId')"
                     :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                     filled
@@ -281,8 +281,8 @@
           <div v-if="displayViolationInfo && !isReferenceQuestion">
             <div>
               <v-text-field
-                v-model="referenceId"
-                :disabled="readOnly"
+                v-model="questionResult.violationInfo.referenceId"
+                :disabled=" isViolationInfoReferenceIdDisabled ||readOnly"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 filled
@@ -467,7 +467,7 @@ export default {
       treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
       isReferenceQuestion: false,
-      isReferenceQuestionInGroup: false,
+      isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
       responseArgs: null,
@@ -475,7 +475,9 @@ export default {
       tab: null,
       tags: [],
       searchProvisions: null,
-      referenceId: null
+      referenceId: null,
+      responses: null,
+      questionResult: { responses: [], violationInfo: { violationCount: null, referenceId: null, selectedProvisions: [] } }
     }
   },
   computed: {
@@ -631,7 +633,6 @@ export default {
       }
     })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
-    this.updateReferenceId()
   },
   methods: {
     setTab (value) {
@@ -718,10 +719,12 @@ export default {
     updateReferenceId () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
       if (!this.isReferenceQuestion) {
-        const rQ = BuilderService.findReferenceQuestion(this.group)
-        if (rQ) {
-          if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.referenceId) {
-            this.question.result.violationInfo.referenceId = rQ.response
+        const referenceQuestion = BuilderService.findReferenceQuestion(this.group)
+        if (referenceQuestion) {
+          this.isViolationInfoReferenceIdDisabled = true
+
+          if (this.question.result && this.question.result.violationInfo) {
+            this.questionResult.violationInfo.referenceId = referenceQuestion.response
           }
         }
       }
@@ -816,8 +819,7 @@ export default {
       // the process and therefore be empty when this method is executing)
       if (!this.isFlatLegislationsDataAvailable) { return }
 
-      // todo replace with luis builderService Function
-      this.question.result = { violationInfo: { referenceId: null, violationCount: null, selectedProvisions: [] } }
+      this.question.result = this.questionResult
 
       this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
       if (this.selectedResponseOption) {
@@ -827,6 +829,7 @@ export default {
 
       this.updateSupplementaryInfoVisibility(args)
       this.updateDependants(args)
+      this.updateReferenceId()
       this.isValid = this.getChildQuestionValidationState()
       this.$emit('responseChanged')
       if (this.isReferenceQuestion) {
