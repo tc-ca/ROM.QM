@@ -2,56 +2,56 @@
 Todo checklist of task to be done in the questionnaire side of things.
 
 Template=======
-rename:".templateid"  by ".guid" --todo/is to be set in the builderService (will not update, will let Luis do it)
+(todo) rename:".templateid"  by ".guid" --todo/is to be set in the builderService (will not update, will let Luis do it)
 
  
 Group ======
 
-rename: ".primaryKey" to ".name" (done) ainsley
-rename:".order" to ".sortOrder" (done) ainsley
-rename:".htmlElementId" to "domId" (done) ainsley
-rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
+(done) rename: ".primaryKey" to ".name"  ainsley
+(done) rename:".order" to ".sortOrder"  ainsley
+(done) rename:".htmlElementId" to "domId"  ainsley
+(todo) rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
-remove: ."expansionPanels" (done) santosh
+(done) remove: ."expansionPanels"  santosh
 
 
 
 Question ======
 
-rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
-remove: ".id" (done)
-remove: ".isMultiple" (done) santosh 
-remove: ".response" --todo santosh
+(todo) rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
+(done) remove: ".id" 
+(done) remove: ".isMultiple"  santosh 
+(todo) remove: ".response"  santosh
 
-move: .samplingRecord to .result object
+(todo) move: .samplingRecord to .result object
 
 --responseOptions
-rename: ".id" to ".guid" (done) santosh
-move: ".selectedProvisions" to .result object
-remove: ".searchProvisions" move to component data member
-remove: ".isProvisionCollapsed" move to component data member
-refactor: ".internalComment" to String and rename to ".internalCommentRequirement"
-refactor: ".externalComment" to String and rename to ".externalCommentRequirement"
-refactor: ".picture" to String and rename to ".pictureRequirement"
-refactor: ".file" to String and rename to ".fileRequirement"
+(done) rename: ".id" to ".guid" santosh
+(todo) move: ".selectedProvisions" to .result object
+(todo) remove: ".searchProvisions" move to component data member
+(todo) remove: ".isProvisionCollapsed" move to component data member
+(todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement"
+(todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement"
+(todo) refactor: ".picture" to String and rename to ".pictureRequirement"
+(todo) refactor: ".file" to String and rename to ".fileRequirement"
 
 ---- REFACTOR violationInfo
-move: violationInfo object to result todo
-remove: ".responseToMatch' (done) santosh
-remove: ".matchingType" (done) santosh
+(todo) move: violationInfo object to result
+(done) remove: ".responseToMatch' santosh
+(done) remove: ".matchingType" santosh
 
 condition: if not null should have properties of ."referenceID" and ".violationCount"
 
 
 ----ADD result object
-add: external comment type string
-add: internal comment type string
-add: files type object check typescript
-add: pictures type object check typescript
-add: sampling record type object check typescript
-add: violation info type object check typescript
-add: responses array of objects type object check typescript
+(todo) add: external comment type string
+(todo) add: internal comment type string
+(todo) add: files type object check typescript
+(todo) add: pictures type object check typescript
+(todo) add: sampling record type object check typescript
+(todo) add: violation info type object check typescript
+(todo) add: responses array of objects type object check typescript
 
  
 
