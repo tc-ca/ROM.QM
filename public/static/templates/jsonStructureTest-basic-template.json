@@ -43,7 +43,6 @@
                             "value": 1,
                             "provisions": [],
                             "selectedProvisions": [],
-                            "isProvisionCollapsed": false,
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -129,8 +128,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -158,8 +156,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
@@ -226,8 +223,7 @@
                                         "value": []
                                     },
                                     "provisions": [],
-                                    "selectedProvisions": [],
-                                    "isProvisionCollapsed": false
+                                    "selectedProvisions": []
                                 },
                                 {
                                     "guid": 2,
@@ -274,8 +270,7 @@
                                         "fd9c4294-78ab-47ac-b252-808577cdfdf3",
                                         "488db8ca-3022-456e-9df9-f21d2ba63791"
                                     ],
-                                    "selectedProvisions": [],
-                                    "isProvisionCollapsed": true
+                                    "selectedProvisions": []
                                 }
                             ],
                             "validationRules": [
@@ -400,8 +395,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -429,8 +423,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
@@ -547,8 +540,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -576,8 +568,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
@@ -657,8 +648,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -686,8 +676,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
