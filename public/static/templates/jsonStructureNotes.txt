@@ -38,12 +38,15 @@ Question ======
 (todo) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
 ---- Move/ refactor violationInfo
-(todo) move: violationCount to resultObject under violationInfo ainsley
-(done) move: referenceId to resultObject under violationInfo ainsley
+(done) move: ".violationCount" to resultObject under violationInfo ainsley
+(done) move: ".referenceId" to resultObject under violationInfo ainsley
 (done) remove: ".responseToMatch' santosh
 (done) remove: ".matchingType" santosh
 
-condition: if not null should have properties of ."referenceID" and ".violationCount"
+---- Move/ Sampling
+(todo) move: ".approximateTotal" to resultObject under samplingRecord ainsley
+(todo) move: ".sampleSize" to resultObject under samplingRecord ainsley
+
 
 
 ----ADD result object
@@ -51,8 +54,8 @@ condition: if not null should have properties of ."referenceID" and ".violationC
 (todo) add: internal comment type string
 (todo) add: files type object check typescript
 (todo) add: pictures type object check typescript
-(todo) add: sampling record type object check typescript
-(todo) add: violation info type object check typescript
+(todo) add: sampling record type object check typescript ainsley
+(done) add: violation info type object check typescript ainsley
 (todo) add: responses array of objects type object check typescript
 
  
