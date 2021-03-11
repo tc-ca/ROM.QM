@@ -1,8 +1,8 @@
 
-Todo checklist of task to be done in the questionnaire side of things.
+Todo checklist of task to be done in the questionnaire side of things. 
 
 Template=======
-(todo) rename:".templateid"  by ".guid" --todo/is to be set in the builderService (will not update, will let Luis do it)
+(skip) rename:".templateid"  by ".guid" (is to be set in the builderService, will not update, will let Luis do it)
 
  
 Group ======
@@ -13,7 +13,7 @@ Group ======
 (todo) rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
-(done) remove: ."expansionPanels"  (santosh)
+(done) remove: ."expansionPanels"  santosh
 
 
 
@@ -21,16 +21,17 @@ Question ======
 
 (todo) rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
 (done) remove: ".id" 
-(done) remove: ".isMultiple"  (santosh) 
-(todo) remove: ".response"  (santosh)
+(done) remove: ".isMultiple"  santosh 
+(todo) remove: ".response"  santosh
 
 (todo) move: .samplingRecord to .result object
 
 --responseOptions
-(done) rename: ".id" to ".guid" (santosh)
-(todo) move: ".selectedProvisions" to .result object
-(todo) remove: ".searchProvisions" move to component data member ainsley
-(todo) remove: ".isProvisionCollapsed" move to component data member ainsley
+(done) rename: ".id" to ".guid" santosh
+(todo) move: ".selectedProvisions" to .result object ainsley
+(done) remove: ".searchProvisions" move to component data member ainsley
+(done) remove: ".selectedProvisionsTitles" ainsley
+(skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
 (todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
 (todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
 (todo) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
@@ -38,8 +39,8 @@ Question ======
 
 ---- REFACTOR violationInfo
 (todo) move: violationInfo object to result
-(done) remove: ".responseToMatch' (santosh)
-(done) remove: ".matchingType" (santosh)
+(done) remove: ".responseToMatch' santosh
+(done) remove: ".matchingType" santosh
 
 condition: if not null should have properties of ."referenceID" and ".violationCount"
 

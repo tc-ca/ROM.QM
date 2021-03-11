@@ -25,6 +25,7 @@
                     },
                     "type": "reference",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -42,8 +43,6 @@
                             "value": 1,
                             "provisions": [],
                             "selectedProvisions": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false,
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -92,6 +91,7 @@
                     },
                     "type": "radio",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": true,
                     "samplingRecord": {
                         "approximateTotal": "",
@@ -128,10 +128,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -159,10 +156,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
@@ -192,6 +186,7 @@
                             },
                             "type": "radio",
                             "response": null,
+                            "result": null,
                             "isSamplingAllowed": true,
                             "samplingRecord": {
                                 "approximateTotal": "",
@@ -228,10 +223,7 @@
                                         "value": []
                                     },
                                     "provisions": [],
-                                    "selectedProvisions": [],
-                                    "selectedProvisionsTitles": [],
-                                    "searchProvisions": null,
-                                    "isProvisionCollapsed": false
+                                    "selectedProvisions": []
                                 },
                                 {
                                     "guid": 2,
@@ -278,10 +270,7 @@
                                         "fd9c4294-78ab-47ac-b252-808577cdfdf3",
                                         "488db8ca-3022-456e-9df9-f21d2ba63791"
                                     ],
-                                    "selectedProvisions": [],
-                                    "selectedProvisionsTitles": [],
-                                    "searchProvisions": null,
-                                    "isProvisionCollapsed": true
+                                    "selectedProvisions": []
                                 }
                             ],
                             "validationRules": [
@@ -336,6 +325,7 @@
                     },
                     "type": "text",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -372,6 +362,7 @@
                     },
                     "type": "select",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -404,10 +395,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -435,10 +423,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
@@ -471,6 +456,7 @@
                     },
                     "type": "number",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -522,6 +508,7 @@
                     },
                     "type": "radio",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -554,10 +541,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -585,10 +569,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
@@ -636,6 +617,7 @@
                     },
                     "type": "radio",
                     "response": null,
+                    "result": null,
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -668,10 +650,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         },
                         {
                             "guid": 2,
@@ -699,10 +678,7 @@
                                 "value": []
                             },
                             "provisions": [],
-                            "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
-                            "isProvisionCollapsed": false
+                            "selectedProvisions": []
                         }
                     ],
                     "validationRules": [
