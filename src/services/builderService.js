@@ -41,9 +41,9 @@ function createGroup(index) {
   return group;
 }
 
-function createQuestion(group, type = QUESTION_TYPE.RADIO) {
+function createQuestion(parent, type = QUESTION_TYPE.RADIO) {
   let guid = uuidv4();
-  let sortOrder = group.questions.length + 1;
+  let sortOrder = (parent.questions !== undefined) ? parent.questions.length + 1: parent.childQuestions.length + 1;
   
   let responseOptions = [];
   if (type === QUESTION_TYPE.RADIO) {
@@ -252,6 +252,19 @@ function createQuestionDependency(dependsOnGuid, validationAction = "equal", val
   qd.validationAction = validationAction;
   qd.validationValue = validationValue;
   return qd;
+}
+
+function createGenericResult() {
+  let result = {
+    externalComment: '',
+    internalComment: '',
+    files: null,
+    pictures: null,
+    samplingRecord: null,
+    responses: [],
+    violationInfo: null
+  };
+  return result;
 }
 
 function processBuilderForSave(questionnaire) {
@@ -852,5 +865,6 @@ export default {
   fixTextToShowInDrawer,
   createGenericValidationRule,
   createQuestionDependency,
-  createGenericQuestionDependency
+  createGenericQuestionDependency,
+  createGenericResult
 };

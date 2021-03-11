@@ -192,12 +192,9 @@ export default {
     addQuestion ($event) {
       $event.stopPropagation()
 
-      const childQuestion = BuilderService.createQuestion(this.questionnaire, this.question, this.group)
-
+      const childQuestion = BuilderService.createQuestion(this.question)
       this.question.childQuestions.push(childQuestion)
-
       this.childQuestionPanels.push(childQuestion.sortOrder - 1)
-
       this.$emit('childQuestionAdded', childQuestion)
     },
     confirmRemoveQuestion () {
@@ -207,11 +204,9 @@ export default {
       this.$emit('removeQuestion', this.group, this.question)
     },
     removeChildQuestion (childQuestion) {
-      for (let i = 0; i < this.question.childQuestions.length; i++) {
-        if (this.question.childQuestions[i] === childQuestion) {
-          this.question.childQuestions.splice(i, 1)
-          break
-        }
+      const idx = this.question.childQuestions.findIndex(cq => cq.guid === childQuestion.guid)
+      if (idx > -1) {
+        this.question.childQuestions.splice(idx, 1)
       }
       this.$emit('childQuestionRemoved', childQuestion)
     },
