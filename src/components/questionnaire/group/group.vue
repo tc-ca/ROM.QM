@@ -267,11 +267,13 @@ export default {
           this.groupSubtitle = `REFERENCE ID: ${rQ.response}`
           this.group.questions.forEach(q => {
             if (q.guid !== rQ.guid) {
-              q.violationInfo.referenceID = rQ.response
+              if (q.result && q.result.violationInfo && q.result.violationInfo.referenceId) {
+                q.result.violationInfo.referenceId = rQ.response
+              }
             }
           })
           this.$refs.groupQuestion.forEach(gq => {
-            gq.updateReferenceID()
+            gq.updateReferenceId()
           })
         }
       }

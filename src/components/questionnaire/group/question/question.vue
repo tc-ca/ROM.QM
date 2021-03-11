@@ -166,8 +166,8 @@
               <div v-if="displayViolationInfo && !isReferenceQuestion">
                 <div>
                   <v-text-field
-                    v-model="question.violationInfo.referenceID"
-                    :disabled="isViolationInfoReferenceIdDisabled || readOnly"
+                    v-model="referenceId"
+                    :disabled="readOnly"
                     :label="$t('app.questionnaire.group.question.referenceId')"
                     :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                     filled
@@ -281,8 +281,8 @@
           <div v-if="displayViolationInfo && !isReferenceQuestion">
             <div>
               <v-text-field
-                v-model="question.violationInfo.referenceID"
-                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
+                v-model="referenceId"
+                :disabled="readOnly"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 filled
@@ -468,14 +468,14 @@ export default {
       selProvisions: [],
       isReferenceQuestion: false,
       isReferenceQuestionInGroup: false,
-      isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
       responseArgs: null,
       filteredInByProvisionSearch: true,
       tab: null,
       tags: [],
-      searchProvisions: null
+      searchProvisions: null,
+      referenceId: null
     }
   },
   computed: {
@@ -631,7 +631,7 @@ export default {
       }
     })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
-    this.updateReferenceID()
+    this.updateReferenceId()
   },
   methods: {
     setTab (value) {
@@ -715,20 +715,15 @@ export default {
         this.displaySamplingRecord = false
       }
     },
-    updateReferenceID () {
+    updateReferenceId () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-      // this.displaySupplementaryInfo = this.isReferenceQuestion
       if (!this.isReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
         if (rQ) {
-          this.isViolationInfoReferenceIdDisabled = false
-          this.isReferenceQuestionInGroup = true
-          this.question.violationInfo.referenceID = rQ.response
-          this.isViolationInfoReferenceIdDisabled = true
-          this.isViolationInfoReferenceIdDisabled = true
+          if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.referenceId) {
+            this.question.result.violationInfo.referenceId = rQ.response
+          }
         }
-      } else {
-        this.isReferenceQuestionInGroup = true
       }
     },
     getSelectedProvisionText (item) {
