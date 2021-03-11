@@ -28,7 +28,7 @@ Question ======
 
 --responseOptions
 (done) rename: ".id" to ".guid" santosh
-(todo) move: ".selectedProvisions" to .result object
+(todo) move: ".selectedProvisions" to .result object ainsley
 (done) remove: ".searchProvisions" move to component data member ainsley
 (done) remove: ".selectedProvisionsTitles" ainsley
 (skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
