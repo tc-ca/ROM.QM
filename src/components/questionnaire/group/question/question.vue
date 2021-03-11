@@ -331,7 +331,6 @@
                 style="background-color:#f5f5f5;"
                 class="mt-2"
               >
-                {{ searchProvisions }}
                 <v-text-field
                   v-model="searchProvisions"
                   :disabled="readOnly"
@@ -525,6 +524,12 @@ export default {
     hasProvisions () {
       return this.provisions.length > 0
     },
+    selectedProvisions () {
+      if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
+        return this.question.result.violationInfo.selectedProvisions
+      }
+      return []
+    },
     getClassName () {
       let selClass = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
       if (selClass === 'selected' && this.$refs.qPanel) this.$refs.qPanel.$el.scrollIntoView(true)
@@ -595,7 +600,7 @@ export default {
   watch: {
     selProvisions: {
       handler () {
-        this.selectedResponseOption.selectedProvisions = this.selProvisions
+        this.question.result.violationInfo.selectedProvisions = this.selProvisions
       },
       deep: true
     },
@@ -816,9 +821,12 @@ export default {
       // the process and therefore be empty when this method is executing)
       if (!this.isFlatLegislationsDataAvailable) { return }
 
+      // todo replace with luis builderService Function
+      this.question.result = { violationInfo: { referenceId: null, violationCount: null, selectedProvisions: [] } }
+
       this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
       if (this.selectedResponseOption) {
-        this.selProvisions = this.selectedResponseOption.selectedProvisions
+        this.selProvisions = this.selectedProvisions
         this.updateViolationInfo(this.selectedResponseOption)
       }
 
@@ -830,10 +838,6 @@ export default {
         this.$emit('reference-change')
       }
     },
-    // updateSupplementaryInfoVisibility (args) {
-    //   this.displaySupplementaryInfo = (args && args.value)
-    //   if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
-    // },
     updateSupplementaryInfoVisibility (args) {
       if (this.showSupplementaryInfo) this.updateSupplementaryInfo(args)
     },
@@ -862,9 +866,6 @@ export default {
           }
         } else {
           this.displayViolationInfo = false
-        }
-        if (responseOption && responseOption.selectedProvisions) {
-          this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
         }
       }
     },
