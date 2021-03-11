@@ -28,7 +28,7 @@ Question ======
 
 --responseOptions
 (done) rename: ".id" to ".guid" santosh
-(todo) move: ".selectedProvisions" to .result object ainsley
+(done) move: ".selectedProvisions" to violationInfo .result object ainsley
 (done) remove: ".searchProvisions" move to component data member ainsley
 (done) remove: ".selectedProvisionsTitles" ainsley
 (skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
@@ -37,8 +37,9 @@ Question ======
 (todo) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
 (todo) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
----- REFACTOR violationInfo
-(todo) move: violationInfo object to result
+---- Move/ refactor violationInfo
+(todo) move: violationCount ainsley
+(todo) move: referenceId ainsley
 (done) remove: ".responseToMatch' santosh
 (done) remove: ".matchingType" santosh
 
