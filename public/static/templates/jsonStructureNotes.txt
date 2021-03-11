@@ -2,56 +2,56 @@
 Todo checklist of task to be done in the questionnaire side of things.
 
 Template=======
-(todo) rename:".templateid"  by ".guid" --todo/is to be set in the builderService (will not update, will let Luis do it)
+(todo/b) rename:".templateid"  by ".guid" (is to be set in the builderService, will not update, will let Luis do it)
 
  
 Group ======
 
-(done) rename: ".primaryKey" to ".name"  ainsley
-(done) rename:".order" to ".sortOrder"  ainsley
-(done) rename:".htmlElementId" to "domId"  ainsley
-(todo) rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
+(done/q) rename: ".primaryKey" to ".name"  ainsley
+(done/q) rename:".order" to ".sortOrder"  ainsley
+(done/q) rename:".htmlElementId" to "domId"  ainsley
+(todo/q) rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
-(done) remove: ."expansionPanels"  santosh
+(done/q) remove: ."expansionPanels"  santosh
 
 
 
 Question ======
 
-(todo) rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
-(done) remove: ".id" 
-(done) remove: ".isMultiple"  santosh 
-(todo) remove: ".response"  santosh
+(todo/q) rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
+(done/q) remove: ".id" 
+(done/q) remove: ".isMultiple"  santosh 
+(todo/q) remove: ".response"  santosh
 
-(todo) move: .samplingRecord to .result object
+(todo/q) move: .samplingRecord to .result object
 
 --responseOptions
-(done) rename: ".id" to ".guid" santosh
-(todo) move: ".selectedProvisions" to .result object
-(todo) remove: ".searchProvisions" move to component data member ainsley
-(todo) remove: ".isProvisionCollapsed" move to component data member ainsley
-(todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
-(todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
-(todo) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
-(todo) refactor: ".file" to String and rename to ".fileRequirement" santosh
+(done/q) rename: ".id" to ".guid" santosh
+(todo/q) move: ".selectedProvisions" to .result object
+(todo/q) remove: ".searchProvisions" move to component data member ainsley
+(todo/b) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
+(todo/q) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
+(todo/q) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
+(todo/q) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
+(todo/q) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
 ---- REFACTOR violationInfo
-(todo) move: violationInfo object to result
-(done) remove: ".responseToMatch' santosh
-(done) remove: ".matchingType" santosh
+(todo/q) move: violationInfo object to result
+(done/q) remove: ".responseToMatch' santosh
+(done/q) remove: ".matchingType" santosh
 
 condition: if not null should have properties of ."referenceID" and ".violationCount"
 
 
 ----ADD result object
-(todo) add: external comment type string
-(todo) add: internal comment type string
-(todo) add: files type object check typescript
-(todo) add: pictures type object check typescript
-(todo) add: sampling record type object check typescript
-(todo) add: violation info type object check typescript
-(todo) add: responses array of objects type object check typescript
+(todo/q) add: external comment type string
+(todo/q) add: internal comment type string
+(todo/q) add: files type object check typescript
+(todo/q) add: pictures type object check typescript
+(todo/q) add: sampling record type object check typescript
+(todo/q) add: violation info type object check typescript
+(todo/q) add: responses array of objects type object check typescript
 
  
 
