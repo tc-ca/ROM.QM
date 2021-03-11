@@ -689,7 +689,7 @@ export default {
       violationsCollapsed: true,
       provisionsCollapsed: true,
       provisions: [],
-      searchProvisions: [],
+      searchProvisions: '',
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],

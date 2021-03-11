@@ -126,15 +126,15 @@ function createGenericValidationRule() {
   }
 }
 
-function createGenericResponseOption() {
+function createGenericResponseOption(sortOrder = -1) {
   let guid = uuidv4();
   return {
     guid: guid,
     name: guid,
-    sortOrder: -1,
+    sortOrder: sortOrder,
     text: {
-      [LANGUAGE.ENGLISH]: `Option ${id}`,
-      [LANGUAGE.FRENCH]: `FR: Option ${id}`
+      [LANGUAGE.ENGLISH]: `Option`,
+      [LANGUAGE.FRENCH]: `FR: Option`
     },
     value: "1",
     internalCommentRequirement: "optional",
@@ -146,8 +146,7 @@ function createGenericResponseOption() {
 }
 
 function createResponseOption(sortOrder,text, value) {
-  let ro = createGenericResponseOption();
-  ro.sortOrder = sortOrder;
+  let ro = createGenericResponseOption(sortOrder);
   ro.text = text;
   ro.value = value;
   return ro;
