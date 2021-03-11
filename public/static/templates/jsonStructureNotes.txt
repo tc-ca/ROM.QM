@@ -30,7 +30,7 @@ Question ======
 (done) rename: ".id" to ".guid" santosh
 (todo) move: ".selectedProvisions" to .result object
 (done) remove: ".searchProvisions" move to component data member ainsley
-(todo) remove: ".selectedProvisionsTitles" ainsley
+(done) remove: ".selectedProvisionsTitles" ainsley
 (skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
 (todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
 (todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
