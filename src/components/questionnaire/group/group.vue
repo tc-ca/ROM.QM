@@ -109,7 +109,6 @@
               :read-only="readOnly"
               @responseChanged="onResponseChanged"
               @error="onError"
-              @group-subtitle-change="onSubtitleChanged"
               @reference-change="onReferenceChanged"
               @update-group-question-count="onUpdateGroupQuestionCount"
               @repeat-question="onRepeatQuestion"
@@ -275,26 +274,6 @@ export default {
             gq.updateReferenceID()
           })
         }
-      }
-    },
-    onSubtitleChanged () {
-      if (this.activegroupHasReferenceQuestion) return
-      this.groupSubtitle = ''
-      if (this.group && this.group.questions) {
-        this.group.questions.forEach(question => {
-          if (question.responseOptions) {
-            for (let x = 0; x < question.responseOptions.length; x++) {
-              if (question.responseOptions[x].selectedProvisionsTitles && question.response === question.responseOptions[x].value) {
-                question.responseOptions[x].selectedProvisionsTitles.forEach(title => {
-                  if (!this.groupSubtitle.includes(title)) {
-                    if (this.groupSubtitle.trim().length > 0) this.groupSubtitle += ', '
-                    this.groupSubtitle += title
-                  }
-                })
-              }
-            }
-          }
-        })
       }
     },
     repeatGroup () {

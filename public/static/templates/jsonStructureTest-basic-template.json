@@ -130,7 +130,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         },
                         {
@@ -160,7 +159,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         }
                     ],
@@ -229,7 +227,6 @@
                                     },
                                     "provisions": [],
                                     "selectedProvisions": [],
-                                    "selectedProvisionsTitles": [],
                                     "isProvisionCollapsed": false
                                 },
                                 {
@@ -278,7 +275,6 @@
                                         "488db8ca-3022-456e-9df9-f21d2ba63791"
                                     ],
                                     "selectedProvisions": [],
-                                    "selectedProvisionsTitles": [],
                                     "isProvisionCollapsed": true
                                 }
                             ],
@@ -405,7 +401,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         },
                         {
@@ -435,7 +430,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         }
                     ],
@@ -554,7 +548,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         },
                         {
@@ -584,7 +577,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         }
                     ],
@@ -666,7 +658,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         },
                         {
@@ -696,7 +687,6 @@
                             },
                             "provisions": [],
                             "selectedProvisions": [],
-                            "selectedProvisionsTitles": [],
                             "isProvisionCollapsed": false
                         }
                     ],

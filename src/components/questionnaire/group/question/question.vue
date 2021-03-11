@@ -425,7 +425,7 @@ import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record.vue'
 
 export default {
-  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
+  emits: ['error', 'responseChanged', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
   mixins: [BaseMixin],
@@ -596,8 +596,6 @@ export default {
     selProvisions: {
       handler () {
         this.selectedResponseOption.selectedProvisions = this.selProvisions
-        this.selectedResponseOption.selectedProvisionsTitles = this.getSelectedProvisionsId()
-        this.$emit('group-subtitle-change')
       },
       deep: true
     },
@@ -741,18 +739,8 @@ export default {
       findDeep(this.treeDataProvisions, item)
       return provison
     },
-    getSelectedProvisionsId () {
-      let list = []
-      if (this.selectedResponseOption && this.selectedResponseOption.selectedProvisions) {
-        this.selectedResponseOption.selectedProvisions.forEach(p => {
-          list.push(this.getSelectedProvisionText(p).trim().toUpperCase())
-        })
-      }
-      return list
-    },
     onSelectedProvisionClick (item) {
       this.selProvisions = this.selProvisions.filter(i => i !== item)
-    // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     loadProvisions (responseOption) {
     // legs in store should be key, value form
@@ -820,7 +808,6 @@ export default {
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
-    // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
       // store the response in data property for reference use
@@ -879,7 +866,6 @@ export default {
         if (responseOption && responseOption.selectedProvisions) {
           this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
         }
-      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
       }
     },
     updateDependants (args) {
