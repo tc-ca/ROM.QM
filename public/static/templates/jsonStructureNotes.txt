@@ -31,10 +31,10 @@ rename--> ".id" to ".guid" --todo santosh (done)
 move--> ".selectedProvisions" to .result object
 remove--> ".searchProvisions" move to component data member
 remove--> ".isProvisionCollapsed" move to component data member
-refactor--> ".internalComment" to String and rename to ".internalCommentRequirement"
-refactor--> ".externalComment" to String and rename to ".externalCommentRequirement"
-refactor--> ".picture" to String and rename to ".pictureRequirement"
-refactor--> ".file" to String and rename to ".fileRequirement"
+refactor--> ".internalComment" to String and rename to ".internalCommentRequirement" --todo santosh
+refactor--> ".externalComment" to String and rename to ".externalCommentRequirement" --todo santosh
+refactor--> ".picture" to String and rename to ".pictureRequirement" --todo santosh
+refactor--> ".file" to String and rename to ".fileRequirement" --todo santosh
 
 ---- REFACTOR violationInfo
 move--> violationInfo object to result
