@@ -49,7 +49,7 @@
       <v-col cols="4">
         <v-text-field
           ref="question.samplingRecord.nonCompliances"
-          v-model.number="question.samplingRecord.nonCompliances"
+          v-model.number="result.violationInfo.violationCount"
           filled
           outlined
           :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
@@ -77,6 +77,10 @@ export default {
     },
     readOnly: {
       type: Boolean,
+      required: true
+    },
+    result: {
+      type: Object,
       required: true
     }
   },
@@ -109,11 +113,11 @@ export default {
       this.errorMessagesTotal = ''
       if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
-          this.question.samplingRecord.nonCompliances === '') {
+          this.result.violationInfo.violationCount === null) {
         return true
       }
       if (this.question.samplingRecord.sampleSize !== '' ||
-          this.question.samplingRecord.nonCompliances !== '') {
+          this.result.violationInfo.violationCount !== null) {
         if (this.question.samplingRecord.approximateTotal === '') {
           this.errorMessagesTotal = 'Approximate Total is required'
           return false
@@ -139,11 +143,11 @@ export default {
       this.errorMessagesSize = ''
       if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
-          this.question.samplingRecord.nonCompliances === '') {
+          this.result.violationInfo.violationCount === null) {
         return true
       }
       if (this.question.samplingRecord.approximateTotal !== '' ||
-          this.question.samplingRecord.nonCompliances !== '') {
+          this.result.violationInfo.violationCount !== null) {
         if (this.question.samplingRecord.sampleSize === '') {
           this.errorMessagesSize = 'Sample Size is required'
           return false
@@ -153,8 +157,8 @@ export default {
           return false
         }
       }
-      if (this.question.samplingRecord.sampleSize > 0 && this.question.samplingRecord.nonCompliances > 0) {
-        if (this.question.samplingRecord.sampleSize < this.question.samplingRecord.nonCompliances) {
+      if (this.question.samplingRecord.sampleSize > 0 && this.result.violationInfo.violationCount > 0) {
+        if (this.question.samplingRecord.sampleSize < this.result.violationInfo.violationCount) {
           this.errorMessagesSize = 'Sample Size have to be equal or higher than Number of non-Compliance'
           return false
         }
@@ -170,17 +174,17 @@ export default {
 
       if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
-          this.question.samplingRecord.nonCompliances === '') {
+          this.result.violationInfo.violationCount === null) {
         return true
       }
 
       if (this.question.samplingRecord.approximateTotal !== '' ||
           this.question.samplingRecord.sampleSize !== '') {
-        if (this.question.samplingRecord.nonCompliances === '') {
+        if (this.result.violationInfo.violationCount === null) {
           this.errorMessagesCompliances = 'Violation count is required'
           return false
         }
-        if (this.question.samplingRecord.nonCompliances < 0) {
+        if (this.result.violationInfo.violationCount < 0) {
           this.errorMessagesCompliances = 'Violation count have to be 0 or greater than 0'
           return false
         }

@@ -180,7 +180,7 @@
                   </div>
                   <div v-else>
                     <v-text-field
-                      v-model="question.violationInfo.violationCount"
+                      v-model="questionResult.violationInfo.violationCount"
                       :disabled="readOnly"
                       :label="$t('app.questionnaire.group.question.violationCount')"
                       :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
@@ -276,6 +276,7 @@
             <sampling-record
               :question="question"
               :read-only="readOnly"
+              :result="questionResult"
             />
           </div>
           <div v-if="displayViolationInfo && !isReferenceQuestion">
@@ -291,11 +292,12 @@
                 <sampling-record
                   :question="question"
                   :read-only="readOnly"
+                  :result="questionResult"
                 />
               </div>
               <div v-else>
                 <v-text-field
-                  v-model="question.violationInfo.violationCount"
+                  v-model="questionResult.violationInfo.violationCount"
                   :disabled="readOnly"
                   :label="$t('app.questionnaire.group.question.violationCount')"
                   :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
