@@ -29,12 +29,12 @@ Question ======
 --responseOptions
 (done) rename: ".id" to ".guid" (santosh)
 (todo) move: ".selectedProvisions" to .result object
-(todo) remove: ".searchProvisions" move to component data member (santosh)
-(todo) remove: ".isProvisionCollapsed" move to component data member (santosh)
-(todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" (santosh)
-(todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" (santosh)
-(todo) refactor: ".picture" to String and rename to ".pictureRequirement" (santosh)
-(todo) refactor: ".file" to String and rename to ".fileRequirement" (santosh)
+(todo) remove: ".searchProvisions" move to component data member ainsley
+(todo) remove: ".isProvisionCollapsed" move to component data member ainsley
+(todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
+(todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
+(todo) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
+(todo) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
 ---- REFACTOR violationInfo
 (todo) move: violationInfo object to result
