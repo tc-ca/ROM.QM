@@ -216,7 +216,7 @@
                     class="mt-2"
                   >
                     <v-text-field
-                      v-model="selectedResponseOption.searchProvisions"
+                      v-model="searchProvisions"
                       :disabled="readOnly"
                       dense
                       outlined
@@ -237,8 +237,7 @@
                       item-key="id"
                       :item-text="'title.' + lang"
                       selection-type="leaf"
-                      :search="selectedResponseOption.searchProvisions"
-                      :filter="selectedResponseOption.filterProvisions"
+                      :search="searchProvisions"
                       :items="treeDataProvisions"
                     >
                       <template v-slot:label="{ item }">
@@ -332,8 +331,9 @@
                 style="background-color:#f5f5f5;"
                 class="mt-2"
               >
+                {{ searchProvisions }}
                 <v-text-field
-                  v-model="selectedResponseOption.searchProvisions"
+                  v-model="searchProvisions"
                   :disabled="readOnly"
                   dense
                   outlined
@@ -354,8 +354,7 @@
                   item-key="id"
                   :item-text="'title.' + lang"
                   selection-type="leaf"
-                  :search="selectedResponseOption.searchProvisions"
-                  :filter="selectedResponseOption.filterProvisions"
+                  :search="searchProvisions"
                   :items="treeDataProvisions"
                 >
                   <template v-slot:label="{ item }">
@@ -476,7 +475,8 @@ export default {
       responseArgs: null,
       filteredInByProvisionSearch: true,
       tab: null,
-      tags: []
+      tags: [],
+      searchProvisions: null
     }
   },
   computed: {

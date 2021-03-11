@@ -43,7 +43,6 @@
                             "value": 1,
                             "provisions": [],
                             "selectedProvisions": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false,
                             "internalComment": {
                                 "option": "optional",
@@ -132,7 +131,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         },
                         {
@@ -163,7 +161,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         }
                     ],
@@ -233,7 +230,6 @@
                                     "provisions": [],
                                     "selectedProvisions": [],
                                     "selectedProvisionsTitles": [],
-                                    "searchProvisions": null,
                                     "isProvisionCollapsed": false
                                 },
                                 {
@@ -283,7 +279,6 @@
                                     ],
                                     "selectedProvisions": [],
                                     "selectedProvisionsTitles": [],
-                                    "searchProvisions": null,
                                     "isProvisionCollapsed": true
                                 }
                             ],
@@ -411,7 +406,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         },
                         {
@@ -442,7 +436,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         }
                     ],
@@ -562,7 +555,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         },
                         {
@@ -593,7 +585,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         }
                     ],
@@ -676,7 +667,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         },
                         {
@@ -707,7 +697,6 @@
                             "provisions": [],
                             "selectedProvisions": [],
                             "selectedProvisionsTitles": [],
-                            "searchProvisions": null,
                             "isProvisionCollapsed": false
                         }
                     ],
