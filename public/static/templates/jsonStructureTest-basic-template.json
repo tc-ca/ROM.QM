@@ -19,7 +19,6 @@
                     "guid": "55bcb79f-635b-4422-81e1-277d5a8a0a4d",
                     "sortOrder": 1,
                     "isVisible": true,
-                    "isMultiple": false,
                     "text": {
                         "en": "type reference",
                         "fr": "FR: Reference ID"
@@ -87,7 +86,6 @@
                     "guid": "18ce837b-5434-43be-8636-dcbef4acf2bc",
                     "sortOrder": 2,
                     "isVisible": true,
-                    "isMultiple": true,
                     "text": {
                         "en": "Question 1",
                         "fr": "FR: Question text"
@@ -188,7 +186,6 @@
                             "guid": "cd178620-7b9e-4410-8510-990689ae3550",
                             "sortOrder": 1,
                             "isVisible": false,
-                            "isMultiple": true,
                             "text": {
                                 "en": "child question ",
                                 "fr": "FR: Question text"
@@ -333,7 +330,6 @@
                     "guid": "25ed03ef-31ba-424a-9859-638ce0e29b1d",
                     "sortOrder": 3,
                     "isVisible": true,
-                    "isMultiple": true,
                     "text": {
                         "en": "type text",
                         "fr": "FR: Question text"
@@ -370,7 +366,6 @@
                     "guid": "db5def87-7859-4637-95ad-52636ce141b2",
                     "sortOrder": 4,
                     "isVisible": true,
-                    "isMultiple": true,
                     "text": {
                         "en": "type select",
                         "fr": "FR: Question text"
@@ -470,7 +465,6 @@
                     "guid": "2a15cee7-fb5b-43c4-8b4d-958412036fb2",
                     "sortOrder": 5,
                     "isVisible": true,
-                    "isMultiple": true,
                     "text": {
                         "en": "type number",
                         "fr": "FR: Question text"
