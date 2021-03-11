@@ -39,7 +39,7 @@ Question ======
 
 ---- Move/ refactor violationInfo
 (todo) move: violationCount to resultObject under violationInfo ainsley
-(todo) move: referenceId to resultObject under violationInfo ainsley
+(done) move: referenceId to resultObject under violationInfo ainsley
 (done) remove: ".responseToMatch' santosh
 (done) remove: ".matchingType" santosh
 
