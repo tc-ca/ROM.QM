@@ -802,7 +802,6 @@ export default {
       this.flagTimer = setTimeout(() => this.isDirty(), 3000)
       if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
-    // TODO - I'm here
     addGroup () {
       this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire.groups.length))
     },
@@ -855,6 +854,7 @@ export default {
           this.selectedQuestion.type = QUESTION_TYPE.TEXT
         }
       }
+      // TODO - I'm here
       if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
           this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
           this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
