@@ -114,6 +114,7 @@ function createReferenceQuestion(group) {
 
 function createGenericValidationRule() {
   return {
+    guid: uuidv4(),
     enabled: true,
     errorMessage: {
       [LANGUAGE.ENGLISH]: "Required",
@@ -229,18 +230,28 @@ function createProvisions() {
 
 function createDependencyGroup() {
   return {
-    ruleType: "visibility", // or validation or validationValue (questionDependencies should be only one item)
+    guid: uuidv4(),
+    ruleType: "visibility",
     childValidatorName: "",
     questionDependencies: []
   };
 }
 
-function createQuestionDependency(dependsOnGuid, validationAction = "equal", validationValue = "false") {
+function createGenericQuestionDependency() {
   return {
-    dependsOnQuestion: { guid: dependsOnGuid},
-    validationAction: validationAction,
-    validationValue: validationValue
+    guid: uuidv4(),
+    dependsOnQuestion: [],
+    validationAction: "equal",
+    validationValue: "false"
   };
+}
+
+function createQuestionDependency(dependsOnGuid, validationAction = "equal", validationValue = "false") {
+  let qd = createGenericQuestionDependency()
+  qd.dependsOnQuestion.push( { guid: dependsOnGuid});
+  qd.validationAction = validationAction;
+  qd.validationValue = validationValue;
+  return qd;
 }
 
 function processBuilderForSave(questionnaire) {
@@ -739,6 +750,15 @@ function fixTemplate (template) {
   return template;
 }
 
+function updateTemplate (template) {
+  var updateLog = []
+  
+  updateLog.push("updateTemplate: do something")
+  downloadData(updateLog, "updateLog.json")
+  downloadData(template, "updatedTemplate.json")
+  return template;
+}
+
 function downloadData (data, filename){
   if(!data) {
       console.error('Console.save: No data')
@@ -825,10 +845,12 @@ export default {
   FindNonUniqueIds,
   flattenQuestions,
   fixTemplate,
+  updateTemplate,
   GenerateRepeatedQuestion,
   isParentAGroup,
   cloneVisibleQuestionsOnly,
   fixTextToShowInDrawer,
   createGenericValidationRule,
-  createQuestionDependency
+  createQuestionDependency,
+  createGenericQuestionDependency
 };

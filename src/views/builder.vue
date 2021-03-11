@@ -663,6 +663,10 @@ export default {
     fixItPropBuilder: {
       type: Boolean,
       default: false
+    },
+    updateItBuilder: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -749,6 +753,9 @@ export default {
     },
     fixItPropBuilder () {
       this.fixit()
+    },
+    updateItBuilder () {
+      this.updateQuestionnaire()
     }
   },
   async mounted () {
@@ -854,30 +861,27 @@ export default {
           this.selectedQuestion.type = QUESTION_TYPE.TEXT
         }
       }
-      // TODO - I'm here
-      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
-          this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
-          this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
-        this.selectedQuestion.responseOptions.length = 0
+      this.selectedQuestion.responseOptions = []
+      if (this.selectedQuestion.type === QUESTION_TYPE.RADIO || this.selectedQuestion.type === QUESTION_TYPE.SELECT) {
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, { [LANGUAGE.ENGLISH]: 'Yes', [LANGUAGE.FRENCH]: 'Oui' }, 'true'))
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(2, { [LANGUAGE.ENGLISH]: 'No', [LANGUAGE.FRENCH]: 'Non' }, 'false'))
       } else {
-        if (this.selectedQuestion.responseOptions == null || this.selectedQuestion.responseOptions.length === 0) {
-          this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
-        }
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, null, ''))
       }
     },
     addQuestion ($event, group) {
       // don't propagate the event up to the group or else the group will gain focus over the question
       $event.stopPropagation()
 
-      let question = BuilderService.createQuestion(this.questionnaire, group)
+      let question = BuilderService.createQuestion(group)
       if (group.questions.length > 0) {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
       group.questions.push(question)
       this.addQuestionToIndex(question)
 
-      group.expansionPanels = []
-      group.expansionPanels.push(group.questions.length)
+      // group.expansionPanels = []
+      // group.expansionPanels.push(group.questions.length)
 
       this.selectedGroup = group
       // this.selectedQuestion = question
@@ -939,39 +943,46 @@ export default {
       this.save()
     },
     save () {
-      const page = 'builder'
-      console.log('Save...')
-      const questionnaire = this.questionnaire
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-      this.$store.dispatch('SetModifiedInBuilder', true)
+      if (this.questionnaire) {
+        const page = 'builder'
+        console.log('Save...')
+        console.log(JSON.stringify(this.questionnaire))
+        const questionnaire = this.questionnaire
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+        this.$store.dispatch('SetModifiedInBuilder', true)
+      }
     },
     fixit () {
       this.questionnaire = BuilderService.fixTemplate(this.questionnaire)
       this.save()
     },
+    updateQuestionnaire () {
+      this.questionnaire = BuilderService.updateTemplate(this.questionnaire)
+      this.save()
+    },
     addOption () {
-      this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
+      const idx = this.selectedQuestion.responseOptions.length
+      const ro = BuilderService.createGenericResponseOption()
+      ro.sortOrder = idx + 1
+      this.selectedQuestion.responseOptions.push(ro)
     },
     toggleOptions () {
       this.optionsCollapsed = !this.optionsCollapsed
     },
     removeResponseOption (option) {
-      for (let i = 0; i < this.selectedQuestion.responseOptions.length; i++) {
-        if (this.selectedQuestion.responseOptions[i] === option) {
-          this.selectedQuestion.responseOptions.splice(i, 1)
-          break
-        }
+      const idx = this.selectedQuestion.responseOptions.findIndex(ro => ro.guid === option.guid)
+      if (idx > -1) {
+        this.selectedQuestion.responseOptions.splice(idx, 1)
       }
     },
     addValidator () {
-      this.selectedQuestion.validationRules.push(BuilderService.createGenericValidationRule())
+      const vr = BuilderService.createGenericValidationRule()
+      this.selectedQuestion.validationRules.push(vr)
     },
     removeValidator (validationRule) {
-      for (let i = 0; i < this.selectedQuestion.validationRules.length; i++) {
-        if (this.selectedQuestion.validationRules[i] === validationRule) {
-          this.selectedQuestion.validationRules.splice(i, 1)
-          break
-        }
+      const idx = this.selectedQuestion.validationRules.findIndex(vr => vr.guid === validationRule.guid)
+      if (idx > -1) {
+        this.selectedQuestion.validationRules.splice(idx, 1)
       }
     },
     toggleValidators () {
@@ -981,29 +992,23 @@ export default {
       this.dependenciesCollapsed = !this.dependenciesCollapsed
     },
     addDependencyGroup () {
-      this.selectedQuestion.dependencyGroups.push(BuilderService.createDependencyGroup())
+      const dg = BuilderService.createDependencyGroup()
+      this.selectedQuestion.dependencyGroups.push(dg)
     },
-    removeDependencyGroup (group) {
-      for (let i = 0; i < this.selectedQuestion.dependencyGroups.length; i++) {
-        if (this.selectedQuestion.dependencyGroups[i] === group) {
-          this.selectedQuestion.dependencyGroups.splice(i, 1)
-          break
-        }
+    removeDependencyGroup (depGroup) {
+      const idx = this.selectedQuestion.dependencyGroups.findIndex(dg => dg.guid === depGroup.guid)
+      if (idx > -1) {
+        this.selectedQuestion.dependencyGroups.splice(idx, 1)
       }
     },
     addQuestionDependency (dependencyGroup) {
-      dependencyGroup.questionDependencies.push({
-        dependsOnQuestion: null,
-        validationAction: null,
-        validationValue: null
-      })
+      const qd = BuilderService.createGenericQuestionDependency()
+      dependencyGroup.questionDependencies.push(qd)
     },
     removeQuestoionDependency (dependencyGroup, questionDependency) {
-      for (let i = 0; i < dependencyGroup.questionDependencies.length; i++) {
-        if (dependencyGroup.questionDependencies[i] === questionDependency) {
-          dependencyGroup.questionDependencies.splice(i, 1)
-          break
-        }
+      const idx = dependencyGroup.questionDependencies.findIndex(qd => qd.guid === questionDependency.guid)
+      if (idx > -1) {
+        dependencyGroup.questionDependencies.splice(idx, 1)
       }
     },
     sortGroups (group) {
