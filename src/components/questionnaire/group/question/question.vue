@@ -724,8 +724,7 @@ export default {
         const referenceQuestion = BuilderService.findReferenceQuestion(this.group)
         if (referenceQuestion) {
           this.isViolationInfoReferenceIdDisabled = true
-
-          if (referenceQuestion.result.responses.length > 0 && this.question.result.violationInfo) {
+          if (referenceQuestion.result && referenceQuestion.result.responses && referenceQuestion.result.responses.length > 0 && this.questionResult.violationInfo) {
             this.questionResult.violationInfo.referenceId = referenceQuestion.result.responses[0].value
           }
         }
@@ -830,6 +829,7 @@ export default {
       }
 
       this.updateSupplementaryInfoVisibility(args)
+      this.updateResult(args)
       this.updateDependants(args)
       this.updateReferenceId()
       this.isValid = this.getChildQuestionValidationState()
@@ -869,9 +869,12 @@ export default {
         }
       }
     },
-    updateDependants (args) {
+    updateResult (args) {
       // [TODO]: Santosh, get the Guid
+      // if (this.question.result == null) this.question.result.
       this.question.result.responses.push({ 'guid': 'xxxx', 'value': args.value })
+    },
+    updateDependants (args) {
       if (this.question.dependants) {
         const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
@@ -910,7 +913,7 @@ export default {
               }
 
               // if response is string or number make into array to be handle multiple selections
-              let response = dependsOnQuestion.result.responses.length > 0 ? dependsOnQuestion.result.responses[0].value : null
+              let response = (dependsOnQuestion.result && dependsOnQuestion.result.responses.length > 0) ? dependsOnQuestion.result.responses[0].value : null
               if (typeof response === 'string' || typeof response === 'number') {
                 response = [response]
               }

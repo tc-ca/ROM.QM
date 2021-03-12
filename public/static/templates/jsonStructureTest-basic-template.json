@@ -24,9 +24,7 @@
                         "fr": "FR: Reference ID"
                     },
                     "type": "reference",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": false,
                     "validationState": true,
                     "isRepeatable": false,
@@ -86,9 +84,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": true,
                     "validationState": true,
                     "isRepeatable": true,
@@ -173,9 +169,7 @@
                                 "fr": "FR: Question text"
                             },
                             "type": "radio",
-                            "result": {
-                                "responses": []
-                            },
+                            "result": null,
                             "isSamplingAllowed": true,
                             "validationState": true,
                             "isRepeatable": false,
@@ -303,9 +297,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "text",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": false,
                     "validationState": true,
                     "isRepeatable": false,
@@ -337,9 +329,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "select",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": false,
                     "validationState": true,
                     "isRepeatable": false,
@@ -426,9 +416,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "number",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": false,
                     "validationState": true,
                     "isRepeatable": false,
@@ -475,9 +463,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": false,
                     "validationState": true,
                     "isRepeatable": true,
@@ -579,9 +565,7 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "result": {
-						"responses": []
-                    },
+                    "result": null,
                     "isSamplingAllowed": false,
                     "validationState": true,
                     "isRepeatable": true,

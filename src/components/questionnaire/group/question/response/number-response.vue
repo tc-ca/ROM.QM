@@ -80,7 +80,7 @@ export default {
       }
     )
 
-    if (this.question.result.responses.length > 0) {
+    if (this.question.result && this.question.result.responses.length > 0) {
       this.value = this.question.result.responses[0].value
       this.onChange()
     }

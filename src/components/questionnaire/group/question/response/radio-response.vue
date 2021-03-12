@@ -150,7 +150,7 @@ export default {
       }
     )
 
-    if (this.question.result.responses.length > 0) {
+    if (this.question.result && this.question.result.responses.length > 0) {
       this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.result.responses[0].value)
       this.selOldOption = this.selectedOption
       this.onChange(this.selectedOption, true)
