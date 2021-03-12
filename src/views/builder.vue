@@ -529,7 +529,7 @@
                                       <v-btn
                                         small
                                         icon
-                                        @click="removeQuestoionDependency(dependencyGroup, questionDependency)"
+                                        @click="removeQuestionDependency(dependencyGroup, questionDependency)"
                                       >
                                         <v-icon
                                           small
@@ -1006,7 +1006,7 @@ export default {
       const qd = BuilderService.createGenericQuestionDependency()
       dependencyGroup.questionDependencies.push(qd)
     },
-    removeQuestoionDependency (dependencyGroup, questionDependency) {
+    removeQuestionDependency (dependencyGroup, questionDependency) {
       const idx = dependencyGroup.questionDependencies.findIndex(qd => qd.guid === questionDependency.guid)
       if (idx > -1) {
         dependencyGroup.questionDependencies.splice(idx, 1)

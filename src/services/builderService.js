@@ -1,8 +1,8 @@
 import _ from "lodash";
 import { LANGUAGE } from "../constants.js";
 import { QUESTION_TYPE } from "../data/questionTypes.js";
-import { v4 as uuidv4 } from 'uuid';
-import { generateName, isString, setNewGUID } from '../utils'
+import { v4 as uuidv4 } from "uuid";
+import { generateName, isString, setNewGUID } from "../utils";
 
 /* eslint-disable no-undef */
 
@@ -29,7 +29,7 @@ function createGroup(index) {
     domSuffix: "",
     guid: guid,
     name: guid,
-    sortOrder: (index) ? index + 1 : 1,
+    sortOrder: index ? index + 1 : 1,
     title: {
       [LANGUAGE.ENGLISH]: "New Group",
       [LANGUAGE.FRENCH]: "Fr: New Group"
@@ -43,17 +43,44 @@ function createGroup(index) {
 
 function createQuestion(parent, type = QUESTION_TYPE.RADIO) {
   let guid = uuidv4();
-  let sortOrder = (parent.questions !== undefined) ? parent.questions.length + 1: parent.childQuestions.length + 1;
-  
+  let sortOrder =
+    parent.questions !== undefined
+      ? parent.questions.length + 1
+      : parent.childQuestions.length + 1;
+
   let responseOptions = [];
   if (type === QUESTION_TYPE.RADIO) {
-    responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Yes",[LANGUAGE.FRENCH]: "Oui"},"true"));
-    responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "No",[LANGUAGE.FRENCH]: "Non"},"false"));
+    responseOptions.push(
+      createResponseOption(
+        1,
+        { [LANGUAGE.ENGLISH]: "Yes", [LANGUAGE.FRENCH]: "Oui" },
+        "true"
+      )
+    );
+    responseOptions.push(
+      createResponseOption(
+        2,
+        { [LANGUAGE.ENGLISH]: "No", [LANGUAGE.FRENCH]: "Non" },
+        "false"
+      )
+    );
   } else if (type === QUESTION_TYPE.SELECT) {
-    responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Option 1",[LANGUAGE.FRENCH]: "Option 1"},"1"));
-    responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "Option 2",[LANGUAGE.FRENCH]: "Option 2"},"2"));
+    responseOptions.push(
+      createResponseOption(
+        1,
+        { [LANGUAGE.ENGLISH]: "Option 1", [LANGUAGE.FRENCH]: "Option 1" },
+        "1"
+      )
+    );
+    responseOptions.push(
+      createResponseOption(
+        2,
+        { [LANGUAGE.ENGLISH]: "Option 2", [LANGUAGE.FRENCH]: "Option 2" },
+        "2"
+      )
+    );
   } else {
-    responseOptions.push(createResponseOption(1,null,""));
+    responseOptions.push(createResponseOption(1, null, ""));
   }
 
   let validationRules = [];
@@ -92,7 +119,7 @@ function convertToReferenceQuestion(rQuestion) {
   rQuestion.type = QUESTION_TYPE.REFERENCE;
   rQuestion.childQuestions = [];
   rQuestion.responseOptions = [];
-  rQuestion.responseOptions.push(createResponseOption(1,null,""));
+  rQuestion.responseOptions.push(createResponseOption(1, null, ""));
   rQuestion.validationRules = [];
   rQuestion.validationRules.push(createGenericValidationRule());
 
@@ -123,7 +150,7 @@ function createGenericValidationRule() {
     name: "require",
     type: "require",
     value: null
-  }
+  };
 }
 
 function createGenericResponseOption(sortOrder = -1) {
@@ -147,7 +174,7 @@ function createGenericResponseOption(sortOrder = -1) {
   };
 }
 
-function createResponseOption(sortOrder,text, value) {
+function createResponseOption(sortOrder, text, value) {
   let ro = createGenericResponseOption(sortOrder);
   ro.text = text;
   ro.value = value;
@@ -173,10 +200,12 @@ function GenerateRepeatedQuestion(oQuestion) {
 
     //Fixing dependants on new Question
     nQuestion.dependants.forEach(d => {
-       const idx = oQuestion.childQuestions.findIndex(ocq => ocq.guid === d.guid);
-       if (idx > -1) {
-         d.guid = nQuestion.childQuestions[idx].guid;
-       }
+      const idx = oQuestion.childQuestions.findIndex(
+        ocq => ocq.guid === d.guid
+      );
+      if (idx > -1) {
+        d.guid = nQuestion.childQuestions[idx].guid;
+      }
     });
 
     //Fixing dependency groups for every child question
@@ -186,8 +215,10 @@ function GenerateRepeatedQuestion(oQuestion) {
           if (qd.dependsOnQuestion.guid === oQuestion.guid) {
             qd.dependsOnQuestion.guid = nQuestion.guid;
           } else {
-            const idx = oQuestion.childQuestions.findIndex( ocq => ocq.guid === qd.dependsOnQuestion.guid);
-            if( idx > -1) {
+            const idx = oQuestion.childQuestions.findIndex(
+              ocq => ocq.guid === qd.dependsOnQuestion.guid
+            );
+            if (idx > -1) {
               qd.dependsOnQuestion.guid = nQuestion.childQuestions[idx].guid;
             }
           }
@@ -196,19 +227,20 @@ function GenerateRepeatedQuestion(oQuestion) {
     });
 
     //Fixing dependants for every child question
-    nQuestion.childQuestions.forEach( cq => {
-      cq.dependants.forEach( d => {
+    nQuestion.childQuestions.forEach(cq => {
+      cq.dependants.forEach(d => {
         if (d.guid === oQuestion.guid) {
           d.guid = nQuestion.guid;
         } else {
-          const idx = oQuestion.childQuestions.findIndex (ocq => ocq.guid === d.guid);
+          const idx = oQuestion.childQuestions.findIndex(
+            ocq => ocq.guid === d.guid
+          );
           if (idx > -1) {
             d.guid = nQuestion.childQuestions[idx].guid;
           }
         }
       });
     });
-
   } catch (error) {
     // Generate Error
     nQuestion = null;
@@ -247,9 +279,13 @@ function createGenericQuestionDependency() {
   };
 }
 
-function createQuestionDependency(dependsOnGuid, validationAction = "equal", validationValue = "false") {
-  let qd = createGenericQuestionDependency()
-  qd.dependsOnQuestion.push( { guid: dependsOnGuid});
+function createQuestionDependency(
+  dependsOnGuid,
+  validationAction = "equal",
+  validationValue = "false"
+) {
+  let qd = createGenericQuestionDependency();
+  qd.dependsOnQuestion.push({ guid: dependsOnGuid });
   qd.validationAction = validationAction;
   qd.validationValue = validationValue;
   return qd;
@@ -257,8 +293,8 @@ function createQuestionDependency(dependsOnGuid, validationAction = "equal", val
 
 function createGenericResult() {
   let result = {
-    externalComment: '',
-    internalComment: '',
+    externalComment: "",
+    internalComment: "",
     files: null,
     pictures: null,
     samplingRecord: null,
@@ -270,7 +306,7 @@ function createGenericResult() {
 
 function processBuilderForSave(questionnaire) {
   //Done by LM on Feb 14 to avoid console error on Dynamic Builder
-  if (!questionnaire) return; 
+  if (!questionnaire) return;
   let groups = _.cloneDeep(questionnaire.groups);
 
   let populateDependantsOnDependency = q => {
@@ -328,15 +364,17 @@ function processBuilderForSave(questionnaire) {
   return { groupsData: groups, questionnaireData: questionnaire };
 }
 
-async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeaturedTemplate') {
-  if(process.env.NODE_ENV !== 'production') 
-  {
-    const axios = await import('axios')
+async function GetMockQuestionnaireFromImportModule(
+  templateToLoad = "fullFeaturedTemplate"
+) {
+  if (process.env.NODE_ENV !== "production") {
+    const axios = await import("axios");
 
     // let response = await axios.get('/static/betaAnswers.json')
-    console.log('Template: ' + templateToLoad)
-    let response = await axios.get(`/static/templates/${templateToLoad}.json`)
-      .catch(function (error) {
+    console.log("Template: " + templateToLoad);
+    let response = await axios
+      .get(`/static/templates/${templateToLoad}.json`)
+      .catch(function(error) {
         // handle error
         console.log(error);
       });
@@ -345,77 +383,78 @@ async function GetMockQuestionnaireFromImportModule(templateToLoad = 'fullFeatur
       console.log(response);
       return response.data;
     } else {
-      console.log('Error on response: Response is NULL');
+      console.log("Error on response: Response is NULL");
       return null;
     }
   }
 }
 
 /**
- * Will find you all instances of the unique values (key) that are not unique 
- * @param {Questionnaire Object - can be a Group, Question or Response} qObject 
- * @param {What is the property name of the field used for uniqueness for this type of object} key 
+ * Will find you all instances of the unique values (key) that are not unique
+ * @param {Questionnaire Object - can be a Group, Question or Response} qObject
+ * @param {What is the property name of the field used for uniqueness for this type of object} key
  */
-function FindNonUniqueIds (qObject, key) {
-  var uniqueIds = []
-  var issues = []
-  var index = 0
+function FindNonUniqueIds(qObject, key) {
+  var uniqueIds = [];
+  var issues = [];
+  var index = 0;
 
   qObject.forEach(element => {
     if (!uniqueIds.includes(element[key])) {
-      uniqueIds.push(element[key])
+      uniqueIds.push(element[key]);
     } else {
-      issues.push(`item ${index} has id ${element[key]} which is not unique`)
+      issues.push(`item ${index} has id ${element[key]} which is not unique`);
     }
-    index++
-  })
+    index++;
+  });
 
   if (issues.length > 0) {
-    console.log(issues)
+    console.log(issues);
   }
 
-  return issues
+  return issues;
 }
 
 /**
  * will recursively flatten a list of Questions
- * @param {Array of Questions} qs 
+ * @param {Array of Questions} qs
  */
-function flatten (qs) {
-  var ret = []
+function flatten(qs) {
+  var ret = [];
 
   for (var i = 0; i < qs.length; i++) {
-    let q = qs[i]
+    let q = qs[i];
 
     if (q.childQuestions.length > 0) {
-      ret = ret.concat(flatten(q.childQuestions))
+      ret = ret.concat(flatten(q.childQuestions));
     }
 
-    ret.push(q)
+    ret.push(q);
   }
-  return ret
+  return ret;
 }
 
 /**
  * Will return you a flattened list of all Questions for all items in the array
- * @param {An Array of Groups} groups 
+ * @param {An Array of Groups} groups
  */
-function flattenQuestions (groups) {
-  var flattenedQuestions = []
+function flattenQuestions(groups) {
+  var flattenedQuestions = [];
   groups.forEach(group => {
-    var qs = flatten(group.questions)
-    flattenedQuestions = flattenedQuestions.concat(qs)
-  })
-  return flattenedQuestions.sort((a, b) => (a.id > b.id) ? 1 : (b.id > a.id) ? -1 : 0)
+    var qs = flatten(group.questions);
+    flattenedQuestions = flattenedQuestions.concat(qs);
+  });
+  return flattenedQuestions.sort((a, b) =>
+    a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+  );
 }
 
 /**
- * Will attempt to make old Templates compatible with the current structure of Templates 
- * @param {An Array of Groups} groups 
+ * Will attempt to make old Templates compatible with the current structure of Templates
+ * @param {An Array of Groups} groups
  */
-function fixTemplate (template) {
-
-  var groups = template.groups
+function fixTemplate(template) {
+  var groups = template.groups;
   var qIndex;
   var rIndex;
   var gIndex;
@@ -424,22 +463,23 @@ function fixTemplate (template) {
   var response;
   var provision;
   var searchableProvisions = [];
-  var fixLog = []
+  var fixLog = [];
 
   //First, fix the isRepeatable on false for every child question, later build the flattenedQuestions with this fix
-  groups.forEach( g => {
-    g.questions.forEach( q => {
-      q.childQuestions.forEach( cq => {
+  groups.forEach(g => {
+    g.questions.forEach(q => {
+      q.childQuestions.forEach(cq => {
         if (cq.isRepeatable) {
-          cq.isRepeatable = false
-          fixLog.push(`fixTemplate: fixing isRepeatable prop for Child Question ${cq.text.en} with guid ${cq.guid}`)
+          cq.isRepeatable = false;
+          fixLog.push(
+            `fixTemplate: fixing isRepeatable prop for Child Question ${cq.text.en} with guid ${cq.guid}`
+          );
         }
       });
     });
   });
 
-
-  var flattenedQuestions = flattenQuestions(groups)
+  var flattenedQuestions = flattenQuestions(groups);
 
   /**
    * Fix Template
@@ -448,8 +488,8 @@ function fixTemplate (template) {
     /**
      * Add the readOnly property to the Template if it does not exist
      */
-    template.readOnly = false
-    fixLog.push("fixTemplate: set readOnly prop on Template to false")
+    template.readOnly = false;
+    fixLog.push("fixTemplate: set readOnly prop on Template to false");
   }
 
   /**
@@ -462,37 +502,58 @@ function fixTemplate (template) {
      * Groups have to have the expansionPanels Property - but reset the value if it exists
      * TODO: this should really be removed from the JSON, its only temporary data and not important to the business
      */
-    g.expansionPanels = []
+    g.expansionPanels = [];
 
-    if (g.primaryKey === undefined || !g.primaryKey.includes('GRP') || g.primaryKey.includes("'")) {
-      g.primaryKey = generateName(g.title[LANGUAGE.ENGLISH], 'GRP', template.name)
-      fixLog.push(`fixTemplate: added/reset primaryKey prop for Group ${gIndex} to ${g.primaryKey}`)
+    if (
+      g.primaryKey === undefined ||
+      !g.primaryKey.includes("GRP") ||
+      g.primaryKey.includes("'")
+    ) {
+      g.primaryKey = generateName(
+        g.title[LANGUAGE.ENGLISH],
+        "GRP",
+        template.name
+      );
+      fixLog.push(
+        `fixTemplate: added/reset primaryKey prop for Group ${gIndex} to ${g.primaryKey}`
+      );
     }
   }
-  fixLog.push("fixTemplate: reset/added expansionPanels prop to all Groups")
+  fixLog.push("fixTemplate: reset/added expansionPanels prop to all Groups");
 
   /**
    * Fix Questions
    */
   for (qIndex = 0; qIndex < flattenedQuestions.length; qIndex++) {
-    question = flattenedQuestions[qIndex]
+    question = flattenedQuestions[qIndex];
 
     /**
      * re-generate question name based on its english name if it's not in our new format
      */
-    if (question.name === undefined || !question.name.includes('QTN') || question.name.includes("'")) {
-      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'QTN', '')
-      fixLog.push(`fixTemplate: added/reset name prop for Question ${qIndex} to ${question.name}`)
+    if (
+      question.name === undefined ||
+      !question.name.includes("QTN") ||
+      question.name.includes("'")
+    ) {
+      question.name = generateName(question.text[LANGUAGE.ENGLISH], "QTN", "");
+      fixLog.push(
+        `fixTemplate: added/reset name prop for Question ${qIndex} to ${question.name}`
+      );
     }
 
-    let repeatedNames = flattenedQuestions.filter( q => q.name === question.name && q.guid !== question.guid);
+    let repeatedNames = flattenedQuestions.filter(
+      q => q.name === question.name && q.guid !== question.guid
+    );
     repeatedNames.forEach(rn => {
       const qIndx = flattenedQuestions.findIndex(fq => fq.guid === rn.guid);
-      if(qIndx) {
-        flattenedQuestions[qIndx].name = flattenedQuestions[qIndx].name + ` v${qIndx}`;
-        fixLog.push(`fixTemplate: fixing repeated name prop for Question ${qIndx} to ${flattenedQuestions[qIndx].name}`)
+      if (qIndx) {
+        flattenedQuestions[qIndx].name =
+          flattenedQuestions[qIndx].name + ` v${qIndx}`;
+        fixLog.push(
+          `fixTemplate: fixing repeated name prop for Question ${qIndx} to ${flattenedQuestions[qIndx].name}`
+        );
       }
-    })
+    });
 
     /**
      * Fix repeated ids in questions
@@ -500,83 +561,102 @@ function fixTemplate (template) {
     question.id = qIndex + 1;
 
     /**
-    * Will assign a unique guid to all Questions in all items within 
-    * the Array of Groups that do not already have one assigned to them 
-    */
+     * Will assign a unique guid to all Questions in all items within
+     * the Array of Groups that do not already have one assigned to them
+     */
     if (question.guid === undefined) {
-      question.guid = uuidv4()
-      fixLog.push(`fixTemplate: added guid (${question.guid}) prop to Question ${question.name}`)
+      question.guid = uuidv4();
+      fixLog.push(
+        `fixTemplate: added guid (${question.guid}) prop to Question ${question.name}`
+      );
     }
 
     /**
      * move the internal comment property from the question to the responses of this question
      */
     if (question.internalComment) {
-
-      if (question.type === "radio" || question.type === "select")
-      {
-        if (question.responseOptions === undefined || question.responseOptions === null) { 
+      if (question.type === "radio" || question.type === "select") {
+        if (
+          question.responseOptions === undefined ||
+          question.responseOptions === null
+        ) {
           question.responseOptions = [];
-          fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+          fixLog.push(
+            `fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `
+          );
         }
         for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
           response = question.responseOptions[rIndex];
-          response.internalComment = question.internalComment
+          response.internalComment = question.internalComment;
         }
       }
 
-      delete question.internalComment
+      delete question.internalComment;
 
-      fixLog.push(`fixTemplate: moved internal comment prop from Question ${question.name} to Responses`)
+      fixLog.push(
+        `fixTemplate: moved internal comment prop from Question ${question.name} to Responses`
+      );
     }
 
     /**
      * move the external comment property from the question to the responses of this question
      */
     if (question.externalComment) {
-      if (question.type === "radio" || question.type === "select")
-      {
-        if (question.responseOptions === undefined || question.responseOptions === null) { 
+      if (question.type === "radio" || question.type === "select") {
+        if (
+          question.responseOptions === undefined ||
+          question.responseOptions === null
+        ) {
           question.responseOptions = [];
-          fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+          fixLog.push(
+            `fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `
+          );
         }
         for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
           response = question.responseOptions[rIndex];
-          response.externalComment = question.externalComment
+          response.externalComment = question.externalComment;
         }
       }
 
-      delete question.externalComment
+      delete question.externalComment;
 
-      fixLog.push(`fixTemplate: moved external comment prop from Question ${question.name} to Responses`)
+      fixLog.push(
+        `fixTemplate: moved external comment prop from Question ${question.name} to Responses`
+      );
     }
 
     /**
      * move the picture property from the question to the responses of this question
      */
     if (question.picture) {
-      if (question.type === "radio" || question.type === "select")
-      {
-        if (question.responseOptions === undefined || question.responseOptions === null) { 
+      if (question.type === "radio" || question.type === "select") {
+        if (
+          question.responseOptions === undefined ||
+          question.responseOptions === null
+        ) {
           question.responseOptions = [];
-          fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+          fixLog.push(
+            `fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `
+          );
         }
         for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
           response = question.responseOptions[rIndex];
-          response.picture = question.picture
+          response.picture = question.picture;
         }
       }
 
-      delete question.picture
+      delete question.picture;
 
-      fixLog.push(`fixTemplate: moved picture prop from Question ${question.name} to Responses`)
+      fixLog.push(
+        `fixTemplate: moved picture prop from Question ${question.name} to Responses`
+      );
     }
 
     /**
      * there has to be a default validationState on the Question object
      */
     if (question.validationState === undefined) {
-      question.validationState = true
+      question.validationState = true;
     }
 
     /**
@@ -586,40 +666,49 @@ function fixTemplate (template) {
       /**
        * there is no violationInfo prop on the object. Add a default value
        */
-      question.violationInfo = 
-      {
+      question.violationInfo = {
         responseToMatch: "false",
         matchingType: "equal",
         referenceID: null,
         violationCount: null
-      }
-      fixLog.push(`fixTemplate: added default violationInfo prop to Question ${question.name}`)
+      };
+      fixLog.push(
+        `fixTemplate: added default violationInfo prop to Question ${question.name}`
+      );
     } else {
       if (question.violationInfo.referenceID === undefined) {
         /**
          * there is no referenceId prop on the violationInfo prop. Add a default value
          */
-        question.violationInfo.referenceID = null
-        fixLog.push(`fixTemplate: added default referenceId to violationInfo object of Question ${question.name}`)
+        question.violationInfo.referenceID = null;
+        fixLog.push(
+          `fixTemplate: added default referenceId to violationInfo object of Question ${question.name}`
+        );
       }
 
       if (question.violationInfo.violationCount === undefined) {
         /**
          * there is no violationCount prop on the violationInfo prop. Add a default value
          */
-        question.violationInfo.violationCount = null
-        fixLog.push(`fixTemplate: added default violationCount for violationInfo object of Question ${question.name}`)
+        question.violationInfo.violationCount = null;
+        fixLog.push(
+          `fixTemplate: added default violationCount for violationInfo object of Question ${question.name}`
+        );
       }
     }
 
     /**
      * Fix Question Responses for radio and select questions
      */
-    if (question.type === "radio" || question.type === "select")
-    {
-      if (question.responseOptions === undefined || question.responseOptions === null) { 
+    if (question.type === "radio" || question.type === "select") {
+      if (
+        question.responseOptions === undefined ||
+        question.responseOptions === null
+      ) {
         question.responseOptions = [];
-        fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+        fixLog.push(
+          `fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `
+        );
       }
       for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
         response = question.responseOptions[rIndex];
@@ -628,79 +717,105 @@ function fixTemplate (template) {
          * Internal Comment prop should exist on Responses
          * Might not have existed on Question to copy over
          */
-        if (response.internalComment === undefined)
-        {
+        if (response.internalComment === undefined) {
           response.internalComment = {
-            "option": "optional",
-            "value": ""
-          }
-          fixLog.push(`fixTemplate: added default internalComment prop for Response ${rIndex} of Question ${question.name}`)
+            option: "optional",
+            value: ""
+          };
+          fixLog.push(
+            `fixTemplate: added default internalComment prop for Response ${rIndex} of Question ${question.name}`
+          );
         }
 
         /**
          * External Comment prop should exist on Responses
          * Might not have existed on Question to copy over
          */
-        if (response.externalComment === undefined)
-        {
+        if (response.externalComment === undefined) {
           response.externalComment = {
-            "option": "optional",
-            "value": ""
-          }
-          fixLog.push(`fixTemplate: added default externalComment prop for Response ${rIndex} of Question ${question.name}`)
+            option: "optional",
+            value: ""
+          };
+          fixLog.push(
+            `fixTemplate: added default externalComment prop for Response ${rIndex} of Question ${question.name}`
+          );
         }
 
         /**
          * picture prop should exist on Responses, and should be an array of strings, not a single string
          */
-        if (response.picture === undefined || response.picture.value === '') {
+        if (response.picture === undefined || response.picture.value === "") {
           response.picture = {
-            "option": "optional",
-            "value": []
-          }
-          fixLog.push(`fixTemplate: added default picture prop for Response ${rIndex} of Question ${question.name}`)
+            option: "optional",
+            value: []
+          };
+          fixLog.push(
+            `fixTemplate: added default picture prop for Response ${rIndex} of Question ${question.name}`
+          );
         }
-
 
         /**
          * response values must be of type String and not number or anything else
          * TODO: always though? maybe we revisit this in schema
          */
         if (!isString(response.value)) {
-          response.value = String(response.value)
-          fixLog.push(`fixTemplate: stringified response value for Response ${rIndex} of Question ${question.name}`)
-        }
-
-
-      /**
-       * generate response names for responses that do not have them
-       */
-        if (response.name === undefined || !response.name.includes('RSPNS') || response.name.includes("'")){
-          response.name = generateName(response.text[LANGUAGE.ENGLISH], 'RSPNS', question.name, false)
-          fixLog.push(`fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`)
+          response.value = String(response.value);
+          fixLog.push(
+            `fixTemplate: stringified response value for Response ${rIndex} of Question ${question.name}`
+          );
         }
 
         /**
-         * add file prop if not exists 
+         * generate response names for responses that do not have them
          */
-
-        if (response.file === undefined || response.file.value === '') {
-          response.file = {
-            "option": "optional",
-            "value": []
-          }
-          fixLog.push(`fixTemplate: added default file prop for Response ${rIndex} of Question ${question.name}`)
+        if (
+          response.name === undefined ||
+          !response.name.includes("RSPNS") ||
+          response.name.includes("'")
+        ) {
+          response.name = generateName(
+            response.text[LANGUAGE.ENGLISH],
+            "RSPNS",
+            question.name,
+            false
+          );
+          fixLog.push(
+            `fixTemplate: added/reset name prop for Response ${rIndex} of Question ${question.name}`
+          );
         }
 
+        /**
+         * add file prop if not exists
+         */
+
+        if (response.file === undefined || response.file.value === "") {
+          response.file = {
+            option: "optional",
+            value: []
+          };
+          fixLog.push(
+            `fixTemplate: added default file prop for Response ${rIndex} of Question ${question.name}`
+          );
+        }
       }
     } else {
-      if (question.responseOptions === undefined || question.responseOptions === null) { 
+      if (
+        question.responseOptions === undefined ||
+        question.responseOptions === null
+      ) {
         question.responseOptions = [];
-        fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
-      } else if (question.responseOptions && question.responseOptions.length > 0) {
+        fixLog.push(
+          `fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `
+        );
+      } else if (
+        question.responseOptions &&
+        question.responseOptions.length > 0
+      ) {
         // shouldnt have any response options...TODO: or should they?
-        question.responseOptions = []
-        fixLog.push(`fixTemplate: removed response options from ${question.type} Question ${question.name}`)
+        question.responseOptions = [];
+        fixLog.push(
+          `fixTemplate: removed response options from ${question.type} Question ${question.name}`
+        );
       }
     }
   }
@@ -708,133 +823,161 @@ function fixTemplate (template) {
   /**
    * add the searchable provisions property to the template if it doesnt exist
    * searchableProvisions is the distinct union of all provisions for all responses in the template
-   * basically, all provisions this template is related to 
+   * basically, all provisions this template is related to
    */
   if (template.searchableProvisions === undefined) {
-
     for (qIndex = 0; qIndex < flattenedQuestions.length; qIndex++) {
       question = flattenedQuestions[qIndex];
 
       // only radio and select have response options
-      if (question.responseOptions === undefined && !(question.type === "radio" || question.type === "select")) continue
+      if (
+        question.responseOptions === undefined &&
+        !(question.type === "radio" || question.type === "select")
+      )
+        continue;
 
-      if (question.responseOptions === undefined || question.responseOptions === null) { 
+      if (
+        question.responseOptions === undefined ||
+        question.responseOptions === null
+      ) {
         question.responseOptions = [];
-        fixLog.push(`fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `)
+        fixLog.push(
+          `fixTemplate: responseOptions field missed in ${question.name}, added as an empty array `
+        );
       }
 
       for (rIndex = 0; rIndex < question.responseOptions.length; rIndex++) {
         response = question.responseOptions[rIndex];
-        
+
         if (response.provisions.length > 0) {
           for (pIndex = 0; pIndex < response.provisions.length; pIndex++) {
             /**
              * for each provision in this response, check if there is already an item in the searchable provisions list for this provision
-             * if there is we can simply add the guidId of the question to it, else we add a new entry to the searchable provisions list 
+             * if there is we can simply add the guidId of the question to it, else we add a new entry to the searchable provisions list
              */
             provision = response.provisions[pIndex];
-            var existingSearchableProvisionIndex = searchableProvisions.findIndex(sp => sp.leg === provision)
+            var existingSearchableProvisionIndex = searchableProvisions.findIndex(
+              sp => sp.leg === provision
+            );
 
-            if (existingSearchableProvisionIndex !== -1)
-            {
-              var existingSearchableProvision = searchableProvisions[existingSearchableProvisionIndex]
-              
-              if (!existingSearchableProvision.questions.includes(question.guid)) {
-                existingSearchableProvision.questions.push(question.guid)
+            if (existingSearchableProvisionIndex !== -1) {
+              var existingSearchableProvision =
+                searchableProvisions[existingSearchableProvisionIndex];
+
+              if (
+                !existingSearchableProvision.questions.includes(question.guid)
+              ) {
+                existingSearchableProvision.questions.push(question.guid);
               }
             } else {
               searchableProvisions.push({
                 leg: provision,
                 questions: [question.guid]
-              })
+              });
             }
           }
         }
       }
     }
 
-    template.searchableProvisions = searchableProvisions
+    template.searchableProvisions = searchableProvisions;
 
-    fixLog.push("fixTemplate: added searchableProvisions prop to Template")
+    fixLog.push("fixTemplate: added searchableProvisions prop to Template");
   }
 
-  downloadData(fixLog, "fixItLog.json")
-  downloadData(template, "fixedTemplate.json")
+  downloadData(fixLog, "fixItLog.json");
+  downloadData(template, "fixedTemplate.json");
 
   return template;
 }
 
-function updateTemplate (template) {
-  var updateLog = []
-  
-  updateLog.push("updateTemplate: do something")
-  downloadData(updateLog, "updateLog.json")
-  downloadData(template, "updatedTemplate.json")
+function updateTemplate(template) {
+  var updateLog = [];
+
+  updateLog.push("updateTemplate: do something");
+  downloadData(updateLog, "updateLog.json");
+  downloadData(template, "updatedTemplate.json");
   return template;
 }
 
-function downloadData (data, filename){
-  if(!data) {
-      console.error('Console.save: No data')
-      return;
+function downloadData(data, filename) {
+  if (!data) {
+    console.error("Console.save: No data");
+    return;
   }
 
-  if(!filename) filename = 'console.json'
+  if (!filename) filename = "console.json";
 
-  if(typeof data === "object"){
-      data = JSON.stringify(data, undefined, 4)
+  if (typeof data === "object") {
+    data = JSON.stringify(data, undefined, 4);
   }
 
-  var blob = new Blob([data], {type: 'text/json'}),
-      e    = document.createEvent('MouseEvents'),
-      a    = document.createElement('a')
+  var blob = new Blob([data], { type: "text/json" }),
+    e = document.createEvent("MouseEvents"),
+    a = document.createElement("a");
 
-  a.download = filename
-  a.href = window.URL.createObjectURL(blob)
-  a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
-  e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-  a.dispatchEvent(e)
+  a.download = filename;
+  a.href = window.URL.createObjectURL(blob);
+  a.dataset.downloadurl = ["text/json", a.download, a.href].join(":");
+  e.initMouseEvent(
+    "click",
+    true,
+    false,
+    window,
+    0,
+    0,
+    0,
+    0,
+    0,
+    false,
+    false,
+    false,
+    false,
+    0,
+    null
+  );
+  a.dispatchEvent(e);
 }
 
-function isParentAGroup (group, qGuid) {
+function isParentAGroup(group, qGuid) {
   let idx = -1;
   if (group) {
-    idx = group.questions.findIndex( q => q.guid === qGuid);
+    idx = group.questions.findIndex(q => q.guid === qGuid);
   }
-  return (idx > -1);
+  return idx > -1;
 }
 
 function cloneVisibleQuestionsOnly(questionnaire) {
-  let clonedGroups = _.cloneDeep(questionnaire.groups)
-  clonedGroups.forEach( g => {
-    g.questions = g.questions.filter( q => q.isVisible === true );
-    g.questions.forEach( gc => {
-      gc.childQuestions = gc.childQuestions.filter( cq => cq.isVisible === true );
+  let clonedGroups = _.cloneDeep(questionnaire.groups);
+  clonedGroups.forEach(g => {
+    g.questions = g.questions.filter(q => q.isVisible === true);
+    g.questions.forEach(gc => {
+      gc.childQuestions = gc.childQuestions.filter(cq => cq.isVisible === true);
     });
   });
   return clonedGroups;
 }
 
 function fixQuestionSpecialCharacters(question) {
-  question.name = question.name.replaceAll('"','');
-  question.text.en = question.text.en.replaceAll('"','');
-  question.text.fr = question.text.fr.replaceAll('"','');
+  question.name = question.name.replaceAll('"', "");
+  question.text.en = question.text.en.replaceAll('"', "");
+  question.text.fr = question.text.fr.replaceAll('"', "");
   if (question.responseOptions) {
-    question.responseOptions.forEach( ro => {
-      ro.name = ro.name.replaceAll('"','');
+    question.responseOptions.forEach(ro => {
+      ro.name = ro.name.replaceAll('"', "");
     });
   }
   return question;
 }
 
 function fixTextToShowInDrawer(groups) {
-  groups.forEach( g => {
-    g.title.en = g.title.en.replaceAll('"','');
-    g.title.fr = g.title.fr.replaceAll('"','');
-    g.questions.forEach( gc => {
+  groups.forEach(g => {
+    g.title.en = g.title.en.replaceAll('"', "");
+    g.title.fr = g.title.fr.replaceAll('"', "");
+    g.questions.forEach(gc => {
       gc = fixQuestionSpecialCharacters(gc);
       // eslint-disable-next-line no-unused-vars
-      gc.childQuestions.forEach( cq => {
+      gc.childQuestions.forEach(cq => {
         cq = fixQuestionSpecialCharacters(cq);
       });
     });
