@@ -44,8 +44,8 @@ Question ======
 (done) remove: ".matchingType" santosh
 
 ---- Move/ Sampling
-(todo) move: ".approximateTotal" to resultObject under samplingRecord ainsley
-(todo) move: ".sampleSize" to resultObject under samplingRecord ainsley
+(done) move: ".approximateTotal" to resultObject under samplingRecord ainsley
+(done) move: ".sampleSize" to resultObject under samplingRecord ainsley
 
 
 
@@ -54,7 +54,7 @@ Question ======
 (todo) add: internal comment type string
 (todo) add: files type object check typescript
 (todo) add: pictures type object check typescript
-(todo) add: sampling record type object check typescript ainsley
+(done) add: sampling record type object check typescript ainsley
 (done) add: violation info type object check typescript ainsley
 (todo) add: responses array of objects type object check typescript
 
