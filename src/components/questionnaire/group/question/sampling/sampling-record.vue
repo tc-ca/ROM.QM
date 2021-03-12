@@ -16,7 +16,7 @@
       <v-col cols="4">
         <v-text-field
           ref="question.samplingRecord.approximateTotal"
-          v-model.number="question.samplingRecord.approximateTotal"
+          v-model.number="result.samplingInfo.approximateTotal"
           filled
           outlined
           :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
@@ -32,7 +32,7 @@
       <v-col cols="4">
         <v-text-field
           ref="question.samplingRecord.sampleSize"
-          v-model.number="question.samplingRecord.sampleSize"
+          v-model.number="result.samplingInfo.sampleSize"
           filled
           outlined
           :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
@@ -41,7 +41,7 @@
           type="number"
           min="1"
           :disabled="readOnly"
-          :max="question.samplingRecord.approximateTotal"
+          :max="result.samplingInfo.approximateTotal"
           :error-messages="errorMessagesSize"
           :rules="[ validateSampleSize ]"
         />
@@ -58,7 +58,7 @@
           type="number"
           min="0"
           :disabled="readOnly"
-          :max="question.samplingRecord.sampleSize"
+          :max="result.samplingInfo.sampleSize"
           :error-messages="errorMessagesCompliances"
           :rules="[ validateNonCompliance ]"
         />
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import { isEmptyValues } from '../../../../../utils.js'
+
 export default {
   name: 'SamplingRecord',
   props: {
@@ -97,38 +99,38 @@ export default {
       if (this.errorMessagesSize.trim().length > 0) return true
       if (this.errorMessagesCompliances.trim().length > 0) return true
       return false
-    }
-  },
-  created () {
-    if (!this.question.samplingRecord) {
-      this.question.samplingRecord = {
-        approximateTotal: '',
-        sampleSize: '',
-        nonCompliances: ''
-      }
+    },
+    approximateTotal () {
+      return this.result.samplingInfo.approximateTotal
+    },
+    sampleSize () {
+      return this.result.samplingInfo.sampleSize
+    },
+    violationCount () {
+      return this.result.violationInfo.violationCount
     }
   },
   methods: {
     validateTotal (callback = true) {
       this.errorMessagesTotal = ''
-      if (this.question.samplingRecord.approximateTotal === '' &&
-          this.question.samplingRecord.sampleSize === '' &&
-          this.result.violationInfo.violationCount === null) {
+      if (isEmptyValues(this.approximateTotal) &&
+          isEmptyValues(this.sampleSize) &&
+          isEmptyValues(this.violationCount)) {
         return true
       }
-      if (this.question.samplingRecord.sampleSize !== '' ||
-          this.result.violationInfo.violationCount !== null) {
-        if (this.question.samplingRecord.approximateTotal === '') {
+      if (!isEmptyValues(this.sampleSize) ||
+          !isEmptyValues(this.violationCount)) {
+        if (isEmptyValues(this.approximateTotal)) {
           this.errorMessagesTotal = 'Approximate Total is required'
           return false
         }
-        if (this.question.samplingRecord.approximateTotal < 1) {
+        if (this.approximateTotal < 1) {
           this.errorMessagesTotal = 'Approximate Total have to be greater than 1'
           return false
         }
       }
-      if (this.question.samplingRecord.approximateTotal > 0 && this.question.samplingRecord.sampleSize > 0) {
-        if (this.question.samplingRecord.approximateTotal < this.question.samplingRecord.sampleSize) {
+      if (this.approximateTotal > 0 && this.sampleSize > 0) {
+        if (this.approximateTotal < this.sampleSize) {
           this.errorMessagesTotal = 'Approximate Total have to be equal or higher than Sample Size'
           return false
         }
@@ -141,24 +143,24 @@ export default {
     },
     validateSampleSize (callback = true) {
       this.errorMessagesSize = ''
-      if (this.question.samplingRecord.approximateTotal === '' &&
-          this.question.samplingRecord.sampleSize === '' &&
-          this.result.violationInfo.violationCount === null) {
+      if (isEmptyValues(this.approximateTotal) &&
+          isEmptyValues(this.sampleSize) &&
+          isEmptyValues(this.violationCount)) {
         return true
       }
-      if (this.question.samplingRecord.approximateTotal !== '' ||
-          this.result.violationInfo.violationCount !== null) {
-        if (this.question.samplingRecord.sampleSize === '') {
+      if (!isEmptyValues(this.approximateTotal) ||
+          !isEmptyValues(this.violationCount)) {
+        if (isEmptyValues(this.sampleSize)) {
           this.errorMessagesSize = 'Sample Size is required'
           return false
         }
-        if (this.question.samplingRecord.sampleSize < 1) {
+        if (this.sampleSize < 1) {
           this.errorMessagesSize = 'Sample Size have to be greater than 1'
           return false
         }
       }
-      if (this.question.samplingRecord.sampleSize > 0 && this.result.violationInfo.violationCount > 0) {
-        if (this.question.samplingRecord.sampleSize < this.result.violationInfo.violationCount) {
+      if (this.sampleSize > 0 && this.violationCount > 0) {
+        if (this.sampleSize < this.violationCount) {
           this.errorMessagesSize = 'Sample Size have to be equal or higher than Number of non-Compliance'
           return false
         }
@@ -172,19 +174,19 @@ export default {
     validateNonCompliance (callback = true) {
       this.errorMessagesCompliances = ''
 
-      if (this.question.samplingRecord.approximateTotal === '' &&
-          this.question.samplingRecord.sampleSize === '' &&
-          this.result.violationInfo.violationCount === null) {
+      if (isEmptyValues(this.approximateTotal) &&
+          isEmptyValues(this.sampleSize) &&
+          isEmptyValues(this.violationCount)) {
         return true
       }
 
-      if (this.question.samplingRecord.approximateTotal !== '' ||
-          this.question.samplingRecord.sampleSize !== '') {
-        if (this.result.violationInfo.violationCount === null) {
+      if (!isEmptyValues(this.approximateTotal) ||
+          !isEmptyValues(this.sampleSize)) {
+        if (isEmptyValues(this.violationCount)) {
           this.errorMessagesCompliances = 'Violation count is required'
           return false
         }
-        if (this.result.violationInfo.violationCount < 0) {
+        if (this.violationCount < 0) {
           this.errorMessagesCompliances = 'Violation count have to be 0 or greater than 0'
           return false
         }

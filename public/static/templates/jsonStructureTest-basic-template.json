@@ -28,7 +28,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": false,
-                    "samplingRecord": null,
                     "validationState": true,
                     "isRepeatable": false,
                     "isRepeated": false,
@@ -91,11 +90,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": true,
-                    "samplingRecord": {
-                        "approximateTotal": "",
-                        "sampleSize": "",
-                        "nonCompliances": ""
-                    },
                     "validationState": true,
                     "isRepeatable": true,
                     "isRepeated": false,
@@ -183,11 +177,6 @@
                                 "responses": []
                             },
                             "isSamplingAllowed": true,
-                            "samplingRecord": {
-                                "approximateTotal": "",
-                                "sampleSize": "",
-                                "nonCompliances": ""
-                            },
                             "validationState": true,
                             "isRepeatable": false,
                             "isRepeated": false,
@@ -318,7 +307,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": false,
-                    "samplingRecord": null,
                     "validationState": true,
                     "isRepeatable": false,
                     "isRepeated": false,
@@ -353,7 +341,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": false,
-                    "samplingRecord": null,
                     "validationState": true,
                     "isRepeatable": false,
                     "isRepeated": false,
@@ -443,7 +430,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": false,
-                    "samplingRecord": null,
                     "validationState": true,
                     "isRepeatable": false,
                     "isRepeated": false,
@@ -493,7 +479,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": false,
-                    "samplingRecord": null,
                     "validationState": true,
                     "isRepeatable": true,
                     "isRepeated": false,
@@ -598,7 +583,6 @@
 						"responses": []
                     },
                     "isSamplingAllowed": false,
-                    "samplingRecord": null,
                     "validationState": true,
                     "isRepeatable": true,
                     "isRepeated": false,
@@ -678,11 +662,11 @@
             "domSuffix": "prop value created virtually",
             "domId": "prop value created virtually",
             "name": "GROUP3",
-             "guid": "eed25c7a-eb68-47b4-a224-aacc9330da63"
+            "guid": "eed25c7a-eb68-47b4-a224-aacc9330da63"
 
         }
     ],
-    "templateid": "",
+    "guid": "5b1d1946-b15d-4ef0-afc4-2f4cddeba2a6",
     "searchableProvisions": [
         {
             "leg": "9241a2ae-1c61-4753-805a-be0707f41622",
