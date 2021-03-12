@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import { isEmptyValues } from '../../../../../utils.js'
+
 export default {
   name: 'SamplingRecord',
   props: {
@@ -88,7 +90,8 @@ export default {
     return {
       errorMessagesTotal: '',
       errorMessagesSize: '',
-      errorMessagesCompliances: ''
+      errorMessagesCompliances: '',
+      violationCount: this.result.violationInfo.violationCount
     }
   },
   computed: {
@@ -113,11 +116,11 @@ export default {
       this.errorMessagesTotal = ''
       if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
-          this.result.violationInfo.violationCount === null) {
+          isEmptyValues(this.result.violationInfo.violationCount)) {
         return true
       }
       if (this.question.samplingRecord.sampleSize !== '' ||
-          this.result.violationInfo.violationCount !== null) {
+          !isEmptyValues(this.result.violationInfo.violationCount)) {
         if (this.question.samplingRecord.approximateTotal === '') {
           this.errorMessagesTotal = 'Approximate Total is required'
           return false
@@ -143,11 +146,11 @@ export default {
       this.errorMessagesSize = ''
       if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
-          this.result.violationInfo.violationCount === null) {
+          isEmptyValues(this.result.violationInfo.violationCount)) {
         return true
       }
       if (this.question.samplingRecord.approximateTotal !== '' ||
-          this.result.violationInfo.violationCount !== null) {
+          !isEmptyValues(this.result.violationInfo.violationCount)) {
         if (this.question.samplingRecord.sampleSize === '') {
           this.errorMessagesSize = 'Sample Size is required'
           return false
@@ -174,13 +177,13 @@ export default {
 
       if (this.question.samplingRecord.approximateTotal === '' &&
           this.question.samplingRecord.sampleSize === '' &&
-          this.result.violationInfo.violationCount === null) {
+          isEmptyValues(this.result.violationInfo.violationCount)) {
         return true
       }
 
       if (this.question.samplingRecord.approximateTotal !== '' ||
           this.question.samplingRecord.sampleSize !== '') {
-        if (this.result.violationInfo.violationCount === null) {
+        if (isEmptyValues(this.result.violationInfo.violationCount)) {
           this.errorMessagesCompliances = 'Violation count is required'
           return false
         }
