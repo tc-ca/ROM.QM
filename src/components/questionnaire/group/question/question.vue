@@ -927,44 +927,40 @@ export default {
                 break
               }
 
-              // if response is string or number make into array to be handle multiple selections
-              let response = (dependsOnQuestion.result && dependsOnQuestion.result.responses.length > 0) ? dependsOnQuestion.result.responses[0].value : null
-              if (typeof response === 'string' || typeof response === 'number') {
-                response = [response]
-              }
+              let responses = (dependsOnQuestion.result && dependsOnQuestion.result.responses.length > 0) ? dependsOnQuestion.result.responses : null
 
-              if (response === null) {
+              if (responses === null) {
                 groupMatch = false
                 break
               }
 
               if (dependancy.validationAction === 'equal') {
-                if (!(response.some(value => value === dependancy.validationValue))) {
+                if (!(responses.some(response => response.value === dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'notEqual') {
-                if (!(response.some(value => value !== dependancy.validationValue))) {
+                if (!(responses.some(response => response.value !== dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'greaterThen') {
-                if (!(response.some(value => +value > +dependancy.validationValue))) {
+                if (!(responses.some(response => +response.value > +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'lessThen') {
-                if (!(response.some(value => +value < +dependancy.validationValue))) {
+                if (!(responses.some(response => +response.value < +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'lengthLessThen') {
-                if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
+                if (!(responses.some(response => !response.value || response.length < +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'lengthGreaterThen') {
-                if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
+                if (!(responses.some(response => !response.value || response.length > +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
