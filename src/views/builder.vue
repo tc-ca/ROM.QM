@@ -284,7 +284,7 @@
                             <v-icon v-if="!option.isProvisionCollapsed">
                               mdi-menu-right
                             </v-icon>
-                            <v-icon v-if="option.isProvisionCollapsed">
+                            <v-icon v-else>
                               mdi-menu-down
                             </v-icon>
                           </v-btn>
@@ -313,7 +313,6 @@
                                   :item-text="displayTextLang"
                                   selection-type="leaf"
                                   :search="option.searchProvisions"
-                                  :filter="option.filterProvisions"
                                   :items="provisions"
                                   @input="updateSearchableProvisions()"
                                 >
@@ -689,10 +688,8 @@ export default {
       violationsCollapsed: true,
       provisionsCollapsed: true,
       provisions: [],
-      searchProvisions: [],
       groupPanels: [],
       questionPanels: [],
-      selectedProvisions: [],
       questionProvisions: [],
       flagTimer: null,
       reference: QUESTION_TYPE.REFERENCE

@@ -142,8 +142,6 @@ function createGenericResponseOption(sortOrder = -1) {
     pictureRequirement: "optional",
     fileRequirement: "optional",
     provisions: [],
-    selectedProvisions: [],
-    selectedProvisionsTitles: [],
     searchProvisions: null,
     isProvisionCollapsed: false
   };

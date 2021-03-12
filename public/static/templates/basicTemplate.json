@@ -42,8 +42,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": [],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false
                       }
@@ -92,8 +90,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": [],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false
                       }, {
@@ -110,8 +106,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": ["1477409f-b360-eb11-89f5-000d3af36af4"],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": true
                       }
@@ -160,8 +154,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": ["802ae924-7f61-478a-a5f8-da7b7b14423d"],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false
                       }, {
@@ -178,8 +170,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": [],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false
                       }
@@ -228,8 +218,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": [],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false
                       }, {
@@ -246,8 +234,6 @@
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
                           "provisions": [],
-                          "selectedProvisions": [],
-                          "selectedProvisionsTitles": [],
                           "searchProvisions": null,
                           "isProvisionCollapsed": false
                       }
@@ -299,8 +285,6 @@
                                               "pictureRequirement": "optional",
                                               "fileRequirement": "optional",
                                               "provisions": ["802ae924-7f61-478a-a5f8-da7b7b14423d"],
-                                              "selectedProvisions": [],
-                                              "selectedProvisionsTitles": [],
                                               "searchProvisions": null,
                                               "isProvisionCollapsed": false
                                           }, {
@@ -317,8 +301,6 @@
                                               "pictureRequirement": "optional",
                                               "fileRequirement": "optional",
                                               "provisions": [],
-                                              "selectedProvisions": [],
-                                              "selectedProvisionsTitles": [],
                                               "searchProvisions": null,
                                               "isProvisionCollapsed": false
                                           }
