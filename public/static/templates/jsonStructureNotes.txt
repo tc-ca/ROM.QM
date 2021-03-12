@@ -22,7 +22,7 @@ Question ======
 (todo) rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
 (done) remove: ".id" 
 (done) remove: ".isMultiple"  santosh 
-(todo) remove: ".response"  santosh
+(done) remove: ".response"  santosh 
 
 (todo) move: .samplingRecord to .result object
 
