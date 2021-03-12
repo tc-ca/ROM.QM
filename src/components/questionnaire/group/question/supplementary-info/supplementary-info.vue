@@ -41,7 +41,8 @@
     />
     <supplementary-info-image
       v-if="displayPicture"
-      :picture="selresponseoption.picture"
+      :picture="question.result ? question.result.pictures : []"
+      :picture-requirement="selresponseoption.pictureRequirement"
       :label="$t('app.questionnaire.group.question.photos')"
       :group="group"
       :question="question"
@@ -93,7 +94,7 @@ export default {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.fileRequirement !== 'n/a'
     },
     displayPicture () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.picture.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.pictureRequirement !== 'n/a'
     },
     ...mapState({
       lang: state => {

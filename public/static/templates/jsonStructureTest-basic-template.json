@@ -43,10 +43,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "required",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            }
+                            "pictureRequirement": "required"
                         }
                     ],
                     "validationRules": [
@@ -93,10 +90,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "required",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         },
                         {
@@ -111,10 +105,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         }
                     ],
@@ -159,10 +150,7 @@
                                     "internalCommentRequirement": "required",
                                     "externalCommentRequirement": "optional",
                                     "fileRequirement": "optional",
-                                    "picture": {
-                                        "option": "optional",
-                                        "value": []
-                                    },
+                                    "pictureRequirement": "required",
                                     "provisions": []
                                 },
                                 {
@@ -177,10 +165,7 @@
                                     "internalCommentRequirement": "required",
                                     "externalCommentRequirement": "optional",
                                     "fileRequirement": "optional",
-                                    "picture": {
-                                        "option": "optional",
-                                        "value": []
-                                    },
+                                    "pictureRequirement": "required",
                                     "provisions": [
                                         "9241a2ae-1c61-4753-805a-be0707f41622",
                                         "77758039-206f-476d-84d9-549c571f269e",
@@ -301,10 +286,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         },
                         {
@@ -319,10 +301,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         },
                         {
@@ -338,10 +317,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            }
+                            "pictureRequirement": "required"
                         }
                     ],
                     "validationRules": [
@@ -469,10 +445,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         },
                         {
@@ -487,10 +460,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         }
                     ],
@@ -553,10 +523,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         },
                         {
@@ -571,10 +538,7 @@
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
-                            "picture": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "pictureRequirement": "required",
                             "provisions": []
                         }
                     ],
