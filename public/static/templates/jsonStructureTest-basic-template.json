@@ -42,10 +42,7 @@
                             "provisions": [],
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "required",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -95,10 +92,7 @@
                             "value": "true",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "required",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -116,10 +110,7 @@
                             "value": "false",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -167,10 +158,7 @@
                                     "value": "true",
                                     "internalCommentRequirement": "required",
                                     "externalCommentRequirement": "optional",
-                                    "file": {
-                                        "option": "optional",
-                                        "value": []
-                                    },
+                                    "fileRequirement": "optional",
                                     "picture": {
                                         "option": "optional",
                                         "value": []
@@ -188,10 +176,7 @@
                                     "value": "false",
                                     "internalCommentRequirement": "required",
                                     "externalCommentRequirement": "optional",
-                                    "file": {
-                                        "option": "optional",
-                                        "value": []
-                                    },
+                                    "fileRequirement": "optional",
                                     "picture": {
                                         "option": "optional",
                                         "value": []
@@ -315,10 +300,7 @@
                             "value": "true",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -336,10 +318,7 @@
                             "value": "false",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -356,18 +335,9 @@
                             },
                             "value": "3",
                             "provisions": [],
-                            "internalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "option": "optional",
-                                "value": ""
-                            },
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -498,10 +468,7 @@
                             "value": "true",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -519,10 +486,7 @@
                             "value": "false",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -588,10 +552,7 @@
                             "value": "true",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []
@@ -609,10 +570,7 @@
                             "value": "false",
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
-                            "file": {
-                                "option": "optional",
-                                "value": []
-                            },
+                            "fileRequirement": "optional",
                             "picture": {
                                 "option": "optional",
                                 "value": []

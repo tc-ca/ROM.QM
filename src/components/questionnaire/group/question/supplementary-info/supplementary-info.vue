@@ -30,7 +30,8 @@
     />
     <supplementary-info-files
       v-if="displayFile"
-      :file="selresponseoption.file"
+      :file="question.result ? question.result.files : []"
+      :file-requirement="selresponseoption.fileRequirement"
       :label="$t('app.questionnaire.group.question.supplementaryFile.label')"
       :group="group"
       :question="question"
@@ -89,7 +90,7 @@ export default {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalCommentRequirement !== 'n/a'
     },
     displayFile () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.file.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.fileRequirement !== 'n/a'
     },
     displayPicture () {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.picture.option !== 'n/a'

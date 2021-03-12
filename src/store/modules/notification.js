@@ -160,7 +160,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
         }
         if (op.file && op.file.notification) {
           dispatch('notification/addNotification', op.file.notification,{root:true});
-        } else if (op.file && op.file.option === 'required' && op.file.value.length === 0) {
+        } else if (op.file && op.fileRequirement === 'required' && q.result.files.length === 0) {
           const msg = {
             en: `A File for the response type ${op.text[lang]} is required.`,
             fr: `Un fichier pour le type de réponse ${op.text[lang]} est requis.`

@@ -61,7 +61,7 @@
               cols="12"
             >
               <v-list
-                v-if="file.value.length > 0"
+                v-if="file.length > 0"
                 color="#f5f5f5"
                 dense
               >
@@ -97,7 +97,7 @@
           <v-col cols="12">
             <v-input
               ref="validationInput"
-              v-model="file.value.length"
+              v-model="file.length"
               :disabled="readOnly"
               :rules="rules"
               @update:error="onError"
@@ -154,7 +154,11 @@ export default {
   mixins: [BaseMixin],
   props: {
     file: {
-      type: Object,
+      type: Array,
+      required: true
+    },
+    fileRequirement: {
+      type: String,
       required: true
     },
     label: {
@@ -185,7 +189,7 @@ export default {
       progressStatus: '',
       galleryIndex: 0,
       rules: [
-        value => !this.file.display || !this.file.required ? true : this.file.value.length > 0 || 'Required.'
+        value => !this.display || !this.isFileRequired === 'required' ? true : this.file.length > 0 || 'Required.'
       ],
       validationStatus: false,
       notification: null,
@@ -199,13 +203,13 @@ export default {
       return this.file.value[this.galleryIndex] !== undefined
     },
     displayFile () {
-      return !this.file.display
+      return this.fileRequirement !== 'n/a'
     },
     isFileRequired () {
-      return this.file.option === 'required'
+      return this.fileRequirement === 'required'
     },
     errorInFile () {
-      return this.displayFile && this.isFileRequired && !this.file.value.length > 0
+      return this.displayFile && this.isFileRequired && !this.file.length > 0
     },
     placeholderText () {
       return this.isFileRequired ? this.$t('app.questionnaire.group.question.supplementaryFile.fileRequired') : this.$t('app.questionnaire.group.question.supplementaryFile.fileOptional')
@@ -247,7 +251,7 @@ export default {
     this.$watch(
       '$refs.validationInput.validations',
       (newValue) => {
-        let error = this.displayFile && this.isFileRequired && !this.file.value.length > 0
+        let error = this.displayFile && this.isFileRequired && !this.file.length > 0
         this.onError(error)
       }
     )
@@ -384,19 +388,19 @@ export default {
     },
 
     setGalleryIndex () {
-      this.galleryIndex = this.file.value.length === 0
+      this.galleryIndex = this.file.length === 0
         ? 0
-        : this.file.value.length - 1
+        : this.file.length - 1
     },
     next () {
-      this.galleryIndex = this.galleryIndex + 1 === this.file.value.length
+      this.galleryIndex = this.galleryIndex + 1 === this.file.length
         ? 0
         : this.galleryIndex + 1
     },
 
     prev () {
       this.galleryIndex = this.galleryIndex - 1 < 0
-        ? this.file.value.length - 1
+        ? this.file.length - 1
         : this.galleryIndex - 1
     },
 
