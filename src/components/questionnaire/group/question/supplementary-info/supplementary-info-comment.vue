@@ -75,7 +75,11 @@ export default {
   emits: ['error'],
   props: {
     comment: {
-      type: Object,
+      type: String,
+      required: true
+    },
+    commentText: {
+      type: String,
       required: true
     },
     label: {
@@ -119,13 +123,13 @@ export default {
       return this.isCommentRequired ? this.$t('app.questionnaire.group.question.commentRequired') : this.$t('app.questionnaire.group.question.commentOptional')
     },
     isCommentRequired () {
-      return this.comment.option === 'required'
+      return this.comment === 'required'
     },
     displayComment () {
-      return this.comment.option !== 'n/a'
+      return this.comment !== 'n/a'
     },
     errorInComment () {
-      return this.displayComment && this.isCommentRequired && !this.comment.value
+      return this.displayComment && this.isCommentRequired && !this.commentText
     },
     ...mapState({
       lang: state => {
