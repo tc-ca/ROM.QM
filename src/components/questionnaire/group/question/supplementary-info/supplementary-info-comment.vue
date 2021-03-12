@@ -40,7 +40,7 @@
       <v-list-item-content>
         <v-textarea
           ref="textArea"
-          v-model="comment.value"
+          v-model="commentData"
           prepend-inner-icon="mdi-message-text-outline"
           auto-grow
           outlined
@@ -111,7 +111,7 @@ export default {
   data () {
     return {
       rules: [
-        value => !this.displayComment || !this.isCommentRequired ? true : !!this.comment.value || 'Required.'
+        value => !this.displayComment || !this.isCommentRequired ? true : !!this.comment || 'Required.'
       ],
       response: '',
       validationStatus: false,
@@ -119,6 +119,12 @@ export default {
     }
   },
   computed: {
+    commentData: {
+      get () {
+        return this.commentText
+      },
+      set (value) { return value }
+    },
     placeholderText () {
       return this.isCommentRequired ? this.$t('app.questionnaire.group.question.commentRequired') : this.$t('app.questionnaire.group.question.commentOptional')
     },

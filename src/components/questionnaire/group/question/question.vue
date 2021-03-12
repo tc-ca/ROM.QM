@@ -479,7 +479,7 @@ export default {
       searchProvisions: null,
       referenceId: null,
       responses: null,
-      questionResult: { externalComment: '', internalComment: '', responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
+      questionResult: { externalComment: '', internalComment: '', files: [], pictures: [], responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
     }
   },
   computed: {
@@ -828,7 +828,7 @@ export default {
         this.updateViolationInfo(this.selectedResponseOption)
       }
 
-      this.updateSupplementaryInfoVisibility(args)
+      // this.updateSupplementaryInfoVisibility(args)
       this.updateResult(args)
       this.updateDependants(args)
       this.updateReferenceId()
@@ -841,6 +841,7 @@ export default {
     updateSupplementaryInfoVisibility (args) {
       if (this.showSupplementaryInfo) this.updateSupplementaryInfo(args)
     },
+    // [TODO] Santosh: Remove this code
     updateSupplementaryInfo (args) {
       if (this.question.type === QUESTION_TYPE.RADIO) {
         let originalOption = this.question.responseOptions.find(option => option.guid === args.optionPreviousId)

@@ -40,12 +40,6 @@
                             },
                             "value": 1,
                             "provisions": [],
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -99,12 +93,6 @@
                                 "fr": "FR: Yes"
                             },
                             "value": "true",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -126,12 +114,6 @@
                                 "fr": "FR: No"
                             },
                             "value": "false",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -184,12 +166,6 @@
                                         "fr": "FR: Yes"
                                     },
                                     "value": "true",
-                                    "internalComment": {
-                                        "value": ""
-                                    },
-                                    "externalComment": {
-                                        "value": ""
-                                    },
                                     "internalCommentRequirement": "required",
                                     "externalCommentRequirement": "optional",
                                     "file": {
@@ -211,12 +187,6 @@
                                         "fr": "FR: No"
                                     },
                                     "value": "false",
-                                    "internalComment": {
-                                        "value": ""
-                                    },
-                                    "externalComment": {
-                                        "value": ""
-                                    },
                                     "internalCommentRequirement": "required",
                                     "externalCommentRequirement": "optional",
                                     "file": {
@@ -344,12 +314,6 @@
                                 "fr": "FR: Yes"
                             },
                             "value": "true",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -371,12 +335,6 @@
                                 "fr": "FR: No"
                             },
                             "value": "false",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -478,12 +436,6 @@
                                 "fr": "FR: Yes"
                             },
                             "value": "true",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -505,12 +457,6 @@
                                 "fr": "FR: No"
                             },
                             "value": "false",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -580,12 +526,6 @@
                                 "fr": "FR: Yes"
                             },
                             "value": "true",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
@@ -607,12 +547,6 @@
                                 "fr": "FR: No"
                             },
                             "value": "false",
-                            "internalComment": {
-                                "value": ""
-                            },
-                            "externalComment": {
-                                "value": ""
-                            },
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
                             "file": {
