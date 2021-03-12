@@ -32,8 +32,8 @@ Question ======
 (done) remove: ".searchProvisions" move to component data member ainsley
 (done) remove: ".selectedProvisionsTitles" ainsley
 (skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
-(todo) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
-(todo) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
+(done) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
+(done) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
 (todo) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
 (todo) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
@@ -50,8 +50,8 @@ Question ======
 
 
 ----ADD result object
-(todo) add: external comment type string
-(todo) add: internal comment type string
+(done) add: external comment type string
+(done) add: internal comment type string
 (todo) add: files type object check typescript
 (todo) add: pictures type object check typescript
 (done) add: sampling record type object check typescript ainsley
