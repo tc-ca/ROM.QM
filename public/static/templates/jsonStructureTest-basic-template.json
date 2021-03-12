@@ -42,7 +42,6 @@
                             },
                             "value": 1,
                             "provisions": [],
-                            "selectedProvisions": [],
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -73,9 +72,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -127,8 +123,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -154,9 +149,7 @@
                             "picture": {
                                 "option": "optional",
                                 "value": []
-                            },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            }
                         }
                     ],
                     "validationRules": [
@@ -171,9 +164,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [
                         {
                             "name": "QTN_CHLDQSTN_RD_GRP_GRP1_TMPLT_QSTNNRTTLN",
@@ -222,8 +212,7 @@
                                         "option": "optional",
                                         "value": []
                                     },
-                                    "provisions": [],
-                                    "selectedProvisions": []
+                                    "provisions": []
                                 },
                                 {
                                     "guid": 2,
@@ -269,8 +258,7 @@
                                         "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
                                         "fd9c4294-78ab-47ac-b252-808577cdfdf3",
                                         "488db8ca-3022-456e-9df9-f21d2ba63791"
-                                    ],
-                                    "selectedProvisions": []
+                                    ]
                                 }
                             ],
                             "validationRules": [
@@ -285,9 +273,6 @@
                                     }
                                 }
                             ],
-                            "violationInfo": {
-                                "referenceID": null
-                            },
                             "childQuestions": [],
                             "dependants": [],
                             "dependencyGroups": [
@@ -344,9 +329,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -394,8 +376,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -422,8 +403,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         }
                     ],
                     "validationRules": [
@@ -438,9 +418,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -475,9 +452,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -540,8 +514,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -568,8 +541,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         }
                     ],
                     "validationRules": [
@@ -584,9 +556,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -649,8 +618,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -677,8 +645,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         }
                     ],
                     "validationRules": [
@@ -693,9 +660,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -704,7 +668,7 @@
             "domSuffix": "prop value created virtually",
             "domId": "prop value created virtually",
             "name": "GROUP3",
-             "guid": "eed25c7a-eb68-47b4-a224-aacc9330da63"
+            "guid": "eed25c7a-eb68-47b4-a224-aacc9330da63"
 
         }
     ],
