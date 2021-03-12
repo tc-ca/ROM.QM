@@ -10,6 +10,15 @@ const tagsToReplace = {
 export function escapeHTML (str) {
       return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
+export  function isEmptyValues(value) {
+  return (
+    value === undefined ||
+    value === null ||
+    value === isNaN ||
+    (typeof value === "object" && Object.keys(value).length === 0) ||
+      (typeof value === "string" && value.trim().length === 0)
+  );
+}
   
 export function pad (n, width, z) {
   z = z || '0'
