@@ -136,7 +136,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
   if(q.responseOptions) {
     for( let x = 0; x < q.responseOptions.length; x++) {
       const op = q.responseOptions[x];
-      if (q.result.responses[0].value === op.value) {
+      if (q.result && q.result.responses[0].value === op.value) {
         // This is the response selected
         if (op.internalComment && op.internalComment.notification) {
           dispatch('notification/addNotification', op.internalComment.notification,{root:true});
@@ -209,7 +209,7 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
   if( q.validationRules) {
     q.validationRules.forEach( vr => {
       if (vr.enabled) {
-        if (!q.result.responses[0].value) {
+        if (q.result && !q.result.responses[0].value) {
           q.notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
           dispatch("notification/addNotification", q.notification, { root: true });
         } else {
@@ -231,7 +231,7 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
     if (q.notification) {
       dispatch("notification/addNotification", q.notification, { root: true });
     } else if (isValidationRequired(q)) {
-      if (!q.validationState || !q.result.responses[0].value) {
+      if (!q.validationState || (q.result && !q.result.responses[0].value)) {
         const msg = {
           en: "A valid response for the question is required.",
           fr: "Une réponse valide à la question est requise."
