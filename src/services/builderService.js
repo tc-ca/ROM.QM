@@ -12,12 +12,12 @@ function createQuestionnaire() {
     guid: guid,
     name: guid,
     readOnly: false,
-    searchableProvisions: [],
     title: {
       [LANGUAGE.ENGLISH]: "Questionnaire Title EN",
       [LANGUAGE.FRENCH]: "Questionnaire Title EN"
     },
-    groups: []
+    groups: [],
+    searchableProvisions: []
   };
   return questionnaire;
 }
@@ -50,8 +50,8 @@ function createQuestion(parent, type = QUESTION_TYPE.RADIO) {
     responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Yes",[LANGUAGE.FRENCH]: "Oui"},"true"));
     responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "No",[LANGUAGE.FRENCH]: "Non"},"false"));
   } else if (type === QUESTION_TYPE.SELECT) {
-    responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Yes",[LANGUAGE.FRENCH]: "Oui"},"true"));
-    responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "No",[LANGUAGE.FRENCH]: "Non"},"false"));
+    responseOptions.push(createResponseOption(1,{[LANGUAGE.ENGLISH]: "Option 1",[LANGUAGE.FRENCH]: "Option 1"},"1"));
+    responseOptions.push(createResponseOption(2,{[LANGUAGE.ENGLISH]: "Option 2",[LANGUAGE.FRENCH]: "Option 2"},"2"));
   } else {
     responseOptions.push(createResponseOption(1,null,""));
   }
@@ -141,7 +141,11 @@ function createGenericResponseOption(sortOrder = -1) {
     externalCommentRequirement: "optional",
     pictureRequirement: "optional",
     fileRequirement: "optional",
-    provisions: []
+    provisions: [],
+    selectedProvisions: [],
+    selectedProvisionsTitles: [],
+    searchProvisions: null,
+    isProvisionCollapsed: false
   };
 }
 

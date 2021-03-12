@@ -169,27 +169,27 @@
                   </div>
                   <div v-show="!optionsCollapsed">
                     <div
-                      v-for="(responseOption, index) in selectedQuestion.responseOptions"
+                      v-for="(option, index) in selectedQuestion.responseOptions"
                       :key="index"
                       class="bordered ml-2 pa-2 my-2"
                     >
                       <v-text-field
-                        v-model="responseOption.text[eng]"
+                        v-model="option.text[eng]"
                         dense
                         :label="$t('app.builder.responseOptions.englishText')"
                       />
                       <v-text-field
-                        v-model="responseOption.text[fr]"
+                        v-model="option.text[fr]"
                         dense
                         :label="$t('app.builder.responseOptions.frenchText')"
                       />
                       <v-text-field
-                        v-model.number="responseOption.sortOrder"
+                        v-model.number="option.sortOrder"
                         dense
                         :label="$t('app.builder.responseOptions.sortOrder')"
                       />
                       <v-text-field
-                        v-model="responseOption.value"
+                        v-model="option.value"
                         dense
                         :label="$t('app.builder.responseOptions.value')"
                       />
@@ -202,7 +202,7 @@
                             <v-btn
                               small
                               icon
-                              @click="removeResponseOption(responseOption)"
+                              @click="removeResponseOption(option)"
                             >
                               <v-icon
                                 small
@@ -218,7 +218,7 @@
                       </div>
                       <div>
                         <v-select
-                          v-model="responseOption.internalCommentRequirement"
+                          v-model="option.internalCommentRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -232,7 +232,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="responseOption.externalCommentRequirement"
+                          v-model="option.externalCommentRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -246,7 +246,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="responseOption.fileRequirement"
+                          v-model="option.fileRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -260,7 +260,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="responseOption.pictureRequirement"
+                          v-model="option.pictureRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -279,25 +279,25 @@
                           <v-btn
                             small
                             icon
-                            @click="toggleProvisions(responseOption)"
+                            @click="toggleProvisions(option)"
                           >
-                            <v-icon v-if="!responseOption.isProvisionCollapsed">
+                            <v-icon v-if="!option.isProvisionCollapsed">
                               mdi-menu-right
                             </v-icon>
-                            <v-icon v-if="responseOption.isProvisionCollapsed">
+                            <v-icon v-if="option.isProvisionCollapsed">
                               mdi-menu-down
                             </v-icon>
                           </v-btn>
                           {{ $t('app.builder.responseOptions.provisions.provisions') }}
                         </div>
-                        <div v-show="responseOption.isProvisionCollapsed">
+                        <div v-show="option.isProvisionCollapsed">
                           <div>
                             <v-card
                               class="mx-auto"
                             >
                               <v-sheet class="pa-4">
                                 <v-text-field
-                                  v-model="responseOption.provisions"
+                                  v-model="option.searchProvisions"
                                   :label="$t('app.builder.responseOptions.provisions.search')"
                                   outlined
                                   hide-details
@@ -307,13 +307,13 @@
                               </v-sheet>
                               <v-card-text>
                                 <v-treeview
-                                  v-model="responseOption.provisions"
+                                  v-model="option.provisions"
                                   selectable
                                   item-key="id"
                                   :item-text="displayTextLang"
                                   selection-type="leaf"
-                                  :search="searchProvisions"
-                                  :filter="filterProvisions"
+                                  :search="option.searchProvisions"
+                                  :filter="option.filterProvisions"
                                   :items="provisions"
                                   @input="updateSearchableProvisions()"
                                 >
@@ -332,7 +332,7 @@
                     <div class="right">
                       <v-btn
                         small
-                        @click="addOption()"
+                        @click="addResponseOption()"
                       >
                         {{ $t('app.builder.responseOptions.addOption') }}
                       </v-btn>
@@ -689,7 +689,7 @@ export default {
       violationsCollapsed: true,
       provisionsCollapsed: true,
       provisions: [],
-      searchProvisions: '',
+      searchProvisions: [],
       groupPanels: [],
       questionPanels: [],
       selectedProvisions: [],
@@ -862,9 +862,12 @@ export default {
         }
       }
       this.selectedQuestion.responseOptions = []
-      if (this.selectedQuestion.type === QUESTION_TYPE.RADIO || this.selectedQuestion.type === QUESTION_TYPE.SELECT) {
+      if (this.selectedQuestion.type === QUESTION_TYPE.RADIO) {
         this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, { [LANGUAGE.ENGLISH]: 'Yes', [LANGUAGE.FRENCH]: 'Oui' }, 'true'))
         this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(2, { [LANGUAGE.ENGLISH]: 'No', [LANGUAGE.FRENCH]: 'Non' }, 'false'))
+      } else if (this.selectedQuestion.type === QUESTION_TYPE.SELECT) {
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, { [LANGUAGE.ENGLISH]: 'Option 1', [LANGUAGE.FRENCH]: 'Option 1' }, '1'))
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(2, { [LANGUAGE.ENGLISH]: 'Option 2', [LANGUAGE.FRENCH]: 'Option 2' }, '2'))
       } else {
         this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, null, ''))
       }
@@ -960,10 +963,11 @@ export default {
       this.questionnaire = BuilderService.updateTemplate(this.questionnaire)
       this.save()
     },
-    addOption () {
+    addResponseOption () {
       const idx = this.selectedQuestion.responseOptions.length
       const ro = BuilderService.createGenericResponseOption()
       ro.sortOrder = idx + 1
+      ro.value = idx + 1
       this.selectedQuestion.responseOptions.push(ro)
     },
     toggleOptions () {

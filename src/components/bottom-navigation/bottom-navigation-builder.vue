@@ -37,7 +37,7 @@
       <span>Update it.</span>
 
       <v-icon color="purple">
-        mdi-hammer-wrench
+        mdi-reload-alert
       </v-icon>
     </v-btn>
   </v-bottom-navigation>
