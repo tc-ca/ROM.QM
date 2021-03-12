@@ -53,7 +53,7 @@ Question ======
 (done) add: external comment type string
 (done) add: internal comment type string
 (done) add: files type object check typescript
-(todo) add: pictures type object check typescript
+(done) add: pictures type object check typescript
 (done) add: sampling record type object check typescript ainsley
 (done) add: violation info type object check typescript ainsley
 (done) add: responses array of objects type object check typescript
