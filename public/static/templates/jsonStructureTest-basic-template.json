@@ -38,7 +38,7 @@
                                 "en": "Option 1",
                                 "fr": "FR: Option 1"
                             },
-                            "value": 1,
+                            "value": "1",
                             "provisions": [],
                             "internalCommentRequirement": "required",
                             "externalCommentRequirement": "optional",
@@ -125,7 +125,6 @@
                                 "value": []
                             },
                             "provisions": []
-
                         }
                     ],
                     "validationRules": [
@@ -346,6 +345,33 @@
                                 "value": []
                             },
                             "provisions": []
+                        },
+                        {
+                            "id": 3,
+                            "name": "RSPNS_PTN3",
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "Option 3",
+                                "fr": "FR: Option 3"
+                            },
+                            "value": "3",
+                            "provisions": [],
+                            "internalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "externalComment": {
+                                "option": "optional",
+                                "value": ""
+                            },
+                            "file": {
+                                "option": "optional",
+                                "value": []
+                            },
+                            "picture": {
+                                "option": "optional",
+                                "value": []
+                            }
                         }
                     ],
                     "validationRules": [
@@ -361,7 +387,14 @@
                         }
                     ],
                     "childQuestions": [],
-                    "dependants": [],
+                    "dependants": [
+                        {
+                            "guid": "2a15cee7-fb5b-43c4-8b4d-958412036fb2"
+                        },
+                        {
+                            "guid": "2a15cee7-fb5b-43c4-8b4d-958412036fb2"
+                        }
+                    ],
                     "dependencyGroups": []
                 },
                 {
@@ -394,7 +427,34 @@
                     ],
                     "childQuestions": [],
                     "dependants": [],
-                    "dependencyGroups": []
+                    "dependencyGroups": [
+                        {
+                            "ruleType": "visibility",
+                            "childValidatorName": null,
+                            "questionDependencies": [
+                                {
+                                    "dependsOnQuestion": {
+                                        "guid": "db5def87-7859-4637-95ad-52636ce141b2"
+                                    },
+                                    "validationAction": "equal",
+                                    "validationValue": "true"
+                                }
+                            ]
+                        },
+                        {
+                            "ruleType": "visibility",
+                            "childValidatorName": null,
+                            "questionDependencies": [
+                                {
+                                    "dependsOnQuestion": {
+                                        "guid": "db5def87-7859-4637-95ad-52636ce141b2"
+                                    },
+                                    "validationAction": "equal",
+                                    "validationValue": "3"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "domSuffix": "prop value created virtually",
@@ -581,7 +641,6 @@
             "domId": "prop value created virtually",
             "name": "GROUP3",
             "guid": "eed25c7a-eb68-47b4-a224-aacc9330da63"
-
         }
     ],
     "guid": "5b1d1946-b15d-4ef0-afc4-2f4cddeba2a6",
