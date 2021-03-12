@@ -149,7 +149,9 @@
                             "picture": {
                                 "option": "optional",
                                 "value": []
-                            }
+                            },
+                            "provisions": []
+
                         }
                     ],
                     "validationRules": [
