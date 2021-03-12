@@ -170,7 +170,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
         }
         if (op.picture && op.picture.notification) {
           dispatch('notification/addNotification', op.picture.notification,{root:true});
-        } else if (op.picture && op.picture.option === 'required' && op.picture.value.length === 0) {
+        } else if (op.picture && op.pictureRequirement === 'required' && q.result.pictures.length === 0) {
           const msg = {
             en: `A Picture for the response type ${op.text[lang]} is required.`,
             fr: `Une image pour le type de réponse ${op.text[lang]} est requis.`

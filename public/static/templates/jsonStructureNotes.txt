@@ -34,7 +34,7 @@ Question ======
 (skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
 (done) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
 (done) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
-(todo) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
+(done) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
 (done) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
 ---- Move/ refactor violationInfo
@@ -56,7 +56,7 @@ Question ======
 (todo) add: pictures type object check typescript
 (done) add: sampling record type object check typescript ainsley
 (done) add: violation info type object check typescript ainsley
-(todo) add: responses array of objects type object check typescript
+(done) add: responses array of objects type object check typescript
 
  
 
