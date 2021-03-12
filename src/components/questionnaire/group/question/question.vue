@@ -872,7 +872,21 @@ export default {
     updateResult (args) {
       // [TODO]: Santosh, get the Guid
       // if (this.question.result == null) this.question.result.
-      this.question.result.responses.push({ 'guid': 'xxxx', 'value': args.value })
+      // this.question.result.responses.push({ 'guid': 'xxxx', 'value': args.value })
+
+      // args.value can can be string/number or array of values i.e select
+      // make everything array for consistent logic
+      let responses = args.value
+      if (this.question.type !== QUESTION_TYPE.SELECT) {
+        responses = [args.value]
+      }
+
+      let newResponses = []
+      responses.forEach(response => {
+        newResponses.push({ 'guid': 'xxxx', 'value': response })
+      })
+
+      this.question.result.responses = newResponses
     },
     updateDependants (args) {
       if (this.question.dependants) {
