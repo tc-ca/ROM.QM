@@ -8,7 +8,7 @@
       :item-text="'text.' + lang"
       attach
       :chips="question.isChips"
-      multiple
+      :multiple="question.isMultiple"
       outlined
       :disabled="readOnly"
       label="select"
@@ -48,7 +48,7 @@ export default {
               let errorMessage = ruleDefinition.errorMessage[this.lang]
 
               if (ruleDefinition.type === 'require') {
-                if (!value || (!value.length)) {
+                if (!value || (this.question.isMultiple && !value.length)) {
                   return errorMessage
                 }
               } else if (ruleDefinition.type === 'minLength') {
@@ -87,9 +87,13 @@ export default {
     )
 
     if (this.question.response != null) {
-      this.response = []
-      for (let i = 0; i < this.question.response.length; i++) {
-        this.response.push(this.question.responseOptions.find(r => r.value === this.question.response[i]))
+      if (this.question.isMultiple) {
+        this.response = []
+        for (let i = 0; i < this.question.response.length; i++) {
+          this.response.push(this.question.responseOptions.find(r => r.value === this.question.response[i]))
+        }
+      } else {
+        this.response = this.question.responseOptions.find(r => r.value === this.question.response)
       }
 
       this.onChange()
@@ -98,7 +102,7 @@ export default {
   methods: {
     onChange () {
       let args = {
-        value: this.response.map(item => item.value)
+        value: this.question.isMultiple ? this.response.map(item => item.value) : this.response.value
       }
 
       this.$emit('change', args)

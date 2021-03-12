@@ -8,7 +8,7 @@
       :item-text="'text.' + lang"
       attach
       :chips="question.isChips"
-      multiple
+      :multiple="question.isMultiple"
       outlined
       label="select"
       return-object
