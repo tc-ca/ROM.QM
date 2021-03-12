@@ -6,7 +6,8 @@
   >
     <supplementary-info-comment
       v-if="displayExternalComment"
-      :comment="selresponseoption.externalComment"
+      :comment="selresponseoption.externalCommentRequirement"
+      :comment-text="question.result ? question.result.externalComment : ''"
       :label="$t('app.questionnaire.group.question.externalComment')"
       :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
@@ -17,7 +18,8 @@
     />
     <supplementary-info-comment
       v-if="displayInternalComment"
-      :comment="selresponseoption.internalComment"
+      :comment="selresponseoption.internalCommentRequirement"
+      :comment-text="question.result ? question.result.internalComment : ''"
       :label="$t('app.questionnaire.group.question.internalComment')"
       :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"
@@ -81,10 +83,10 @@ export default {
   },
   computed: {
     displayInternalComment () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.internalComment.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.internalCommentRequirement !== 'n/a'
     },
     displayExternalComment () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalComment.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalCommentRequirement !== 'n/a'
     },
     displayFile () {
       return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.file.option !== 'n/a'

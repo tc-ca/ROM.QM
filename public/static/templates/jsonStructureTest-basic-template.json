@@ -41,13 +41,13 @@
                             "value": 1,
                             "provisions": [],
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -100,13 +100,13 @@
                             },
                             "value": "true",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -127,13 +127,13 @@
                             },
                             "value": "false",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "required",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -185,13 +185,13 @@
                                     },
                                     "value": "true",
                                     "internalComment": {
-                                        "option": "optional",
                                         "value": ""
                                     },
                                     "externalComment": {
-                                        "option": "optional",
                                         "value": ""
                                     },
+                                    "internalCommentRequirement": "required",
+                                    "externalCommentRequirement": "optional",
                                     "file": {
                                         "option": "optional",
                                         "value": []
@@ -212,13 +212,13 @@
                                     },
                                     "value": "false",
                                     "internalComment": {
-                                        "option": "optional",
                                         "value": ""
                                     },
                                     "externalComment": {
-                                        "option": "required",
                                         "value": ""
                                     },
+                                    "internalCommentRequirement": "required",
+                                    "externalCommentRequirement": "optional",
                                     "file": {
                                         "option": "optional",
                                         "value": []
@@ -345,13 +345,13 @@
                             },
                             "value": "true",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -372,13 +372,13 @@
                             },
                             "value": "false",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "required",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -479,13 +479,13 @@
                             },
                             "value": "true",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -506,13 +506,13 @@
                             },
                             "value": "false",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "required",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -581,13 +581,13 @@
                             },
                             "value": "true",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []
@@ -608,13 +608,13 @@
                             },
                             "value": "false",
                             "internalComment": {
-                                "option": "optional",
                                 "value": ""
                             },
                             "externalComment": {
-                                "option": "required",
                                 "value": ""
                             },
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "optional",
                             "file": {
                                 "option": "optional",
                                 "value": []

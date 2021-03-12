@@ -479,7 +479,7 @@ export default {
       searchProvisions: null,
       referenceId: null,
       responses: null,
-      questionResult: { responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
+      questionResult: { externalComment: '', internalComment: '', responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
     }
   },
   computed: {

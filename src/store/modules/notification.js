@@ -140,7 +140,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
         // This is the response selected
         if (op.internalComment && op.internalComment.notification) {
           dispatch('notification/addNotification', op.internalComment.notification,{root:true});
-        } else if (op.internalComment && op.internalComment.option === 'required' && op.internalComment.value.trim().length === 0) {
+        } else if (op.internalComment && op.internalCommentRequirement === 'required' && op.internalComment.value.trim().length === 0) {
           const msg = {
             en: `Internal Comment for the response type ${op.text[lang]} is required.`,
             fr: `Commentaire interne pour le type de réponse ${op.text[lang]} est requis.`
@@ -150,7 +150,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
         }
         if (op.externalComment && op.externalComment.notification) {
           dispatch('notification/addNotification', op.externalComment.notification,{root:true});
-        } else if (op.externalComment && op.externalComment.option === 'required' && op.externalComment.value.trim().length === 0) {
+        } else if (op.externalComment && op.externalCommentRequirement === 'required' && op.externalComment.value.trim().length === 0) {
           const msg = {
             en: `External Comment for the response type ${op.text[lang]} is required.`,
             fr: `Commentaire externe pour le type de réponse ${op.text[lang]} est requis.`
