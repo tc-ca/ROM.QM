@@ -136,7 +136,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
   if(q.responseOptions) {
     for( let x = 0; x < q.responseOptions.length; x++) {
       const op = q.responseOptions[x];
-      if (q.response === op.value) {
+      if (q.result.responses[0].value === op.value) {
         // This is the response selected
         if (op.internalComment && op.internalComment.notification) {
           dispatch('notification/addNotification', op.internalComment.notification,{root:true});
@@ -186,22 +186,22 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
 }
 
 function validateMinValue( q, vr) {
-  if ((vr.type === 'min') && (isNaN(q.response) || !vr.value || (+q.response < +vr.value))) return false;
+  if ((vr.type === 'min') && (isNaN(q.result.responses[0].value) || !vr.value || (+q.result.responses[0].value < +vr.value))) return false;
   return true;
 }
 
 function validateMinLength(q, vr) {
-  if ((vr.type === 'minLength') && (!vr.value || (String(q.response).length < +vr.value))) return false;
+  if ((vr.type === 'minLength') && (!vr.value || (String(q.result.responses[0].value).length < +vr.value))) return false;
   return true;
 }
 
 function validateMaxValue(q, vr) {
-  if ( (vr.type === 'max') && (isNaN(q.response) || !vr.value || (+q.response > +vr.value))) return false;
+  if ( (vr.type === 'max') && (isNaN(q.result.responses[0].value) || !vr.value || (+q.result.responses[0].value > +vr.value))) return false;
   return true;
 }
 
 function validateMaxLength(q, vr) {
-  if ((vr.type === 'maxLength') && (!vr.value || (String(q.response).length > +vr.value))) return false;
+  if ((vr.type === 'maxLength') && (!vr.value || (String(q.result.responses[0].value).length > +vr.value))) return false;
   return true;
 }
 
@@ -209,7 +209,7 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
   if( q.validationRules) {
     q.validationRules.forEach( vr => {
       if (vr.enabled) {
-        if (!q.response) {
+        if (!q.result.responses[0].value) {
           q.notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
           dispatch("notification/addNotification", q.notification, { root: true });
         } else {
@@ -231,7 +231,7 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
     if (q.notification) {
       dispatch("notification/addNotification", q.notification, { root: true });
     } else if (isValidationRequired(q)) {
-      if (!q.validationState || !q.response) {
+      if (!q.validationState || !q.result.responses[0].value) {
         const msg = {
           en: "A valid response for the question is required.",
           fr: "Une réponse valide à la question est requise."

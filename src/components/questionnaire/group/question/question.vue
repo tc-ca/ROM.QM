@@ -725,8 +725,8 @@ export default {
         if (referenceQuestion) {
           this.isViolationInfoReferenceIdDisabled = true
 
-          if (this.question.result && this.question.result.violationInfo) {
-            this.questionResult.violationInfo.referenceId = referenceQuestion.response
+          if (referenceQuestion.result.responses.length > 0 && this.question.result.violationInfo) {
+            this.questionResult.violationInfo.referenceId = referenceQuestion.result.responses[0].value
           }
         }
       }
@@ -870,7 +870,8 @@ export default {
       }
     },
     updateDependants (args) {
-      this.question.response = args.value
+      // [TODO]: Santosh, get the Guid
+      this.question.result.responses.push({ 'guid': 'xxxx', 'value': args.value })
       if (this.question.dependants) {
         const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
@@ -907,8 +908,9 @@ export default {
                 groupMatch = false
                 break
               }
+
               // if response is string or number make into array to be handle multiple selections
-              let response = dependsOnQuestion.response
+              let response = dependsOnQuestion.result.responses.length > 0 ? dependsOnQuestion.result.responses[0].value : null
               if (typeof response === 'string' || typeof response === 'number') {
                 response = [response]
               }
@@ -966,7 +968,7 @@ export default {
             } else if (group.ruleType === 'validationValue' && groupMatch) {
               if (question.validationRules) {
                 let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-                rule.value = group.questionDependencies[0].parentQuestion.response
+                rule.value = group.questionDependencies[0].parentQuestion.result.responses[0].value
               }
             }
           }

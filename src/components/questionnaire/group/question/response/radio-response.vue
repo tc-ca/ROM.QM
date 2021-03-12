@@ -150,8 +150,8 @@ export default {
       }
     )
 
-    if (this.question.response != null) {
-      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
+    if (this.question.result.responses.length > 0) {
+      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.result.responses[0].value)
       this.selOldOption = this.selectedOption
       this.onChange(this.selectedOption, true)
     }
@@ -196,7 +196,7 @@ export default {
     },
     cancel () {
       this.confirmDialogOpen = false
-      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
+      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.result.responses[0].value)
     },
     onError (error) {
       this.$emit('error', error)

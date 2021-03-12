@@ -263,12 +263,12 @@ export default {
     onReferenceChanged () {
       if (this.activegroupHasReferenceQuestion) {
         const rQ = BuilderService.findReferenceQuestion(this.group)
-        if (rQ && rQ.response) {
-          this.groupSubtitle = `REFERENCE ID: ${rQ.response}`
+        if (rQ && rQ.result.responses.length > 0) {
+          this.groupSubtitle = `REFERENCE ID: ${rQ.result.responses[0].value}`
           this.group.questions.forEach(q => {
             if (q.guid !== rQ.guid) {
               if (q.result && q.result.violationInfo && q.result.violationInfo.referenceId) {
-                q.result.violationInfo.referenceId = rQ.response
+                q.result.violationInfo.referenceId = rQ.result.responses[0].value
               }
             }
           })

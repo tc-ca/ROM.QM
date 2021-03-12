@@ -85,9 +85,6 @@ export default {
   },
 
   methods: {
-    handler (value, response, type) {
-
-    },
     onChange (args) {
       this.$emit('change', args)
     },

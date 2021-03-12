@@ -24,8 +24,9 @@
                         "fr": "FR: Reference ID"
                     },
                     "type": "reference",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -42,7 +43,6 @@
                             },
                             "value": 1,
                             "provisions": [],
-                            "selectedProvisions": [],
                             "internalComment": {
                                 "option": "optional",
                                 "value": ""
@@ -73,9 +73,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -90,8 +87,9 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": true,
                     "samplingRecord": {
                         "approximateTotal": "",
@@ -127,8 +125,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -155,8 +152,8 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
+
                         }
                     ],
                     "validationRules": [
@@ -171,9 +168,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [
                         {
                             "name": "QTN_CHLDQSTN_RD_GRP_GRP1_TMPLT_QSTNNRTTLN",
@@ -185,8 +179,9 @@
                                 "fr": "FR: Question text"
                             },
                             "type": "radio",
-                            "response": null,
-                            "result": null,
+                            "result": {
+                                "responses": []
+                            },
                             "isSamplingAllowed": true,
                             "samplingRecord": {
                                 "approximateTotal": "",
@@ -222,8 +217,7 @@
                                         "option": "optional",
                                         "value": []
                                     },
-                                    "provisions": [],
-                                    "selectedProvisions": []
+                                    "provisions": []
                                 },
                                 {
                                     "guid": 2,
@@ -269,8 +263,7 @@
                                         "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
                                         "fd9c4294-78ab-47ac-b252-808577cdfdf3",
                                         "488db8ca-3022-456e-9df9-f21d2ba63791"
-                                    ],
-                                    "selectedProvisions": []
+                                    ]
                                 }
                             ],
                             "validationRules": [
@@ -285,9 +278,6 @@
                                     }
                                 }
                             ],
-                            "violationInfo": {
-                                "referenceID": null
-                            },
                             "childQuestions": [],
                             "dependants": [],
                             "dependencyGroups": [
@@ -324,8 +314,9 @@
                         "fr": "FR: Question text"
                     },
                     "type": "text",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -344,9 +335,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -361,8 +349,9 @@
                         "fr": "FR: Question text"
                     },
                     "type": "select",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -394,8 +383,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -422,8 +410,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         }
                     ],
                     "validationRules": [
@@ -438,9 +425,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -455,8 +439,9 @@
                         "fr": "FR: Question text"
                     },
                     "type": "number",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -475,9 +460,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -507,8 +489,9 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -540,8 +523,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -568,8 +550,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         }
                     ],
                     "validationRules": [
@@ -584,9 +565,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
@@ -616,8 +594,9 @@
                         "fr": "FR: Question text"
                     },
                     "type": "radio",
-                    "response": null,
-                    "result": null,
+                    "result": {
+						"responses": []
+                    },
                     "isSamplingAllowed": false,
                     "samplingRecord": null,
                     "validationState": true,
@@ -649,8 +628,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         },
                         {
                             "guid": 2,
@@ -677,8 +655,7 @@
                                 "option": "optional",
                                 "value": []
                             },
-                            "provisions": [],
-                            "selectedProvisions": []
+                            "provisions": []
                         }
                     ],
                     "validationRules": [
@@ -693,9 +670,6 @@
                             }
                         }
                     ],
-                    "violationInfo": {
-                        "referenceID": null
-                    },
                     "childQuestions": [],
                     "dependants": [],
                     "dependencyGroups": []
