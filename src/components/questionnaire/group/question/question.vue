@@ -828,7 +828,6 @@ export default {
         this.updateViolationInfo(this.selectedResponseOption)
       }
 
-      // this.updateSupplementaryInfoVisibility(args)
       this.updateResult(args)
       this.updateDependants(args)
       this.updateReferenceId()
@@ -836,24 +835,6 @@ export default {
       this.$emit('responseChanged')
       if (this.isReferenceQuestion) {
         this.$emit('reference-change')
-      }
-    },
-    updateSupplementaryInfoVisibility (args) {
-      if (this.showSupplementaryInfo) this.updateSupplementaryInfo(args)
-    },
-    // [TODO] Santosh: Remove this code
-    updateSupplementaryInfo (args) {
-      if (this.question.type === QUESTION_TYPE.RADIO) {
-        let originalOption = this.question.responseOptions.find(option => option.guid === args.optionPreviousId)
-        let selectedOption = this.question.responseOptions.find(option => option.guid === args.optionCurrentId)
-
-        // if user changes option
-        if (args.optionCurrentId !== args.optionPreviousId) {
-          // then pull the original values into the selected option
-          selectedOption.internalComment.value = originalOption.internalComment.value
-          selectedOption.externalComment.value = originalOption.externalComment.value
-          selectedOption.picture.value = originalOption.picture.value
-        }
       }
     },
     updateViolationInfo (responseOption) {
