@@ -421,7 +421,7 @@ import BaseMixin from '../../../../mixins/base'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo, isEmptyValues } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record.vue'
 
@@ -853,22 +853,23 @@ export default {
     },
     updateResult (args) {
       // [TODO]: Santosh, get the Guid
-      // if (this.question.result == null) this.question.result.
-      // this.question.result.responses.push({ 'guid': 'xxxx', 'value': args.value })
-
       // args.value can can be string/number or array of values i.e select
       // make everything array for consistent logic
-      let responses = args.value
-      if (this.question.type !== QUESTION_TYPE.SELECT) {
-        responses = [args.value]
+      // result.response must return always array
+      if (isEmptyValues(args.value)) {
+        this.question.result.responses = []
+      } else {
+        let responses = args.value
+        if (this.question.type !== QUESTION_TYPE.SELECT) {
+          responses = [args.value]
+        }
+
+        let newResponses = []
+        responses.forEach(response => {
+          newResponses.push({ 'guid': 'xxxx', 'value': response })
+        })
+        this.question.result.responses = newResponses
       }
-
-      let newResponses = []
-      responses.forEach(response => {
-        newResponses.push({ 'guid': 'xxxx', 'value': response })
-      })
-
-      this.question.result.responses = newResponses
     },
     updateDependants (args) {
       if (this.question.dependants) {
