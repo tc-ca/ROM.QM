@@ -820,7 +820,14 @@ export default {
       // the process and therefore be empty when this method is executing)
       if (!this.isFlatLegislationsDataAvailable) { return }
 
-      this.question.result = this.questionResult
+      if (!this.question.result) {
+        // question has not been answered previously
+        // set json to our component data result object
+        this.question.result = this.questionResult
+      } else {
+        // bind componenent data result to values recieved from  json
+        this.questionResult = this.question.result
+      }
 
       this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
       if (this.selectedResponseOption) {
