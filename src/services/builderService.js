@@ -307,6 +307,7 @@ function createGenericResult() {
 function processBuilderForSave(questionnaire) {
   //Done by LM on Feb 14 to avoid console error on Dynamic Builder
   if (!questionnaire) return;
+  
   let groups = _.cloneDeep(questionnaire.groups);
 
   let populateDependantsOnDependency = q => {
@@ -361,7 +362,49 @@ function processBuilderForSave(questionnaire) {
     });
   });
 
+  // Build the dependants relationship between questions
+  let createDependencyRelationship = q => {
+    q.dependencyGroups.forEach(dg => {
+      dg.questionDependencies.forEach(qd => {
+        const dquest = findQuestionById(questionnaire, qd.dependsOnQuestion.guid);
+        if (dquest && (dquest.dependants.findIndex(d => d.guid === q.guid) === -1)) {
+          dquest.dependants.push({ guid: q.guid });
+        }
+      })
+    })
+  };
+
+  questionnaire.groups.forEach(g => {
+    g.questions.forEach(q => {
+      createDependencyRelationship(q);
+      q.childQuestions.forEach(cq => {
+        createDependencyRelationship(cq);
+      })
+    })
+  });
+
   return { groupsData: groups, questionnaireData: questionnaire };
+}
+
+function findQuestionById(questionnaire, guid) {
+  let result = null;
+  for( let x = 0; x < questionnaire.groups.length; x++) {
+    const  g = questionnaire.groups[x];
+    const obj = g.questions.find(q => q.guid === guid);
+    if (obj) { 
+      result = obj;
+      break; 
+    }
+    for( let y = 0; y < g.questions.length; y++) {
+      const q = g.questions[y];
+      const obj = q.childQuestions.find(cq => cq.guid === guid);
+      if (obj) {
+        result = obj;
+        break;
+      }
+    }
+  }
+  return result;
 }
 
 async function GetMockQuestionnaireFromImportModule(
