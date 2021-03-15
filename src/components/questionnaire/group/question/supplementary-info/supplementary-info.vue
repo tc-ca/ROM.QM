@@ -6,8 +6,9 @@
   >
     <supplementary-info-comment
       v-if="displayExternalComment"
-      :comment="selresponseoption.externalCommentRequirement"
-      :comment-text="question.result ? question.result.externalComment : ''"
+      :is-external-comment="true"
+      :comment-requirement="selresponseoption.externalCommentRequirement"
+      :result="question.result"
       :label="$t('app.questionnaire.group.question.externalComment')"
       :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
@@ -18,8 +19,9 @@
     />
     <supplementary-info-comment
       v-if="displayInternalComment"
-      :comment="selresponseoption.internalCommentRequirement"
-      :comment-text="question.result ? question.result.internalComment : ''"
+      :is-external-comment="false"
+      :comment-requirement="selresponseoption.internalCommentRequirement"
+      :result="question.result"
       :label="$t('app.questionnaire.group.question.internalComment')"
       :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"

@@ -39,8 +39,9 @@
     <v-list-item>
       <v-list-item-content>
         <v-textarea
+          v-if="isExternalComment"
           ref="textArea"
-          v-model="commentData"
+          v-model="result.externalComment"
           prepend-inner-icon="mdi-message-text-outline"
           auto-grow
           outlined
@@ -55,7 +56,33 @@
           @update:error="onError"
         >
           <v-icon
-            v-if="comment.required"
+            v-if="isCommentRequired"
+            slot="append"
+            small
+            color="red"
+          >
+            mdi-exclamation
+          </v-icon>
+        </v-textarea>
+        <v-textarea
+          v-else
+          ref="textArea"
+          v-model="result.internalComment"
+          prepend-inner-icon="mdi-message-text-outline"
+          auto-grow
+          outlined
+          filled
+          clearable
+          :disabled="readOnly"
+          clear-icon="mdi-close-circle"
+          :placeholder="placeholderText"
+          rows="1"
+          :hint="hint"
+          :rules="rules"
+          @update:error="onError"
+        >
+          <v-icon
+            v-if="isCommentRequired"
             slot="append"
             small
             color="red"
@@ -74,12 +101,16 @@ import { mapState } from 'vuex'
 export default {
   emits: ['error'],
   props: {
-    comment: {
+    isExternalComment: {
+      type: Boolean,
+      required: true
+    },
+    commentRequirement: {
       type: String,
       required: true
     },
-    commentText: {
-      type: String,
+    result: {
+      type: Object,
       required: true
     },
     label: {
@@ -111,7 +142,7 @@ export default {
   data () {
     return {
       rules: [
-        value => !this.displayComment || !this.isCommentRequired ? true : !!this.comment || 'Required.'
+        value => !this.displayComment || !this.isCommentRequired ? true : !!this.commentRequirement || 'Required.'
       ],
       response: '',
       validationStatus: false,
@@ -119,23 +150,17 @@ export default {
     }
   },
   computed: {
-    commentData: {
-      get () {
-        return this.commentText
-      },
-      set (value) { return value }
-    },
     placeholderText () {
       return this.isCommentRequired ? this.$t('app.questionnaire.group.question.commentRequired') : this.$t('app.questionnaire.group.question.commentOptional')
     },
     isCommentRequired () {
-      return this.comment === 'required'
+      return this.commentRequirement === 'required'
     },
     displayComment () {
-      return this.comment !== 'n/a'
+      return this.commentRequirement !== 'n/a'
     },
     errorInComment () {
-      return this.displayComment && this.isCommentRequired && !this.commentText
+      return this.displayComment && this.isCommentRequired && (this.isExternalComment ? !this.result.externalComment : !this.result.internalComment)
     },
     ...mapState({
       lang: state => {
