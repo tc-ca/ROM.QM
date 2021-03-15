@@ -460,7 +460,6 @@ export default {
   data () {
     return {
       displayViolationInfo: false,
-      // displaySupplementaryInfo: false,
       isValid: null,
       selectedResponseOption: [],
       treeDataProvisions: [], // to populate the tree control
@@ -860,7 +859,6 @@ export default {
       }
     },
     updateResult (args) {
-      // [TODO]: Santosh, get the Guid
       // args.value can can be string/number or array of values i.e select
       // make everything array for consistent logic
       // result.response must return always array
@@ -875,9 +873,10 @@ export default {
         let options = []
         let newResponses = []
         responses.forEach((response) => {
-          newResponses.push({ 'guid': 'xxxx', 'value': response })
           const option = this.question.responseOptions.find(option => option.value === response)
           if (option) { options.push(option) }
+
+          newResponses.push({ 'guid': option ? option.guid : 'not found', 'value': response })
         })
 
         let targetedProvisionsIds = []
@@ -890,7 +889,7 @@ export default {
         this.provisionIds = targetedProvisionsIds
       }
     },
-    updateDependants (args) {
+    updateDependants () {
       if (this.question.dependants) {
         const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
