@@ -74,42 +74,23 @@
       </v-col>
       <v-col cols="5">
         <div style="position: fixed;left: 60%;top: 10%; width: 35%;max-height:85%;overflow-y: auto;overflow-x: hidden">
-          <v-row>
-            <!-- <v-col>
-              <v-text-field
-                v-if="questionnaire"
-                v-model="questionnaire.name"
-                disabled
-                :label="$t('app.builder.questionnaireName')"
-              />
-            </v-col> -->
-          </v-row>
           <v-row v-if="selectedGroup && !selectedQuestion">
             <v-col>
-              <!-- <v-text-field
-                v-model="selectedGroup.primaryKey"
-                :label="$t('app.builder.group.groupName')"
-              /> -->
               <v-text-field
                 v-model="selectedGroup.title[eng]"
                 :label="$t('app.builder.group.englishText')"
-                @change="onGroupTextChange(selectedGroup)"
               />
               <v-text-field
                 v-model="selectedGroup.title[fr]"
                 :label="$t('app.builder.group.frenchText')"
               />
               <v-text-field
-                v-model="selectedGroup.order"
+                v-model="selectedGroup.sortOrder"
                 dense
                 type="number"
                 :label="$t('app.builder.sortOrder')"
                 @change="sortGroups(selectedGroup)"
               />
-              <!-- <v-checkbox
-                v-model="selectedGroup.isVisible"
-                :label="$t('app.builder.isVisible')"
-              /> -->
               <v-checkbox
                 v-model="selectedGroup.isRepeatable"
                 :label="$t('app.builder.isRepeatable')"
@@ -118,15 +99,9 @@
           </v-row>
           <v-row v-if="selectedQuestion">
             <v-col>
-              <!-- <v-text-field
-                v-model="selectedQuestion.name"
-                :disabled="selectedQuestion.type === reference"
-                :label="$t('app.builder.questionName')"
-              /> -->
               <v-text-field
                 v-model="selectedQuestion.text[eng]"
                 :label="$t('app.builder.question.englishText')"
-                @change="onQuestionTextChange(selectedQuestion)"
               />
               <v-text-field
                 v-model="selectedQuestion.text[fr]"
@@ -160,7 +135,6 @@
                   v-model="selectedQuestion.isSamplingAllowed"
                   dense
                   :label="$t('app.builder.question.samplingAllowed')"
-                  @change="setSamplingRecord()"
                 />
                 <div v-if="isRepeatableVisible">
                   <v-checkbox
@@ -199,16 +173,10 @@
                       :key="index"
                       class="bordered ml-2 pa-2 my-2"
                     >
-                      <!-- <v-text-field
-                        v-model="option.name"
-                        dense
-                        label="Option Name"
-                      /> -->
                       <v-text-field
                         v-model="option.text[eng]"
                         dense
                         :label="$t('app.builder.responseOptions.englishText')"
-                        @change="onOptionTextChange(option)"
                       />
                       <v-text-field
                         v-model="option.text[fr]"
@@ -250,7 +218,7 @@
                       </div>
                       <div>
                         <v-select
-                          v-model="option.internalComment.option"
+                          v-model="option.internalCommentRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -264,7 +232,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="option.externalComment.option"
+                          v-model="option.externalCommentRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -278,7 +246,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="option.file.option"
+                          v-model="option.fileRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -292,7 +260,7 @@
                           </template>
                         </v-select>
                         <v-select
-                          v-model="option.picture.option"
+                          v-model="option.pictureRequirement"
                           item-text="text"
                           item-value="value"
                           :items="optionTypes"
@@ -316,7 +284,7 @@
                             <v-icon v-if="!option.isProvisionCollapsed">
                               mdi-menu-right
                             </v-icon>
-                            <v-icon v-if="option.isProvisionCollapsed">
+                            <v-icon v-else>
                               mdi-menu-down
                             </v-icon>
                           </v-btn>
@@ -345,7 +313,6 @@
                                   :item-text="displayTextLang"
                                   selection-type="leaf"
                                   :search="option.searchProvisions"
-                                  :filter="option.filterProvisions"
                                   :items="provisions"
                                   @input="updateSearchableProvisions()"
                                 >
@@ -364,7 +331,7 @@
                     <div class="right">
                       <v-btn
                         small
-                        @click="addOption()"
+                        @click="addResponseOption()"
                       >
                         {{ $t('app.builder.responseOptions.addOption') }}
                       </v-btn>
@@ -562,7 +529,7 @@
                                       <v-btn
                                         small
                                         icon
-                                        @click="removeQuestoionDependency(dependencyGroup, questionDependency)"
+                                        @click="removeQuestionDependency(dependencyGroup, questionDependency)"
                                       >
                                         <v-icon
                                           small
@@ -676,7 +643,7 @@ import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
 import { QUESTION_TYPE } from '../data/questionTypes'
-import { generateName } from '../utils.js'
+
 export default {
   name: 'Builder',
   components: {
@@ -693,6 +660,10 @@ export default {
       default: false
     },
     fixItPropBuilder: {
+      type: Boolean,
+      default: false
+    },
+    updateItBuilder: {
       type: Boolean,
       default: false
     }
@@ -717,10 +688,8 @@ export default {
       violationsCollapsed: true,
       provisionsCollapsed: true,
       provisions: [],
-      searchProvisions: [],
       groupPanels: [],
       questionPanels: [],
-      selectedProvisions: [],
       questionProvisions: [],
       flagTimer: null,
       reference: QUESTION_TYPE.REFERENCE
@@ -728,7 +697,10 @@ export default {
   },
   computed: {
     isRepeatableVisible () {
-      return BuilderService.isParentAGroup(this.selectedGroup, this.selectedQuestion.guid)
+      if (this.selectedGroup && this.selectedQuestion) {
+        return BuilderService.isParentAGroup(this.selectedGroup, this.selectedQuestion.guid)
+      }
+      return false
     },
     displayTextLang () {
       return (this.lang === 'eng') ? 'DisplayEnglishText' : 'DisplayFrenchText'
@@ -778,6 +750,9 @@ export default {
     },
     fixItPropBuilder () {
       this.fixit()
+    },
+    updateItBuilder () {
+      this.updateQuestionnaire()
     }
   },
   async mounted () {
@@ -831,71 +806,8 @@ export default {
       this.flagTimer = setTimeout(() => this.isDirty(), 3000)
       if (this.$root.$children[0].isFormDirty) clearTimeout(this.flagTimer)
     },
-    onGroupTextChange (selectedGroup) {
-      selectedGroup.primaryKey = generateName(selectedGroup.title[LANGUAGE.ENGLISH], 'GRP', this.questionnaire.name)
-      selectedGroup.questions.forEach(q => {
-        this.onQuestionTextChange(q)
-      })
-    },
-    onQuestionTextChange (question) {
-      let questiontext = question.text[LANGUAGE.ENGLISH]
-
-      switch (question.type) {
-        case QUESTION_TYPE.TEXT: questiontext = 'TXT'
-          break
-        case QUESTION_TYPE.RADIO: questiontext = 'RD'
-          break
-        case QUESTION_TYPE.SELECT: questiontext = 'SLCT'
-          break
-        // case QUESTION_TYPE.IMAGE: questiontext = 'IMG'
-        //   break
-        case QUESTION_TYPE.NUMBER: questiontext = 'NBR'
-          break
-        case QUESTION_TYPE.REFERENCE: questiontext = 'REF'
-          break
-      }
-
-      question.name = generateName(question.text[LANGUAGE.ENGLISH], 'QTN', questiontext + '_' + this.selectedGroup.primaryKey)
-      if (question.childQuestions) {
-        question.childQuestions.forEach(q => {
-          this.onQuestionTextChange(q)
-          if (q.responseOptions) {
-            q.responseOptions.forEach(o => {
-              this.onOptionTextChange(o)
-            })
-          }
-        })
-        if (question.responseOptions) {
-          question.responseOptions.forEach(o => {
-            this.onOptionTextChange(o)
-          })
-        }
-      }
-    },
-    onOptionTextChange (option) {
-      if (option) {
-        if (option.text[LANGUAGE.ENGLISH] && this.selectedQuestion) {
-          option.name = generateName(option.text[LANGUAGE.ENGLISH], 'RSPNS', this.selectedQuestion.name)
-        } else {
-          option.name = generateName(Math.random().toString(16).slice(2), 'RSPNS')
-        }
-      }
-    },
-    setSamplingRecord () {
-      if (this.selectedQuestion) {
-        if (this.selectedQuestion.isSamplingAllowed) {
-          this.selectedQuestion.samplingRecord = {
-            approximateTotal: '',
-            sampleSize: '',
-            nonCompliances: ''
-          }
-        } else {
-          this.selectedQuestion.samplingRecord = null
-        }
-      }
-    },
     addGroup () {
-      this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire))
+      this.questionnaire.groups.push(BuilderService.createGroup(this.questionnaire.groups.length))
     },
     confirmed () {
       this.confirmDialogOpen = false
@@ -922,19 +834,16 @@ export default {
         const group = BuilderService.findGroupForQuestionById(this.questionnaire.groups, this.selectedQuestion.guid)
         if (group) {
           if (!BuilderService.findReferenceQuestion(group, this.selectedQuestion.guid)) {
-            let qRf = BuilderService.createReferenceQuestion(this.questionnaire, group)
+            let qRf = BuilderService.createReferenceQuestion(group)
             if (group.questions.length > 0) {
               // Move every question one number up on the sort order
               group.questions.forEach((q) => { q.sortOrder += 1 })
             }
-            qRf.sortOrder = 1
             group.questions.unshift(qRf)
             // Move question from the end to the start of the list
             const index = group.questions.findIndex(q => q.guid === this.selectedQuestion.guid)
             if (index > -1) {
               group.questions.splice(index, 1)
-              // Rebuidl the question Panels
-              // this.questionPanels = []
               group.expansionPanels = []
               group.questions.forEach(q => { group.expansionPanels.push(q.sortOrder) })
               this.selectedQuestion = qRf
@@ -942,37 +851,37 @@ export default {
           } else {
             // Alert and return back to the text type, the closest type to Reference Question
             this.$store.dispatch('notification/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
-            this.selectedQuestion.type = 'text'
+            this.selectedQuestion.type = QUESTION_TYPE.TEXT
           }
         } else {
           this.$store.dispatch('notification/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
-          this.selectedQuestion.type = 'text'
+          this.selectedQuestion.type = QUESTION_TYPE.TEXT
         }
       }
-      if (this.selectedQuestion.type !== QUESTION_TYPE.RADIO &&
-          this.selectedQuestion.type !== QUESTION_TYPE.SELECT &&
-          this.selectedQuestion.type !== QUESTION_TYPE.REFERENCE) {
-        this.selectedQuestion.responseOptions.length = 0
-        this.onQuestionTextChange(this.selectedQuestion)
+      this.selectedQuestion.responseOptions = []
+      if (this.selectedQuestion.type === QUESTION_TYPE.RADIO) {
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, { [LANGUAGE.ENGLISH]: 'Yes', [LANGUAGE.FRENCH]: 'Oui' }, 'true'))
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(2, { [LANGUAGE.ENGLISH]: 'No', [LANGUAGE.FRENCH]: 'Non' }, 'false'))
+      } else if (this.selectedQuestion.type === QUESTION_TYPE.SELECT) {
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, { [LANGUAGE.ENGLISH]: 'Option 1', [LANGUAGE.FRENCH]: 'Option 1' }, '1'))
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(2, { [LANGUAGE.ENGLISH]: 'Option 2', [LANGUAGE.FRENCH]: 'Option 2' }, '2'))
       } else {
-        if (this.selectedQuestion.responseOptions == null || this.selectedQuestion.responseOptions.length === 0) {
-          this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
-        }
+        this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(1, null, ''))
       }
     },
     addQuestion ($event, group) {
       // don't propagate the event up to the group or else the group will gain focus over the question
       $event.stopPropagation()
 
-      let question = BuilderService.createQuestion(this.questionnaire, group)
+      let question = BuilderService.createQuestion(group)
       if (group.questions.length > 0) {
         question.sortOrder = +group.questions.reduce((a, b) => a.sortOrder > b.sortOrder ? a : b).sortOrder + 1
       }
       group.questions.push(question)
       this.addQuestionToIndex(question)
 
-      group.expansionPanels = []
-      group.expansionPanels.push(group.questions.length)
+      // group.expansionPanels = []
+      // group.expansionPanels.push(group.questions.length)
 
       this.selectedGroup = group
       // this.selectedQuestion = question
@@ -1034,39 +943,45 @@ export default {
       this.save()
     },
     save () {
-      const page = 'builder'
-      console.log('Save...')
-      const questionnaire = this.questionnaire
-      this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
-      this.$store.dispatch('SetModifiedInBuilder', true)
+      if (this.questionnaire) {
+        const page = 'builder'
+        const questionnaire = this.questionnaire
+        this.$store.dispatch('SetQuestionnaireState', { questionnaire, page })
+        this.$store.dispatch('SetModifiedInBuilder', true)
+      }
     },
     fixit () {
       this.questionnaire = BuilderService.fixTemplate(this.questionnaire)
       this.save()
     },
-    addOption () {
-      this.selectedQuestion.responseOptions.push(BuilderService.createResponseOption(this.selectedQuestion))
+    updateQuestionnaire () {
+      this.questionnaire = BuilderService.updateTemplate(this.questionnaire)
+      this.save()
+    },
+    addResponseOption () {
+      const idx = this.selectedQuestion.responseOptions.length
+      const ro = BuilderService.createGenericResponseOption()
+      ro.sortOrder = idx + 1
+      ro.value = idx + 1
+      this.selectedQuestion.responseOptions.push(ro)
     },
     toggleOptions () {
       this.optionsCollapsed = !this.optionsCollapsed
     },
     removeResponseOption (option) {
-      for (let i = 0; i < this.selectedQuestion.responseOptions.length; i++) {
-        if (this.selectedQuestion.responseOptions[i] === option) {
-          this.selectedQuestion.responseOptions.splice(i, 1)
-          break
-        }
+      const idx = this.selectedQuestion.responseOptions.findIndex(ro => ro.guid === option.guid)
+      if (idx > -1) {
+        this.selectedQuestion.responseOptions.splice(idx, 1)
       }
     },
     addValidator () {
-      this.selectedQuestion.validationRules.push(BuilderService.createValidator())
+      const vr = BuilderService.createGenericValidationRule()
+      this.selectedQuestion.validationRules.push(vr)
     },
     removeValidator (validationRule) {
-      for (let i = 0; i < this.selectedQuestion.validationRules.length; i++) {
-        if (this.selectedQuestion.validationRules[i] === validationRule) {
-          this.selectedQuestion.validationRules.splice(i, 1)
-          break
-        }
+      const idx = this.selectedQuestion.validationRules.findIndex(vr => vr.guid === validationRule.guid)
+      if (idx > -1) {
+        this.selectedQuestion.validationRules.splice(idx, 1)
       }
     },
     toggleValidators () {
@@ -1076,29 +991,23 @@ export default {
       this.dependenciesCollapsed = !this.dependenciesCollapsed
     },
     addDependencyGroup () {
-      this.selectedQuestion.dependencyGroups.push(BuilderService.createDependencyGroup())
+      const dg = BuilderService.createDependencyGroup()
+      this.selectedQuestion.dependencyGroups.push(dg)
     },
-    removeDependencyGroup (group) {
-      for (let i = 0; i < this.selectedQuestion.dependencyGroups.length; i++) {
-        if (this.selectedQuestion.dependencyGroups[i] === group) {
-          this.selectedQuestion.dependencyGroups.splice(i, 1)
-          break
-        }
+    removeDependencyGroup (depGroup) {
+      const idx = this.selectedQuestion.dependencyGroups.findIndex(dg => dg.guid === depGroup.guid)
+      if (idx > -1) {
+        this.selectedQuestion.dependencyGroups.splice(idx, 1)
       }
     },
     addQuestionDependency (dependencyGroup) {
-      dependencyGroup.questionDependencies.push({
-        dependsOnQuestion: null,
-        validationAction: null,
-        validationValue: null
-      })
+      const qd = BuilderService.createGenericQuestionDependency()
+      dependencyGroup.questionDependencies.push(qd)
     },
-    removeQuestoionDependency (dependencyGroup, questionDependency) {
-      for (let i = 0; i < dependencyGroup.questionDependencies.length; i++) {
-        if (dependencyGroup.questionDependencies[i] === questionDependency) {
-          dependencyGroup.questionDependencies.splice(i, 1)
-          break
-        }
+    removeQuestionDependency (dependencyGroup, questionDependency) {
+      const idx = dependencyGroup.questionDependencies.findIndex(qd => qd.guid === questionDependency.guid)
+      if (idx > -1) {
+        dependencyGroup.questionDependencies.splice(idx, 1)
       }
     },
     sortGroups (group) {

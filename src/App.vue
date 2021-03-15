@@ -93,6 +93,7 @@
           :clear-prop-builder="clearBuilder"
           :save-prop-builder="saveBuilder"
           :fix-it-prop-builder="fixItBuilder"
+          :update-prop-builder="updateItBuilder"
           @clear-provision-search-field="setClearProvisionSearchTrue"
         />
       </v-container>
@@ -117,6 +118,7 @@
         @clear="clearBuilder = !clearBuilder"
         @save="saveBuilder = !saveBuilder"
         @fix-it="fixItBuilder = !fixItBuilder"
+        @update-it="updateItBuilder = !updateItBuilder"
       />
     </div>
   </v-app>
@@ -179,7 +181,8 @@ export default {
       clearBuilder: false,
       saveBuilder: false,
       fixItBuilder: false,
-      isFormDirty: false
+      isFormDirty: false,
+      updateItBuilder: false
     }
   },
   computed: {
