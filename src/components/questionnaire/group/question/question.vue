@@ -462,10 +462,10 @@ export default {
       displayViolationInfo: false,
       // displaySupplementaryInfo: false,
       isValid: null,
-      selectedResponseOption: {},
-      selResponses: [],
+      selectedResponseOption: [],
       treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
+      provisionIds: [],
       isReferenceQuestion: false,
       isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
@@ -475,8 +475,6 @@ export default {
       tab: null,
       tags: [],
       searchProvisions: null,
-      referenceId: null,
-      responses: null,
       questionResult: { externalComment: '', internalComment: '', files: [], pictures: [], responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
     }
   },
@@ -508,7 +506,6 @@ export default {
     },
     showSupplementaryInfo () {
       return (!_.isEmpty(this.selectedResponseOption)) && questionHasSupplementaryInfo(this.question)
-      // return questionHasSupplementaryInfo(this.question)
     },
     provisions () {
       if (this.isFlatLegislationsDataAvailable) {
@@ -525,12 +522,6 @@ export default {
     },
     hasProvisions () {
       return this.provisions.length > 0
-    },
-    selectedProvisions () {
-      if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
-        return this.question.result.violationInfo.selectedProvisions
-      }
-      return []
     },
     getClassName () {
       let selClass = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
@@ -762,10 +753,10 @@ export default {
     onSelectedProvisionClick (item) {
       this.selProvisions = this.selProvisions.filter(i => i !== item)
     },
-    loadProvisions (responseOption) {
+    loadProvisions (provisionIds) {
     // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
-      let provisions = hydrateItems(responseOption.provisions, dictionnairyOfProvisions)
+      let provisions = hydrateItems(provisionIds, dictionnairyOfProvisions)
 
       // we need to get the parent nodes to have an actual tree or list will be flat
       let parentIds = provisions.map(x => x.parentLegislationId)
@@ -845,13 +836,13 @@ export default {
         this.questionResult = this.question.result
       }
 
-      this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
-      if (this.selectedResponseOption) {
-        this.selProvisions = this.selectedProvisions
-        this.updateViolationInfo(this.selectedResponseOption)
-      }
-
       this.updateResult(args)
+
+      if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
+        this.selProvisions = this.question.result.violationInfo.selectedProvisions
+      }
+      this.updateViolationInfo()
+
       this.updateDependants(args)
       this.updateReferenceId()
       this.isValid = this.getChildQuestionValidationState()
@@ -860,18 +851,12 @@ export default {
         this.$emit('reference-change')
       }
     },
-    updateViolationInfo (responseOption) {
-      if (this.question.responseOptions && this.question.responseOptions.length > 0) {
-        if (responseOption) {
-          if (responseOption.provisions == null || responseOption.provisions.length === 0) {
-            this.displayViolationInfo = false
-          } else {
-            this.loadProvisions(responseOption)
-            this.displayViolationInfo = !this.isReferenceQuestion
-          }
-        } else {
-          this.displayViolationInfo = false
-        }
+    updateViolationInfo () {
+      if (this.provisionIds.length === 0) {
+        this.displayViolationInfo = false
+      } else if (this.provisionIds.length > 0 && !this.isReferenceQuestion) {
+        this.loadProvisions(this.provisionIds)
+        this.displayViolationInfo = true
       }
     },
     updateResult (args) {
@@ -887,11 +872,22 @@ export default {
           responses = [args.value]
         }
 
+        let options = []
         let newResponses = []
-        responses.forEach(response => {
+        responses.forEach((response) => {
           newResponses.push({ 'guid': 'xxxx', 'value': response })
+          const option = this.question.responseOptions.find(option => option.value === response)
+          if (option) { options.push(option) }
         })
+
+        let targetedProvisionsIds = []
+        options.forEach(option => {
+          targetedProvisionsIds = targetedProvisionsIds.concat(option.provisions)
+        })
+
         this.question.result.responses = newResponses
+        this.selectedResponseOption = options
+        this.provisionIds = targetedProvisionsIds
       }
     },
     updateDependants (args) {
