@@ -33,13 +33,13 @@
                 @click.native.stop="clickSampling"
               >
                 <v-icon
-                  color="blue"
+                  :color="!samplingButtonData.disabled? 'blue': 'grey lighten-1'"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+            <span>{{ samplingButtonData.message }}</span>
           </v-tooltip>
 
           <v-tooltip
@@ -272,13 +272,12 @@
         <v-sheet>
           <span v-if="displayViolationInfo">  {{ $t('app.questionnaire.group.question.violationDetails') }}</span>
 
-          <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
-            <sampling-record
-              :question="question"
-              :read-only="readOnly"
-              :result="questionResult"
-            />
-          </div>
+          <sampling-record
+            v-if="(displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion) || hasSamplingInfo"
+            :question="question"
+            :read-only="readOnly"
+            :result="questionResult"
+          />
           <div v-if="displayViolationInfo && !isReferenceQuestion">
             <div>
               <v-text-field
@@ -288,13 +287,12 @@
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 filled
               />
-              <div v-if="displaySamplingRecord">
-                <sampling-record
-                  :question="question"
-                  :read-only="readOnly"
-                  :result="questionResult"
-                />
-              </div>
+              <sampling-record
+                v-if="displaySamplingRecord || hasSamplingInfo"
+                :question="question"
+                :read-only="readOnly"
+                :result="questionResult"
+              />
               <div v-else>
                 <v-text-field
                   v-model="questionResult.violationInfo.violationCount"
@@ -588,6 +586,22 @@ export default {
       if (this.displaySamplingRecord) return 'black'
       else return 'primary'
     },
+    // allows to display saved sampling info. i.e. when user re-opens an edited questionnaire with sampling information saved they will see the component instead of it hiding.
+    hasSamplingInfo () {
+      if (this.question.result) {
+        return this.question.result.samplingInfo.approximateTotal > 0
+      }
+      return false
+    },
+    samplingButtonData () {
+      if (!this.question.result) {
+        return { disabled: true, message: 'question must be answered before enabling' }
+      }
+      if (this.hasSamplingInfo) {
+        return { disabled: true, message: 'to disable, delete sampling info' }
+      }
+      return { disabled: false, message: this.$t('app.questionnaire.group.question.sampling.samplingTooltip') }
+    },
     tabVisibility () {
       if (this.displayViolationInfo) {
         this.setTab(0)
@@ -713,7 +727,9 @@ export default {
     clickSampling ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion) {
-        this.displaySamplingRecord = !this.displaySamplingRecord
+        if (!this.samplingButtonData.disabled) {
+          this.displaySamplingRecord = !this.displaySamplingRecord
+        }
       } else {
         this.displaySamplingRecord = false
       }
