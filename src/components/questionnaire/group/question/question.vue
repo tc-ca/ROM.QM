@@ -595,10 +595,10 @@ export default {
     },
     samplingButtonData () {
       if (!this.question.result) {
-        return { disabled: true, message: 'question must be answered before enabling' }
+        return { disabled: true, message: 'to enable sampling, question must be answered' }
       }
       if (this.hasSamplingInfo) {
-        return { disabled: true, message: 'to disable, delete sampling info' }
+        return { disabled: true, message: 'to disable sampling, delete sampling data' }
       }
       return { disabled: false, message: this.$t('app.questionnaire.group.question.sampling.samplingTooltip') }
     },
