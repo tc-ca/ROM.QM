@@ -307,7 +307,7 @@ function createGenericResult() {
 function processBuilderForSave(questionnaire) {
   //Done by LM on Feb 14 to avoid console error on Dynamic Builder
   if (!questionnaire) return;
-  
+
   let groups = _.cloneDeep(questionnaire.groups);
 
   let populateDependantsOnDependency = q => {
@@ -937,10 +937,49 @@ function fixTemplate(template) {
 function updateTemplate(template) {
   var updateLog = [];
 
+  if (!template) return null;
+  if (template.templateid === undefined) return template;
+
+  let nTemplate = createQuestionnaire();
+  nTemplate.readOnly = template.readOnly;
+  nTemplate.title = template.title;
+  nTemplate.searchableProvisions = template.searchableProvisions;
+
+  let updateQuestion = (q,p) => {
+    nQ = createQuestion( p, q.type);
+    nQ.sortOrder = q.sortOrder;
+    nQ.text = q.text;
+    nQ.isRepeatable = q.isRepeatable;
+    nQ.isRepeated = q.isRepeated;
+    nQ.isSamplingAllowed = q.isSamplingAllowed;
+    nQ.isVisible = q.isVisible;
+    nQ.validationState = q.validationState;
+
+    nQ.result = null;
+
+    nQ.dependants = q.dependants;
+    return nQ;
+  }
+
+  for( let x = 0; x < template.groups.length; x++) {
+    let newGroup = createGroup(x);
+    newGroup.title = template.groups[x].title;
+    newGroup.isRepeatable = template.groups[x].isRepeatable;
+    newGroup.isVisibleByDefault = template.groups[x].isVisible;
+    newGroup.expansionPanels = template.groups[x].expansionPanels;
+
+    // Questions
+    template.groups[x].questions.forEach(q => {
+      let nQuestion = updateQuestion(q,template.groups[x]);
+      newGroup.questions.push(nQuestion);
+    })
+  }
+
+
   updateLog.push("updateTemplate: do something");
   downloadData(updateLog, "updateLog.json");
-  downloadData(template, "updatedTemplate.json");
-  return template;
+  downloadData(nTemplate, "updatedTemplate.json");
+  return nTemplate;
 }
 
 function downloadData(data, filename) {
