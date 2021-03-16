@@ -1,0 +1,2372 @@
+{
+  "guid": "d27d6c97-d48b-4894-bcf9-51c1018d3650",
+  "name": "d27d6c97-d48b-4894-bcf9-51c1018d3650",
+  "readOnly": false,
+  "title": {
+      "en": "Questionnaire Title EN",
+      "fr": "Questionnaire Title EN"
+  },
+  "groups": [
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "9468fb66-0942-4bd1-bd5b-6bdce445da86",
+          "name": "9468fb66-0942-4bd1-bd5b-6bdce445da86",
+          "sortOrder": 1,
+          "title": {
+              "en": "Highway Tanks - TC 331",
+              "fr": "Citèrnes Routières - TC 331"
+          },
+          "isRepeatable": true,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "2319df05-4daa-4957-b9b3-02c728aebeb7",
+                  "name": "2319df05-4daa-4957-b9b3-02c728aebeb7",
+                  "sortOrder": 1,
+                  "text": {
+                      "en": "(1.0) Highway tank reference ID(s)",
+                      "fr": "(1.0) Numero(s) d'identification de la citerne routière"
+                  },
+                  "type": "reference",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "d2285ebe-1f59-4ea8-ae2f-ee20b7b6b180",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "75c45f8b-29cd-4df6-9dbb-9603c97fbcd2",
+                  "name": "75c45f8b-29cd-4df6-9dbb-9603c97fbcd2",
+                  "sortOrder": 2,
+                  "text": {
+                      "en": "(2.0) Does the identification plate have all the required information and is legible?",
+                      "fr": "(2.0) La plaque d'identification a-t-elle toutes les informations requises et est-elle lisible?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "8c44c856-2529-498f-8a5c-afd7443be71f",
+                          "name": "8c44c856-2529-498f-8a5c-afd7443be71f",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [
+                              "3592efcf-3562-eb11-a812-000d3ae9471c",
+                              "23f4fd2a-b264-41be-b697-71d7c417b34a"
+                          ],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": true
+                      },
+                      {
+                          "guid": "043e55f3-4dd7-4cb0-8b58-6b62497b073b",
+                          "name": "043e55f3-4dd7-4cb0-8b58-6b62497b073b",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "edbffd44-459e-4878-9ce1-6905baef0c31",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "eb02176b-d34a-416b-a7fe-588817986379",
+                  "name": "eb02176b-d34a-416b-a7fe-588817986379",
+                  "sortOrder": 3,
+                  "text": {
+                      "en": "(3.0) Were the filling limit requirements complied with?",
+                      "fr": "(3.0) Est-ce que les exigences de limites de remplissage sont en conformité?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "effd1b70-f92b-42ce-929a-48a4dfad1c1a",
+                          "name": "effd1b70-f92b-42ce-929a-48a4dfad1c1a",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "33b139d6-fff1-43b0-a5d2-9581bdd9bf6a",
+                          "name": "33b139d6-fff1-43b0-a5d2-9581bdd9bf6a",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "df15a701-59b3-412a-8797-a940839ac75f",
+                          "name": "df15a701-59b3-412a-8797-a940839ac75f",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected",
+                              "fr": "Non inspecté"
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "f8b8f54a-2282-45d1-aab0-f09112e24dab",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "4744eace-52ec-44c0-976e-3b506efa298a",
+                  "name": "4744eace-52ec-44c0-976e-3b506efa298a",
+                  "sortOrder": 4,
+                  "text": {
+                      "en": "(4.0) Was the tank tested and inspected in accordance with B620?",
+                      "fr": "(4.0) La citerne a-t-elle été testée et inspectée conformément à B620?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "6183a1c7-f29d-48f7-9403-ff1440f1b62f",
+                          "name": "6183a1c7-f29d-48f7-9403-ff1440f1b62f",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "096e2230-bb05-43b6-8e2f-783939230504",
+                          "name": "096e2230-bb05-43b6-8e2f-783939230504",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "5b281eb2-1481-469f-9685-cc1b8f752672",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "8c621aab-347b-4f6e-896c-324c47781f08"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "8c621aab-347b-4f6e-896c-324c47781f08",
+                          "name": "8c621aab-347b-4f6e-896c-324c47781f08",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "(4.1) Does the tank have displayed the appropriate inspection and test markings?",
+                              "fr": "(4.1) Est-ce que la citerne affiche les marquages d'examens et essais appropriés?"
+                          },
+                          "type": "radio",
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "c6e5ec5c-7dc1-4817-b690-e3c05011d6b4",
+                                  "name": "c6e5ec5c-7dc1-4817-b690-e3c05011d6b4",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [
+                                      "3592efcf-3562-eb11-a812-000d3ae9471c"
+                                  ],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": true
+                              },
+                              {
+                                  "guid": "e33244fc-1571-48fe-85e0-c6123e870ada",
+                                  "name": "e33244fc-1571-48fe-85e0-c6123e870ada",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "5baf2978-b961-44d7-95d9-8f7cd0a4528a",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "326745fb-8de8-46ae-94fa-1c6a9204884a",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "9fe77b05-db67-4313-b7c6-4a7d5943f8a9",
+                                          "dependsOnQuestion": {
+                                              "guid": "4744eace-52ec-44c0-976e-3b506efa298a"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "8d6e9f1c-e194-4e9f-b3e2-709db63d1a77",
+                          "name": "8d6e9f1c-e194-4e9f-b3e2-709db63d1a77",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "Question text",
+                              "fr": "FR: Question text"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": true,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "f6a3ec46-6d00-44cb-9980-2eb06136469b",
+                                  "name": "f6a3ec46-6d00-44cb-9980-2eb06136469b",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "FR: Yes"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "c5e37f20-276d-4bd5-bdfc-27b1a081ce40",
+                                  "name": "c5e37f20-276d-4bd5-bdfc-27b1a081ce40",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "FR: No"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "03545428-2019-473d-8a94-5e37072f088b",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06",
+                  "name": "1844b37d-5bc3-4dca-ba75-a5838fdbef06",
+                  "sortOrder": 5,
+                  "text": {
+                      "en": "(5.0) Were hose assemblies included as part of your inspection?",
+                      "fr": "(5.0) Les flexibles ont-ils été inclus dans le cadre de votre inspection?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "aabbaf89-0b09-4443-ab55-f55f12f70d60",
+                          "name": "aabbaf89-0b09-4443-ab55-f55f12f70d60",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "1034206f-50d8-486d-b9a3-0e518f5e8797",
+                          "name": "1034206f-50d8-486d-b9a3-0e518f5e8797",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "c41b46b7-ee88-4f5b-a98c-d8e591331844",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "363ec5fd-796b-4c80-a042-94bbc429f341"
+                      },
+                      {
+                          "guid": "74151357-aa39-47c2-8f5a-77604ac99dfa"
+                      },
+                      {
+                          "guid": "8cdceea1-5bdc-46d9-a2d8-f094ff55fabc"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "363ec5fd-796b-4c80-a042-94bbc429f341",
+                          "name": "363ec5fd-796b-4c80-a042-94bbc429f341",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "(5.01) Were hose assemblies inspected in accordance with B620?",
+                              "fr": "(5.01) Les flexibles ont-ils été inspectés conformément à B620?"
+                          },
+                          "type": "radio",
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "ce44213f-94e2-45f0-8ff1-795aa029bea5",
+                                  "name": "ce44213f-94e2-45f0-8ff1-795aa029bea5",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "4d06e53a-e1d2-4956-8f49-cb5b435a3374",
+                                  "name": "4d06e53a-e1d2-4956-8f49-cb5b435a3374",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "ee61873a-9077-45bc-9769-5b008dd9d3c2",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "6dc42937-dc6c-4e01-b724-18d6b81774de",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "f1ef4b1d-5036-4c8a-a003-583bd4931833",
+                                          "dependsOnQuestion": {
+                                              "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "74151357-aa39-47c2-8f5a-77604ac99dfa",
+                          "name": "74151357-aa39-47c2-8f5a-77604ac99dfa",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "(5.02) Does the hose assembly have the appropriate test markings, ID number and HAWP?",
+                              "fr": "(5.02)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "76d5e9fb-4ad3-42aa-b03b-6c989a53ab5b",
+                                  "name": "76d5e9fb-4ad3-42aa-b03b-6c989a53ab5b",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "40ddc4b2-f520-4051-a706-4ea476c6642b",
+                                  "name": "40ddc4b2-f520-4051-a706-4ea476c6642b",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "b013de4b-d873-42e2-8af6-97ffb1c71da0",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "2d63b0f2-82fa-4e2a-88fb-eb3505ab3a3f",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "df4ae19f-cfeb-4538-b645-a661f6a52a48",
+                                          "dependsOnQuestion": {
+                                              "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "8cdceea1-5bdc-46d9-a2d8-f094ff55fabc",
+                          "name": "8cdceea1-5bdc-46d9-a2d8-f094ff55fabc",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "(5.03) Does the hose assembly have a minimum working pressure of 350psi?",
+                              "fr": "(5.03)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "add83e46-3495-4584-8aca-0eada297ab8b",
+                                  "name": "add83e46-3495-4584-8aca-0eada297ab8b",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "ac258459-4f2f-46b7-bed2-889675ac0202",
+                                  "name": "ac258459-4f2f-46b7-bed2-889675ac0202",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "f5ff9e74-0fd3-45cf-8681-0225739b0fed",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "25c753dc-b49b-4f04-b992-fe7401e8cd59",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "e3def56a-5a9b-4cf6-85cf-a932f65c30e8",
+                                          "dependsOnQuestion": {
+                                              "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "25214005-f861-42f0-bb3a-446a1dc57d27",
+                  "name": "25214005-f861-42f0-bb3a-446a1dc57d27",
+                  "sortOrder": 6,
+                  "text": {
+                      "en": "(6.0) Are the supports and anchors in compliance with the requirements?",
+                      "fr": "(6.0) Est-ce que les supports et ancrages sont en conformité avec les exigences?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "d27f1da1-e946-4629-9ebd-d659c5e6b1a8",
+                          "name": "d27f1da1-e946-4629-9ebd-d659c5e6b1a8",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "6fca9051-88b7-4c08-b688-18d7bba69208",
+                          "name": "6fca9051-88b7-4c08-b688-18d7bba69208",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "733b267a-2afc-49c0-bc18-33a7770e6f42",
+                          "name": "733b267a-2afc-49c0-bc18-33a7770e6f42",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected",
+                              "fr": "Non inspecté"
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "ac720e79-2ebd-421f-99d3-a3f493cab67b",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "8c67b2fd-5960-4266-804d-f1b625a86716",
+                  "name": "8c67b2fd-5960-4266-804d-f1b625a86716",
+                  "sortOrder": 7,
+                  "text": {
+                      "en": "(7.0) Do the shell or head of the tank display any of the rejection criteria listed in c. 7.2.1.8 of B620?",
+                      "fr": "(7.0) Est-ce que les virole et fonds de la citèrne présentent des critères de rejet énumérées dans l'a 7.2.1.8 de la B620?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "344eeda1-7066-4150-ba81-c8553c18babd",
+                          "name": "344eeda1-7066-4150-ba81-c8553c18babd",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "FR: Yes"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "731663a5-75e6-4fd1-a453-fe9a57cf241d",
+                          "name": "731663a5-75e6-4fd1-a453-fe9a57cf241d",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "FR: No"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "c0cb0658-fae9-454e-9e58-d7e38ec40751",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "91575613-87c5-48ff-9a8b-8f4f66724ed1",
+                  "name": "91575613-87c5-48ff-9a8b-8f4f66724ed1",
+                  "sortOrder": 8,
+                  "text": {
+                      "en": "(8.0) Is the circumferential reinforcement in compliance with the requirements of B620?",
+                      "fr": "(8.0) 5.03 Est-ce que les renforcements structurels sont en conformité avec les exigences de la B620?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "02132c07-2044-4c54-baa3-084a2f2bfb75",
+                          "name": "02132c07-2044-4c54-baa3-084a2f2bfb75",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "68328ca3-6821-4d4e-be94-5bd572b203cf",
+                          "name": "68328ca3-6821-4d4e-be94-5bd572b203cf",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "14753033-936a-4155-a07e-a4fb43f1e05b",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "be3ef764-308e-445f-826b-06000ccfd692",
+                  "name": "be3ef764-308e-445f-826b-06000ccfd692",
+                  "sortOrder": 9,
+                  "text": {
+                      "en": "(9.0) Are the pipes, valves, safety devices, fittings, and other accessories that contain lading designed and protected from potential damage?",
+                      "fr": "(9.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": true,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "5a6760f6-17d7-4597-b677-308f589778be",
+                          "name": "5a6760f6-17d7-4597-b677-308f589778be",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "f89e81c0-e685-4131-9f8b-311b953cc0b7",
+                          "name": "f89e81c0-e685-4131-9f8b-311b953cc0b7",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "ef7ae85e-e5c8-45bf-9317-9dbe1afbc0dc",
+                          "name": "ef7ae85e-e5c8-45bf-9317-9dbe1afbc0dc",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected",
+                              "fr": "Non inspecté"
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "6fc28114-e94b-4188-b961-4c195f3955d0",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "cb61b19b-5de8-4ab1-85fa-24d2295604ac",
+                  "name": "cb61b19b-5de8-4ab1-85fa-24d2295604ac",
+                  "sortOrder": 10,
+                  "text": {
+                      "en": "(10.0) Does the highway tank have sufficient road clearance?",
+                      "fr": "(10.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "109ceef9-05e7-44c9-bdd3-f3724fb6535b",
+                          "name": "109ceef9-05e7-44c9-bdd3-f3724fb6535b",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "484bd421-5c21-48ba-84d7-371e37ad92df",
+                          "name": "484bd421-5c21-48ba-84d7-371e37ad92df",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "628e1591-847d-496d-a291-4ac3ff08f0df",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "fcc7699b-03d8-4114-b51e-92e507a792a0",
+                  "name": "fcc7699b-03d8-4114-b51e-92e507a792a0",
+                  "sortOrder": 11,
+                  "text": {
+                      "en": "(11.0) Does the tank have the appropriate emergency shut-off devices?",
+                      "fr": "(11.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "2bc74bd1-d6c9-4372-b566-67588e2fa3cd",
+                          "name": "2bc74bd1-d6c9-4372-b566-67588e2fa3cd",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "140a8547-db86-4147-b67b-71ac259da46a",
+                          "name": "140a8547-db86-4147-b67b-71ac259da46a",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "32792916-6379-4699-bef6-00310ace8917",
+                          "name": "32792916-6379-4699-bef6-00310ace8917",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not applicable",
+                              "fr": "Sans objet"
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "281b276d-68fc-4131-a5ee-43dedecdec9a",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "27100784-24ba-4fe1-90b4-7c3bd5eed351",
+                  "name": "27100784-24ba-4fe1-90b4-7c3bd5eed351",
+                  "sortOrder": 12,
+                  "text": {
+                      "en": "(12.0) Does the tank have the appropriate emergency discharge controls?",
+                      "fr": "(12.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "f8830467-e42a-46a9-8e2f-52a6c86c0199",
+                          "name": "f8830467-e42a-46a9-8e2f-52a6c86c0199",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "a56e9935-7f87-48f1-a0f0-b37bca062a94",
+                          "name": "a56e9935-7f87-48f1-a0f0-b37bca062a94",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "1eaa03a8-10b0-4e72-a0af-c5c5f951540a",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "6ab1cd45-22f5-4283-9a85-23738b14294e"
+                      },
+                      {
+                          "guid": "61c0e989-5b83-4455-8ac2-b3d42d637de1"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "6ab1cd45-22f5-4283-9a85-23738b14294e",
+                          "name": "6ab1cd45-22f5-4283-9a85-23738b14294e",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "(12.1) Does the operator have the required emergency discharge control procedures? (c. 5.2.6 B622)",
+                              "fr": "(12.1)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "ab140b60-bfa3-48b1-9ab7-4de2f2ee6af1",
+                                  "name": "ab140b60-bfa3-48b1-9ab7-4de2f2ee6af1",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "06612a1d-109e-4d04-a822-922818bdd175",
+                                  "name": "06612a1d-109e-4d04-a822-922818bdd175",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "59293d29-2acf-463e-a3a9-29837bcb27f2",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "d851cdf8-0d9b-489c-8af2-1ec16883a326",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "ed8795b1-83ec-463b-97af-ac4011b5bb17",
+                                          "dependsOnQuestion": {
+                                              "guid": "27100784-24ba-4fe1-90b4-7c3bd5eed351"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "61c0e989-5b83-4455-8ac2-b3d42d637de1",
+                          "name": "61c0e989-5b83-4455-8ac2-b3d42d637de1",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "(12.2) Is the off-truck emergency shutdown system tested and is the report retained in accordance with B622 and B620?",
+                              "fr": "(12.2)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "d0b71ea5-6d73-44ee-b130-b99d3f910a68",
+                                  "name": "d0b71ea5-6d73-44ee-b130-b99d3f910a68",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "b551046f-1627-41da-a0ee-14e87eef87e4",
+                                  "name": "b551046f-1627-41da-a0ee-14e87eef87e4",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "1399190e-9314-457d-8cde-b1901a8d58e5",
+                                  "name": "1399190e-9314-457d-8cde-b1901a8d58e5",
+                                  "sortOrder": 3,
+                                  "text": {
+                                      "en": "Not applicable",
+                                      "fr": "Sans objet"
+                                  },
+                                  "value": "3",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "be96d518-f497-4b56-9487-a43db11b12e5",
+                                  "enabled": false,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "805b6bd1-83b8-45a9-b82d-cb29bd0e49f8",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "a4c02e89-2599-4712-a408-27ee757c79f9",
+                                          "dependsOnQuestion": {
+                                              "guid": "27100784-24ba-4fe1-90b4-7c3bd5eed351"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "82f4b7a2-ae51-4d6e-8010-f56c49a75cfe",
+                  "name": "82f4b7a2-ae51-4d6e-8010-f56c49a75cfe",
+                  "sortOrder": 13,
+                  "text": {
+                      "en": "(13.0) Does the rear-end protection of the tank meet the requirements of B620? (c. 5.1.5 B620)",
+                      "fr": "(13.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "edb3f037-347f-4f9c-8f93-bba86143eb6b",
+                          "name": "edb3f037-347f-4f9c-8f93-bba86143eb6b",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "e9875dbb-3525-417e-a406-56e9f7743cd7",
+                          "name": "e9875dbb-3525-417e-a406-56e9f7743cd7",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "c8d2797d-828b-4164-a057-453217b51267",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "0940dbae-48bf-4de7-92d5-354ec2680c18",
+                  "name": "0940dbae-48bf-4de7-92d5-354ec2680c18",
+                  "sortOrder": 14,
+                  "text": {
+                      "en": "(14.0) Do the manhole closures, pressure relief devices and roll over protection meet the requirements of B620? (c. 5.2.2.8, 5.2.4, 5.2.7 B620)",
+                      "fr": "(14.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "913e4dee-890f-46b5-9920-e66266d742f7",
+                          "name": "913e4dee-890f-46b5-9920-e66266d742f7",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "20c67273-f04e-4115-8a94-571270a271cf",
+                          "name": "20c67273-f04e-4115-8a94-571270a271cf",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "61c08c57-13bd-46a8-adce-f4376c7d3c57",
+                          "name": "61c08c57-13bd-46a8-adce-f4376c7d3c57",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected",
+                              "fr": "Non inspecté"
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "974c7771-7ee5-4df7-8154-e66681a813cf",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "8af97190-a1a6-473a-a053-c48bf34daab9",
+                  "name": "8af97190-a1a6-473a-a053-c48bf34daab9",
+                  "sortOrder": 15,
+                  "text": {
+                      "en": "(15.0) Were loading and unloading operations observed as part of your inspection?",
+                      "fr": "(15.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "f9ae6f28-eae3-426f-99c0-de0703d4de83",
+                          "name": "f9ae6f28-eae3-426f-99c0-de0703d4de83",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "eb2884fd-92d2-40e3-a3e2-190c8bf8b1bf",
+                          "name": "eb2884fd-92d2-40e3-a3e2-190c8bf8b1bf",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "4d9373d1-4688-45c0-a555-c58ed25751b1",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "88fc1e1f-5bba-46be-be53-60fc094a949b"
+                      },
+                      {
+                          "guid": "e91c2f11-2360-45ed-897a-bfa5bdea79c8"
+                      },
+                      {
+                          "guid": "d18175e1-6c85-40c2-8e15-0cf4aae57bbf"
+                      },
+                      {
+                          "guid": "7d9c1535-dbd5-49de-b578-7be3afb50f00"
+                      },
+                      {
+                          "guid": "1d09dd99-d897-4895-a6c0-d60158dae905"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "88fc1e1f-5bba-46be-be53-60fc094a949b",
+                          "name": "88fc1e1f-5bba-46be-be53-60fc094a949b",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "(15.1) Was the MOC and hose assembly pre-loading inspection done by the shipper or carrier? (c. 5.2 B622)",
+                              "fr": "(15.1)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "3d4daf5b-520d-4cbe-bae9-5b115394e939",
+                                  "name": "3d4daf5b-520d-4cbe-bae9-5b115394e939",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "af032715-d17e-4fe4-8d31-81fb817b7bde",
+                                  "name": "af032715-d17e-4fe4-8d31-81fb817b7bde",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "eadc0e39-92ec-4239-803d-ca5ab22d3919",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "52f7ef9f-e061-44ad-a1df-203c6f69b838",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "3d59d225-25f5-4948-b002-10097ef8b738",
+                                          "dependsOnQuestion": {
+                                              "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "e91c2f11-2360-45ed-897a-bfa5bdea79c8",
+                          "name": "e91c2f11-2360-45ed-897a-bfa5bdea79c8",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "(15.2) Was the fail-safe brake interlock system or wheel chocks used? (c. 5.1(g) B622)",
+                              "fr": "FR: Question text"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "df855440-3412-4402-9908-a1fd7c75311a",
+                                  "name": "df855440-3412-4402-9908-a1fd7c75311a",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "e0272076-0cce-4833-a4fa-ced0aecbc671",
+                                  "name": "e0272076-0cce-4833-a4fa-ced0aecbc671",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "6530d158-ace0-4bb7-870a-73ed81af8cf2",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "c019c67e-9f15-48b3-81c8-b35c3d664e7d",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "e7b56acb-1aad-40ee-8219-5f3a692d5563",
+                                          "dependsOnQuestion": {
+                                              "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "d18175e1-6c85-40c2-8e15-0cf4aae57bbf",
+                          "name": "d18175e1-6c85-40c2-8e15-0cf4aae57bbf",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "(15.3) Was the tank equipped with the appropriate emergency discharge controls? (c. 5.2.6, 5.5.1 B622)",
+                              "fr": "(15.3)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "fa4a8a35-a9a3-4fc5-beb0-3e35fc5697d7",
+                                  "name": "fa4a8a35-a9a3-4fc5-beb0-3e35fc5697d7",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "797e21ac-ec4d-4177-8513-ef6cdd2f5256",
+                                  "name": "797e21ac-ec4d-4177-8513-ef6cdd2f5256",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "9202b6f8-46af-46b4-9cb1-3ef2fad109c6",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "f56f7314-0b67-4b88-a8cc-4f06e16b834b",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "bc350ad0-5461-4402-9350-460b687bcb88",
+                                          "dependsOnQuestion": {
+                                              "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "7d9c1535-dbd5-49de-b578-7be3afb50f00",
+                          "name": "7d9c1535-dbd5-49de-b578-7be3afb50f00",
+                          "sortOrder": 4,
+                          "text": {
+                              "en": "(15.4) Were the loading and unloading operations supervised? (c. 5.3.1.1, 5.6 B622)",
+                              "fr": "(15.4)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "096ba7b6-c607-4464-82df-23dbd459d17f",
+                                  "name": "096ba7b6-c607-4464-82df-23dbd459d17f",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "2a6d990b-ecb1-42a5-a848-6fd6f376ad3b",
+                                  "name": "2a6d990b-ecb1-42a5-a848-6fd6f376ad3b",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "1df86686-a994-49d6-8a9d-49403137f232",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "1c2ef80b-ba7d-4b10-85df-ce046ae5343e",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "ed0e120b-22c1-4d5c-b681-f6e996602eef",
+                                          "dependsOnQuestion": {
+                                              "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "1d09dd99-d897-4895-a6c0-d60158dae905",
+                          "name": "1d09dd99-d897-4895-a6c0-d60158dae905",
+                          "sortOrder": 5,
+                          "text": {
+                              "en": "(15.5) After loading and unloading were all hatches, valves and other openings closed and secured? (c. 5.4, 5.7 B622)",
+                              "fr": "(15.5)"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "7588139d-fe04-405f-be7d-6d05aa0a32e5",
+                                  "name": "7588139d-fe04-405f-be7d-6d05aa0a32e5",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "bd99f9a6-c460-4133-af9a-2dbb281308f0",
+                                  "name": "bd99f9a6-c460-4133-af9a-2dbb281308f0",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "0ad17e07-4149-4dbf-93f5-6cf4379f11b0",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "9d7d5ae8-f044-42d7-816f-1138ab0d5e08",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "20d62164-e810-40b7-8014-b22d95a9a125",
+                                          "dependsOnQuestion": {
+                                              "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "2332ff1b-347d-4ca0-a931-444ac4527be6",
+                  "name": "2332ff1b-347d-4ca0-a931-444ac4527be6",
+                  "sortOrder": 16,
+                  "text": {
+                      "en": "(16.0) Is the highway tank equipped with the appropriate fire extinguisher? (c. 5.1h B622)",
+                      "fr": "(16.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "b0850610-9583-477b-acb6-46f434b054f6",
+                          "name": "b0850610-9583-477b-acb6-46f434b054f6",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "f1e3766c-759d-42b5-bd9b-510bbbbb32eb",
+                          "name": "f1e3766c-759d-42b5-bd9b-510bbbbb32eb",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "04cd37e1-8abb-4167-810c-28253fc5ec24",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "e0b0dbae-2b82-4415-bb67-f78b59da8f93",
+                  "name": "e0b0dbae-2b82-4415-bb67-f78b59da8f93",
+                  "sortOrder": 17,
+                  "text": {
+                      "en": "(17.0) Is the highway tank equipped with an automatic engine intake shut off device? (c. 5.1i B622)",
+                      "fr": "(17.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "dc149a0c-4fd1-4172-9868-64734267ef7c",
+                          "name": "dc149a0c-4fd1-4172-9868-64734267ef7c",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "FR: Yes"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "5df4e6db-b210-41b5-a1be-ac93041c560e",
+                          "name": "5df4e6db-b210-41b5-a1be-ac93041c560e",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "FR: No"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "ed36878d-9c15-40dd-8ce8-d53897d4562f",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "9c3214a9-3e1c-412b-99af-8667aa3ff88f",
+                  "name": "9c3214a9-3e1c-412b-99af-8667aa3ff88f",
+                  "sortOrder": 18,
+                  "text": {
+                      "en": "(18.0) Were any other non-compliances with B620 or B622 observed on this highway tank?",
+                      "fr": "(18.0)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "61739a58-ed3e-4e34-b4b5-b43bcbae7632",
+                          "name": "61739a58-ed3e-4e34-b4b5-b43bcbae7632",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "FR: Yes"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "f180e280-4272-4646-875f-da5359c44acf",
+                          "name": "f180e280-4272-4646-875f-da5359c44acf",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "FR: No"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "eecf58e4-bedb-44f6-bcb9-16019ffd24f1",
+                          "enabled": false,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      }
+  ],
+  "searchableProvisions": [
+      {
+          "leg": "3592efcf-3562-eb11-a812-000d3ae9471c",
+          "questions": [
+              "18db9932-4ab0-4d57-8c59-a4689b908c25",
+              "75c45f8b-29cd-4df6-9dbb-9603c97fbcd2",
+              "8c621aab-347b-4f6e-896c-324c47781f08"
+          ]
+      },
+      {
+          "leg": "23f4fd2a-b264-41be-b697-71d7c417b34a",
+          "questions": [
+              "75c45f8b-29cd-4df6-9dbb-9603c97fbcd2"
+          ]
+      }
+  ]
+}

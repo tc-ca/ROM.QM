@@ -1,0 +1,1322 @@
+{
+  "guid": "5793387d-8486-4686-9d85-baab1248301d",
+  "name": "5793387d-8486-4686-9d85-baab1248301d",
+  "readOnly": false,
+  "title": {
+      "en": "Questionnaire Title EN",
+      "fr": "Questionnaire Title EN"
+  },
+  "groups": [
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "59fb0e99-b5ef-4592-8735-5379082552af",
+          "name": "59fb0e99-b5ef-4592-8735-5379082552af",
+          "sortOrder": 1,
+          "title": {
+              "en": "1.0 COMPANY DETAILS ",
+              "fr": "1.0 DÉTAILS DE LA COMPAGNIE"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "52a3ce52-27aa-4544-8a82-d33f68f66093",
+                  "name": "52a3ce52-27aa-4544-8a82-d33f68f66093",
+                  "sortOrder": 1,
+                  "text": {
+                      "en": "1.01 Physical address matches address on Certificate of Registration?",
+                      "fr": " 1.01 L'adresse physique correspond au Certificat d'inscription? "
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "212aacec-99ab-473f-887c-4a005029fded",
+                          "name": "212aacec-99ab-473f-887c-4a005029fded",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "1265834c-0c1f-4c42-bb67-cf2d9141f166",
+                          "name": "1265834c-0c1f-4c42-bb67-cf2d9141f166",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "344388f6-ab83-4c08-b2f3-acc01224b43a",
+                          "name": "344388f6-ab83-4c08-b2f3-acc01224b43a",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "3b6516ea-09bb-45fd-a73e-709d9d16d32b",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "9fc3e211-a683-4a7e-bc03-796c6e3c6b9c",
+          "name": "9fc3e211-a683-4a7e-bc03-796c6e3c6b9c",
+          "sortOrder": 2,
+          "title": {
+              "en": "2.0 CERTIFICATE(S) OF REGISTRATION ",
+              "fr": "2.0 CERTIFICAT(S) D'INSCRIPTION"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "d7ba3d7c-d115-4f3a-9156-48013c3bb5f0",
+                  "name": "d7ba3d7c-d115-4f3a-9156-48013c3bb5f0",
+                  "sortOrder": 2,
+                  "text": {
+                      "en": "2.01 The Certificate of Registration is valid and available upon request. ",
+                      "fr": "2.01 Le certificat d'inscription est valide et peut être fourni sur demande."
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "beb1824c-654f-4276-9314-65d179e90b16",
+                          "name": "beb1824c-654f-4276-9314-65d179e90b16",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "99b15697-ffdf-495d-845c-352bc81f8c0a",
+                          "name": "99b15697-ffdf-495d-845c-352bc81f8c0a",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "def285e5-2e75-4dd9-8a1d-277cd7e3c65b",
+                          "name": "def285e5-2e75-4dd9-8a1d-277cd7e3c65b",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "6312fd57-45f9-4a69-8fa2-cbd4cefc452a",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "44e3539a-5583-4ad9-9b3e-542a28f2991b",
+                          "name": "44e3539a-5583-4ad9-9b3e-542a28f2991b",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "2.01a Certificate number ",
+                              "fr": "2.01a Numéro du Certificat"
+                          },
+                          "type": "text",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": true,
+                          "validationState": true,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "guid": "21e31b3b-b1fb-4f36-81bf-3f8ba921d0c4",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "d71b9b65-67c5-4385-a89f-6b2676c6dc14",
+          "name": "d71b9b65-67c5-4385-a89f-6b2676c6dc14",
+          "sortOrder": 3,
+          "title": {
+              "en": "3.0 OTHER DOCUMENTATION ",
+              "fr": "3.0 DOCUMENTATION ADDITIONNELLE"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "e7d5c85b-a346-4343-b5fa-3a2a696b8132",
+                  "name": "e7d5c85b-a346-4343-b5fa-3a2a696b8132",
+                  "sortOrder": 5,
+                  "text": {
+                      "en": "3.01 Current version of TP14850 ",
+                      "fr": "3.01 Version actuelle de la norme TP14850"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "8add6cca-4ad7-41c1-b57f-e59877c4b5d7",
+                          "name": "8add6cca-4ad7-41c1-b57f-e59877c4b5d7",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "7146f609-5337-4154-9066-71e18946f613",
+                          "name": "7146f609-5337-4154-9066-71e18946f613",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "c0125c20-0519-4b1e-8df5-4b9176ac70c7",
+                          "name": "c0125c20-0519-4b1e-8df5-4b9176ac70c7",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "90c11de5-0c26-4f46-bd1b-caf6742ecd6a",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "3778d874-a18e-4676-9551-cefb02fea2bf",
+          "name": "3778d874-a18e-4676-9551-cefb02fea2bf",
+          "sortOrder": 4,
+          "title": {
+              "en": "4.0 COMPLIANCE MARKING-See General Information, Section 5.2 of the Inspection Standard for Combination Packagings (4G)",
+              "fr": "4.0 INDICATION DE CONFORMITÉ-Voir Information générale, Section 5.2 de la norme d'inspection pour les emballages combinés (4G)"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "46ef27f5-9a4e-4cf4-bee3-4115d55f592f",
+                  "name": "46ef27f5-9a4e-4cf4-bee3-4115d55f592f",
+                  "sortOrder": 6,
+                  "text": {
+                      "en": "4.01 Compliance markings match those listed in Appendix A of Certificate ",
+                      "fr": "4.01 Les indications de conformités concordent avec celles listée à l'annexe A du certificat"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": true,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "0df25567-47f3-41a9-b185-4a5181342f50",
+                          "name": "0df25567-47f3-41a9-b185-4a5181342f50",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "e6c8640b-7926-4e7c-8f5f-bbdfc64c57bb",
+                          "name": "e6c8640b-7926-4e7c-8f5f-bbdfc64c57bb",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "8a4fe4a2-5eae-4011-a204-7c54acc42f97",
+                          "name": "8a4fe4a2-5eae-4011-a204-7c54acc42f97",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "58a65631-b061-4ba5-ad05-215e2c509deb",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "cc82fe35-17ab-41c1-87ba-1decb45cee79",
+                  "name": "cc82fe35-17ab-41c1-87ba-1decb45cee79",
+                  "sortOrder": 7,
+                  "text": {
+                      "en": "4.02 Copy of compliance markings attached to this report (handwritten or photo) ",
+                      "fr": "4.02 Copie des indications de conformité jointes au présent document (copie manuscrite ou photo)"
+                  },
+                  "type": "image",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": true,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "b1ecce3d-076e-494b-a079-e093f023355a",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "9079ea0e-c967-4885-8307-90e77add0c4f",
+          "name": "9079ea0e-c967-4885-8307-90e77add0c4f",
+          "sortOrder": 5,
+          "title": {
+              "en": "5.0 PACKAGING SPECIFICATIONS (DESIGN)-Inspectors must contact Engineering Services prior to conducting the inspection, when possible, to obtain the specifications of each design. See General Information, Section 5.4 of the Inspection Standard for Combination Packaging (4G)",
+              "fr": "5.0 SPÉCIFICATIONS D'EMBALLAGES (CONCEPTION)-Si possible, contactez les services d'ingénierie avant de procéder à l'inspection pour obtenir les spécifications de chaque conception. Voir la section 5.4, renseignements généraux, de la norme d'inspection pour les emballages combinés (4G) pour plus d'information."
+          },
+          "isRepeatable": true,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "085dc1a7-661e-4888-a314-ec49585f8a3f",
+                  "name": "085dc1a7-661e-4888-a314-ec49585f8a3f",
+                  "sortOrder": 8,
+                  "text": {
+                      "en": "5.01 Design number ",
+                      "fr": "5.01 Numéro de conception"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "d6a876aa-d906-4f47-a959-b8d9c9a5e69a",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "54fcad79-2abc-472a-969b-f743e118363d",
+                  "name": "54fcad79-2abc-472a-969b-f743e118363d",
+                  "sortOrder": 9,
+                  "text": {
+                      "en": "5.02 UN Marking",
+                      "fr": "5.02 Marquage UN"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "452b1b21-f28b-45f7-ac7d-697e7ec0e470",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "9af84196-ae1b-4e87-acd1-6365285e4309",
+                  "name": "9af84196-ae1b-4e87-acd1-6365285e4309",
+                  "sortOrder": 10,
+                  "text": {
+                      "en": "5.03 Outer Packaging – Box – ECT ",
+                      "fr": "5.03 Emballage extérieur  – Caisse  – Mullen"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "28a7bb30-ade7-48b4-9aa9-82e2e74192ac",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "c4a191c7-1a2c-4162-81c9-ecbb9b7a1dd0",
+                  "name": "c4a191c7-1a2c-4162-81c9-ecbb9b7a1dd0",
+                  "sortOrder": 11,
+                  "text": {
+                      "en": "5.04 Outer Packaging – Box – Flute ",
+                      "fr": "5.04 Emballage extérieur  – Caisse  – Cannelure"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "49a9e35a-4bae-4c14-81eb-c29ee411d062",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "2e0cc1c7-70d9-4f2d-9c51-e6fdd22961af",
+                  "name": "2e0cc1c7-70d9-4f2d-9c51-e6fdd22961af",
+                  "sortOrder": 12,
+                  "text": {
+                      "en": "5.05 Outer Packaging – Box – Grammage ",
+                      "fr": "5.05 Emballage extérieur  – Caisse  – Grammage"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "e83ccb5d-e419-45f7-964a-cdac9a83c0a9",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "3aa010f3-ae73-4eaa-956a-9396917f079a",
+                  "name": "3aa010f3-ae73-4eaa-956a-9396917f079a",
+                  "sortOrder": 13,
+                  "text": {
+                      "en": "5.06 Outer Packaging – Box – Supplier ",
+                      "fr": "5.06 Emballage extérieur  – Caisse  – Fournisseur"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "d1979dae-4412-4eb7-932d-e010ee47e81f",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "3df97378-44d1-4243-9bdf-09dca0131388",
+                  "name": "3df97378-44d1-4243-9bdf-09dca0131388",
+                  "sortOrder": 14,
+                  "text": {
+                      "en": "5.07 Outer Packaging – Closure – Tape ",
+                      "fr": "5.07 Emballage extérieur  – Fermeture  – Ruban"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "3f139c25-9f02-4af1-97a0-0e15eaa5741c",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "d78df2a1-8818-4cbd-a32e-9ab26a63b587",
+                  "name": "d78df2a1-8818-4cbd-a32e-9ab26a63b587",
+                  "sortOrder": 15,
+                  "text": {
+                      "en": "5.08 Outer Packaging – Closure – Glue ",
+                      "fr": "5.08 Emballage extérieur  – Fermeture  – Colle"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "bcc123a8-9c15-48f5-8b78-28f33ee250fd",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "7cb8832f-e57a-413e-8ca9-aee14414c85a",
+                  "name": "7cb8832f-e57a-413e-8ca9-aee14414c85a",
+                  "sortOrder": 16,
+                  "text": {
+                      "en": "5.09 Outer Packaging – Closure – Staples ",
+                      "fr": "5.09 Emballage extérieur  – Fermeture  – Agrafes"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "87e4303d-2910-44b4-9670-05fb77eab9c0",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "39dbc7a6-0e64-4659-a437-f12ef050c289",
+                  "name": "39dbc7a6-0e64-4659-a437-f12ef050c289",
+                  "sortOrder": 17,
+                  "text": {
+                      "en": "5.10 Inner Packaging – Type ",
+                      "fr": "5.10 Emballages intérieurs – Type"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "7eb9e124-db26-4273-ba15-b90f391dc822",
+                          "name": "7eb9e124-db26-4273-ba15-b90f391dc822",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Plastic Bottles ",
+                              "fr": "Bouteilles en plastique"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "bf05714d-c828-4ee7-a42a-77fb9874cfc0",
+                          "name": "bf05714d-c828-4ee7-a42a-77fb9874cfc0",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "Pails ",
+                              "fr": "Seaux"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "9bd89c84-3fb7-4d2f-b9ae-671cd32ff642",
+                          "name": "9bd89c84-3fb7-4d2f-b9ae-671cd32ff642",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Other ",
+                              "fr": "Autre"
+                          },
+                          "value": "other",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "1ee0ad55-d03b-4821-a206-3e5b1e75c3a8",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "d4ad9860-f2c4-451e-8f90-69df8e7d8e49"
+                      },
+                      {
+                          "guid": "cee9c183-7b04-4546-be10-d77bf0384812"
+                      },
+                      {
+                          "guid": "cee9c183-7b04-4546-be10-d77bf0384812"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "d4ad9860-f2c4-451e-8f90-69df8e7d8e49",
+                          "name": "d4ad9860-f2c4-451e-8f90-69df8e7d8e49",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "5.10a Bottle type",
+                              "fr": "5.10a Type de bouteille"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "5d3a2ca3-a8fa-4db0-afba-28c27b19a3f0",
+                                  "name": "5d3a2ca3-a8fa-4db0-afba-28c27b19a3f0",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "F-Style",
+                                      "fr": "F-Style"
+                                  },
+                                  "value": "1",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "161aad2b-a124-493d-bdbc-44f5017ddcd0",
+                                  "name": "161aad2b-a124-493d-bdbc-44f5017ddcd0",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "BR",
+                                      "fr": "BR"
+                                  },
+                                  "value": "2",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "b0549727-84e9-4444-a625-f5164635f8c9",
+                                  "name": "b0549727-84e9-4444-a625-f5164635f8c9",
+                                  "sortOrder": 3,
+                                  "text": {
+                                      "en": "RS",
+                                      "fr": "RS"
+                                  },
+                                  "value": "3",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "e12d190d-cfab-4600-bd58-2a560ebfd886",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "449be722-cbd7-477e-a01d-982ad9886668",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "3238e8c8-5992-455b-89b4-b75dab9ee473",
+                                          "dependsOnQuestion": {
+                                              "guid": "39dbc7a6-0e64-4659-a437-f12ef050c289"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "true"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "cee9c183-7b04-4546-be10-d77bf0384812",
+                          "name": "cee9c183-7b04-4546-be10-d77bf0384812",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "5.10b Other ",
+                              "fr": "5.10b Autre"
+                          },
+                          "type": "text",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "guid": "97c7de97-6ef7-46c2-94c1-9d579bc4f2cc",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "ca14fc43-649f-4def-8632-30de0db193d1",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "d0c9cc78-9400-492b-ad5c-044cc9fcfc6a",
+                                          "dependsOnQuestion": {
+                                              "guid": "39dbc7a6-0e64-4659-a437-f12ef050c289"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "other"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "7b248537-a0a4-4f67-ad7f-9104034af495",
+                  "name": "7b248537-a0a4-4f67-ad7f-9104034af495",
+                  "sortOrder": 18,
+                  "text": {
+                      "en": "5.11 Inner Packaging – Number and Capacity ",
+                      "fr": "5.11 Emballages intérieurs – Nombre et capacité"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "3b32b780-b132-48e7-b86e-6f0feaac2490",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "f1d76ab2-114f-46d9-9929-b3f79f6581bc",
+                  "name": "f1d76ab2-114f-46d9-9929-b3f79f6581bc",
+                  "sortOrder": 19,
+                  "text": {
+                      "en": "5.12 Inner Packaging – Material ",
+                      "fr": "5.12 Emballages intérieurs – Matériau"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "d8080288-6904-4976-8a13-36fd54bf0081",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "e2642dc9-90c2-41c3-b472-5b58a1946f5e",
+                  "name": "e2642dc9-90c2-41c3-b472-5b58a1946f5e",
+                  "sortOrder": 20,
+                  "text": {
+                      "en": "5.13 Inner Packaging – Supplier ",
+                      "fr": "5.13 Emballages intérieurs – Fournisseur"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "4f2afe7c-8e3a-4c5c-957f-8be0771dd3cd",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "46c2f652-a95a-47ca-a913-c909bcfc3b5c",
+                  "name": "46c2f652-a95a-47ca-a913-c909bcfc3b5c",
+                  "sortOrder": 21,
+                  "text": {
+                      "en": "5.14 Inner Packaging – Caps – Size ",
+                      "fr": "5.14 Emballages intérieurs – Bouchons – Taille"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "d4b0e6d0-1736-4a2e-bdc6-e23044ed6eec",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "3633f16d-f502-43ad-a75f-205783114f65",
+                  "name": "3633f16d-f502-43ad-a75f-205783114f65",
+                  "sortOrder": 22,
+                  "text": {
+                      "en": "5.15 Inner Packaging – Caps – Style ",
+                      "fr": "5.15 Emballages intérieurs – Bouchons – Style"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "08ae35a8-5afa-4f38-aba5-9d4d113b26db",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "d0b4e79c-ed2c-4e72-a497-9dfa3e0b6a25",
+                  "name": "d0b4e79c-ed2c-4e72-a497-9dfa3e0b6a25",
+                  "sortOrder": 23,
+                  "text": {
+                      "en": "5.16 Inner Packaging – Caps – Supplier ",
+                      "fr": "5.16 Emballages intérieurs – Bouchons – Fournisseur"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "8e9d1251-4957-450b-bb2e-ebec64adcfd5",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "9ffb1c2a-2aaa-443e-baa6-b49d9ad2a3aa",
+                  "name": "9ffb1c2a-2aaa-443e-baa6-b49d9ad2a3aa",
+                  "sortOrder": 24,
+                  "text": {
+                      "en": "5.17 Inserts/Cushioning/Other",
+                      "fr": "5.17 Rembourrage/amortissant/autre"
+                  },
+                  "type": "text",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "f1e11a66-0b7f-4c0d-841a-8ed04b8308cb",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "50f27f40-e6b8-4837-926e-003745392f9e",
+          "name": "50f27f40-e6b8-4837-926e-003745392f9e",
+          "sortOrder": 6,
+          "title": {
+              "en": "6.0 ADDITIONAL NON-COMPLIANCES",
+              "fr": "6.0 AUTRES NON-CONFORMITÉS"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "d23a68a6-1ea2-418c-ad2c-71f6fa3deef7",
+                  "name": "d23a68a6-1ea2-418c-ad2c-71f6fa3deef7",
+                  "sortOrder": 27,
+                  "text": {
+                      "en": "6.01 Additional non-compliances ",
+                      "fr": "6.01 Autres non-conformités"
+                  },
+                  "type": "text",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": true,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "0bed39ce-2027-4a03-af39-98bc43f50e90",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      }
+  ],
+  "searchableProvisions": []
+}
