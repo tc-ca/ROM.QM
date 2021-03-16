@@ -135,9 +135,6 @@ export default {
       },
       group: state => {
         return state.group
-      },
-      displayValidationErrors: state => {
-        return state.notification.displayValidationErrors
       }
     }),
     isVisible () {
@@ -145,10 +142,6 @@ export default {
     }
   },
   watch: {
-    // expandAllProp (value) {
-    //   alert('expand')
-    //   this.expandPanels(value)
-    // },
     readOnlyProp () {
       this.setReadOnly()
     },
@@ -171,7 +164,7 @@ export default {
     this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
   },
   beforeDestroy () {
-    this.$store.dispatch('notification/clearNotifications')
+    // this.$store.dispatch('notification/clearNotifications')
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
@@ -203,7 +196,7 @@ export default {
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       }
-      this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: true })
+      this.$store.dispatch('notification/validateQuestions')
     },
     // expandPanels (expand) {
     //   this.panelIndex = null

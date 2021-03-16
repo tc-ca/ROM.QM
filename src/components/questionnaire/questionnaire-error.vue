@@ -80,11 +80,7 @@ export default {
     ...mapState({
       notifications: state => {
         return state.notification.notifications
-      },
-      displayValidationErrors: state => {
-        return state.notification.displayValidationErrors
       }
-
     }),
     hasNotifications () {
       return this.notifications.length > 0

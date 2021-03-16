@@ -280,7 +280,7 @@ export default {
       }
     },
     RunValidation () {
-      this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: false })
+      this.$store.dispatch('notification/validateQuestions')
       const errors = this.$store.state.notification.notifications
       return { isValid: !errors.length > 0, errorCount: errors.length }
     },
