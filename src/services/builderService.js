@@ -273,7 +273,7 @@ function createDependencyGroup() {
 function createGenericQuestionDependency() {
   return {
     guid: uuidv4(),
-    dependsOnQuestion: [],
+    dependsOnQuestion: null,
     validationAction: "equal",
     validationValue: "false"
   };
@@ -945,23 +945,83 @@ function updateTemplate(template) {
   nTemplate.title = template.title;
   nTemplate.searchableProvisions = template.searchableProvisions;
 
-  let updateQuestion = (q,p) => {
-    nQ = createQuestion( p, q.type);
-    nQ.sortOrder = q.sortOrder;
-    nQ.text = q.text;
-    nQ.isRepeatable = q.isRepeatable;
-    nQ.isRepeated = q.isRepeated;
-    nQ.isSamplingAllowed = q.isSamplingAllowed;
-    nQ.isVisible = q.isVisible;
-    nQ.validationState = q.validationState;
+  let updateQuestion = (q) => {
+    let nQ = {
+      guid: q.guid,
+      name: q.guid,
+      sortOrder: q.sortOrder,
+      text: q.text,
+      type: q.type,
+      isRepeatable: q.isRepeatable,
+      isRepeated: q.isRepeated,
+      isSamplingAllowed: q.isSamplingAllowed,
+      isVisible: q.isVisible,
+      validationState: q.validationState,
+      responseOptions: [],
+      validationRules: [],
+      dependants: q.dependants,
+      dependencyGroups: [],
+      childQuestions: [],
+      result: null
+    };
+    
+    q.validationRules.forEach( vr => {
+      let nVr = {
+        guid: uuidv4(),
+        enabled:  vr.enabled,
+        errorMessage: vr.errorMessage,
+        name: vr.name,
+        type: vr.type,
+        value: vr.value
+      };
+      nQ.validationRules.push(nVr);
+    });
 
-    nQ.result = null;
+    q.dependencyGroups.forEach( dg => {
+      let nDg = {
+        guid: uuidv4(),
+        ruleType: dg.ruleType,
+        childValidatorName: dg.childValidatorName,
+        questionDependencies: []
+      };
+      dg.questionDependencies.forEach( qd => {
+        let nQd = {
+          guid: uuidv4(),
+          dependsOnQuestion: qd.dependsOnQuestion,
+          validationAction: qd.validationAction,
+          validationValue: qd.validationValue
+        };
+        nDg.questionDependencies.push(nQd);
+      })
 
-    nQ.dependants = q.dependants;
+      nQ.dependencyGroups.push(nDg);
+    })
+
+    // response Options
+    q.responseOptions.forEach( ro => {
+      let guid = uuidv4();
+      let nRo = {
+        guid: guid,
+        name: guid,
+        sortOrder: ro.sortOrder,
+        text: ro.text,
+        value: ro.value,
+        internalCommentRequirement: ro.internalComment.option,
+        externalCommentRequirement: ro.externalComment.option,
+        pictureRequirement: ro.picture.option,
+        fileRequirement: ro.file.option,
+        provisions: ro.provisions,
+        searchProvisions: null,
+        isProvisionCollapsed: ro.isProvisionCollapsed
+      };
+      nQ.responseOptions.push(nRo);
+    })
+
     return nQ;
   }
 
   for( let x = 0; x < template.groups.length; x++) {
+    updateLog.push("updateTemplate: Updating Group # " + x);
     let newGroup = createGroup(x);
     newGroup.title = template.groups[x].title;
     newGroup.isRepeatable = template.groups[x].isRepeatable;
@@ -970,13 +1030,22 @@ function updateTemplate(template) {
 
     // Questions
     template.groups[x].questions.forEach(q => {
-      let nQuestion = updateQuestion(q,template.groups[x]);
+      updateLog.push("updateGroup: Updating Question # " + q.sortOrder);
+      let nQuestion = updateQuestion(q);
+      // child questions
+      q.childQuestions.forEach( cq => {
+        updateLog.push("updateQuestion: Updating Child Question # " + cq.sortOrder);
+        let nCq = updateQuestion(cq);
+        nQuestion.childQuestions.push(nCq);
+      });
+
       newGroup.questions.push(nQuestion);
-    })
+    });
+
+    nTemplate.groups.push(newGroup);
   }
 
 
-  updateLog.push("updateTemplate: do something");
   downloadData(updateLog, "updateLog.json");
   downloadData(nTemplate, "updatedTemplate.json");
   return nTemplate;
