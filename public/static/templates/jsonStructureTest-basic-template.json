@@ -287,7 +287,7 @@
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
                             "pictureRequirement": "required",
-                            "provisions": []
+                            "provisions": ["9241a2ae-1c61-4753-805a-be0707f41622"]
                         },
                         {
                             "guid": 2,
@@ -302,7 +302,7 @@
                             "externalCommentRequirement": "optional",
                             "fileRequirement": "optional",
                             "pictureRequirement": "required",
-                            "provisions": []
+                            "provisions": ["77758039-206f-476d-84d9-549c571f269e"]
                         },
                         {
                             "guid": 3,
