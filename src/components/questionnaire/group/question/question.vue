@@ -102,12 +102,10 @@
             mdi-exclamation
           </v-icon>
         </v-col>
-        <v-col cols="12">
-          <div
-            :style="{fontSize:'16px !important'}"
-          >
-            <span class="text-break">{{ questionText }}</span>
-          </div>
+        <v-col class="pl-1">
+          <h2 class="subtitle-1 text-break">
+            {{ questionText }}
+          </h2>
         </v-col>
         <!-- <v-col mt-0>
           <v-chip
