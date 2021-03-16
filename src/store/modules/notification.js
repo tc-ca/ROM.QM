@@ -26,12 +26,10 @@ export const actions = {
     commit('SET_NOTIFICATIONS', notification)
   },
 
+
+  
   addNotification ({ commit }, notification) {
     if (!notification.guid) notification.guid = uuidv4();
-    notification.showing = false
-    notification.color = notification.color || 'success'
-    notification.timeout = notification.timeout || 6000
-
     commit('SET_NOTIFICATIONS', notification)
   },
 
@@ -45,7 +43,7 @@ export const actions = {
     dispatch("setDisplayValidationErrorsState", displayValidationErrors);
 
     //clear up any previous errors/notifications
-    dispatch("clearNotifications", { root: true });
+    // dispatch("clearNotifications", { root: true });
 
     let grpIndex = 0;
     const questionnaire = rootState.questionnaire.questionnaire;
