@@ -15,7 +15,6 @@
       :question="question"
       :read-only="readOnly"
       save-to-prop="externalComment"
-      @error="onError"
     />
     <supplementary-info-comment
       v-if="displayInternalComment"
@@ -28,7 +27,6 @@
       :question="question"
       :read-only="readOnly"
       save-to-prop="internalComment"
-      @error="onError"
     />
     <supplementary-info-files
       v-if="displayFile"
@@ -39,7 +37,6 @@
       :question="question"
       :read-only="readOnly"
       save-to-prop="images"
-      @error="onError"
     />
     <supplementary-info-image
       v-if="displayPicture"
@@ -50,7 +47,6 @@
       :question="question"
       :read-only="readOnly"
       save-to-prop="images"
-      @error="onError"
     />
   </v-list>
 </template>

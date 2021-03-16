@@ -245,15 +245,11 @@ export interface ResponseOption {
 export interface File {
     /** @default [] */
     items: FileItem[];
-    validationStatus?: boolean;
-    notification?: null;
 }
 
 export interface Picture {
     /** @default [] */
     items: PictureItem[];
-    validationStatus?: boolean;
-    notification?: null;
 }
 
 export interface FileItem {

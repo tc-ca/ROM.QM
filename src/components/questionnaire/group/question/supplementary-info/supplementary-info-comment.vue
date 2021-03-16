@@ -53,7 +53,6 @@
           rows="1"
           :hint="hint"
           :rules="rules"
-          @update:error="onError"
         >
           <v-icon
             v-if="isCommentRequired"
@@ -79,7 +78,6 @@
           rows="1"
           :hint="hint"
           :rules="rules"
-          @update:error="onError"
         >
           <v-icon
             v-if="isCommentRequired"
@@ -185,20 +183,6 @@ export default {
         this.onError(this.errorInComment)
       }
     )
-  },
-  methods: {
-    handler: function (value) {
-      // TODO: better name of argument.
-    },
-    onError (error) {
-      this.comment.validationStatus = !error
-      if (!this.comment.validationStatus) {
-        this.comment.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `${this.comment.label} for this question is required. Please enter a value on the comment field.`, color: 'error' }
-      } else {
-        this.comment.notification = null
-      }
-      this.$emit('error', error)
-    }
   }
 }
 </script>

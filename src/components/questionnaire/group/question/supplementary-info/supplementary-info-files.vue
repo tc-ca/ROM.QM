@@ -100,7 +100,6 @@
               v-model="file.length"
               :disabled="readOnly"
               :rules="rules"
-              @update:error="onError"
             />
             <v-dialog
               v-model="confirmDialogOpen"
@@ -402,24 +401,6 @@ export default {
       this.galleryIndex = this.galleryIndex - 1 < 0
         ? this.file.length - 1
         : this.galleryIndex - 1
-    },
-
-    updateResponseStore: function () {
-      // Need to be changed because the updateSupplementaryInfo on the response store was deleted
-      // const question = this.question
-      // const group = this.group
-      // const saveToProp = this.saveToProp
-      // const response = this.files
-      // this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
-    },
-    onError (error) {
-      this.file.validationStatus = !error
-      if (!this.file.validationStatus) {
-        this.file.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `File is required on this question, please upload at least one.`, color: 'error' }
-      } else {
-        this.file.notification = null
-      }
-      this.$emit('error', error)
     }
   }
 
