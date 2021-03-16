@@ -305,7 +305,7 @@
                             "provisions": []
                         },
                         {
-                            "id": 3,
+                            "guid": 3,
                             "name": "RSPNS_PTN3",
                             "sortOrder": 3,
                             "text": {
@@ -315,8 +315,8 @@
                             "value": "3",
                             "provisions": [],
                             "internalCommentRequirement": "required",
-                            "externalCommentRequirement": "optional",
-                            "fileRequirement": "optional",
+                            "externalCommentRequirement": "required",
+                            "fileRequirement": "required",
                             "pictureRequirement": "required"
                         }
                     ],

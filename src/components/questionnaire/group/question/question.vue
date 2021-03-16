@@ -885,9 +885,20 @@ export default {
         })
 
         this.question.result.responses = newResponses
-        this.selectedResponseOption = options
+        // For question type Select where we have multiple response selected get the 1st option and
+        // where the user the selects both option 1 and 2, the required will trump over optional
+        this.selectedResponseOption = options.length > 1 ? this.createListOptions(options) : options[0]
         this.provisionIds = targetedProvisionsIds
       }
+    },
+    createListOptions (options) {
+      let ops = _.cloneDeep(options)
+      ops[0].externalCommentRequirement = options.some(o => o.externalCommentRequirement === 'required') ? 'required' : 'optional'
+      ops[0].fileRequirement = options.some(o => o.fileRequirement === 'required') ? 'required' : 'optional'
+      ops[0].internalCommentRequirement = options.some(o => o.internalCommentRequirement === 'required') ? 'required' : 'optional'
+      ops[0].pictureRequirement = options.some(o => o.pictureRequirement === 'required') ? 'required' : 'optional'
+
+      return ops[0]
     },
     updateDependants () {
       if (this.question.dependants) {
