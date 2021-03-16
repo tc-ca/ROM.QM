@@ -169,7 +169,6 @@ function createGenericResponseOption(sortOrder = -1) {
     pictureRequirement: "optional",
     fileRequirement: "optional",
     provisions: [],
-    searchProvisions: null,
     isProvisionCollapsed: false
   };
 }

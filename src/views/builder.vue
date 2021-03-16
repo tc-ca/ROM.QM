@@ -297,7 +297,7 @@
                             >
                               <v-sheet class="pa-4">
                                 <v-text-field
-                                  v-model="option.searchProvisions"
+                                  v-model="searchProvisions"
                                   :label="$t('app.builder.responseOptions.provisions.search')"
                                   outlined
                                   hide-details
@@ -312,7 +312,7 @@
                                   item-key="id"
                                   :item-text="displayTextLang"
                                   selection-type="leaf"
-                                  :search="option.searchProvisions"
+                                  :search="searchProvisions"
                                   :items="provisions"
                                   @input="updateSearchableProvisions()"
                                 >
@@ -692,7 +692,8 @@ export default {
       questionPanels: [],
       questionProvisions: [],
       flagTimer: null,
-      reference: QUESTION_TYPE.REFERENCE
+      reference: QUESTION_TYPE.REFERENCE,
+      searchProvisions: null
     }
   },
   computed: {
