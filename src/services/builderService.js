@@ -35,7 +35,7 @@ function createGroup(index) {
       [LANGUAGE.FRENCH]: "Fr: New Group"
     },
     isRepeatable: false,
-    isVisibleByDefault: true,
+    isVisible: true,
     questions: []
   };
   return group;
@@ -297,7 +297,7 @@ function createGenericResult() {
     internalComment: "",
     files: null,
     pictures: null,
-    samplingRecord: null,
+    samplingInfo: null,
     responses: [],
     violationInfo: null
   };
