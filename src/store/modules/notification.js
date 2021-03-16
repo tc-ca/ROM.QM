@@ -11,9 +11,6 @@ export const state = {
 export const getters = {
   hasNotifications(state) {
     return (state.notifications && state.notifications.length > 0);
-  },
-  getNotifications(state) {
-    return state.notifications;
   }
 }
 
@@ -213,19 +210,15 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
 {
    if (q.isVisible) {
     if (isValidationRequired(q)) {
-      if (!q.validationState || (q.result && !q.result.responses[0].value)) {
-
-          const msg = i18n.t('app.notifications.question')
-         const notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+        const msg = i18n.t('app.notifications.question')
+        const notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-draw', lang);
         dispatch("notification/addNotification", notification, { root: true });
+        
       } else {
         //If there are responseOptions
         validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang);
-
         // Now the validationRules
         evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang);
-
-      }
     }
 
     if(q.childQuestions && q.childQuestions.length > 0) {
