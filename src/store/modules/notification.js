@@ -16,18 +16,13 @@ export const getters = {
   }
 }
 
+
 export const actions = {
   show ({ commit }, notification) {
     if (!notification.guid) notification.guid = uuidv4();
-    notification.showing = true
-    notification.color = notification.color || 'success'
-    notification.timeout = notification.timeout || 3000
-
     commit('SET_NOTIFICATIONS', notification)
   },
 
-
-  
   addNotification ({ commit }, notification) {
     if (!notification.guid) notification.guid = uuidv4();
     commit('SET_NOTIFICATIONS', notification)
