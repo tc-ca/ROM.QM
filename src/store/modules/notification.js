@@ -59,18 +59,8 @@ export const actions = {
     commit("SET_NOTIFICATIONS_VISIBLE");
   },
 
-  clearNotifications ({commit, rootState}) {
+  clearNotifications ({commit}) {
     commit("CLEAR_NOTIFICATIONS");
-    const questionnaire = rootState.questionnaire.questionnaire;
-    if (questionnaire && questionnaire.groups) {
-      questionnaire.groups.forEach(group => {
-        if (group.questions) {
-          group.questions.forEach(question => {
-            ClearPreviousNotifications(question);
-          });
-        }
-      });
-    }
   }
 }
 
@@ -92,27 +82,7 @@ export const mutations = {
   }
 };
 
-function ClearPreviousNotifications(q)
-{
-  if(q.responseOptions) {
-    q.responseOptions.forEach(op => {
-      if (op.internalComment && op.internalComment.notification) {
-        op.internalComment.notification = null;
-      }
-      if (op.externalComment && op.externalComment.notification) {
-        op.externalComment.notification = null;
-      }
-      if (op.picture && op.picture.notification) {
-        op.picture.notification = null;
-      }
-    });
-  }  
-  if(q.childQuestions) {
-    q.childQuestions.forEach(child => {
-      ClearPreviousNotifications(child);
-    });
-  }
-}
+
 
 function isValidationRequired(q)
 {
