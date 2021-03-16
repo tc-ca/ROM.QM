@@ -67,7 +67,7 @@ export interface Group {
      * in a DependencyGroup of a Question which decribes the logic
      * used to hide or show this group
      */
-    isVisibleByDefault: boolean;
+    isVisible: boolean;
 
     /**
      * order in which this group appears in a set of groups of a template
@@ -116,7 +116,7 @@ export interface Question {
      * in a DependencyGroup of another Question to decribes the logic
      * used to hide or show this question
      */
-    isVisibleByDefault: boolean;
+    isVisible: boolean;
 
     /**
      * text of the question in a multi-lang array
@@ -294,7 +294,7 @@ export interface ViolationInfo {
     violationCount: string;
 }
 
-export interface SamplingRecord {
+export interface SamplingInfo {
     approximateTotal: string;
     sampleSize: string;
 }
@@ -356,7 +356,7 @@ export interface Result {
     violationInfo: ViolationInfo;
 
     /** @nullable */
-    samplingRecord: SamplingRecord;
+    samplingRecord: SamplingInfo;
 }
 
 export interface Response {
