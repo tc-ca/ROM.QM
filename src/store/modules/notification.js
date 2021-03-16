@@ -95,9 +95,6 @@ export const mutations = {
 
 function ClearPreviousNotifications(q)
 {
-  if (q.notification) {
-    q.notification = null;
-  }
   if(q.responseOptions) {
     q.responseOptions.forEach(op => {
       if (op.internalComment && op.internalComment.notification) {
@@ -203,12 +200,12 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
     q.validationRules.forEach( vr => {
       if (vr.enabled) {
         if (q.result && !q.result.responses[0].value) {
-          q.notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
-          dispatch("notification/addNotification", q.notification, { root: true });
+          const notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+          dispatch("notification/addNotification", notification, { root: true });
         } else {
           if (!validateMinValue(q,vr) || !validateMinLength(q,vr) || !validateMaxValue(q,vr) || !validateMaxLength(q,vr)) {
-            q.notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
-            dispatch("notification/addNotification", q.notification, { root: true });
+            const notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+            dispatch("notification/addNotification", notification, { root: true });
           }
         }
       }
@@ -221,16 +218,14 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
 function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch, lang)
 {
    if (q.isVisible) {
-    if (q.notification) {
-      dispatch("notification/addNotification", q.notification, { root: true });
-    } else if (isValidationRequired(q)) {
+    if (isValidationRequired(q)) {
       if (!q.validationState || (q.result && !q.result.responses[0].value)) {
         const msg = {
           en: "A valid response for the question is required.",
           fr: "Une réponse valide à la question est requise."
         }
-        q.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
-        dispatch("notification/addNotification", q.notification, { root: true });
+         const notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+        dispatch("notification/addNotification", notification, { root: true });
       } else {
         //If there are responseOptions
         validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang);
