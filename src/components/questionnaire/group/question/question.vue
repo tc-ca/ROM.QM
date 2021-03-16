@@ -840,7 +840,7 @@ export default {
       if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
         this.selProvisions = this.question.result.violationInfo.selectedProvisions
       }
-      this.updateViolationInfo()
+      this.updateViolationInfo(args)
 
       this.updateDependants(args)
       this.updateReferenceId()
@@ -850,12 +850,14 @@ export default {
         this.$emit('reference-change')
       }
     },
-    updateViolationInfo () {
+    updateViolationInfo (args) {
       if (this.provisionIds.length === 0) {
         this.displayViolationInfo = false
-      } else if (this.provisionIds.length > 0 && !this.isReferenceQuestion) {
+      } else if (this.provisionIds.length > 0 && !this.isReferenceQuestion && !isEmptyValues(args.value)) {
         this.loadProvisions(this.provisionIds)
         this.displayViolationInfo = true
+      } else {
+        this.displayViolationInfo = false
       }
     },
     updateResult (args) {
@@ -864,6 +866,7 @@ export default {
       // result.response must return always array
       if (isEmptyValues(args.value)) {
         this.question.result.responses = []
+        this.selectedResponseOption = []
       } else {
         let responses = args.value
         if (this.question.type !== QUESTION_TYPE.SELECT) {
