@@ -663,7 +663,7 @@ export default {
       type: Boolean,
       default: false
     },
-    updateItBuilder: {
+    updatePropBuilder: {
       type: Boolean,
       default: false
     }
@@ -751,7 +751,7 @@ export default {
     fixItPropBuilder () {
       this.fixit()
     },
-    updateItBuilder () {
+    updatePropBuilder () {
       this.updateQuestionnaire()
     }
   },
