@@ -275,57 +275,70 @@
                         </v-select>
                       </div>
                       <div>
-                        <div>
-                          <v-btn
-                            small
-                            icon
-                            @click="toggleProvisions(option)"
-                          >
-                            <v-icon v-if="!option.isProvisionCollapsed">
-                              mdi-menu-right
-                            </v-icon>
-                            <v-icon v-else>
-                              mdi-menu-down
-                            </v-icon>
-                          </v-btn>
-                          {{ $t('app.builder.responseOptions.provisions.provisions') }}
-                        </div>
-                        <div v-show="option.isProvisionCollapsed">
-                          <div>
-                            <v-card
-                              class="mx-auto"
-                            >
-                              <v-sheet class="pa-4">
-                                <v-text-field
-                                  v-model="searchProvisions"
-                                  :label="$t('app.builder.responseOptions.provisions.search')"
-                                  outlined
-                                  hide-details
-                                  clearable
-                                  clear-icon="mdi-close-circle-outline"
-                                />
-                              </v-sheet>
-                              <v-card-text>
-                                <v-treeview
-                                  v-model="option.provisions"
-                                  selectable
-                                  item-key="id"
-                                  :item-text="displayTextLang"
-                                  selection-type="leaf"
-                                  :search="searchProvisions"
-                                  :items="provisions"
-                                  @input="updateSearchableProvisions()"
+                        <v-list
+                          dense
+                          nav
+                          color="#f5f5f5"
+                        >
+                          <v-list-group>
+                            <template v-slot:activator>
+                              <v-list-item-title
+                                class="subtitle-1"
+                                style="color:#757575"
+                              >
+                                <v-row>
+                                  <v-col>
+                                    {{ $t('app.builder.responseOptions.provisions.provisions') }}
+                                  </v-col>
+                                </v-row>
+                              </v-list-item-title>
+                              <v-list-item-action>
+                                <v-icon
+                                  v-if="errorInComment"
+                                  color="red"
                                 >
-                                  <template v-slot:label="{ item }">
-                                    <div class="truncated">
-                                      <div>{{ lang === eng ? item.DisplayEnglishText : item.DisplayFrenchText }}</div>
-                                    </div>
-                                  </template>
-                                </v-treeview>
-                              </v-card-text>
-                            </v-card>
-                          </div>
-                        </div>
+                                  mdi-exclamation
+                                </v-icon>
+                              </v-list-item-action>
+                            </template>
+                            <v-list-item>
+                              <v-list-item-content>
+                                <v-card
+                                  class="mx-auto"
+                                >
+                                  <v-sheet class="pa-4">
+                                    <v-text-field
+                                      v-model="searchProvisions"
+                                      :label="$t('app.builder.responseOptions.provisions.search')"
+                                      outlined
+                                      hide-details
+                                      clearable
+                                      clear-icon="mdi-close-circle-outline"
+                                    />
+                                  </v-sheet>
+                                  <v-card-text>
+                                    <v-treeview
+                                      v-model="option.provisions"
+                                      selectable
+                                      item-key="id"
+                                      :item-text="displayTextLang"
+                                      selection-type="leaf"
+                                      :search="searchProvisions"
+                                      :items="provisions"
+                                      @input="updateSearchableProvisions()"
+                                    >
+                                      <template v-slot:label="{ item }">
+                                        <div class="truncated">
+                                          <div>{{ lang === eng ? item.DisplayEnglishText : item.DisplayFrenchText }}</div>
+                                        </div>
+                                      </template>
+                                    </v-treeview>
+                                  </v-card-text>
+                                </v-card>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list-group>
+                        </v-list>
                       </div>
                     </div>
                     <div class="right">
@@ -1040,9 +1053,6 @@ export default {
     },
     toggleViolations () {
       this.violationsCollapsed = !this.violationsCollapsed
-    },
-    toggleProvisions (option) {
-      option.isProvisionCollapsed = !option.isProvisionCollapsed
     },
     updateSearchableProvisions () {
       const questionGuid = this.selectedQuestion.guid
