@@ -31,6 +31,15 @@
         mdi-hammer-wrench
       </v-icon>
     </v-btn>
+    <v-btn
+      @click="updateIt(true)"
+    >
+      <span>Update it.</span>
+
+      <v-icon color="purple">
+        mdi-reload-alert
+      </v-icon>
+    </v-btn>
   </v-bottom-navigation>
 </template>
 
@@ -49,6 +58,9 @@ export default {
     },
     fixIt () {
       this.$emit('fix-it')
+    },
+    updateIt () {
+      this.$emit('update-it')
     }
   }
 }

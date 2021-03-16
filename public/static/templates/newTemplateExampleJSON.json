@@ -4,7 +4,7 @@
     "domSuffix": "",
     "guid": "1f3b2c46-a253-4fe2-a0fc-855216571c36",
     "isRepeatable": true,
-    "isVisibleByDefault": true,
+    "isVisible": true,
     "name": "1f3b2c46-a253-4fe2-a0fc-855216571c36",
     "questions": [{
       "dependants": [{
@@ -15,7 +15,7 @@
       "isRepeatable": false,
       "isRepeated": false,
       "isSamplingAllowed": false,
-      "isVisibleByDefault": true,
+      "isVisible": true,
       "name": "8a629301-851b-445c-a31f-92890b83fb27",
       "childQuestions": [{
         "dependants": [],
@@ -34,7 +34,7 @@
         "isRepeatable": false,
         "isRepeated": false,
         "isSamplingAllowed": true,
-        "isVisibleByDefault": false,
+        "isVisible": false,
         "name": "58f503ac-4642-42f0-8248-1658638c5050",
         "childQuestions": [],
         "responseOptions": [{
@@ -196,7 +196,7 @@
       "isRepeatable": false,
       "isRepeated": false,
       "isSamplingAllowed": true,
-      "isVisibleByDefault": true,
+      "isVisible": true,
       "name": "d1555ab0-0262-457d-85da-d8de8593ac45",
       "childQuestions": [],
       "type": "text",
