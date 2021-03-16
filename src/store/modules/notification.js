@@ -6,7 +6,6 @@ export const namespaced = true
 
 export const state = {
   notifications: [],
-  displayValidationErrors: false
 }
 
 export const getters = {
@@ -26,15 +25,9 @@ export const actions = {
     if (!notification.guid) notification.guid = uuidv4();
     commit('SET_NOTIFICATIONS', notification)
   },
-
-  setDisplayValidationErrorsState ({ commit }, payload) {
-    commit('SET_DISPLAY_VALIDATION_ERRORS', payload)
-  },
   
   //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
-  validateQuestions ({ dispatch, rootState }, payload) {
-    const { displayValidationErrors } = payload;
-    dispatch("setDisplayValidationErrorsState", displayValidationErrors);
+  validateQuestions ({ dispatch, rootState }) {
 
     //clear up any previous errors/notifications
     dispatch("clearNotifications", { root: true });
@@ -76,9 +69,6 @@ export const mutations = {
   },
   CLEAR_NOTIFICATIONS (state) {
     state.notifications = []
-  },
-    SET_DISPLAY_VALIDATION_ERRORS (state, payload) {
-    state.displayValidationErrors = payload;
   }
 };
 
