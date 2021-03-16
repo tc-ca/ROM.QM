@@ -874,7 +874,12 @@ export default {
         let options = []
         let newResponses = []
         responses.forEach((response) => {
-          const option = this.question.responseOptions.find(option => option.value === response)
+          let option = null
+          if (this.question.type === QUESTION_TYPE.SELECT || this.question.type === QUESTION_TYPE.RADIO) {
+            option = this.question.responseOptions.find(option => option.value === response)
+          } else {
+            option = this.question.responseOptions[0]
+          }
           if (option) { options.push(option) }
 
           newResponses.push({ 'guid': option ? option.guid : 'not found', 'value': response })
