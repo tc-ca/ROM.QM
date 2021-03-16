@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import i18n from '../../i18n'
 
 export const namespaced = true
 
@@ -38,7 +39,7 @@ export const actions = {
     dispatch("setDisplayValidationErrorsState", displayValidationErrors);
 
     //clear up any previous errors/notifications
-    // dispatch("clearNotifications", { root: true });
+    dispatch("clearNotifications", { root: true });
 
     let grpIndex = 0;
     const questionnaire = rootState.questionnaire.questionnaire;
@@ -127,44 +128,37 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
     for( let x = 0; x < q.responseOptions.length; x++) {
       const op = q.responseOptions[x];
       if (q.result && q.result.responses[0].value === op.value) {
-        // This is the response selected
         if (op.internalComment && op.internalComment.notification) {
           dispatch('notification/addNotification', op.internalComment.notification,{root:true});
         } else if (op.internalComment && op.internalCommentRequirement === 'required' && op.internalComment.value.trim().length === 0) {
-          const msg = {
-            en: `Internal Comment for the response type ${op.text[lang]} is required.`,
-            fr: `Commentaire interne pour le type de réponse ${op.text[lang]} est requis.`
-          }
-          op.internalComment.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-message-alert', lang);
+ 
+          const msg = i18n.t$('app.notifications.internalComment', { type: op.text[lang] } )
+          op.internalComment.notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
           dispatch('notification/addNotification', op.internalComment.notification,{root:true});
         }
         if (op.externalComment && op.externalComment.notification) {
           dispatch('notification/addNotification', op.externalComment.notification,{root:true});
         } else if (op.externalComment && op.externalCommentRequirement === 'required' && op.externalComment.value.trim().length === 0) {
-          const msg = {
-            en: `External Comment for the response type ${op.text[lang]} is required.`,
-            fr: `Commentaire externe pour le type de réponse ${op.text[lang]} est requis.`
-          }
-          op.externalComment.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-message-alert', lang);
+
+          const msg = i18n.t$('app.notifications.externalComment', { type: op.text[lang] } )
+
+          op.externalComment.notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
           dispatch('notification/addNotification', op.externalComment.notification,{root:true});
         }
         if (op.file && op.file.notification) {
           dispatch('notification/addNotification', op.file.notification,{root:true});
         } else if (op.file && op.fileRequirement === 'required' && q.result.files.length === 0) {
-          const msg = {
-            en: `A File for the response type ${op.text[lang]} is required.`,
-            fr: `Un fichier pour le type de réponse ${op.text[lang]} est requis.`
-          }
-          op.file.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-image-plus', lang);
+
+          const msg = i18n.t$('app.notifications.file', { type: op.text[lang] } )
+
+          op.file.notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
           dispatch('notification/addNotification', op.file.notification, {root:true});
         }
         if (op.picture && op.picture.notification) {
           dispatch('notification/addNotification', op.picture.notification,{root:true});
         } else if (op.picture && op.pictureRequirement === 'required' && q.result.pictures.length === 0) {
-          const msg = {
-            en: `A Picture for the response type ${op.text[lang]} is required.`,
-            fr: `Une image pour le type de réponse ${op.text[lang]} est requis.`
-          }
+          const msg = i18n.t$('app.notifications.picture', { type: op.text[lang] } )
+
           op.picture.notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-image-plus', lang);
           dispatch('notification/addNotification', op.picture.notification, {root:true});
         }
@@ -220,11 +214,9 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
    if (q.isVisible) {
     if (isValidationRequired(q)) {
       if (!q.validationState || (q.result && !q.result.responses[0].value)) {
-        const msg = {
-          en: "A valid response for the question is required.",
-          fr: "Une réponse valide à la question est requise."
-        }
-         const notification = buildNotificationObject(q, msg[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+
+          const msg = i18n.t('app.notifications.question')
+         const notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-draw', lang);
         dispatch("notification/addNotification", notification, { root: true });
       } else {
         //If there are responseOptions
@@ -244,18 +236,18 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
   }
 }
 
-function buildNotificationObject (q, text, groupIndex, queIndex, depth, icon = 'mdi-message-alert', lang = 'en', color = 'error', timeout = 5000) {
+function buildNotificationObject (q, text, groupIndex, queIndex, depth, icon = 'mdi-message-alert') {
   const notice = { 
     guid: uuidv4(),
-    header: `Question: ${q.text[lang]}`, 
-    text: text, 
+    header: i18n.t('app.notifications.header', { text: q.text['en'] }),        
+    text: text, // error
     icon: icon, 
-    color: color,
+    color: 'error',
     groupIndex: groupIndex,
     questionId: queIndex,
     qguid: q.guid,
     depth: depth,
-    timeout: timeout
+    timeout: 5000
   };
   return notice;
 }
