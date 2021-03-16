@@ -292,14 +292,6 @@
                                   </v-col>
                                 </v-row>
                               </v-list-item-title>
-                              <v-list-item-action>
-                                <v-icon
-                                  v-if="errorInComment"
-                                  color="red"
-                                >
-                                  mdi-exclamation
-                                </v-icon>
-                              </v-list-item-action>
                             </template>
                             <v-list-item>
                               <v-list-item-content>
