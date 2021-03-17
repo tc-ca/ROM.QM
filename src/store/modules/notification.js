@@ -170,10 +170,10 @@ function SetQuestionNotificationsToList(q, dispatch, lang)
   }
 }
 
-function buildNotificationObject (q, text, icon = 'mdi-message-alert') {
+function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang) {
   const notice = { 
     guid: uuidv4(),
-    header: i18n.t('app.notifications.header', { text: q.text['en'] }),        
+    header: i18n.t('app.notifications.header', { text: q.text[lang] }),        
     text: text, // error of msg
     icon: icon, 
     color: 'error',
