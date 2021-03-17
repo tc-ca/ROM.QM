@@ -98,6 +98,7 @@ function validateResponseOptions(q, lang) {
 }
 
 function validateMinValue( q, vr) {
+
   if ((vr.type === 'min') && (isNaN(q.result.responses[0].value) || !vr.value || (+q.result.responses[0].value < +vr.value))) return false;
   return true;
 }
@@ -123,13 +124,16 @@ function evaluateValidationRules(q, lang) {
   if( q.validationRules) {
     q.validationRules.forEach( vr => {
       if (vr.enabled) {
-        if (q.result && !q.result.responses[0].value) {
-          errorNotifications.push(buildNotificationObject(q, vr.errorMessage[lang], 'mdi-message-draw', lang))
-        } else {
-          if (!validateMinValue(q,vr) || !validateMinLength(q,vr) || !validateMaxValue(q,vr) || !validateMaxLength(q,vr)) {
+       
+        // dont validate until you have a response to validate against
+        if(q.result)
+        {
+            if ( !validateMinValue(q,vr) || !validateMinLength(q,vr) || !validateMaxValue(q,vr) || !validateMaxLength(q,vr)) {
             errorNotifications.push(buildNotificationObject(q, vr.errorMessage[lang], 'mdi-message-draw', lang))
           }
         }
+        
+        
       }
     });
   }
