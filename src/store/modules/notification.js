@@ -97,43 +97,54 @@ function validateResponseOptions(q, lang) {
   return errorNotifications  
 }
 
-function validateMinValue( q, vr) {
+function validateRule( q, vr) {
 
-  if ((vr.type === 'min') && (isNaN(q.result.responses[0].value) || !vr.value || (+q.result.responses[0].value < +vr.value))) return false;
-  return true;
-}
+  switch (vr.type) {
+    case "min":
+      return (
+        !q.result.responses.some(response => isNaN(response.value)) &&
+        !q.result.responses.some(response => +response.value < +vr.value)
+      );
+    case "minLength":
+      return (
+        !q.result.responses.some(response => isNaN(response.value)) &&
+        !q.result.responses.some(response => String(response.value).length < +vr.value)
+      );
+    case "max":
+      return (
+        !q.result.responses.some(response => isNaN(response.value)) &&
+        !q.result.responses.some(response => +response.value > +vr.value)
+      );
+    case "maxLength":
+      return (
+        !q.result.responses.some(response => isNaN(response.value)) &&
+        !q.result.responses.some(response => String(response.value).length +vr.value)
+      );
 
-function validateMinLength(q, vr) {
-  if ((vr.type === 'minLength') && (!vr.value || (String(q.result.responses[0].value).length < +vr.value))) return false;
-  return true;
-}
+    default:
+      console.log('error: rule type does not match')
+      return false
+  }
 
-function validateMaxValue(q, vr) {
-  if ( (vr.type === 'max') && (isNaN(q.result.responses[0].value) || !vr.value || (+q.result.responses[0].value > +vr.value))) return false;
-  return true;
-}
-
-function validateMaxLength(q, vr) {
-  if ((vr.type === 'maxLength') && (!vr.value || (String(q.result.responses[0].value).length > +vr.value))) return false;
-  return true;
 }
 
 function evaluateValidationRules(q, lang) {
   let errorNotifications = [];
 
-  if( q.validationRules) {
-    q.validationRules.forEach( vr => {
+  if (q.validationRules) {
+    q.validationRules.forEach(vr => {
       if (vr.enabled) {
-       
         // dont validate until you have a response to validate against
-        if(q.result)
-        {
-            if ( !validateMinValue(q,vr) || !validateMinLength(q,vr) || !validateMaxValue(q,vr) || !validateMaxLength(q,vr)) {
-            errorNotifications.push(buildNotificationObject(q, vr.errorMessage[lang], 'mdi-message-draw', lang))
+        if (q.result) {
+          // make sure the validation value exist to validate against
+          if (vr.value) {
+            if (validateRule(q, vr)) {
+              errorNotifications.push(buildNotificationObject(q,vr.errorMessage[lang],"mdi-message-draw",lang));
+            }
+          } else {
+            console.log("error: validation rule value is null");
           }
         }
-        
-        
       }
     });
   }
