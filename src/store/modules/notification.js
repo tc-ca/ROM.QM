@@ -21,31 +21,26 @@ export const actions = {
     commit('SET_NOTIFICATIONS', notification)
   },
   
-  //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
+  clearNotifications ({commit}) {
+    commit("CLEAR_NOTIFICATIONS");
+  },
+
+    //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
   validateQuestions ({ dispatch, rootState }) {
 
     //clear up any previous errors/notifications
     dispatch("clearNotifications", { root: true });
 
-    let grpIndex = 0;
     const questionnaire = rootState.questionnaire.questionnaire;
     const lang = rootState.settings.settings.lang;
 
     questionnaire.groups.forEach(group => {
-      let qIndex = 0;
       group.questions.forEach(question => {
-        SetQuestionNotificationsToList(question,grpIndex,qIndex,0,dispatch,lang);
-        qIndex++;
+        SetQuestionNotificationsToList(question, dispatch, lang);
       });
-      grpIndex++;
     });
 
   },
-
-
-  clearNotifications ({commit}) {
-    commit("CLEAR_NOTIFICATIONS");
-  }
 }
 
 export const mutations = {
@@ -68,7 +63,7 @@ function isValidationRequired(q)
   return result > -1;
 }
 
-function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang) {
+function validateResponseOptions(q, dispatch, lang) {
   if(q.responseOptions) {
     for( let x = 0; x < q.responseOptions.length; x++) {
       const op = q.responseOptions[x];
@@ -76,14 +71,14 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
         if (op.internalCommentRequirement === 'required' &&  isEmptyValues(q.result.internalComment)) {
  
           const errorMsg = i18n.t('app.notifications.internalComment', { type: op.text[lang] } )
-           const notification = buildNotificationObject(q, errorMsg, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
+           const notification = buildNotificationObject(q, errorMsg, 'mdi-message-alert', lang);
           dispatch('notification/addErrorNotification', notification,{root:true});
         }
         if (op.externalCommentRequirement === 'required'  && isEmptyValues(q.result.externalComment)) {
 
           const errorMsg = i18n.t('app.notifications.externalComment', { type: op.text[lang] } )
 
-          const notification = buildNotificationObject(q, errorMsg, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
+          const notification = buildNotificationObject(q, errorMsg, 'mdi-message-alert', lang);
           dispatch("notification/addErrorNotification", notification, {
             root: true
           });
@@ -92,7 +87,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
 
           const errorMsg = i18n.t('app.notifications.file', { type: op.text[lang] } )
 
-          const notification  = buildNotificationObject(q, errorMsg, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
+          const notification  = buildNotificationObject(q, errorMsg, 'mdi-image-plus', lang);
           dispatch("notification/addErrorNotification", notification, {
             root: true
           });
@@ -100,7 +95,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
         if (op.pictureRequirement === 'required' && isEmptyValues(q.result.pictures)) {
           const errorMsg = i18n.t('app.notifications.picture', { type: op.text[lang] } )
 
-          const notification = buildNotificationObject(q, errorMsg[lang], groupIndex, queIndex, depth, 'mdi-image-plus', lang);
+          const notification = buildNotificationObject(q, errorMsg[lang], 'mdi-image-plus', lang);
           dispatch("notification/addErrorNotification", notification, {
             root: true
           });
@@ -130,16 +125,16 @@ function validateMaxLength(q, vr) {
   return true;
 }
 
-function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang) {
+function evaluateValidationRules(q, dispatch, lang) {
   if( q.validationRules) {
     q.validationRules.forEach( vr => {
       if (vr.enabled) {
         if (q.result && !q.result.responses[0].value) {
-          const notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+          const notification = buildNotificationObject(q, vr.errorMessage[lang], 'mdi-message-draw', lang);
           dispatch("notification/addErrorNotification", notification, { root: true });
         } else {
           if (!validateMinValue(q,vr) || !validateMinLength(q,vr) || !validateMaxValue(q,vr) || !validateMaxLength(q,vr)) {
-            const notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+            const notification = buildNotificationObject(q, vr.errorMessage[lang], 'mdi-message-draw', lang);
             dispatch("notification/addErrorNotification", notification, { root: true });
           }
         }
@@ -150,43 +145,39 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
   return false;
 }
 
-function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch, lang)
+function SetQuestionNotificationsToList(q, dispatch, lang)
 {
    if (q.isVisible) {
     if (isValidationRequired(q)) {
         const msg = i18n.t('app.notifications.question')
-        const notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-draw', lang);
+        const notification = buildNotificationObject(q, msg, 'mdi-message-draw', lang);
  
         //validate question
         dispatch("notification/addErrorNotification", notification, { root: true });
         //validate supplementary info
-        validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang);
+        validateResponseOptions(q, dispatch, lang);
         //validate rules
-        evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang);
+        evaluateValidationRules(q, dispatch, lang);
         
       }
     
         //validate children questions 
     if(q.childQuestions && q.childQuestions.length > 0) {
       q.childQuestions.forEach(child => {
-        SetQuestionNotificationsToList(child, groupIndex, queIndex, ++depth, dispatch, lang);
+        SetQuestionNotificationsToList(child, dispatch, lang);
       });
     }
   }
 }
 
-function buildNotificationObject (q, text, groupIndex, queIndex, depth, icon = 'mdi-message-alert') {
+function buildNotificationObject (q, text, icon = 'mdi-message-alert') {
   const notice = { 
     guid: uuidv4(),
     header: i18n.t('app.notifications.header', { text: q.text['en'] }),        
     text: text, // error of msg
     icon: icon, 
     color: 'error',
-    groupIndex: groupIndex,
-    questionId: queIndex,
     qguid: q.guid,
-    depth: depth,
-    timeout: 5000
   };
   return notice;
 }
