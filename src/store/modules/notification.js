@@ -154,19 +154,20 @@ function getQuestionErrorNotifications(q, lang)
    if (q.isVisible) {
     if (isValidationRequired(q)) {
         let errorNotifications = []
-        
-        const errorMsg = i18n.t("app.notifications.question");
-        errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-draw', lang))
- 
-        //get notification errors for  supplementary info
-        errorNotifications = errorNotifications.concat(validateResponseOptions(q, lang))
-        //get notification errors for validation rules
-        errorNotifications = errorNotifications.concat(evaluateValidationRules(q, lang));
+        if(q.result == null || q.result.responses == null || q.result.responses.length == 0) {
+          const errorMsg = i18n.t("app.notifications.question")
+          errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-draw', lang))
+        } else {
+          //get notification errors for  supplementary info
+          errorNotifications = errorNotifications.concat(validateResponseOptions(q, lang))
+          //get notification errors for validation rules
+          errorNotifications = errorNotifications.concat(evaluateValidationRules(q, lang));
+        }
+
         return errorNotifications
-        
       }
     
-        //validate children questions 
+    //validate children questions 
     if(q.childQuestions && q.childQuestions.length > 0) {
       q.childQuestions.forEach(child => {
         getQuestionErrorNotifications(child, lang);
