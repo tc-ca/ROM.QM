@@ -49,7 +49,7 @@ export const mutations = {
     state.notifications.push(notification)
   },
   
-  //expects aan array of notifications
+  //expects an array of notifications
   SET_NOTIFICATIONS (state, notifications) {
     state.notifications = notifications
   },
@@ -97,7 +97,7 @@ function validateResponseOptions(q, lang) {
   return errorNotifications  
 }
 
-function validateRule( q, vr) {
+function isValidRule( q, vr) {
 
   switch (vr.type) {
     case "min":
@@ -105,25 +105,23 @@ function validateRule( q, vr) {
         !q.result.responses.some(response => isNaN(response.value)) &&
         !q.result.responses.some(response => +response.value < +vr.value)
       );
-    case "minLength":
-      return (
-        !q.result.responses.some(response => isNaN(response.value)) &&
-        !q.result.responses.some(response => String(response.value).length < +vr.value)
-      );
     case "max":
       return (
         !q.result.responses.some(response => isNaN(response.value)) &&
         !q.result.responses.some(response => +response.value > +vr.value)
       );
+    case "minLength":
+      return !q.result.responses.some(
+        response => String(response.value).length < +vr.value
+      );
     case "maxLength":
-      return (
-        !q.result.responses.some(response => isNaN(response.value)) &&
-        !q.result.responses.some(response => String(response.value).length +vr.value)
+      return !q.result.responses.some(
+        response => String(response.value).length > +vr.value
       );
 
     default:
-      console.log('error: rule type does not match')
-      return false
+      console.log("error: rule type does not match");
+      return false;
   }
 
 }
@@ -138,7 +136,7 @@ function evaluateValidationRules(q, lang) {
         if (q.result) {
           // make sure the validation value exist to validate against
           if (vr.value) {
-            if (validateRule(q, vr)) {
+            if (!isValidRule(q, vr)) {
               errorNotifications.push(buildNotificationObject(q,vr.errorMessage[lang],"mdi-message-draw",lang));
             }
           } else {
