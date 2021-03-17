@@ -53,7 +53,7 @@
             <!-- eslint-disable vue/no-v-html -->
             <v-list-item-title
               class="actionLink"
-              @click="$emit('notification:click', notification)"
+              @click="$emit('notification:click', notification.qguid)"
               v-html="notification.header"
             />
             <v-list-item-subtitle v-html="notification.text" />

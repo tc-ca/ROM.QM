@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import * as group from '@/store/modules/group.js'
 import * as notification from '@/store/modules/notification.js'
 import * as imagefile from '@/store/modules/imagefile.js'
-import * as errors from '@/store/modules/errors.js'
 import * as objectstate from '@/store/modules/objectstate.js'
 import * as settings from '@/store/modules/settings.js'
 import * as questionnaire from '@/store/modules/questionnaire.js'
@@ -23,7 +22,6 @@ export default new Vuex.Store({
     group,
     notification,
     imagefile,
-    errors,
     objectstate,
     settings,
     questionnaire,

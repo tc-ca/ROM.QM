@@ -8,7 +8,8 @@ export const state = {
   provisionFilter: null,
   originalTagFilter: [],
   tagFilter: [],
-  modifiedInBuilder: false
+  modifiedInBuilder: false,
+  activeSelectedQuestionId: null
 };
 
 export const getters = {
@@ -311,7 +312,10 @@ export const actions = {
       },
     });
 
-  }
+  },
+    updateActiveQuestionSelection({ commit }, payload) {
+    commit("UPDATE_ACTIVE_QUESTION_SELECTION", payload);
+  },
 };
 
 export const mutations = {
@@ -420,7 +424,10 @@ export const mutations = {
     } else {
         state.originalTagFilter.push(tag);
     }
-  }
+  },
+    UPDATE_ACTIVE_QUESTION_SELECTION (state, payload) {
+        state.activeSelectedQuestionId = payload;
+    }
 };
 
 function GetChildrenQuestion(question) {

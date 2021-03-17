@@ -491,6 +491,9 @@ export default {
       },
       provisionFilter: state => {
         return state.questionnaire.provisionFilter
+      },
+      activeSelectedQuestionId: state => {
+        return state.questionnaire.activeSelectedQuestionId
       }
     }),
     questionText () {
@@ -521,7 +524,7 @@ export default {
       return this.provisions.length > 0
     },
     getClassName () {
-      let selClass = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
+      let selClass = this.activeSelectedQuestionId === this.question.guid ? 'selected' : ''
       if (selClass === 'selected' && this.$refs.qPanel) this.$refs.qPanel.$el.scrollIntoView(true)
       return selClass
     },
@@ -529,7 +532,7 @@ export default {
       return this.selProvisions.length > 0 ? 'caption' : 'subtitle-1'
     },
     isPanelActive () {
-      return this.$store.state.errors.errorNotification.qid === this.question.guid
+      return this.activeSelectedQuestionId === this.question.guid
     },
     expansionPanelsValue: {
       get () {
