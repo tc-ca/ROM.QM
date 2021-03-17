@@ -117,7 +117,7 @@ export default {
   computed: {
     ...mapState({
       notifications: state => {
-        return state.notification.notifications
+        return state.error.notifications
       }
 
     }),

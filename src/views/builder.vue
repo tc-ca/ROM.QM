@@ -803,9 +803,6 @@ export default {
     this.$store.dispatch('InitializeSearchableProvisionRef')
     this.isDirty()
   },
-  beforeDestroy () {
-    this.$store.dispatch('notification/clearNotifications')
-  },
   methods: {
     isDirty () {
       this.$root.$children[0].isFormDirty = _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
@@ -856,11 +853,11 @@ export default {
             }
           } else {
             // Alert and return back to the text type, the closest type to Reference Question
-            this.$store.dispatch('notification/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
+            this.$store.dispatch('toast/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
             this.selectedQuestion.type = QUESTION_TYPE.TEXT
           }
         } else {
-          this.$store.dispatch('notification/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
+          this.$store.dispatch('toast/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
           this.selectedQuestion.type = QUESTION_TYPE.TEXT
         }
       }

@@ -164,7 +164,6 @@ export default {
     this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
   },
   beforeDestroy () {
-    // this.$store.dispatch('notification/clearNotifications')
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
@@ -196,12 +195,8 @@ export default {
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       }
-      this.$store.dispatch('notification/validateQuestions')
+      this.$store.dispatch('error/validateQuestions')
     },
-    // expandPanels (expand) {
-    //   this.panelIndex = null
-    //   this.expand = expand
-    // },
     onUpdateGroupCount () {
       if (this.$refs.questionGroup) {
         this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length

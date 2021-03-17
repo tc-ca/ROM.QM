@@ -13,14 +13,6 @@ export const getters = {
 
 
 export const actions = {
-  show ({ commit }, notification) {
-    commit('SET_NOTIFICATION', notification)
-  },
- 
-  clearNotifications ({commit}) {
-    commit("CLEAR_NOTIFICATIONS");
-  },
-
     //possible future refactor work, be able to pass dependencies i.e. questions which would allow you to validate specific sets of questions if wanted. 
   validateQuestions ({ commit, rootState }) {
 
