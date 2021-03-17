@@ -154,14 +154,18 @@ function getQuestionErrorNotifications(q, lang)
    if (q.isVisible) {
     if (isValidationRequired(q)) {
         let errorNotifications = []
-        if(q.result == null || q.result.responses == null || q.result.responses.length == 0) {
+        //if question has no response, add a "required" error notification
+        if(isEmptyValues(q.result) || isEmptyValues(q.result.responses)) {
           const errorMsg = i18n.t("app.notifications.question")
           errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-draw', lang))
         } else {
-          //get notification errors for  supplementary info
-          errorNotifications = errorNotifications.concat(validateResponseOptions(q, lang))
+          //else question has a response.
+          
           //get notification errors for validation rules
           errorNotifications = errorNotifications.concat(evaluateValidationRules(q, lang));
+          //get notification errors for  supplementary info
+          errorNotifications = errorNotifications.concat(validateResponseOptions(q, lang))
+       
         }
 
         return errorNotifications
