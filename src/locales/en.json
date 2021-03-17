@@ -196,8 +196,8 @@
       "isRequired": " is required.",
       "internalComment": "Internal Comment for the response type {type} is required",
       "externalComment": "External Comment for the response type {type} is required ",
-      "file": "A File for the response type ",
-      "picture": "A Picture for the response type",
+      "file": "A File for the response type {type} ",
+      "picture": "A Picture for the response type {type}",
       "header": "Question: {text}"
     }
   }

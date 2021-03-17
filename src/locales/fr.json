@@ -193,9 +193,9 @@
       "question": "Une réponse valide à la question est requise.",
       "isRequired": " est requis.",
       "internalComment": "Commentaire interne pour le type de réponse {type} est requis",
-      "externalComment": "Commentaire externe pour le type de réponse {type}  est requis ",
-      "file": "Un fichier pour le type de réponse ",
-      "picture": "Une image pour le type de réponse ",
+      "externalComment": "Commentaire externe pour le type de réponse {type} est requis ",
+      "file": "Un fichier pour le type de réponse {type}",
+      "picture": "Une image pour le type de réponse {type}",
       "header": "Question: {text}"
 
     }
