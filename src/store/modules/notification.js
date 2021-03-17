@@ -9,20 +9,15 @@ export const state = {
 }
 
 export const getters = {
-  hasNotifications(state) {
-    return (state.notifications && state.notifications.length > 0);
-  }
 }
 
 
 export const actions = {
   show ({ commit }, notification) {
-    if (!notification.guid) notification.guid = uuidv4();
     commit('SET_NOTIFICATIONS', notification)
   },
 
-  addNotification ({ commit }, notification) {
-    if (!notification.guid) notification.guid = uuidv4();
+  addErrorNotification ({ commit }, notification) {
     commit('SET_NOTIFICATIONS', notification)
   },
   
@@ -39,7 +34,6 @@ export const actions = {
     questionnaire.groups.forEach(group => {
       let qIndex = 0;
       group.questions.forEach(question => {
-        console.log(question.text["en"]);
         SetQuestionNotificationsToList(question,grpIndex,qIndex,0,dispatch,lang);
         qIndex++;
       });
@@ -48,9 +42,6 @@ export const actions = {
 
   },
 
-  showNotifications ({commit}) {
-    commit("SET_NOTIFICATIONS_VISIBLE");
-  },
 
   clearNotifications ({commit}) {
     commit("CLEAR_NOTIFICATIONS");
@@ -62,11 +53,7 @@ export const mutations = {
   SET_NOTIFICATIONS (state, notification) {
     state.notifications.push(notification)
   },
-  SET_NOTIFICATIONS_VISIBLE  (state) {
-    if (state.notifications.length > 0) {
-      state.notifications.forEach( n => n.showing = true )
-    }
-  },
+
   CLEAR_NOTIFICATIONS (state) {
     state.notifications = []
   }
@@ -90,14 +77,14 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
  
           const errorMsg = i18n.t('app.notifications.internalComment', { type: op.text[lang] } )
            const notification = buildNotificationObject(q, errorMsg, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
-          dispatch('notification/addNotification', notification,{root:true});
+          dispatch('notification/addErrorNotification', notification,{root:true});
         }
         if (op.externalCommentRequirement === 'required'  && isEmptyValues(q.result.externalComment)) {
 
           const errorMsg = i18n.t('app.notifications.externalComment', { type: op.text[lang] } )
 
           const notification = buildNotificationObject(q, errorMsg, groupIndex, queIndex, depth, 'mdi-message-alert', lang);
-          dispatch("notification/addNotification", notification, {
+          dispatch("notification/addErrorNotification", notification, {
             root: true
           });
         }
@@ -106,7 +93,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
           const errorMsg = i18n.t('app.notifications.file', { type: op.text[lang] } )
 
           const notification  = buildNotificationObject(q, errorMsg, groupIndex, queIndex, depth, 'mdi-image-plus', lang);
-          dispatch("notification/addNotification", notification, {
+          dispatch("notification/addErrorNotification", notification, {
             root: true
           });
         }
@@ -114,7 +101,7 @@ function validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang)
           const errorMsg = i18n.t('app.notifications.picture', { type: op.text[lang] } )
 
           const notification = buildNotificationObject(q, errorMsg[lang], groupIndex, queIndex, depth, 'mdi-image-plus', lang);
-          dispatch("notification/addNotification", notification, {
+          dispatch("notification/addErrorNotification", notification, {
             root: true
           });
         }
@@ -149,11 +136,11 @@ function evaluateValidationRules(q, groupIndex, queIndex, depth, dispatch, lang)
       if (vr.enabled) {
         if (q.result && !q.result.responses[0].value) {
           const notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
-          dispatch("notification/addNotification", notification, { root: true });
+          dispatch("notification/addErrorNotification", notification, { root: true });
         } else {
           if (!validateMinValue(q,vr) || !validateMinLength(q,vr) || !validateMaxValue(q,vr) || !validateMaxLength(q,vr)) {
             const notification = buildNotificationObject(q, vr.errorMessage[lang], groupIndex, queIndex, depth, 'mdi-message-draw', lang);
-            dispatch("notification/addNotification", notification, { root: true });
+            dispatch("notification/addErrorNotification", notification, { root: true });
           }
         }
       }
@@ -171,7 +158,7 @@ function SetQuestionNotificationsToList(q, groupIndex, queIndex, depth, dispatch
         const notification = buildNotificationObject(q, msg, groupIndex, queIndex, depth, 'mdi-message-draw', lang);
  
         //validate question
-        dispatch("notification/addNotification", notification, { root: true });
+        dispatch("notification/addErrorNotification", notification, { root: true });
         //validate supplementary info
         validateResponseOptions(q, groupIndex, queIndex, depth, dispatch, lang);
         //validate rules
@@ -192,7 +179,7 @@ function buildNotificationObject (q, text, groupIndex, queIndex, depth, icon = '
   const notice = { 
     guid: uuidv4(),
     header: i18n.t('app.notifications.header', { text: q.text['en'] }),        
-    text: text, // error
+    text: text, // error of msg
     icon: icon, 
     color: 'error',
     groupIndex: groupIndex,
