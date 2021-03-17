@@ -247,13 +247,13 @@ export default {
         }
       }
     )
-    this.$watch(
-      '$refs.validationInput.validations',
-      (newValue) => {
-        let error = this.displayFile && this.isFileRequired && !this.file.length > 0
-        this.onError(error)
-      }
-    )
+    // this.$watch(
+    //   '$refs.validationInput.validations',
+    //   (newValue) => {
+    //     let error = this.displayFile && this.isFileRequired && !this.file.length > 0
+    //     this.onError(error)
+    //   }
+    // )
   },
   methods: {
     onFileChange (e) {
