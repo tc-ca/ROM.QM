@@ -423,13 +423,13 @@ export default {
         }
       }
     )
-    this.$watch(
-      '$refs.validationInput.validations',
-      (newValue) => {
-        let error = this.displayPicture && this.isPictureRequired && !this.picture.length > 0
-        this.onError(error)
-      }
-    )
+    // this.$watch(
+    //   '$refs.validationInput.validations',
+    //   (newValue) => {
+    //     let error = this.displayPicture && this.isPictureRequired && !this.picture.length > 0
+    //     this.onError(error)
+    //   }
+    // )
     this.onNextPageMove(1)
   },
   methods: {

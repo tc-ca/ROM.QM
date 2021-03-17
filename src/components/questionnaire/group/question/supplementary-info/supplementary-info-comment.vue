@@ -168,22 +168,22 @@ export default {
         return state.settings.settings.lang
       }
     })
-  },
-  watch: {
-    'comment.display' (newValue) {
-      if (!newValue) {
-        this.onError(false)
-      }
-    }
-  },
-  mounted () {
-    this.$watch(
-      '$refs.textArea.validations',
-      (newValue) => {
-        this.onError(this.errorInComment)
-      }
-    )
-  }
+  }//,
+  // watch: {
+  //   'comment.display' (newValue) {
+  //     if (!newValue) {
+  //       this.onError(false)
+  //     }
+  //   }
+  // },
+  // mounted () {
+  //   this.$watch(
+  //     '$refs.textArea.validations',
+  //     (newValue) => {
+  //       this.onError(this.errorInComment)
+  //     }
+  //   )
+  // }
 }
 </script>
 
