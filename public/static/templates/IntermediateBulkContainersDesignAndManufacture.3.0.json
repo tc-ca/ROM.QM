@@ -1,0 +1,1219 @@
+{
+  "guid": "4a26e147-7a60-470a-bbe9-f14fc25bb211",
+  "name": "4a26e147-7a60-470a-bbe9-f14fc25bb211",
+  "readOnly": false,
+  "title": {
+      "en": "Questionnaire Title EN",
+      "fr": "Questionnaire Title EN"
+  },
+  "groups": [
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "03082c1d-b3ea-48f8-9b64-cecaf4a5320c",
+          "name": "03082c1d-b3ea-48f8-9b64-cecaf4a5320c",
+          "sortOrder": 1,
+          "title": {
+              "en": "1.0 COMPANY DETAILS",
+              "fr": "1.0 DÉTAILS DE LA COMPAGNIE"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "2a52bb18-ff63-42e6-be03-84afe116deb7",
+                  "name": "2a52bb18-ff63-42e6-be03-84afe116deb7",
+                  "sortOrder": 1,
+                  "text": {
+                      "en": "1.01 Type of Inspection",
+                      "fr": "1.01 Type d'inspection"
+                  },
+                  "type": "select",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "ec10fb09-c63e-4286-8739-068538c333c6",
+                          "name": "ec10fb09-c63e-4286-8739-068538c333c6",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Initial",
+                              "fr": "Initiale"
+                          },
+                          "value": "1",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "cd79de87-f1e2-4939-86b0-bca5bd357819",
+                          "name": "cd79de87-f1e2-4939-86b0-bca5bd357819",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "Verification",
+                              "fr": "Vérification"
+                          },
+                          "value": "2",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "7ed2fec8-9fd4-43df-afab-1937725c2729",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "91ad851b-18b9-421f-a5a8-e3ba1b5dc57a"
+                      },
+                      {
+                          "guid": "379230fa-1830-4ef5-9f00-a9e68c60efc0"
+                      },
+                      {
+                          "guid": "bc949298-dc79-49a3-ab67-bea5613bad34"
+                      },
+                      {
+                          "guid": "730e2609-d56f-4a3d-9020-132fb394d2c6"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "bc949298-dc79-49a3-ab67-bea5613bad34",
+                          "name": "bc949298-dc79-49a3-ab67-bea5613bad34",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "1.01a If initial inspection, physical address matches address on application for registration?",
+                              "fr": "1.01a S'il s'agit d'une inspection initiale, l'adresse physique correspond à la demande d'inscription?"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "1addcb6a-5dfa-4a60-9d99-cd04b1b98540",
+                                  "name": "1addcb6a-5dfa-4a60-9d99-cd04b1b98540",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "8f95cf26-6d0a-429a-9a7d-7e06c11fbed9",
+                                  "name": "8f95cf26-6d0a-429a-9a7d-7e06c11fbed9",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "458fe9c4-a572-482c-a1f7-cb159e39fed2",
+                                  "name": "458fe9c4-a572-482c-a1f7-cb159e39fed2",
+                                  "sortOrder": 3,
+                                  "text": {
+                                      "en": "Not inspected ",
+                                      "fr": "Non inspecté "
+                                  },
+                                  "value": "3",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "5bb71e25-e210-43bb-b471-c9e3cf119f72",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "b40c80f0-227a-454a-839b-6ee229030f09",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "157d923f-5962-4e0c-9f65-a3a8e81a52cf",
+                                          "dependsOnQuestion": {
+                                              "guid": "2a52bb18-ff63-42e6-be03-84afe116deb7"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "1"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "730e2609-d56f-4a3d-9020-132fb394d2c6",
+                          "name": "730e2609-d56f-4a3d-9020-132fb394d2c6",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "1.01b If verification inspection, physical address matches address on Certificate of Registration?",
+                              "fr": "1.01b S'il s'agit d'une inspection de vérification, l'adresse physique correspond au Certificat d'inscription?"
+                          },
+                          "type": "radio",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [
+                              {
+                                  "guid": "d33eedd6-f5ca-4d3c-9e2e-112a8d4f497c",
+                                  "name": "d33eedd6-f5ca-4d3c-9e2e-112a8d4f497c",
+                                  "sortOrder": 1,
+                                  "text": {
+                                      "en": "Yes",
+                                      "fr": "Oui"
+                                  },
+                                  "value": "true",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "34984a14-286a-4412-aca3-dc444b017ed5",
+                                  "name": "34984a14-286a-4412-aca3-dc444b017ed5",
+                                  "sortOrder": 2,
+                                  "text": {
+                                      "en": "No",
+                                      "fr": "Non"
+                                  },
+                                  "value": "false",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "required",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              },
+                              {
+                                  "guid": "8b10e68e-b633-4f44-916d-aa4c5f911f1b",
+                                  "name": "8b10e68e-b633-4f44-916d-aa4c5f911f1b",
+                                  "sortOrder": 3,
+                                  "text": {
+                                      "en": "Not inspected ",
+                                      "fr": "Non inspecté "
+                                  },
+                                  "value": "3",
+                                  "internalCommentRequirement": "optional",
+                                  "externalCommentRequirement": "optional",
+                                  "pictureRequirement": "optional",
+                                  "fileRequirement": "optional",
+                                  "provisions": [],
+                                  "searchProvisions": null,
+                                  "isProvisionCollapsed": false
+                              }
+                          ],
+                          "validationRules": [
+                              {
+                                  "guid": "5e938217-97a1-4501-a104-254fd19d2817",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "4571fe5a-99b2-4f3b-90c2-8fd9d72547ca",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "76c9df4d-4f6a-4e74-aea8-3fbe897286d9",
+                                          "dependsOnQuestion": {
+                                              "guid": "2a52bb18-ff63-42e6-be03-84afe116deb7"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "2"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "6b6cda38-a8a5-4a00-8483-6477389e4111",
+                  "name": "6b6cda38-a8a5-4a00-8483-6477389e4111",
+                  "sortOrder": 4,
+                  "text": {
+                      "en": "1.02 Equivalency Certificate Number(s) (if applicable)",
+                      "fr": "1.02 Numéro(s) de certificat d'équivalence (si applicable)"
+                  },
+                  "type": "text",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "c110827c-15e9-4e9a-be53-d5f8797ac604",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "324dd9b0-2789-4fb1-b1d1-2d9ce0cc5ab9",
+          "name": "324dd9b0-2789-4fb1-b1d1-2d9ce0cc5ab9",
+          "sortOrder": 2,
+          "title": {
+              "en": "2.0 CERTIFICATE(S) OF REGISTRATION ",
+              "fr": "2.0 CERTIFICAT(S) D'INSCRIPTION"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "79a2f09f-18d6-4dc2-9493-688d462f43cb",
+                  "name": "79a2f09f-18d6-4dc2-9493-688d462f43cb",
+                  "sortOrder": 5,
+                  "text": {
+                      "en": "2.01 The Certificate of Registration is valid and available upon request.",
+                      "fr": "2.01 Le certificat d'inscription est valide et peut être fourni sur demande."
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "5a29106f-72fd-4934-b4ab-af2f8de70593",
+                          "name": "5a29106f-72fd-4934-b4ab-af2f8de70593",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "42df21a9-9569-464e-a2ab-e0223c5dc823",
+                          "name": "42df21a9-9569-464e-a2ab-e0223c5dc823",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "945f4eae-f426-4bfb-a773-b010cc91e5d3",
+                          "name": "945f4eae-f426-4bfb-a773-b010cc91e5d3",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "d481e73c-5834-4112-9eff-a7b2019b9527",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "fa4551a2-b8a7-4901-a55c-e605141bfaf1"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "eba6db28-9707-450b-bab1-3d634642e53b",
+                          "name": "eba6db28-9707-450b-bab1-3d634642e53b",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "2.01a Certificate number ",
+                              "fr": "2.01a Numéro du Certificat"
+                          },
+                          "type": "text",
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": true,
+                          "validationState": true,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "guid": "c0e9d703-cbca-4117-8488-4218f6dea758",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "d0f82bc7-db9a-450a-bce5-5dcf27cb91fd",
+          "name": "d0f82bc7-db9a-450a-bce5-5dcf27cb91fd",
+          "sortOrder": 3,
+          "title": {
+              "en": "3.0 OTHER DOCUMENTATION",
+              "fr": "3.0 DOCUMENTATION ADDITIONNELLE"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "892fb479-6bdf-44e0-904a-1d230e221572",
+                  "name": "892fb479-6bdf-44e0-904a-1d230e221572",
+                  "sortOrder": 8,
+                  "text": {
+                      "en": "3.01 The ISO 9001 Certificate is valid and available upon request. ",
+                      "fr": "3.01 Le certificat ISO 9001 est valide et peut être fourni sur demande."
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "fc917917-972c-4c52-8621-370b7b37ae93",
+                          "name": "fc917917-972c-4c52-8621-370b7b37ae93",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "419311f5-1fb4-461c-b4c6-edb7dbc1037b",
+                          "name": "419311f5-1fb4-461c-b4c6-edb7dbc1037b",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "a9a81fd8-b8a2-4619-a823-6a809a5e9dda",
+                          "name": "a9a81fd8-b8a2-4619-a823-6a809a5e9dda",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "9310e99b-65d2-487b-a51a-c6d28d068611",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "dd20066c-82b2-4de8-a423-b4c977e1eb07"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "dd20066c-82b2-4de8-a423-b4c977e1eb07",
+                          "name": "dd20066c-82b2-4de8-a423-b4c977e1eb07",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "3.01a ISO 9001 Certificate Number ",
+                              "fr": "3.01a Numéro de certificat ISO 9001"
+                          },
+                          "type": "text",
+                          "isRepeatable": true,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": true,
+                          "validationState": true,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "guid": "140dbf25-7715-4178-b7aa-579345f8b212",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              },
+              {
+                  "guid": "0850e6c1-400d-4fc2-ac4f-c343b789a68a",
+                  "name": "0850e6c1-400d-4fc2-ac4f-c343b789a68a",
+                  "sortOrder": 9,
+                  "text": {
+                      "en": "3.02 Current version of CGSB-43.146",
+                      "fr": "3.02 Version actuelle de la norme CGSB-43.146"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "01945918-b915-4283-bc2a-9ef5649cbc88",
+                          "name": "01945918-b915-4283-bc2a-9ef5649cbc88",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "a006793c-22f9-4b9d-803a-1e6ee0278631",
+                          "name": "a006793c-22f9-4b9d-803a-1e6ee0278631",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "0f2497d2-94f5-4506-a606-d97d2da33f90",
+                          "name": "0f2497d2-94f5-4506-a606-d97d2da33f90",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "7552a48a-4b4a-4af1-8319-52b92c7953f5",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "97c4bf43-0818-4138-8925-d7828af3f346",
+                  "name": "97c4bf43-0818-4138-8925-d7828af3f346",
+                  "sortOrder": 10,
+                  "text": {
+                      "en": "3.03 For Code 21 or 31IBCs – Instrument calibration records available?",
+                      "fr": "3.03 Pour les code GRV 21 ou 31 – Dossier d'étalonnage des instruments disponibles ?"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "fbba136c-4df5-457c-9b0a-dbf420896591",
+                          "name": "fbba136c-4df5-457c-9b0a-dbf420896591",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "dd117835-ce1c-41f7-a191-17a90d491200",
+                          "name": "dd117835-ce1c-41f7-a191-17a90d491200",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "d8daf511-1498-4230-ba4b-1e7cce8807b8",
+                          "name": "d8daf511-1498-4230-ba4b-1e7cce8807b8",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "b76bd1a2-d19f-4999-9861-8acce5fa9a88",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "30f89c52-7b09-4676-9221-3716c2c0ea62",
+                  "name": "30f89c52-7b09-4676-9221-3716c2c0ea62",
+                  "sortOrder": 11,
+                  "text": {
+                      "en": "3.04 Estimated number of UN IBCs manufactured per month or year ",
+                      "fr": "3.04 Nombre approximatif de GRV normalisés UN fabriqués par mois ou année"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": true,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "f55d7089-8d5d-40bc-a593-7deb21142ea0",
+                          "name": "f55d7089-8d5d-40bc-a593-7deb21142ea0",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Per month ",
+                              "fr": "Par mois"
+                          },
+                          "value": "1",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "8d29121a-1a7c-4a92-9874-72a471a7098e",
+                          "name": "8d29121a-1a7c-4a92-9874-72a471a7098e",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "Per year ",
+                              "fr": "Par année"
+                          },
+                          "value": "2",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "a45dfeba-b6ba-4916-b3a8-1899d8760647",
+                          "name": "a45dfeba-b6ba-4916-b3a8-1899d8760647",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "573a42ce-9653-48f2-a58f-c6abf78030d5",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [
+                      {
+                          "guid": "73857f49-5de0-40c6-8f33-b1cc314cd62f"
+                      },
+                      {
+                          "guid": "3f63f7b9-b0fd-4518-a941-ee8aa96772f1"
+                      }
+                  ],
+                  "dependencyGroups": [],
+                  "childQuestions": [
+                      {
+                          "guid": "73857f49-5de0-40c6-8f33-b1cc314cd62f",
+                          "name": "73857f49-5de0-40c6-8f33-b1cc314cd62f",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "3.04a Per month",
+                              "fr": "3.04a Par mois"
+                          },
+                          "type": "text",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "guid": "65906052-f64f-4cc8-8ec7-9d86a3b45804",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "6e5c4c8a-b292-494a-ad5b-7cbbcda7bba3",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "88437429-3e3c-459d-833d-d2139a8f2782",
+                                          "dependsOnQuestion": {
+                                              "guid": "30f89c52-7b09-4676-9221-3716c2c0ea62"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "1"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      },
+                      {
+                          "guid": "3f63f7b9-b0fd-4518-a941-ee8aa96772f1",
+                          "name": "3f63f7b9-b0fd-4518-a941-ee8aa96772f1",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "3.04b Per year ",
+                              "fr": "3.04b Par année"
+                          },
+                          "type": "text",
+                          "isRepeatable": false,
+                          "isRepeated": false,
+                          "isSamplingAllowed": false,
+                          "isVisible": false,
+                          "validationState": true,
+                          "responseOptions": [],
+                          "validationRules": [
+                              {
+                                  "guid": "38347b3a-9050-4e64-ac9e-14a8081291b6",
+                                  "enabled": true,
+                                  "errorMessage": {
+                                      "en": "Required",
+                                      "fr": "FR: Required"
+                                  },
+                                  "name": "require",
+                                  "type": "require",
+                                  "value": null
+                              }
+                          ],
+                          "dependants": [],
+                          "dependencyGroups": [
+                              {
+                                  "guid": "68cf9d87-f918-42cf-b253-e4b7b950e99e",
+                                  "ruleType": "visibility",
+                                  "childValidatorName": null,
+                                  "questionDependencies": [
+                                      {
+                                          "guid": "961bc988-3308-4288-8d66-25e00b1c1ff2",
+                                          "dependsOnQuestion": {
+                                              "guid": "30f89c52-7b09-4676-9221-3716c2c0ea62"
+                                          },
+                                          "validationAction": "equal",
+                                          "validationValue": "2"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "childQuestions": [],
+                          "result": null
+                      }
+                  ],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "80993712-82ee-46fc-ad34-296ec0caacbb",
+          "name": "80993712-82ee-46fc-ad34-296ec0caacbb",
+          "sortOrder": 4,
+          "title": {
+              "en": "4.0 COMPLIANCE MARKING",
+              "fr": "4.0 INDICATION DE CONFORMITÉ"
+          },
+          "isRepeatable": false,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "7d290d74-fb77-4f5a-b966-6225156eea35",
+                  "name": "7d290d74-fb77-4f5a-b966-6225156eea35",
+                  "sortOrder": 13,
+                  "text": {
+                      "en": "4.01 Compliance markings comply with section 5 of CGSB-43.146",
+                      "fr": "4.01 Les indications de conformités rencontrent les exigences de la section 5 de la norme CGSB-43.146"
+                  },
+                  "type": "radio",
+                  "isRepeatable": false,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "6c1071da-fa10-4b59-9017-26b3e5c738dd",
+                          "name": "6c1071da-fa10-4b59-9017-26b3e5c738dd",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "3c1d0cbb-bad9-4f9d-8eca-1c5af182c2ff",
+                          "name": "3c1d0cbb-bad9-4f9d-8eca-1c5af182c2ff",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "false",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "required",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "df70c73f-681e-4c8f-b7ea-2d1b34529de5",
+                          "name": "df70c73f-681e-4c8f-b7ea-2d1b34529de5",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "6d5ea513-2643-495e-b9e2-a3461483497f",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              },
+              {
+                  "guid": "1025317b-6337-4f41-b9ad-613f59c777ad",
+                  "name": "1025317b-6337-4f41-b9ad-613f59c777ad",
+                  "sortOrder": 14,
+                  "text": {
+                      "en": "4.02 Copy of compliance markings attached to this report (handwritten or photo)",
+                      "fr": "4.02 Copie des indications de conformité jointes au présent document (copie manuscrite ou photo)"
+                  },
+                  "type": "radio",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": false,
+                  "isVisible": false,
+                  "validationState": true,
+                  "responseOptions": [
+                      {
+                          "guid": "0587bfa1-93cb-4298-a2a2-df5ba13b4394",
+                          "name": "0587bfa1-93cb-4298-a2a2-df5ba13b4394",
+                          "sortOrder": 1,
+                          "text": {
+                              "en": "Yes",
+                              "fr": "Oui"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "6a16de21-5a3c-408d-aa54-858f8d5fdb14",
+                          "name": "6a16de21-5a3c-408d-aa54-858f8d5fdb14",
+                          "sortOrder": 2,
+                          "text": {
+                              "en": "No",
+                              "fr": "Non"
+                          },
+                          "value": "true",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      },
+                      {
+                          "guid": "f6bec1a4-4c3f-4033-ac6e-a196ab6bd7dd",
+                          "name": "f6bec1a4-4c3f-4033-ac6e-a196ab6bd7dd",
+                          "sortOrder": 3,
+                          "text": {
+                              "en": "Not inspected ",
+                              "fr": "Non inspecté "
+                          },
+                          "value": "3",
+                          "internalCommentRequirement": "optional",
+                          "externalCommentRequirement": "optional",
+                          "pictureRequirement": "optional",
+                          "fileRequirement": "optional",
+                          "provisions": [],
+                          "searchProvisions": null,
+                          "isProvisionCollapsed": false
+                      }
+                  ],
+                  "validationRules": [
+                      {
+                          "guid": "d5116a50-edd2-4358-b532-dd8625b9ce1c",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      },
+      {
+          "domId": "",
+          "domSuffix": "",
+          "guid": "a97503b1-2d17-40ef-bd1d-f625ade4b582",
+          "name": "a97503b1-2d17-40ef-bd1d-f625ade4b582",
+          "sortOrder": 5,
+          "title": {
+              "en": "5.0 ADDITIONAL NON-COMPLIANCES",
+              "fr": "5.0 AUTRES NON-CONFORMITÉS"
+          },
+          "isRepeatable": true,
+          "isVisibleByDefault": true,
+          "questions": [
+              {
+                  "guid": "bfb8483d-6f20-49e1-9b32-cbbf072817f8",
+                  "name": "bfb8483d-6f20-49e1-9b32-cbbf072817f8",
+                  "sortOrder": 19,
+                  "text": {
+                      "en": "5.01 Additional non-compliances ",
+                      "fr": "5.01 Autres non-conformités"
+                  },
+                  "type": "text",
+                  "isRepeatable": true,
+                  "isRepeated": false,
+                  "isSamplingAllowed": true,
+                  "isVisible": true,
+                  "validationState": true,
+                  "responseOptions": [],
+                  "validationRules": [
+                      {
+                          "guid": "21ca31b5-ca4d-44e6-9dba-5b93cbfd62e9",
+                          "enabled": true,
+                          "errorMessage": {
+                              "en": "Required",
+                              "fr": "FR: Required"
+                          },
+                          "name": "require",
+                          "type": "require",
+                          "value": null
+                      }
+                  ],
+                  "dependants": [],
+                  "dependencyGroups": [],
+                  "childQuestions": [],
+                  "result": null
+              }
+          ],
+          "expansionPanels": []
+      }
+  ],
+  "searchableProvisions": []
+}
