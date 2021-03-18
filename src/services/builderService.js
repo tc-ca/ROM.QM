@@ -1012,8 +1012,6 @@ function updateTemplate(template) {
           pictureRequirement: ro.picture.option,
           fileRequirement: ro.file.option,
           provisions: ro.provisions
-          // searchProvisions: null,
-          // isProvisionCollapsed: ro.isProvisionCollapsed
         };
         nQ.responseOptions.push(nRo);
       })
