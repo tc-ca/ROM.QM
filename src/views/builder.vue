@@ -295,38 +295,11 @@
                             </template>
                             <v-list-item>
                               <v-list-item-content>
-                                <v-card
-                                  class="mx-auto"
-                                >
-                                  <v-sheet class="pa-4">
-                                    <v-text-field
-                                      v-model="searchProvisions"
-                                      :label="$t('app.builder.responseOptions.provisions.search')"
-                                      outlined
-                                      hide-details
-                                      clearable
-                                      clear-icon="mdi-close-circle-outline"
-                                    />
-                                  </v-sheet>
-                                  <v-card-text>
-                                    <v-treeview
-                                      v-model="option.provisions"
-                                      selectable
-                                      item-key="id"
-                                      :item-text="displayTextLang"
-                                      selection-type="leaf"
-                                      :search="searchProvisions"
-                                      :items="provisions"
-                                      @input="updateSearchableProvisions()"
-                                    >
-                                      <template v-slot:label="{ item }">
-                                        <div class="truncated">
-                                          <div>{{ lang === eng ? item.DisplayEnglishText : item.DisplayFrenchText }}</div>
-                                        </div>
-                                      </template>
-                                    </v-treeview>
-                                  </v-card-text>
-                                </v-card>
+                                <builder-provisions-search
+                                  :option="option"
+                                  :provisions="provisions"
+                                  @update-searchable-provisions="updateSearchableProvisions()"
+                                />
                               </v-list-item-content>
                             </v-list-item>
                           </v-list-group>
@@ -644,6 +617,7 @@ import _ from 'lodash'
 import { LANGUAGE } from '../constants.js'
 import BUILDER from '../data/builderLookupTypes'
 import BuilderGroup from '../components/builder/builder-group'
+import BuilderProvisionsSearch from '../components/builder/builder-provision-search.vue'
 import BaseMixin from '../mixins/base'
 import BuilderService from '../services/builderService'
 import { mapState, mapGetters } from 'vuex'
@@ -652,7 +626,8 @@ import { QUESTION_TYPE } from '../data/questionTypes'
 export default {
   name: 'Builder',
   components: {
-    BuilderGroup
+    BuilderGroup,
+    BuilderProvisionsSearch
   },
   mixins: [BaseMixin],
   props: {
