@@ -57,7 +57,9 @@ function isValidationRequired(q)
 {
   let result = -1;
   if (q.validationRules) result = q.validationRules.findIndex( v => v.enabled);
-  return result > -1;
+  if (result > -1) return true;
+  if (q.result) return true;
+  return false;
 }
 
 function validateResponseOptions(q, lang) {

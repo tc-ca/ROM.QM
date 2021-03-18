@@ -1,6 +1,6 @@
 {
-  "guid": "4c7a1b36-e253-4e15-b79d-15c498c08527",
-  "name": "4c7a1b36-e253-4e15-b79d-15c498c08527",
+  "guid": "d2236113-9263-4088-8a5a-d796451fc5fb",
+  "name": "d2236113-9263-4088-8a5a-d796451fc5fb",
   "readOnly": false,
   "title": {
       "en": "Questionnaire Title EN",
@@ -10,15 +10,15 @@
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "b69ad99e-d6da-4b65-aee8-b013272e1f7c",
-          "name": "b69ad99e-d6da-4b65-aee8-b013272e1f7c",
+          "guid": "86759f90-ff6e-4ccc-9ca9-854445009f26",
+          "name": "86759f90-ff6e-4ccc-9ca9-854445009f26",
           "sortOrder": 1,
           "title": {
               "en": "Highway Tank - TC 406 and TC 406 Crude",
               "fr": "Citèrnes routières - TC 406 et TC 406 Brut"
           },
           "isRepeatable": true,
-          "isVisibleByDefault": true,
+          "isVisible": true,
           "questions": [
               {
                   "guid": "55bb6830-6be7-42e0-9763-17bd3c29c360",
@@ -37,7 +37,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "e84f5c30-eb87-4a50-b688-bf535cfa22ae",
+                          "guid": "45186437-b0ac-4a8c-b8ee-4ef528cbd28b",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -70,7 +70,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "c79adda4-23ee-48d4-997b-899f8288d4ff",
+                          "guid": "e0ae21d2-c93c-4ca1-9c49-755050142816",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -101,7 +101,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "ee6ee263-17a1-4910-8f1c-99dd0c7b998e",
+                                  "guid": "415e030a-881d-4148-8321-b63a72edfaad",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -134,7 +134,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "74621334-8c33-4181-aa54-25d51c384598",
+                                  "guid": "8492a862-2888-4bc1-ba5c-eb16a5abc566",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -167,7 +167,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "1140ac54-3365-4606-9e18-289f28363575",
+                                  "guid": "232fa6bd-76f2-48ed-af14-536a5da5ed7b",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -200,7 +200,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "a7e1d118-42de-4edd-8975-7fad56a540e4",
+                                  "guid": "80b88518-9d0e-41d8-95c3-b17528b19894",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -233,7 +233,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "3f8c4ab7-3cd9-4e57-a3b2-53c57ce91a06",
+                                  "guid": "4051e627-e980-4e45-8553-a03f5196389a",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -266,7 +266,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "e1d7265b-baab-4236-ace1-474cedf7f685",
+                                  "guid": "99d11831-a77e-4c65-ba45-a71be5db77c1",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -299,7 +299,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "6a8070c9-78f2-49f8-8d07-eabedb5b99eb",
+                                  "guid": "63eac69c-ffd4-4e8e-849b-420ae077439c",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -332,7 +332,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "e51517a0-47fb-4ba3-b5c6-194bb9fd3ddd",
+                                  "guid": "9aaba326-0d4f-4c77-99bd-cd6f609a5d1a",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -364,8 +364,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "777ad064-291f-4c6e-955c-5edb945b8140",
-                                  "name": "777ad064-291f-4c6e-955c-5edb945b8140",
+                                  "guid": "f4acb28c-c9a6-4786-9cf9-44c79f1352a1",
+                                  "name": "f4acb28c-c9a6-4786-9cf9-44c79f1352a1",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -376,13 +376,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "2399b409-4bfa-4175-ac2c-2f2460f7a3eb",
-                                  "name": "2399b409-4bfa-4175-ac2c-2f2460f7a3eb",
+                                  "guid": "af1346ad-3b48-47d0-8ffd-448980a202ef",
+                                  "name": "af1346ad-3b48-47d0-8ffd-448980a202ef",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -393,14 +391,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "63439b99-bd0d-45b9-a6fb-74b80aa700c4",
+                                  "guid": "77b048ec-d888-4d93-be26-0b1d6549ad98",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -432,8 +428,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "f582d40a-f87e-4635-8979-01f74d43858f",
-                                  "name": "f582d40a-f87e-4635-8979-01f74d43858f",
+                                  "guid": "0e0fac33-2cfa-4892-8212-17f4f1ace3b5",
+                                  "name": "0e0fac33-2cfa-4892-8212-17f4f1ace3b5",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -444,13 +440,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "6416988e-3906-4ec5-bbb6-c784329cda85",
-                                  "name": "6416988e-3906-4ec5-bbb6-c784329cda85",
+                                  "guid": "7707fc50-d771-455a-b678-5f2339d41225",
+                                  "name": "7707fc50-d771-455a-b678-5f2339d41225",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -461,14 +455,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "84c22932-3473-428d-9d8f-35cac1981d12",
+                                  "guid": "8e17c376-ffad-488b-9ab5-27fac3b9fa84",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -503,8 +495,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "8c921098-6196-4fe0-a939-34052809ee70",
-                          "name": "8c921098-6196-4fe0-a939-34052809ee70",
+                          "guid": "fa475d20-9189-425c-9a83-eaef24273428",
+                          "name": "fa475d20-9189-425c-9a83-eaef24273428",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -515,13 +507,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "38b45c1d-3e1c-42e7-981d-aab2e8c7b043",
-                          "name": "38b45c1d-3e1c-42e7-981d-aab2e8c7b043",
+                          "guid": "93456bc6-735e-4f26-afac-c63624df25e9",
+                          "name": "93456bc6-735e-4f26-afac-c63624df25e9",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -532,14 +522,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "62b838af-17af-4892-8837-cb241796aae7",
+                          "guid": "6ee71b42-3a75-4023-bbec-66200163b16f",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -571,8 +559,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "316a6dc8-0a64-4182-b8be-a15a1d0c17bd",
-                          "name": "316a6dc8-0a64-4182-b8be-a15a1d0c17bd",
+                          "guid": "dbfe8064-ccf4-4843-9a44-d0ef252acf7f",
+                          "name": "dbfe8064-ccf4-4843-9a44-d0ef252acf7f",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -583,13 +571,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "ae6d9873-3841-4a82-b033-b64b281422db",
-                          "name": "ae6d9873-3841-4a82-b033-b64b281422db",
+                          "guid": "0c90dc89-510d-4e90-91e7-2bc50d5d1d15",
+                          "name": "0c90dc89-510d-4e90-91e7-2bc50d5d1d15",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -600,14 +586,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "7683a187-a327-4169-9c30-c7b46d97a031",
+                          "guid": "9b600223-61b0-48de-a2a2-7b4d7a9d92cd",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -640,7 +624,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "8765b17a-6a4e-499a-ad12-056fad33703f",
+                          "guid": "88496815-75ea-469f-a707-57ce2912a6f7",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -671,7 +655,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "e02f8aa3-22a5-431d-b312-950012bcaa78",
+                                  "guid": "1ad10d46-8dec-43f5-804d-1711a091c688",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -704,7 +688,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "a637f0f6-2e42-438e-8837-a210fee8e578",
+                                  "guid": "85933f3c-d41e-42ce-8dc2-e07f595995b5",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -737,7 +721,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "80789ea9-e71f-4723-9eb9-32bcb8ef046a",
+                                  "guid": "3cd84282-517d-4a3d-b6d6-c5f75fe898f8",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -770,7 +754,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "d372f503-77d5-4aee-a8c7-328e6af3d8b3",
+                                  "guid": "99a02deb-924a-484e-ad56-7188e2264a17",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -803,7 +787,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "39e0f6ca-008b-40ea-91f8-c7dd380b5a45",
+                                  "guid": "30c3e69e-0bb8-4901-aefa-2dfd2b0d5944",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -836,7 +820,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "52613760-99bd-4bce-a0c1-36e87223505e",
+                                  "guid": "a04035c8-24c0-4898-aaa1-45c3b7ff027b",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -868,8 +852,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "845942af-d4d3-4383-b1ce-412e37a6fd00",
-                                  "name": "845942af-d4d3-4383-b1ce-412e37a6fd00",
+                                  "guid": "bdd6ccc9-0680-4d77-8428-871b5315da3d",
+                                  "name": "bdd6ccc9-0680-4d77-8428-871b5315da3d",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -880,13 +864,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "5d95037d-63e0-46a8-b658-c284033f762a",
-                                  "name": "5d95037d-63e0-46a8-b658-c284033f762a",
+                                  "guid": "ac420890-0978-410e-900a-355259ebfa0a",
+                                  "name": "ac420890-0978-410e-900a-355259ebfa0a",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -897,14 +879,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "8dabb8d2-5d82-4e57-ad26-a15bf7a6d1b8",
+                                  "guid": "32e9f169-cc8d-4696-bd83-a544bdf642c2",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -940,7 +920,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "bf1a4be2-28c3-4008-87ed-f22840bba0e3",
+                          "guid": "313c416c-e320-4586-bdc4-79e51f405699",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -971,7 +951,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "5285e87c-f84e-4863-b881-62818e242971",
+                                  "guid": "d4d0ae59-e9bb-4473-8024-55582bdcd51f",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1004,7 +984,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "08195f8e-165c-495f-897a-60112a7f6613",
+                                  "guid": "fa3d70c7-387c-40f5-af4d-0628ccda269a",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1037,7 +1017,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "8e45c329-794b-4f2e-abc8-1a58ca3ae38a",
+                                  "guid": "6fcea07c-54c8-4e16-aa67-2153d83d378b",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1073,7 +1053,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "d4114337-02ab-4245-97e8-46118b52e852",
+                          "guid": "9c6e0d84-4eff-400e-a9c9-45daf70dbc17",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1104,7 +1084,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "fc5b2014-204e-4844-92e8-498e87b0860c",
+                                  "guid": "e6d4df89-0b4e-41a1-85d2-51f60d3c6512",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1137,7 +1117,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "30758b16-9986-4fc1-a9ef-ae3c6e2abebb",
+                                  "guid": "49ff1030-20f1-4e79-b063-e0cc81d216b4",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1170,7 +1150,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "eb0272ab-1cd6-4c5a-bbdb-6eff2aa33830",
+                                  "guid": "90c131b7-f713-43e4-9405-a9303109a349",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1206,7 +1186,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "cf1f79cc-22f7-441c-a245-2f6a0acc702b",
+                          "guid": "feb08718-fe26-4d3e-9910-fa4560151497",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1237,7 +1217,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "c870c264-3c92-440f-8480-eb04d7552e07",
+                                  "guid": "c0337b1f-1322-4055-8fcb-5ffe73e7ad05",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1273,7 +1253,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "d410c8ea-0c07-4f54-adc0-ec4549adc225",
+                          "guid": "3c8cff15-8df0-469a-b60a-63fc28f6fdb6",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1304,7 +1284,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "9d45c16c-2bfa-4a33-ac4a-44d6faa5675b",
+                                  "guid": "a58d8f42-5a46-43a1-9a08-c1d0039cde10",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1337,7 +1317,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "1f5bd9a6-7739-43f5-9e37-292e1345edcc",
+                                  "guid": "66956bba-0fd9-47f1-a4ee-c58b189fe375",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1373,7 +1353,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "11caa82a-b56b-4d26-93c6-b0ea61de10d7",
+                          "guid": "99f8f720-3efa-4bc2-85c7-a3873c615a23",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1404,7 +1384,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "d0a8c6d0-c2f8-428c-aa77-cc62e0851652",
+                                  "guid": "3d238ccf-c041-4de0-866f-750545597030",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1440,7 +1420,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "a330a296-8303-4ff6-8bdd-1d3c2c7539b1",
+                          "guid": "774ebacc-d2a0-48f2-87d4-2ba00555e5d7",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1471,7 +1451,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "fe352a2d-ac2b-49b0-9810-47335da1246f",
+                                  "guid": "eb2500bf-e530-4e4e-88c0-c37b44557226",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1504,7 +1484,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "c3d1db6b-99e2-4a24-ac7c-3cf58f06c2da",
+                                  "guid": "97193c80-695d-4fa8-a50d-e04297eb0c69",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1537,7 +1517,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "3467daee-6fde-423a-ad17-0843e19fdfa9",
+                                  "guid": "dbef742b-e245-4463-a1fe-ead40f9a41ef",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1573,7 +1553,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "c631b0ac-23a2-4c95-94cc-dbc8647acf2d",
+                          "guid": "adbe9eb4-1989-4882-8bf9-aa3e7bf287f3",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1603,8 +1583,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "32ecad7c-be53-475b-9a30-f4c4fdfdc9c9",
-                                  "name": "32ecad7c-be53-475b-9a30-f4c4fdfdc9c9",
+                                  "guid": "930ad61e-f77e-449c-9cb9-cb068a965326",
+                                  "name": "930ad61e-f77e-449c-9cb9-cb068a965326",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1615,13 +1595,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "c3322c00-fcfe-4437-aa75-a3cea11a18f0",
-                                  "name": "c3322c00-fcfe-4437-aa75-a3cea11a18f0",
+                                  "guid": "508184c8-d441-4bbc-8a76-09b484a68ae4",
+                                  "name": "508184c8-d441-4bbc-8a76-09b484a68ae4",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1634,13 +1612,11 @@
                                   "fileRequirement": "optional",
                                   "provisions": [
                                       "305fb633-16c9-4d75-ba6a-897140ce9c43"
-                                  ],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  ]
                               },
                               {
-                                  "guid": "cab88e53-db78-4e01-b801-09d2982cec11",
-                                  "name": "cab88e53-db78-4e01-b801-09d2982cec11",
+                                  "guid": "376cd136-f04c-4014-8fca-af0fbcca7efc",
+                                  "name": "376cd136-f04c-4014-8fca-af0fbcca7efc",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "Not inspected",
@@ -1651,14 +1627,12 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "b07aadfd-03f6-41cb-8c89-53723b7468cc",
+                                  "guid": "e97df333-babd-4148-b095-11b973aa09e4",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1690,8 +1664,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "b35512da-b46f-4a16-b417-8d5965bd1f94",
-                                  "name": "b35512da-b46f-4a16-b417-8d5965bd1f94",
+                                  "guid": "1d9c18b5-a3e1-4013-9146-c46afa325850",
+                                  "name": "1d9c18b5-a3e1-4013-9146-c46afa325850",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1702,13 +1676,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "866f67eb-74d8-4f2f-9ce0-94fa2633a96a",
-                                  "name": "866f67eb-74d8-4f2f-9ce0-94fa2633a96a",
+                                  "guid": "a133896d-a621-4d2c-a7f6-39e605315165",
+                                  "name": "a133896d-a621-4d2c-a7f6-39e605315165",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1721,13 +1693,11 @@
                                   "fileRequirement": "optional",
                                   "provisions": [
                                       "305fb633-16c9-4d75-ba6a-897140ce9c43"
-                                  ],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  ]
                               },
                               {
-                                  "guid": "c9beb29b-9c9c-41ce-9f5b-6e8125c9c611",
-                                  "name": "c9beb29b-9c9c-41ce-9f5b-6e8125c9c611",
+                                  "guid": "fdbfbf2c-0c63-45f4-bf43-f0e0d0fade31",
+                                  "name": "fdbfbf2c-0c63-45f4-bf43-f0e0d0fade31",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "Not inspected",
@@ -1738,14 +1708,12 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "221f5eb3-1279-47a4-9795-310a17cdecfd",
+                                  "guid": "55975290-f20f-429b-bff1-05e496638306",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1777,8 +1745,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "dc68618b-17bb-46aa-aa21-353289bb127a",
-                                  "name": "dc68618b-17bb-46aa-aa21-353289bb127a",
+                                  "guid": "4ad45de0-43e1-4ea5-8070-020fffde47e5",
+                                  "name": "4ad45de0-43e1-4ea5-8070-020fffde47e5",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1789,13 +1757,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "02a2840e-7216-449f-b90c-d0316e0dab76",
-                                  "name": "02a2840e-7216-449f-b90c-d0316e0dab76",
+                                  "guid": "62bc09f3-d92e-4c79-a854-7135b65dd334",
+                                  "name": "62bc09f3-d92e-4c79-a854-7135b65dd334",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1808,13 +1774,11 @@
                                   "fileRequirement": "optional",
                                   "provisions": [
                                       "305fb633-16c9-4d75-ba6a-897140ce9c43"
-                                  ],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": true
+                                  ]
                               },
                               {
-                                  "guid": "58af0373-fb38-474e-8f9b-209d2f5aeb26",
-                                  "name": "58af0373-fb38-474e-8f9b-209d2f5aeb26",
+                                  "guid": "5c39c681-c08f-41f0-a6f7-d0754e2196c0",
+                                  "name": "5c39c681-c08f-41f0-a6f7-d0754e2196c0",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "Not inspected",
@@ -1825,14 +1789,12 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "bc25413d-dcab-4917-a8a1-47d8db4884df",
+                                  "guid": "6f1a43e7-a7b6-414a-9c9b-5386a30b26f0",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1864,8 +1826,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "299bd791-177f-4321-bfeb-fa03491332e8",
-                                  "name": "299bd791-177f-4321-bfeb-fa03491332e8",
+                                  "guid": "2a97a867-c8da-4145-a925-a4bd8fef6593",
+                                  "name": "2a97a867-c8da-4145-a925-a4bd8fef6593",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1876,13 +1838,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "2eb1cca1-ec85-44e1-bec1-1f431f5801e3",
-                                  "name": "2eb1cca1-ec85-44e1-bec1-1f431f5801e3",
+                                  "guid": "3fd9c6cb-3f22-4b31-b965-31a4a4c757b4",
+                                  "name": "3fd9c6cb-3f22-4b31-b965-31a4a4c757b4",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1895,13 +1855,11 @@
                                   "fileRequirement": "optional",
                                   "provisions": [
                                       "305fb633-16c9-4d75-ba6a-897140ce9c43"
-                                  ],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": true
+                                  ]
                               },
                               {
-                                  "guid": "344491e6-f880-41a3-a837-d7e3fcd2f917",
-                                  "name": "344491e6-f880-41a3-a837-d7e3fcd2f917",
+                                  "guid": "a3368a49-2ea4-4dc4-a6cd-b71c1144d41a",
+                                  "name": "a3368a49-2ea4-4dc4-a6cd-b71c1144d41a",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "Not inspected",
@@ -1912,14 +1870,12 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "8cb8eb78-e2c3-4b8a-9709-04f831725bc1",
+                                  "guid": "3a3611cb-f27a-4d2f-b78f-98c288337816",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1951,8 +1907,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "9ab90ab9-3f7f-4fd7-af48-6fd22af979fe",
-                                  "name": "9ab90ab9-3f7f-4fd7-af48-6fd22af979fe",
+                                  "guid": "c22f2361-69fb-40e1-bd71-4ae3335c6c98",
+                                  "name": "c22f2361-69fb-40e1-bd71-4ae3335c6c98",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1963,13 +1919,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "3c151d7f-f0d0-48e5-8496-cebc5077c42a",
-                                  "name": "3c151d7f-f0d0-48e5-8496-cebc5077c42a",
+                                  "guid": "ede7102a-14e0-4f10-8e8b-a5b609ad67bf",
+                                  "name": "ede7102a-14e0-4f10-8e8b-a5b609ad67bf",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1982,13 +1936,11 @@
                                   "fileRequirement": "optional",
                                   "provisions": [
                                       "305fb633-16c9-4d75-ba6a-897140ce9c43"
-                                  ],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": true
+                                  ]
                               },
                               {
-                                  "guid": "08fd0a4c-3d6b-403b-ba13-f896bf6c058d",
-                                  "name": "08fd0a4c-3d6b-403b-ba13-f896bf6c058d",
+                                  "guid": "01fbc4c9-5947-4cab-9b7e-68f73f17d443",
+                                  "name": "01fbc4c9-5947-4cab-9b7e-68f73f17d443",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "Not inspected",
@@ -1999,14 +1951,12 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "0318b5a4-4013-4c51-ba58-82ff7e6f45f4",
+                                  "guid": "42485561-1b4d-4356-aba4-20ec0c795fc5",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -2041,8 +1991,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "c245d080-4b50-4d8c-8c4c-79c6dad8c981",
-                          "name": "c245d080-4b50-4d8c-8c4c-79c6dad8c981",
+                          "guid": "75c40fc6-a6de-4b88-b1e2-b5c650471974",
+                          "name": "75c40fc6-a6de-4b88-b1e2-b5c650471974",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -2053,13 +2003,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "3b52de19-6c07-4d3b-86d4-9e24e4bdfac8",
-                          "name": "3b52de19-6c07-4d3b-86d4-9e24e4bdfac8",
+                          "guid": "8842a3b5-19b3-47fc-8527-632cf2ef804c",
+                          "name": "8842a3b5-19b3-47fc-8527-632cf2ef804c",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -2070,14 +2018,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "cbbd4396-358e-4ac0-9102-2343a33c85f8",
+                          "guid": "fcc6ea5f-1eb2-418c-a01c-aa09adeb8e43",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -2094,6 +2040,7 @@
                   "result": null
               }
           ],
+          "isVisibleByDefault": true,
           "expansionPanels": []
       }
   ],

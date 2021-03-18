@@ -996,24 +996,28 @@ function updateTemplate(template) {
     })
 
     // response Options
-    q.responseOptions.forEach( ro => {
-      let guid = uuidv4();
-      let nRo = {
-        guid: guid,
-        name: guid,
-        sortOrder: ro.sortOrder,
-        text: ro.text,
-        value: ro.value,
-        internalCommentRequirement: ro.internalComment.option,
-        externalCommentRequirement: ro.externalComment.option,
-        pictureRequirement: ro.picture.option,
-        fileRequirement: ro.file.option,
-        provisions: ro.provisions,
-        searchProvisions: null,
-        isProvisionCollapsed: ro.isProvisionCollapsed
-      };
-      nQ.responseOptions.push(nRo);
-    })
+    if (!q.responseOptions) {
+      nQ.responseOptions.push(createGenericResponseOption(1));
+    } else {
+      q.responseOptions.forEach( ro => {
+        let guid = uuidv4();
+        let nRo = {
+          guid: guid,
+          name: guid,
+          sortOrder: ro.sortOrder,
+          text: ro.text,
+          value: ro.value,
+          internalCommentRequirement: ro.internalComment.option,
+          externalCommentRequirement: ro.externalComment.option,
+          pictureRequirement: ro.picture.option,
+          fileRequirement: ro.file.option,
+          provisions: ro.provisions
+          // searchProvisions: null,
+          // isProvisionCollapsed: ro.isProvisionCollapsed
+        };
+        nQ.responseOptions.push(nRo);
+      })
+    }
 
     return nQ;
   }
