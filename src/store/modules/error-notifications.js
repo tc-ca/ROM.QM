@@ -26,7 +26,10 @@ export const actions = {
     let errorNotifications = []
     questionnaire.groups.forEach(group => {
       group.questions.forEach(question => {
-        errorNotifications = errorNotifications.concat(getQuestionErrorNotifications(question, lang))
+        let notification = getQuestionErrorNotifications(question, lang);
+        if(notification) {
+          errorNotifications = errorNotifications.concat(notification);
+        }
       });
     });
 
@@ -58,35 +61,34 @@ function isValidationRequired(q)
   let result = -1;
   if (q.validationRules) result = q.validationRules.findIndex( v => v.enabled);
   if (result > -1) return true;
-  if (q.result) return true;
+  if (q.result !== null) return true;
   return false;
 }
 
 function validateResponseOptions(q, lang) {
   let errorNotifications = []
-  if(q.responseOptions) {
-    for( let x = 0; x < q.responseOptions.length; x++) {
-      const op = q.responseOptions[x];
-      if (q.result) {
-        if (op.internalCommentRequirement === 'required' &&  isEmptyValues(q.result.internalComment)) {
-          const errorMsg = i18n.t('app.notifications.internalComment', { type: op.text[lang] } )
+  if(q.responseOptions && q.result) {
+    q.result.responses.forEach(r => {
+      let ro = q.responseOptions.find(o => o.guid === r.guid);
+      if (ro) {
+        if (ro.internalCommentRequirement === 'required' &&  isEmptyValues(r.internalComment)) {
+          const errorMsg = i18n.t('app.notifications.internalComment', { type: ro.text[lang] } )
            errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-alert', lang))
         }
-        if (op.externalCommentRequirement === 'required'  && isEmptyValues(q.result.externalComment)) {
-          const errorMsg = i18n.t('app.notifications.externalComment', { type: op.text[lang] } )
+        if (ro.externalCommentRequirement === 'required'  && isEmptyValues(r.externalComment)) {
+          const errorMsg = i18n.t('app.notifications.externalComment', { type: ro.text[lang] } )
             errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-alert', lang));
         }
-        if (op.fileRequirement === 'required' && isEmptyValues(q.result.files)) {
-
-          const errorMsg = i18n.t('app.notifications.file', { type: op.text[lang] } )
+        if (ro.fileRequirement === 'required' && isEmptyValues(r.files)) {
+          const errorMsg = i18n.t('app.notifications.file', { type: ro.text[lang] } )
           errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-image-plus', lang));
         }
-        if (op.pictureRequirement === 'required' && isEmptyValues(q.result.pictures)) {
-          const errorMsg = i18n.t('app.notifications.picture', { type: op.text[lang] } )
+        if (ro.pictureRequirement === 'required' && isEmptyValues(r.pictures)) {
+          const errorMsg = i18n.t('app.notifications.picture', { type: ro.text[lang] } )
           errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-image-plus', lang));
         }
       }
-    }
+    });
   }
   return errorNotifications  
 }
@@ -153,15 +155,17 @@ function getQuestionErrorNotifications(q, lang)
           const errorMsg = i18n.t("app.notifications.question")
           errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-draw', lang))
         } else {
-          //else question has a response.
-          
           //get notification errors for validation rules
-          errorNotifications = errorNotifications.concat(evaluateValidationRules(q, lang));
+          let notifications = evaluateValidationRules(q, lang);
+          if(notifications.length > 0) {
+            errorNotifications = errorNotifications.concat(notifications);
+          }
           //get notification errors for  supplementary info
-          errorNotifications = errorNotifications.concat(validateResponseOptions(q, lang))
-       
+          notifications = validateResponseOptions(q, lang);
+          if(notifications.length > 0) {
+            errorNotifications = errorNotifications.concat(notifications);
+          }
         }
-
         return errorNotifications
       }
     
