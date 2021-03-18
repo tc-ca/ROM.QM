@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as group from '@/store/modules/group.js'
-import * as notification from '@/store/modules/notification.js'
+import * as error from '@/store/modules/error-notifications.js'
+import * as toast from "@/store/modules/toast-notifications.js";
 import * as imagefile from '@/store/modules/imagefile.js'
-import * as errors from '@/store/modules/errors.js'
 import * as objectstate from '@/store/modules/objectstate.js'
 import * as settings from '@/store/modules/settings.js'
 import * as questionnaire from '@/store/modules/questionnaire.js'
 import * as legislations from "@/store/modules/legislations.js";
 import * as characteristics from "@/store/modules/characteristics.js";
+
 
 
 Vue.use(Vuex)
@@ -21,14 +22,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     group,
-    notification,
+    error,
     imagefile,
-    errors,
     objectstate,
     settings,
     questionnaire,
     legislations,
-    characteristics
+    characteristics,
+    toast
   },
 
   state: {},

@@ -275,57 +275,62 @@
                         </v-select>
                       </div>
                       <div>
-                        <div>
-                          <v-btn
-                            small
-                            icon
-                            @click="toggleProvisions(option)"
-                          >
-                            <v-icon v-if="!option.isProvisionCollapsed">
-                              mdi-menu-right
-                            </v-icon>
-                            <v-icon v-else>
-                              mdi-menu-down
-                            </v-icon>
-                          </v-btn>
-                          {{ $t('app.builder.responseOptions.provisions.provisions') }}
-                        </div>
-                        <div v-show="option.isProvisionCollapsed">
-                          <div>
-                            <v-card
-                              class="mx-auto"
-                            >
-                              <v-sheet class="pa-4">
-                                <v-text-field
-                                  v-model="option.searchProvisions"
-                                  :label="$t('app.builder.responseOptions.provisions.search')"
-                                  outlined
-                                  hide-details
-                                  clearable
-                                  clear-icon="mdi-close-circle-outline"
-                                />
-                              </v-sheet>
-                              <v-card-text>
-                                <v-treeview
-                                  v-model="option.provisions"
-                                  selectable
-                                  item-key="id"
-                                  :item-text="displayTextLang"
-                                  selection-type="leaf"
-                                  :search="option.searchProvisions"
-                                  :items="provisions"
-                                  @input="updateSearchableProvisions()"
+                        <v-list
+                          dense
+                          nav
+                          color="#f5f5f5"
+                        >
+                          <v-list-group>
+                            <template v-slot:activator>
+                              <v-list-item-title
+                                class="subtitle-1"
+                                style="color:#757575"
+                              >
+                                <v-row>
+                                  <v-col>
+                                    {{ $t('app.builder.responseOptions.provisions.provisions') }}
+                                  </v-col>
+                                </v-row>
+                              </v-list-item-title>
+                            </template>
+                            <v-list-item>
+                              <v-list-item-content>
+                                <v-card
+                                  class="mx-auto"
                                 >
-                                  <template v-slot:label="{ item }">
-                                    <div class="truncated">
-                                      <div>{{ lang === eng ? item.DisplayEnglishText : item.DisplayFrenchText }}</div>
-                                    </div>
-                                  </template>
-                                </v-treeview>
-                              </v-card-text>
-                            </v-card>
-                          </div>
-                        </div>
+                                  <v-sheet class="pa-4">
+                                    <v-text-field
+                                      v-model="searchProvisions"
+                                      :label="$t('app.builder.responseOptions.provisions.search')"
+                                      outlined
+                                      hide-details
+                                      clearable
+                                      clear-icon="mdi-close-circle-outline"
+                                    />
+                                  </v-sheet>
+                                  <v-card-text>
+                                    <v-treeview
+                                      v-model="option.provisions"
+                                      selectable
+                                      item-key="id"
+                                      :item-text="displayTextLang"
+                                      selection-type="leaf"
+                                      :search="searchProvisions"
+                                      :items="provisions"
+                                      @input="updateSearchableProvisions()"
+                                    >
+                                      <template v-slot:label="{ item }">
+                                        <div class="truncated">
+                                          <div>{{ lang === eng ? item.DisplayEnglishText : item.DisplayFrenchText }}</div>
+                                        </div>
+                                      </template>
+                                    </v-treeview>
+                                  </v-card-text>
+                                </v-card>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list-group>
+                        </v-list>
                       </div>
                     </div>
                     <div class="right">
@@ -692,7 +697,8 @@ export default {
       questionPanels: [],
       questionProvisions: [],
       flagTimer: null,
-      reference: QUESTION_TYPE.REFERENCE
+      reference: QUESTION_TYPE.REFERENCE,
+      searchProvisions: null
     }
   },
   computed: {
@@ -797,9 +803,6 @@ export default {
     this.$store.dispatch('InitializeSearchableProvisionRef')
     this.isDirty()
   },
-  beforeDestroy () {
-    this.$store.dispatch('notification/clearNotifications')
-  },
   methods: {
     isDirty () {
       this.$root.$children[0].isFormDirty = _.differenceWith([this.questionnaire], this.$store.state.objectstate.data.questionnaire, _.isEqual).length !== 0
@@ -850,11 +853,11 @@ export default {
             }
           } else {
             // Alert and return back to the text type, the closest type to Reference Question
-            this.$store.dispatch('notification/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
+            this.$store.dispatch('toast/show', { text: `Only one Reference question is allowed on a Group`, color: 'error', timeout: 5000 })
             this.selectedQuestion.type = QUESTION_TYPE.TEXT
           }
         } else {
-          this.$store.dispatch('notification/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
+          this.$store.dispatch('toast/show', { text: `A Reference question is only allowed on a Group Top Level, not as a Child Question`, color: 'error', timeout: 5000 })
           this.selectedQuestion.type = QUESTION_TYPE.TEXT
         }
       }
@@ -1039,9 +1042,6 @@ export default {
     },
     toggleViolations () {
       this.violationsCollapsed = !this.violationsCollapsed
-    },
-    toggleProvisions (option) {
-      option.isProvisionCollapsed = !option.isProvisionCollapsed
     },
     updateSearchableProvisions () {
       const questionGuid = this.selectedQuestion.guid

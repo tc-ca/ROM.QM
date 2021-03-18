@@ -82,8 +82,8 @@ export default {
       }
     )
 
-    if (this.question.response != null) {
-      this.value = this.question.response
+    if (this.question.result && this.question.result.responses.length > 0) {
+      this.value = this.question.result.responses[0].value
       this.onChange()
     }
   },

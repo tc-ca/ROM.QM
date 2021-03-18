@@ -262,14 +262,14 @@
           />
         </v-col>
       </v-row>
-      <v-row v-if="picture.value.length > 0">
+      <v-row v-if="picture.length > 0">
         <v-col
           class="d-flex child-flex"
           cols="12"
         >
           <v-pagination
             v-model="page"
-            :length="calculateTotalPages(picture.value.length)"
+            :length="calculateTotalPages(picture.length)"
             :total-visible="5"
             circle
             @input="onNextPageMove($event)"
@@ -278,10 +278,9 @@
       </v-row>
       <v-input
         ref="validationInput"
-        v-model="picture.value.length"
+        v-model="picture.length"
         :disabled="readOnly"
         :rules="rules"
-        @update:error="onError"
       />
       <v-dialog
         v-model="confirmDialogOpen"
@@ -332,7 +331,11 @@ export default {
   mixins: [BaseMixin],
   props: {
     picture: {
-      type: Object,
+      type: Array,
+      required: true
+    },
+    pictureRequirement: {
+      type: String,
       required: true
     },
     label: {
@@ -370,7 +373,7 @@ export default {
       progressStatus: '',
       galleryIndex: 0,
       rules: [
-        value => !this.picture.display || !this.picture.required ? true : this.picture.value.length > 0 || 'Required.'
+        value => !this.display || !this.isPictureRequired === 'required' ? true : this.picture.length > 0 || 'Required.'
       ],
       validationStatus: false,
       notification: null,
@@ -385,13 +388,13 @@ export default {
       return this.picture.value[this.galleryIndex] !== undefined
     },
     displayPicture () {
-      return !this.picture.display
+      return this.pictureRequirement !== 'n/a'
     },
     isPictureRequired () {
-      return this.picture.option === 'required'
+      return this.pictureRequirement === 'required'
     },
     errorInPicture () {
-      return this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
+      return this.displayPicture && this.isPictureRequired && !this.picture.length > 0
     },
     ...mapState({
       userName: state => {
@@ -420,13 +423,13 @@ export default {
         }
       }
     )
-    this.$watch(
-      '$refs.validationInput.validations',
-      (newValue) => {
-        let error = this.displayPicture && this.isPictureRequired && !this.picture.value.length > 0
-        this.onError(error)
-      }
-    )
+    // this.$watch(
+    //   '$refs.validationInput.validations',
+    //   (newValue) => {
+    //     let error = this.displayPicture && this.isPictureRequired && !this.picture.length > 0
+    //     this.onError(error)
+    //   }
+    // )
     this.onNextPageMove(1)
   },
   methods: {
@@ -434,8 +437,8 @@ export default {
       let el = this.$store.state.imagefile.imageFileNotification.imageResults
       if (el !== null) {
         // storeObj.forEach((el, index) => {
-        if (this.question.guid === el.qguid && !this.picture.value.some(p => p.guid === el.guid)) {
-          this.picture.value.push({
+        if (this.question.guid === el.qguid && !this.picture.some(p => p.guid === el.guid)) {
+          this.picture.push({
             title: el.result,
             fileName: el.result,
             comment: 'N/A',
@@ -444,7 +447,7 @@ export default {
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
           })
           this.progressStatus = ''
-          this.curPage = this.calculateTotalPages(this.picture.value.length)
+          this.curPage = this.calculateTotalPages(this.picture.length)
           this.onNextPageMove(this.curPage)
           this.next()
           this.next()
@@ -457,8 +460,8 @@ export default {
       let el = this.$store.state.imagefile.deletedImageData.imageDetails
       if (el !== null) {
         // storeDelObj.forEach((el, index) => {
-        if (this.picture.value.some(p => p.guid === el.guid)) {
-          this.picture.value.splice(this.picture.value.findIndex(p => p.guid === el.guid), 1)
+        if (this.picture.some(p => p.guid === el.guid)) {
+          this.picture.splice(this.picture.findIndex(p => p.guid === el.guid), 1)
           this.prev()
           this.prev()
           this.selImage = null
@@ -477,7 +480,7 @@ export default {
       let end = (i * IMAGES_PER_PAGE)
       this.curPage = i
       this.curPageImages = null
-      this.curPageImages = this.picture.value.slice(start, end)
+      this.curPageImages = this.picture.slice(start, end)
     },
 
     setCurrentImage (imgLink, img) {
@@ -583,39 +586,21 @@ export default {
     },
 
     setGalleryIndex () {
-      this.galleryIndex = this.picture.value.length === 0
+      this.galleryIndex = this.picture.length === 0
         ? 0
-        : this.picture.value.length - 1
+        : this.picture.length - 1
     },
 
     next () {
-      this.galleryIndex = this.galleryIndex + 1 === this.picture.value.length
+      this.galleryIndex = this.galleryIndex + 1 === this.picture.length
         ? 0
         : this.galleryIndex + 1
     },
 
     prev () {
       this.galleryIndex = this.galleryIndex - 1 < 0
-        ? this.picture.value.length - 1
+        ? this.picture.length - 1
         : this.galleryIndex - 1
-    },
-
-    updateResponseStore: function () {
-      // Need to be changed because the updateSupplementaryInfo on the response store was deleted
-      // const question = this.question
-      // const group = this.group
-      // const saveToProp = this.saveToProp
-      // const response = this.images
-      // this.$store.dispatch('updateSupplementaryInfo', { saveToProp, group, question, response })
-    },
-    onError (error) {
-      this.picture.validationStatus = !error
-      if (!this.picture.validationStatus) {
-        this.picture.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `Picture is required on this question, please upload at least one.`, color: 'error' }
-      } else {
-        this.picture.notification = null
-      }
-      this.$emit('error', error)
     }
   }
 

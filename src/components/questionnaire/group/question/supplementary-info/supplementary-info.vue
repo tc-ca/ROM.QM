@@ -6,45 +6,47 @@
   >
     <supplementary-info-comment
       v-if="displayExternalComment"
-      :comment="selresponseoption.externalComment"
+      :is-external-comment="true"
+      :comment-requirement="selresponseoption.externalCommentRequirement"
+      :result="question.result"
       :label="$t('app.questionnaire.group.question.externalComment')"
       :hint="$t('app.questionnaire.group.question.externalCommentInfo')"
       :group="group"
       :question="question"
       :read-only="readOnly"
       save-to-prop="externalComment"
-      @error="onError"
     />
     <supplementary-info-comment
       v-if="displayInternalComment"
-      :comment="selresponseoption.internalComment"
+      :is-external-comment="false"
+      :comment-requirement="selresponseoption.internalCommentRequirement"
+      :result="question.result"
       :label="$t('app.questionnaire.group.question.internalComment')"
       :hint="$t('app.questionnaire.group.question.internalCommentInfo')"
       :group="group"
       :question="question"
       :read-only="readOnly"
       save-to-prop="internalComment"
-      @error="onError"
     />
     <supplementary-info-files
       v-if="displayFile"
-      :file="selresponseoption.file"
+      :file="question.result ? question.result.files : []"
+      :file-requirement="selresponseoption.fileRequirement"
       :label="$t('app.questionnaire.group.question.supplementaryFile.label')"
       :group="group"
       :question="question"
       :read-only="readOnly"
       save-to-prop="images"
-      @error="onError"
     />
     <supplementary-info-image
       v-if="displayPicture"
-      :picture="selresponseoption.picture"
+      :picture="question.result ? question.result.pictures : []"
+      :picture-requirement="selresponseoption.pictureRequirement"
       :label="$t('app.questionnaire.group.question.photos')"
       :group="group"
       :question="question"
       :read-only="readOnly"
       save-to-prop="images"
-      @error="onError"
     />
   </v-list>
 </template>
@@ -81,16 +83,16 @@ export default {
   },
   computed: {
     displayInternalComment () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.internalComment.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.internalCommentRequirement !== 'n/a'
     },
     displayExternalComment () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalComment.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.externalCommentRequirement !== 'n/a'
     },
     displayFile () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.file.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.fileRequirement !== 'n/a'
     },
     displayPicture () {
-      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.picture.option !== 'n/a'
+      return questionHasSupplementaryInfo(this.question) && this.selresponseoption && this.selresponseoption.pictureRequirement !== 'n/a'
     },
     ...mapState({
       lang: state => {

@@ -1,0 +1,1050 @@
+{
+    "guid": "8eecb881-aa15-4320-9617-69b1ab58c4b0",
+    "name": "8eecb881-aa15-4320-9617-69b1ab58c4b0",
+    "readOnly": false,
+    "title": {
+        "en": "Questionnaire Title EN",
+        "fr": "Questionnaire Title EN"
+    },
+    "groups": [
+        {
+            "domId": "",
+            "domSuffix": "",
+            "guid": "e35de9dc-48b5-4598-9bbb-76dc9904541a",
+            "name": "e35de9dc-48b5-4598-9bbb-76dc9904541a",
+            "sortOrder": 1,
+            "title": {
+                "en": "New Group",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": false,
+            "isVisible": true,
+            "questions": [
+                {
+                    "guid": "49ec98a1-f651-4893-8266-91a4e970d848",
+                    "name": "49ec98a1-f651-4893-8266-91a4e970d848",
+                    "sortOrder": 1,
+                    "text": {
+                        "en": "Reference ID",
+                        "fr": "FR: Reference ID"
+                    },
+                    "type": "reference",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "d2e53858-fb30-421f-a518-91b5b5340f10",
+                            "name": "d2e53858-fb30-421f-a518-91b5b5340f10",
+                            "sortOrder": 1,
+                            "text": null,
+                            "value": "",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "f3737154-8a7e-4b05-b50c-eeff1f644047",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "e14cf30b-d384-437c-a133-375e4f4dd5f3",
+                    "name": "e14cf30b-d384-437c-a133-375e4f4dd5f3",
+                    "sortOrder": 2,
+                    "text": {
+                        "en": "Question 1",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": true,
+                    "isRepeated": false,
+                    "isSamplingAllowed": true,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "fcf88eba-cc63-4e9e-8982-eb3783389251",
+                            "name": "fcf88eba-cc63-4e9e-8982-eb3783389251",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "required",
+                            "externalCommentRequirement": "required",
+                            "pictureRequirement": "required",
+                            "fileRequirement": "required",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "guid": "bfcfeec5-93b0-4b77-a6e0-a555fc1f19c9",
+                            "name": "bfcfeec5-93b0-4b77-a6e0-a555fc1f19c9",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "7cc25dec-be13-45aa-ac1d-1f8ee4d9f960",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [
+                        {
+                            "guid": "a6dc3179-6465-4587-bad2-675649bd5956"
+                        }
+                    ],
+                    "dependencyGroups": [],
+                    "childQuestions": [
+                        {
+                            "guid": "a6dc3179-6465-4587-bad2-675649bd5956",
+                            "name": "a6dc3179-6465-4587-bad2-675649bd5956",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "child question",
+                                "fr": "FR: Question text"
+                            },
+                            "type": "radio",
+                            "isRepeatable": false,
+                            "isRepeated": false,
+                            "isSamplingAllowed": true,
+                            "isVisible": false,
+                            "responseOptions": [
+                                {
+                                    "guid": "9ac2e481-b1ff-4202-a147-e4d6340a12a2",
+                                    "name": "9ac2e481-b1ff-4202-a147-e4d6340a12a2",
+                                    "sortOrder": 1,
+                                    "text": {
+                                        "en": "Yes",
+                                        "fr": "Oui"
+                                    },
+                                    "value": "true",
+                                    "internalCommentRequirement": "optional",
+                                    "externalCommentRequirement": "optional",
+                                    "pictureRequirement": "optional",
+                                    "fileRequirement": "optional",
+                                    "provisions": [],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                },
+                                {
+                                    "guid": "bef8a8bd-fa7b-46f8-a6c5-84db98511f0d",
+                                    "name": "bef8a8bd-fa7b-46f8-a6c5-84db98511f0d",
+                                    "sortOrder": 2,
+                                    "text": {
+                                        "en": "No",
+                                        "fr": "Non"
+                                    },
+                                    "value": "false",
+                                    "internalCommentRequirement": "optional",
+                                    "externalCommentRequirement": "optional",
+                                    "pictureRequirement": "optional",
+                                    "fileRequirement": "optional",
+                                    "provisions": [
+                                        "9241a2ae-1c61-4753-805a-be0707f41622",
+                                        "77758039-206f-476d-84d9-549c571f269e",
+                                        "7b298d1f-da3e-408c-a705-2558886a9b9d",
+                                        "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+                                        "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+                                        "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+                                        "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+                                        "792fda3c-0696-4e90-9655-a0bb810f7b33",
+                                        "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+                                        "e311574a-8bac-4b5b-b092-a31182accab5",
+                                        "bec23597-02d7-4422-a3db-f41e7c57d47f",
+                                        "6473a679-7c58-412d-b0c2-b1678faa53e2",
+                                        "b11288f8-e99e-4071-b829-8684947f3421",
+                                        "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+                                        "8b9e1c85-7365-4306-9c70-269bf841484b",
+                                        "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+                                        "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+                                        "488db8ca-3022-456e-9df9-f21d2ba63791"
+                                    ],
+                                    "searchProvisions": null,
+                                    "isProvisionCollapsed": false
+                                }
+                            ],
+                            "validationRules": [
+                                {
+                                    "guid": "8fd423bc-bc49-4f48-a3e0-ec6b7a532412",
+                                    "enabled": true,
+                                    "errorMessage": {
+                                        "en": "Required",
+                                        "fr": "FR Required"
+                                    },
+                                    "name": "require",
+                                    "type": "require",
+                                    "value": null
+                                }
+                            ],
+                            "validationState": true,
+                            "dependants": [],
+                            "dependencyGroups": [
+                                {
+                                    "guid": "7b3d28b8-2cb8-4cf6-9c93-8624fd0f589b",
+                                    "ruleType": "visibility",
+                                    "childValidatorName": "",
+                                    "questionDependencies": [
+                                        {
+                                            "guid": "d9628f1e-ffa5-4515-9123-1102a1f564d5",
+                                            "dependsOnQuestion": {
+                                                "guid": "e14cf30b-d384-437c-a133-375e4f4dd5f3"
+                                            },
+                                            "validationAction": "equal",
+                                            "validationValue": "true"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "childQuestions": [],
+                            "result": null
+                        }
+                    ],
+                    "result": null
+                },
+                {
+                    "guid": "f602a791-cee9-4b63-9b43-d618567b0333",
+                    "name": "f602a791-cee9-4b63-9b43-d618567b0333",
+                    "sortOrder": 3,
+                    "text": {
+                        "en": "type text",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "acc82e41-9e45-47c2-ab02-e79248be3194",
+                            "name": "acc82e41-9e45-47c2-ab02-e79248be3194",
+                            "sortOrder": 1,
+                            "text": null,
+                            "value": "",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "52394630-59f9-4b61-b119-08a2c30882c2",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "887cd3f5-c9ca-4c9f-8f07-1d09681696c6",
+                    "name": "887cd3f5-c9ca-4c9f-8f07-1d09681696c6",
+                    "sortOrder": 4,
+                    "text": {
+                        "en": "type select ",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "select",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "7eadae3b-e441-40e5-baa4-346146e65770",
+                            "name": "7eadae3b-e441-40e5-baa4-346146e65770",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Option 1",
+                                "fr": "Option 1"
+                            },
+                            "value": "1",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [
+                                "fe852602-4fb0-4101-b42b-78c2dc2c1f38"
+                            ],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "guid": "2a75a2c1-7bdf-424d-883e-c2b75f0a2b62",
+                            "name": "2a75a2c1-7bdf-424d-883e-c2b75f0a2b62",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "Option 2",
+                                "fr": "Option 2"
+                            },
+                            "value": "2",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [
+                                "b222c2fd-7d56-42f8-8c7c-b07ed82795ab",
+                                "f7ed9c8d-49d2-4caf-8846-987dd7ead606"
+                            ],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "guid": "f2c80f2d-892f-4c6f-b5e6-7451be4029d9",
+                            "name": "f2c80f2d-892f-4c6f-b5e6-7451be4029d9",
+                            "sortOrder": 3,
+                            "text": {
+                                "en": "Option",
+                                "fr": "FR: Option"
+                            },
+                            "value": 3,
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "a66c97cf-ef1c-4fb4-99c2-4a317a745a3f",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "b56bd0cf-1539-47e2-80b0-f4eb6aad2b88",
+                    "name": "b56bd0cf-1539-47e2-80b0-f4eb6aad2b88",
+                    "sortOrder": 5,
+                    "text": {
+                        "en": "type number",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "number",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "7a0ccf67-14a8-453b-8811-a92fec2f7b0b",
+                            "name": "7a0ccf67-14a8-453b-8811-a92fec2f7b0b",
+                            "sortOrder": 1,
+                            "text": null,
+                            "value": "",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "003f0598-6144-4532-b9eb-a64d09ccf97e",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                }
+            ],
+            "expansionPanels": [
+                1
+            ]
+        },
+        {
+            "domId": "",
+            "domSuffix": "",
+            "guid": "203eb154-a5a4-436b-8c33-0d6928cab66e",
+            "name": "203eb154-a5a4-436b-8c33-0d6928cab66e",
+            "sortOrder": 2,
+            "title": {
+                "en": "Group2",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": false,
+            "isVisible": true,
+            "questions": [
+                {
+                    "guid": "9c0c04bc-081b-4b18-82a9-1bcf83bb50fc",
+                    "name": "9c0c04bc-081b-4b18-82a9-1bcf83bb50fc",
+                    "sortOrder": 1,
+                    "text": {
+                        "en": "default question 2",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "b2f90900-559f-4bbe-b437-3a8fab0a067a",
+                            "name": "b2f90900-559f-4bbe-b437-3a8fab0a067a",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "guid": "d078ad01-529d-4f5c-9b19-c39f73030425",
+                            "name": "d078ad01-529d-4f5c-9b19-c39f73030425",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "551578fe-6e76-448d-a1da-8d688c0d1f04",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                }
+            ]
+        },
+        {
+            "domId": "",
+            "domSuffix": "",
+            "guid": "0409ee56-cc43-4e81-b2fb-dde085b0fa54",
+            "name": "0409ee56-cc43-4e81-b2fb-dde085b0fa54",
+            "sortOrder": 3,
+            "title": {
+                "en": "Group3",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": false,
+            "isVisible": true,
+            "questions": [
+                {
+                    "guid": "ec6598df-d8a6-4a47-b309-ab8db09de19c",
+                    "name": "ec6598df-d8a6-4a47-b309-ab8db09de19c",
+                    "sortOrder": 1,
+                    "text": {
+                        "en": "default question 3",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "0e86aab8-53cf-4dd2-814e-7014820ea0c4",
+                            "name": "0e86aab8-53cf-4dd2-814e-7014820ea0c4",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        },
+                        {
+                            "guid": "aafab386-b12f-4edd-a611-43305435d0f0",
+                            "name": "aafab386-b12f-4edd-a611-43305435d0f0",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": [],
+                            "searchProvisions": null,
+                            "isProvisionCollapsed": false
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "46d236c1-9d44-4cef-b90e-b2689b158d22",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                }
+            ]
+        },
+        {
+            "domId": "",
+            "domSuffix": "",
+            "guid": "729befd1-f41c-4cf7-8f04-b773efc61677",
+            "name": "729befd1-f41c-4cf7-8f04-b773efc61677",
+            "sortOrder": 4,
+            "title": {
+                "en": "Group4",
+                "fr": "Fr: New Group"
+            },
+            "isRepeatable": false,
+            "isVisible": true,
+            "questions": [
+                {
+                    "guid": "dcce9cb0-f025-449b-9761-d3ccea3152d8",
+                    "name": "dcce9cb0-f025-449b-9761-d3ccea3152d8",
+                    "sortOrder": 1,
+                    "text": {
+                        "en": "max length (10)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "e8fe635c-6c76-4043-9896-33c1cee22c67",
+                            "name": "e8fe635c-6c76-4043-9896-33c1cee22c67",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        },
+                        {
+                            "guid": "b85d2497-4ab7-47f4-ae7e-8573d3cb58b0",
+                            "name": "b85d2497-4ab7-47f4-ae7e-8573d3cb58b0",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "2dfc2bb4-c5eb-414a-a0c2-901c043cda6c",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "maxLength",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "2d1ca463-643f-424d-8f59-3ff92d8b7478",
+                    "name": "2d1ca463-643f-424d-8f59-3ff92d8b7478",
+                    "sortOrder": 2,
+                    "text": {
+                        "en": "min length (5)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "text",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "a9e222da-746b-482c-b772-0ea148669048",
+                            "name": "a9e222da-746b-482c-b772-0ea148669048",
+                            "sortOrder": 1,
+                            "text": null,
+                            "value": "",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "6dc3b0b6-9ef9-458f-a64d-fe590a6989f7",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "minLength",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "c1b29c4c-5a20-42d4-971e-39a4aed68192",
+                    "name": "c1b29c4c-5a20-42d4-971e-39a4aed68192",
+                    "sortOrder": 3,
+                    "text": {
+                        "en": "max value (10)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "1c481cc2-87af-476b-9665-29b55fb68278",
+                            "name": "1c481cc2-87af-476b-9665-29b55fb68278",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        },
+                        {
+                            "guid": "65db1911-10f8-4d7f-a133-11151a813096",
+                            "name": "65db1911-10f8-4d7f-a133-11151a813096",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "a251cc38-38ca-4458-8449-3d88727c7cde",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "max",
+                            "value": "10"
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "4ef989d7-8154-4f35-8a42-6a6dd1690ffa",
+                    "name": "4ef989d7-8154-4f35-8a42-6a6dd1690ffa",
+                    "sortOrder": 4,
+                    "text": {
+                        "en": "min value (5)",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "bc1542e5-7070-4e3d-9152-9f083a6d6c49",
+                            "name": "bc1542e5-7070-4e3d-9152-9f083a6d6c49",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        },
+                        {
+                            "guid": "4d3c7c1b-c5c9-4479-a31d-e7a289f39f91",
+                            "name": "4d3c7c1b-c5c9-4479-a31d-e7a289f39f91",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "70b7374b-18d3-4048-9c33-f5187ddbaf4c",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "min",
+                            "value": "5"
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                },
+                {
+                    "guid": "67ff609c-d8ee-44bb-b64c-05ba94c34d8b",
+                    "name": "67ff609c-d8ee-44bb-b64c-05ba94c34d8b",
+                    "sortOrder": 5,
+                    "text": {
+                        "en": "Question text",
+                        "fr": "FR: Question text"
+                    },
+                    "type": "radio",
+                    "isRepeatable": false,
+                    "isRepeated": false,
+                    "isSamplingAllowed": false,
+                    "isVisible": true,
+                    "responseOptions": [
+                        {
+                            "guid": "51eb5a94-0d34-43d1-90bd-2f08934926a2",
+                            "name": "51eb5a94-0d34-43d1-90bd-2f08934926a2",
+                            "sortOrder": 1,
+                            "text": {
+                                "en": "Yes",
+                                "fr": "Oui"
+                            },
+                            "value": "true",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        },
+                        {
+                            "guid": "b53870a6-e46e-49ef-8010-2cea1183d9af",
+                            "name": "b53870a6-e46e-49ef-8010-2cea1183d9af",
+                            "sortOrder": 2,
+                            "text": {
+                                "en": "No",
+                                "fr": "Non"
+                            },
+                            "value": "false",
+                            "internalCommentRequirement": "optional",
+                            "externalCommentRequirement": "optional",
+                            "pictureRequirement": "optional",
+                            "fileRequirement": "optional",
+                            "provisions": []
+                        }
+                    ],
+                    "validationRules": [
+                        {
+                            "guid": "2eda0d2a-d6b2-42a9-959f-3adaf38cd725",
+                            "enabled": true,
+                            "errorMessage": {
+                                "en": "Required",
+                                "fr": "FR Required"
+                            },
+                            "name": "require",
+                            "type": "require",
+                            "value": null
+                        }
+                    ],
+                    "validationState": true,
+                    "dependants": [],
+                    "dependencyGroups": [],
+                    "childQuestions": [],
+                    "result": null
+                }
+            ]
+        }
+    ],
+    "searchableProvisions": [
+        {
+            "leg": "9241a2ae-1c61-4753-805a-be0707f41622",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "77758039-206f-476d-84d9-549c571f269e",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "7b298d1f-da3e-408c-a705-2558886a9b9d",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "41b78728-24c2-4a6d-94b3-87b8dc72d677",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "5b475ff2-d3ab-4de9-9eb6-33ae688efeca",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "717e68ce-cbc4-4b3f-b54d-fe7f685a26ab",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "3f3925aa-35a5-4ab2-bdd9-517c8e3f173b",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "792fda3c-0696-4e90-9655-a0bb810f7b33",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "7ed9ef36-aa07-4824-91e6-b119bc46a672",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "e311574a-8bac-4b5b-b092-a31182accab5",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "bec23597-02d7-4422-a3db-f41e7c57d47f",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "6473a679-7c58-412d-b0c2-b1678faa53e2",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "b11288f8-e99e-4071-b829-8684947f3421",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "ee3b3b3e-065d-472c-8cd8-89de7fbed3b1",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "8b9e1c85-7365-4306-9c70-269bf841484b",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "1863dfe1-a4e4-4d49-abbf-12be48e482d7",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "fd9c4294-78ab-47ac-b252-808577cdfdf3",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "488db8ca-3022-456e-9df9-f21d2ba63791",
+            "questions": [
+                "a6dc3179-6465-4587-bad2-675649bd5956"
+            ]
+        },
+        {
+            "leg": "fe852602-4fb0-4101-b42b-78c2dc2c1f38",
+            "questions": [
+                "887cd3f5-c9ca-4c9f-8f07-1d09681696c6"
+            ]
+        },
+        {
+            "leg": "b222c2fd-7d56-42f8-8c7c-b07ed82795ab",
+            "questions": [
+                "887cd3f5-c9ca-4c9f-8f07-1d09681696c6"
+            ]
+        },
+        {
+            "leg": "f7ed9c8d-49d2-4caf-8846-987dd7ead606",
+            "questions": [
+                "887cd3f5-c9ca-4c9f-8f07-1d09681696c6"
+            ]
+        }
+    ]
+}

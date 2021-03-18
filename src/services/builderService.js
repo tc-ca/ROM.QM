@@ -35,7 +35,7 @@ function createGroup(index) {
       [LANGUAGE.FRENCH]: "Fr: New Group"
     },
     isRepeatable: false,
-    isVisibleByDefault: true,
+    isVisible: true,
     questions: []
   };
   return group;
@@ -169,8 +169,6 @@ function createGenericResponseOption(sortOrder = -1) {
     pictureRequirement: "optional",
     fileRequirement: "optional",
     provisions: [],
-    searchProvisions: null,
-    isProvisionCollapsed: false
   };
 }
 
@@ -297,7 +295,7 @@ function createGenericResult() {
     internalComment: "",
     files: null,
     pictures: null,
-    samplingRecord: null,
+    samplingInfo: null,
     responses: [],
     violationInfo: null
   };

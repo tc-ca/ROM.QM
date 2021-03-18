@@ -1,58 +1,62 @@
 
-Todo checklist.
+Todo checklist of task to be done in the questionnaire side of things. 
 
 Template=======
-rename-->".templateid"  by ".guid"
+(skip) rename:".templateid"  by ".guid" (is to be set in the builderService, will not update, will let Luis do it)
 
  
 Group ======
 
-rename-->".primaryKey" changed to ".name"
-rename-->".order" to ".sortOrder"
-rename-->".htmlElementId" to "domId"
-rename--> ".isVisible" to "isVisibleByDefault"
+(done) rename: ".primaryKey" to ".name"  ainsley
+(done) rename:".order" to ".sortOrder"  ainsley
+(done) rename:".htmlElementId" to "domId"  ainsley
+(todo) rename: ".isVisible" to "isVisibleByDefault" (for discussion, would like to keep, we can add this as an additional property if required)
  
 
-remove--> ."expansionPanels"
+(done) remove: ."expansionPanels"  santosh
 
 
 
 Question ======
 
-rename--> ".isVisible" to ".isVisibleByDefault"
+(todo) rename: ".isVisible" to ".isVisibleByDefault" --(for discussion, would like to keep, we can add this as an additional property if required)
+(done) remove: ".id" 
+(done) remove: ".isMultiple"  santosh 
+(done) remove: ".response"  santosh 
 
-remove--> ".id" 
-remove--> "isMultiSelect"  (done)
-remove--> ".response"
-
-move--> .samplingRecord to .result object
+(todo) move: .samplingRecord to .result object
 
 --responseOptions
-rename--> ".id" to ".guid"
-move--> ".selectedProvisions" to .result object
-remove--> ".searchProvisions" move to component data member
-remove--> ".isProvisionCollapsed" move to component data member
-refactor--> ".internalComment" to String and rename to ".internalCommentRequirement"
-refactor--> ".externalComment" to String and rename to ".externalCommentRequirement"
-refactor--> ".picture" to String and rename to ".pictureRequirement"
-refactor--> ".file" to String and rename to ".fileRequirement"
+(done) rename: ".id" to ".guid" santosh
+(done) move: ".selectedProvisions" to violationInfo .result object ainsley
+(done) remove: ".searchProvisions" move to component data member ainsley
+(done) remove: ".selectedProvisionsTitles" ainsley
+(skip) remove: ".isProvisionCollapsed" (is to be set in the builderService, will not update, will let Luis do it)
+(done) refactor: ".internalComment" to String and rename to ".internalCommentRequirement" santosh
+(done) refactor: ".externalComment" to String and rename to ".externalCommentRequirement" santosh
+(done) refactor: ".picture" to String and rename to ".pictureRequirement" santosh
+(done) refactor: ".file" to String and rename to ".fileRequirement" santosh
 
----- REFACTOR violationInfo
-move--> violationInfo object to result
-remove--> ".responseToMatch'
-remove--> ".matchingType"
+---- Move/ refactor violationInfo
+(done) move: ".violationCount" to resultObject under violationInfo ainsley
+(done) move: ".referenceId" to resultObject under violationInfo ainsley
+(done) remove: ".responseToMatch' santosh
+(done) remove: ".matchingType" santosh
 
-condition: if not null should have properties of ."referenceID" and ".violationCount"
+---- Move/ Sampling
+(done) move: ".approximateTotal" to resultObject under samplingRecord ainsley
+(done) move: ".sampleSize" to resultObject under samplingRecord ainsley
+
 
 
 ----ADD result object
-add--> external comment type string
-add--> internal comment type string
-add-- files type object check typescript
-add--> pictures type object check typescript
-add--> sampling record type object check typescript
-add--> violation info type object check typescript
-add--> responses array of objects type object check typescript
+(done) add: external comment type string
+(done) add: internal comment type string
+(done) add: files type object check typescript
+(done) add: pictures type object check typescript
+(done) add: sampling record type object check typescript ainsley
+(done) add: violation info type object check typescript ainsley
+(done) add: responses array of objects type object check typescript
 
  
 

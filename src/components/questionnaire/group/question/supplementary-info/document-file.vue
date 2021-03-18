@@ -154,16 +154,6 @@ export default {
       else fileType = 'document-outline'
 
       return fileType
-    },
-
-    onError (error) {
-      this.picture.validationStatus = !error
-      if (!this.picture.validationStatus) {
-        this.picture.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `Picture is required on this question, please upload at least one.`, color: 'error' }
-      } else {
-        this.picture.notification = null
-      }
-      this.$emit('error', error)
     }
   }
 

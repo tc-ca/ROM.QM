@@ -121,16 +121,22 @@ export default {
       return this.selectedOption.value
     },
     currentId () {
-      return this.selectedOption.id
+      return this.selectedOption.guid
     },
     previousId () {
-      return this.selOldOption !== null ? this.selOldOption.id : this.selectedOption.id
+      return this.selOldOption !== null ? this.selOldOption.guid : this.selectedOption.guid
     },
     isViolation () {
       if (!this.selectedOption) {
         return false
       }
       return this.selectedOption.provisions.length > 0
+    },
+    selectedProvisions () {
+      if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
+        return this.question.result.violationInfo.selectedProvisions.length > 0
+      }
+      return []
     }
   },
   created () {
@@ -144,8 +150,8 @@ export default {
       }
     )
 
-    if (this.question.response != null) {
-      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
+    if (this.question.result && this.question.result.responses.length > 0) {
+      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.result.responses[0].value)
       this.selOldOption = this.selectedOption
       this.onChange(this.selectedOption, true)
     }
@@ -153,12 +159,11 @@ export default {
   methods: {
     onChange (e, flag) {
       if (this.question.responseOptions.length > 0) {
-        let rs = this.question.responseOptions.find(q => q.id === this.previousId)
         // if user changes option
         // and if option has provisions asscoiated to it
         // notify the user of possible lost changes
         // flag bool to prevent notification from pop up on load
-        if (this.previousId !== this.currentId && rs.selectedProvisions.length > 0 && !flag) {
+        if (this.previousId !== this.currentId && this.selectedProvisions.length > 0 && !flag) {
           this.confirmDialogOpen = true
         } else {
           this.processEvent()
@@ -191,7 +196,7 @@ export default {
     },
     cancel () {
       this.confirmDialogOpen = false
-      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.response)
+      this.selectedOption = this.question.responseOptions.find(r => r.value === this.question.result.responses[0].value)
     },
     onError (error) {
       this.$emit('error', error)

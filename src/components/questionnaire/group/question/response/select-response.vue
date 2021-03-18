@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <v-select
       ref="select"
       v-model="response"
@@ -86,10 +86,10 @@ export default {
       }
     )
 
-    if (this.question.response != null) {
+    if (this.question.result && this.question.result.responses.length > 0) {
       this.response = []
-      for (let i = 0; i < this.question.response.length; i++) {
-        this.response.push(this.question.responseOptions.find(r => r.value === this.question.response[i]))
+      for (let i = 0; i < this.question.result.responses.length; i++) {
+        this.response.push(this.question.responseOptions.find(r => r.value === this.question.result.responses[i].value))
       }
 
       this.onChange()

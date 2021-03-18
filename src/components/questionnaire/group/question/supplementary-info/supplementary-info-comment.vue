@@ -39,8 +39,9 @@
     <v-list-item>
       <v-list-item-content>
         <v-textarea
+          v-if="isExternalComment"
           ref="textArea"
-          v-model="comment.value"
+          v-model="result.externalComment"
           prepend-inner-icon="mdi-message-text-outline"
           auto-grow
           outlined
@@ -52,10 +53,34 @@
           rows="1"
           :hint="hint"
           :rules="rules"
-          @update:error="onError"
         >
           <v-icon
-            v-if="comment.required"
+            v-if="isCommentRequired"
+            slot="append"
+            small
+            color="red"
+          >
+            mdi-exclamation
+          </v-icon>
+        </v-textarea>
+        <v-textarea
+          v-else
+          ref="textArea"
+          v-model="result.internalComment"
+          prepend-inner-icon="mdi-message-text-outline"
+          auto-grow
+          outlined
+          filled
+          clearable
+          :disabled="readOnly"
+          clear-icon="mdi-close-circle"
+          :placeholder="placeholderText"
+          rows="1"
+          :hint="hint"
+          :rules="rules"
+        >
+          <v-icon
+            v-if="isCommentRequired"
             slot="append"
             small
             color="red"
@@ -74,7 +99,15 @@ import { mapState } from 'vuex'
 export default {
   emits: ['error'],
   props: {
-    comment: {
+    isExternalComment: {
+      type: Boolean,
+      required: true
+    },
+    commentRequirement: {
+      type: String,
+      required: true
+    },
+    result: {
       type: Object,
       required: true
     },
@@ -107,7 +140,7 @@ export default {
   data () {
     return {
       rules: [
-        value => !this.displayComment || !this.isCommentRequired ? true : !!this.comment.value || 'Required.'
+        value => !this.displayComment || !this.isCommentRequired ? true : !!this.commentRequirement || 'Required.'
       ],
       response: '',
       validationStatus: false,
@@ -119,13 +152,13 @@ export default {
       return this.isCommentRequired ? this.$t('app.questionnaire.group.question.commentRequired') : this.$t('app.questionnaire.group.question.commentOptional')
     },
     isCommentRequired () {
-      return this.comment.option === 'required'
+      return this.commentRequirement === 'required'
     },
     displayComment () {
-      return this.comment.option !== 'n/a'
+      return this.commentRequirement !== 'n/a'
     },
     errorInComment () {
-      return this.displayComment && this.isCommentRequired && !this.comment.value
+      return this.displayComment && this.isCommentRequired && (this.isExternalComment ? !this.result.externalComment : !this.result.internalComment)
     },
     ...mapState({
       lang: state => {
@@ -135,36 +168,22 @@ export default {
         return state.settings.settings.lang
       }
     })
-  },
-  watch: {
-    'comment.display' (newValue) {
-      if (!newValue) {
-        this.onError(false)
-      }
-    }
-  },
-  mounted () {
-    this.$watch(
-      '$refs.textArea.validations',
-      (newValue) => {
-        this.onError(this.errorInComment)
-      }
-    )
-  },
-  methods: {
-    handler: function (value) {
-      // TODO: better name of argument.
-    },
-    onError (error) {
-      this.comment.validationStatus = !error
-      if (!this.comment.validationStatus) {
-        this.comment.notification = { header: `Question: ${this.question.text[this.lang]}`, text: `${this.comment.label} for this question is required. Please enter a value on the comment field.`, color: 'error' }
-      } else {
-        this.comment.notification = null
-      }
-      this.$emit('error', error)
-    }
-  }
+  }//,
+  // watch: {
+  //   'comment.display' (newValue) {
+  //     if (!newValue) {
+  //       this.onError(false)
+  //     }
+  //   }
+  // },
+  // mounted () {
+  //   this.$watch(
+  //     '$refs.textArea.validations',
+  //     (newValue) => {
+  //       this.onError(this.errorInComment)
+  //     }
+  //   )
+  // }
 }
 </script>
 

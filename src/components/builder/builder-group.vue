@@ -3,7 +3,7 @@
     <v-row @click="editGroup($event, group)">
       <v-col cols="12">
         <v-expansion-panels
-          v-model="group.expansionPanels"
+          v-model="expansionPanels"
           hover
           focusable
           multiple

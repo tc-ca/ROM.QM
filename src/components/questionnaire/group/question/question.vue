@@ -33,13 +33,13 @@
                 @click.native.stop="clickSampling"
               >
                 <v-icon
-                  color="blue"
+                  :color="!samplingButtonData.disabled? 'blue': 'grey lighten-1'"
                 >
                   mdi-book-open-page-variant-outline
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ $t('app.questionnaire.group.question.sampling.samplingTooltip') }}</span>
+            <span>{{ samplingButtonData.message }}</span>
           </v-tooltip>
 
           <v-tooltip
@@ -102,12 +102,10 @@
             mdi-exclamation
           </v-icon>
         </v-col>
-        <v-col cols="12">
-          <div
-            :style="{fontSize:'16px !important'}"
-          >
-            <span class="text-break">{{ questionText }}</span>
-          </div>
+        <v-col class="pl-1">
+          <h2 class="subtitle-1 text-break">
+            {{ questionText }}
+          </h2>
         </v-col>
         <!-- <v-col mt-0>
           <v-chip
@@ -166,7 +164,7 @@
               <div v-if="displayViolationInfo && !isReferenceQuestion">
                 <div>
                   <v-text-field
-                    v-model="question.violationInfo.referenceID"
+                    v-model="questionResult.violationInfo.referenceId"
                     :disabled="isViolationInfoReferenceIdDisabled || readOnly"
                     :label="$t('app.questionnaire.group.question.referenceId')"
                     :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
@@ -180,7 +178,7 @@
                   </div>
                   <div v-else>
                     <v-text-field
-                      v-model="question.violationInfo.violationCount"
+                      v-model="questionResult.violationInfo.violationCount"
                       :disabled="readOnly"
                       :label="$t('app.questionnaire.group.question.violationCount')"
                       :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
@@ -216,7 +214,7 @@
                     class="mt-2"
                   >
                     <v-text-field
-                      v-model="selectedResponseOption.searchProvisions"
+                      v-model="searchProvisions"
                       :disabled="readOnly"
                       dense
                       outlined
@@ -237,8 +235,7 @@
                       item-key="id"
                       :item-text="'title.' + lang"
                       selection-type="leaf"
-                      :search="selectedResponseOption.searchProvisions"
-                      :filter="selectedResponseOption.filterProvisions"
+                      :search="searchProvisions"
                       :items="treeDataProvisions"
                     >
                       <template v-slot:label="{ item }">
@@ -273,30 +270,30 @@
         <v-sheet>
           <span v-if="displayViolationInfo">  {{ $t('app.questionnaire.group.question.violationDetails') }}</span>
 
-          <div v-if="displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion">
-            <sampling-record
-              :question="question"
-              :read-only="readOnly"
-            />
-          </div>
+          <sampling-record
+            v-if="(displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion) || hasSamplingInfo"
+            :question="question"
+            :read-only="readOnly"
+            :result="questionResult"
+          />
           <div v-if="displayViolationInfo && !isReferenceQuestion">
             <div>
               <v-text-field
-                v-model="question.violationInfo.referenceID"
-                :disabled="isViolationInfoReferenceIdDisabled || readOnly"
+                v-model="questionResult.violationInfo.referenceId"
+                :disabled=" isViolationInfoReferenceIdDisabled ||readOnly"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
                 filled
               />
-              <div v-if="displaySamplingRecord">
-                <sampling-record
-                  :question="question"
-                  :read-only="readOnly"
-                />
-              </div>
+              <sampling-record
+                v-if="displaySamplingRecord || hasSamplingInfo"
+                :question="question"
+                :read-only="readOnly"
+                :result="questionResult"
+              />
               <div v-else>
                 <v-text-field
-                  v-model="question.violationInfo.violationCount"
+                  v-model="questionResult.violationInfo.violationCount"
                   :disabled="readOnly"
                   :label="$t('app.questionnaire.group.question.violationCount')"
                   :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
@@ -333,7 +330,7 @@
                 class="mt-2"
               >
                 <v-text-field
-                  v-model="selectedResponseOption.searchProvisions"
+                  v-model="searchProvisions"
                   :disabled="readOnly"
                   dense
                   outlined
@@ -354,8 +351,7 @@
                   item-key="id"
                   :item-text="'title.' + lang"
                   selection-type="leaf"
-                  :search="selectedResponseOption.searchProvisions"
-                  :filter="selectedResponseOption.filterProvisions"
+                  :search="searchProvisions"
                   :items="treeDataProvisions"
                 >
                   <template v-slot:label="{ item }">
@@ -421,12 +417,12 @@ import BaseMixin from '../../../../mixins/base'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo, isEmptyValues } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record.vue'
 
 export default {
-  emits: ['error', 'responseChanged', 'group-subtitle-change', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
+  emits: ['error', 'responseChanged', 'reference-change', 'delete-repeated-question', 'update-group-question-count'],
   name: 'Question',
   components: { Response, SupplementaryInfo, SamplingRecord },
   mixins: [BaseMixin],
@@ -462,21 +458,21 @@ export default {
   data () {
     return {
       displayViolationInfo: false,
-      // displaySupplementaryInfo: false,
       isValid: null,
-      selectedResponseOption: {},
-      selResponses: [],
+      selectedResponseOption: [],
       treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
+      provisionIds: [],
       isReferenceQuestion: false,
-      isReferenceQuestionInGroup: false,
       isViolationInfoReferenceIdDisabled: false,
       displaySamplingRecord: false,
       requireDependantQuestionToEnableVisibility: this.question.dependencyGroups.some(x => x.ruleType === 'visibility'),
       responseArgs: null,
       filteredInByProvisionSearch: true,
       tab: null,
-      tags: []
+      tags: [],
+      searchProvisions: null,
+      questionResult: { externalComment: '', internalComment: '', files: [], pictures: [], responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
     }
   },
   computed: {
@@ -495,6 +491,9 @@ export default {
       },
       provisionFilter: state => {
         return state.questionnaire.provisionFilter
+      },
+      activeSelectedQuestionId: state => {
+        return state.questionnaire.activeSelectedQuestionId
       }
     }),
     questionText () {
@@ -507,7 +506,6 @@ export default {
     },
     showSupplementaryInfo () {
       return (!_.isEmpty(this.selectedResponseOption)) && questionHasSupplementaryInfo(this.question)
-      // return questionHasSupplementaryInfo(this.question)
     },
     provisions () {
       if (this.isFlatLegislationsDataAvailable) {
@@ -526,7 +524,7 @@ export default {
       return this.provisions.length > 0
     },
     getClassName () {
-      let selClass = this.$store.state.errors.errorNotification.qid === this.question.guid ? 'selected' : ''
+      let selClass = this.activeSelectedQuestionId === this.question.guid ? 'selected' : ''
       if (selClass === 'selected' && this.$refs.qPanel) this.$refs.qPanel.$el.scrollIntoView(true)
       return selClass
     },
@@ -534,7 +532,7 @@ export default {
       return this.selProvisions.length > 0 ? 'caption' : 'subtitle-1'
     },
     isPanelActive () {
-      return this.$store.state.errors.errorNotification.qid === this.question.guid
+      return this.activeSelectedQuestionId === this.question.guid
     },
     expansionPanelsValue: {
       get () {
@@ -557,9 +555,9 @@ export default {
       // if repeated group, find source group
       if (this.inRepeatedGroup || this.question.isRepeated || (this.isChildQuestion && this.parent.isRepeated)) {
         // find the originial group (needed when group is repeated)
-        const groupId = `${this.group.primaryKey}#000`// #000 is always identifies the origin of specific group
+        const domId = `${this.group.name}#000`// #000 is always identifies the origin of specific group
         // find question in the origin group, must get flat list all questions within group first (including children).
-        const originQuestions = this.getFlatListOfAllQuestions(groupId)
+        const originQuestions = this.getFlatListOfAllQuestions(domId)
         // find will return first occurence which statifies our search as the source will always be in the beginning of the array.
         const originQuestion = originQuestions.find(x => x.name === this.question.name)
 
@@ -579,6 +577,22 @@ export default {
       if (this.displaySamplingRecord) return 'black'
       else return 'primary'
     },
+    // allows to display saved sampling info. i.e. when user re-opens an edited questionnaire with sampling information saved they will see the component instead of it hiding.
+    hasSamplingInfo () {
+      if (this.question.result) {
+        return this.question.result.samplingInfo.approximateTotal > 0
+      }
+      return false
+    },
+    samplingButtonData () {
+      if (!this.question.result) {
+        return { disabled: true, message: 'to enable sampling, question must be answered' }
+      }
+      if (this.hasSamplingInfo) {
+        return { disabled: true, message: 'to disable sampling, delete sampling data' }
+      }
+      return { disabled: false, message: this.$t('app.questionnaire.group.question.sampling.samplingTooltip') }
+    },
     tabVisibility () {
       if (this.displayViolationInfo) {
         this.setTab(0)
@@ -595,9 +609,7 @@ export default {
   watch: {
     selProvisions: {
       handler () {
-        this.selectedResponseOption.selectedProvisions = this.selProvisions
-        this.selectedResponseOption.selectedProvisionsTitles = this.getSelectedProvisionsId()
-        this.$emit('group-subtitle-change')
+        this.question.result.violationInfo.selectedProvisions = this.selProvisions
       },
       deep: true
     },
@@ -628,7 +640,6 @@ export default {
       }
     })
     this.question.childQuestions.sort((a, b) => a.sortOrder - b.sortOrder)
-    this.updateReferenceID()
   },
   methods: {
     setTab (value) {
@@ -707,25 +718,23 @@ export default {
     clickSampling ($event) {
       $event.stopPropagation()
       if (!this.isReferenceQuestion) {
-        this.displaySamplingRecord = !this.displaySamplingRecord
+        if (!this.samplingButtonData.disabled) {
+          this.displaySamplingRecord = !this.displaySamplingRecord
+        }
       } else {
         this.displaySamplingRecord = false
       }
     },
-    updateReferenceID () {
+    updateReferenceId () {
       this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-      // this.displaySupplementaryInfo = this.isReferenceQuestion
       if (!this.isReferenceQuestion) {
-        const rQ = BuilderService.findReferenceQuestion(this.group)
-        if (rQ) {
-          this.isViolationInfoReferenceIdDisabled = false
-          this.isReferenceQuestionInGroup = true
-          this.question.violationInfo.referenceID = rQ.response
+        const referenceQuestion = BuilderService.findReferenceQuestion(this.group)
+        if (referenceQuestion) {
           this.isViolationInfoReferenceIdDisabled = true
-          this.isViolationInfoReferenceIdDisabled = true
+          if (referenceQuestion.result && referenceQuestion.result.responses && referenceQuestion.result.responses.length > 0 && this.questionResult.violationInfo) {
+            this.questionResult.violationInfo.referenceId = referenceQuestion.result.responses[0].value
+          }
         }
-      } else {
-        this.isReferenceQuestionInGroup = true
       }
     },
     getSelectedProvisionText (item) {
@@ -741,23 +750,13 @@ export default {
       findDeep(this.treeDataProvisions, item)
       return provison
     },
-    getSelectedProvisionsId () {
-      let list = []
-      if (this.selectedResponseOption && this.selectedResponseOption.selectedProvisions) {
-        this.selectedResponseOption.selectedProvisions.forEach(p => {
-          list.push(this.getSelectedProvisionText(p).trim().toUpperCase())
-        })
-      }
-      return list
-    },
     onSelectedProvisionClick (item) {
       this.selProvisions = this.selProvisions.filter(i => i !== item)
-    // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
-    loadProvisions (responseOption) {
+    loadProvisions (provisionIds) {
     // legs in store should be key, value form
       let dictionnairyOfProvisions = this.$store.state.legislations.legislations
-      let provisions = hydrateItems(responseOption.provisions, dictionnairyOfProvisions)
+      let provisions = hydrateItems(provisionIds, dictionnairyOfProvisions)
 
       // we need to get the parent nodes to have an actual tree or list will be flat
       let parentIds = provisions.map(x => x.parentLegislationId)
@@ -820,7 +819,6 @@ export default {
     },
     onViolationsChange (args) {
       this.question.violationResponse = args
-    // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
     },
     onUserResponseChanged (args) {
       // store the response in data property for reference use
@@ -829,61 +827,89 @@ export default {
       // the process and therefore be empty when this method is executing)
       if (!this.isFlatLegislationsDataAvailable) { return }
 
-      this.selectedResponseOption = this.question.responseOptions.find(q => q.value === args.value)
-      if (this.selectedResponseOption) {
-        this.selProvisions = this.selectedResponseOption.selectedProvisions
-        this.updateViolationInfo(this.selectedResponseOption)
+      if (!this.question.result) {
+        // question has not been answered previously
+        // set json to our component data result object
+        this.question.result = this.questionResult
+      } else {
+        // bind componenent data result to values recieved from  json
+        this.questionResult = this.question.result
       }
 
-      this.updateSupplementaryInfoVisibility(args)
+      this.updateResult(args)
+
+      if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
+        this.selProvisions = this.question.result.violationInfo.selectedProvisions
+      }
+      this.updateViolationInfo(args)
+
       this.updateDependants(args)
+      this.updateReferenceId()
       this.isValid = this.getChildQuestionValidationState()
       this.$emit('responseChanged')
       if (this.isReferenceQuestion) {
         this.$emit('reference-change')
       }
     },
-    // updateSupplementaryInfoVisibility (args) {
-    //   this.displaySupplementaryInfo = (args && args.value)
-    //   if (this.displaySupplementaryInfo) this.updateSupplementaryInfo(args)
-    // },
-    updateSupplementaryInfoVisibility (args) {
-      if (this.showSupplementaryInfo) this.updateSupplementaryInfo(args)
+    updateViolationInfo (args) {
+      if (this.provisionIds.length === 0) {
+        this.displayViolationInfo = false
+      } else if (this.provisionIds.length > 0 && !this.isReferenceQuestion && !isEmptyValues(args.value)) {
+        this.loadProvisions(this.provisionIds)
+        this.displayViolationInfo = true
+      } else {
+        this.displayViolationInfo = false
+      }
     },
-    updateSupplementaryInfo (args) {
-      if (this.question.type === QUESTION_TYPE.RADIO) {
-        let originalOption = this.question.responseOptions.find(option => option.id === args.optionPreviousId)
-        let selectedOption = this.question.responseOptions.find(option => option.id === args.optionCurrentId)
+    updateResult (args) {
+      // args.value can can be string/number or array of values i.e select
+      // make everything array for consistent logic
+      // result.response must return always array
+      if (isEmptyValues(args.value)) {
+        this.question.result.responses = []
+        this.selectedResponseOption = []
+      } else {
+        let responses = args.value
+        if (this.question.type !== QUESTION_TYPE.SELECT) {
+          responses = [args.value]
+        }
 
-        // if user changes option
-        if (args.optionCurrentId !== args.optionPreviousId) {
-          // then pull the original values into the selected option
-          selectedOption.internalComment.value = originalOption.internalComment.value
-          selectedOption.externalComment.value = originalOption.externalComment.value
-          selectedOption.picture.value = originalOption.picture.value
-        }
-      }
-    },
-    updateViolationInfo (responseOption) {
-      if (this.question.responseOptions && this.question.responseOptions.length > 0) {
-        if (responseOption) {
-          if (responseOption.provisions == null || responseOption.provisions.length === 0) {
-            this.displayViolationInfo = false
+        let options = []
+        let newResponses = []
+        responses.forEach((response) => {
+          let option = null
+          if (this.question.type === QUESTION_TYPE.SELECT || this.question.type === QUESTION_TYPE.RADIO) {
+            option = this.question.responseOptions.find(option => option.value === response)
           } else {
-            this.loadProvisions(responseOption)
-            this.displayViolationInfo = !this.isReferenceQuestion
+            option = this.question.responseOptions[0]
           }
-        } else {
-          this.displayViolationInfo = false
-        }
-        if (responseOption && responseOption.selectedProvisions) {
-          this.selectedResponseOption.selectedProvisions = responseOption.selectedProvisions
-        }
-      // this.$emit('group-subtitle-change', this.getSelectedProvisionsId())
+          if (option) { options.push(option) }
+
+          newResponses.push({ 'guid': option ? option.guid : 'not found', 'value': response })
+        })
+
+        let targetedProvisionsIds = []
+        options.forEach(option => {
+          targetedProvisionsIds = targetedProvisionsIds.concat(option.provisions)
+        })
+
+        this.question.result.responses = newResponses
+        // For question type Select where we have multiple response selected get the 1st option and
+        // where the user the selects both option 1 and 2, the required will trump over optional
+        this.selectedResponseOption = options.length > 1 ? this.createListOptions(options) : options[0]
+        this.provisionIds = targetedProvisionsIds
       }
     },
-    updateDependants (args) {
-      this.question.response = args.value
+    createListOptions (options) {
+      let ops = _.cloneDeep(options)
+      ops[0].externalCommentRequirement = options.some(o => o.externalCommentRequirement === 'required') ? 'required' : 'optional'
+      ops[0].fileRequirement = options.some(o => o.fileRequirement === 'required') ? 'required' : 'optional'
+      ops[0].internalCommentRequirement = options.some(o => o.internalCommentRequirement === 'required') ? 'required' : 'optional'
+      ops[0].pictureRequirement = options.some(o => o.pictureRequirement === 'required') ? 'required' : 'optional'
+
+      return ops[0]
+    },
+    updateDependants () {
       if (this.question.dependants) {
         const flatListQuestions = this.getFlatListOfAllQuestions()
         for (let i = 0; i < this.question.dependants.length; i++) {
@@ -920,44 +946,41 @@ export default {
                 groupMatch = false
                 break
               }
-              // if response is string or number make into array to be handle multiple selections
-              let response = dependsOnQuestion.response
-              if (typeof response === 'string' || typeof response === 'number') {
-                response = [response]
-              }
 
-              if (response === null) {
+              let responses = (dependsOnQuestion.result && dependsOnQuestion.result.responses.length > 0) ? dependsOnQuestion.result.responses : null
+
+              if (responses === null) {
                 groupMatch = false
                 break
               }
 
               if (dependancy.validationAction === 'equal') {
-                if (!(response.some(value => value === dependancy.validationValue))) {
+                if (!(responses.some(response => response.value === dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'notEqual') {
-                if (!(response.some(value => value !== dependancy.validationValue))) {
+                if (!(responses.some(response => response.value !== dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'greaterThen') {
-                if (!(response.some(value => +value > +dependancy.validationValue))) {
+                if (!(responses.some(response => +response.value > +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'lessThen') {
-                if (!(response.some(value => +value < +dependancy.validationValue))) {
+                if (!(responses.some(response => +response.value < +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'lengthLessThen') {
-                if (!(response.some(value => !value || value.length < +dependancy.validationValue))) {
+                if (!(responses.some(response => !response.value || response.length < +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
               } else if (dependancy.validationAction === 'lengthGreaterThen') {
-                if (!(response.some(value => !value || value.length > +dependancy.validationValue))) {
+                if (!(responses.some(response => !response.value || response.length > +dependancy.validationValue))) {
                   groupMatch = false
                   break
                 }
@@ -979,7 +1002,7 @@ export default {
             } else if (group.ruleType === 'validationValue' && groupMatch) {
               if (question.validationRules) {
                 let rule = question.validationRules.find(rule => rule.name === group.childValidatorName)
-                rule.value = group.questionDependencies[0].parentQuestion.response
+                rule.value = group.questionDependencies[0].parentQuestion.result.responses[0].value
               }
             }
           }

@@ -21,7 +21,7 @@
               <questionnaire-group
                 v-for="(group, groupIndex) in group.groups"
                 ref="questionGroup"
-                :key="groupIndex"
+                :key="group.guid"
                 :group="group"
                 :index="groupIndex"
                 :expand="expand"
@@ -135,9 +135,6 @@ export default {
       },
       group: state => {
         return state.group
-      },
-      displayValidationErrors: state => {
-        return state.notification.displayValidationErrors
       }
     }),
     isVisible () {
@@ -145,10 +142,6 @@ export default {
     }
   },
   watch: {
-    // expandAllProp (value) {
-    //   alert('expand')
-    //   this.expandPanels(value)
-    // },
     readOnlyProp () {
       this.setReadOnly()
     },
@@ -171,7 +164,6 @@ export default {
     this.readOnly = this.$store.getters['getQuestionnaireReadOnlyStatus']
   },
   beforeDestroy () {
-    this.$store.dispatch('notification/clearNotifications')
     this.$store.dispatch('setQuestionnaireReadOnlyStatus', this.readOnly)
   },
   methods: {
@@ -203,12 +195,8 @@ export default {
       if (this.$refs.questionaire_form.validate()) {
         console.log('Attempting to save...')
       }
-      this.$store.dispatch('notification/validateQuestions', { displayValidationErrors: true })
+      this.$store.dispatch('error/validateQuestions')
     },
-    // expandPanels (expand) {
-    //   this.panelIndex = null
-    //   this.expand = expand
-    // },
     onUpdateGroupCount () {
       if (this.$refs.questionGroup) {
         this.groupCount = this.$refs.questionGroup.filter(x => x.isVisible === true).length

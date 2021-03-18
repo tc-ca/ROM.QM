@@ -25,7 +25,7 @@
       >
         <div
           class="truncated"
-          @click="$emit('question:click', props.item)"
+          @click="$emit('question:click', props.item.guid)"
         >
           <div>
             <v-icon

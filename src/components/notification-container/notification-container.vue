@@ -22,7 +22,14 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  computed: mapState('notification', ['notifications'])
+  computed: {
+    ...mapState({
+
+      notifications: state => {
+        return state.toast.notifications
+      }
+    })
+  }
 }
 
 </script>

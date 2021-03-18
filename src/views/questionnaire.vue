@@ -32,7 +32,6 @@
               :read-only-prop="readOnlyPropQuestionnaire"
               :validate-prop="validatePropQuestionnaire"
               :display-navigation-prop="navigationDisplayPropQuestionnniare"
-              :notification:click="onNotificationClick"
               @clear-provision-search-field="onClearProvisionSearchField"
             />
             <questionnaire-error
@@ -43,7 +42,7 @@
             <questionnaire-nav
               :display="drawer"
               :navitems="navItems"
-              @question:click="onQuestionClick"
+              @question:click="onNotificationClick"
               @navigation-close="drawer = $event"
             />
           </v-sheet>
@@ -153,21 +152,14 @@ export default {
     onClearProvisionSearchField () {
       this.$emit('clear-provision-search-field')
     },
-    onNotificationClick (n) {
-      this.$store.commit('errors/updateErrorNotification', n.qguid)
-      this.validate = false
+    onNotificationClick (questionGuid) {
       this.expandPanels.value = true
-    },
-    onQuestionClick (q) {
-      if (q.guid === undefined) return
-      this.expandPanels.value = true
-      this.drawer = false
-      this.$store.commit('errors/updateErrorNotification', q.guid)
+      this.$store.dispatch('updateActiveQuestionSelection', questionGuid)
     },
     displayNavigationDrawer () {
       let clonedGroups = BuilderService.cloneVisibleQuestionsOnly(this.$store.state.questionnaire.questionnaire)
       clonedGroups = BuilderService.fixTextToShowInDrawer(clonedGroups)
-      let b = JSON.stringify(clonedGroups).replaceAll('primaryKey', 'id')
+      let b = JSON.stringify(clonedGroups).replaceAll('name', 'id')
         .replaceAll('"questions":', '"children":')
         .replaceAll('"childQuestions":', '"children":')
         .replaceAll('"name":', '"name_o":')

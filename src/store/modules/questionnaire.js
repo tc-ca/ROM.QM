@@ -8,7 +8,8 @@ export const state = {
   provisionFilter: null,
   originalTagFilter: [],
   tagFilter: [],
-  modifiedInBuilder: false
+  modifiedInBuilder: false,
+  activeSelectedQuestionId: null
 };
 
 export const getters = {
@@ -26,15 +27,15 @@ export const getters = {
   },
 
   getFlatListOfAllQuestions(state) {
-    return (groupId = false) => {
+    return (domId = false) => {
       let questions = [];
       let groups = [];
 
       //Done by LM on Feb 14 to avoid console error on Dynamic Builder
       if (state.questionnaire) {
-        if (groupId) {
+        if (domId) {
           groups = state.questionnaire.groups.filter(
-            x => x.htmlElementId === groupId
+            x => x.domId === domId
           );
         } else {
           groups = state.questionnaire.groups;
@@ -311,7 +312,10 @@ export const actions = {
       },
     });
 
-  }
+  },
+    updateActiveQuestionSelection({ commit }, payload) {
+    commit("UPDATE_ACTIVE_QUESTION_SELECTION", payload);
+  },
 };
 
 export const mutations = {
@@ -420,7 +424,10 @@ export const mutations = {
     } else {
         state.originalTagFilter.push(tag);
     }
-  }
+  },
+    UPDATE_ACTIVE_QUESTION_SELECTION (state, payload) {
+        state.activeSelectedQuestionId = payload;
+    }
 };
 
 function GetChildrenQuestion(question) {
