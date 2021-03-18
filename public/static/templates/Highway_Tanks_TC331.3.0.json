@@ -1,6 +1,6 @@
 {
-  "guid": "d27d6c97-d48b-4894-bcf9-51c1018d3650",
-  "name": "d27d6c97-d48b-4894-bcf9-51c1018d3650",
+  "guid": "1a7c49ab-04ab-4755-a4f7-47dcdccb0df1",
+  "name": "1a7c49ab-04ab-4755-a4f7-47dcdccb0df1",
   "readOnly": false,
   "title": {
       "en": "Questionnaire Title EN",
@@ -10,15 +10,15 @@
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "9468fb66-0942-4bd1-bd5b-6bdce445da86",
-          "name": "9468fb66-0942-4bd1-bd5b-6bdce445da86",
+          "guid": "27abdeb5-82ac-4cf2-aab1-5e10259e3df9",
+          "name": "27abdeb5-82ac-4cf2-aab1-5e10259e3df9",
           "sortOrder": 1,
           "title": {
               "en": "Highway Tanks - TC 331",
               "fr": "Citèrnes Routières - TC 331"
           },
           "isRepeatable": true,
-          "isVisibleByDefault": true,
+          "isVisible": true,
           "questions": [
               {
                   "guid": "2319df05-4daa-4957-b9b3-02c728aebeb7",
@@ -37,7 +37,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "d2285ebe-1f59-4ea8-ae2f-ee20b7b6b180",
+                          "guid": "be602ad3-8784-4a51-ac6a-855cb4446cfd",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -69,8 +69,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "8c44c856-2529-498f-8a5c-afd7443be71f",
-                          "name": "8c44c856-2529-498f-8a5c-afd7443be71f",
+                          "guid": "1238eaf3-d963-429c-82a3-ec0400d11038",
+                          "name": "1238eaf3-d963-429c-82a3-ec0400d11038",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -84,13 +84,11 @@
                           "provisions": [
                               "3592efcf-3562-eb11-a812-000d3ae9471c",
                               "23f4fd2a-b264-41be-b697-71d7c417b34a"
-                          ],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": true
+                          ]
                       },
                       {
-                          "guid": "043e55f3-4dd7-4cb0-8b58-6b62497b073b",
-                          "name": "043e55f3-4dd7-4cb0-8b58-6b62497b073b",
+                          "guid": "7e4ca726-ab2f-43d3-a5b2-9c3dc7b4f988",
+                          "name": "7e4ca726-ab2f-43d3-a5b2-9c3dc7b4f988",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -101,14 +99,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "edbffd44-459e-4878-9ce1-6905baef0c31",
+                          "guid": "dde8f761-2331-49df-9489-55f17905b1c5",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -140,8 +136,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "effd1b70-f92b-42ce-929a-48a4dfad1c1a",
-                          "name": "effd1b70-f92b-42ce-929a-48a4dfad1c1a",
+                          "guid": "49b23fc5-bba2-4d61-a5f3-147db6f43040",
+                          "name": "49b23fc5-bba2-4d61-a5f3-147db6f43040",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -152,13 +148,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "33b139d6-fff1-43b0-a5d2-9581bdd9bf6a",
-                          "name": "33b139d6-fff1-43b0-a5d2-9581bdd9bf6a",
+                          "guid": "aca4465e-effa-472f-ac89-90a0e301f1bd",
+                          "name": "aca4465e-effa-472f-ac89-90a0e301f1bd",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -169,13 +163,11 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "df15a701-59b3-412a-8797-a940839ac75f",
-                          "name": "df15a701-59b3-412a-8797-a940839ac75f",
+                          "guid": "df6702f1-6b19-43da-9e07-0e6e6496502a",
+                          "name": "df6702f1-6b19-43da-9e07-0e6e6496502a",
                           "sortOrder": 3,
                           "text": {
                               "en": "Not inspected",
@@ -186,14 +178,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "f8b8f54a-2282-45d1-aab0-f09112e24dab",
+                          "guid": "6034af07-f4c1-4ee4-99c2-6a34638fcde9",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -225,8 +215,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "6183a1c7-f29d-48f7-9403-ff1440f1b62f",
-                          "name": "6183a1c7-f29d-48f7-9403-ff1440f1b62f",
+                          "guid": "eef839d4-b82e-466f-a2b4-0ba740e2b078",
+                          "name": "eef839d4-b82e-466f-a2b4-0ba740e2b078",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -237,13 +227,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "096e2230-bb05-43b6-8e2f-783939230504",
-                          "name": "096e2230-bb05-43b6-8e2f-783939230504",
+                          "guid": "23f76d30-eb0d-4587-bd48-e68761505452",
+                          "name": "23f76d30-eb0d-4587-bd48-e68761505452",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -254,14 +242,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "5b281eb2-1481-469f-9685-cc1b8f752672",
+                          "guid": "90e6f3ec-20ca-4c4a-a9fe-e48195ddcb27",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -295,8 +281,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "c6e5ec5c-7dc1-4817-b690-e3c05011d6b4",
-                                  "name": "c6e5ec5c-7dc1-4817-b690-e3c05011d6b4",
+                                  "guid": "9b330e4a-3e2e-46b7-8f49-e61941755e6d",
+                                  "name": "9b330e4a-3e2e-46b7-8f49-e61941755e6d",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -309,13 +295,11 @@
                                   "fileRequirement": "optional",
                                   "provisions": [
                                       "3592efcf-3562-eb11-a812-000d3ae9471c"
-                                  ],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": true
+                                  ]
                               },
                               {
-                                  "guid": "e33244fc-1571-48fe-85e0-c6123e870ada",
-                                  "name": "e33244fc-1571-48fe-85e0-c6123e870ada",
+                                  "guid": "76387415-5874-4a49-915e-3648da4809fe",
+                                  "name": "76387415-5874-4a49-915e-3648da4809fe",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -326,14 +310,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "5baf2978-b961-44d7-95d9-8f7cd0a4528a",
+                                  "guid": "2a0b296f-398f-4ade-91c3-6f46d37d85a9",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -347,12 +329,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "326745fb-8de8-46ae-94fa-1c6a9204884a",
+                                  "guid": "9bf1afe7-26a4-4ffa-be3a-1303776b8bee",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "9fe77b05-db67-4313-b7c6-4a7d5943f8a9",
+                                          "guid": "edbbb806-6757-4631-b7c8-b132700f8708",
                                           "dependsOnQuestion": {
                                               "guid": "4744eace-52ec-44c0-976e-3b506efa298a"
                                           },
@@ -381,8 +363,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "f6a3ec46-6d00-44cb-9980-2eb06136469b",
-                                  "name": "f6a3ec46-6d00-44cb-9980-2eb06136469b",
+                                  "guid": "2d6baa66-e2a5-4f4d-a066-ac0657be7d4f",
+                                  "name": "2d6baa66-e2a5-4f4d-a066-ac0657be7d4f",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -393,13 +375,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "c5e37f20-276d-4bd5-bdfc-27b1a081ce40",
-                                  "name": "c5e37f20-276d-4bd5-bdfc-27b1a081ce40",
+                                  "guid": "0d495234-a39a-4623-aca3-b1ff67fef858",
+                                  "name": "0d495234-a39a-4623-aca3-b1ff67fef858",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -410,14 +390,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "03545428-2019-473d-8a94-5e37072f088b",
+                                  "guid": "ca783311-05c0-4afc-bc3c-89e1a29d05f7",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -452,8 +430,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "aabbaf89-0b09-4443-ab55-f55f12f70d60",
-                          "name": "aabbaf89-0b09-4443-ab55-f55f12f70d60",
+                          "guid": "e0b4b284-30d9-4891-9030-693de5d454ac",
+                          "name": "e0b4b284-30d9-4891-9030-693de5d454ac",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -464,13 +442,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "1034206f-50d8-486d-b9a3-0e518f5e8797",
-                          "name": "1034206f-50d8-486d-b9a3-0e518f5e8797",
+                          "guid": "75b5050d-445d-49f3-b941-ee4b65401fca",
+                          "name": "75b5050d-445d-49f3-b941-ee4b65401fca",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -481,14 +457,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "c41b46b7-ee88-4f5b-a98c-d8e591331844",
+                          "guid": "1c47acf9-fa6a-4bc8-8260-e3552ce2b84a",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -528,8 +502,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "ce44213f-94e2-45f0-8ff1-795aa029bea5",
-                                  "name": "ce44213f-94e2-45f0-8ff1-795aa029bea5",
+                                  "guid": "275db0d9-0fd9-45c8-9a6a-6161219de7ed",
+                                  "name": "275db0d9-0fd9-45c8-9a6a-6161219de7ed",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -540,13 +514,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "4d06e53a-e1d2-4956-8f49-cb5b435a3374",
-                                  "name": "4d06e53a-e1d2-4956-8f49-cb5b435a3374",
+                                  "guid": "c4ce4cf8-d9d1-4b2b-8479-3a7e9db51fb8",
+                                  "name": "c4ce4cf8-d9d1-4b2b-8479-3a7e9db51fb8",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -557,14 +529,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "ee61873a-9077-45bc-9769-5b008dd9d3c2",
+                                  "guid": "9e9365e5-64bf-4093-8202-25e315b7c87e",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -578,12 +548,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "6dc42937-dc6c-4e01-b724-18d6b81774de",
+                                  "guid": "8ec4b00c-b4f4-45de-bb1f-2c9615672a78",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "f1ef4b1d-5036-4c8a-a003-583bd4931833",
+                                          "guid": "28d3ff81-b6fc-4dcc-ad2a-3c5e6e3eb2c4",
                                           "dependsOnQuestion": {
                                               "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06"
                                           },
@@ -612,8 +582,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "76d5e9fb-4ad3-42aa-b03b-6c989a53ab5b",
-                                  "name": "76d5e9fb-4ad3-42aa-b03b-6c989a53ab5b",
+                                  "guid": "afbb18c5-810a-4a3b-8709-59f5dee10805",
+                                  "name": "afbb18c5-810a-4a3b-8709-59f5dee10805",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -624,13 +594,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "40ddc4b2-f520-4051-a706-4ea476c6642b",
-                                  "name": "40ddc4b2-f520-4051-a706-4ea476c6642b",
+                                  "guid": "956e6ec5-e1a5-4d63-9868-fc20b2137ff5",
+                                  "name": "956e6ec5-e1a5-4d63-9868-fc20b2137ff5",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -641,14 +609,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "b013de4b-d873-42e2-8af6-97ffb1c71da0",
+                                  "guid": "7417ffbe-6646-4b66-a9a5-66b39d58b8c6",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -662,12 +628,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "2d63b0f2-82fa-4e2a-88fb-eb3505ab3a3f",
+                                  "guid": "d095c733-b9d8-4e76-a0a0-fb1035367aaa",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "df4ae19f-cfeb-4538-b645-a661f6a52a48",
+                                          "guid": "c9a4f210-282c-452e-a24f-05bdd1eae9b5",
                                           "dependsOnQuestion": {
                                               "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06"
                                           },
@@ -696,8 +662,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "add83e46-3495-4584-8aca-0eada297ab8b",
-                                  "name": "add83e46-3495-4584-8aca-0eada297ab8b",
+                                  "guid": "34cc3c6b-7d44-4d4c-ba7f-5654b00a2216",
+                                  "name": "34cc3c6b-7d44-4d4c-ba7f-5654b00a2216",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -708,13 +674,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "ac258459-4f2f-46b7-bed2-889675ac0202",
-                                  "name": "ac258459-4f2f-46b7-bed2-889675ac0202",
+                                  "guid": "f5f020ee-0195-42bf-9c12-a252815ad18d",
+                                  "name": "f5f020ee-0195-42bf-9c12-a252815ad18d",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -725,14 +689,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "f5ff9e74-0fd3-45cf-8681-0225739b0fed",
+                                  "guid": "820a1181-4b95-404b-8ab8-1610735f9838",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -746,12 +708,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "25c753dc-b49b-4f04-b992-fe7401e8cd59",
+                                  "guid": "9286c8f2-2c1f-481a-97cf-c26b5e34652b",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "e3def56a-5a9b-4cf6-85cf-a932f65c30e8",
+                                          "guid": "f4ff10ad-edd7-4261-84ee-b91c69d94856",
                                           "dependsOnQuestion": {
                                               "guid": "1844b37d-5bc3-4dca-ba75-a5838fdbef06"
                                           },
@@ -783,8 +745,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "d27f1da1-e946-4629-9ebd-d659c5e6b1a8",
-                          "name": "d27f1da1-e946-4629-9ebd-d659c5e6b1a8",
+                          "guid": "d39ff599-2824-41eb-bf63-60cff870ea2b",
+                          "name": "d39ff599-2824-41eb-bf63-60cff870ea2b",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -795,13 +757,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "6fca9051-88b7-4c08-b688-18d7bba69208",
-                          "name": "6fca9051-88b7-4c08-b688-18d7bba69208",
+                          "guid": "0b12dbdd-0c89-4331-9aab-a0129f29cf53",
+                          "name": "0b12dbdd-0c89-4331-9aab-a0129f29cf53",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -812,13 +772,11 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "733b267a-2afc-49c0-bc18-33a7770e6f42",
-                          "name": "733b267a-2afc-49c0-bc18-33a7770e6f42",
+                          "guid": "323d34d9-4447-4f34-ab99-bace7e3fdd25",
+                          "name": "323d34d9-4447-4f34-ab99-bace7e3fdd25",
                           "sortOrder": 3,
                           "text": {
                               "en": "Not inspected",
@@ -829,14 +787,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "ac720e79-2ebd-421f-99d3-a3f493cab67b",
+                          "guid": "8d4127dc-dd6b-426f-b775-8890860efd34",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -868,8 +824,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "344eeda1-7066-4150-ba81-c8553c18babd",
-                          "name": "344eeda1-7066-4150-ba81-c8553c18babd",
+                          "guid": "20a230d4-284e-4728-ba9b-ca27e6f47b03",
+                          "name": "20a230d4-284e-4728-ba9b-ca27e6f47b03",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -880,13 +836,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "731663a5-75e6-4fd1-a453-fe9a57cf241d",
-                          "name": "731663a5-75e6-4fd1-a453-fe9a57cf241d",
+                          "guid": "422e808a-bcba-4bfc-9555-f5ef5acc2b0e",
+                          "name": "422e808a-bcba-4bfc-9555-f5ef5acc2b0e",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -897,14 +851,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "c0cb0658-fae9-454e-9e58-d7e38ec40751",
+                          "guid": "883b33a1-ded9-4289-af8a-1a0c3130b8b1",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -936,8 +888,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "02132c07-2044-4c54-baa3-084a2f2bfb75",
-                          "name": "02132c07-2044-4c54-baa3-084a2f2bfb75",
+                          "guid": "5272ad41-cc39-4947-8c00-8f9674660f3e",
+                          "name": "5272ad41-cc39-4947-8c00-8f9674660f3e",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -948,13 +900,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "68328ca3-6821-4d4e-be94-5bd572b203cf",
-                          "name": "68328ca3-6821-4d4e-be94-5bd572b203cf",
+                          "guid": "02a30391-2ee1-4232-8246-9e9b993fe12c",
+                          "name": "02a30391-2ee1-4232-8246-9e9b993fe12c",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -965,14 +915,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "14753033-936a-4155-a07e-a4fb43f1e05b",
+                          "guid": "67986092-cdd6-4f3a-9d1f-af35bbbc2b27",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1004,8 +952,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "5a6760f6-17d7-4597-b677-308f589778be",
-                          "name": "5a6760f6-17d7-4597-b677-308f589778be",
+                          "guid": "cafb8d44-c16d-43e3-9bca-be5210ae82d3",
+                          "name": "cafb8d44-c16d-43e3-9bca-be5210ae82d3",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1016,13 +964,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "f89e81c0-e685-4131-9f8b-311b953cc0b7",
-                          "name": "f89e81c0-e685-4131-9f8b-311b953cc0b7",
+                          "guid": "b3253918-8ead-4d9f-8968-18d51692c1ef",
+                          "name": "b3253918-8ead-4d9f-8968-18d51692c1ef",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1033,13 +979,11 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "ef7ae85e-e5c8-45bf-9317-9dbe1afbc0dc",
-                          "name": "ef7ae85e-e5c8-45bf-9317-9dbe1afbc0dc",
+                          "guid": "b6aa8b5a-252c-4da1-9b24-482303b564c3",
+                          "name": "b6aa8b5a-252c-4da1-9b24-482303b564c3",
                           "sortOrder": 3,
                           "text": {
                               "en": "Not inspected",
@@ -1050,14 +994,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "6fc28114-e94b-4188-b961-4c195f3955d0",
+                          "guid": "c320964f-d932-4157-8c6a-8cd14fe049d4",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1089,8 +1031,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "109ceef9-05e7-44c9-bdd3-f3724fb6535b",
-                          "name": "109ceef9-05e7-44c9-bdd3-f3724fb6535b",
+                          "guid": "74d43abe-7b7e-4020-a419-ccba94e2c58d",
+                          "name": "74d43abe-7b7e-4020-a419-ccba94e2c58d",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1101,13 +1043,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "484bd421-5c21-48ba-84d7-371e37ad92df",
-                          "name": "484bd421-5c21-48ba-84d7-371e37ad92df",
+                          "guid": "b4de432e-bbb1-4be7-90c1-df2768c77d1f",
+                          "name": "b4de432e-bbb1-4be7-90c1-df2768c77d1f",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1118,14 +1058,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "628e1591-847d-496d-a291-4ac3ff08f0df",
+                          "guid": "6a85f4f2-44d0-4dad-80d7-c48e47007fbe",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1157,8 +1095,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "2bc74bd1-d6c9-4372-b566-67588e2fa3cd",
-                          "name": "2bc74bd1-d6c9-4372-b566-67588e2fa3cd",
+                          "guid": "b7bec89c-6f62-400d-8d60-5eeaec43d19a",
+                          "name": "b7bec89c-6f62-400d-8d60-5eeaec43d19a",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1169,13 +1107,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "140a8547-db86-4147-b67b-71ac259da46a",
-                          "name": "140a8547-db86-4147-b67b-71ac259da46a",
+                          "guid": "b35bb0a5-e411-4970-9687-6b2552f599cd",
+                          "name": "b35bb0a5-e411-4970-9687-6b2552f599cd",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1186,13 +1122,11 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "32792916-6379-4699-bef6-00310ace8917",
-                          "name": "32792916-6379-4699-bef6-00310ace8917",
+                          "guid": "8e90876f-314d-4b1d-9acc-2d56ba83e581",
+                          "name": "8e90876f-314d-4b1d-9acc-2d56ba83e581",
                           "sortOrder": 3,
                           "text": {
                               "en": "Not applicable",
@@ -1203,14 +1137,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "281b276d-68fc-4131-a5ee-43dedecdec9a",
+                          "guid": "249d3349-e612-463f-9fe6-ef747c701c39",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1242,8 +1174,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "f8830467-e42a-46a9-8e2f-52a6c86c0199",
-                          "name": "f8830467-e42a-46a9-8e2f-52a6c86c0199",
+                          "guid": "68a8c6a9-c24f-4167-98d3-b8b91847c0c0",
+                          "name": "68a8c6a9-c24f-4167-98d3-b8b91847c0c0",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1254,13 +1186,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "a56e9935-7f87-48f1-a0f0-b37bca062a94",
-                          "name": "a56e9935-7f87-48f1-a0f0-b37bca062a94",
+                          "guid": "7acf0a9f-763a-4d83-b988-650c66a9f267",
+                          "name": "7acf0a9f-763a-4d83-b988-650c66a9f267",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1271,14 +1201,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "1eaa03a8-10b0-4e72-a0af-c5c5f951540a",
+                          "guid": "831c9a0d-3759-4e9b-a706-433ae5f2d207",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1315,8 +1243,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "ab140b60-bfa3-48b1-9ab7-4de2f2ee6af1",
-                                  "name": "ab140b60-bfa3-48b1-9ab7-4de2f2ee6af1",
+                                  "guid": "c3f1bca4-46ed-493e-886d-d4b510591c01",
+                                  "name": "c3f1bca4-46ed-493e-886d-d4b510591c01",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1327,13 +1255,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "06612a1d-109e-4d04-a822-922818bdd175",
-                                  "name": "06612a1d-109e-4d04-a822-922818bdd175",
+                                  "guid": "79cc1ca0-3eff-47b6-b1d3-77314993ffe6",
+                                  "name": "79cc1ca0-3eff-47b6-b1d3-77314993ffe6",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1344,14 +1270,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "59293d29-2acf-463e-a3a9-29837bcb27f2",
+                                  "guid": "7a72143b-4675-46e2-bbf6-c20acb9ea2eb",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1365,12 +1289,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "d851cdf8-0d9b-489c-8af2-1ec16883a326",
+                                  "guid": "bf56a287-1138-4eac-88b7-58f7624605d9",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "ed8795b1-83ec-463b-97af-ac4011b5bb17",
+                                          "guid": "9a052d40-de80-4c19-a802-e71af879d5d4",
                                           "dependsOnQuestion": {
                                               "guid": "27100784-24ba-4fe1-90b4-7c3bd5eed351"
                                           },
@@ -1399,8 +1323,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "d0b71ea5-6d73-44ee-b130-b99d3f910a68",
-                                  "name": "d0b71ea5-6d73-44ee-b130-b99d3f910a68",
+                                  "guid": "b41c91e8-e741-4822-9484-9d432a52be6a",
+                                  "name": "b41c91e8-e741-4822-9484-9d432a52be6a",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1411,13 +1335,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "b551046f-1627-41da-a0ee-14e87eef87e4",
-                                  "name": "b551046f-1627-41da-a0ee-14e87eef87e4",
+                                  "guid": "2a03f239-50d6-49a4-b252-66a0414a4b59",
+                                  "name": "2a03f239-50d6-49a4-b252-66a0414a4b59",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1428,13 +1350,11 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "1399190e-9314-457d-8cde-b1901a8d58e5",
-                                  "name": "1399190e-9314-457d-8cde-b1901a8d58e5",
+                                  "guid": "b4ef997e-4503-4b8d-98bb-c7aa839fc82f",
+                                  "name": "b4ef997e-4503-4b8d-98bb-c7aa839fc82f",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "Not applicable",
@@ -1445,14 +1365,12 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "be96d518-f497-4b56-9487-a43db11b12e5",
+                                  "guid": "73a116da-59fa-4f8f-b526-9b5af0dd22ce",
                                   "enabled": false,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1466,12 +1384,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "805b6bd1-83b8-45a9-b82d-cb29bd0e49f8",
+                                  "guid": "f4594a81-fa84-4cee-b4e6-4a97c31f1a06",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "a4c02e89-2599-4712-a408-27ee757c79f9",
+                                          "guid": "f6587c97-2c03-48d9-a03e-fdaec431a056",
                                           "dependsOnQuestion": {
                                               "guid": "27100784-24ba-4fe1-90b4-7c3bd5eed351"
                                           },
@@ -1503,8 +1421,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "edb3f037-347f-4f9c-8f93-bba86143eb6b",
-                          "name": "edb3f037-347f-4f9c-8f93-bba86143eb6b",
+                          "guid": "d6b39d45-29bc-4838-995d-bb11a5715b72",
+                          "name": "d6b39d45-29bc-4838-995d-bb11a5715b72",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1515,13 +1433,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "e9875dbb-3525-417e-a406-56e9f7743cd7",
-                          "name": "e9875dbb-3525-417e-a406-56e9f7743cd7",
+                          "guid": "359248f8-9d05-46d2-a30f-eb53ce8b1a30",
+                          "name": "359248f8-9d05-46d2-a30f-eb53ce8b1a30",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1532,14 +1448,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "c8d2797d-828b-4164-a057-453217b51267",
+                          "guid": "8d558e52-b052-41f2-8233-e80d045e7292",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1571,8 +1485,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "913e4dee-890f-46b5-9920-e66266d742f7",
-                          "name": "913e4dee-890f-46b5-9920-e66266d742f7",
+                          "guid": "4bf51efa-8551-4184-bccb-7587fc3e8d0e",
+                          "name": "4bf51efa-8551-4184-bccb-7587fc3e8d0e",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1583,13 +1497,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "20c67273-f04e-4115-8a94-571270a271cf",
-                          "name": "20c67273-f04e-4115-8a94-571270a271cf",
+                          "guid": "13095d99-7181-4a45-bdfe-9a35fe0fc790",
+                          "name": "13095d99-7181-4a45-bdfe-9a35fe0fc790",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1600,13 +1512,11 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "61c08c57-13bd-46a8-adce-f4376c7d3c57",
-                          "name": "61c08c57-13bd-46a8-adce-f4376c7d3c57",
+                          "guid": "11d92ac1-50a4-4152-acbf-424b8eaac454",
+                          "name": "11d92ac1-50a4-4152-acbf-424b8eaac454",
                           "sortOrder": 3,
                           "text": {
                               "en": "Not inspected",
@@ -1617,14 +1527,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "974c7771-7ee5-4df7-8154-e66681a813cf",
+                          "guid": "1bca4774-74a6-4b82-9cb6-035dbaadffab",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1656,8 +1564,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "f9ae6f28-eae3-426f-99c0-de0703d4de83",
-                          "name": "f9ae6f28-eae3-426f-99c0-de0703d4de83",
+                          "guid": "d219b46b-77f9-4de5-858f-d55de6c182a2",
+                          "name": "d219b46b-77f9-4de5-858f-d55de6c182a2",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1668,13 +1576,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "eb2884fd-92d2-40e3-a3e2-190c8bf8b1bf",
-                          "name": "eb2884fd-92d2-40e3-a3e2-190c8bf8b1bf",
+                          "guid": "1e41678f-7bd4-413f-a398-e78e60e9c0db",
+                          "name": "1e41678f-7bd4-413f-a398-e78e60e9c0db",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1685,14 +1591,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "4d9373d1-4688-45c0-a555-c58ed25751b1",
+                          "guid": "01a0c72d-8322-4449-a07c-70910e40d1ed",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -1738,8 +1642,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "3d4daf5b-520d-4cbe-bae9-5b115394e939",
-                                  "name": "3d4daf5b-520d-4cbe-bae9-5b115394e939",
+                                  "guid": "9abbb1d1-7ea4-40c9-b7a9-84c12104029f",
+                                  "name": "9abbb1d1-7ea4-40c9-b7a9-84c12104029f",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1750,13 +1654,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "af032715-d17e-4fe4-8d31-81fb817b7bde",
-                                  "name": "af032715-d17e-4fe4-8d31-81fb817b7bde",
+                                  "guid": "61a30454-470a-460e-8639-bb9ecc5477a6",
+                                  "name": "61a30454-470a-460e-8639-bb9ecc5477a6",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1767,14 +1669,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "eadc0e39-92ec-4239-803d-ca5ab22d3919",
+                                  "guid": "b11c8c74-3fee-4506-b511-339cc9f2cf00",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1788,12 +1688,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "52f7ef9f-e061-44ad-a1df-203c6f69b838",
+                                  "guid": "8bfe7a84-1ef3-455a-977a-101cddd4b819",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "3d59d225-25f5-4948-b002-10097ef8b738",
+                                          "guid": "d8e7a750-0f4b-43f9-9794-1d5e9a502fba",
                                           "dependsOnQuestion": {
                                               "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
                                           },
@@ -1822,8 +1722,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "df855440-3412-4402-9908-a1fd7c75311a",
-                                  "name": "df855440-3412-4402-9908-a1fd7c75311a",
+                                  "guid": "95d1d7bc-4122-44fc-b157-ea0d6791d74a",
+                                  "name": "95d1d7bc-4122-44fc-b157-ea0d6791d74a",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1834,13 +1734,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "e0272076-0cce-4833-a4fa-ced0aecbc671",
-                                  "name": "e0272076-0cce-4833-a4fa-ced0aecbc671",
+                                  "guid": "517eef73-80a7-4f66-8a9d-69fc25b62285",
+                                  "name": "517eef73-80a7-4f66-8a9d-69fc25b62285",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1851,14 +1749,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "6530d158-ace0-4bb7-870a-73ed81af8cf2",
+                                  "guid": "d2b4830c-fcb9-4a5b-8eba-4b5dd47441a1",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1872,12 +1768,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "c019c67e-9f15-48b3-81c8-b35c3d664e7d",
+                                  "guid": "c5b19e53-c0a7-4dcf-8b21-5435eeb971d2",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "e7b56acb-1aad-40ee-8219-5f3a692d5563",
+                                          "guid": "6e787930-e5f7-47ee-9810-1353cb136901",
                                           "dependsOnQuestion": {
                                               "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
                                           },
@@ -1906,8 +1802,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "fa4a8a35-a9a3-4fc5-beb0-3e35fc5697d7",
-                                  "name": "fa4a8a35-a9a3-4fc5-beb0-3e35fc5697d7",
+                                  "guid": "faab39c7-b745-419b-97b1-cf594893e327",
+                                  "name": "faab39c7-b745-419b-97b1-cf594893e327",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -1918,13 +1814,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "797e21ac-ec4d-4177-8513-ef6cdd2f5256",
-                                  "name": "797e21ac-ec4d-4177-8513-ef6cdd2f5256",
+                                  "guid": "0ad2de99-a503-488b-afdf-5fc33fda4357",
+                                  "name": "0ad2de99-a503-488b-afdf-5fc33fda4357",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -1935,14 +1829,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "9202b6f8-46af-46b4-9cb1-3ef2fad109c6",
+                                  "guid": "364ae10e-cf3e-4426-afb1-74549d199877",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -1956,12 +1848,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "f56f7314-0b67-4b88-a8cc-4f06e16b834b",
+                                  "guid": "811c981d-9fa2-4408-85b5-06b9b3c8d922",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "bc350ad0-5461-4402-9350-460b687bcb88",
+                                          "guid": "a360df09-08af-4751-8328-c77c87061fe4",
                                           "dependsOnQuestion": {
                                               "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
                                           },
@@ -1990,8 +1882,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "096ba7b6-c607-4464-82df-23dbd459d17f",
-                                  "name": "096ba7b6-c607-4464-82df-23dbd459d17f",
+                                  "guid": "a4a3997e-5e3b-4b67-bf1e-733f63c87e01",
+                                  "name": "a4a3997e-5e3b-4b67-bf1e-733f63c87e01",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -2002,13 +1894,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "2a6d990b-ecb1-42a5-a848-6fd6f376ad3b",
-                                  "name": "2a6d990b-ecb1-42a5-a848-6fd6f376ad3b",
+                                  "guid": "978df074-2151-4be6-b1c0-e60e001ab55c",
+                                  "name": "978df074-2151-4be6-b1c0-e60e001ab55c",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -2019,14 +1909,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "1df86686-a994-49d6-8a9d-49403137f232",
+                                  "guid": "87a82282-5b43-460e-a0a0-f40e495ba56e",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -2040,12 +1928,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "1c2ef80b-ba7d-4b10-85df-ce046ae5343e",
+                                  "guid": "14d253e1-ce94-4857-8b70-9e7164d74e72",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "ed0e120b-22c1-4d5c-b681-f6e996602eef",
+                                          "guid": "aa832846-e498-45cc-a2ca-cce496268626",
                                           "dependsOnQuestion": {
                                               "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
                                           },
@@ -2074,8 +1962,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "7588139d-fe04-405f-be7d-6d05aa0a32e5",
-                                  "name": "7588139d-fe04-405f-be7d-6d05aa0a32e5",
+                                  "guid": "e39c00ee-81aa-467e-9ae1-e69479e06b21",
+                                  "name": "e39c00ee-81aa-467e-9ae1-e69479e06b21",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -2086,13 +1974,11 @@
                                   "externalCommentRequirement": "optional",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               },
                               {
-                                  "guid": "bd99f9a6-c460-4133-af9a-2dbb281308f0",
-                                  "name": "bd99f9a6-c460-4133-af9a-2dbb281308f0",
+                                  "guid": "9887c74c-5de7-4b3b-92ba-b3e59a4c7f02",
+                                  "name": "9887c74c-5de7-4b3b-92ba-b3e59a4c7f02",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -2103,14 +1989,12 @@
                                   "externalCommentRequirement": "required",
                                   "pictureRequirement": "optional",
                                   "fileRequirement": "optional",
-                                  "provisions": [],
-                                  "searchProvisions": null,
-                                  "isProvisionCollapsed": false
+                                  "provisions": []
                               }
                           ],
                           "validationRules": [
                               {
-                                  "guid": "0ad17e07-4149-4dbf-93f5-6cf4379f11b0",
+                                  "guid": "b1e61b45-437f-48cb-bc61-199a6068cc8e",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -2124,12 +2008,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "9d7d5ae8-f044-42d7-816f-1138ab0d5e08",
+                                  "guid": "4f56f070-c73c-4d88-a27a-3095209a0bb7",
                                   "ruleType": "visibility",
                                   "childValidatorName": null,
                                   "questionDependencies": [
                                       {
-                                          "guid": "20d62164-e810-40b7-8014-b22d95a9a125",
+                                          "guid": "0ac32ab7-27ff-4516-a299-407a39ce32b6",
                                           "dependsOnQuestion": {
                                               "guid": "8af97190-a1a6-473a-a053-c48bf34daab9"
                                           },
@@ -2161,8 +2045,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "b0850610-9583-477b-acb6-46f434b054f6",
-                          "name": "b0850610-9583-477b-acb6-46f434b054f6",
+                          "guid": "d94e5c39-f2ee-4dca-9a7d-a1393a6e48fb",
+                          "name": "d94e5c39-f2ee-4dca-9a7d-a1393a6e48fb",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -2173,13 +2057,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "f1e3766c-759d-42b5-bd9b-510bbbbb32eb",
-                          "name": "f1e3766c-759d-42b5-bd9b-510bbbbb32eb",
+                          "guid": "a44c59c7-ffda-4e43-8c9b-72beb56e816b",
+                          "name": "a44c59c7-ffda-4e43-8c9b-72beb56e816b",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -2190,14 +2072,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "04cd37e1-8abb-4167-810c-28253fc5ec24",
+                          "guid": "0bbfc76c-74dd-4457-8c2c-fd155195235e",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -2229,8 +2109,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "dc149a0c-4fd1-4172-9868-64734267ef7c",
-                          "name": "dc149a0c-4fd1-4172-9868-64734267ef7c",
+                          "guid": "f63e17a1-64de-4eb1-b7c1-a2a8952addbd",
+                          "name": "f63e17a1-64de-4eb1-b7c1-a2a8952addbd",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -2241,13 +2121,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "5df4e6db-b210-41b5-a1be-ac93041c560e",
-                          "name": "5df4e6db-b210-41b5-a1be-ac93041c560e",
+                          "guid": "f528c6a5-b53a-48f8-8c05-44d98f2ed0a8",
+                          "name": "f528c6a5-b53a-48f8-8c05-44d98f2ed0a8",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -2258,14 +2136,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "ed36878d-9c15-40dd-8ce8-d53897d4562f",
+                          "guid": "d4c44f44-2ad9-4fb9-a72b-a68da7c986fc",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -2297,8 +2173,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "61739a58-ed3e-4e34-b4b5-b43bcbae7632",
-                          "name": "61739a58-ed3e-4e34-b4b5-b43bcbae7632",
+                          "guid": "7ae6d785-637e-42d3-baae-4d01dcc13621",
+                          "name": "7ae6d785-637e-42d3-baae-4d01dcc13621",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -2309,13 +2185,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "f180e280-4272-4646-875f-da5359c44acf",
-                          "name": "f180e280-4272-4646-875f-da5359c44acf",
+                          "guid": "64dff228-bb66-4799-af98-4d15d5accf7c",
+                          "name": "64dff228-bb66-4799-af98-4d15d5accf7c",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -2326,14 +2200,12 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "eecf58e4-bedb-44f6-bcb9-16019ffd24f1",
+                          "guid": "461fb777-6420-42dd-b24c-2af22259ab35",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -2350,6 +2222,7 @@
                   "result": null
               }
           ],
+          "isVisibleByDefault": true,
           "expansionPanels": []
       }
   ],

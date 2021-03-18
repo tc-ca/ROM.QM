@@ -1,6 +1,6 @@
 {
-  "guid": "367af5f1-983d-4cdd-9298-cbaa79eff84f",
-  "name": "367af5f1-983d-4cdd-9298-cbaa79eff84f",
+  "guid": "04bff287-6dcf-4ca7-8478-24ede20b827f",
+  "name": "04bff287-6dcf-4ca7-8478-24ede20b827f",
   "readOnly": false,
   "title": {
       "en": "Questionnaire Title EN",
@@ -10,15 +10,15 @@
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "2894bf5a-5505-4335-ad45-06deab986e12",
-          "name": "2894bf5a-5505-4335-ad45-06deab986e12",
+          "guid": "75884aaf-3a7c-4e50-913d-dbf03ade620d",
+          "name": "75884aaf-3a7c-4e50-913d-dbf03ade620d",
           "sortOrder": 1,
           "title": {
               "en": "Commercial air operator’s dangerous goods procedures",
               "fr": "Fr: New Group"
           },
           "isRepeatable": false,
-          "isVisibleByDefault": true,
+          "isVisible": true,
           "questions": [
               {
                   "guid": "7d233e69-a4f1-47f6-a178-420c1cc373b4",
@@ -36,8 +36,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "f21b2336-ae3e-40b2-b976-65ac693b8381",
-                          "name": "f21b2336-ae3e-40b2-b976-65ac693b8381",
+                          "guid": "6c224bcf-ea8c-4400-906d-73df99637ef3",
+                          "name": "6c224bcf-ea8c-4400-906d-73df99637ef3",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -48,13 +48,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "ac014195-917a-438e-b6d2-2875f6c9b9cc",
-                          "name": "ac014195-917a-438e-b6d2-2875f6c9b9cc",
+                          "guid": "893efa1c-8a3c-43c9-9a94-2b976626d0e8",
+                          "name": "893efa1c-8a3c-43c9-9a94-2b976626d0e8",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -65,13 +63,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "db2f60a7-f802-4dc7-8114-56ef53f8aaa3",
-                          "name": "db2f60a7-f802-4dc7-8114-56ef53f8aaa3",
+                          "guid": "1494f5db-a5a6-4faa-8b71-b5c5ad028525",
+                          "name": "1494f5db-a5a6-4faa-8b71-b5c5ad028525",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -82,14 +78,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "2b37eeb7-69fe-4a8b-8330-a281e0419816",
+                          "guid": "060cbded-cb5c-4a4c-bead-714f4c4b1361",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -121,8 +115,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "da487eb2-33c1-419e-9e8c-1ff5f415c2cd",
-                          "name": "da487eb2-33c1-419e-9e8c-1ff5f415c2cd",
+                          "guid": "e21e31f7-b716-45e9-b4e5-0f14d6866ce0",
+                          "name": "e21e31f7-b716-45e9-b4e5-0f14d6866ce0",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -133,13 +127,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "8a8dabf8-c55a-4331-9d07-23d482564b5f",
-                          "name": "8a8dabf8-c55a-4331-9d07-23d482564b5f",
+                          "guid": "3a63e3cb-f471-4ba3-9123-c65090487bc0",
+                          "name": "3a63e3cb-f471-4ba3-9123-c65090487bc0",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -150,13 +142,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "d1fb76fe-3a42-4492-ba1e-5dc99b05bdf1",
-                          "name": "d1fb76fe-3a42-4492-ba1e-5dc99b05bdf1",
+                          "guid": "253e05fc-2951-4f5b-a9fb-836ac010767d",
+                          "name": "253e05fc-2951-4f5b-a9fb-836ac010767d",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -167,14 +157,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "011cfc6a-a32f-4bff-8cde-74c4a0687159",
+                          "guid": "23aa65af-d6da-42ef-ae57-b140e7bbe046",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -191,20 +179,21 @@
                   "result": null
               }
           ],
+          "isVisibleByDefault": true,
           "expansionPanels": []
       },
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "f76780e7-2718-4a41-b7ae-aa9b4eeaecda",
-          "name": "f76780e7-2718-4a41-b7ae-aa9b4eeaecda",
+          "guid": "7edb8182-3919-4ad8-a2c1-d9f39701db3f",
+          "name": "7edb8182-3919-4ad8-a2c1-d9f39701db3f",
           "sortOrder": 2,
           "title": {
               "en": " DG Training program",
               "fr": "Fr: New Group"
           },
           "isRepeatable": false,
-          "isVisibleByDefault": true,
+          "isVisible": true,
           "questions": [
               {
                   "guid": "e0355bf4-28fe-4522-9ef1-74dbfa42ee52",
@@ -222,8 +211,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "845ea60e-d817-4b78-99ca-50e65429358e",
-                          "name": "845ea60e-d817-4b78-99ca-50e65429358e",
+                          "guid": "3f078c8d-22c2-4843-90d5-268c2ce0894c",
+                          "name": "3f078c8d-22c2-4843-90d5-268c2ce0894c",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -234,13 +223,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "373ac7ab-e2dc-4c01-a0bc-abd6f9da8ff5",
-                          "name": "373ac7ab-e2dc-4c01-a0bc-abd6f9da8ff5",
+                          "guid": "e7f12323-8017-4e8a-b7cd-9daf53554451",
+                          "name": "e7f12323-8017-4e8a-b7cd-9daf53554451",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -251,13 +238,11 @@
                           "externalCommentRequirement": "required",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "95aa2d57-75ee-4fa1-af78-37d82fe909f5",
-                          "name": "95aa2d57-75ee-4fa1-af78-37d82fe909f5",
+                          "guid": "61ff8433-3940-48e8-9796-a1dd8a2db471",
+                          "name": "61ff8433-3940-48e8-9796-a1dd8a2db471",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -268,14 +253,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "74128613-825c-4bba-9ce6-6f484acd0f0b",
+                          "guid": "e9248b13-7c4b-4f21-b0a8-bf8dc7fd20b6",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -307,8 +290,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "107eaad2-818a-403b-9ade-3cbe8746c9f7",
-                          "name": "107eaad2-818a-403b-9ade-3cbe8746c9f7",
+                          "guid": "dd1c86fe-a1e3-421a-aff0-5080f2b436bc",
+                          "name": "dd1c86fe-a1e3-421a-aff0-5080f2b436bc",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -319,13 +302,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "48f17a12-cc29-4f5b-aa28-82f24c1b9d94",
-                          "name": "48f17a12-cc29-4f5b-aa28-82f24c1b9d94",
+                          "guid": "35094e3e-5c83-4390-9b03-95bfeb61d3ee",
+                          "name": "35094e3e-5c83-4390-9b03-95bfeb61d3ee",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -336,13 +317,11 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       },
                       {
-                          "guid": "abaf3df9-f250-4d2a-9ae1-5295461e7337",
-                          "name": "abaf3df9-f250-4d2a-9ae1-5295461e7337",
+                          "guid": "057c0765-eda4-46aa-9964-2e5ea8492343",
+                          "name": "057c0765-eda4-46aa-9964-2e5ea8492343",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -353,14 +332,12 @@
                           "externalCommentRequirement": "optional",
                           "pictureRequirement": "optional",
                           "fileRequirement": "optional",
-                          "provisions": [],
-                          "searchProvisions": null,
-                          "isProvisionCollapsed": false
+                          "provisions": []
                       }
                   ],
                   "validationRules": [
                       {
-                          "guid": "15d7f25b-9603-4bd7-a368-8660f8f82e12",
+                          "guid": "a62055ed-7998-4ca9-95a9-58136c95cc30",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -377,6 +354,7 @@
                   "result": null
               }
           ],
+          "isVisibleByDefault": true,
           "expansionPanels": []
       }
   ],
