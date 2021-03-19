@@ -134,7 +134,7 @@ export default {
     },
     selectedProvisions () {
       if (this.question.result && this.question.result.violationInfo && this.question.result.violationInfo.selectedProvisions) {
-        return this.question.result.violationInfo.selectedProvisions.length > 0
+        return this.question.result.violationInfo.selectedProvisions
       }
       return []
     }
