@@ -1,239 +1,359 @@
 export interface Template {
-    /**
-     * unique id (GUID) of the template
-     * @TJS-type string
-     */
-    templateid: string;
+  /**
+   * unique id (GUID) of the template
+   * @TJS-type string
+   */
+  guid: string;
 
-    /**
-     * name of the template
-     * @TJS-type string
-     */
-    name: string;
+  /**
+   * Static name; think radio button groups
+   */
+  name: string;
 
-    title: Title;
+  /**
+   * title of the element in a multi-lang array
+   */
+  title: Title;
 
-    groups: Group[];
+  /**
+   * if the questionnaire\template is read-only due to the state of the object in dyanmics 
+   * @TJS-type boolean
+   */
+  readOnly: boolean;
 
-    /** @nullable */
-    searchableProvisions: SearchableProvision[];
+  /**
+   * list of objects representing all the associated provisions of this template
+   * and the questions those provisions are linked to 
+   * @default []
+   */
+  searchableProvisions: SearchableProvision[];
 
-    readOnly: boolean;
+  /**
+   * list of objects representing groupings of questions in this Template
+   * @default []
+   */
+  groups: Group[];
 }
 
 export interface Group {
-    primaryKey: string;
-    title: Title;
-    isRepeatable: boolean;
-    isVisible: boolean;
-    order: number;
-    questions: Question[];
-    domSuffix: string;
-    htmlElementId: string;
-    expansionPanels: number[]; // shouldnt be here
+  /**
+   * unique id (GUID) of the template
+   * @TJS-type string
+   */
+  guid: string;
+
+  /**
+   * Static name; think radio button groups. 
+   * Also for copy purpose to know its a clone or identify original
+   */
+  name: string;
+
+  /**
+   * title of the element in a multi-lang array
+   */
+  title: Title;
+
+  /**
+   * represents if this group can be repeated by user
+   */
+  isRepeatable: boolean;
+
+  /**
+   * if this group is visible by default 
+   * 
+   * having a value of false would assume that this group has been included
+   * in a DependencyGroup of a Question which decribes the logic
+   * used to hide or show this group
+   */
+  isVisible: boolean;
+
+  /**
+   * order in which this group appears in a set of groups of a template
+   */
+  sortOrder: number;
+
+  /**
+   * suffix used to create unique html element ids
+   * when repeating groups 
+   */
+  domSuffix: string;
+
+  /**
+   * unique ID for html element id 
+   */
+  domId: string;
+
+  /**
+   * the set of Questions that belong to this group
+   * @default []
+   */
+  questions: Question[];
 }
 
 export interface Question {
-    name: string;
-    id: number;
-    guid: string;
-    sortOrder: number;
-    isVisible: boolean;
-    isMultiple: boolean;
-    text: Title;
-    type: QuestionResponseType;
-    response: string[] | number | null | string;
-    isSamplingAllowed?: boolean;
+  /**
+   * unique id (GUID) of the template
+   * @TJS-type string
+   */
+  guid: string;
 
-    /** @nullable */
-    samplingRecord?: SamplingRecord | null;
+  /**
+   * Static name; think radio button groups
+   */
+  name: string;
 
-    isRepeatable?: boolean;
-    isRepeated?: boolean;
+  /**
+   * order in which this group appears in a set of groups of a template
+   */
+  sortOrder: number;
 
-    /** @nullable */
-    // only radio and select have resonse options...currently - TODO: every type of Question should have them
-    responseOptions: QuestionResponseOption[];
+  /**
+   * if this question is visible by default 
+   * 
+   * having a value of false would assume that this question has been included
+   * in a DependencyGroup of another Question to decribes the logic
+   * used to hide or show this question
+   */
+  isVisible: boolean;
 
-    validationRules: ValidationRule[];
-    violationInfo: ViolationInfo;
-    childQuestions: Question[];
-    /**
-    * @default []
-    */
-    dependants: Dependent[];
-    dependencyGroups: DependencyGroup[];
-    validationState: boolean;
-    notification?: Notification;
+  /**
+   * text of the question in a multi-lang array
+   */
+  text: Title;
+
+  /**
+   * what type of question is this
+   * @TJS-type string
+   */
+  type: QuestionResponseType;
+
+
+  isSamplingAllowed: boolean;
+
+  /**
+   * represents if this element CAN be repeated by user
+   */
+  isRepeatable: boolean;
+
+  /**
+   * represents if this element HAS been repeated by user
+   */
+  isRepeated: boolean;
+
+  /**
+   * only radio and select have resonse options...currently - 
+   * TODO: every type of Question should have them
+   * @default []
+   */
+  responseOptions: ResponseOption[];
+
+  /**
+   * array of rules describing what is required for the response 
+   * of this question to be valid
+   * @default []
+   */
+  validationRules: ValidationRule[];
+
+  /**
+   * child or sub-questions
+   * @default []
+   */
+  childQuestions: Question[];
+
+  /**
+   * the result of this question can affect the
+   * -question requirement, 
+   * -enabling of a ValidationRule, or 
+   * -setting the value of what a validationRule should validate against
+   * for other questions
+   * 
+   * having a dependant also means that this question is included inside 
+   * a dependencyGroup of that question
+   * @default []
+   */
+  dependants: Dependant[];
+
+  /**
+   * the
+   * -question requirement, 
+   * -enabling of a ValidationRule, or 
+   * -setting the value of what a validationRule should validate against
+   * for this question can be dependent on other questions as described in 
+   * the DependencyGroups of this array
+   * @default []
+   * */
+  dependencyGroups: DependencyGroup[];
+
+  /** represents the state of validation for a question
+   * maybe long could make computed, but working
+   */
+  validationState: boolean;
+
+  result: Result;
 }
 
-export interface Dependent {
-    guid: string;
+export interface Dependant {
+  guid: string;
 }
 
 export interface DependencyGroup {
-    ruleType: DependencyGroupType;
-    childValidatorName: null;
-    questionDependencies: QuestionDependency[];
+  ruleType: DependencyGroupType;
+
+  /** @default "" */
+  childValidatorName: string;
+
+  /** @default [] */
+  questionDependencies: DependencyGroupItem[]
 }
 
-export interface QuestionDependency {
-    dependsOnQuestion: QuestionDependencyItem;
+export interface DependencyGroupItem {
+  dependsOnQuestion: Dependant;
 
-    /** @nullable */
-    validationAction: ComparisonOperator | null;
-    validationValue: string;
-}
-
-export interface Notification {
-    guid?: string;
-    header: string;
-    text: string;
-    icon?: Icon;
-    color: Color;
-    groupIndex?: number;
-    questionId?: number;
-    qguid?: string;
-    depth?: number;
-    timeout?: number;
-    showing?: boolean;
-}
-
-export enum Color {
-    Error = "error",
-}
-
-export enum Icon {
-    MDIMessageAlert = "mdi-message-alert",
-    MDIMessageDraw = "mdi-message-draw",
-}
-
-export interface QuestionDependencyItem {
-    guid: string;
+  /** @nullable */
+  validationAction: ComparisonOperator;
+  validationValue: string;
 }
 
 export interface Comment {
-    option: Option;
-    value: string;
+  option: Option;
+  value: string;
 }
 
-export interface QuestionResponseOption {
-    id: number;
-    sortOrder: number;
-    text: Title;
-    value: string;
-    internalComment: Comment;
-    externalComment: Comment;
-    file: File;
-    picture: Picture;
-    provisions: string[];
-    selectedProvisions: any[];
+export interface ResponseOption {
+  guid: string;
+  name: string;
+  sortOrder: number;
 
-    /** @nullable */
-    searchProvisions: string | null;
-    isProvisionCollapsed: boolean;
-    name: string;
-    selectedProvisionsTitles?: any[];
+  /** @nullable */
+  text: Title;
+
+  /** @default "" */
+  value: string;
+
+  internalCommentRequirement: Option;
+  externalCommentRequirement: Option;
+  fileRequirement: Option;
+  pictureRequirement: Option;
+
+  /** @default [] */
+  provisions: string[];
 }
 
 export interface File {
-    option: Option;
-    value: FileItems[];
-    validationStatus?: boolean;
-    notification?: null;
-}
-export interface Picture {
-    option: Option;
-    value: PictureItems[];
-    validationStatus?: boolean;
-    notification?: null;
+  /** @default [] */
+  items: FileItem[];
 }
 
-export interface FileItems {
-    title: string;
-    fileName: string;
-    guid: string;
-    comment: string;
-    uploadedBy: string;
-    timeStamp: Date;
+export interface Picture {
+  /** @default [] */
+  items: PictureItem[];
 }
-export interface PictureItems {
-    title: string;
-    fileName: string;
-    guid: string;
-    comment: string;
-    uploadedBy: string;
-    timeStamp: Date;
+
+export interface FileItem {
+  title: string;
+  fileName: string;
+  guid: string;
+  comment: string;
+  uploadedBy: string;
+  timeStamp: Date;
+}
+
+export interface PictureItem {
+  title: string;
+  fileName: string;
+  guid: string;
+  comment: string;
+  uploadedBy: string;
+  timeStamp: Date;
 }
 
 export interface Title {
-    en: string;
-    fr: string;
+  en: string;
+  fr: string;
 }
 
 export interface ValidationRule {
-    name: ValidationRuleType;
-    enabled: boolean;
-    type: ValidationRuleType;
+  name: ValidationRuleType;
+  enabled: boolean;
+  type: ValidationRuleType;
 
-    /** @nullable */
-    value: ValidationValue;
-    errorMessage: Title;
+  /** @nullable */
+  value: string | number | null;
+  errorMessage: Title;
 }
-
-export type ValidationValue = string | number | null;
 
 export interface ViolationInfo {
-    responseToMatch: string;
-    matchingType: ComparisonOperator;
-    referenceID: string | null;
-    violationCount: string | null;
+  referenceID: string;
+  violationCount: string;
 }
 
-export interface SamplingRecord {
-    approximateTotal: string;
-    sampleSize: string;
-    nonCompliances: string;
+export interface SamplingInfo {
+  approximateTotal: string;
+  sampleSize: string;
 }
 
 export interface SearchableProvision {
-    leg: string;
-    questions: string[];
+  leg: string;
+  questions: string[];
 }
 
 export enum QuestionResponseType {
-    Reference = "reference",
-    Number = "number",
-    Select = "select",
-    Radio = "radio",
-    Text = "text",
+  Reference = "reference",
+  Number = "number",
+  Select = "select",
+  Radio = "radio",
+  Text = "text",
 }
 
 export enum ComparisonOperator {
-    Equal = "equal",
-    NotEqual = "notEqual",
-    GreaterThen = "greaterThen",
-    LessThen = "lessThen",
-    LengthLessThen = "lengthLessThen",
-    LengthGreaterThen = "lengthGreaterThen",
+  Equal = "equal",
+  NotEqual = "notEqual",
+  GreaterThen = "greaterThen",
+  LessThen = "lessThen",
+  LengthLessThen = "lengthLessThen",
+  LengthGreaterThen = "lengthGreaterThen",
 }
 
 export enum ValidationRuleType {
-    Require = "require",
-    Min = "min",
-    Max = "max",
-    MinLength = "minLength",
-    MaxLength = "maxLength",
+  Require = "require",
+  Min = "min",
+  Max = "max",
+  MinLength = "minLength",
+  MaxLength = "maxLength",
 }
 
 export enum Option {
-    Optional = "optional",
-    Required = "required",
-    NA = "n/a"
+  Optional = "optional",
+  Required = "required",
+  NA = "n/a"
 }
 
 export enum DependencyGroupType {
-    Visibility = "visibility",
-    Validation = "validation",
-    ValidationValue = "validationValue"
+  Visibility = "visibility",
+  Validation = "validation",
+  ValidationValue = "validationValue"
 }
+
+export interface Result {
+  responses: Response[];
+  externalComment: string;
+  internalComment: string;
+
+  /** @nullable */
+  pictures: Picture;
+
+  /** @nullable */
+  files: File;
+
+  /** @nullable */
+  violationInfo: ViolationInfo;
+
+  /** @nullable */
+  samplingRecord: SamplingInfo;
+}
+
+export interface Response {
+  guid: string,
+  value: string;
+}
+

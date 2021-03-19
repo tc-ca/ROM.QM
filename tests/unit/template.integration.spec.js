@@ -3,7 +3,7 @@
 // import { mount, createLocalVue } from '@vue/test-utils'
 // import Group from '../../src/components/questionnaire/group/group.vue'
 import Ajv from 'ajv'
-import templateSchema from '../../src/schema/newTemplateStructure.json'
+import templateSchema from '../../src/schema/template.json'
 import templateData from '../../public/static/templates/newTemplateExampleJSON.json'
 import addFormats from 'ajv-formats'
 
