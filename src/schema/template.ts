@@ -189,7 +189,7 @@ export interface Question {
    */
   validationState: boolean;
 
-  result: Result;
+  result: Result | null;
 }
 
 export interface Dependant {
@@ -197,6 +197,7 @@ export interface Dependant {
 }
 
 export interface DependencyGroup {
+  guid: string;
   ruleType: DependencyGroupType;
 
   /** @default "" */
@@ -207,10 +208,10 @@ export interface DependencyGroup {
 }
 
 export interface DependencyGroupItem {
+  guid: string;
   dependsOnQuestion: Dependant;
 
-  /** @nullable */
-  validationAction: ComparisonOperator;
+  validationAction: ComparisonOperator | null;
   validationValue: string;
 }
 
@@ -224,8 +225,7 @@ export interface ResponseOption {
   name: string;
   sortOrder: number;
 
-  /** @nullable */
-  text: Title;
+  text: Title | null;
 
   /** @default "" */
   value: string;
@@ -273,18 +273,19 @@ export interface Title {
 }
 
 export interface ValidationRule {
+  guid: string;
   name: ValidationRuleType;
   enabled: boolean;
   type: ValidationRuleType;
 
-  /** @nullable */
   value: string | number | null;
   errorMessage: Title;
 }
 
 export interface ViolationInfo {
-  referenceID: string;
+  referenceId: string;
   violationCount: string;
+  selectedProvisions: string[]
 }
 
 export interface SamplingInfo {
@@ -339,17 +340,13 @@ export interface Result {
   externalComment: string;
   internalComment: string;
 
-  /** @nullable */
-  pictures: Picture;
+  pictures: Picture | null;
 
-  /** @nullable */
-  files: File;
+  files: File | null;
 
-  /** @nullable */
-  violationInfo: ViolationInfo;
+  violationInfo: ViolationInfo | null;
 
-  /** @nullable */
-  samplingRecord: SamplingInfo;
+  samplingInfo: SamplingInfo | null;
 }
 
 export interface Response {

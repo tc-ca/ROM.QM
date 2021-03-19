@@ -4,7 +4,7 @@
 // import Group from '../../src/components/questionnaire/group/group.vue'
 import Ajv from 'ajv'
 import templateSchema from '../../src/schema/template.json'
-import templateData from '../../public/static/templates/newTemplateExampleJSON.json'
+import templateData from '../../public/static/templates/GC.3.0-result.json'
 import addFormats from 'ajv-formats'
 
 let ajvWarnings = []

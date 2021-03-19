@@ -979,7 +979,7 @@ function updateTemplate(template) {
       let nDg = {
         guid: uuidv4(),
         ruleType: dg.ruleType,
-        childValidatorName: dg.childValidatorName,
+        childValidatorName: (dg.childValidatorName) ? dg.childValidatorName : "",
         questionDependencies: []
       };
       dg.questionDependencies.forEach( qd => {
@@ -1025,8 +1025,11 @@ function updateTemplate(template) {
     let newGroup = createGroup(x);
     newGroup.title = template.groups[x].title;
     newGroup.isRepeatable = template.groups[x].isRepeatable;
-    newGroup.isVisibleByDefault = template.groups[x].isVisible;
-    newGroup.expansionPanels = template.groups[x].expansionPanels;
+    newGroup.isVisible = template.groups[x].isVisible;
+
+    if (newGroup.isVisibleByDefault !== undefined) {
+      delete newGroup.isVisibleByDefault;
+    }
 
     // Questions
     template.groups[x].questions.forEach(q => {

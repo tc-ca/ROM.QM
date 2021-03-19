@@ -264,6 +264,9 @@ namespace TC.PowerApps.Models
         [JsonProperty("childValidatorName")]
         public string ChildValidatorName { get; set; }
 
+        [JsonProperty("guid")]
+        public string Guid { get; set; }
+
         [JsonProperty("questionDependencies")]
         public List<DependencyGroupItem> QuestionDependencies { get; set; }
 
@@ -275,6 +278,9 @@ namespace TC.PowerApps.Models
     {
         [JsonProperty("dependsOnQuestion")]
         public Dependant DependsOnQuestion { get; set; }
+
+        [JsonProperty("guid")]
+        public string Guid { get; set; }
 
         [JsonProperty("validationAction")]
         public ComparisonOperatorEnum? ValidationAction { get; set; }
@@ -347,8 +353,8 @@ namespace TC.PowerApps.Models
         [JsonProperty("responses")]
         public List<Response> Responses { get; set; }
 
-        [JsonProperty("samplingRecord")]
-        public SamplingInfo SamplingRecord { get; set; }
+        [JsonProperty("samplingInfo")]
+        public SamplingInfo SamplingInfo { get; set; }
 
         [JsonProperty("violationInfo")]
         public ViolationInfo ViolationInfo { get; set; }
@@ -428,8 +434,11 @@ namespace TC.PowerApps.Models
 
     public partial class ViolationInfo
     {
-        [JsonProperty("referenceID")]
+        [JsonProperty("referenceId")]
         public string ReferenceId { get; set; }
+
+        [JsonProperty("selectedProvisions")]
+        public List<string> SelectedProvisions { get; set; }
 
         [JsonProperty("violationCount")]
         public string ViolationCount { get; set; }
@@ -442,6 +451,9 @@ namespace TC.PowerApps.Models
 
         [JsonProperty("errorMessage")]
         public Title ErrorMessage { get; set; }
+
+        [JsonProperty("guid")]
+        public string Guid { get; set; }
 
         [JsonProperty("name")]
         public ValidationRuleTypeEnum Name { get; set; }
