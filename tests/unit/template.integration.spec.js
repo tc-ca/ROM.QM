@@ -3,8 +3,8 @@
 // import { mount, createLocalVue } from '@vue/test-utils'
 // import Group from '../../src/components/questionnaire/group/group.vue'
 import Ajv from 'ajv'
-import templateSchema from '../../src/schema/newTemplateStructure.json'
-import templateData from '../../public/static/templates/newTemplateExampleJSON.json'
+import templateSchema from '../../src/schema/template.json'
+import templateData from '../../public/static/templates/GC.3.0-result.json'
 import addFormats from 'ajv-formats'
 
 let ajvWarnings = []

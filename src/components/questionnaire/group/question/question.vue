@@ -472,7 +472,7 @@ export default {
       tab: null,
       tags: [],
       searchProvisions: null,
-      questionResult: { externalComment: '', internalComment: '', files: [], pictures: [], responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
+      questionResult: { externalComment: '', internalComment: '', files: null, pictures: null, responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
     }
   },
   computed: {
