@@ -1,6 +1,6 @@
 {
-  "guid": "04bff287-6dcf-4ca7-8478-24ede20b827f",
-  "name": "04bff287-6dcf-4ca7-8478-24ede20b827f",
+  "guid": "96329fe6-ea39-4508-b530-47081cc2bac1",
+  "name": "96329fe6-ea39-4508-b530-47081cc2bac1",
   "readOnly": false,
   "title": {
       "en": "Questionnaire Title EN",
@@ -10,8 +10,8 @@
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "75884aaf-3a7c-4e50-913d-dbf03ade620d",
-          "name": "75884aaf-3a7c-4e50-913d-dbf03ade620d",
+          "guid": "4c0bfb50-5ffd-4308-841f-556774ef5edc",
+          "name": "4c0bfb50-5ffd-4308-841f-556774ef5edc",
           "sortOrder": 1,
           "title": {
               "en": "Commercial air operator’s dangerous goods procedures",
@@ -36,8 +36,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "6c224bcf-ea8c-4400-906d-73df99637ef3",
-                          "name": "6c224bcf-ea8c-4400-906d-73df99637ef3",
+                          "guid": "a1034413-03c7-4b6c-ac41-ef344c499d62",
+                          "name": "a1034413-03c7-4b6c-ac41-ef344c499d62",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -51,8 +51,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "893efa1c-8a3c-43c9-9a94-2b976626d0e8",
-                          "name": "893efa1c-8a3c-43c9-9a94-2b976626d0e8",
+                          "guid": "bff269ca-7228-4a9a-bfd8-b95ebde5c471",
+                          "name": "bff269ca-7228-4a9a-bfd8-b95ebde5c471",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -66,8 +66,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "1494f5db-a5a6-4faa-8b71-b5c5ad028525",
-                          "name": "1494f5db-a5a6-4faa-8b71-b5c5ad028525",
+                          "guid": "27176100-377b-4455-97ae-417a633d03dc",
+                          "name": "27176100-377b-4455-97ae-417a633d03dc",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -83,7 +83,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "060cbded-cb5c-4a4c-bead-714f4c4b1361",
+                          "guid": "d99743bc-4435-4c41-9522-41467dd97b65",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -115,8 +115,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "e21e31f7-b716-45e9-b4e5-0f14d6866ce0",
-                          "name": "e21e31f7-b716-45e9-b4e5-0f14d6866ce0",
+                          "guid": "0ba9a714-a869-4df3-9efa-23dd17b52343",
+                          "name": "0ba9a714-a869-4df3-9efa-23dd17b52343",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -130,8 +130,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "3a63e3cb-f471-4ba3-9123-c65090487bc0",
-                          "name": "3a63e3cb-f471-4ba3-9123-c65090487bc0",
+                          "guid": "eec6f9a8-4afd-4949-91a6-6bf419e9f802",
+                          "name": "eec6f9a8-4afd-4949-91a6-6bf419e9f802",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -145,8 +145,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "253e05fc-2951-4f5b-a9fb-836ac010767d",
-                          "name": "253e05fc-2951-4f5b-a9fb-836ac010767d",
+                          "guid": "94382d94-d192-43b7-85b0-ecde4cee4983",
+                          "name": "94382d94-d192-43b7-85b0-ecde4cee4983",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -162,7 +162,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "23aa65af-d6da-42ef-ae57-b140e7bbe046",
+                          "guid": "44e9d2f6-0d0b-4ac5-97dc-07937094015d",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -178,15 +178,13 @@
                   "childQuestions": [],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       },
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "7edb8182-3919-4ad8-a2c1-d9f39701db3f",
-          "name": "7edb8182-3919-4ad8-a2c1-d9f39701db3f",
+          "guid": "41afddf6-bfa4-4a9c-9722-b3114def87dc",
+          "name": "41afddf6-bfa4-4a9c-9722-b3114def87dc",
           "sortOrder": 2,
           "title": {
               "en": " DG Training program",
@@ -211,8 +209,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "3f078c8d-22c2-4843-90d5-268c2ce0894c",
-                          "name": "3f078c8d-22c2-4843-90d5-268c2ce0894c",
+                          "guid": "c9d4aa5d-3a1b-4cb3-bde7-a45178aeab71",
+                          "name": "c9d4aa5d-3a1b-4cb3-bde7-a45178aeab71",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -226,8 +224,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "e7f12323-8017-4e8a-b7cd-9daf53554451",
-                          "name": "e7f12323-8017-4e8a-b7cd-9daf53554451",
+                          "guid": "1c96d996-3f2e-49f2-a995-a10d0c51bf11",
+                          "name": "1c96d996-3f2e-49f2-a995-a10d0c51bf11",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -241,8 +239,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "61ff8433-3940-48e8-9796-a1dd8a2db471",
-                          "name": "61ff8433-3940-48e8-9796-a1dd8a2db471",
+                          "guid": "5580b9bd-fd04-410a-a56f-6ba387599ddc",
+                          "name": "5580b9bd-fd04-410a-a56f-6ba387599ddc",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -258,7 +256,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "e9248b13-7c4b-4f21-b0a8-bf8dc7fd20b6",
+                          "guid": "00770784-3b53-4cfb-a438-d58b1b4969de",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -290,8 +288,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "dd1c86fe-a1e3-421a-aff0-5080f2b436bc",
-                          "name": "dd1c86fe-a1e3-421a-aff0-5080f2b436bc",
+                          "guid": "24dd0f9d-36db-4ee5-9c46-2bf31be257f5",
+                          "name": "24dd0f9d-36db-4ee5-9c46-2bf31be257f5",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -305,8 +303,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "35094e3e-5c83-4390-9b03-95bfeb61d3ee",
-                          "name": "35094e3e-5c83-4390-9b03-95bfeb61d3ee",
+                          "guid": "891f3cfe-0dcb-436f-8ad8-f1966a36af25",
+                          "name": "891f3cfe-0dcb-436f-8ad8-f1966a36af25",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -320,8 +318,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "057c0765-eda4-46aa-9964-2e5ea8492343",
-                          "name": "057c0765-eda4-46aa-9964-2e5ea8492343",
+                          "guid": "f53bb043-ea3a-4dd0-84ec-c68c7c4c277d",
+                          "name": "f53bb043-ea3a-4dd0-84ec-c68c7c4c277d",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -337,7 +335,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "a62055ed-7998-4ca9-95a9-58136c95cc30",
+                          "guid": "840b18bc-c438-4262-b629-77fed042302c",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -353,9 +351,7 @@
                   "childQuestions": [],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       }
   ],
   "searchableProvisions": []

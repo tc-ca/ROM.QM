@@ -1,6 +1,6 @@
 {
-  "guid": "2bf574d9-b2d8-4668-8281-8123abb55e4e",
-  "name": "2bf574d9-b2d8-4668-8281-8123abb55e4e",
+  "guid": "74fa9084-59b4-4483-b48e-a7d912062aeb",
+  "name": "74fa9084-59b4-4483-b48e-a7d912062aeb",
   "readOnly": false,
   "title": {
       "en": "Small Containers Design and Manufacture for the Transportation of Dangerous Goods Pursuant to Part 1 of TP14850",
@@ -10,8 +10,8 @@
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "0b0e5e29-f6da-45ad-a54a-e67a3be54969",
-          "name": "0b0e5e29-f6da-45ad-a54a-e67a3be54969",
+          "guid": "e771719b-ba6e-408e-9061-1b85ea57d57c",
+          "name": "e771719b-ba6e-408e-9061-1b85ea57d57c",
           "sortOrder": 1,
           "title": {
               "en": "1.0- Company details",
@@ -36,8 +36,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "95759db8-dba7-40d1-87b7-88e083b6aa26",
-                          "name": "95759db8-dba7-40d1-87b7-88e083b6aa26",
+                          "guid": "a1b4ac51-a0e9-4d09-91b1-59e55c2a4613",
+                          "name": "a1b4ac51-a0e9-4d09-91b1-59e55c2a4613",
                           "sortOrder": 1,
                           "text": {
                               "en": "Initial",
@@ -51,8 +51,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "3cc5abbb-566c-45fb-b1ec-ea1bddcb9166",
-                          "name": "3cc5abbb-566c-45fb-b1ec-ea1bddcb9166",
+                          "guid": "3513f5ab-14f2-4556-ba3b-4670a4e9c848",
+                          "name": "3513f5ab-14f2-4556-ba3b-4670a4e9c848",
                           "sortOrder": 2,
                           "text": {
                               "en": "Verification",
@@ -68,7 +68,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "00221dbe-720b-402e-ba4e-a14a5d88d3c6",
+                          "guid": "eff18f1e-5ded-4b9e-b34a-988afedd85f9",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -105,8 +105,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "2f75c9ca-424d-4ed8-bc63-35d47e952778",
-                                  "name": "2f75c9ca-424d-4ed8-bc63-35d47e952778",
+                                  "guid": "c4e5248c-0cd5-4a4a-ad0f-d1bb7d881a48",
+                                  "name": "c4e5248c-0cd5-4a4a-ad0f-d1bb7d881a48",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -120,8 +120,8 @@
                                   "provisions": []
                               },
                               {
-                                  "guid": "c1aac584-7b53-43d4-9ecd-444dd361722f",
-                                  "name": "c1aac584-7b53-43d4-9ecd-444dd361722f",
+                                  "guid": "9b21d566-4cd6-4098-85a7-a31457d878ec",
+                                  "name": "9b21d566-4cd6-4098-85a7-a31457d878ec",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -137,8 +137,8 @@
                                   ]
                               },
                               {
-                                  "guid": "77901ef9-9c1a-4e91-a73d-c1596e628abb",
-                                  "name": "77901ef9-9c1a-4e91-a73d-c1596e628abb",
+                                  "guid": "e033f924-fc8f-4609-aa9c-09535fd161ff",
+                                  "name": "e033f924-fc8f-4609-aa9c-09535fd161ff",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "N/A",
@@ -154,7 +154,7 @@
                           ],
                           "validationRules": [
                               {
-                                  "guid": "a157ae0c-844f-4435-a949-ceb5922360cb",
+                                  "guid": "cfb9fbdf-3224-4ca3-9b24-222d74be8767",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -168,12 +168,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "8546e63f-7c75-48d5-bc48-e8655818f6be",
+                                  "guid": "1e18a56c-4b43-49d9-8d7a-80cd420035b6",
                                   "ruleType": "visibility",
-                                  "childValidatorName": null,
+                                  "childValidatorName": "",
                                   "questionDependencies": [
                                       {
-                                          "guid": "3cfc48b3-377f-423a-9647-b4a30ee564bf",
+                                          "guid": "54946db8-9461-499e-b9c6-3dead01a3c26",
                                           "dependsOnQuestion": {
                                               "guid": "bc8873b1-6ed7-4b3b-aefb-3da65d618aec"
                                           },
@@ -202,8 +202,8 @@
                           "validationState": true,
                           "responseOptions": [
                               {
-                                  "guid": "d463aa99-f0b3-496c-a239-31e4a54661ee",
-                                  "name": "d463aa99-f0b3-496c-a239-31e4a54661ee",
+                                  "guid": "fb4743cd-d36d-4eb3-add4-d6de74b00921",
+                                  "name": "fb4743cd-d36d-4eb3-add4-d6de74b00921",
                                   "sortOrder": 1,
                                   "text": {
                                       "en": "Yes",
@@ -217,8 +217,8 @@
                                   "provisions": []
                               },
                               {
-                                  "guid": "c8d7d30c-0e45-4577-8695-49e918d2fc86",
-                                  "name": "c8d7d30c-0e45-4577-8695-49e918d2fc86",
+                                  "guid": "e0db2e53-f680-4e25-a0e4-32c5c615f627",
+                                  "name": "e0db2e53-f680-4e25-a0e4-32c5c615f627",
                                   "sortOrder": 2,
                                   "text": {
                                       "en": "No",
@@ -234,8 +234,8 @@
                                   ]
                               },
                               {
-                                  "guid": "2bcd4219-b922-4c3b-be5c-969680a64c8f",
-                                  "name": "2bcd4219-b922-4c3b-be5c-969680a64c8f",
+                                  "guid": "d1c99a96-b7cd-4591-8bf2-5790e09d9424",
+                                  "name": "d1c99a96-b7cd-4591-8bf2-5790e09d9424",
                                   "sortOrder": 3,
                                   "text": {
                                       "en": "N/A",
@@ -251,7 +251,7 @@
                           ],
                           "validationRules": [
                               {
-                                  "guid": "fc1168f2-234d-4ef2-bf4b-400795e24cf9",
+                                  "guid": "3820b3c9-e38c-4789-b1e6-e34380b58625",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -265,12 +265,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "5ddcae38-00eb-4ca8-bc63-2b991ce4600e",
+                                  "guid": "2335cabc-f356-4756-a33d-5b819888a59c",
                                   "ruleType": "visibility",
-                                  "childValidatorName": null,
+                                  "childValidatorName": "",
                                   "questionDependencies": [
                                       {
-                                          "guid": "74f59063-80b8-4056-a504-7907b5bdaa90",
+                                          "guid": "9c4f4aa0-722f-4559-ac92-91acca5e66ad",
                                           "dependsOnQuestion": {
                                               "guid": "bc8873b1-6ed7-4b3b-aefb-3da65d618aec"
                                           },
@@ -302,8 +302,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "7de7b86c-fabb-49af-81b3-cf64a5a7e8ac",
-                          "name": "7de7b86c-fabb-49af-81b3-cf64a5a7e8ac",
+                          "guid": "440071ed-b3c5-414e-a206-4ec92c4bfb1e",
+                          "name": "440071ed-b3c5-414e-a206-4ec92c4bfb1e",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -317,8 +317,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "e84cd132-5262-4a23-b330-696453737b3b",
-                          "name": "e84cd132-5262-4a23-b330-696453737b3b",
+                          "guid": "78b9e39b-b822-4ab1-9e56-26f1db148a5f",
+                          "name": "78b9e39b-b822-4ab1-9e56-26f1db148a5f",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -334,7 +334,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "fb757cfa-c1f7-4f9e-ac7c-260741b22a7d",
+                          "guid": "e2e6545e-7794-4e24-88c7-69a0c89b2cb7",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -369,7 +369,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "60751e14-d198-4422-bafc-10632043fb3a",
+                                  "guid": "43e21f67-3d5c-4ae9-9e48-d7a96ba10ee5",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -383,12 +383,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "ebb63a08-bac2-4e13-9692-e2a041b1a96f",
+                                  "guid": "e202d8ba-8a6d-47bb-8c78-d07fd9c5d93b",
                                   "ruleType": "visibility",
-                                  "childValidatorName": null,
+                                  "childValidatorName": "",
                                   "questionDependencies": [
                                       {
-                                          "guid": "a874af9e-f2fe-4b2e-8869-a23b86ed58cf",
+                                          "guid": "f5cd43d3-bc83-4cd5-8d1b-417baa4da716",
                                           "dependsOnQuestion": {
                                               "guid": "890e6170-f726-45e3-bbc6-fdaf191d5937"
                                           },
@@ -404,15 +404,13 @@
                   ],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       },
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "5118d05c-f731-43f3-9530-6a00746eb83e",
-          "name": "5118d05c-f731-43f3-9530-6a00746eb83e",
+          "guid": "1af60175-862e-4ef3-b6b1-405ef3c5f787",
+          "name": "1af60175-862e-4ef3-b6b1-405ef3c5f787",
           "sortOrder": 2,
           "title": {
               "en": "2.0-Certificate(s) of Registration ",
@@ -435,8 +433,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "78aefb41-1deb-4cc0-9f58-baa7aa7181f2",
-                          "name": "78aefb41-1deb-4cc0-9f58-baa7aa7181f2",
+                          "guid": "5d94a207-89ec-4584-b9e8-c02050421edc",
+                          "name": "5d94a207-89ec-4584-b9e8-c02050421edc",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -450,8 +448,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "4d07a7e8-e595-4a13-b5b5-2257c600dcc7",
-                          "name": "4d07a7e8-e595-4a13-b5b5-2257c600dcc7",
+                          "guid": "b4ab9a41-67aa-4a58-b51d-284db235d7c0",
+                          "name": "b4ab9a41-67aa-4a58-b51d-284db235d7c0",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -465,8 +463,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "47c198c8-bf0c-434c-b27d-2a01c7e13c8f",
-                          "name": "47c198c8-bf0c-434c-b27d-2a01c7e13c8f",
+                          "guid": "45f904a1-550e-44a6-aacf-6810411fb5c9",
+                          "name": "45f904a1-550e-44a6-aacf-6810411fb5c9",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -482,7 +480,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "a23f07f3-4a25-4620-b4b3-e6b5da8832de",
+                          "guid": "a9f1c5ad-9196-4819-a271-468ff0987992",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -500,9 +498,9 @@
                   ],
                   "dependencyGroups": [
                       {
-                          "guid": "f8f647bd-88ce-48d7-85d0-8e61be948d38",
+                          "guid": "42a2f218-7318-4704-aa93-0216dba06f1f",
                           "ruleType": "visibility",
-                          "childValidatorName": null,
+                          "childValidatorName": "",
                           "questionDependencies": []
                       }
                   ],
@@ -522,7 +520,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "fbc38079-a4a5-4d8c-895c-3818b1330c42",
+                                  "guid": "7965315b-9e8f-4a19-bd44-45186ca62f60",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -536,12 +534,12 @@
                           "dependants": [],
                           "dependencyGroups": [
                               {
-                                  "guid": "c8972686-d9bf-4087-b7f5-79c64ef77a5d",
+                                  "guid": "11a7eccc-d6f2-4c51-8494-4fe61381af83",
                                   "ruleType": "visibility",
-                                  "childValidatorName": null,
+                                  "childValidatorName": "",
                                   "questionDependencies": [
                                       {
-                                          "guid": "4b272f81-434b-41d8-b435-7212612e4923",
+                                          "guid": "f03bd56d-e517-4850-86f0-cca39144b7cc",
                                           "dependsOnQuestion": {
                                               "guid": "a1c1470d-74c9-4b73-aefe-34add05494b0"
                                           },
@@ -557,15 +555,13 @@
                   ],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       },
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "ea8bdf54-503a-4a25-bb7a-3333493f6119",
-          "name": "ea8bdf54-503a-4a25-bb7a-3333493f6119",
+          "guid": "ac6fa98b-73dd-4027-bf30-062e1bd2afb7",
+          "name": "ac6fa98b-73dd-4027-bf30-062e1bd2afb7",
           "sortOrder": 3,
           "title": {
               "en": "3.0- Other Documentation",
@@ -588,8 +584,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "f5c54c90-467e-4cee-9acf-1af4f38d26ba",
-                          "name": "f5c54c90-467e-4cee-9acf-1af4f38d26ba",
+                          "guid": "26d94cd9-dbe6-4756-8a26-597a32cbe837",
+                          "name": "26d94cd9-dbe6-4756-8a26-597a32cbe837",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -603,8 +599,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "098d6a43-09b4-4b63-ba56-c823889f4fd0",
-                          "name": "098d6a43-09b4-4b63-ba56-c823889f4fd0",
+                          "guid": "ee3d29fc-ec85-4175-842c-6d6bfe9fbd65",
+                          "name": "ee3d29fc-ec85-4175-842c-6d6bfe9fbd65",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -622,7 +618,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "80b4bcd8-a5c5-48c1-87fd-a9111b29e3a0",
+                          "guid": "557f2926-c483-44bf-b82a-1732fe96a17e",
                           "enabled": false,
                           "errorMessage": {
                               "en": "Required",
@@ -657,7 +653,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "ffde9219-c2d6-4c19-a344-a6e5623605b3",
+                                  "guid": "19253317-ba6d-4f0f-b35d-6502cde1b9de",
                                   "enabled": true,
                                   "errorMessage": {
                                       "en": "Required",
@@ -675,12 +671,12 @@
                           ],
                           "dependencyGroups": [
                               {
-                                  "guid": "241be6fa-4aa4-41e1-b370-dff27d6075c1",
+                                  "guid": "2c2c3d12-b6f3-4198-9855-43dc12b95c10",
                                   "ruleType": "visibility",
-                                  "childValidatorName": null,
+                                  "childValidatorName": "",
                                   "questionDependencies": [
                                       {
-                                          "guid": "e518f7af-6961-4d74-b3b9-082902261bc1",
+                                          "guid": "1ca3f847-cbeb-4591-9d17-7cb9b213951c",
                                           "dependsOnQuestion": {
                                               "guid": "96744199-1d4d-4d57-aeb1-ce7513985327"
                                           },
@@ -709,8 +705,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "64196e80-9de3-494b-96f2-84eafb788a6e",
-                          "name": "64196e80-9de3-494b-96f2-84eafb788a6e",
+                          "guid": "43c213d6-ac0f-4868-8110-185766a4ebda",
+                          "name": "43c213d6-ac0f-4868-8110-185766a4ebda",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -724,8 +720,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "c6faf209-900f-493c-b8de-05413040e378",
-                          "name": "c6faf209-900f-493c-b8de-05413040e378",
+                          "guid": "899cd8f6-047d-4c8e-a0c9-1065d9bcea9e",
+                          "name": "899cd8f6-047d-4c8e-a0c9-1065d9bcea9e",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -739,8 +735,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "88b372d1-b47c-41fd-b54a-4e2c621d7463",
-                          "name": "88b372d1-b47c-41fd-b54a-4e2c621d7463",
+                          "guid": "dd9ff173-3510-4310-b1c6-e94d6904c10f",
+                          "name": "dd9ff173-3510-4310-b1c6-e94d6904c10f",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -756,7 +752,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "9ad4f8b5-0f05-40a3-88e6-e99ff18f5285",
+                          "guid": "728bb9ce-1eb8-4927-8037-16470a5f03e6",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -785,8 +781,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "5557f78a-8a5c-48c2-8ca4-9c0e5c726829",
-                          "name": "5557f78a-8a5c-48c2-8ca4-9c0e5c726829",
+                          "guid": "ab855252-90a6-405e-9871-5a35b460441b",
+                          "name": "ab855252-90a6-405e-9871-5a35b460441b",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -800,8 +796,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "621e1fc0-7fdb-4698-809a-93e08473c4d9",
-                          "name": "621e1fc0-7fdb-4698-809a-93e08473c4d9",
+                          "guid": "af6563ed-e197-4948-b139-da6021eb9025",
+                          "name": "af6563ed-e197-4948-b139-da6021eb9025",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -817,8 +813,8 @@
                           ]
                       },
                       {
-                          "guid": "b55581fb-2de2-4428-b0fc-8c6cc7c0f42b",
-                          "name": "b55581fb-2de2-4428-b0fc-8c6cc7c0f42b",
+                          "guid": "21c682ed-292f-416d-8a81-e21f6c89dda9",
+                          "name": "21c682ed-292f-416d-8a81-e21f6c89dda9",
                           "sortOrder": 3,
                           "text": {
                               "en": "N/A",
@@ -834,7 +830,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "7a1342a1-f5b6-42c3-9bd4-401b28cebdca",
+                          "guid": "3b5fbafa-1e1b-40f3-a02d-e3b38e867261",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -864,7 +860,7 @@
                   "responseOptions": [],
                   "validationRules": [
                       {
-                          "guid": "2087e715-3590-469a-bf81-6a6540e42191",
+                          "guid": "1f494e31-1ce4-4d50-97fb-bf8d218ec285",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -892,7 +888,7 @@
                           "responseOptions": [],
                           "validationRules": [
                               {
-                                  "guid": "be31154d-ed93-494c-8041-345862944dd2",
+                                  "guid": "872af654-e76e-49b1-9b90-b21bb0a8c223",
                                   "enabled": false,
                                   "errorMessage": {
                                       "en": "Required",
@@ -911,15 +907,13 @@
                   ],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       },
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "bbb1e4c4-c559-4876-b762-666a663c9add",
-          "name": "bbb1e4c4-c559-4876-b762-666a663c9add",
+          "guid": "2b4eafab-39ae-4c99-9813-05226552764b",
+          "name": "2b4eafab-39ae-4c99-9813-05226552764b",
           "sortOrder": 4,
           "title": {
               "en": "4.0- Compliance Marking",
@@ -944,8 +938,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "2ffcab15-0f61-4a9f-9a05-68b05985a1ec",
-                          "name": "2ffcab15-0f61-4a9f-9a05-68b05985a1ec",
+                          "guid": "535947ed-afcc-4995-8f41-8841a5b9f30b",
+                          "name": "535947ed-afcc-4995-8f41-8841a5b9f30b",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -959,8 +953,8 @@
                           "provisions": []
                       },
                       {
-                          "guid": "f1660a48-516b-4c3c-a0e5-533cbced9bc5",
-                          "name": "f1660a48-516b-4c3c-a0e5-533cbced9bc5",
+                          "guid": "3a49f878-c143-44e0-b889-a1266b7b39df",
+                          "name": "3a49f878-c143-44e0-b889-a1266b7b39df",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -978,7 +972,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "d721ccaf-6aaa-4e34-86cc-2a036596d655",
+                          "guid": "e5694d98-e27e-4523-83c7-9b87ceded2fa",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -994,15 +988,13 @@
                   "childQuestions": [],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       },
       {
           "domId": "",
           "domSuffix": "",
-          "guid": "0e88e63c-3824-4378-8e2c-4e5f98334a10",
-          "name": "0e88e63c-3824-4378-8e2c-4e5f98334a10",
+          "guid": "60cfd65c-7bfb-46d7-a48d-6090f0c5260a",
+          "name": "60cfd65c-7bfb-46d7-a48d-6090f0c5260a",
           "sortOrder": 5,
           "title": {
               "en": "5.0- Other findings",
@@ -1027,8 +1019,8 @@
                   "validationState": true,
                   "responseOptions": [
                       {
-                          "guid": "d9c2c2e6-3404-4a68-9a8b-1c725cefad4d",
-                          "name": "d9c2c2e6-3404-4a68-9a8b-1c725cefad4d",
+                          "guid": "95eb9af5-a114-4dca-bc20-5c59954a4782",
+                          "name": "95eb9af5-a114-4dca-bc20-5c59954a4782",
                           "sortOrder": 1,
                           "text": {
                               "en": "Yes",
@@ -1162,8 +1154,8 @@
                           ]
                       },
                       {
-                          "guid": "bcee574e-270e-4181-a8e5-1b8ebc2dcf44",
-                          "name": "bcee574e-270e-4181-a8e5-1b8ebc2dcf44",
+                          "guid": "f7803374-60ca-4ab2-9d35-6b47b53b0873",
+                          "name": "f7803374-60ca-4ab2-9d35-6b47b53b0873",
                           "sortOrder": 2,
                           "text": {
                               "en": "No",
@@ -1179,7 +1171,7 @@
                   ],
                   "validationRules": [
                       {
-                          "guid": "8ed9e11f-5a25-4395-a261-8626a6cad76c",
+                          "guid": "c74bf195-bad3-40e1-99ed-f7214be6533f",
                           "enabled": true,
                           "errorMessage": {
                               "en": "Required",
@@ -1195,9 +1187,7 @@
                   "childQuestions": [],
                   "result": null
               }
-          ],
-          "isVisibleByDefault": true,
-          "expansionPanels": []
+          ]
       }
   ],
   "searchableProvisions": [
