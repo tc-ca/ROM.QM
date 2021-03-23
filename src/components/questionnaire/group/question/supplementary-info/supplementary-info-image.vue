@@ -262,7 +262,7 @@
           />
         </v-col>
       </v-row>
-      <v-row v-if="question.result != null && question.result.pictures != null && question.result.pictures.items.length > 0">
+      <v-row v-if="question.result && question.result.pictures && question.result.pictures.items && question.result.pictures.items.length > 0">
         <v-col
           class="d-flex child-flex"
           cols="12"
@@ -277,7 +277,7 @@
         </v-col>
       </v-row>
       <v-input
-        v-if="question.result.pictures && question.result.pictures.items"
+        v-if="question.result && question.result.pictures && question.result.pictures.items"
         ref="validationInput"
         v-model="question.result.pictures.items.length"
         :disabled="readOnly"
@@ -391,7 +391,7 @@ export default {
       return this.pictureRequirement === 'required'
     },
     errorInPicture () {
-      return this.displayPicture && this.isPictureRequired && this.question.result.pictures != null && !this.question.result.pictures.items.length > 0
+      return this.displayPicture && this.isPictureRequired && this.question.result.pictures && this.question.result.pictures.items && !this.question.result.pictures.items.length > 0
     },
     ...mapState({
       userName: state => {
@@ -474,7 +474,7 @@ export default {
       let end = (i * IMAGES_PER_PAGE)
       this.curPage = i
       this.curPageImages = null
-      this.curPageImages = this.question.result.pictures.items.slice(start, end)
+      this.curPageImages = (this.question.result.pictures && this.question.result.pictures.items) ? this.question.result.pictures.items.slice(start, end) : null
     },
 
     setCurrentImage (imgLink, img) {
