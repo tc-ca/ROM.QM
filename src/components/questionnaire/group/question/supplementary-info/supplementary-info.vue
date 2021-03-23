@@ -30,7 +30,6 @@
     />
     <supplementary-info-files
       v-if="displayFile"
-      :file="question.result ? question.result.files : []"
       :file-requirement="selresponseoption.fileRequirement"
       :label="$t('app.questionnaire.group.question.supplementaryFile.label')"
       :group="group"
@@ -40,7 +39,6 @@
     />
     <supplementary-info-image
       v-if="displayPicture"
-      :picture="question.result ? question.result.pictures : []"
       :picture-requirement="selresponseoption.pictureRequirement"
       :label="$t('app.questionnaire.group.question.photos')"
       :group="group"

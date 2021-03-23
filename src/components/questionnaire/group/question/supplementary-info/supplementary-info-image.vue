@@ -262,14 +262,14 @@
           />
         </v-col>
       </v-row>
-      <v-row v-if="picture.length > 0">
+      <v-row v-if="question.result != null && question.result.pictures != null && question.result.pictures.items.length > 0">
         <v-col
           class="d-flex child-flex"
           cols="12"
         >
           <v-pagination
             v-model="page"
-            :length="calculateTotalPages(picture.length)"
+            :length="calculateTotalPages(question.result.pictures.items.length)"
             :total-visible="5"
             circle
             @input="onNextPageMove($event)"
@@ -277,8 +277,9 @@
         </v-col>
       </v-row>
       <v-input
+        v-if="question.result.pictures && question.result.pictures.items"
         ref="validationInput"
-        v-model="picture.length"
+        v-model="question.result.pictures.items.length"
         :disabled="readOnly"
         :rules="rules"
       />
@@ -330,10 +331,6 @@ export default {
   },
   mixins: [BaseMixin],
   props: {
-    picture: {
-      type: Array,
-      required: true
-    },
     pictureRequirement: {
       type: String,
       required: true
@@ -373,7 +370,7 @@ export default {
       progressStatus: '',
       galleryIndex: 0,
       rules: [
-        value => !this.display || !this.isPictureRequired === 'required' ? true : this.picture.length > 0 || 'Required.'
+        value => !this.display || !this.isPictureRequired === 'required' ? true : (this.question.result.pictures != null && this.question.result.pictures.items.length > 0) || 'Required.'
       ],
       validationStatus: false,
       notification: null,
@@ -385,7 +382,7 @@ export default {
 
   computed: {
     imageNoteExist () {
-      return this.picture.value[this.galleryIndex] !== undefined
+      return this.question.result.pictures.items[this.galleryIndex] !== undefined
     },
     displayPicture () {
       return this.pictureRequirement !== 'n/a'
@@ -394,7 +391,7 @@ export default {
       return this.pictureRequirement === 'required'
     },
     errorInPicture () {
-      return this.displayPicture && this.isPictureRequired && !this.picture.length > 0
+      return this.displayPicture && this.isPictureRequired && this.question.result.pictures != null && !this.question.result.pictures.items.length > 0
     },
     ...mapState({
       userName: state => {
@@ -423,13 +420,6 @@ export default {
         }
       }
     )
-    // this.$watch(
-    //   '$refs.validationInput.validations',
-    //   (newValue) => {
-    //     let error = this.displayPicture && this.isPictureRequired && !this.picture.length > 0
-    //     this.onError(error)
-    //   }
-    // )
     this.onNextPageMove(1)
   },
   methods: {
@@ -437,8 +427,12 @@ export default {
       let el = this.$store.state.imagefile.imageFileNotification.imageResults
       if (el !== null) {
         // storeObj.forEach((el, index) => {
-        if (this.question.guid === el.qguid && !this.picture.some(p => p.guid === el.guid)) {
-          this.picture.push({
+        if (this.question.result.pictures == null) {
+          this.question.result.pictures = {}
+          this.question.result.pictures.items = []
+        }
+        if (this.question.guid === el.qguid && !this.question.result.pictures.items.some(p => p.guid === el.guid)) {
+          this.question.result.pictures.items.push({
             title: el.result,
             fileName: el.result,
             comment: 'N/A',
@@ -447,7 +441,7 @@ export default {
             timeStamp: moment().format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS)
           })
           this.progressStatus = ''
-          this.curPage = this.calculateTotalPages(this.picture.length)
+          this.curPage = this.calculateTotalPages(this.question.result.pictures.items.length)
           this.onNextPageMove(this.curPage)
           this.next()
           this.next()
@@ -460,8 +454,8 @@ export default {
       let el = this.$store.state.imagefile.deletedImageData.imageDetails
       if (el !== null) {
         // storeDelObj.forEach((el, index) => {
-        if (this.picture.some(p => p.guid === el.guid)) {
-          this.picture.splice(this.picture.findIndex(p => p.guid === el.guid), 1)
+        if (this.question.result.pictures.items.some(p => p.guid === el.guid)) {
+          this.question.result.pictures.items.splice(this.question.result.pictures.items.findIndex(p => p.guid === el.guid), 1)
           this.prev()
           this.prev()
           this.selImage = null
@@ -480,7 +474,7 @@ export default {
       let end = (i * IMAGES_PER_PAGE)
       this.curPage = i
       this.curPageImages = null
-      this.curPageImages = this.picture.slice(start, end)
+      this.curPageImages = this.question.result.pictures.items.slice(start, end)
     },
 
     setCurrentImage (imgLink, img) {
@@ -586,20 +580,20 @@ export default {
     },
 
     setGalleryIndex () {
-      this.galleryIndex = this.picture.length === 0
+      this.galleryIndex = this.question.result.pictures.items.length === 0
         ? 0
-        : this.picture.length - 1
+        : this.question.result.pictures.items.length - 1
     },
 
     next () {
-      this.galleryIndex = this.galleryIndex + 1 === this.picture.length
+      this.galleryIndex = this.galleryIndex + 1 === this.question.result.pictures.items.length
         ? 0
         : this.galleryIndex + 1
     },
 
     prev () {
       this.galleryIndex = this.galleryIndex - 1 < 0
-        ? this.picture.length - 1
+        ? this.question.result.pictures.items.length - 1
         : this.galleryIndex - 1
     }
   }

@@ -61,7 +61,7 @@
               cols="12"
             >
               <v-list
-                v-if="file.length > 0"
+                v-if="question.result.files && question.result.files.items && question.result.files.items.length > 0"
                 color="#f5f5f5"
                 dense
               >
@@ -73,7 +73,7 @@
                 </v-list-item-title>
 
                 <v-list-item
-                  v-for="(f, index) in file.value"
+                  v-for="(f, index) in question.result.files.items"
                   :key="index"
                 >
                   <document-file
@@ -96,8 +96,9 @@
         <v-row>
           <v-col cols="12">
             <v-input
+              v-if="question.result.files && question.result.files.items"
               ref="validationInput"
-              v-model="file.length"
+              v-model="question.result.files.items.length"
               :disabled="readOnly"
               :rules="rules"
             />
@@ -152,10 +153,6 @@ export default {
   },
   mixins: [BaseMixin],
   props: {
-    file: {
-      type: Array,
-      required: true
-    },
     fileRequirement: {
       type: String,
       required: true
@@ -188,7 +185,7 @@ export default {
       progressStatus: '',
       galleryIndex: 0,
       rules: [
-        value => !this.display || !this.isFileRequired === 'required' ? true : this.file.length > 0 || 'Required.'
+        value => !this.display || !this.isFileRequired === 'required' ? true : (this.question.result.files && this.question.result.files.items && this.question.result.files.items.length > 0) || 'Required.'
       ],
       validationStatus: false,
       notification: null,
@@ -198,8 +195,13 @@ export default {
   },
 
   computed: {
+    // file: {
+    //   get: function () {
+    //     return this.question.result.filess
+    //   }
+    // },
     fileNoteExist () {
-      return this.file.value[this.galleryIndex] !== undefined
+      return this.question.result.files && this.question.result.files.items[this.galleryIndex] !== undefined
     },
     displayFile () {
       return this.fileRequirement !== 'n/a'
@@ -208,7 +210,7 @@ export default {
       return this.fileRequirement === 'required'
     },
     errorInFile () {
-      return this.displayFile && this.isFileRequired && !this.file.length > 0
+      return this.displayFile && this.isFileRequired && this.question.result.files && this.question.result.files.items && !this.question.result.files.items.length > 0
     },
     placeholderText () {
       return this.isFileRequired ? this.$t('app.questionnaire.group.question.supplementaryFile.fileRequired') : this.$t('app.questionnaire.group.question.supplementaryFile.fileOptional')
@@ -247,13 +249,6 @@ export default {
         }
       }
     )
-    // this.$watch(
-    //   '$refs.validationInput.validations',
-    //   (newValue) => {
-    //     let error = this.displayFile && this.isFileRequired && !this.file.length > 0
-    //     this.onError(error)
-    //   }
-    // )
   },
   methods: {
     onFileChange (e) {
@@ -297,8 +292,12 @@ export default {
     onUploadFile () {
       let el = this.$store.state.imagefile.imageFileNotification.fileResults
       if (el !== null) {
-        if (this.question.guid === el.qguid && !this.file.value.some(f => f.guid === el.guid)) {
-          this.file.value.push({
+        if (this.question.result.files == null) {
+          this.question.result.files = {}
+          this.question.result.files.items = []
+        }
+        if (this.question.guid === el.qguid && !this.question.result.files.items.some(f => f.guid === el.guid)) {
+          this.question.result.files.items.push({
             title: el.result,
             fileName: el.result,
             comment: 'N/A',
@@ -372,8 +371,8 @@ export default {
     onDeleteFile () {
       let el = this.$store.state.imagefile.deletedImageData.fileDetails
       if (el !== null) {
-        if (this.file.value.some(f => f.guid === el.guid)) {
-          this.file.value.splice(this.file.value.findIndex(f => f.guid === el.guid), 1)
+        if (this.question.result.files.items.some(f => f.guid === el.guid)) {
+          this.question.result.files.items.splice(this.question.result.files.items.findIndex(f => f.guid === el.guid), 1)
           this.prev()
           this.prev()
         }
@@ -387,19 +386,19 @@ export default {
     },
 
     setGalleryIndex () {
-      this.galleryIndex = this.file.length === 0
+      this.galleryIndex = this.file.items.length === 0
         ? 0
-        : this.file.length - 1
+        : this.file.items.length - 1
     },
     next () {
-      this.galleryIndex = this.galleryIndex + 1 === this.file.length
+      this.galleryIndex = this.galleryIndex + 1 === this.question.result.files.items.length
         ? 0
         : this.galleryIndex + 1
     },
 
     prev () {
       this.galleryIndex = this.galleryIndex - 1 < 0
-        ? this.file.length - 1
+        ? this.question.result.files.items.length - 1
         : this.galleryIndex - 1
     }
   }
