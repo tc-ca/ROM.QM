@@ -13,10 +13,10 @@
       no-gutters
       dense
     >
-      <v-col cols="4">
+      <v-col :cols="colSize">
         <v-text-field
           ref="question.samplingRecord.approximateTotal"
-          v-model.number="result.samplingInfo.approximateTotal"
+          v-model.number="samplingInfo.approximateTotal"
           filled
           outlined
           :label="$t('app.questionnaire.group.question.sampling.approximateTotal')"
@@ -29,10 +29,10 @@
           :rules="[ validateTotal ]"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col :cols="colSize">
         <v-text-field
           ref="question.samplingRecord.sampleSize"
-          v-model.number="result.samplingInfo.sampleSize"
+          v-model.number="samplingInfo.sampleSize"
           filled
           outlined
           :label="$t('app.questionnaire.group.question.sampling.sampleSize')"
@@ -41,15 +41,18 @@
           type="number"
           min="1"
           :disabled="readOnly"
-          :max="result.samplingInfo.approximateTotal"
+          :max="samplingInfo.approximateTotal"
           :error-messages="errorMessagesSize"
           :rules="[ validateSampleSize ]"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col
+        v-if="hasProvisions"
+        :cols="colSize"
+      >
         <v-text-field
           ref="question.samplingRecord.nonCompliances"
-          v-model.number="result.violationInfo.violationCount"
+          v-model.number="violationInfo.violationCount"
           filled
           outlined
           :label="$t('app.questionnaire.group.question.sampling.nonCompliances')"
@@ -58,7 +61,7 @@
           type="number"
           min="0"
           :disabled="readOnly"
-          :max="result.samplingInfo.sampleSize"
+          :max="samplingInfo.sampleSize"
           :error-messages="errorMessagesCompliances"
           :rules="[ validateNonCompliance ]"
         />
@@ -81,8 +84,16 @@ export default {
       type: Boolean,
       required: true
     },
-    result: {
+    samplingInfo: {
       type: Object,
+      required: true
+    },
+    violationInfo: {
+      type: Object,
+      required: true
+    },
+    hasProvisions: {
+      type: Boolean,
       required: true
     }
   },
@@ -101,13 +112,16 @@ export default {
       return false
     },
     approximateTotal () {
-      return this.result.samplingInfo.approximateTotal
+      return this.samplingInfo.approximateTotal
     },
     sampleSize () {
-      return this.result.samplingInfo.sampleSize
+      return this.samplingInfo.sampleSize
     },
     violationCount () {
-      return this.result.violationInfo.violationCount
+      return this.violationInfo.violationCount
+    },
+    colSize () {
+      return this.hasProvisions ? '4' : '6'
     }
   },
   methods: {

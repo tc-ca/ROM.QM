@@ -271,15 +271,17 @@
           <span v-if="displayViolationInfo">  {{ $t('app.questionnaire.group.question.violationDetails') }}</span>
 
           <sampling-record
-            v-if="(displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion) || hasSamplingInfo"
+            v-if="(displaySamplingRecord && !displayViolationInfo && !isReferenceQuestion) || (hasSamplingInfo && !displayViolationInfo && !isReferenceQuestion)"
             :question="question"
             :read-only="readOnly"
-            :result="questionResult"
+            :sampling-info="samplingInfo"
+            :violation-info="violationInfo"
+            :has-provisions="provisionIds.length > 0"
           />
           <div v-if="displayViolationInfo && !isReferenceQuestion">
             <div>
               <v-text-field
-                v-model="questionResult.violationInfo.referenceId"
+                v-model="violationInfo.referenceId"
                 :disabled=" isViolationInfoReferenceIdDisabled ||readOnly"
                 :label="$t('app.questionnaire.group.question.referenceId')"
                 :placeholder="$t('app.questionnaire.group.question.referenceIdPlaceHolder')"
@@ -289,11 +291,13 @@
                 v-if="displaySamplingRecord || hasSamplingInfo"
                 :question="question"
                 :read-only="readOnly"
-                :result="questionResult"
+                :sampling-info="samplingInfo"
+                :violation-info="violationInfo"
+                :has-provisions="provisionIds.length > 0"
               />
               <div v-else>
                 <v-text-field
-                  v-model="questionResult.violationInfo.violationCount"
+                  v-model="violationInfo.violationCount"
                   :disabled="readOnly"
                   :label="$t('app.questionnaire.group.question.violationCount')"
                   :placeholder="$t('app.questionnaire.group.question.violationCountPlaceHolder')"
@@ -472,7 +476,9 @@ export default {
       tab: null,
       tags: [],
       searchProvisions: null,
-      questionResult: { externalComment: '', internalComment: '', files: null, pictures: null, responses: [], violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] }, samplingInfo: { approximateTotal: '', sampleSize: '' } }
+      questionResult: { externalComment: '', internalComment: '', files: [], pictures: [], responses: [], violationInfo: null, samplingInfo: null },
+      violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] },
+      samplingInfo: { approximateTotal: '', sampleSize: '' }
     }
   },
   computed: {
@@ -534,6 +540,17 @@ export default {
     isPanelActive () {
       return this.activeSelectedQuestionId === this.question.guid
     },
+    referenceId () {
+      if (!this.isReferenceQuestion) {
+        const referenceQuestion = BuilderService.findReferenceQuestion(this.group)
+        if (referenceQuestion) {
+          if (referenceQuestion.result && referenceQuestion.result.responses && referenceQuestion.result.responses.length > 0 && this.questionResult.violationInfo) {
+            return referenceQuestion.result.responses[0].value
+          }
+        }
+      }
+      return null
+    },
     expansionPanelsValue: {
       get () {
         if (this.expand.value) {
@@ -580,7 +597,7 @@ export default {
     // allows to display saved sampling info. i.e. when user re-opens an edited questionnaire with sampling information saved they will see the component instead of it hiding.
     hasSamplingInfo () {
       if (this.question.result) {
-        return this.question.result.samplingInfo.approximateTotal > 0
+        return this.samplingInfo.approximateTotal > 0 || this.samplingInfo.sampleSize > 0
       }
       return false
     },
@@ -609,12 +626,18 @@ export default {
   watch: {
     selProvisions: {
       handler () {
-        this.question.result.violationInfo.selectedProvisions = this.selProvisions
+        this.violationInfo.selectedProvisions = this.selProvisions
       },
       deep: true
     },
     isVisible () {
       this.$emit('update-group-question-count')
+    },
+    referenceId (value) {
+      if (value) {
+        this.violationInfo.referenceId = value
+        this.isViolationInfoReferenceIdDisabled = true
+      }
     }
   },
   mounted () {
@@ -717,24 +740,19 @@ export default {
     },
     clickSampling ($event) {
       $event.stopPropagation()
-      if (!this.isReferenceQuestion) {
-        if (!this.samplingButtonData.disabled) {
-          this.displaySamplingRecord = !this.displaySamplingRecord
+      if (!this.isReferenceQuestion && !this.samplingButtonData.disabled && !this.hasSamplingInfo) {
+        this.displaySamplingRecord = !this.displaySamplingRecord
+
+        if (this.displaySamplingRecord) {
+          this.question.result.samplingInfo = this.samplingInfo
+        } else {
+          this.question.result.samplingInfo = null
         }
+      } else if (this.hasSamplingInfo) {
+        // dont do anything, let user clear data first
       } else {
         this.displaySamplingRecord = false
-      }
-    },
-    updateReferenceId () {
-      this.isReferenceQuestion = (this.question.type === QUESTION_TYPE.REFERENCE)
-      if (!this.isReferenceQuestion) {
-        const referenceQuestion = BuilderService.findReferenceQuestion(this.group)
-        if (referenceQuestion) {
-          this.isViolationInfoReferenceIdDisabled = true
-          if (referenceQuestion.result && referenceQuestion.result.responses && referenceQuestion.result.responses.length > 0 && this.questionResult.violationInfo) {
-            this.questionResult.violationInfo.referenceId = referenceQuestion.result.responses[0].value
-          }
-        }
+        this.question.result.samplingInfo = null
       }
     },
     getSelectedProvisionText (item) {
@@ -835,6 +853,7 @@ export default {
         // bind componenent data result to values recieved from  json
         this.questionResult = this.question.result
       }
+      this.isReferenceQuestion = this.question.type === QUESTION_TYPE.REFERENCE
 
       this.updateResult(args)
 
@@ -844,7 +863,6 @@ export default {
       this.updateViolationInfo(args)
 
       this.updateDependants(args)
-      this.updateReferenceId()
       this.isValid = this.getChildQuestionValidationState()
       this.$emit('responseChanged')
       if (this.isReferenceQuestion) {
@@ -898,6 +916,24 @@ export default {
         // where the user the selects both option 1 and 2, the required will trump over optional
         this.selectedResponseOption = options.length > 1 ? this.createListOptions(options) : options[0]
         this.provisionIds = targetedProvisionsIds
+
+        // if a response has provisions then violation info obj can be not null
+        if (!isEmptyValues(this.provisionIds)) {
+          if (this.question.result && this.question.result.violationInfo) {
+            this.violationInfo = this.question.result.violationInfo
+          } else {
+            this.question.result.violationInfo = this.violationInfo
+          }
+        } else {
+          this.question.result.violationInfo = null
+          this.violationInfo.violationCount = ''
+          this.violationInfo.referenceId = ''
+          this.violationInfo.selectedProvisions = []
+        }
+        // if saved question has sampling info, populate local data option
+        if (this.question.result && this.question.result.samplingInfo) {
+          this.samplingInfo = this.question.result.samplingInfo
+        }
       }
     },
     createListOptions (options) {
