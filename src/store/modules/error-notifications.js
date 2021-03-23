@@ -71,19 +71,19 @@ function validateResponseOptions(q, lang) {
     q.result.responses.forEach(r => {
       let ro = q.responseOptions.find(o => o.guid === r.guid);
       if (ro) {
-        if (ro.internalCommentRequirement === 'required' &&  isEmptyValues(r.internalComment)) {
+        if (ro.internalCommentRequirement === 'required' &&  isEmptyValues(q.result.internalComment)) {
           const errorMsg = i18n.t('app.notifications.internalComment', { type: ro.text[lang] } )
            errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-alert', lang))
         }
-        if (ro.externalCommentRequirement === 'required'  && isEmptyValues(r.externalComment)) {
+        if (ro.externalCommentRequirement === 'required'  && isEmptyValues(q.result.externalComment)) {
           const errorMsg = i18n.t('app.notifications.externalComment', { type: ro.text[lang] } )
             errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-message-alert', lang));
         }
-        if (ro.fileRequirement === 'required' && isEmptyValues(r.files)) {
+        if (ro.fileRequirement === 'required' && isEmptyValues(q.result.files)) {
           const errorMsg = i18n.t('app.notifications.file', { type: ro.text[lang] } )
           errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-image-plus', lang));
         }
-        if (ro.pictureRequirement === 'required' && isEmptyValues(r.pictures)) {
+        if (ro.pictureRequirement === 'required' && isEmptyValues(q.result.pictures)) {
           const errorMsg = i18n.t('app.notifications.picture', { type: ro.text[lang] } )
           errorNotifications.push(buildNotificationObject(q, errorMsg, 'mdi-image-plus', lang));
         }
@@ -147,9 +147,10 @@ function evaluateValidationRules(q, lang) {
 
 function getQuestionErrorNotifications(q, lang)
 {
+          let errorNotifications = [];
+
    if (q.isVisible) {
     if (isValidationRequired(q)) {
-        let errorNotifications = []
         //if question has no response, add a "required" error notification
         if(isEmptyValues(q.result) || isEmptyValues(q.result.responses)) {
           const errorMsg = i18n.t("app.notifications.question")
@@ -166,16 +167,18 @@ function getQuestionErrorNotifications(q, lang)
             errorNotifications = errorNotifications.concat(notifications);
           }
         }
-        return errorNotifications
       }
     
     //validate children questions 
     if(q.childQuestions && q.childQuestions.length > 0) {
       q.childQuestions.forEach(child => {
-        getQuestionErrorNotifications(child, lang);
+       errorNotifications = errorNotifications.concat(getQuestionErrorNotifications(child, lang));
       });
     }
   }
+  
+  return errorNotifications;
+
 }
 
 function buildNotificationObject (q, text, icon = 'mdi-message-alert', lang) {
