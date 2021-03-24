@@ -760,7 +760,7 @@ function fixTemplate(template) {
          */
         if (response.internalComment === undefined) {
           response.internalComment = {
-            option: "optional",
+            option: "n/a",
             value: ""
           };
           fixLog.push(
