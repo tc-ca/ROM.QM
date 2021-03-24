@@ -2,7 +2,6 @@
   <v-list
     dense
     nav
-    color="#f5f5f5"
   >
     <supplementary-info-comment
       v-if="displayExternalComment"

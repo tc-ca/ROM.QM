@@ -5,7 +5,7 @@
         no
         no-gutters
       >
-        <v-col>
+        <v-col cols="8">
           <v-form
             ref="questionaire_form"
             v-model="valid"

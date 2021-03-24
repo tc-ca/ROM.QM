@@ -29,10 +29,10 @@
   display: block;
   margin:10px 0px;
   text-align:center;
-  border-radius: 25px;
 }
 .qtn-radio-button-compliant input[type="radio"]:checked + label {
   background-color: #13855f;
+
   color: white;
 }
 .qtn-radio-button-non-compliant input[type="radio"]:checked + label {
