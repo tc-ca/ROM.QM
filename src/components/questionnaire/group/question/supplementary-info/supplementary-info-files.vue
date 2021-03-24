@@ -61,7 +61,7 @@
               cols="12"
             >
               <v-list
-                v-if="question.result.files && question.result.files.items && question.result.files.items.length > 0"
+                v-if="hasValidFiles"
                 color="#f5f5f5"
                 dense
               >
@@ -195,11 +195,9 @@ export default {
   },
 
   computed: {
-    // file: {
-    //   get: function () {
-    //     return this.question.result.filess
-    //   }
-    // },
+    hasValidFiles () {
+      return this.question.result.files && this.question.result.files.items !== undefined && this.question.result.files.items.length > 0
+    },
     fileNoteExist () {
       return this.question.result.files && this.question.result.files.items[this.galleryIndex] !== undefined
     },
@@ -294,6 +292,8 @@ export default {
       if (el !== null) {
         if (this.question.result.files == null) {
           this.question.result.files = {}
+        }
+        if (this.question.result.files.items === undefined) {
           this.question.result.files.items = []
         }
         if (this.question.guid === el.qguid && !this.question.result.files.items.some(f => f.guid === el.guid)) {
