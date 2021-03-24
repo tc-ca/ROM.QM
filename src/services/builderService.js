@@ -164,7 +164,7 @@ function createGenericResponseOption(sortOrder = -1) {
       [LANGUAGE.FRENCH]: `FR: Option`
     },
     value: "1",
-    internalCommentRequirement: "optional",
+    internalCommentRequirement: "n/a",
     externalCommentRequirement: "optional",
     pictureRequirement: "optional",
     fileRequirement: "optional",
