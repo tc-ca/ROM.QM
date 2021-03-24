@@ -369,12 +369,12 @@
           </div>
         </v-sheet>
         <v-sheet :class="displayViolationInfo ? 'mt-7':''">
-          <span v-if="showSupplementaryInfo">
+          <span v-if="showSupplementaryInfo && selectedResponseOption">
             {{ $t('app.questionnaire.group.question.supplementaryInformation') }}
           </span>
 
           <supplementary-info
-            v-if="showSupplementaryInfo"
+            v-if="showSupplementaryInfo && selectedResponseOption"
             :question="question"
             :selresponseoption="selectedResponseOption"
             :group="group"
@@ -421,7 +421,7 @@ import BaseMixin from '../../../../mixins/base'
 import Response from './response/response.vue'
 import SupplementaryInfo from './supplementary-info/supplementary-info.vue'
 import { QUESTION_TYPE } from '../../../../data/questionTypes'
-import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, questionHasSupplementaryInfo, isEmptyValues } from '../../../../utils.js'
+import { onlyUnique, buildTreeFromFlatList, hydrateItems, GetAllChildrenQuestions, isEmptyValues } from '../../../../utils.js'
 import BuilderService from '../../../../services/builderService'
 import SamplingRecord from './sampling/sampling-record.vue'
 
@@ -463,7 +463,7 @@ export default {
     return {
       displayViolationInfo: false,
       isValid: null,
-      selectedResponseOption: [],
+      selectedResponseOption: null,
       treeDataProvisions: [], // to populate the tree control
       selProvisions: [],
       provisionIds: [],
@@ -511,7 +511,16 @@ export default {
       return text
     },
     showSupplementaryInfo () {
-      return (!_.isEmpty(this.selectedResponseOption)) && questionHasSupplementaryInfo(this.question)
+      switch (this.question.type) {
+        case QUESTION_TYPE.SELECT:
+        case QUESTION_TYPE.RADIO:
+          return !_.isEmpty(this.selectedResponseOption)
+        case QUESTION_TYPE.TEXT:
+        case QUESTION_TYPE.NUMBER:
+          return true
+        default:
+          return false
+      }
     },
     provisions () {
       if (this.isFlatLegislationsDataAvailable) {
@@ -885,7 +894,7 @@ export default {
       // result.response must return always array
       if (isEmptyValues(args.value)) {
         this.question.result.responses = []
-        this.selectedResponseOption = []
+        this.selectedResponseOption = null
       } else {
         let responses = args.value
         if (this.question.type !== QUESTION_TYPE.SELECT) {
