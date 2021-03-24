@@ -476,7 +476,7 @@ export default {
       tab: null,
       tags: [],
       searchProvisions: null,
-      questionResult: { externalComment: '', internalComment: '', files: [], pictures: [], responses: [], violationInfo: null, samplingInfo: null },
+      questionResult: { externalComment: '', internalComment: '', files: null, pictures: null, responses: [], violationInfo: null, samplingInfo: null },
       violationInfo: { violationCount: '', referenceId: '', selectedProvisions: [] },
       samplingInfo: { approximateTotal: '', sampleSize: '' }
     }
